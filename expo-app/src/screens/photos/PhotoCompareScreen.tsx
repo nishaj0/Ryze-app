@@ -46,7 +46,7 @@ export default function PhotoCompareScreen({ navigation }: Props) {
             <View style={{ flex: 1 }}>
               <Text style={{ color: "#94A3B8", fontSize: 12, marginBottom: 8 }}>Photo 1</Text>
               {photo1 ? (
-                <Image source={{ uri: `http://localhost:3000${photo1.cloudinaryUrl}` }} style={{ width: "100%", height: 200, borderRadius: 12 }} resizeMode="cover" />
+                <Image source={{ uri: photo1.cloudinaryUrl }} style={{ width: "100%", height: 200, borderRadius: 12 }} resizeMode="cover" />
               ) : (
                 <View style={{ width: "100%", height: 200, backgroundColor: "#1E293B", borderRadius: 12, justifyContent: "center", alignItems: "center" }}>
                   <Text style={{ color: "#475569" }}>Select</Text>
@@ -56,7 +56,7 @@ export default function PhotoCompareScreen({ navigation }: Props) {
             <View style={{ flex: 1 }}>
               <Text style={{ color: "#94A3B8", fontSize: 12, marginBottom: 8 }}>Photo 2</Text>
               {photo2 ? (
-                <Image source={{ uri: `http://localhost:3000${photo2.cloudinaryUrl}` }} style={{ width: "100%", height: 200, borderRadius: 12 }} resizeMode="cover" />
+                <Image source={{ uri: photo2.cloudinaryUrl }} style={{ width: "100%", height: 200, borderRadius: 12 }} resizeMode="cover" />
               ) : (
                 <View style={{ width: "100%", height: 200, backgroundColor: "#1E293B", borderRadius: 12, justifyContent: "center", alignItems: "center" }}>
                   <Text style={{ color: "#475569" }}>Select</Text>
@@ -85,7 +85,7 @@ export default function PhotoCompareScreen({ navigation }: Props) {
                 borderColor: "#6366F1",
               }}
             >
-              <Image source={{ uri: `http://localhost:3000${photo.cloudinaryUrl}` }} style={{ width: 60, height: 60, borderRadius: 8 }} resizeMode="cover" />
+              <Image source={{ uri: photo.cloudinaryUrl }} style={{ width: 60, height: 60, borderRadius: 8 }} resizeMode="cover" />
               <View style={{ marginLeft: 12, flex: 1 }}>
                 <Text style={{ color: "#fff", fontSize: 14 }}>{new Date(photo.date).toLocaleDateString()}</Text>
                 <Text style={{ color: "#94A3B8", fontSize: 12, textTransform: "capitalize" }}>{photo.type}</Text>

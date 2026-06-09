@@ -11,7 +11,7 @@ export const listExercises = async (req: AuthRequest, res: Response) => {
   if (muscleGroup) where.muscleGroup = muscleGroup;
   if (equipment) where.equipmentNeeded = equipment;
   if (search) {
-    where.name = { contains: String(search) };
+    where.name = { contains: String(search), mode: "insensitive" };
   }
 
   const exercises = await prisma.exercise.findMany({

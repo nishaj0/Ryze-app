@@ -1,16 +1,16 @@
 # Graph Report - gym-tracker-app  (2026-06-10)
 
 ## Corpus Check
-- 138 files · ~37,661 words
+- 139 files · ~37,731 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 731 nodes · 978 edges · 86 communities (42 shown, 44 thin omitted)
+- 734 nodes · 985 edges · 81 communities (38 shown, 43 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `56ffb6f4`
+- Built from commit: `c51e5e74`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -39,7 +39,6 @@
 - [[_COMMUNITY_Community 21|Community 21]]
 - [[_COMMUNITY_Community 22|Community 22]]
 - [[_COMMUNITY_Community 23|Community 23]]
-- [[_COMMUNITY_Community 24|Community 24]]
 - [[_COMMUNITY_Community 25|Community 25]]
 - [[_COMMUNITY_Community 26|Community 26]]
 - [[_COMMUNITY_Community 27|Community 27]]
@@ -50,16 +49,12 @@
 - [[_COMMUNITY_Community 32|Community 32]]
 - [[_COMMUNITY_Community 33|Community 33]]
 - [[_COMMUNITY_Community 34|Community 34]]
-- [[_COMMUNITY_Community 39|Community 39]]
 - [[_COMMUNITY_Community 40|Community 40]]
-- [[_COMMUNITY_Community 41|Community 41]]
 - [[_COMMUNITY_Community 42|Community 42]]
 - [[_COMMUNITY_Community 43|Community 43]]
-- [[_COMMUNITY_Community 44|Community 44]]
 - [[_COMMUNITY_Community 45|Community 45]]
 - [[_COMMUNITY_Community 46|Community 46]]
 - [[_COMMUNITY_Community 47|Community 47]]
-- [[_COMMUNITY_Community 48|Community 48]]
 - [[_COMMUNITY_Community 49|Community 49]]
 - [[_COMMUNITY_Community 50|Community 50]]
 - [[_COMMUNITY_Community 51|Community 51]]
@@ -113,31 +108,31 @@
 ## Surprising Connections (you probably didn't know these)
 - `RootNavigator()` --calls--> `useAuthStore`  [EXTRACTED]
   expo-app/src/navigation/RootNavigator.tsx → expo-app/src/store/authStore.ts
-- `ProfileScreen()` --calls--> `useAuthStore`  [EXTRACTED]
-  expo-app/src/screens/profile/ProfileScreen.tsx → expo-app/src/store/authStore.ts
 - `LoginScreen()` --calls--> `useAuthStore`  [EXTRACTED]
   expo-app/src/screens/auth/LoginScreen.tsx → expo-app/src/store/authStore.ts
 - `RegisterScreen()` --calls--> `useAuthStore`  [EXTRACTED]
   expo-app/src/screens/auth/RegisterScreen.tsx → expo-app/src/store/authStore.ts
 - `HomeScreen()` --calls--> `useAuthStore`  [EXTRACTED]
   expo-app/src/screens/home/HomeScreen.tsx → expo-app/src/store/authStore.ts
+- `BodyStatsContent()` --calls--> `useOnboarding()`  [EXTRACTED]
+  expo-app/src/screens/onboarding/BodyStatsScreen.tsx → expo-app/src/screens/onboarding/OnboardingContext.tsx
 
 ## Import Cycles
 - None detected.
 
-## Communities (86 total, 44 thin omitted)
+## Communities (81 total, 43 thin omitted)
 
 ### Community 5 - "Community 5"
-Cohesion: 0.15
-Nodes (14): login(), register(), updateProfile(), LoginScreen(), Props, Props, RegisterScreen(), Stack (+6 more)
+Cohesion: 0.18
+Nodes (6): prisma, AppError, errorHandler(), onboardingSchema, router, app
 
 ### Community 6 - "Community 6"
-Cohesion: 0.07
-Nodes (39): listExercises(), getExerciseProgress(), getHeatmap(), getMuscleVolume(), getOverview(), getRecords(), addExercise(), completeSession() (+31 more)
+Cohesion: 0.05
+Nodes (50): listExercises(), deleteBodyMetric(), getBodyMetrics(), logBodyMetric(), getExerciseProgress(), getHeatmap(), getMuscleVolume(), getOverview() (+42 more)
 
 ### Community 7 - "Community 7"
 Cohesion: 0.07
-Nodes (32): completeOnboarding(), getRecommendedSplits(), screenOptions, Stack, OnboardingStackParamList, BodyStatsContent(), Props, DaysContent() (+24 more)
+Nodes (34): completeOnboarding(), getRecommendedSplits(), screenOptions, Stack, MainTabParamList, OnboardingStackParamList, ScreenProps, WorkoutStackParamList (+26 more)
 
 ### Community 8 - "Community 8"
 Cohesion: 0.05
@@ -145,11 +140,11 @@ Nodes (38): dependencies, axios, expo, expo-camera, expo-image-manipulator, expo
 
 ### Community 9 - "Community 9"
 Cohesion: 0.06
-Nodes (31): dependencies, bcryptjs, cors, dotenv, express, jsonwebtoken, multer, @prisma/client (+23 more)
+Nodes (31): dependencies, bcryptjs, cloudinary, cors, dotenv, express, jsonwebtoken, multer (+23 more)
 
 ### Community 10 - "Community 10"
-Cohesion: 0.12
-Nodes (8): headerStyle, HomeStackNav, PhotosStackNav, ProfileStackNav, ProgressStackNav, stackOpts, Tab, WorkoutStackNav
+Cohesion: 0.09
+Nodes (16): deletePhoto(), getPhotos(), uploadPhoto(), headerStyle, HomeStackNav, PhotosStackNav, ProfileStackNav, ProgressStackNav (+8 more)
 
 ### Community 11 - "Community 11"
 Cohesion: 0.06
@@ -176,12 +171,12 @@ Cohesion: 0.09
 Nodes (22): computedHash, skillPath, source, sourceType, computedHash, skillPath, source, sourceType (+14 more)
 
 ### Community 17 - "Community 17"
-Cohesion: 0.22
-Nodes (4): errorHandler(), router, router, app
+Cohesion: 0.19
+Nodes (5): authMiddleware(), router, router, router, router
 
 ### Community 18 - "Community 18"
-Cohesion: 0.15
-Nodes (10): authMiddleware(), validate(), loginSchema, registerSchema, router, bodyMetricSchema, router, onboardingSchema (+2 more)
+Cohesion: 0.18
+Nodes (7): validate(), loginSchema, registerSchema, router, bodyMetricSchema, router, router
 
 ### Community 19 - "Community 19"
 Cohesion: 0.18
@@ -192,16 +187,12 @@ Cohesion: 0.20
 Nodes (9): 1. Install graphify, 2. Add graphify to PATH (Windows — required), 3. Build the initial graph, 4. Install the git hooks, 5. Install agent integrations (per agent), AI Coding Agents & Knowledge Graph, Daily workflow, Prerequisites (+1 more)
 
 ### Community 21 - "Community 21"
-Cohesion: 0.19
-Nodes (4): prisma, prisma, AuthRequest, router
+Cohesion: 0.20
+Nodes (3): prisma, prisma, AuthRequest
 
 ### Community 22 - "Community 22"
-Cohesion: 0.20
-Nodes (4): prisma, router, storage, upload
-
-### Community 24 - "Community 24"
-Cohesion: 0.39
-Nodes (5): deleteBodyMetric(), getBodyMetrics(), logBodyMetric(), Props, BodyMetric
+Cohesion: 0.21
+Nodes (8): deletePhoto(), prisma, uploadPhoto(), router, storage, upload, deleteFromCloudinary(), uploadToCloudinary()
 
 ### Community 25 - "Community 25"
 Cohesion: 0.32
@@ -220,24 +211,16 @@ Cohesion: 0.29
 Nodes (6): compilerOptions, baseUrl, paths, strict, extends, @/*
 
 ### Community 31 - "Community 31"
-Cohesion: 0.12
-Nodes (9): client, AuthState, User, clearAuth(), getToken(), getUser(), saveToken(), saveUser() (+1 more)
+Cohesion: 0.06
+Nodes (31): deleteAccount(), login(), register(), updateProfile(), client, LoginScreen(), Props, Props (+23 more)
 
 ### Community 32 - "Community 32"
 Cohesion: 0.50
 Nodes (3): config, { getDefaultConfig }, { withNativeWind }
 
-### Community 39 - "Community 39"
-Cohesion: 0.16
-Nodes (12): deleteAccount(), getActiveSplit(), listSplits(), setActiveSplit(), MainTabParamList, ProfileStackParamList, ScreenProps, WorkoutStackParamList (+4 more)
-
 ### Community 40 - "Community 40"
 Cohesion: 0.12
 Nodes (15): 1. Concrete Transformation Patterns, 2. Error-First Structure, 3. Quantified Impact, 4. Self-Contained Examples, 5. Semantic Naming, Code Example Standards, Comments, Impact Level Guidelines (+7 more)
-
-### Community 41 - "Community 41"
-Cohesion: 0.21
-Nodes (8): deletePhoto(), getPhotos(), uploadPhoto(), PhotosStackParamList, Props, Props, Props, ProgressPhoto
 
 ### Community 42 - "Community 42"
 Cohesion: 0.14
@@ -259,10 +242,6 @@ Nodes (7): [1.2.0](https://github.com/supabase/agent-skills/compare/v1.1.1...v1.
 Cohesion: 0.25
 Nodes (7): Core Principles, Making and Committing Schema Changes, Reference Guides, Supabase, Supabase CLI, Supabase Documentation, Supabase MCP Server
 
-### Community 48 - "Community 48"
-Cohesion: 0.29
-Nodes (4): RootNavigator(), Stack, RootStackParamList, queryClient
-
 ### Community 49 - "Community 49"
 Cohesion: 0.33
 Nodes (5): caveman, Example output, How to invoke, See also, What it does
@@ -280,24 +259,24 @@ Cohesion: 0.50
 Nodes (3): Fix suggestion, Source, What happened
 
 ## Knowledge Gaps
-- **357 isolated node(s):** `What it does`, `How to invoke`, `Example output`, `See also`, `Persistence` (+352 more)
+- **357 isolated node(s):** `name`, `version`, `private`, `dev`, `build` (+352 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **44 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **43 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `useAuthStore` connect `Community 5` to `Community 6`, `Community 39`, `Community 7`, `Community 48`, `Community 31`?**
+- **Why does `AuthRequest` connect `Community 21` to `Community 5`, `Community 17`, `Community 19`, `Community 22`, `Community 23`, `Community 25`, `Community 26`, `Community 28`, `Community 30`?**
   _High betweenness centrality (0.003) - this node is a cross-community bridge._
-- **Why does `AuthRequest` connect `Community 21` to `Community 44`, `Community 19`, `Community 22`, `Community 23`, `Community 25`, `Community 26`, `Community 28`, `Community 30`?**
+- **Why does `useAuthStore` connect `Community 31` to `Community 6`, `Community 7`?**
   _High betweenness centrality (0.003) - this node is a cross-community bridge._
-- **What connects `What it does`, `How to invoke`, `Example output` to the rest of the system?**
+- **Why does `useOnboarding()` connect `Community 7` to `Community 31`?**
+  _High betweenness centrality (0.003) - this node is a cross-community bridge._
+- **What connects `name`, `version`, `private` to the rest of the system?**
   _357 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 6` be split into smaller, more focused modules?**
-  _Cohesion score 0.06836158192090395 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.05094905094905095 - nodes in this community are weakly interconnected._
 - **Should `Community 7` be split into smaller, more focused modules?**
-  _Cohesion score 0.07164404223227752 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07138047138047138 - nodes in this community are weakly interconnected._
 - **Should `Community 8` be split into smaller, more focused modules?**
   _Cohesion score 0.05128205128205128 - nodes in this community are weakly interconnected._
-- **Should `Community 9` be split into smaller, more focused modules?**
-  _Cohesion score 0.0625 - nodes in this community are weakly interconnected._

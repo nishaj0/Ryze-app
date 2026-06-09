@@ -3,7 +3,6 @@ dotenv.config();
 
 import express from "express";
 import cors from "cors";
-import path from "path";
 import { errorHandler } from "./middleware/errorHandler";
 import authRoutes from "./routes/auth";
 import onboardingRoutes from "./routes/onboarding";
@@ -21,7 +20,6 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json({ limit: "10mb" }));
-app.use("/uploads", express.static(path.join(__dirname, "..", "uploads")));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/onboarding", onboardingRoutes);

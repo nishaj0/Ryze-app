@@ -66,7 +66,7 @@ export default function PhotosTimelineScreen({ navigation }: Props) {
         photos.map((photo) => (
           <View key={photo.id} style={{ backgroundColor: "#1E293B", borderRadius: 16, marginBottom: 16, overflow: "hidden" }}>
             <Image
-              source={{ uri: `http://localhost:3000${photo.cloudinaryUrl}` }}
+              source={{ uri: photo.cloudinaryUrl }}
               style={{ width: "100%", height: 300 }}
               resizeMode="cover"
             />

@@ -40,8 +40,8 @@
     "semantic_hash": ""
   },
   "api/package.json": {
-    "mtime": 1781022584.3147323,
-    "ast_hash": "706a4ed96d9c416ae2d8db08340b954b",
+    "mtime": 1781037118.8748822,
+    "ast_hash": "17a54b3923653215d1f71f7718c9e86f",
     "semantic_hash": ""
   },
   "api/prisma/migrations/20260609164345_init/migration.sql": {
@@ -55,8 +55,8 @@
     "semantic_hash": ""
   },
   "api/src/controllers/exerciseController.ts": {
-    "mtime": 1781022787.4193125,
-    "ast_hash": "afe6882089ce7cf4285445da8a7a3eb0",
+    "mtime": 1781037170.2178645,
+    "ast_hash": "84f6a3d2f18e3920f2256195042a7c30",
     "semantic_hash": ""
   },
   "api/src/controllers/metricsController.ts": {
@@ -75,8 +75,8 @@
     "semantic_hash": ""
   },
   "api/src/controllers/photoController.ts": {
-    "mtime": 1781022914.085199,
-    "ast_hash": "15c50b06ab49fc8aa2b8dd11814302b7",
+    "mtime": 1781037160.275661,
+    "ast_hash": "4a91811a5745bd094c1c14b3d21a359d",
     "semantic_hash": ""
   },
   "api/src/controllers/progressController.ts": {
@@ -100,8 +100,8 @@
     "semantic_hash": ""
   },
   "api/src/index.ts": {
-    "mtime": 1781022645.6885717,
-    "ast_hash": "5a21fddf59368f3b160c68ecc884edad",
+    "mtime": 1781037168.1276884,
+    "ast_hash": "95932d346a83137a8860f29f7f80e909",
     "semantic_hash": ""
   },
   "api/src/middleware/auth.ts": {
@@ -265,8 +265,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/constants/config.ts": {
-    "mtime": 1781023886.9678674,
-    "ast_hash": "68276bbf66d51d441ac26b53ecf23b3c",
+    "mtime": 1781037177.9054863,
+    "ast_hash": "15f46621637ae1f3049cf19942bc4eb8",
     "semantic_hash": ""
   },
   "expo-app/src/navigation/AuthStack.tsx": {
@@ -365,13 +365,13 @@
     "semantic_hash": ""
   },
   "expo-app/src/screens/photos/PhotoCompareScreen.tsx": {
-    "mtime": 1781025413.5569654,
-    "ast_hash": "224305189b4a899727e6e2b8a8a47e07",
+    "mtime": 1781037197.5204232,
+    "ast_hash": "22990bdd912eebe35197295797ceb50f",
     "semantic_hash": ""
   },
   "expo-app/src/screens/photos/PhotosTimelineScreen.tsx": {
-    "mtime": 1781025334.3542428,
-    "ast_hash": "b061d89d0922a0fa73800f04bc327910",
+    "mtime": 1781037179.7800903,
+    "ast_hash": "148385f00690d68ae2501f0c72778904",
     "semantic_hash": ""
   },
   "expo-app/src/screens/profile/EditProfileScreen.tsx": {
@@ -687,6 +687,11 @@
   ".agents/skills/supabase/references/skill-feedback.md": {
     "mtime": 1781036600.60252,
     "ast_hash": "c9fa098e2ec8bdce9d6a0f8a64d2c6c0",
+    "semantic_hash": ""
+  },
+  "api/src/utils/cloudinary.ts": {
+    "mtime": 1781037145.8459334,
+    "ast_hash": "39aab17e4356632d68ed8eedd8733d4d",
     "semantic_hash": ""
   }
 }
