@@ -1,0 +1,11 @@
+.agents/
+.codex/
+.opencode/
+graphify-out/
+node_modules/
+api/node_modules/
+expo-app/node_modules/
+*.db
+*.db-journal
+api/prisma/migrations/
+*.md
