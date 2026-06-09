@@ -1,0 +1,209 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String   @id @default(cuid())
+  email            String   @unique
+  passwordHash     String
+  name             String?
+  gender           String?
+  goal             String?
+  experienceLevel  String?
+  daysAvailable    Int?
+  equipmentAccess  String?
+  sleepHours       Float?
+  dateOfBirth      DateTime?
+  currentWeight    Float?
+  height           Float?
+  units            String   @default("kg")
+  onboardingDone   Boolean  @default(false)
+  pushToken        String?
+  reminderTime     String?  @default("08:00")
+  weeklyCheckin    Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  userSplits       UserSplit[]
+  workoutSessions  WorkoutSession[]
+  bodyMetrics      BodyMetric[]
+  progressPhotos   ProgressPhoto[]
+  personalRecords  PersonalRecord[]
+  notifications    Notification[]
+  createdSplits    Split[]
+}
+
+model Split {
+  id           String   @id @default(cuid())
+  name         String
+  description  String?
+  type         String
+  daysPerWeek  Int
+  isPrebuilt   Boolean  @default(false)
+  createdById  String?
+  createdAt    DateTime @default(now())
+
+  createdBy    User?          @relation(fields: [createdById], references: [id])
+  days         SplitDay[]
+  userSplits   UserSplit[]
+}
+
+model SplitDay {
+  id           String   @id @default(cuid())
+  splitId      String
+  dayNumber    Int
+  name         String
+  muscleGroups String
+  isRest       Boolean  @default(false)
+
+  split        Split              @relation(fields: [splitId], references: [id], onDelete: Cascade)
+  exercises    SplitDayExercise[]
+  sessions     WorkoutSession[]
+}
+
+model Exercise {
+  id               String   @id @default(cuid())
+  name             String
+  muscleGroup      String
+  secondaryMuscles String
+  equipmentNeeded  String
+  demoUrl          String?
+  instructions     String?
+  createdAt        DateTime @default(now())
+
+  splitDayExercises SplitDayExercise[]
+  exerciseLogs      ExerciseLog[]
+  alternativesFrom  ExerciseAlternative[] @relation("fromExercise")
+  alternativesTo    ExerciseAlternative[] @relation("toExercise")
+  personalRecords   PersonalRecord[]
+}
+
+model ExerciseAlternative {
+  id             String @id @default(cuid())
+  exerciseId     String
+  alternativeId  String
+  reason         String
+
+  exercise       Exercise @relation("fromExercise", fields: [exerciseId], references: [id], onDelete: Cascade)
+  alternative    Exercise @relation("toExercise", fields: [alternativeId], references: [id], onDelete: Cascade)
+}
+
+model SplitDayExercise {
+  id             String  @id @default(cuid())
+  splitDayId     String
+  exerciseId     String
+  order          Int
+  targetSets     Int
+  targetRepsMin  Int
+  targetRepsMax  Int
+  notes          String?
+
+  splitDay       SplitDay @relation(fields: [splitDayId], references: [id], onDelete: Cascade)
+  exercise       Exercise @relation(fields: [exerciseId], references: [id])
+}
+
+model UserSplit {
+  id        String   @id @default(cuid())
+  userId    String
+  splitId   String
+  startDate DateTime @default(now())
+  isActive  Boolean  @default(true)
+  phase     String?
+
+  user      User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  split     Split @relation(fields: [splitId], references: [id], onDelete: Cascade)
+}
+
+model WorkoutSession {
+  id              String   @id @default(cuid())
+  userId          String
+  splitDayId      String
+  date            DateTime @default(now())
+  status          String   @default("IN_PROGRESS")
+  restReason      String?
+  notes           String?
+  durationMinutes Int?
+  createdAt       DateTime @default(now())
+
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  splitDay       SplitDay      @relation(fields: [splitDayId], references: [id])
+  exerciseLogs   ExerciseLog[]
+}
+
+model ExerciseLog {
+  id          String @id @default(cuid())
+  sessionId   String
+  exerciseId  String
+  order       Int
+
+  session     WorkoutSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  exercise    Exercise       @relation(fields: [exerciseId], references: [id])
+  setLogs     SetLog[]
+}
+
+model SetLog {
+  id            String   @id @default(cuid())
+  exerciseLogId String
+  setNumber     Int
+  weightKg      Float
+  reps          Int
+  rpe           Float?
+  notes         String?
+  completedAt   DateTime @default(now())
+
+  exerciseLog   ExerciseLog @relation(fields: [exerciseLogId], references: [id], onDelete: Cascade)
+}
+
+model BodyMetric {
+  id        String   @id @default(cuid())
+  userId    String
+  date      DateTime @default(now())
+  weightKg  Float
+  notes     String?
+  createdAt DateTime @default(now())
+
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model ProgressPhoto {
+  id                 String   @id @default(cuid())
+  userId             String
+  date               DateTime @default(now())
+  cloudinaryUrl      String
+  cloudinaryPublicId String?
+  type               String
+  notes              String?
+  createdAt          DateTime @default(now())
+
+  user               User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model PersonalRecord {
+  id           String   @id @default(cuid())
+  userId       String
+  exerciseId   String
+  weightKg     Float
+  reps         Int
+  estimated1rm Float
+  achievedAt   DateTime @default(now())
+
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  exercise     Exercise @relation(fields: [exerciseId], references: [id])
+}
+
+model Notification {
+  id      String    @id @default(cuid())
+  userId  String
+  type    String
+  title   String
+  body    String
+  sentAt  DateTime  @default(now())
+  readAt  DateTime?
+
+  user    User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
