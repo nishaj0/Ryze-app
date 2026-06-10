@@ -12,15 +12,17 @@ export default function RegisterScreen({ navigation }: Props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const { setAuth } = useAuthStore();
 
   const handleRegister = async () => {
+    setErrorMsg(null);
     if (!email || !password) {
-      Alert.alert("Error", "Please fill in all fields");
+      setErrorMsg("Please fill in all required fields");
       return;
     }
     if (password.length < 8) {
-      Alert.alert("Error", "Password must be at least 8 characters");
+      setErrorMsg("Password must be at least 8 characters");
       return;
     }
     setLoading(true);
@@ -28,7 +30,16 @@ export default function RegisterScreen({ navigation }: Props) {
       const res = await register(email, password, name || undefined);
       await setAuth(res.token, res.user);
     } catch (err: any) {
-      Alert.alert("Registration Failed", err.response?.data?.error || "Something went wrong");
+      let message = "Something went wrong";
+      if (!err.response) {
+        message = "Cannot connect to server. Make sure the backend is running and your device is on the same network.";
+      } else if (err.response?.data?.error) {
+        message = err.response.data.error;
+      } else if (err.response?.status) {
+        message = `Server error (${err.response.status}). Please try again.`;
+      }
+      setErrorMsg(message);
+      console.error("[RegisterScreen] register error:", err);
     } finally {
       setLoading(false);
     }
@@ -60,7 +71,7 @@ export default function RegisterScreen({ navigation }: Props) {
 
       <Text style={{ color: "#CBD5E1", marginBottom: 8, fontSize: 14 }}>Password</Text>
       <TextInput
-        style={{ backgroundColor: "#1E293B", borderRadius: 12, padding: 16, color: "#fff", marginBottom: 24, fontSize: 16 }}
+        style={{ backgroundColor: "#1E293B", borderRadius: 12, padding: 16, color: "#fff", marginBottom: errorMsg ? 12 : 24, fontSize: 16 }}
         value={password}
         onChangeText={setPassword}
         placeholder="Min 8 characters"
@@ -68,10 +79,16 @@ export default function RegisterScreen({ navigation }: Props) {
         secureTextEntry
       />
 
+      {errorMsg ? (
+        <View style={{ backgroundColor: "#7F1D1D", padding: 12, borderRadius: 8, marginBottom: 24 }}>
+          <Text style={{ color: "#FECACA", fontSize: 14 }}>{errorMsg}</Text>
+        </View>
+      ) : null}
+
       <TouchableOpacity
         onPress={handleRegister}
         disabled={loading}
-        style={{ backgroundColor: "#6366F1", borderRadius: 12, padding: 16, alignItems: "center" }}
+        style={{ backgroundColor: "#6366F1", borderRadius: 12, padding: 16, alignItems: "center", opacity: loading ? 0.7 : 1 }}
       >
         {loading ? <ActivityIndicator color="#fff" /> : <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>Create Account</Text>}
       </TouchableOpacity>

@@ -20,6 +20,10 @@
       },
       "package": "com.ryze.app"
     },
+    "web": {
+      "bundler": "metro",
+      "output": "single"
+    },
     "plugins": [
       "expo-secure-store",
       [

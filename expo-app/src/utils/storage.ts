@@ -1,6 +1,5 @@
-import { MMKV } from "react-native-mmkv";
-
-const storage = new MMKV();
+import * as SecureStore from "expo-secure-store";
+import { Platform } from "react-native";
 
 export const TOKEN_KEY = "auth_token";
 export const USER_KEY = "user_profile";
@@ -8,54 +7,140 @@ export const ACTIVE_SPLIT_KEY = "active_split";
 export const PENDING_SESSIONS_KEY = "pending_sessions";
 
 export const saveToken = async (token: string) => {
-  storage.set(TOKEN_KEY, token);
+  if (Platform.OS === "web") {
+    localStorage.setItem(TOKEN_KEY, token);
+  } else {
+    await SecureStore.setItemAsync(TOKEN_KEY, token);
+  }
 };
 
 export const getToken = async (): Promise<string | null> => {
-  return storage.getString(TOKEN_KEY) || null;
+  if (Platform.OS === "web") {
+    return localStorage.getItem(TOKEN_KEY);
+  }
+  return await SecureStore.getItemAsync(TOKEN_KEY);
 };
 
-export const saveUser = (user: any) => {
-  storage.set(USER_KEY, JSON.stringify(user));
+export const saveUser = async (user: any) => {
+  const value = JSON.stringify(user);
+  if (Platform.OS === "web") {
+    localStorage.setItem(USER_KEY, value);
+  } else {
+    await SecureStore.setItemAsync(USER_KEY, value);
+  }
 };
 
-export const getUser = () => {
-  const raw = storage.getString(USER_KEY);
+export const getUser = async () => {
+  let raw = null;
+  if (Platform.OS === "web") {
+    raw = localStorage.getItem(USER_KEY);
+  } else {
+    raw = await SecureStore.getItemAsync(USER_KEY);
+  }
   return raw ? JSON.parse(raw) : null;
 };
 
-export const saveActiveSplit = (split: any) => {
-  storage.set(ACTIVE_SPLIT_KEY, JSON.stringify(split));
+export const saveActiveSplit = async (split: any) => {
+  const value = JSON.stringify(split);
+  if (Platform.OS === "web") {
+    localStorage.setItem(ACTIVE_SPLIT_KEY, value);
+  } else {
+    await SecureStore.setItemAsync(ACTIVE_SPLIT_KEY, value);
+  }
 };
 
-export const getActiveSplit = () => {
-  const raw = storage.getString(ACTIVE_SPLIT_KEY);
+export const getActiveSplit = async () => {
+  let raw = null;
+  if (Platform.OS === "web") {
+    raw = localStorage.getItem(ACTIVE_SPLIT_KEY);
+  } else {
+    raw = await SecureStore.getItemAsync(ACTIVE_SPLIT_KEY);
+  }
   return raw ? JSON.parse(raw) : null;
 };
 
-export const addToPendingQueue = (key: string, data: any) => {
-  const raw = storage.getString(PENDING_SESSIONS_KEY);
+export const addToPendingQueue = async (key: string, data: any) => {
+  let raw = null;
+  if (Platform.OS === "web") {
+    raw = localStorage.getItem(PENDING_SESSIONS_KEY);
+  } else {
+    raw = await SecureStore.getItemAsync(PENDING_SESSIONS_KEY);
+  }
   const queue = raw ? JSON.parse(raw) : [];
   queue.push({ key, data, timestamp: Date.now() });
-  storage.set(PENDING_SESSIONS_KEY, JSON.stringify(queue));
+  
+  const value = JSON.stringify(queue);
+  if (Platform.OS === "web") {
+    localStorage.setItem(PENDING_SESSIONS_KEY, value);
+  } else {
+    await SecureStore.setItemAsync(PENDING_SESSIONS_KEY, value);
+  }
 };
 
-export const getPendingQueue = () => {
-  const raw = storage.getString(PENDING_SESSIONS_KEY);
+export const getPendingQueue = async () => {
+  let raw = null;
+  if (Platform.OS === "web") {
+    raw = localStorage.getItem(PENDING_SESSIONS_KEY);
+  } else {
+    raw = await SecureStore.getItemAsync(PENDING_SESSIONS_KEY);
+  }
   return raw ? JSON.parse(raw) : [];
 };
 
-export const clearPendingQueue = () => {
-  storage.delete(PENDING_SESSIONS_KEY);
+export const clearPendingQueue = async () => {
+  if (Platform.OS === "web") {
+    localStorage.removeItem(PENDING_SESSIONS_KEY);
+  } else {
+    await SecureStore.deleteItemAsync(PENDING_SESSIONS_KEY);
+  }
 };
 
 export const clearAuth = async () => {
-  storage.delete(TOKEN_KEY);
-  storage.delete(USER_KEY);
+  if (Platform.OS === "web") {
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(USER_KEY);
+  } else {
+    await SecureStore.deleteItemAsync(TOKEN_KEY);
+    await SecureStore.deleteItemAsync(USER_KEY);
+  }
 };
 
-export const clearAll = () => {
-  storage.clearAll();
+export const clearAll = async () => {
+  if (Platform.OS === "web") {
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(USER_KEY);
+    localStorage.removeItem(ACTIVE_SPLIT_KEY);
+    localStorage.removeItem(PENDING_SESSIONS_KEY);
+  } else {
+    await SecureStore.deleteItemAsync(TOKEN_KEY);
+    await SecureStore.deleteItemAsync(USER_KEY);
+    await SecureStore.deleteItemAsync(ACTIVE_SPLIT_KEY);
+    await SecureStore.deleteItemAsync(PENDING_SESSIONS_KEY);
+  }
+};
+
+// Back-compat default export
+const storage = {
+  set: async (key: string, value: string) => {
+    if (Platform.OS === "web") {
+      localStorage.setItem(key, value);
+    } else {
+      await SecureStore.setItemAsync(key, value);
+    }
+  },
+  getString: async (key: string) => {
+    if (Platform.OS === "web") {
+      return localStorage.getItem(key);
+    }
+    return await SecureStore.getItemAsync(key);
+  },
+  delete: async (key: string) => {
+    if (Platform.OS === "web") {
+      localStorage.removeItem(key);
+    } else {
+      await SecureStore.deleteItemAsync(key);
+    }
+  },
 };
 
 export default storage;

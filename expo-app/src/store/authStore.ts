@@ -21,16 +21,21 @@ export const useAuthStore = create<AuthState>((set) => ({
 
   setAuth: async (token, user) => {
     await saveToken(token);
-    saveUser(user);
+    await saveUser(user);
     set({ token, user: user as User, isAuthenticated: true, isLoading: false });
   },
 
   loadAuth: async () => {
-    const token = await getToken();
-    const user = getUser();
-    if (token && user) {
-      set({ token, user, isAuthenticated: true, isLoading: false });
-    } else {
+    try {
+      const token = await getToken();
+      const user = await getUser();
+      if (token && user) {
+        set({ token, user, isAuthenticated: true, isLoading: false });
+      } else {
+        set({ isLoading: false });
+      }
+    } catch (err) {
+      console.error("[authStore] loadAuth failed:", err);
       set({ isLoading: false });
     }
   },
