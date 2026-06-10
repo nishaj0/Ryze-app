@@ -4,6 +4,798 @@
   "graph": {},
   "nodes": [
     {
+      "label": "app.json",
+      "file_type": "code",
+      "source_file": "expo-app/app.json",
+      "source_location": "L1",
+      "id": "expo_app_app",
+      "community": 8,
+      "norm_label": "app.json"
+    },
+    {
+      "label": "expo",
+      "file_type": "code",
+      "source_file": "expo-app/app.json",
+      "source_location": "L2",
+      "id": "expo_app_app_expo",
+      "community": 8,
+      "norm_label": "expo"
+    },
+    {
+      "label": "name",
+      "file_type": "code",
+      "source_file": "expo-app/app.json",
+      "source_location": "L3",
+      "id": "expo_app_app_expo_name",
+      "community": 8,
+      "norm_label": "name"
+    },
+    {
+      "label": "slug",
+      "file_type": "code",
+      "source_file": "expo-app/app.json",
+      "source_location": "L4",
+      "id": "expo_app_app_expo_slug",
+      "community": 8,
+      "norm_label": "slug"
+    },
+    {
+      "label": "version",
+      "file_type": "code",
+      "source_file": "expo-app/app.json",
+      "source_location": "L5",
+      "id": "expo_app_app_expo_version",
+      "community": 8,
+      "norm_label": "version"
+    },
+    {
+      "label": "orientation",
+      "file_type": "code",
+      "source_file": "expo-app/app.json",
+      "source_location": "L6",
+      "id": "expo_app_app_expo_orientation",
+      "community": 8,
+      "norm_label": "orientation"
+    },
+    {
+      "label": "icon",
+      "file_type": "code",
+      "source_file": "expo-app/app.json",
+      "source_location": "L7",
+      "id": "expo_app_app_expo_icon",
+      "community": 8,
+      "norm_label": "icon"
+    },
+    {
+      "label": "userInterfaceStyle",
+      "file_type": "code",
+      "source_file": "expo-app/app.json",
+      "source_location": "L8",
+      "id": "expo_app_app_expo_userinterfacestyle",
+      "community": 8,
+      "norm_label": "userinterfacestyle"
+    },
+    {
+      "label": "newArchEnabled",
+      "file_type": "code",
+      "source_file": "expo-app/app.json",
+      "source_location": "L9",
+      "id": "expo_app_app_expo_newarchenabled",
+      "community": 8,
+      "norm_label": "newarchenabled"
+    },
+    {
+      "label": "splash",
+      "file_type": "code",
+      "source_file": "expo-app/app.json",
+      "source_location": "L10",
+      "id": "expo_app_app_expo_splash",
+      "community": 8,
+      "norm_label": "splash"
+    },
+    {
+      "label": "backgroundColor",
+      "file_type": "code",
+      "source_file": "expo-app/app.json",
+      "source_location": "L11",
+      "id": "expo_app_app_splash_backgroundcolor",
+      "community": 8,
+      "norm_label": "backgroundcolor"
+    },
+    {
+      "label": "ios",
+      "file_type": "code",
+      "source_file": "expo-app/app.json",
+      "source_location": "L13",
+      "id": "expo_app_app_expo_ios",
+      "community": 8,
+      "norm_label": "ios"
+    },
+    {
+      "label": "supportsTablet",
+      "file_type": "code",
+      "source_file": "expo-app/app.json",
+      "source_location": "L14",
+      "id": "expo_app_app_ios_supportstablet",
+      "community": 8,
+      "norm_label": "supportstablet"
+    },
+    {
+      "label": "bundleIdentifier",
+      "file_type": "code",
+      "source_file": "expo-app/app.json",
+      "source_location": "L15",
+      "id": "expo_app_app_ios_bundleidentifier",
+      "community": 8,
+      "norm_label": "bundleidentifier"
+    },
+    {
+      "label": "android",
+      "file_type": "code",
+      "source_file": "expo-app/app.json",
+      "source_location": "L17",
+      "id": "expo_app_app_expo_android",
+      "community": 8,
+      "norm_label": "android"
+    },
+    {
+      "label": "adaptiveIcon",
+      "file_type": "code",
+      "source_file": "expo-app/app.json",
+      "source_location": "L18",
+      "id": "expo_app_app_android_adaptiveicon",
+      "community": 8,
+      "norm_label": "adaptiveicon"
+    },
+    {
+      "label": "backgroundColor",
+      "file_type": "code",
+      "source_file": "expo-app/app.json",
+      "source_location": "L19",
+      "id": "expo_app_app_adaptiveicon_backgroundcolor",
+      "community": 8,
+      "norm_label": "backgroundcolor"
+    },
+    {
+      "label": "package",
+      "file_type": "code",
+      "source_file": "expo-app/app.json",
+      "source_location": "L21",
+      "id": "expo_app_app_android_package",
+      "community": 8,
+      "norm_label": "package"
+    },
+    {
+      "label": "web",
+      "file_type": "code",
+      "source_file": "expo-app/app.json",
+      "source_location": "L23",
+      "id": "expo_app_app_expo_web",
+      "community": 8,
+      "norm_label": "web"
+    },
+    {
+      "label": "bundler",
+      "file_type": "code",
+      "source_file": "expo-app/app.json",
+      "source_location": "L24",
+      "id": "expo_app_app_web_bundler",
+      "community": 8,
+      "norm_label": "bundler"
+    },
+    {
+      "label": "output",
+      "file_type": "code",
+      "source_file": "expo-app/app.json",
+      "source_location": "L25",
+      "id": "expo_app_app_web_output",
+      "community": 8,
+      "norm_label": "output"
+    },
+    {
+      "label": "plugins",
+      "file_type": "code",
+      "source_file": "expo-app/app.json",
+      "source_location": "L27",
+      "id": "expo_app_app_expo_plugins",
+      "community": 8,
+      "norm_label": "plugins"
+    },
+    {
+      "label": "babel.config.js",
+      "file_type": "code",
+      "source_file": "expo-app/babel.config.js",
+      "source_location": "L1",
+      "id": "expo_app_babel_config",
+      "community": 26,
+      "norm_label": "babel.config.js"
+    },
+    {
+      "label": "index.js",
+      "file_type": "code",
+      "source_file": "expo-app/index.js",
+      "source_location": "L1",
+      "id": "expo_app_index",
+      "community": 29,
+      "norm_label": "index.js"
+    },
+    {
+      "label": "package.json",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L1",
+      "id": "expo_app_package",
+      "community": 2,
+      "norm_label": "package.json"
+    },
+    {
+      "label": "name",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L2",
+      "id": "expo_app_package_name",
+      "community": 2,
+      "norm_label": "name"
+    },
+    {
+      "label": "version",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L3",
+      "id": "expo_app_package_version",
+      "community": 2,
+      "norm_label": "version"
+    },
+    {
+      "label": "main",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L4",
+      "id": "expo_app_package_main",
+      "community": 2,
+      "norm_label": "main"
+    },
+    {
+      "label": "scripts",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L5",
+      "id": "expo_app_package_scripts",
+      "community": 2,
+      "norm_label": "scripts"
+    },
+    {
+      "label": "start",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L6",
+      "id": "expo_app_package_scripts_start",
+      "community": 2,
+      "norm_label": "start"
+    },
+    {
+      "label": "android",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L7",
+      "id": "expo_app_package_scripts_android",
+      "community": 2,
+      "norm_label": "android"
+    },
+    {
+      "label": "ios",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L8",
+      "id": "expo_app_package_scripts_ios",
+      "community": 2,
+      "norm_label": "ios"
+    },
+    {
+      "label": "web",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L9",
+      "id": "expo_app_package_scripts_web",
+      "community": 2,
+      "norm_label": "web"
+    },
+    {
+      "label": "lint",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L10",
+      "id": "expo_app_package_scripts_lint",
+      "community": 2,
+      "norm_label": "lint"
+    },
+    {
+      "label": "dependencies",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L12",
+      "id": "expo_app_package_dependencies",
+      "community": 2,
+      "norm_label": "dependencies"
+    },
+    {
+      "label": "@expo/metro-runtime",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L13",
+      "id": "expo_app_package_dependencies_expo_metro_runtime",
+      "community": 2,
+      "norm_label": "@expo/metro-runtime"
+    },
+    {
+      "label": "@react-navigation/bottom-tabs",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L14",
+      "id": "expo_app_package_dependencies_react_navigation_bottom_tabs",
+      "community": 2,
+      "norm_label": "@react-navigation/bottom-tabs"
+    },
+    {
+      "label": "@react-navigation/native",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L15",
+      "id": "expo_app_package_dependencies_react_navigation_native",
+      "community": 2,
+      "norm_label": "@react-navigation/native"
+    },
+    {
+      "label": "@react-navigation/native-stack",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L16",
+      "id": "expo_app_package_dependencies_react_navigation_native_stack",
+      "community": 2,
+      "norm_label": "@react-navigation/native-stack"
+    },
+    {
+      "label": "@tanstack/react-query",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L17",
+      "id": "expo_app_package_dependencies_tanstack_react_query",
+      "community": 2,
+      "norm_label": "@tanstack/react-query"
+    },
+    {
+      "label": "axios",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L18",
+      "id": "expo_app_package_dependencies_axios",
+      "community": 2,
+      "norm_label": "axios"
+    },
+    {
+      "label": "expo",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L19",
+      "id": "expo_app_package_dependencies_expo",
+      "community": 2,
+      "norm_label": "expo"
+    },
+    {
+      "label": "expo-camera",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L20",
+      "id": "expo_app_package_dependencies_expo_camera",
+      "community": 2,
+      "norm_label": "expo-camera"
+    },
+    {
+      "label": "expo-image-manipulator",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L21",
+      "id": "expo_app_package_dependencies_expo_image_manipulator",
+      "community": 2,
+      "norm_label": "expo-image-manipulator"
+    },
+    {
+      "label": "expo-image-picker",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L22",
+      "id": "expo_app_package_dependencies_expo_image_picker",
+      "community": 2,
+      "norm_label": "expo-image-picker"
+    },
+    {
+      "label": "expo-notifications",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L23",
+      "id": "expo_app_package_dependencies_expo_notifications",
+      "community": 2,
+      "norm_label": "expo-notifications"
+    },
+    {
+      "label": "expo-secure-store",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L24",
+      "id": "expo_app_package_dependencies_expo_secure_store",
+      "community": 2,
+      "norm_label": "expo-secure-store"
+    },
+    {
+      "label": "expo-status-bar",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L25",
+      "id": "expo_app_package_dependencies_expo_status_bar",
+      "community": 2,
+      "norm_label": "expo-status-bar"
+    },
+    {
+      "label": "nativewind",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L26",
+      "id": "expo_app_package_dependencies_nativewind",
+      "community": 2,
+      "norm_label": "nativewind"
+    },
+    {
+      "label": "react",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L27",
+      "id": "expo_app_package_dependencies_react",
+      "community": 2,
+      "norm_label": "react"
+    },
+    {
+      "label": "react-dom",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L28",
+      "id": "expo_app_package_dependencies_react_dom",
+      "community": 2,
+      "norm_label": "react-dom"
+    },
+    {
+      "label": "react-native",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L29",
+      "id": "expo_app_package_dependencies_react_native",
+      "community": 2,
+      "norm_label": "react-native"
+    },
+    {
+      "label": "react-native-reanimated",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L30",
+      "id": "expo_app_package_dependencies_react_native_reanimated",
+      "community": 2,
+      "norm_label": "react-native-reanimated"
+    },
+    {
+      "label": "react-native-safe-area-context",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L31",
+      "id": "expo_app_package_dependencies_react_native_safe_area_context",
+      "community": 2,
+      "norm_label": "react-native-safe-area-context"
+    },
+    {
+      "label": "react-native-screens",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L32",
+      "id": "expo_app_package_dependencies_react_native_screens",
+      "community": 2,
+      "norm_label": "react-native-screens"
+    },
+    {
+      "label": "react-native-svg",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L33",
+      "id": "expo_app_package_dependencies_react_native_svg",
+      "community": 2,
+      "norm_label": "react-native-svg"
+    },
+    {
+      "label": "react-native-web",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L34",
+      "id": "expo_app_package_dependencies_react_native_web",
+      "community": 2,
+      "norm_label": "react-native-web"
+    },
+    {
+      "label": "victory-native",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L35",
+      "id": "expo_app_package_dependencies_victory_native",
+      "community": 2,
+      "norm_label": "victory-native"
+    },
+    {
+      "label": "zustand",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L36",
+      "id": "expo_app_package_dependencies_zustand",
+      "community": 2,
+      "norm_label": "zustand"
+    },
+    {
+      "label": "devDependencies",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L38",
+      "id": "expo_app_package_devdependencies",
+      "community": 2,
+      "norm_label": "devdependencies"
+    },
+    {
+      "label": "@babel/core",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L39",
+      "id": "expo_app_package_devdependencies_babel_core",
+      "community": 2,
+      "norm_label": "@babel/core"
+    },
+    {
+      "label": "@types/react",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L40",
+      "id": "expo_app_package_devdependencies_types_react",
+      "community": 2,
+      "norm_label": "@types/react"
+    },
+    {
+      "label": "tailwindcss",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L41",
+      "id": "expo_app_package_devdependencies_tailwindcss",
+      "community": 2,
+      "norm_label": "tailwindcss"
+    },
+    {
+      "label": "typescript",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L42",
+      "id": "expo_app_package_devdependencies_typescript",
+      "community": 2,
+      "norm_label": "typescript"
+    },
+    {
+      "label": "private",
+      "file_type": "code",
+      "source_file": "expo-app/package.json",
+      "source_location": "L44",
+      "id": "expo_app_package_private",
+      "community": 2,
+      "norm_label": "private"
+    },
+    {
+      "label": "LoginScreen.tsx",
+      "file_type": "code",
+      "source_file": "expo-app/src/screens/auth/LoginScreen.tsx",
+      "source_location": "L1",
+      "id": "auth_loginscreen",
+      "community": 0,
+      "norm_label": "loginscreen.tsx"
+    },
+    {
+      "label": "Props",
+      "file_type": "code",
+      "source_file": "expo-app/src/screens/auth/LoginScreen.tsx",
+      "source_location": "L8",
+      "id": "auth_loginscreen_props",
+      "community": 0,
+      "norm_label": "props"
+    },
+    {
+      "label": "LoginScreen()",
+      "file_type": "code",
+      "source_file": "expo-app/src/screens/auth/LoginScreen.tsx",
+      "source_location": "L10",
+      "id": "auth_loginscreen_loginscreen",
+      "community": 0,
+      "norm_label": "loginscreen()"
+    },
+    {
+      "label": "RegisterScreen.tsx",
+      "file_type": "code",
+      "source_file": "expo-app/src/screens/auth/RegisterScreen.tsx",
+      "source_location": "L1",
+      "id": "auth_registerscreen",
+      "community": 0,
+      "norm_label": "registerscreen.tsx"
+    },
+    {
+      "label": "Props",
+      "file_type": "code",
+      "source_file": "expo-app/src/screens/auth/RegisterScreen.tsx",
+      "source_location": "L8",
+      "id": "auth_registerscreen_props",
+      "community": 0,
+      "norm_label": "props"
+    },
+    {
+      "label": "RegisterScreen()",
+      "file_type": "code",
+      "source_file": "expo-app/src/screens/auth/RegisterScreen.tsx",
+      "source_location": "L10",
+      "id": "auth_registerscreen_registerscreen",
+      "community": 0,
+      "norm_label": "registerscreen()"
+    },
+    {
+      "label": "authStore.ts",
+      "file_type": "code",
+      "source_file": "expo-app/src/store/authStore.ts",
+      "source_location": "L1",
+      "id": "store_authstore",
+      "community": 5,
+      "norm_label": "authstore.ts"
+    },
+    {
+      "label": "AuthState",
+      "file_type": "code",
+      "source_file": "expo-app/src/store/authStore.ts",
+      "source_location": "L5",
+      "id": "store_authstore_authstate",
+      "community": 5,
+      "norm_label": "authstate"
+    },
+    {
+      "label": "useAuthStore",
+      "file_type": "code",
+      "source_file": "expo-app/src/store/authStore.ts",
+      "source_location": "L16",
+      "id": "store_authstore_useauthstore",
+      "community": 0,
+      "norm_label": "useauthstore"
+    },
+    {
+      "label": "storage.ts",
+      "file_type": "code",
+      "source_file": "expo-app/src/utils/storage.ts",
+      "source_location": "L1",
+      "id": "utils_storage",
+      "community": 5,
+      "norm_label": "storage.ts"
+    },
+    {
+      "label": "saveToken()",
+      "file_type": "code",
+      "source_file": "expo-app/src/utils/storage.ts",
+      "source_location": "L9",
+      "id": "utils_storage_savetoken",
+      "community": 5,
+      "norm_label": "savetoken()"
+    },
+    {
+      "label": "getToken()",
+      "file_type": "code",
+      "source_file": "expo-app/src/utils/storage.ts",
+      "source_location": "L17",
+      "id": "utils_storage_gettoken",
+      "community": 5,
+      "norm_label": "gettoken()"
+    },
+    {
+      "label": "saveUser()",
+      "file_type": "code",
+      "source_file": "expo-app/src/utils/storage.ts",
+      "source_location": "L24",
+      "id": "utils_storage_saveuser",
+      "community": 5,
+      "norm_label": "saveuser()"
+    },
+    {
+      "label": "getUser()",
+      "file_type": "code",
+      "source_file": "expo-app/src/utils/storage.ts",
+      "source_location": "L33",
+      "id": "utils_storage_getuser",
+      "community": 5,
+      "norm_label": "getuser()"
+    },
+    {
+      "label": "saveActiveSplit()",
+      "file_type": "code",
+      "source_file": "expo-app/src/utils/storage.ts",
+      "source_location": "L43",
+      "id": "utils_storage_saveactivesplit",
+      "community": 5,
+      "norm_label": "saveactivesplit()"
+    },
+    {
+      "label": "getActiveSplit()",
+      "file_type": "code",
+      "source_file": "expo-app/src/utils/storage.ts",
+      "source_location": "L52",
+      "id": "utils_storage_getactivesplit",
+      "community": 5,
+      "norm_label": "getactivesplit()"
+    },
+    {
+      "label": "addToPendingQueue()",
+      "file_type": "code",
+      "source_file": "expo-app/src/utils/storage.ts",
+      "source_location": "L62",
+      "id": "utils_storage_addtopendingqueue",
+      "community": 5,
+      "norm_label": "addtopendingqueue()"
+    },
+    {
+      "label": "getPendingQueue()",
+      "file_type": "code",
+      "source_file": "expo-app/src/utils/storage.ts",
+      "source_location": "L80",
+      "id": "utils_storage_getpendingqueue",
+      "community": 5,
+      "norm_label": "getpendingqueue()"
+    },
+    {
+      "label": "clearPendingQueue()",
+      "file_type": "code",
+      "source_file": "expo-app/src/utils/storage.ts",
+      "source_location": "L90",
+      "id": "utils_storage_clearpendingqueue",
+      "community": 5,
+      "norm_label": "clearpendingqueue()"
+    },
+    {
+      "label": "clearAuth()",
+      "file_type": "code",
+      "source_file": "expo-app/src/utils/storage.ts",
+      "source_location": "L98",
+      "id": "utils_storage_clearauth",
+      "community": 5,
+      "norm_label": "clearauth()"
+    },
+    {
+      "label": "clearAll()",
+      "file_type": "code",
+      "source_file": "expo-app/src/utils/storage.ts",
+      "source_location": "L108",
+      "id": "utils_storage_clearall",
+      "community": 5,
+      "norm_label": "clearall()"
+    },
+    {
+      "label": "storage",
+      "file_type": "code",
+      "source_file": "expo-app/src/utils/storage.ts",
+      "source_location": "L123",
+      "id": "utils_storage_storage",
+      "community": 5,
+      "norm_label": "storage"
+    },
+    {
+      "label": "tailwind.config.js",
+      "file_type": "code",
+      "source_file": "expo-app/tailwind.config.js",
+      "source_location": "L1",
+      "id": "expo_app_tailwind_config",
+      "community": 28,
+      "norm_label": "tailwind.config.js"
+    },
+    {
       "label": "package.json",
       "file_type": "code",
       "source_file": "api/package.json",
@@ -116,7 +908,7 @@
       "file_type": "code",
       "source_file": "api/package.json",
       "source_location": "L14",
-      "community": 9,
+      "community": 6,
       "norm_label": "dependencies",
       "id": "api_package_dependencies"
     },
@@ -125,7 +917,7 @@
       "file_type": "code",
       "source_file": "api/package.json",
       "source_location": "L15",
-      "community": 9,
+      "community": 6,
       "norm_label": "@prisma/client",
       "id": "api_package_dependencies_prisma_client"
     },
@@ -134,7 +926,7 @@
       "file_type": "code",
       "source_file": "api/package.json",
       "source_location": "L16",
-      "community": 9,
+      "community": 6,
       "norm_label": "bcryptjs",
       "id": "api_package_dependencies_bcryptjs"
     },
@@ -143,7 +935,7 @@
       "file_type": "code",
       "source_file": "api/package.json",
       "source_location": "L18",
-      "community": 9,
+      "community": 6,
       "norm_label": "cors",
       "id": "api_package_dependencies_cors"
     },
@@ -152,7 +944,7 @@
       "file_type": "code",
       "source_file": "api/package.json",
       "source_location": "L19",
-      "community": 9,
+      "community": 6,
       "norm_label": "dotenv",
       "id": "api_package_dependencies_dotenv"
     },
@@ -161,7 +953,7 @@
       "file_type": "code",
       "source_file": "api/package.json",
       "source_location": "L20",
-      "community": 9,
+      "community": 6,
       "norm_label": "express",
       "id": "api_package_dependencies_express"
     },
@@ -170,7 +962,7 @@
       "file_type": "code",
       "source_file": "api/package.json",
       "source_location": "L21",
-      "community": 9,
+      "community": 6,
       "norm_label": "jsonwebtoken",
       "id": "api_package_dependencies_jsonwebtoken"
     },
@@ -179,7 +971,7 @@
       "file_type": "code",
       "source_file": "api/package.json",
       "source_location": "L22",
-      "community": 9,
+      "community": 6,
       "norm_label": "multer",
       "id": "api_package_dependencies_multer"
     },
@@ -188,7 +980,7 @@
       "file_type": "code",
       "source_file": "api/package.json",
       "source_location": "L23",
-      "community": 9,
+      "community": 6,
       "norm_label": "zod",
       "id": "api_package_dependencies_zod"
     },
@@ -656,7 +1448,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/recordController.ts",
       "source_location": "L1",
-      "community": 15,
+      "community": 21,
       "norm_label": "recordcontroller.ts",
       "id": "controllers_recordcontroller"
     },
@@ -665,7 +1457,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/recordController.ts",
       "source_location": "L5",
-      "community": 15,
+      "community": 21,
       "norm_label": "prisma",
       "id": "controllers_recordcontroller_prisma"
     },
@@ -674,7 +1466,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/recordController.ts",
       "source_location": "L7",
-      "community": 15,
+      "community": 21,
       "norm_label": "getrecords()",
       "id": "controllers_recordcontroller_getrecords"
     },
@@ -683,7 +1475,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/recordController.ts",
       "source_location": "L31",
-      "community": 15,
+      "community": 21,
       "norm_label": "getexerciserecords()",
       "id": "controllers_recordcontroller_getexerciserecords"
     },
@@ -854,7 +1646,7 @@
       "file_type": "code",
       "source_file": "api/src/index.ts",
       "source_location": "L1",
-      "community": 7,
+      "community": 13,
       "norm_label": "index.ts",
       "id": "src_index"
     },
@@ -863,7 +1655,7 @@
       "file_type": "code",
       "source_file": "api/src/index.ts",
       "source_location": "L18",
-      "community": 7,
+      "community": 13,
       "norm_label": "app",
       "id": "src_index_app"
     },
@@ -872,7 +1664,7 @@
       "file_type": "code",
       "source_file": "api/src/middleware/auth.ts",
       "source_location": "L1",
-      "community": 13,
+      "community": 11,
       "norm_label": "auth.ts",
       "id": "middleware_auth"
     },
@@ -881,7 +1673,7 @@
       "file_type": "code",
       "source_file": "api/src/middleware/auth.ts",
       "source_location": "L5",
-      "community": 15,
+      "community": 11,
       "norm_label": "authrequest",
       "id": "middleware_auth_authrequest"
     },
@@ -1016,7 +1808,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/auth.ts",
       "source_location": "L1",
-      "community": 7,
+      "community": 23,
       "norm_label": "auth.ts",
       "id": "routes_auth"
     },
@@ -1025,7 +1817,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/auth.ts",
       "source_location": "L7",
-      "community": 7,
+      "community": 23,
       "norm_label": "router",
       "id": "routes_auth_router"
     },
@@ -1034,7 +1826,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/auth.ts",
       "source_location": "L9",
-      "community": 7,
+      "community": 23,
       "norm_label": "registerschema",
       "id": "routes_auth_registerschema"
     },
@@ -1043,7 +1835,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/auth.ts",
       "source_location": "L15",
-      "community": 7,
+      "community": 23,
       "norm_label": "loginschema",
       "id": "routes_auth_loginschema"
     },
@@ -1052,7 +1844,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/auth.ts",
       "source_location": "L20",
-      "community": 7,
+      "community": 23,
       "norm_label": "wrap()",
       "id": "routes_auth_wrap"
     },
@@ -1187,7 +1979,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/photos.ts",
       "source_location": "L1",
-      "community": 23,
+      "community": 13,
       "norm_label": "photos.ts",
       "id": "routes_photos"
     },
@@ -1196,7 +1988,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/photos.ts",
       "source_location": "L6",
-      "community": 23,
+      "community": 13,
       "norm_label": "router",
       "id": "routes_photos_router"
     },
@@ -1205,7 +1997,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/photos.ts",
       "source_location": "L8",
-      "community": 23,
+      "community": 13,
       "norm_label": "storage",
       "id": "routes_photos_storage"
     },
@@ -1214,7 +2006,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/photos.ts",
       "source_location": "L9",
-      "community": 23,
+      "community": 13,
       "norm_label": "upload",
       "id": "routes_photos_upload"
     },
@@ -1223,7 +2015,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/photos.ts",
       "source_location": "L21",
-      "community": 23,
+      "community": 13,
       "norm_label": "wrap()",
       "id": "routes_photos_wrap"
     },
@@ -1259,7 +2051,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/records.ts",
       "source_location": "L1",
-      "community": 13,
+      "community": 21,
       "norm_label": "records.ts",
       "id": "routes_records"
     },
@@ -1268,7 +2060,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/records.ts",
       "source_location": "L5",
-      "community": 13,
+      "community": 21,
       "norm_label": "router",
       "id": "routes_records_router"
     },
@@ -1277,7 +2069,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/records.ts",
       "source_location": "L7",
-      "community": 13,
+      "community": 21,
       "norm_label": "wrap()",
       "id": "routes_records_wrap"
     },
@@ -1534,177 +2326,6 @@
       "id": "expo_devices_devices"
     },
     {
-      "label": "app.json",
-      "file_type": "code",
-      "source_file": "expo-app/app.json",
-      "source_location": "L1",
-      "community": 8,
-      "norm_label": "app.json",
-      "id": "expo_app_app"
-    },
-    {
-      "label": "expo",
-      "file_type": "code",
-      "source_file": "expo-app/app.json",
-      "source_location": "L2",
-      "community": 8,
-      "norm_label": "expo",
-      "id": "expo_app_app_expo"
-    },
-    {
-      "label": "name",
-      "file_type": "code",
-      "source_file": "expo-app/app.json",
-      "source_location": "L3",
-      "community": 8,
-      "norm_label": "name",
-      "id": "expo_app_app_expo_name"
-    },
-    {
-      "label": "slug",
-      "file_type": "code",
-      "source_file": "expo-app/app.json",
-      "source_location": "L4",
-      "community": 8,
-      "norm_label": "slug",
-      "id": "expo_app_app_expo_slug"
-    },
-    {
-      "label": "version",
-      "file_type": "code",
-      "source_file": "expo-app/app.json",
-      "source_location": "L5",
-      "community": 8,
-      "norm_label": "version",
-      "id": "expo_app_app_expo_version"
-    },
-    {
-      "label": "orientation",
-      "file_type": "code",
-      "source_file": "expo-app/app.json",
-      "source_location": "L6",
-      "community": 8,
-      "norm_label": "orientation",
-      "id": "expo_app_app_expo_orientation"
-    },
-    {
-      "label": "icon",
-      "file_type": "code",
-      "source_file": "expo-app/app.json",
-      "source_location": "L7",
-      "community": 8,
-      "norm_label": "icon",
-      "id": "expo_app_app_expo_icon"
-    },
-    {
-      "label": "userInterfaceStyle",
-      "file_type": "code",
-      "source_file": "expo-app/app.json",
-      "source_location": "L8",
-      "community": 8,
-      "norm_label": "userinterfacestyle",
-      "id": "expo_app_app_expo_userinterfacestyle"
-    },
-    {
-      "label": "newArchEnabled",
-      "file_type": "code",
-      "source_file": "expo-app/app.json",
-      "source_location": "L9",
-      "community": 8,
-      "norm_label": "newarchenabled",
-      "id": "expo_app_app_expo_newarchenabled"
-    },
-    {
-      "label": "splash",
-      "file_type": "code",
-      "source_file": "expo-app/app.json",
-      "source_location": "L10",
-      "community": 8,
-      "norm_label": "splash",
-      "id": "expo_app_app_expo_splash"
-    },
-    {
-      "label": "backgroundColor",
-      "file_type": "code",
-      "source_file": "expo-app/app.json",
-      "source_location": "L11",
-      "community": 8,
-      "norm_label": "backgroundcolor",
-      "id": "expo_app_app_splash_backgroundcolor"
-    },
-    {
-      "label": "ios",
-      "file_type": "code",
-      "source_file": "expo-app/app.json",
-      "source_location": "L13",
-      "community": 8,
-      "norm_label": "ios",
-      "id": "expo_app_app_expo_ios"
-    },
-    {
-      "label": "supportsTablet",
-      "file_type": "code",
-      "source_file": "expo-app/app.json",
-      "source_location": "L14",
-      "community": 8,
-      "norm_label": "supportstablet",
-      "id": "expo_app_app_ios_supportstablet"
-    },
-    {
-      "label": "bundleIdentifier",
-      "file_type": "code",
-      "source_file": "expo-app/app.json",
-      "source_location": "L15",
-      "community": 8,
-      "norm_label": "bundleidentifier",
-      "id": "expo_app_app_ios_bundleidentifier"
-    },
-    {
-      "label": "android",
-      "file_type": "code",
-      "source_file": "expo-app/app.json",
-      "source_location": "L17",
-      "community": 8,
-      "norm_label": "android",
-      "id": "expo_app_app_expo_android"
-    },
-    {
-      "label": "adaptiveIcon",
-      "file_type": "code",
-      "source_file": "expo-app/app.json",
-      "source_location": "L18",
-      "community": 8,
-      "norm_label": "adaptiveicon",
-      "id": "expo_app_app_android_adaptiveicon"
-    },
-    {
-      "label": "package",
-      "file_type": "code",
-      "source_file": "expo-app/app.json",
-      "source_location": "L21",
-      "community": 8,
-      "norm_label": "package",
-      "id": "expo_app_app_android_package"
-    },
-    {
-      "label": "plugins",
-      "file_type": "code",
-      "source_file": "expo-app/app.json",
-      "source_location": "L23",
-      "community": 8,
-      "norm_label": "plugins",
-      "id": "expo_app_app_expo_plugins"
-    },
-    {
-      "label": "babel.config.js",
-      "file_type": "code",
-      "source_file": "expo-app/babel.config.js",
-      "source_location": "L1",
-      "community": 26,
-      "norm_label": "babel.config.js",
-      "id": "expo_app_babel_config"
-    },
-    {
       "label": "metro.config.js",
       "file_type": "code",
       "source_file": "expo-app/metro.config.js",
@@ -1748,348 +2369,6 @@
       "community": 27,
       "norm_label": "nativewind-env.d.ts",
       "id": "expo_app_nativewind_env_d"
-    },
-    {
-      "label": "package.json",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L1",
-      "community": 2,
-      "norm_label": "package.json",
-      "id": "expo_app_package"
-    },
-    {
-      "label": "name",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L2",
-      "community": 2,
-      "norm_label": "name",
-      "id": "expo_app_package_name"
-    },
-    {
-      "label": "version",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L3",
-      "community": 2,
-      "norm_label": "version",
-      "id": "expo_app_package_version"
-    },
-    {
-      "label": "main",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L4",
-      "community": 2,
-      "norm_label": "main",
-      "id": "expo_app_package_main"
-    },
-    {
-      "label": "scripts",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L5",
-      "community": 2,
-      "norm_label": "scripts",
-      "id": "expo_app_package_scripts"
-    },
-    {
-      "label": "start",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L6",
-      "community": 2,
-      "norm_label": "start",
-      "id": "expo_app_package_scripts_start"
-    },
-    {
-      "label": "android",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L7",
-      "community": 2,
-      "norm_label": "android",
-      "id": "expo_app_package_scripts_android"
-    },
-    {
-      "label": "ios",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L8",
-      "community": 2,
-      "norm_label": "ios",
-      "id": "expo_app_package_scripts_ios"
-    },
-    {
-      "label": "web",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L9",
-      "community": 2,
-      "norm_label": "web",
-      "id": "expo_app_package_scripts_web"
-    },
-    {
-      "label": "lint",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L10",
-      "community": 2,
-      "norm_label": "lint",
-      "id": "expo_app_package_scripts_lint"
-    },
-    {
-      "label": "dependencies",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L12",
-      "community": 2,
-      "norm_label": "dependencies",
-      "id": "expo_app_package_dependencies"
-    },
-    {
-      "label": "@react-navigation/bottom-tabs",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L13",
-      "community": 2,
-      "norm_label": "@react-navigation/bottom-tabs",
-      "id": "expo_app_package_dependencies_react_navigation_bottom_tabs"
-    },
-    {
-      "label": "@react-navigation/native",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L14",
-      "community": 2,
-      "norm_label": "@react-navigation/native",
-      "id": "expo_app_package_dependencies_react_navigation_native"
-    },
-    {
-      "label": "@tanstack/react-query",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L16",
-      "community": 2,
-      "norm_label": "@tanstack/react-query",
-      "id": "expo_app_package_dependencies_tanstack_react_query"
-    },
-    {
-      "label": "axios",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L17",
-      "community": 2,
-      "norm_label": "axios",
-      "id": "expo_app_package_dependencies_axios"
-    },
-    {
-      "label": "expo",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L18",
-      "community": 2,
-      "norm_label": "expo",
-      "id": "expo_app_package_dependencies_expo"
-    },
-    {
-      "label": "expo-camera",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L19",
-      "community": 2,
-      "norm_label": "expo-camera",
-      "id": "expo_app_package_dependencies_expo_camera"
-    },
-    {
-      "label": "expo-image-manipulator",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L20",
-      "community": 2,
-      "norm_label": "expo-image-manipulator",
-      "id": "expo_app_package_dependencies_expo_image_manipulator"
-    },
-    {
-      "label": "expo-image-picker",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L21",
-      "community": 2,
-      "norm_label": "expo-image-picker",
-      "id": "expo_app_package_dependencies_expo_image_picker"
-    },
-    {
-      "label": "expo-notifications",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L22",
-      "community": 2,
-      "norm_label": "expo-notifications",
-      "id": "expo_app_package_dependencies_expo_notifications"
-    },
-    {
-      "label": "expo-secure-store",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L23",
-      "community": 2,
-      "norm_label": "expo-secure-store",
-      "id": "expo_app_package_dependencies_expo_secure_store"
-    },
-    {
-      "label": "expo-status-bar",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L24",
-      "community": 2,
-      "norm_label": "expo-status-bar",
-      "id": "expo_app_package_dependencies_expo_status_bar"
-    },
-    {
-      "label": "nativewind",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L25",
-      "community": 2,
-      "norm_label": "nativewind",
-      "id": "expo_app_package_dependencies_nativewind"
-    },
-    {
-      "label": "react",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L26",
-      "community": 2,
-      "norm_label": "react",
-      "id": "expo_app_package_dependencies_react"
-    },
-    {
-      "label": "react-native",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L27",
-      "community": 2,
-      "norm_label": "react-native",
-      "id": "expo_app_package_dependencies_react_native"
-    },
-    {
-      "label": "react-native-mmkv",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L28",
-      "community": 2,
-      "norm_label": "react-native-mmkv",
-      "id": "expo_app_package_dependencies_react_native_mmkv"
-    },
-    {
-      "label": "react-native-reanimated",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L29",
-      "community": 2,
-      "norm_label": "react-native-reanimated",
-      "id": "expo_app_package_dependencies_react_native_reanimated"
-    },
-    {
-      "label": "react-native-safe-area-context",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L30",
-      "community": 2,
-      "norm_label": "react-native-safe-area-context",
-      "id": "expo_app_package_dependencies_react_native_safe_area_context"
-    },
-    {
-      "label": "react-native-screens",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L31",
-      "community": 2,
-      "norm_label": "react-native-screens",
-      "id": "expo_app_package_dependencies_react_native_screens"
-    },
-    {
-      "label": "react-native-svg",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L32",
-      "community": 2,
-      "norm_label": "react-native-svg",
-      "id": "expo_app_package_dependencies_react_native_svg"
-    },
-    {
-      "label": "victory-native",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L33",
-      "community": 2,
-      "norm_label": "victory-native",
-      "id": "expo_app_package_dependencies_victory_native"
-    },
-    {
-      "label": "zustand",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L34",
-      "community": 2,
-      "norm_label": "zustand",
-      "id": "expo_app_package_dependencies_zustand"
-    },
-    {
-      "label": "devDependencies",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L36",
-      "community": 2,
-      "norm_label": "devdependencies",
-      "id": "expo_app_package_devdependencies"
-    },
-    {
-      "label": "@babel/core",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L37",
-      "community": 2,
-      "norm_label": "@babel/core",
-      "id": "expo_app_package_devdependencies_babel_core"
-    },
-    {
-      "label": "@types/react",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L38",
-      "community": 2,
-      "norm_label": "@types/react",
-      "id": "expo_app_package_devdependencies_types_react"
-    },
-    {
-      "label": "tailwindcss",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L39",
-      "community": 2,
-      "norm_label": "tailwindcss",
-      "id": "expo_app_package_devdependencies_tailwindcss"
-    },
-    {
-      "label": "typescript",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L40",
-      "community": 2,
-      "norm_label": "typescript",
-      "id": "expo_app_package_devdependencies_typescript"
-    },
-    {
-      "label": "private",
-      "file_type": "code",
-      "source_file": "expo-app/package.json",
-      "source_location": "L42",
-      "community": 2,
-      "norm_label": "private",
-      "id": "expo_app_package_private"
     },
     {
       "label": "App.tsx",
@@ -2240,7 +2519,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/api/metrics.ts",
       "source_location": "L1",
-      "community": 21,
+      "community": 4,
       "norm_label": "metrics.ts",
       "id": "api_metrics"
     },
@@ -2249,7 +2528,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/api/metrics.ts",
       "source_location": "L4",
-      "community": 21,
+      "community": 4,
       "norm_label": "logbodymetric()",
       "id": "api_metrics_logbodymetric"
     },
@@ -2258,7 +2537,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/api/metrics.ts",
       "source_location": "L9",
-      "community": 21,
+      "community": 4,
       "norm_label": "getbodymetrics()",
       "id": "api_metrics_getbodymetrics"
     },
@@ -2267,7 +2546,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/api/metrics.ts",
       "source_location": "L14",
-      "community": 21,
+      "community": 4,
       "norm_label": "deletebodymetric()",
       "id": "api_metrics_deletebodymetric"
     },
@@ -2375,7 +2654,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/api/progress.ts",
       "source_location": "L1",
-      "community": 3,
+      "community": 4,
       "norm_label": "progress.ts",
       "id": "api_progress"
     },
@@ -2384,7 +2663,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/api/progress.ts",
       "source_location": "L4",
-      "community": 3,
+      "community": 4,
       "norm_label": "getoverview()",
       "id": "api_progress_getoverview"
     },
@@ -2393,7 +2672,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/api/progress.ts",
       "source_location": "L9",
-      "community": 3,
+      "community": 4,
       "norm_label": "getexerciseprogress()",
       "id": "api_progress_getexerciseprogress"
     },
@@ -2402,7 +2681,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/api/progress.ts",
       "source_location": "L14",
-      "community": 3,
+      "community": 4,
       "norm_label": "getmusclevolume()",
       "id": "api_progress_getmusclevolume"
     },
@@ -2411,7 +2690,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/api/progress.ts",
       "source_location": "L19",
-      "community": 3,
+      "community": 4,
       "norm_label": "getheatmap()",
       "id": "api_progress_getheatmap"
     },
@@ -2420,7 +2699,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/api/records.ts",
       "source_location": "L1",
-      "community": 3,
+      "community": 4,
       "norm_label": "records.ts",
       "id": "api_records"
     },
@@ -2429,7 +2708,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/api/records.ts",
       "source_location": "L4",
-      "community": 3,
+      "community": 4,
       "norm_label": "getrecords()",
       "id": "api_records_getrecords"
     },
@@ -2438,7 +2717,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/api/records.ts",
       "source_location": "L9",
-      "community": 3,
+      "community": 4,
       "norm_label": "getexerciserecords()",
       "id": "api_records_getexerciserecords"
     },
@@ -2825,7 +3104,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/navigation/types.ts",
       "source_location": "L33",
-      "community": 3,
+      "community": 4,
       "norm_label": "progressstackparamlist",
       "id": "navigation_types_progressstackparamlist"
     },
@@ -2875,51 +3154,6 @@
       "id": "navigation_types_screenprops"
     },
     {
-      "label": "LoginScreen.tsx",
-      "file_type": "code",
-      "source_file": "expo-app/src/screens/auth/LoginScreen.tsx",
-      "source_location": "L1",
-      "community": 0,
-      "norm_label": "loginscreen.tsx",
-      "id": "auth_loginscreen"
-    },
-    {
-      "label": "Props",
-      "file_type": "code",
-      "source_file": "expo-app/src/screens/auth/LoginScreen.tsx",
-      "source_location": "L8",
-      "community": 0,
-      "norm_label": "props",
-      "id": "auth_loginscreen_props"
-    },
-    {
-      "label": "LoginScreen()",
-      "file_type": "code",
-      "source_file": "expo-app/src/screens/auth/LoginScreen.tsx",
-      "source_location": "L10",
-      "community": 0,
-      "norm_label": "loginscreen()",
-      "id": "auth_loginscreen_loginscreen"
-    },
-    {
-      "label": "RegisterScreen.tsx",
-      "file_type": "code",
-      "source_file": "expo-app/src/screens/auth/RegisterScreen.tsx",
-      "source_location": "L1",
-      "community": 0,
-      "norm_label": "registerscreen.tsx",
-      "id": "auth_registerscreen"
-    },
-    {
-      "label": "Props",
-      "file_type": "code",
-      "source_file": "expo-app/src/screens/auth/RegisterScreen.tsx",
-      "source_location": "L8",
-      "community": 0,
-      "norm_label": "props",
-      "id": "auth_registerscreen_props"
-    },
-    {
       "label": "HomeScreen.tsx",
       "file_type": "code",
       "source_file": "expo-app/src/screens/home/HomeScreen.tsx",
@@ -2951,7 +3185,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/metrics/MetricsScreen.tsx",
       "source_location": "L1",
-      "community": 21,
+      "community": 4,
       "norm_label": "metricsscreen.tsx",
       "id": "metrics_metricsscreen"
     },
@@ -2960,7 +3194,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/metrics/MetricsScreen.tsx",
       "source_location": "L8",
-      "community": 21,
+      "community": 4,
       "norm_label": "props",
       "id": "metrics_metricsscreen_props"
     },
@@ -3284,7 +3518,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/onboarding/SplitSelectionScreen.tsx",
       "source_location": "L12",
-      "community": 1,
+      "community": 0,
       "norm_label": "splitselectioncontent()",
       "id": "onboarding_splitselectionscreen_splitselectioncontent"
     },
@@ -3446,7 +3680,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/progress/DashboardScreen.tsx",
       "source_location": "L1",
-      "community": 3,
+      "community": 4,
       "norm_label": "dashboardscreen.tsx",
       "id": "progress_dashboardscreen"
     },
@@ -3455,7 +3689,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/progress/DashboardScreen.tsx",
       "source_location": "L9",
-      "community": 3,
+      "community": 4,
       "norm_label": "props",
       "id": "progress_dashboardscreen_props"
     },
@@ -3464,7 +3698,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/progress/ExerciseProgressScreen.tsx",
       "source_location": "L1",
-      "community": 3,
+      "community": 4,
       "norm_label": "exerciseprogressscreen.tsx",
       "id": "progress_exerciseprogressscreen"
     },
@@ -3473,7 +3707,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/progress/ExerciseProgressScreen.tsx",
       "source_location": "L8",
-      "community": 3,
+      "community": 4,
       "norm_label": "props",
       "id": "progress_exerciseprogressscreen_props"
     },
@@ -3482,7 +3716,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/progress/RecordsScreen.tsx",
       "source_location": "L1",
-      "community": 3,
+      "community": 4,
       "norm_label": "recordsscreen.tsx",
       "id": "progress_recordsscreen"
     },
@@ -3491,7 +3725,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/progress/RecordsScreen.tsx",
       "source_location": "L8",
-      "community": 3,
+      "community": 4,
       "norm_label": "props",
       "id": "progress_recordsscreen_props"
     },
@@ -3521,33 +3755,6 @@
       "community": 4,
       "norm_label": "props",
       "id": "workout_workoutsummaryscreen_props"
-    },
-    {
-      "label": "authStore.ts",
-      "file_type": "code",
-      "source_file": "expo-app/src/store/authStore.ts",
-      "source_location": "L1",
-      "community": 5,
-      "norm_label": "authstore.ts",
-      "id": "store_authstore"
-    },
-    {
-      "label": "AuthState",
-      "file_type": "code",
-      "source_file": "expo-app/src/store/authStore.ts",
-      "source_location": "L5",
-      "community": 5,
-      "norm_label": "authstate",
-      "id": "store_authstore_authstate"
-    },
-    {
-      "label": "useAuthStore",
-      "file_type": "code",
-      "source_file": "expo-app/src/store/authStore.ts",
-      "source_location": "L16",
-      "community": 0,
-      "norm_label": "useauthstore",
-      "id": "store_authstore_useauthstore"
     },
     {
       "label": "workoutStore.ts",
@@ -3581,7 +3788,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L1",
-      "community": 3,
+      "community": 4,
       "norm_label": "index.ts",
       "id": "types_index"
     },
@@ -3617,7 +3824,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L40",
-      "community": 3,
+      "community": 4,
       "norm_label": "splitdayexercise",
       "id": "types_index_splitdayexercise"
     },
@@ -3635,7 +3842,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L63",
-      "community": 3,
+      "community": 4,
       "norm_label": "exercisealternative",
       "id": "types_index_exercisealternative"
     },
@@ -3680,7 +3887,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L114",
-      "community": 21,
+      "community": 4,
       "norm_label": "bodymetric",
       "id": "types_index_bodymetric"
     },
@@ -3698,7 +3905,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L131",
-      "community": 3,
+      "community": 4,
       "norm_label": "personalrecord",
       "id": "types_index_personalrecord"
     },
@@ -3725,7 +3932,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L162",
-      "community": 3,
+      "community": 4,
       "norm_label": "progressoverview",
       "id": "types_index_progressoverview"
     },
@@ -3734,7 +3941,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L171",
-      "community": 3,
+      "community": 4,
       "norm_label": "exerciseprogress",
       "id": "types_index_exerciseprogress"
     },
@@ -3743,7 +3950,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L180",
-      "community": 3,
+      "community": 4,
       "norm_label": "musclevolume",
       "id": "types_index_musclevolume"
     },
@@ -3752,135 +3959,9 @@
       "file_type": "code",
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L185",
-      "community": 3,
+      "community": 4,
       "norm_label": "heatmapentry",
       "id": "types_index_heatmapentry"
-    },
-    {
-      "label": "storage.ts",
-      "file_type": "code",
-      "source_file": "expo-app/src/utils/storage.ts",
-      "source_location": "L1",
-      "community": 5,
-      "norm_label": "storage.ts",
-      "id": "utils_storage"
-    },
-    {
-      "label": "storage",
-      "file_type": "code",
-      "source_file": "expo-app/src/utils/storage.ts",
-      "source_location": "L3",
-      "community": 5,
-      "norm_label": "storage",
-      "id": "utils_storage_storage"
-    },
-    {
-      "label": "saveToken()",
-      "file_type": "code",
-      "source_file": "expo-app/src/utils/storage.ts",
-      "source_location": "L10",
-      "community": 5,
-      "norm_label": "savetoken()",
-      "id": "utils_storage_savetoken"
-    },
-    {
-      "label": "getToken()",
-      "file_type": "code",
-      "source_file": "expo-app/src/utils/storage.ts",
-      "source_location": "L14",
-      "community": 5,
-      "norm_label": "gettoken()",
-      "id": "utils_storage_gettoken"
-    },
-    {
-      "label": "saveUser()",
-      "file_type": "code",
-      "source_file": "expo-app/src/utils/storage.ts",
-      "source_location": "L18",
-      "community": 5,
-      "norm_label": "saveuser()",
-      "id": "utils_storage_saveuser"
-    },
-    {
-      "label": "getUser()",
-      "file_type": "code",
-      "source_file": "expo-app/src/utils/storage.ts",
-      "source_location": "L22",
-      "community": 5,
-      "norm_label": "getuser()",
-      "id": "utils_storage_getuser"
-    },
-    {
-      "label": "saveActiveSplit()",
-      "file_type": "code",
-      "source_file": "expo-app/src/utils/storage.ts",
-      "source_location": "L27",
-      "community": 5,
-      "norm_label": "saveactivesplit()",
-      "id": "utils_storage_saveactivesplit"
-    },
-    {
-      "label": "getActiveSplit()",
-      "file_type": "code",
-      "source_file": "expo-app/src/utils/storage.ts",
-      "source_location": "L31",
-      "community": 5,
-      "norm_label": "getactivesplit()",
-      "id": "utils_storage_getactivesplit"
-    },
-    {
-      "label": "addToPendingQueue()",
-      "file_type": "code",
-      "source_file": "expo-app/src/utils/storage.ts",
-      "source_location": "L36",
-      "community": 5,
-      "norm_label": "addtopendingqueue()",
-      "id": "utils_storage_addtopendingqueue"
-    },
-    {
-      "label": "getPendingQueue()",
-      "file_type": "code",
-      "source_file": "expo-app/src/utils/storage.ts",
-      "source_location": "L43",
-      "community": 5,
-      "norm_label": "getpendingqueue()",
-      "id": "utils_storage_getpendingqueue"
-    },
-    {
-      "label": "clearPendingQueue()",
-      "file_type": "code",
-      "source_file": "expo-app/src/utils/storage.ts",
-      "source_location": "L48",
-      "community": 5,
-      "norm_label": "clearpendingqueue()",
-      "id": "utils_storage_clearpendingqueue"
-    },
-    {
-      "label": "clearAuth()",
-      "file_type": "code",
-      "source_file": "expo-app/src/utils/storage.ts",
-      "source_location": "L52",
-      "community": 5,
-      "norm_label": "clearauth()",
-      "id": "utils_storage_clearauth"
-    },
-    {
-      "label": "clearAll()",
-      "file_type": "code",
-      "source_file": "expo-app/src/utils/storage.ts",
-      "source_location": "L57",
-      "community": 5,
-      "norm_label": "clearall()",
-      "id": "utils_storage_clearall"
-    },
-    {
-      "label": "tailwind.config.js",
-      "file_type": "code",
-      "source_file": "expo-app/tailwind.config.js",
-      "source_location": "L1",
-      "community": 28,
-      "norm_label": "tailwind.config.js",
-      "id": "expo_app_tailwind_config"
     },
     {
       "label": "tsconfig.json",
@@ -4199,6 +4280,1301 @@
     }
   ],
   "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/app.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_app",
+      "target": "expo_app_app_expo"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/app.json",
+      "source_location": "L17",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_app_expo",
+      "target": "expo_app_app_expo_android"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/app.json",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_app_expo",
+      "target": "expo_app_app_expo_icon"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/app.json",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_app_expo",
+      "target": "expo_app_app_expo_ios"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/app.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_app_expo",
+      "target": "expo_app_app_expo_name"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/app.json",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_app_expo",
+      "target": "expo_app_app_expo_newarchenabled"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/app.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_app_expo",
+      "target": "expo_app_app_expo_orientation"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/app.json",
+      "source_location": "L23",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_app_expo",
+      "target": "expo_app_app_expo_plugins"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/app.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_app_expo",
+      "target": "expo_app_app_expo_slug"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/app.json",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_app_expo",
+      "target": "expo_app_app_expo_splash"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/app.json",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_app_expo",
+      "target": "expo_app_app_expo_userinterfacestyle"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/app.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_app_expo",
+      "target": "expo_app_app_expo_version"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/app.json",
+      "source_location": "L23",
+      "weight": 1.0,
+      "source": "expo_app_app_expo",
+      "target": "expo_app_app_expo_web",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/app.json",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_app_expo_splash",
+      "target": "expo_app_app_splash_backgroundcolor"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/app.json",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_app_android_adaptiveicon",
+      "target": "expo_app_app_splash_backgroundcolor"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/app.json",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_app_expo_ios",
+      "target": "expo_app_app_ios_bundleidentifier"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/app.json",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_app_expo_ios",
+      "target": "expo_app_app_ios_supportstablet"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/app.json",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_app_expo_android",
+      "target": "expo_app_app_android_adaptiveicon"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/app.json",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_app_expo_android",
+      "target": "expo_app_app_android_package"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/app.json",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "expo_app_app_android_adaptiveicon",
+      "target": "expo_app_app_adaptiveicon_backgroundcolor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/app.json",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "expo_app_app_expo_web",
+      "target": "expo_app_app_web_bundler",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/app.json",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "expo_app_app_expo_web",
+      "target": "expo_app_app_web_output",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package",
+      "target": "expo_app_package_dependencies"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L36",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package",
+      "target": "expo_app_package_devdependencies"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package",
+      "target": "expo_app_package_main"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package",
+      "target": "expo_app_package_name"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L42",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package",
+      "target": "expo_app_package_private"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package",
+      "target": "expo_app_package_scripts"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package",
+      "target": "expo_app_package_version"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package_scripts",
+      "target": "expo_app_package_scripts_android"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package_scripts",
+      "target": "expo_app_package_scripts_ios"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package_scripts",
+      "target": "expo_app_package_scripts_lint"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package_scripts",
+      "target": "expo_app_package_scripts_start"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package_scripts",
+      "target": "expo_app_package_scripts_web"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L17",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package_dependencies",
+      "target": "expo_app_package_dependencies_axios"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package_dependencies",
+      "target": "expo_app_package_dependencies_expo"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package_dependencies",
+      "target": "expo_app_package_dependencies_expo_camera"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L20",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package_dependencies",
+      "target": "expo_app_package_dependencies_expo_image_manipulator"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package_dependencies",
+      "target": "expo_app_package_dependencies_expo_image_picker"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "expo_app_package_dependencies",
+      "target": "expo_app_package_dependencies_expo_metro_runtime",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L22",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package_dependencies",
+      "target": "expo_app_package_dependencies_expo_notifications"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L23",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package_dependencies",
+      "target": "expo_app_package_dependencies_expo_secure_store"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L24",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package_dependencies",
+      "target": "expo_app_package_dependencies_expo_status_bar"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L25",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package_dependencies",
+      "target": "expo_app_package_dependencies_nativewind"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L26",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package_dependencies",
+      "target": "expo_app_package_dependencies_react"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "expo_app_package_dependencies",
+      "target": "expo_app_package_dependencies_react_dom",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L27",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package_dependencies",
+      "target": "expo_app_package_dependencies_react_native"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L29",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package_dependencies",
+      "target": "expo_app_package_dependencies_react_native_reanimated"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L30",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package_dependencies",
+      "target": "expo_app_package_dependencies_react_native_safe_area_context"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L31",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package_dependencies",
+      "target": "expo_app_package_dependencies_react_native_screens"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L32",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package_dependencies",
+      "target": "expo_app_package_dependencies_react_native_svg"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L34",
+      "weight": 1.0,
+      "source": "expo_app_package_dependencies",
+      "target": "expo_app_package_dependencies_react_native_web",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package_dependencies",
+      "target": "expo_app_package_dependencies_react_navigation_bottom_tabs"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package_dependencies",
+      "target": "expo_app_package_dependencies_react_navigation_native"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "expo_app_package_dependencies",
+      "target": "expo_app_package_dependencies_react_navigation_native_stack",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package_dependencies",
+      "target": "expo_app_package_dependencies_tanstack_react_query"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L33",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package_dependencies",
+      "target": "expo_app_package_dependencies_victory_native"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L34",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package_dependencies",
+      "target": "expo_app_package_dependencies_zustand"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L37",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package_devdependencies",
+      "target": "expo_app_package_devdependencies_babel_core"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L39",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package_devdependencies",
+      "target": "expo_app_package_devdependencies_tailwindcss"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L38",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package_devdependencies",
+      "target": "expo_app_package_devdependencies_types_react"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/package.json",
+      "source_location": "L40",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_package_devdependencies",
+      "target": "expo_app_package_devdependencies_typescript"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/screens/auth/LoginScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "auth_loginscreen",
+      "target": "api_auth"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/screens/auth/LoginScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "auth_loginscreen",
+      "target": "api_auth_login"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/screens/auth/LoginScreen.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "auth_loginscreen",
+      "target": "auth_loginscreen_loginscreen"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/screens/auth/LoginScreen.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "auth_loginscreen",
+      "target": "auth_loginscreen_props"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/screens/auth/LoginScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "auth_loginscreen",
+      "target": "navigation_types"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/screens/auth/LoginScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "auth_loginscreen",
+      "target": "navigation_types_authstackparamlist"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/screens/auth/LoginScreen.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "auth_loginscreen",
+      "target": "store_authstore"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/screens/auth/LoginScreen.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "auth_loginscreen",
+      "target": "store_authstore_useauthstore"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/navigation/AuthStack.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "navigation_authstack",
+      "target": "auth_loginscreen"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "expo-app/src/screens/auth/LoginScreen.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "auth_loginscreen_loginscreen",
+      "target": "store_authstore_useauthstore"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/screens/auth/RegisterScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "auth_registerscreen",
+      "target": "api_auth"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/screens/auth/RegisterScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "auth_registerscreen",
+      "target": "api_auth_register"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/screens/auth/RegisterScreen.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "auth_registerscreen",
+      "target": "auth_registerscreen_props"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/screens/auth/RegisterScreen.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "auth_registerscreen",
+      "target": "auth_registerscreen_registerscreen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/screens/auth/RegisterScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "auth_registerscreen",
+      "target": "navigation_types"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/screens/auth/RegisterScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "auth_registerscreen",
+      "target": "navigation_types_authstackparamlist"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/screens/auth/RegisterScreen.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "auth_registerscreen",
+      "target": "store_authstore"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/screens/auth/RegisterScreen.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "auth_registerscreen",
+      "target": "store_authstore_useauthstore"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/navigation/AuthStack.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "navigation_authstack",
+      "target": "auth_registerscreen"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "expo-app/src/screens/auth/RegisterScreen.tsx",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "auth_registerscreen_registerscreen",
+      "target": "store_authstore_useauthstore"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/screens/home/HomeScreen.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "home_homescreen",
+      "target": "store_authstore"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/navigation/RootNavigator.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "navigation_rootnavigator",
+      "target": "store_authstore"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/screens/onboarding/SplitSelectionScreen.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "onboarding_splitselectionscreen",
+      "target": "store_authstore"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/screens/profile/EditProfileScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "profile_editprofilescreen",
+      "target": "store_authstore"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/screens/profile/ProfileScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "profile_profilescreen",
+      "target": "store_authstore"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/screens/profile/SettingsScreen.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "profile_settingsscreen",
+      "target": "store_authstore"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/store/authStore.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "store_authstore",
+      "target": "store_authstore_authstate"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/store/authStore.ts",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "store_authstore",
+      "target": "store_authstore_useauthstore"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/store/authStore.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "store_authstore",
+      "target": "types_index"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/store/authStore.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "store_authstore",
+      "target": "types_index_user"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/store/authStore.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "store_authstore",
+      "target": "utils_storage"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/store/authStore.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "store_authstore",
+      "target": "utils_storage_clearauth"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/store/authStore.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "store_authstore",
+      "target": "utils_storage_gettoken"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/store/authStore.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "store_authstore",
+      "target": "utils_storage_getuser"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/store/authStore.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "store_authstore",
+      "target": "utils_storage_savetoken"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/store/authStore.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "store_authstore",
+      "target": "utils_storage_saveuser"
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/store/authStore.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "store_authstore_authstate",
+      "target": "types_index_user"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/screens/home/HomeScreen.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "home_homescreen",
+      "target": "store_authstore_useauthstore"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "expo-app/src/screens/home/HomeScreen.tsx",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "home_homescreen_homescreen",
+      "target": "store_authstore_useauthstore"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/navigation/RootNavigator.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "navigation_rootnavigator",
+      "target": "store_authstore_useauthstore"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "expo-app/src/navigation/RootNavigator.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "navigation_rootnavigator_rootnavigator",
+      "target": "store_authstore_useauthstore"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/screens/onboarding/SplitSelectionScreen.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "onboarding_splitselectionscreen",
+      "target": "store_authstore_useauthstore"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "expo-app/src/screens/onboarding/SplitSelectionScreen.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "onboarding_splitselectionscreen_splitselectioncontent",
+      "target": "store_authstore_useauthstore"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "expo-app/src/screens/profile/EditProfileScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "profile_editprofilescreen",
+      "target": "store_authstore_useauthstore"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/screens/profile/ProfileScreen.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "profile_profilescreen",
+      "target": "store_authstore_useauthstore"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "expo-app/src/screens/profile/ProfileScreen.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "profile_profilescreen_profilescreen",
+      "target": "store_authstore_useauthstore"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/screens/profile/SettingsScreen.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "profile_settingsscreen",
+      "target": "store_authstore_useauthstore"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "expo-app/src/screens/profile/SettingsScreen.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "profile_settingsscreen_settingsscreen",
+      "target": "store_authstore_useauthstore"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/api/client.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_client",
+      "target": "utils_storage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/utils/storage.ts",
+      "source_location": "L36",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "utils_storage",
+      "target": "utils_storage_addtopendingqueue"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/utils/storage.ts",
+      "source_location": "L57",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "utils_storage",
+      "target": "utils_storage_clearall"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/utils/storage.ts",
+      "source_location": "L52",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "utils_storage",
+      "target": "utils_storage_clearauth"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/utils/storage.ts",
+      "source_location": "L48",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "utils_storage",
+      "target": "utils_storage_clearpendingqueue"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/utils/storage.ts",
+      "source_location": "L31",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "utils_storage",
+      "target": "utils_storage_getactivesplit"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/utils/storage.ts",
+      "source_location": "L43",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "utils_storage",
+      "target": "utils_storage_getpendingqueue"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/utils/storage.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "utils_storage",
+      "target": "utils_storage_gettoken"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/utils/storage.ts",
+      "source_location": "L22",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "utils_storage",
+      "target": "utils_storage_getuser"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/utils/storage.ts",
+      "source_location": "L27",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "utils_storage",
+      "target": "utils_storage_saveactivesplit"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/utils/storage.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "utils_storage",
+      "target": "utils_storage_savetoken"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/utils/storage.ts",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "utils_storage",
+      "target": "utils_storage_saveuser"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/utils/storage.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "utils_storage",
+      "target": "utils_storage_storage"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/api/client.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_client",
+      "target": "utils_storage_gettoken"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/api/client.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_client",
+      "target": "utils_storage_clearauth"
+    },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
@@ -6666,186 +8042,6 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "expo-app/app.json",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_app",
-      "target": "expo_app_app_expo"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/app.json",
-      "source_location": "L17",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_app_expo",
-      "target": "expo_app_app_expo_android"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/app.json",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_app_expo",
-      "target": "expo_app_app_expo_icon"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/app.json",
-      "source_location": "L13",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_app_expo",
-      "target": "expo_app_app_expo_ios"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/app.json",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_app_expo",
-      "target": "expo_app_app_expo_name"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/app.json",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_app_expo",
-      "target": "expo_app_app_expo_newarchenabled"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/app.json",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_app_expo",
-      "target": "expo_app_app_expo_orientation"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/app.json",
-      "source_location": "L23",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_app_expo",
-      "target": "expo_app_app_expo_plugins"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/app.json",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_app_expo",
-      "target": "expo_app_app_expo_slug"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/app.json",
-      "source_location": "L10",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_app_expo",
-      "target": "expo_app_app_expo_splash"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/app.json",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_app_expo",
-      "target": "expo_app_app_expo_userinterfacestyle"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/app.json",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_app_expo",
-      "target": "expo_app_app_expo_version"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/app.json",
-      "source_location": "L11",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_app_expo_splash",
-      "target": "expo_app_app_splash_backgroundcolor"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/app.json",
-      "source_location": "L19",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_app_android_adaptiveicon",
-      "target": "expo_app_app_splash_backgroundcolor"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/app.json",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_app_expo_ios",
-      "target": "expo_app_app_ios_bundleidentifier"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/app.json",
-      "source_location": "L14",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_app_expo_ios",
-      "target": "expo_app_app_ios_supportstablet"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/app.json",
-      "source_location": "L18",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_app_expo_android",
-      "target": "expo_app_app_android_adaptiveicon"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/app.json",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_app_expo_android",
-      "target": "expo_app_app_android_package"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "expo-app/metro.config.js",
       "source_location": "L4",
       "weight": 1.0,
@@ -6872,376 +8068,6 @@
       "confidence_score": 1.0,
       "source": "expo_app_metro_config",
       "target": "expo_app_metro_config_withnativewind"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L12",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package",
-      "target": "expo_app_package_dependencies"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L36",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package",
-      "target": "expo_app_package_devdependencies"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package",
-      "target": "expo_app_package_main"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package",
-      "target": "expo_app_package_name"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L42",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package",
-      "target": "expo_app_package_private"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package",
-      "target": "expo_app_package_scripts"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package",
-      "target": "expo_app_package_version"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package_scripts",
-      "target": "expo_app_package_scripts_android"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package_scripts",
-      "target": "expo_app_package_scripts_ios"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L10",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package_scripts",
-      "target": "expo_app_package_scripts_lint"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package_scripts",
-      "target": "expo_app_package_scripts_start"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package_scripts",
-      "target": "expo_app_package_scripts_web"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L17",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package_dependencies",
-      "target": "expo_app_package_dependencies_axios"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L18",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package_dependencies",
-      "target": "expo_app_package_dependencies_expo"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L19",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package_dependencies",
-      "target": "expo_app_package_dependencies_expo_camera"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L20",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package_dependencies",
-      "target": "expo_app_package_dependencies_expo_image_manipulator"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package_dependencies",
-      "target": "expo_app_package_dependencies_expo_image_picker"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L22",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package_dependencies",
-      "target": "expo_app_package_dependencies_expo_notifications"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L23",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package_dependencies",
-      "target": "expo_app_package_dependencies_expo_secure_store"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L24",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package_dependencies",
-      "target": "expo_app_package_dependencies_expo_status_bar"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L25",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package_dependencies",
-      "target": "expo_app_package_dependencies_nativewind"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L26",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package_dependencies",
-      "target": "expo_app_package_dependencies_react"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L27",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package_dependencies",
-      "target": "expo_app_package_dependencies_react_native"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L28",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package_dependencies",
-      "target": "expo_app_package_dependencies_react_native_mmkv"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L29",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package_dependencies",
-      "target": "expo_app_package_dependencies_react_native_reanimated"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L30",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package_dependencies",
-      "target": "expo_app_package_dependencies_react_native_safe_area_context"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L31",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package_dependencies",
-      "target": "expo_app_package_dependencies_react_native_screens"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L32",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package_dependencies",
-      "target": "expo_app_package_dependencies_react_native_svg"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L13",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package_dependencies",
-      "target": "expo_app_package_dependencies_react_navigation_bottom_tabs"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package_dependencies",
-      "target": "expo_app_package_dependencies_react_navigation_native"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L16",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package_dependencies",
-      "target": "expo_app_package_dependencies_tanstack_react_query"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L33",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package_dependencies",
-      "target": "expo_app_package_dependencies_victory_native"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L34",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package_dependencies",
-      "target": "expo_app_package_dependencies_zustand"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L37",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package_devdependencies",
-      "target": "expo_app_package_devdependencies_babel_core"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L39",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package_devdependencies",
-      "target": "expo_app_package_devdependencies_tailwindcss"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L38",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package_devdependencies",
-      "target": "expo_app_package_devdependencies_types_react"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/package.json",
-      "source_location": "L40",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_package_devdependencies",
-      "target": "expo_app_package_devdependencies_typescript"
     },
     {
       "relation": "imports_from",
@@ -7361,28 +8187,6 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/screens/auth/LoginScreen.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "auth_loginscreen",
-      "target": "api_auth"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/screens/auth/RegisterScreen.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "auth_registerscreen",
-      "target": "api_auth"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "expo-app/src/screens/profile/EditProfileScreen.tsx",
       "source_location": "L6",
       "weight": 1.0,
@@ -7411,28 +8215,6 @@
       "confidence_score": 1.0,
       "source": "profile_settingsscreen",
       "target": "api_auth"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/screens/auth/LoginScreen.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "auth_loginscreen",
-      "target": "api_auth_login"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/screens/auth/RegisterScreen.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "auth_registerscreen",
-      "target": "api_auth_register"
     },
     {
       "relation": "imports",
@@ -7487,39 +8269,6 @@
       "confidence_score": 1.0,
       "source": "api_client",
       "target": "constants_config"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/api/client.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_client",
-      "target": "utils_storage"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/api/client.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_client",
-      "target": "utils_storage_clearauth"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/api/client.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_client",
-      "target": "utils_storage_gettoken"
     },
     {
       "relation": "imports_from",
@@ -8698,28 +9447,6 @@
       "target": "api_splits_setactivesplit"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/navigation/AuthStack.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "navigation_authstack",
-      "target": "auth_loginscreen"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/navigation/AuthStack.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "navigation_authstack",
-      "target": "auth_registerscreen"
-    },
-    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "expo-app/src/navigation/AuthStack.tsx",
@@ -9311,61 +10038,6 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/navigation/RootNavigator.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "navigation_rootnavigator",
-      "target": "store_authstore"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/navigation/RootNavigator.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "navigation_rootnavigator",
-      "target": "store_authstore_useauthstore"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "expo-app/src/navigation/RootNavigator.tsx",
-      "source_location": "L14",
-      "weight": 1.0,
-      "source": "navigation_rootnavigator_rootnavigator",
-      "target": "store_authstore_useauthstore"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/screens/auth/LoginScreen.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "auth_loginscreen",
-      "target": "navigation_types"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/screens/auth/RegisterScreen.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "auth_registerscreen",
-      "target": "navigation_types"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "expo-app/src/screens/home/HomeScreen.tsx",
       "source_location": "L4",
       "weight": 1.0,
@@ -9697,28 +10369,6 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/screens/auth/LoginScreen.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "auth_loginscreen",
-      "target": "navigation_types_authstackparamlist"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/screens/auth/RegisterScreen.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "auth_registerscreen",
-      "target": "navigation_types_authstackparamlist"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "expo-app/src/screens/onboarding/BodyStatsScreen.tsx",
       "source_location": "L4",
       "weight": 1.0,
@@ -9949,91 +10599,6 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/screens/auth/LoginScreen.tsx",
-      "source_location": "L10",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "auth_loginscreen",
-      "target": "auth_loginscreen_loginscreen"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/screens/auth/LoginScreen.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "auth_loginscreen",
-      "target": "auth_loginscreen_props"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/screens/auth/LoginScreen.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "auth_loginscreen",
-      "target": "store_authstore"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/screens/auth/LoginScreen.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "auth_loginscreen",
-      "target": "store_authstore_useauthstore"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "expo-app/src/screens/auth/LoginScreen.tsx",
-      "source_location": "L14",
-      "weight": 1.0,
-      "source": "auth_loginscreen_loginscreen",
-      "target": "store_authstore_useauthstore"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/screens/auth/RegisterScreen.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "auth_registerscreen",
-      "target": "auth_registerscreen_props"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/screens/auth/RegisterScreen.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "auth_registerscreen",
-      "target": "store_authstore"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "expo-app/src/screens/auth/RegisterScreen.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "auth_registerscreen",
-      "target": "store_authstore_useauthstore"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "expo-app/src/screens/home/HomeScreen.tsx",
       "source_location": "L15",
       "weight": 1.0,
@@ -10050,28 +10615,6 @@
       "confidence_score": 1.0,
       "source": "home_homescreen",
       "target": "home_homescreen_props"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/screens/home/HomeScreen.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "home_homescreen",
-      "target": "store_authstore"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/screens/home/HomeScreen.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "home_homescreen",
-      "target": "store_authstore_useauthstore"
     },
     {
       "relation": "imports_from",
@@ -10138,17 +10681,6 @@
       "confidence_score": 1.0,
       "source": "home_homescreen",
       "target": "types_index_usersplit"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "expo-app/src/screens/home/HomeScreen.tsx",
-      "source_location": "L16",
-      "weight": 1.0,
-      "source": "home_homescreen_homescreen",
-      "target": "store_authstore_useauthstore"
     },
     {
       "relation": "calls",
@@ -10842,28 +11374,6 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "expo-app/src/screens/onboarding/SplitSelectionScreen.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "onboarding_splitselectionscreen",
-      "target": "store_authstore"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/screens/onboarding/SplitSelectionScreen.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "onboarding_splitselectionscreen",
-      "target": "store_authstore_useauthstore"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/screens/onboarding/SplitSelectionScreen.tsx",
       "source_location": "L8",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -10880,17 +11390,6 @@
       "confidence_score": 1.0,
       "source": "onboarding_splitselectionscreen",
       "target": "types_index_split"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "expo-app/src/screens/onboarding/SplitSelectionScreen.tsx",
-      "source_location": "L14",
-      "weight": 1.0,
-      "source": "onboarding_splitselectionscreen_splitselectioncontent",
-      "target": "store_authstore_useauthstore"
     },
     {
       "relation": "contains",
@@ -10997,28 +11496,6 @@
       "target": "profile_editprofilescreen_props"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/screens/profile/EditProfileScreen.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "profile_editprofilescreen",
-      "target": "store_authstore"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "expo-app/src/screens/profile/EditProfileScreen.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "profile_editprofilescreen",
-      "target": "store_authstore_useauthstore"
-    },
-    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "expo-app/src/screens/profile/ProfileScreen.tsx",
@@ -11043,28 +11520,6 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "expo-app/src/screens/profile/ProfileScreen.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "profile_profilescreen",
-      "target": "store_authstore"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/screens/profile/ProfileScreen.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "profile_profilescreen",
-      "target": "store_authstore_useauthstore"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/screens/profile/ProfileScreen.tsx",
       "source_location": "L8",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -11083,17 +11538,6 @@
       "target": "types_index_usersplit"
     },
     {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "expo-app/src/screens/profile/ProfileScreen.tsx",
-      "source_location": "L13",
-      "weight": 1.0,
-      "source": "profile_profilescreen_profilescreen",
-      "target": "store_authstore_useauthstore"
-    },
-    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "expo-app/src/screens/profile/SettingsScreen.tsx",
@@ -11102,39 +11546,6 @@
       "confidence_score": 1.0,
       "source": "profile_settingsscreen",
       "target": "profile_settingsscreen_settingsscreen"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/screens/profile/SettingsScreen.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "profile_settingsscreen",
-      "target": "store_authstore"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/screens/profile/SettingsScreen.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "profile_settingsscreen",
-      "target": "store_authstore_useauthstore"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "expo-app/src/screens/profile/SettingsScreen.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "profile_settingsscreen_settingsscreen",
-      "target": "store_authstore_useauthstore"
     },
     {
       "relation": "contains",
@@ -11382,125 +11793,6 @@
       "confidence_score": 1.0,
       "source": "types_index_workoutsummary",
       "target": "workout_workoutsummaryscreen_props"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/store/authStore.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "store_authstore",
-      "target": "store_authstore_authstate"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/store/authStore.ts",
-      "source_location": "L16",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "store_authstore",
-      "target": "store_authstore_useauthstore"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/store/authStore.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "store_authstore",
-      "target": "types_index"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/store/authStore.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "store_authstore",
-      "target": "types_index_user"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/store/authStore.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "store_authstore",
-      "target": "utils_storage"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/store/authStore.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "store_authstore",
-      "target": "utils_storage_clearauth"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/store/authStore.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "store_authstore",
-      "target": "utils_storage_gettoken"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/store/authStore.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "store_authstore",
-      "target": "utils_storage_getuser"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/store/authStore.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "store_authstore",
-      "target": "utils_storage_savetoken"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/store/authStore.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "store_authstore",
-      "target": "utils_storage_saveuser"
-    },
-    {
-      "relation": "references",
-      "context": "generic_arg",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/store/authStore.ts",
-      "source_location": "L10",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "store_authstore_authstate",
-      "target": "types_index_user"
     },
     {
       "relation": "contains",
@@ -11811,126 +12103,6 @@
       "confidence_score": 1.0,
       "source": "types_index_workoutsummary",
       "target": "types_index_personalrecord"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/utils/storage.ts",
-      "source_location": "L36",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "utils_storage",
-      "target": "utils_storage_addtopendingqueue"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/utils/storage.ts",
-      "source_location": "L57",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "utils_storage",
-      "target": "utils_storage_clearall"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/utils/storage.ts",
-      "source_location": "L52",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "utils_storage",
-      "target": "utils_storage_clearauth"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/utils/storage.ts",
-      "source_location": "L48",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "utils_storage",
-      "target": "utils_storage_clearpendingqueue"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/utils/storage.ts",
-      "source_location": "L31",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "utils_storage",
-      "target": "utils_storage_getactivesplit"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/utils/storage.ts",
-      "source_location": "L43",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "utils_storage",
-      "target": "utils_storage_getpendingqueue"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/utils/storage.ts",
-      "source_location": "L14",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "utils_storage",
-      "target": "utils_storage_gettoken"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/utils/storage.ts",
-      "source_location": "L22",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "utils_storage",
-      "target": "utils_storage_getuser"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/utils/storage.ts",
-      "source_location": "L27",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "utils_storage",
-      "target": "utils_storage_saveactivesplit"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/utils/storage.ts",
-      "source_location": "L10",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "utils_storage",
-      "target": "utils_storage_savetoken"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/utils/storage.ts",
-      "source_location": "L18",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "utils_storage",
-      "target": "utils_storage_saveuser"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/src/utils/storage.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "utils_storage",
-      "target": "utils_storage_storage"
     },
     {
       "relation": "contains",
@@ -12374,5 +12546,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "26840ec71899a10183754fc304f30a23ca62803c"
+  "built_at_commit": "f10fdfacc1f233b24566979d84e1cfae15a55490"
 }

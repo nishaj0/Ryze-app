@@ -100,9 +100,9 @@
     "semantic_hash": "95932d346a83137a8860f29f7f80e909"
   },
   "api/src/middleware/auth.ts": {
-    "mtime": 1781022661.5650637,
-    "ast_hash": "3437c8278da374f314bcd9110926d2e5",
-    "semantic_hash": "3437c8278da374f314bcd9110926d2e5"
+    "mtime": 1781125031.524928,
+    "ast_hash": "c1084bbb27a4c597de4da3ffb64859a2",
+    "semantic_hash": ""
   },
   "api/src/middleware/errorHandler.ts": {
     "mtime": 1781022653.4611278,
@@ -210,9 +210,9 @@
     "semantic_hash": "49ae5134a24ce9ff8f0c17bc81f4a42a"
   },
   "expo-app/src/api/client.ts": {
-    "mtime": 1781023895.4158,
-    "ast_hash": "3a82bb3d242ab3c6f9b2f2d2f6503cae",
-    "semantic_hash": "3a82bb3d242ab3c6f9b2f2d2f6503cae"
+    "mtime": 1781125046.7664642,
+    "ast_hash": "48be103664d4f9e122e5107b3865c1f2",
+    "semantic_hash": ""
   },
   "expo-app/src/api/exercises.ts": {
     "mtime": 1781023935.2506008,

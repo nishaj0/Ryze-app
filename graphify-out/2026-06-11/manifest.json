@@ -175,14 +175,14 @@
     "semantic_hash": "1a75cf7cc63c0ca74ed4901654e08b19"
   },
   "expo-app/app.json": {
-    "mtime": 1781023500.42157,
-    "ast_hash": "42367e5ccaa1f12088cd8e03b0ddbf05",
-    "semantic_hash": "42367e5ccaa1f12088cd8e03b0ddbf05"
+    "mtime": 1781123284.908455,
+    "ast_hash": "1c6af079b27682e20d49d482722e50b6",
+    "semantic_hash": ""
   },
   "expo-app/babel.config.js": {
-    "mtime": 1781023513.2128334,
-    "ast_hash": "1d1b756868b21412318dde52a920098a",
-    "semantic_hash": "1d1b756868b21412318dde52a920098a"
+    "mtime": 1781121672.465028,
+    "ast_hash": "8ecd74b45e6ed1bedafcdd8e1e2875cc",
+    "semantic_hash": ""
   },
   "expo-app/metro.config.js": {
     "mtime": 1781023549.983987,
@@ -195,9 +195,9 @@
     "semantic_hash": "b02bcf4fde15f746f6e5248537d0b156"
   },
   "expo-app/package.json": {
-    "mtime": 1781023489.347478,
-    "ast_hash": "0bacd9cb6a51e3036146f6876fcaf603",
-    "semantic_hash": "0bacd9cb6a51e3036146f6876fcaf603"
+    "mtime": 1781123208.4086502,
+    "ast_hash": "684768f2dce77bc9919838f80671eed3",
+    "semantic_hash": ""
   },
   "expo-app/src/App.tsx": {
     "mtime": 1781024128.835783,
@@ -290,14 +290,14 @@
     "semantic_hash": "8fae5fdeb0bd19a6abc9f408aa614d8c"
   },
   "expo-app/src/screens/auth/LoginScreen.tsx": {
-    "mtime": 1781024150.1527393,
-    "ast_hash": "d197f72bf3b2f783e77a2a4124548279",
-    "semantic_hash": "d197f72bf3b2f783e77a2a4124548279"
+    "mtime": 1781124372.1771274,
+    "ast_hash": "6439c420ba9d7b35277a1e053475f4d3",
+    "semantic_hash": ""
   },
   "expo-app/src/screens/auth/RegisterScreen.tsx": {
-    "mtime": 1781024182.868049,
-    "ast_hash": "722707115fe94b48125d98662e7d6503",
-    "semantic_hash": "722707115fe94b48125d98662e7d6503"
+    "mtime": 1781124386.3906558,
+    "ast_hash": "a20dfeee868a9ad8354cf20a0e111cdf",
+    "semantic_hash": ""
   },
   "expo-app/src/screens/home/HomeScreen.tsx": {
     "mtime": 1781024392.2758558,
@@ -415,9 +415,9 @@
     "semantic_hash": "786a43de6c809368f524c146db40e0fe"
   },
   "expo-app/src/store/authStore.ts": {
-    "mtime": 1781024019.2440224,
-    "ast_hash": "1b7e86b5059f811fdecc2f50e360d9f7",
-    "semantic_hash": "1b7e86b5059f811fdecc2f50e360d9f7"
+    "mtime": 1781123696.4401343,
+    "ast_hash": "4cf80a6573f6c056bdd703c74f814dc8",
+    "semantic_hash": ""
   },
   "expo-app/src/store/workoutStore.ts": {
     "mtime": 1781024039.6796288,
@@ -430,14 +430,14 @@
     "semantic_hash": "83ecec041a1a0c442df16bd7b322c4f9"
   },
   "expo-app/src/utils/storage.ts": {
-    "mtime": 1781024006.86117,
-    "ast_hash": "d6a25b6e658d12d3bba61b21fbc7436f",
-    "semantic_hash": "d6a25b6e658d12d3bba61b21fbc7436f"
+    "mtime": 1781124315.174164,
+    "ast_hash": "7dccc5f95afb75d228b8d213d3573ec1",
+    "semantic_hash": ""
   },
   "expo-app/tailwind.config.js": {
-    "mtime": 1781023531.354177,
-    "ast_hash": "94571f95553c7464dc04aaab8eff5c60",
-    "semantic_hash": "94571f95553c7464dc04aaab8eff5c60"
+    "mtime": 1781124322.6012838,
+    "ast_hash": "79e6171dc578e53c1ac1e08e45e9d3e2",
+    "semantic_hash": ""
   },
   "expo-app/tsconfig.json": {
     "mtime": 1781026626.749401,
@@ -445,9 +445,9 @@
     "semantic_hash": "6cfa770d021becb10e3a2ca2350214da"
   },
   "package.json": {
-    "mtime": 1781022572.2588856,
-    "ast_hash": "07fb42c1de6cc9280f50fe5101221c82",
-    "semantic_hash": "07fb42c1de6cc9280f50fe5101221c82"
+    "mtime": 1781121058.2440746,
+    "ast_hash": "169fbe9abf48b08e87701fff66cda17d",
+    "semantic_hash": ""
   },
   ".agents/skills/dashboard/SKILL.md": {
     "mtime": 1780780678.828533,
@@ -690,8 +690,23 @@
     "semantic_hash": "39aab17e4356632d68ed8eedd8733d4d"
   },
   "expo-app/.expo/devices.json": {
-    "mtime": 1781035201.6173186,
+    "mtime": 1781123766.9899743,
     "ast_hash": "e5f6eb13c875f326cfd5915d3364614f",
     "semantic_hash": "e5f6eb13c875f326cfd5915d3364614f"
+  },
+  "expo-app/index.js": {
+    "mtime": 1781122886.8395562,
+    "ast_hash": "8d85c6c0edb22c3f1778132df1cf67f1",
+    "semantic_hash": ""
+  },
+  "expo-app/assets/icon.png": {
+    "mtime": 1781121688.5108545,
+    "ast_hash": "f829b914fc47cfc9c0747c119c27cf1b",
+    "semantic_hash": ""
+  },
+  "expo-app/assets/notification-icon.png": {
+    "mtime": 1781121688.5108545,
+    "ast_hash": "f829b914fc47cfc9c0747c119c27cf1b",
+    "semantic_hash": ""
   }
 }
