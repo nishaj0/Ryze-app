@@ -44,11 +44,6 @@
     "ast_hash": "17a54b3923653215d1f71f7718c9e86f",
     "semantic_hash": "17a54b3923653215d1f71f7718c9e86f"
   },
-  "api/prisma/migrations/20260609164345_init/migration.sql": {
-    "mtime": 1781023425.2855558,
-    "ast_hash": "ae7e5043d7cf8072307afcbf7fdf56fb",
-    "semantic_hash": ""
-  },
   "api/src/controllers/authController.ts": {
     "mtime": 1781022690.0924363,
     "ast_hash": "6a6917a52822bd8d0c10d1ec8b354121",
