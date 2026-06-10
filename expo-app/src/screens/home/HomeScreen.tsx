@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, Alert, Modal, TextInput } from "react-native";
+import { View, TouchableOpacity, ActivityIndicator, Alert, Modal } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { HomeStackParamList } from "../../navigation/types";
 import { getActiveSplit } from "../../api/splits";
@@ -9,6 +9,9 @@ import { useAuthStore } from "../../store/authStore";
 import { useWorkoutStore } from "../../store/workoutStore";
 import { createSession } from "../../api/sessions";
 import { UserSplit, ProgressOverview, SplitDay } from "../../types";
+import { Screen, Card, Typography, Button, Icon, Input } from "../../components";
+import { lightTheme } from "../../theme/colors";
+import { space } from "../../theme/spacing";
 
 type Props = NativeStackScreenProps<HomeStackParamList, "HomeMain">;
 
@@ -77,9 +80,11 @@ export default function HomeScreen({ navigation }: Props) {
 
   if (loading) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#0F172A" }}>
-        <ActivityIndicator size="large" color="#6366F1" />
-      </View>
+      <Screen scroll={false} padding="none">
+        <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+          <ActivityIndicator size="large" color={lightTheme.primary} />
+        </View>
+      </Screen>
     );
   }
 
@@ -95,106 +100,188 @@ export default function HomeScreen({ navigation }: Props) {
   };
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: "#0F172A" }} contentContainerStyle={{ padding: 24, paddingTop: 60 }}>
-      <Text style={{ fontSize: 28, fontWeight: "bold", color: "#fff", marginBottom: 4 }}>
-        {greeting()}{user?.name ? `, ${user.name}` : ""}
-      </Text>
-      <Text style={{ color: "#94A3B8", fontSize: 16, marginBottom: 32 }}>Let's make today count.</Text>
+    <Screen scroll padding="lg">
+      {/* Greeting */}
+      <View style={{ marginBottom: space.lg }}>
+        <Typography variant="heading2" color={lightTheme.textPrimary}>
+          {greeting()}{user?.name ? `, ${user.name}` : ""}
+        </Typography>
+        <Typography variant="body" color={lightTheme.textSecondary} style={{ marginTop: space.sm }}>
+          Let's make today count.
+        </Typography>
+      </View>
 
+      {/* Today's Plan Card */}
       {todaySplitDay && (
-        <View style={{ backgroundColor: "#1E293B", borderRadius: 20, padding: 24, marginBottom: 24 }}>
-          <Text style={{ color: "#94A3B8", fontSize: 14, marginBottom: 4 }}>Today's Plan</Text>
-          <Text style={{ color: "#fff", fontSize: 24, fontWeight: "bold", marginBottom: 8 }}>{todaySplitDay.name}</Text>
+        <Card shadow="md" style={{ marginBottom: space.lg }}>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.sm }}>
+            <Icon name="Calendar" size={18} color={lightTheme.textMuted} />
+            <Typography variant="caption" color={lightTheme.textMuted}>
+              TODAY'S PLAN
+            </Typography>
+          </View>
+
+          <Typography variant="heading2" color={lightTheme.textPrimary} style={{ marginBottom: space.sm }}>
+            {todaySplitDay.name}
+          </Typography>
 
           {muscleGroups.length > 0 && (
-            <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 8, marginBottom: 20 }}>
+            <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space.sm, marginBottom: space.md }}>
               {muscleGroups.map((mg: string) => (
-                <View key={mg} style={{ backgroundColor: "#334155", borderRadius: 8, paddingHorizontal: 12, paddingVertical: 4 }}>
-                  <Text style={{ color: "#CBD5E1", fontSize: 12 }}>{mg.charAt(0).toUpperCase() + mg.slice(1)}</Text>
+                <View
+                  key={mg}
+                  style={{
+                    backgroundColor: lightTheme.primaryLight,
+                    borderRadius: 8,
+                    paddingHorizontal: space.md,
+                    paddingVertical: space.xs,
+                  }}
+                >
+                  <Typography variant="caption" color={lightTheme.primary} weight="600">
+                    {mg.charAt(0).toUpperCase() + mg.slice(1)}
+                  </Typography>
                 </View>
               ))}
             </View>
           )}
 
           {todaySplitDay.isRest ? (
-            <View style={{ backgroundColor: "#1E293B", borderRadius: 12, padding: 16, alignItems: "center" }}>
-              <Text style={{ color: "#10B981", fontSize: 18, fontWeight: "600" }}>Rest Day</Text>
-              <Text style={{ color: "#94A3B8", fontSize: 14, marginTop: 4 }}>Recovery is growth. Enjoy it!</Text>
-            </View>
+            <Card
+              padding="md"
+              border={false}
+              shadow="none"
+              style={{ backgroundColor: lightTheme.successBg, marginTop: space.md }}
+            >
+              <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
+                <Icon name="Moon" size={24} color={lightTheme.success} />
+                <View>
+                  <Typography variant="heading3" color={lightTheme.success}>
+                    Rest Day
+                  </Typography>
+                  <Typography variant="bodySmall" color={lightTheme.successText}>
+                    Recovery is growth. Enjoy it!
+                  </Typography>
+                </View>
+              </View>
+            </Card>
           ) : (
-            <View style={{ flexDirection: "row", gap: 12 }}>
-              <TouchableOpacity
+            <View style={{ flexDirection: "row", gap: space.md, marginTop: space.md }}>
+              <Button
+                title="Start Workout"
                 onPress={handleStartWorkout}
-                style={{ flex: 1, backgroundColor: "#6366F1", borderRadius: 12, padding: 16, alignItems: "center" }}
-              >
-                <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>Start Workout</Text>
-              </TouchableOpacity>
+                variant="primary"
+                size="lg"
+                icon={<Icon name="Play" size={20} color={lightTheme.primaryText} />}
+                style={{ flex: 1 }}
+              />
               <TouchableOpacity
                 onPress={() => setRestModalVisible(true)}
-                style={{ backgroundColor: "#334155", borderRadius: 12, padding: 16, alignItems: "center", justifyContent: "center" }}
+                style={{
+                  backgroundColor: lightTheme.secondary,
+                  borderRadius: 16,
+                  padding: 16,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  aspectRatio: 1,
+                }}
               >
-                <Text style={{ color: "#94A3B8", fontSize: 12 }}>Rest</Text>
+                <Icon name="Moon" size={24} color={lightTheme.textSecondary} />
+                <Typography variant="caption" color={lightTheme.textSecondary} style={{ marginTop: 4 }}>
+                  Rest
+                </Typography>
               </TouchableOpacity>
             </View>
           )}
-        </View>
+        </Card>
       )}
 
+      {/* Stats */}
       {overview && (
-        <View style={{ flexDirection: "row", gap: 12, marginBottom: 24 }}>
-          <View style={{ flex: 1, backgroundColor: "#1E293B", borderRadius: 16, padding: 16, alignItems: "center" }}>
-            <Text style={{ color: "#6366F1", fontSize: 32, fontWeight: "bold" }}>{overview.currentStreak}</Text>
-            <Text style={{ color: "#94A3B8", fontSize: 12 }}>Day Streak</Text>
-          </View>
-          <View style={{ flex: 1, backgroundColor: "#1E293B", borderRadius: 16, padding: 16, alignItems: "center" }}>
-            <Text style={{ color: "#10B981", fontSize: 32, fontWeight: "bold" }}>{overview.thisWeekWorkouts}</Text>
-            <Text style={{ color: "#94A3B8", fontSize: 12 }}>This Week</Text>
-          </View>
-          <View style={{ flex: 1, backgroundColor: "#1E293B", borderRadius: 16, padding: 16, alignItems: "center" }}>
-            <Text style={{ color: "#F59E0B", fontSize: 32, fontWeight: "bold" }}>{overview.totalWorkouts}</Text>
-            <Text style={{ color: "#94A3B8", fontSize: 12 }}>Total</Text>
-          </View>
+        <View style={{ flexDirection: "row", gap: space.md, marginBottom: space.lg }}>
+          <Card shadow="sm" style={{ flex: 1, alignItems: "center" }}>
+            <Typography variant="display" color={lightTheme.primary} style={{ fontSize: 32 }}>
+              {overview.currentStreak}
+            </Typography>
+            <Typography variant="caption" color={lightTheme.textMuted}>
+              Day Streak
+            </Typography>
+          </Card>
+          <Card shadow="sm" style={{ flex: 1, alignItems: "center" }}>
+            <Typography variant="display" color={lightTheme.success} style={{ fontSize: 32 }}>
+              {overview.thisWeekWorkouts}
+            </Typography>
+            <Typography variant="caption" color={lightTheme.textMuted}>
+              This Week
+            </Typography>
+          </Card>
+          <Card shadow="sm" style={{ flex: 1, alignItems: "center" }}>
+            <Typography variant="display" color={lightTheme.warning} style={{ fontSize: 32 }}>
+              {overview.totalWorkouts}
+            </Typography>
+            <Typography variant="caption" color={lightTheme.textMuted}>
+              Total
+            </Typography>
+          </Card>
         </View>
       )}
 
+      {/* Rest Day Modal */}
       <Modal visible={restModalVisible} transparent animationType="slide">
-        <View style={{ flex: 1, justifyContent: "flex-end", backgroundColor: "rgba(0,0,0,0.5)" }}>
-          <View style={{ backgroundColor: "#1E293B", borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 24 }}>
-            <Text style={{ color: "#fff", fontSize: 20, fontWeight: "bold", marginBottom: 16 }}>Mark Rest Day</Text>
-            <Text style={{ color: "#94A3B8", marginBottom: 16 }}>Optional: Why are you resting today?</Text>
+        <View style={{ flex: 1, justifyContent: "flex-end", backgroundColor: lightTheme.bgOverlay }}>
+          <Card
+            shadow="none"
+            border={false}
+            style={{
+              borderTopLeftRadius: 24,
+              borderTopRightRadius: 24,
+              padding: space.lg,
+            }}
+          >
+            <Typography variant="heading2" color={lightTheme.textPrimary} style={{ marginBottom: space.md }}>
+              Mark Rest Day
+            </Typography>
+            <Typography variant="body" color={lightTheme.textSecondary} style={{ marginBottom: space.md }}>
+              Optional: Why are you resting today?
+            </Typography>
 
             {["Tired", "Sick", "Busy", "Other"].map((reason) => (
               <TouchableOpacity
                 key={reason}
                 onPress={() => setRestReason(reason.toLowerCase())}
                 style={{
-                  backgroundColor: restReason === reason.toLowerCase() ? "#4F46E5" : "#334155",
+                  backgroundColor: restReason === reason.toLowerCase() ? lightTheme.primary : lightTheme.surfaceSecondary,
                   borderRadius: 12,
                   padding: 14,
-                  marginBottom: 8,
+                  marginBottom: space.sm,
+                  borderWidth: restReason === reason.toLowerCase() ? 0 : 1,
+                  borderColor: lightTheme.border,
                 }}
               >
-                <Text style={{ color: "#fff", fontSize: 16 }}>{reason}</Text>
+                <Typography variant="body" color={restReason === reason.toLowerCase() ? lightTheme.primaryText : lightTheme.textPrimary}>
+                  {reason}
+                </Typography>
               </TouchableOpacity>
             ))}
 
-            <View style={{ flexDirection: "row", gap: 12, marginTop: 16 }}>
-              <TouchableOpacity
+            <View style={{ flexDirection: "row", gap: space.md, marginTop: space.md }}>
+              <Button
+                title="Cancel"
                 onPress={() => setRestModalVisible(false)}
-                style={{ flex: 1, backgroundColor: "#334155", borderRadius: 12, padding: 14, alignItems: "center" }}
-              >
-                <Text style={{ color: "#94A3B8", fontSize: 16 }}>Cancel</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
+                variant="secondary"
+                size="md"
+                style={{ flex: 1 }}
+              />
+              <Button
+                title="Confirm"
                 onPress={handleMarkRest}
-                style={{ flex: 1, backgroundColor: "#6366F1", borderRadius: 12, padding: 14, alignItems: "center" }}
-              >
-                <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>Confirm</Text>
-              </TouchableOpacity>
+                variant="primary"
+                size="md"
+                style={{ flex: 1 }}
+              />
             </View>
-          </View>
+          </Card>
         </View>
       </Modal>
-    </ScrollView>
+    </Screen>
   );
 }

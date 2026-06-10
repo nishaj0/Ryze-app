@@ -75,9 +75,9 @@
     "semantic_hash": "4a91811a5745bd094c1c14b3d21a359d"
   },
   "api/src/controllers/progressController.ts": {
-    "mtime": 1781022968.2012444,
-    "ast_hash": "9298f8819b5a28d858a67f2900454a8f",
-    "semantic_hash": "9298f8819b5a28d858a67f2900454a8f"
+    "mtime": 1781126528.8860583,
+    "ast_hash": "f4020bb9ad0a574266e6285b18487caf",
+    "semantic_hash": ""
   },
   "api/src/controllers/recordController.ts": {
     "mtime": 1781023015.3575068,
@@ -150,9 +150,9 @@
     "semantic_hash": "928a6847ca2e47289a15f29be373ce34"
   },
   "api/src/routes/progress.ts": {
-    "mtime": 1781023001.2051759,
-    "ast_hash": "cd6702422feb65c9da6b52c2ca07c60d",
-    "semantic_hash": "cd6702422feb65c9da6b52c2ca07c60d"
+    "mtime": 1781126538.635053,
+    "ast_hash": "d2fb8fe75f826f4640342d7b6db97b28",
+    "semantic_hash": ""
   },
   "api/src/routes/records.ts": {
     "mtime": 1781023023.0783825,
@@ -175,8 +175,8 @@
     "semantic_hash": "1a75cf7cc63c0ca74ed4901654e08b19"
   },
   "expo-app/app.json": {
-    "mtime": 1781123284.908455,
-    "ast_hash": "1c6af079b27682e20d49d482722e50b6",
+    "mtime": 1781125839.7903836,
+    "ast_hash": "7d1457d89d9b4b09900dfdb325050efb",
     "semantic_hash": ""
   },
   "expo-app/babel.config.js": {
@@ -195,14 +195,14 @@
     "semantic_hash": "b02bcf4fde15f746f6e5248537d0b156"
   },
   "expo-app/package.json": {
-    "mtime": 1781123208.4086502,
-    "ast_hash": "684768f2dce77bc9919838f80671eed3",
+    "mtime": 1781127249.5994318,
+    "ast_hash": "93c659a0bbdb911ec7fe785b5ebb73bc",
     "semantic_hash": ""
   },
   "expo-app/src/App.tsx": {
-    "mtime": 1781024128.835783,
-    "ast_hash": "cbe4d9106269ba2c34bbb64e823470ed",
-    "semantic_hash": "cbe4d9106269ba2c34bbb64e823470ed"
+    "mtime": 1781126283.3224845,
+    "ast_hash": "13e1ee5fcd108cd5bd41754d31963342",
+    "semantic_hash": ""
   },
   "expo-app/src/api/auth.ts": {
     "mtime": 1781023905.0991013,
@@ -240,9 +240,9 @@
     "semantic_hash": "ae7f589e89c4c7b0eee9717d39894fb0"
   },
   "expo-app/src/api/progress.ts": {
-    "mtime": 1781023981.2042153,
-    "ast_hash": "0207749e769596d26d5395b663dd604a",
-    "semantic_hash": "0207749e769596d26d5395b663dd604a"
+    "mtime": 1781126554.8035064,
+    "ast_hash": "c08ce5b30a4c849ecad158f973fd8658",
+    "semantic_hash": ""
   },
   "expo-app/src/api/records.ts": {
     "mtime": 1781023987.7580943,
@@ -270,9 +270,9 @@
     "semantic_hash": "7b015c2924d7afa4ce9985a3dbac5678"
   },
   "expo-app/src/navigation/MainTabs.tsx": {
-    "mtime": 1781024108.2043962,
-    "ast_hash": "4be76f4d995ac79b3e404687a44b1d92",
-    "semantic_hash": "4be76f4d995ac79b3e404687a44b1d92"
+    "mtime": 1781125702.2503595,
+    "ast_hash": "68182ecadb0653ee66f7ef76c2a00d1e",
+    "semantic_hash": ""
   },
   "expo-app/src/navigation/OnboardingStack.tsx": {
     "mtime": 1781024078.0712414,
@@ -280,9 +280,9 @@
     "semantic_hash": "a9e27a1385d6147408943e8ee739cd61"
   },
   "expo-app/src/navigation/RootNavigator.tsx": {
-    "mtime": 1781024119.0531318,
-    "ast_hash": "309117d4335b3b83f45998cc368a318b",
-    "semantic_hash": "309117d4335b3b83f45998cc368a318b"
+    "mtime": 1781125822.9277804,
+    "ast_hash": "459f0add1cd17bc95373c5ce5ffeadf0",
+    "semantic_hash": ""
   },
   "expo-app/src/navigation/types.ts": {
     "mtime": 1781024054.822837,
@@ -290,54 +290,54 @@
     "semantic_hash": "8fae5fdeb0bd19a6abc9f408aa614d8c"
   },
   "expo-app/src/screens/auth/LoginScreen.tsx": {
-    "mtime": 1781124372.1771274,
-    "ast_hash": "6439c420ba9d7b35277a1e053475f4d3",
+    "mtime": 1781125674.302977,
+    "ast_hash": "e439d7da490a908282de2d80883b98ab",
     "semantic_hash": ""
   },
   "expo-app/src/screens/auth/RegisterScreen.tsx": {
-    "mtime": 1781124386.3906558,
-    "ast_hash": "a20dfeee868a9ad8354cf20a0e111cdf",
+    "mtime": 1781125686.1115024,
+    "ast_hash": "4e816d1697f67a73b77e8e58f6d9c3bf",
     "semantic_hash": ""
   },
   "expo-app/src/screens/home/HomeScreen.tsx": {
-    "mtime": 1781024392.2758558,
-    "ast_hash": "cf5dd64c7a09e7f0ce5a81ccd8022e94",
-    "semantic_hash": "cf5dd64c7a09e7f0ce5a81ccd8022e94"
+    "mtime": 1781125721.2599669,
+    "ast_hash": "2700b29d0676987b6be436ed1d1f3815",
+    "semantic_hash": ""
   },
   "expo-app/src/screens/metrics/MetricsScreen.tsx": {
-    "mtime": 1781025466.282648,
-    "ast_hash": "65ce9be1bfb5892e719a6debe2809bc7",
-    "semantic_hash": "65ce9be1bfb5892e719a6debe2809bc7"
+    "mtime": 1781127047.2637951,
+    "ast_hash": "76ae48c06cb509b520e58c8b79ad09ee",
+    "semantic_hash": ""
   },
   "expo-app/src/screens/onboarding/BodyStatsScreen.tsx": {
-    "mtime": 1781024296.7595305,
-    "ast_hash": "d85565feda7d1610312d51ee8d1665f0",
-    "semantic_hash": "d85565feda7d1610312d51ee8d1665f0"
+    "mtime": 1781125776.0949123,
+    "ast_hash": "c39fe32ea1778ee551e5611dd5bc1e43",
+    "semantic_hash": ""
   },
   "expo-app/src/screens/onboarding/DaysScreen.tsx": {
-    "mtime": 1781024265.1067061,
-    "ast_hash": "93a88b6dc99da6b09ef72c860c3be82c",
-    "semantic_hash": "93a88b6dc99da6b09ef72c860c3be82c"
+    "mtime": 1781125760.0515013,
+    "ast_hash": "6aab48379b80283609ea4de735cd78f1",
+    "semantic_hash": ""
   },
   "expo-app/src/screens/onboarding/EquipmentScreen.tsx": {
-    "mtime": 1781024280.5165904,
-    "ast_hash": "9431aaddacd9fb448dfbad0ea967eb28",
-    "semantic_hash": "9431aaddacd9fb448dfbad0ea967eb28"
+    "mtime": 1781125769.1847732,
+    "ast_hash": "dff14a6fb10f16a79d48d9666eaf69df",
+    "semantic_hash": ""
   },
   "expo-app/src/screens/onboarding/ExperienceScreen.tsx": {
-    "mtime": 1781024244.9492648,
-    "ast_hash": "68cdbfd09636ecadef72d76c7f649d8a",
-    "semantic_hash": "68cdbfd09636ecadef72d76c7f649d8a"
+    "mtime": 1781125751.1363223,
+    "ast_hash": "602d4c7fe6d6bf2bb2ef7b210c8e21f7",
+    "semantic_hash": ""
   },
   "expo-app/src/screens/onboarding/GenderScreen.tsx": {
-    "mtime": 1781024209.2821467,
-    "ast_hash": "5b64c847eacaa4642afb7d989d448925",
-    "semantic_hash": "5b64c847eacaa4642afb7d989d448925"
+    "mtime": 1781125731.9885347,
+    "ast_hash": "cd3b27bf36bb329e34bab6953cd7743a",
+    "semantic_hash": ""
   },
   "expo-app/src/screens/onboarding/GoalScreen.tsx": {
-    "mtime": 1781024227.3179283,
-    "ast_hash": "cfc49fb4b2eb9a54bf0a6f8e4a54b2b1",
-    "semantic_hash": "cfc49fb4b2eb9a54bf0a6f8e4a54b2b1"
+    "mtime": 1781125741.7151508,
+    "ast_hash": "2d2d71e7d143941da9f2afa798a80df4",
+    "semantic_hash": ""
   },
   "expo-app/src/screens/onboarding/OnboardingContext.tsx": {
     "mtime": 1781024192.7719896,
@@ -345,74 +345,74 @@
     "semantic_hash": "96668d6421f80e8f72417fa0b7416952"
   },
   "expo-app/src/screens/onboarding/SleepScreen.tsx": {
-    "mtime": 1781024313.3932786,
-    "ast_hash": "6e61d6ce86c547b7a72ee79d1bf7c68e",
-    "semantic_hash": "6e61d6ce86c547b7a72ee79d1bf7c68e"
+    "mtime": 1781125784.3803227,
+    "ast_hash": "a8c094fdf1fa7eb922956d265b6e7ea4",
+    "semantic_hash": ""
   },
   "expo-app/src/screens/onboarding/SplitSelectionScreen.tsx": {
-    "mtime": 1781024340.887068,
-    "ast_hash": "7fa5067ea6cfb8ca5d18950262d53f26",
-    "semantic_hash": "7fa5067ea6cfb8ca5d18950262d53f26"
+    "mtime": 1781125795.3670528,
+    "ast_hash": "e35e46fc3270ef6237c7cd6396387903",
+    "semantic_hash": ""
   },
   "expo-app/src/screens/photos/PhotoCaptureScreen.tsx": {
-    "mtime": 1781025379.0931797,
-    "ast_hash": "f91f7a4569f998ded36d418e0c5fa220",
-    "semantic_hash": "f91f7a4569f998ded36d418e0c5fa220"
+    "mtime": 1781126863.359671,
+    "ast_hash": "ba9e4a3b92fc3b6517943a39148f5ec4",
+    "semantic_hash": ""
   },
   "expo-app/src/screens/photos/PhotoCompareScreen.tsx": {
-    "mtime": 1781037197.5204232,
-    "ast_hash": "22990bdd912eebe35197295797ceb50f",
-    "semantic_hash": "22990bdd912eebe35197295797ceb50f"
+    "mtime": 1781126904.1955044,
+    "ast_hash": "d4d56060c0942992a356d025b35a4d5f",
+    "semantic_hash": ""
   },
   "expo-app/src/screens/photos/PhotosTimelineScreen.tsx": {
-    "mtime": 1781037179.7800903,
-    "ast_hash": "148385f00690d68ae2501f0c72778904",
-    "semantic_hash": "148385f00690d68ae2501f0c72778904"
+    "mtime": 1781126831.0334694,
+    "ast_hash": "6928d77edf28b39b601ca58758ad1093",
+    "semantic_hash": ""
   },
   "expo-app/src/screens/profile/EditProfileScreen.tsx": {
-    "mtime": 1781025525.054655,
-    "ast_hash": "860b735f973775e3aaf54ae8328b74bb",
-    "semantic_hash": "860b735f973775e3aaf54ae8328b74bb"
+    "mtime": 1781126946.0665143,
+    "ast_hash": "8f6989c2814a40e7e27bccc019dfce1d",
+    "semantic_hash": ""
   },
   "expo-app/src/screens/profile/ProfileScreen.tsx": {
-    "mtime": 1781025495.5126572,
-    "ast_hash": "6b1fa11ff842ec8ee2d207e96eab0467",
-    "semantic_hash": "6b1fa11ff842ec8ee2d207e96eab0467"
+    "mtime": 1781125813.669119,
+    "ast_hash": "2c9989d86271f1375f5fcbf12d5817cd",
+    "semantic_hash": ""
   },
   "expo-app/src/screens/profile/SettingsScreen.tsx": {
-    "mtime": 1781025576.3625512,
-    "ast_hash": "40c3134d21f9ff6d77ecbf471681a227",
-    "semantic_hash": "40c3134d21f9ff6d77ecbf471681a227"
+    "mtime": 1781127002.9454477,
+    "ast_hash": "acce7eded1a08f9874f4270b09ee3a72",
+    "semantic_hash": ""
   },
   "expo-app/src/screens/profile/SplitSwitcherScreen.tsx": {
-    "mtime": 1781025547.4938035,
-    "ast_hash": "f378fc1141a82e63abb000c297ff4ee6",
-    "semantic_hash": "f378fc1141a82e63abb000c297ff4ee6"
+    "mtime": 1781126973.577075,
+    "ast_hash": "c1c512cc8d2ae883d87644109a9f4bf1",
+    "semantic_hash": ""
   },
   "expo-app/src/screens/progress/DashboardScreen.tsx": {
-    "mtime": 1781024535.522746,
-    "ast_hash": "af30ea23bb58a59e67db9194f2860f9c",
-    "semantic_hash": "af30ea23bb58a59e67db9194f2860f9c"
+    "mtime": 1781126599.751793,
+    "ast_hash": "73c329f6642613e738f38a86f01d67b1",
+    "semantic_hash": ""
   },
   "expo-app/src/screens/progress/ExerciseProgressScreen.tsx": {
-    "mtime": 1781025286.356549,
-    "ast_hash": "4b3ec075b6ba074dc8d459604c9ffe13",
-    "semantic_hash": "4b3ec075b6ba074dc8d459604c9ffe13"
+    "mtime": 1781126648.9233308,
+    "ast_hash": "178b888f82c3c23f99422f0ec2c44592",
+    "semantic_hash": ""
   },
   "expo-app/src/screens/progress/RecordsScreen.tsx": {
-    "mtime": 1781025305.954267,
-    "ast_hash": "b4ec0bae82e3bf60e3599a87e2656467",
-    "semantic_hash": "b4ec0bae82e3bf60e3599a87e2656467"
+    "mtime": 1781126672.8108675,
+    "ast_hash": "2e6fa2ead8e305e8fd04df8325a493f4",
+    "semantic_hash": ""
   },
   "expo-app/src/screens/workout/WorkoutLoggerScreen.tsx": {
-    "mtime": 1781024470.051013,
-    "ast_hash": "d60cbd569151d0098349ad210bb80ff0",
-    "semantic_hash": "d60cbd569151d0098349ad210bb80ff0"
+    "mtime": 1781127424.715061,
+    "ast_hash": "c4118049fb220bd531a4981f096410c9",
+    "semantic_hash": ""
   },
   "expo-app/src/screens/workout/WorkoutSummaryScreen.tsx": {
-    "mtime": 1781024495.5548644,
-    "ast_hash": "786a43de6c809368f524c146db40e0fe",
-    "semantic_hash": "786a43de6c809368f524c146db40e0fe"
+    "mtime": 1781126783.7355042,
+    "ast_hash": "702ecbad875791f350be5aa32a1e8270",
+    "semantic_hash": ""
   },
   "expo-app/src/store/authStore.ts": {
     "mtime": 1781123696.4401343,
@@ -690,7 +690,7 @@
     "semantic_hash": "39aab17e4356632d68ed8eedd8733d4d"
   },
   "expo-app/.expo/devices.json": {
-    "mtime": 1781123766.9899743,
+    "mtime": 1781127444.3453386,
     "ast_hash": "e5f6eb13c875f326cfd5915d3364614f",
     "semantic_hash": "e5f6eb13c875f326cfd5915d3364614f"
   },
@@ -707,6 +707,86 @@
   "expo-app/assets/notification-icon.png": {
     "mtime": 1781121688.5108545,
     "ast_hash": "f829b914fc47cfc9c0747c119c27cf1b",
+    "semantic_hash": ""
+  },
+  "expo-app/src/components/Button.tsx": {
+    "mtime": 1781125629.8215082,
+    "ast_hash": "3eef1ab93181e7a45a3104ab48d15e69",
+    "semantic_hash": ""
+  },
+  "expo-app/src/components/Card.tsx": {
+    "mtime": 1781125635.1337411,
+    "ast_hash": "ac5d8530d05226469657f6b5b9d95ae8",
+    "semantic_hash": ""
+  },
+  "expo-app/src/components/Icon.tsx": {
+    "mtime": 1781125652.0171275,
+    "ast_hash": "d484e5bf0a04268c805551c95f6d0b4c",
+    "semantic_hash": ""
+  },
+  "expo-app/src/components/Input.tsx": {
+    "mtime": 1781125641.832742,
+    "ast_hash": "4ccf201aee40774e284b87f74c35160c",
+    "semantic_hash": ""
+  },
+  "expo-app/src/components/Screen.tsx": {
+    "mtime": 1781125646.4450457,
+    "ast_hash": "025f9ca25f9ba3dff4746048eb1b7c0c",
+    "semantic_hash": ""
+  },
+  "expo-app/src/components/Typography.tsx": {
+    "mtime": 1781126310.9744866,
+    "ast_hash": "d5f7ea50898a3b4e8a0169cb685a3907",
+    "semantic_hash": ""
+  },
+  "expo-app/src/components/charts/BarChart.tsx": {
+    "mtime": 1781126449.549039,
+    "ast_hash": "682165a99931a0d8e3127557895eaabf",
+    "semantic_hash": ""
+  },
+  "expo-app/src/components/charts/Heatmap.tsx": {
+    "mtime": 1781126469.5889904,
+    "ast_hash": "f7d6172d8dee53a4d49eaebfd109be13",
+    "semantic_hash": ""
+  },
+  "expo-app/src/components/charts/LineChart.tsx": {
+    "mtime": 1781126433.858659,
+    "ast_hash": "1732658b3a59e49e4b6e02549ba01546",
+    "semantic_hash": ""
+  },
+  "expo-app/src/components/charts/RingChart.tsx": {
+    "mtime": 1781126481.1794164,
+    "ast_hash": "848bae80bf5790f528137369a2a3a835",
+    "semantic_hash": ""
+  },
+  "expo-app/src/components/charts/index.ts": {
+    "mtime": 1781126487.4242046,
+    "ast_hash": "66ff88ab667eba8c3bd07af715aca9dc",
+    "semantic_hash": ""
+  },
+  "expo-app/src/components/index.ts": {
+    "mtime": 1781125656.2971928,
+    "ast_hash": "c896d3a23647bca05b63f684a56169ca",
+    "semantic_hash": ""
+  },
+  "expo-app/src/theme/colors.ts": {
+    "mtime": 1781125591.2497847,
+    "ast_hash": "8186b3a40eb34d9cc897d655ec9008a2",
+    "semantic_hash": ""
+  },
+  "expo-app/src/theme/index.ts": {
+    "mtime": 1781125608.6387117,
+    "ast_hash": "bfba468c16bb1546d606116b4de9c85f",
+    "semantic_hash": ""
+  },
+  "expo-app/src/theme/spacing.ts": {
+    "mtime": 1781125597.6141882,
+    "ast_hash": "553d0b29630a441da06d4e72cc9413f2",
+    "semantic_hash": ""
+  },
+  "expo-app/src/theme/typography.ts": {
+    "mtime": 1781126298.7091813,
+    "ast_hash": "c1f2681efd8fcfc89be31c499802cfc5",
     "semantic_hash": ""
   }
 }

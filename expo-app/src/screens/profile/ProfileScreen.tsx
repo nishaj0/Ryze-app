@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, ScrollView, TouchableOpacity, ActivityIndicator, Alert } from "react-native";
+import { View, TouchableOpacity, ActivityIndicator, Alert } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ProfileStackParamList } from "../../navigation/types";
 import { useAuthStore } from "../../store/authStore";
 import { getActiveSplit } from "../../api/splits";
 import { deleteAccount } from "../../api/auth";
 import { UserSplit } from "../../types";
+import { Screen, Typography, Card, Button, Icon } from "../../components";
+import { lightTheme } from "../../theme/colors";
+import { space } from "../../theme/spacing";
 
 type Props = NativeStackScreenProps<ProfileStackParamList, "ProfileMain">;
 
@@ -49,55 +52,110 @@ export default function ProfileScreen({ navigation }: Props) {
   };
 
   if (loading) {
-    return <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#0F172A" }}><ActivityIndicator color="#6366F1" /></View>;
+    return (
+      <Screen scroll={false} padding="none">
+        <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+          <ActivityIndicator color={lightTheme.primary} />
+        </View>
+      </Screen>
+    );
   }
 
+  const menuItems = [
+    { label: "Edit Profile", icon: "User" as const, onPress: () => navigation.navigate("EditProfile") },
+    { label: "Switch Split", icon: "Repeat" as const, onPress: () => navigation.navigate("SplitSwitcher") },
+    { label: "Body Metrics", icon: "Ruler" as const, onPress: () => navigation.navigate("Metrics") },
+    { label: "Settings", icon: "Settings" as const, onPress: () => navigation.navigate("Settings") },
+  ];
+
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: "#0F172A" }} contentContainerStyle={{ padding: 24, paddingTop: 60 }}>
-      <View style={{ alignItems: "center", marginBottom: 32 }}>
-        <View style={{ width: 80, height: 80, borderRadius: 40, backgroundColor: "#6366F1", justifyContent: "center", alignItems: "center", marginBottom: 16 }}>
-          <Text style={{ color: "#fff", fontSize: 32, fontWeight: "bold" }}>{user?.name?.charAt(0)?.toUpperCase() || "U"}</Text>
+    <Screen scroll padding="lg">
+      {/* Profile Header */}
+      <View style={{ alignItems: "center", marginBottom: space.lg }}>
+        <View
+          style={{
+            width: 80,
+            height: 80,
+            borderRadius: 40,
+            backgroundColor: lightTheme.primary,
+            justifyContent: "center",
+            alignItems: "center",
+            marginBottom: space.md,
+          }}
+        >
+          <Typography variant="display" color={lightTheme.primaryText} style={{ fontSize: 32 }}>
+            {user?.name?.charAt(0)?.toUpperCase() || "U"}
+          </Typography>
         </View>
-        <Text style={{ color: "#fff", fontSize: 24, fontWeight: "bold" }}>{user?.name || "User"}</Text>
-        <Text style={{ color: "#94A3B8", fontSize: 14, marginTop: 4 }}>{user?.email}</Text>
+        <Typography variant="heading2" color={lightTheme.textPrimary}>
+          {user?.name || "User"}
+        </Typography>
+        <Typography variant="body" color={lightTheme.textSecondary} style={{ marginTop: space.xs }}>
+          {user?.email}
+        </Typography>
       </View>
 
+      {/* Current Split Card */}
       {userSplit && (
-        <View style={{ backgroundColor: "#1E293B", borderRadius: 16, padding: 16, marginBottom: 24 }}>
-          <Text style={{ color: "#94A3B8", fontSize: 12, marginBottom: 4 }}>Current Split</Text>
-          <Text style={{ color: "#fff", fontSize: 18, fontWeight: "600" }}>{userSplit.split.name}</Text>
-          <Text style={{ color: "#94A3B8", fontSize: 14, marginTop: 4 }}>{userSplit.split.daysPerWeek} days/week</Text>
-        </View>
+        <Card shadow="sm" style={{ marginBottom: space.lg }}>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.sm }}>
+            <Icon name="Calendar" size={18} color={lightTheme.textMuted} />
+            <Typography variant="caption" color={lightTheme.textMuted}>
+              CURRENT SPLIT
+            </Typography>
+          </View>
+          <Typography variant="heading3" color={lightTheme.textPrimary}>
+            {userSplit.split.name}
+          </Typography>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginTop: space.sm }}>
+            <Icon name="Clock" size={14} color={lightTheme.textMuted} />
+            <Typography variant="caption" color={lightTheme.textMuted}>
+              {userSplit.split.daysPerWeek} days/week
+            </Typography>
+          </View>
+        </Card>
       )}
 
-      <View style={{ backgroundColor: "#1E293B", borderRadius: 16, marginBottom: 24 }}>
-        <TouchableOpacity onPress={() => navigation.navigate("EditProfile")} style={{ padding: 16, borderBottomWidth: 1, borderBottomColor: "#334155" }}>
-          <Text style={{ color: "#fff", fontSize: 16 }}>Edit Profile</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("SplitSwitcher")} style={{ padding: 16, borderBottomWidth: 1, borderBottomColor: "#334155" }}>
-          <Text style={{ color: "#fff", fontSize: 16 }}>Switch Split</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("Metrics")} style={{ padding: 16, borderBottomWidth: 1, borderBottomColor: "#334155" }}>
-          <Text style={{ color: "#fff", fontSize: 16 }}>Body Metrics</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("Settings")} style={{ padding: 16 }}>
-          <Text style={{ color: "#fff", fontSize: 16 }}>Settings</Text>
-        </TouchableOpacity>
+      {/* Menu */}
+      <Card shadow="sm" style={{ marginBottom: space.lg, padding: 0 }}>
+        {menuItems.map((item, index) => (
+          <TouchableOpacity
+            key={item.label}
+            onPress={item.onPress}
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              padding: space.md,
+              borderBottomWidth: index < menuItems.length - 1 ? 1 : 0,
+              borderBottomColor: lightTheme.border,
+              gap: space.md,
+            }}
+          >
+            <Icon name={item.icon} size={20} color={lightTheme.textSecondary} />
+            <Typography variant="body" color={lightTheme.textPrimary} style={{ flex: 1 }}>
+              {item.label}
+            </Typography>
+            <Icon name="ChevronRight" size={20} color={lightTheme.textMuted} />
+          </TouchableOpacity>
+        ))}
+      </Card>
+
+      {/* Actions */}
+      <View style={{ gap: space.md }}>
+        <Button
+          title="Log Out"
+          onPress={logout}
+          variant="secondary"
+          size="md"
+          icon={<Icon name="LogOut" size={20} color={lightTheme.secondaryText} />}
+        />
+        <Button
+          title="Delete Account"
+          onPress={handleDeleteAccount}
+          variant="danger"
+          size="sm"
+        />
       </View>
-
-      <TouchableOpacity
-        onPress={logout}
-        style={{ backgroundColor: "#334155", borderRadius: 12, padding: 16, alignItems: "center", marginBottom: 12 }}
-      >
-        <Text style={{ color: "#94A3B8", fontSize: 16 }}>Log Out</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        onPress={handleDeleteAccount}
-        style={{ backgroundColor: "#1E293B", borderRadius: 12, padding: 16, alignItems: "center" }}
-      >
-        <Text style={{ color: "#EF4444", fontSize: 14 }}>Delete Account</Text>
-      </TouchableOpacity>
-    </ScrollView>
+    </Screen>
   );
 }

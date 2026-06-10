@@ -1,51 +1,92 @@
 import React from "react";
-import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { OnboardingStackParamList } from "../../navigation/types";
 import { useOnboarding, OnboardingProvider } from "./OnboardingContext";
+import { Screen, Typography, Card, Icon } from "../../components";
+import { lightTheme } from "../../theme/colors";
+import { space } from "../../theme/spacing";
 
 type Props = NativeStackScreenProps<OnboardingStackParamList, "Goal">;
 
 const options = [
-  { value: "MUSCLE_GAIN", label: "Build Muscle", desc: "Gain strength and size", emoji: "💪" },
-  { value: "WEIGHT_LOSS", label: "Lose Weight", desc: "Burn fat and get lean", emoji: "🔥" },
-  { value: "GET_FIT", label: "Get Fit", desc: "Improve overall fitness", emoji: "🏃" },
-  { value: "MAINTAIN", label: "Maintain", desc: "Keep current physique", emoji: "⚖️" },
+  { value: "MUSCLE_GAIN", label: "Build Muscle", desc: "Gain strength and size", icon: "Dumbbell" as const },
+  { value: "WEIGHT_LOSS", label: "Lose Weight", desc: "Burn fat and get lean", icon: "Flame" as const },
+  { value: "GET_FIT", label: "Get Fit", desc: "Improve overall fitness", icon: "Activity" as const },
+  { value: "MAINTAIN", label: "Maintain", desc: "Keep current physique", icon: "Scale" as const },
 ];
 
 function GoalContent({ navigation }: Props) {
   const { data, update } = useOnboarding();
 
   return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1, padding: 24, backgroundColor: "#0F172A" }}>
-      <Text style={{ fontSize: 24, fontWeight: "bold", color: "#fff", marginBottom: 8 }}>What's your main goal?</Text>
-      <Text style={{ color: "#94A3B8", marginBottom: 32 }}>We'll tailor your program accordingly.</Text>
+    <Screen scroll padding="lg">
+      <View style={{ flex: 1, justifyContent: "center" }}>
+        <Typography variant="heading2" color={lightTheme.textPrimary} style={{ marginBottom: space.sm }}>
+          What's your main goal?
+        </Typography>
+        <Typography variant="body" color={lightTheme.textSecondary} style={{ marginBottom: space.xl }}>
+          We'll tailor your program accordingly.
+        </Typography>
 
-      {options.map((opt) => (
-        <TouchableOpacity
-          key={opt.value}
-          onPress={() => {
-            update({ goal: opt.value as any });
-            navigation.navigate("Experience");
-          }}
-          style={{
-            backgroundColor: data.goal === opt.value ? "#4F46E5" : "#1E293B",
-            borderRadius: 16,
-            padding: 20,
-            marginBottom: 12,
-            borderWidth: data.goal === opt.value ? 2 : 0,
-            borderColor: "#6366F1",
-          }}
-        >
-          <Text style={{ fontSize: 24, marginBottom: 4 }}>{opt.emoji}</Text>
-          <Text style={{ color: "#fff", fontSize: 18, fontWeight: "600" }}>{opt.label}</Text>
-          <Text style={{ color: "#CBD5E1", fontSize: 14 }}>{opt.desc}</Text>
-        </TouchableOpacity>
-      ))}
-    </ScrollView>
+        {options.map((opt) => {
+          const isSelected = data.goal === opt.value;
+          return (
+            <TouchableOpacity
+              key={opt.value}
+              onPress={() => {
+                update({ goal: opt.value as any });
+                navigation.navigate("Experience");
+              }}
+              style={{ marginBottom: space.md }}
+              activeOpacity={0.8}
+            >
+              <Card
+                padding="lg"
+                border={true}
+                shadow={isSelected ? "sm" : "none"}
+                style={{
+                  backgroundColor: isSelected ? lightTheme.primaryLight : lightTheme.surface,
+                  borderColor: isSelected ? lightTheme.primary : lightTheme.border,
+                  borderWidth: isSelected ? 2 : 1,
+                }}
+              >
+                <View style={{ flexDirection: "row", alignItems: "center", gap: space.md }}>
+                  <View
+                    style={{
+                      width: 48,
+                      height: 48,
+                      borderRadius: 12,
+                      backgroundColor: isSelected ? lightTheme.primary : lightTheme.surfaceSecondary,
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Icon name={opt.icon} size={24} color={isSelected ? lightTheme.primaryText : lightTheme.textSecondary} />
+                  </View>
+                  <View style={{ flex: 1 }}>
+                    <Typography variant="heading3" color={isSelected ? lightTheme.primary : lightTheme.textPrimary}>
+                      {opt.label}
+                    </Typography>
+                    <Typography variant="bodySmall" color={lightTheme.textSecondary} style={{ marginTop: space.xs }}>
+                      {opt.desc}
+                    </Typography>
+                  </View>
+                  {isSelected && <Icon name="CheckCircle2" size={24} color={lightTheme.primary} />}
+                </View>
+              </Card>
+            </TouchableOpacity>
+          );
+        })}
+      </View>
+    </Screen>
   );
 }
 
 export default function GoalScreen(props: Props) {
-  return <OnboardingProvider><GoalContent {...props} /></OnboardingProvider>;
+  return (
+    <OnboardingProvider>
+      <GoalContent {...props} />
+    </OnboardingProvider>
+  );
 }

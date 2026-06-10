@@ -185,3 +185,67 @@ export const getHeatmap = async (req: AuthRequest, res: Response) => {
 
   res.json({ heatmap });
 };
+
+export const getVolumeHistory = async (req: AuthRequest, res: Response) => {
+  const userId = req.userId!;
+  const weeks = Math.min(Math.max(parseInt(req.query.weeks as string) || 8, 1), 52);
+
+  const startDate = new Date();
+  startDate.setDate(startDate.getDate() - weeks * 7);
+  startDate.setHours(0, 0, 0, 0);
+
+  const sessions = await prisma.workoutSession.findMany({
+    where: {
+      userId,
+      status: "COMPLETED",
+      date: { gte: startDate },
+    },
+    include: {
+      exerciseLogs: { include: { setLogs: true } },
+    },
+    orderBy: { date: "asc" },
+  });
+
+  // Group by week
+  const weekly: { week: string; volume: number; workouts: number }[] = [];
+  for (let i = 0; i < weeks; i++) {
+    const wStart = new Date(startDate);
+    wStart.setDate(wStart.getDate() + i * 7);
+    const wEnd = new Date(wStart);
+    wEnd.setDate(wEnd.getDate() + 7);
+    const weekSessions = sessions.filter((s) => {
+      const d = new Date(s.date);
+      return d >= wStart && d < wEnd;
+    });
+    const volume = weekSessions.reduce((sum, s) => {
+      const sessVol = s.exerciseLogs.reduce((logSum, log) => {
+        return logSum + log.setLogs.reduce((setSum, set) => setSum + set.weightKg * set.reps, 0);
+      }, 0);
+      return sum + sessVol;
+    }, 0);
+    weekly.push({
+      week: `W${i + 1}`,
+      volume: Math.round(volume),
+      workouts: weekSessions.length,
+    });
+  }
+
+  // Daily workout count for the last 7 days
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const sevenDaysAgo = new Date(today);
+  sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 6);
+  const daily: { day: string; count: number }[] = [];
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(sevenDaysAgo);
+    d.setDate(d.getDate() + i);
+    const dStr = d.toISOString().split("T")[0];
+    const count = sessions.filter((s) => new Date(s.date).toISOString().split("T")[0] === dStr).length;
+    daily.push({
+      day: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][d.getDay()],
+      count,
+    });
+  }
+
+  res.json({ weekly, daily });
+};

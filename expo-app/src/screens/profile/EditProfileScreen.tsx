@@ -1,17 +1,21 @@
 import React, { useState } from "react";
-import { View, Text, ScrollView, TextInput, TouchableOpacity, Alert, ActivityIndicator } from "react-native";
+import { View, ScrollView, TouchableOpacity, Alert, ActivityIndicator } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ProfileStackParamList } from "../../navigation/types";
 import { useAuthStore } from "../../store/authStore";
 import { updateProfile } from "../../api/auth";
+import { Typography, Card, Button, Icon, Input } from "../../components";
+import { lightTheme } from "../../theme/colors";
+import { space, radius } from "../../theme/spacing";
 
 type Props = NativeStackScreenProps<ProfileStackParamList, "EditProfile">;
 
 const goals = [
-  { value: "MUSCLE_GAIN", label: "Build Muscle" },
-  { value: "WEIGHT_LOSS", label: "Lose Weight" },
-  { value: "GET_FIT", label: "Get Fit" },
-  { value: "MAINTAIN", label: "Maintain" },
+  { value: "MUSCLE_GAIN", label: "Build Muscle", icon: "Dumbbell" as const },
+  { value: "WEIGHT_LOSS", label: "Lose Weight", icon: "Flame" as const },
+  { value: "GET_FIT", label: "Get Fit", icon: "Activity" as const },
+  { value: "MAINTAIN", label: "Maintain", icon: "Scale" as const },
 ];
 
 export default function EditProfileScreen({ navigation }: Props) {
@@ -43,72 +47,126 @@ export default function EditProfileScreen({ navigation }: Props) {
   };
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: "#0F172A" }} contentContainerStyle={{ padding: 24 }}>
-      <Text style={{ color: "#CBD5E1", marginBottom: 8, fontSize: 14 }}>Name</Text>
-      <TextInput
-        style={{ backgroundColor: "#1E293B", borderRadius: 12, padding: 16, color: "#fff", marginBottom: 20, fontSize: 16 }}
-        value={name}
-        onChangeText={setName}
-        placeholder="Your name"
-        placeholderTextColor="#475569"
-      />
-
-      <Text style={{ color: "#CBD5E1", marginBottom: 12, fontSize: 14 }}>Goal</Text>
-      <View style={{ gap: 8, marginBottom: 20 }}>
-        {goals.map((g) => (
-          <TouchableOpacity
-            key={g.value}
-            onPress={() => setGoal(g.value)}
-            style={{
-              backgroundColor: goal === g.value ? "#4F46E5" : "#1E293B",
-              borderRadius: 12,
-              padding: 14,
-              borderWidth: goal === g.value ? 2 : 0,
-              borderColor: "#6366F1",
-            }}
-          >
-            <Text style={{ color: "#fff", fontSize: 16 }}>{g.label}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-
-      <Text style={{ color: "#CBD5E1", marginBottom: 8, fontSize: 14 }}>Current Weight (kg)</Text>
-      <TextInput
-        style={{ backgroundColor: "#1E293B", borderRadius: 12, padding: 16, color: "#fff", marginBottom: 20, fontSize: 16 }}
-        value={weight}
-        onChangeText={setWeight}
-        placeholder="70"
-        placeholderTextColor="#475569"
-        keyboardType="decimal-pad"
-      />
-
-      <Text style={{ color: "#CBD5E1", marginBottom: 8, fontSize: 14 }}>Height (cm)</Text>
-      <TextInput
-        style={{ backgroundColor: "#1E293B", borderRadius: 12, padding: 16, color: "#fff", marginBottom: 20, fontSize: 16 }}
-        value={height}
-        onChangeText={setHeight}
-        placeholder="175"
-        placeholderTextColor="#475569"
-        keyboardType="decimal-pad"
-      />
-
-      <Text style={{ color: "#CBD5E1", marginBottom: 8, fontSize: 14 }}>Sleep Hours</Text>
-      <TextInput
-        style={{ backgroundColor: "#1E293B", borderRadius: 12, padding: 16, color: "#fff", marginBottom: 32, fontSize: 16 }}
-        value={sleep}
-        onChangeText={setSleep}
-        placeholder="8"
-        placeholderTextColor="#475569"
-        keyboardType="decimal-pad"
-      />
-
-      <TouchableOpacity
-        onPress={handleSave}
-        disabled={saving}
-        style={{ backgroundColor: "#6366F1", borderRadius: 12, padding: 16, alignItems: "center" }}
+    <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg }} edges={["top"]}>
+      <ScrollView
+        style={{ flex: 1 }}
+        contentContainerStyle={{ padding: space.lg, paddingBottom: space.xl }}
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
       >
-        {saving ? <ActivityIndicator color="#fff" /> : <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>Save Changes</Text>}
-      </TouchableOpacity>
-    </ScrollView>
+        {/* Header */}
+        <View style={{ marginBottom: space.xl }}>
+          <Typography variant="caption" color={lightTheme.textMuted} weight="600">
+            EDIT YOUR PROFILE
+          </Typography>
+          <Typography variant="heading1" color={lightTheme.textPrimary} style={{ marginTop: space.xs }}>
+            Edit Profile
+          </Typography>
+        </View>
+
+        <View style={{ gap: space.lg }}>
+          <Input
+            label="Name"
+            value={name}
+            onChangeText={setName}
+            placeholder="Your name"
+            icon={<Icon name="User" size={20} color={lightTheme.textMuted} />}
+          />
+
+          <View>
+            <Typography variant="label" color={lightTheme.textSecondary} style={{ marginBottom: space.sm }}>
+              GOAL
+            </Typography>
+            <View style={{ gap: space.sm }}>
+              {goals.map((g) => {
+                const isSelected = goal === g.value;
+                return (
+                  <TouchableOpacity
+                    key={g.value}
+                    onPress={() => setGoal(g.value)}
+                    activeOpacity={0.8}
+                  >
+                    <Card
+                      shadow={isSelected ? "sm" : "none"}
+                      style={{
+                        padding: space.md,
+                        backgroundColor: isSelected ? lightTheme.primaryLight : lightTheme.surface,
+                        borderColor: isSelected ? lightTheme.primary : lightTheme.border,
+                        borderWidth: isSelected ? 2 : 1,
+                      }}
+                    >
+                      <View style={{ flexDirection: "row", alignItems: "center", gap: space.md }}>
+                        <View
+                          style={{
+                            width: 40,
+                            height: 40,
+                            borderRadius: radius.md,
+                            backgroundColor: isSelected ? lightTheme.primary : lightTheme.surfaceSecondary,
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <Icon name={g.icon} size={20} color={isSelected ? lightTheme.primaryText : lightTheme.textSecondary} />
+                        </View>
+                        <Typography variant="body" color={isSelected ? lightTheme.primary : lightTheme.textPrimary} weight="600">
+                          {g.label}
+                        </Typography>
+                        {isSelected && (
+                          <Icon name="CheckCircle2" size={20} color={lightTheme.primary} style={{ marginLeft: "auto" }} />
+                        )}
+                      </View>
+                    </Card>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+          </View>
+
+          <View style={{ flexDirection: "row", gap: space.md }}>
+            <View style={{ flex: 1 }}>
+              <Input
+                label="Weight (kg)"
+                value={weight}
+                onChangeText={setWeight}
+                placeholder="70"
+                keyboardType="decimal-pad"
+                containerStyle={{ marginBottom: 0 }}
+              />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Input
+                label="Height (cm)"
+                value={height}
+                onChangeText={setHeight}
+                placeholder="175"
+                keyboardType="decimal-pad"
+                containerStyle={{ marginBottom: 0 }}
+              />
+            </View>
+          </View>
+
+          <Input
+            label="Sleep (hours/night)"
+            value={sleep}
+            onChangeText={setSleep}
+            placeholder="8"
+            keyboardType="decimal-pad"
+            icon={<Icon name="Moon" size={20} color={lightTheme.textMuted} />}
+          />
+        </View>
+
+        <View style={{ marginTop: space.xl }}>
+          <Button
+            title="Save Changes"
+            onPress={handleSave}
+            loading={saving}
+            disabled={saving}
+            variant="primary"
+            size="lg"
+            icon={<Icon name="Save" size={20} color={lightTheme.primaryText} />}
+          />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }

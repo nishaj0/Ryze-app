@@ -2,7 +2,8 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { MainTabParamList, HomeStackParamList, WorkoutStackParamList, ProgressStackParamList, PhotosStackParamList, ProfileStackParamList } from "./types";
-import { Text } from "react-native";
+import { Icon } from "../components";
+import { lightTheme } from "../theme/colors";
 
 import HomeScreen from "../screens/home/HomeScreen";
 import WorkoutLoggerScreen from "../screens/workout/WorkoutLoggerScreen";
@@ -26,9 +27,10 @@ const ProgressStackNav = createNativeStackNavigator<ProgressStackParamList>();
 const PhotosStackNav = createNativeStackNavigator<PhotosStackParamList>();
 const ProfileStackNav = createNativeStackNavigator<ProfileStackParamList>();
 
-const headerStyle = { backgroundColor: "#0F172A" as const };
-const headerTintColor = "#fff";
-const stackOpts = { headerStyle, headerTintColor };
+const headerStyle = { backgroundColor: lightTheme.bg as const };
+const headerTintColor = lightTheme.textPrimary;
+const headerTitleStyle = { fontFamily: "Inter", fontWeight: "600" as const, fontSize: 18, color: lightTheme.textPrimary };
+const stackOpts = { headerStyle, headerTintColor, headerTitleStyle };
 
 function HomeStack() {
   return (
@@ -81,24 +83,46 @@ function ProfileStack() {
   );
 }
 
-const TabIcon = ({ label, focused }: { label: string; focused: boolean }) => (
-  <Text style={{ fontSize: 20 }}>{label}</Text>
-);
+const tabIcons: Record<string, { active: any; inactive: any }> = {
+  Home: { active: "Home", inactive: "Home" },
+  Progress: { active: "BarChart3", inactive: "BarChart3" },
+  Photos: { active: "Camera", inactive: "Camera" },
+  Profile: { active: "User", inactive: "User" },
+};
 
 export default function MainTabs() {
   return (
     <Tab.Navigator
-      screenOptions={{
-        tabBarStyle: { backgroundColor: "#1E293B", borderTopColor: "#334155" },
-        tabBarActiveTintColor: "#6366F1",
-        tabBarInactiveTintColor: "#94A3B8",
+      screenOptions={({ route }) => ({
+        tabBarStyle: {
+          backgroundColor: lightTheme.surface,
+          borderTopColor: lightTheme.border,
+          borderTopWidth: 1,
+          elevation: 0,
+          shadowOpacity: 0,
+          height: 64,
+          paddingBottom: 8,
+          paddingTop: 8,
+        },
+        tabBarActiveTintColor: lightTheme.primary,
+        tabBarInactiveTintColor: lightTheme.textMuted,
+        tabBarLabelStyle: {
+          fontFamily: "Inter",
+          fontSize: 12,
+          fontWeight: "500",
+          marginTop: 4,
+        },
         headerShown: false,
-      }}
+        tabBarIcon: ({ focused, color }: { focused: boolean; color: string }) => {
+          const iconName = tabIcons[route.name]?.active || "Circle";
+          return <Icon name={iconName} size={24} color={color} strokeWidth={focused ? 2.5 : 2} />;
+        },
+      })}
     >
-      <Tab.Screen name="Home" component={HomeStack} options={{ tabBarLabel: "Home", tabBarIcon: (p: any) => <TabIcon label="🏠" focused={p.focused} /> }} />
-      <Tab.Screen name="Progress" component={ProgressStack} options={{ tabBarLabel: "Progress", tabBarIcon: (p: any) => <TabIcon label="📊" focused={p.focused} /> }} />
-      <Tab.Screen name="Photos" component={PhotosStack} options={{ tabBarLabel: "Photos", tabBarIcon: (p: any) => <TabIcon label="📷" focused={p.focused} /> }} />
-      <Tab.Screen name="Profile" component={ProfileStack} options={{ tabBarLabel: "Profile", tabBarIcon: (p: any) => <TabIcon label="👤" focused={p.focused} /> }} />
+      <Tab.Screen name="Home" component={HomeStack} options={{ tabBarLabel: "Home" }} />
+      <Tab.Screen name="Progress" component={ProgressStack} options={{ tabBarLabel: "Progress" }} />
+      <Tab.Screen name="Photos" component={PhotosStack} options={{ tabBarLabel: "Photos" }} />
+      <Tab.Screen name="Profile" component={ProfileStack} options={{ tabBarLabel: "Profile" }} />
     </Tab.Navigator>
   );
 }

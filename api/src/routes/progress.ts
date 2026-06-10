@@ -14,5 +14,6 @@ router.get("/overview", authMiddleware, wrap(progressController.getOverview));
 router.get("/exercise/:id", authMiddleware, wrap(progressController.getExerciseProgress));
 router.get("/muscle-volume", authMiddleware, wrap(progressController.getMuscleVolume));
 router.get("/heatmap", authMiddleware, wrap(progressController.getHeatmap));
+router.get("/volume-history", authMiddleware, wrap(progressController.getVolumeHistory));
 
 export default router;

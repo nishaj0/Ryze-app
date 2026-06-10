@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, ScrollView, TouchableOpacity, Alert, ActivityIndicator } from "react-native";
+import { View, ScrollView, TouchableOpacity, Alert, ActivityIndicator } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ProfileStackParamList } from "../../navigation/types";
 import { listSplits, setActiveSplit } from "../../api/splits";
 import { Split } from "../../types";
+import { Typography, Card, Icon } from "../../components";
+import { lightTheme } from "../../theme/colors";
+import { space, radius } from "../../theme/spacing";
 
 type Props = NativeStackScreenProps<ProfileStackParamList, "SplitSwitcher">;
 
@@ -20,8 +24,11 @@ export default function SplitSwitcherScreen({ navigation }: Props) {
     try {
       const res = await listSplits();
       setSplits(res.splits);
-    } catch (err) {}
-    finally { setLoading(false); }
+    } catch (err) {
+      console.error("[SplitSwitcher] load error:", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSwitch = (splitId: string, splitName: string) => {
@@ -49,34 +56,117 @@ export default function SplitSwitcherScreen({ navigation }: Props) {
   };
 
   if (loading) {
-    return <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#0F172A" }}><ActivityIndicator color="#6366F1" /></View>;
+    return (
+      <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator color={lightTheme.primary} size="large" />
+      </SafeAreaView>
+    );
   }
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: "#0F172A" }} contentContainerStyle={{ padding: 24 }}>
-      <Text style={{ fontSize: 24, fontWeight: "bold", color: "#fff", marginBottom: 8 }}>Switch Split</Text>
-      <Text style={{ color: "#94A3B8", fontSize: 14, marginBottom: 24 }}>Choose a new training program</Text>
+    <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg }} edges={["top"]}>
+      <ScrollView
+        style={{ flex: 1 }}
+        contentContainerStyle={{ padding: space.lg, paddingBottom: space.xl }}
+        showsVerticalScrollIndicator={false}
+      >
+        {/* Header */}
+        <View style={{ marginBottom: space.xl }}>
+          <Typography variant="caption" color={lightTheme.textMuted} weight="600">
+            AVAILABLE SPLITS
+          </Typography>
+          <Typography variant="heading1" color={lightTheme.textPrimary} style={{ marginTop: space.xs }}>
+            Switch Split
+          </Typography>
+          <Typography variant="body" color={lightTheme.textSecondary} style={{ marginTop: space.sm }}>
+            Choose a new training program
+          </Typography>
+        </View>
 
-      {splits.map((split) => (
-        <TouchableOpacity
-          key={split.id}
-          onPress={() => handleSwitch(split.id, split.name)}
-          disabled={switching !== null}
-          style={{ backgroundColor: "#1E293B", borderRadius: 16, padding: 20, marginBottom: 12 }}
-        >
-          <Text style={{ color: "#fff", fontSize: 18, fontWeight: "600" }}>{split.name}</Text>
-          <Text style={{ color: "#CBD5E1", fontSize: 14, marginTop: 4 }}>{split.description}</Text>
-          <View style={{ flexDirection: "row", gap: 16, marginTop: 12 }}>
-            <Text style={{ color: "#94A3B8", fontSize: 12 }}>{split.daysPerWeek} days/week</Text>
-            <Text style={{ color: "#94A3B8", fontSize: 12, textTransform: "capitalize" }}>{split.type.replace("_", " ")}</Text>
-          </View>
-          {switching === split.id && (
-            <View style={{ marginTop: 12, alignItems: "center" }}>
-              <ActivityIndicator color="#6366F1" />
+        {splits.length === 0 ? (
+          <Card padding="lg" shadow="sm" style={{ alignItems: "center" }}>
+            <View
+              style={{
+                width: 80,
+                height: 80,
+                borderRadius: 40,
+                backgroundColor: lightTheme.primaryLight,
+                alignItems: "center",
+                justifyContent: "center",
+                marginBottom: space.md,
+              }}
+            >
+              <Icon name="Layers" size={36} color={lightTheme.primary} />
             </View>
-          )}
-        </TouchableOpacity>
-      ))}
-    </ScrollView>
+            <Typography variant="heading3" color={lightTheme.textPrimary} align="center">
+              No splits available
+            </Typography>
+          </Card>
+        ) : (
+          <View style={{ gap: space.md }}>
+            {splits.map((split) => (
+              <TouchableOpacity
+                key={split.id}
+                onPress={() => handleSwitch(split.id, split.name)}
+                disabled={switching !== null}
+                activeOpacity={0.8}
+              >
+                <Card shadow="sm" style={{ padding: space.lg }}>
+                  <View style={{ flexDirection: "row", alignItems: "flex-start", gap: space.md }}>
+                    <View
+                      style={{
+                        width: 48,
+                        height: 48,
+                        borderRadius: radius.md,
+                        backgroundColor: lightTheme.primaryLight,
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Icon name="Layers" size={24} color={lightTheme.primary} />
+                    </View>
+                    <View style={{ flex: 1 }}>
+                      <Typography variant="heading3" color={lightTheme.textPrimary}>
+                        {split.name}
+                      </Typography>
+                      {split.description && (
+                        <Typography variant="bodySmall" color={lightTheme.textSecondary} style={{ marginTop: 4 }}>
+                          {split.description}
+                        </Typography>
+                      )}
+                      <View style={{ flexDirection: "row", alignItems: "center", gap: space.md, marginTop: space.sm }}>
+                        <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
+                          <Icon name="Calendar" size={12} color={lightTheme.textMuted} />
+                          <Typography variant="caption" color={lightTheme.textMuted}>
+                            {split.daysPerWeek} days/week
+                          </Typography>
+                        </View>
+                        <View
+                          style={{
+                            backgroundColor: lightTheme.surfaceTertiary,
+                            paddingHorizontal: 6,
+                            paddingVertical: 1,
+                            borderRadius: 4,
+                          }}
+                        >
+                          <Typography variant="caption" color={lightTheme.textSecondary} weight="600" style={{ textTransform: "capitalize", fontSize: 10 }}>
+                            {split.type.replace("_", " ")}
+                          </Typography>
+                        </View>
+                      </View>
+                    </View>
+                    {switching === split.id ? (
+                      <ActivityIndicator color={lightTheme.primary} />
+                    ) : (
+                      <Icon name="ChevronRight" size={20} color={lightTheme.textMuted} />
+                    )}
+                  </View>
+                </Card>
+              </TouchableOpacity>
+            ))}
+          </View>
+        )}
+      </ScrollView>
+    </SafeAreaView>
   );
 }

@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, ScrollView, TouchableOpacity, TextInput, Modal, Alert, ActivityIndicator } from "react-native";
+import { View, ScrollView, TouchableOpacity, Modal, Alert, ActivityIndicator, Dimensions } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ProfileStackParamList } from "../../navigation/types";
 import { getBodyMetrics, logBodyMetric, deleteBodyMetric } from "../../api/metrics";
 import { BodyMetric } from "../../types";
+import { Typography, Card, Button, Icon, Input } from "../../components";
+import { LineChart } from "../../components/charts";
+import { lightTheme } from "../../theme/colors";
+import { space, radius } from "../../theme/spacing";
 
 type Props = NativeStackScreenProps<ProfileStackParamList, "Metrics">;
+
+const { width: screenW } = Dimensions.get("window");
 
 export default function MetricsScreen({ navigation }: Props) {
   const [metrics, setMetrics] = useState<BodyMetric[]>([]);
@@ -23,8 +30,11 @@ export default function MetricsScreen({ navigation }: Props) {
     try {
       const res = await getBodyMetrics();
       setMetrics(res.metrics);
-    } catch (err) {}
-    finally { setLoading(false); }
+    } catch (err) {
+      console.error("[Metrics] load error:", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleLog = async () => {
@@ -47,7 +57,7 @@ export default function MetricsScreen({ navigation }: Props) {
     }
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = (id: string) => {
     Alert.alert("Delete", "Delete this entry?", [
       { text: "Cancel", style: "cancel" },
       {
@@ -66,107 +76,261 @@ export default function MetricsScreen({ navigation }: Props) {
   };
 
   if (loading) {
-    return <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#0F172A" }}><ActivityIndicator color="#6366F1" /></View>;
+    return (
+      <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator color={lightTheme.primary} size="large" />
+      </SafeAreaView>
+    );
   }
 
-  const latestWeight = metrics.length > 0 ? metrics[metrics.length - 1].weightKg : null;
-  const maxWeight = Math.max(...metrics.map((m) => m.weightKg), 1);
-  const minWeight = Math.min(...metrics.map((m) => m.weightKg), 0);
-  const range = maxWeight - minWeight || 1;
+  const sortedMetrics = [...metrics].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  const latestWeight = sortedMetrics.length > 0 ? sortedMetrics[sortedMetrics.length - 1].weightKg : null;
+  const firstWeight = sortedMetrics.length > 0 ? sortedMetrics[0].weightKg : null;
+  const change = latestWeight !== null && firstWeight !== null ? latestWeight - firstWeight : 0;
+  const changePct = firstWeight && firstWeight > 0 ? (change / firstWeight) * 100 : 0;
+
+  const chartData = sortedMetrics.map((m, i) => ({
+    label: `${i + 1}`,
+    value: m.weightKg,
+  }));
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: "#0F172A" }} contentContainerStyle={{ padding: 24 }}>
-      <Text style={{ fontSize: 24, fontWeight: "bold", color: "#fff", marginBottom: 24 }}>Body Weight</Text>
-
-      {latestWeight && (
-        <View style={{ backgroundColor: "#1E293B", borderRadius: 16, padding: 20, marginBottom: 24, alignItems: "center" }}>
-          <Text style={{ color: "#94A3B8", fontSize: 14 }}>Current Weight</Text>
-          <Text style={{ color: "#6366F1", fontSize: 48, fontWeight: "bold" }}>{latestWeight}</Text>
-          <Text style={{ color: "#94A3B8", fontSize: 16 }}>kg</Text>
-        </View>
-      )}
-
-      {metrics.length > 1 && (
-        <View style={{ backgroundColor: "#1E293B", borderRadius: 16, padding: 16, marginBottom: 24 }}>
-          <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600", marginBottom: 16 }}>Weight Trend</Text>
-          <View style={{ height: 120, flexDirection: "row", alignItems: "flex-end", gap: 2 }}>
-            {metrics.slice(-20).map((m, idx) => {
-              const height = ((m.weightKg - minWeight) / range) * 100 + 10;
-              return (
-                <View key={m.id} style={{ flex: 1, alignItems: "center", justifyContent: "flex-end" }}>
-                  <View style={{ width: "100%", backgroundColor: "#6366F1", borderRadius: 2, height: height }} />
-                </View>
-              );
-            })}
-          </View>
-          <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 8 }}>
-            <Text style={{ color: "#475569", fontSize: 10 }}>{new Date(metrics[0].date).toLocaleDateString()}</Text>
-            <Text style={{ color: "#475569", fontSize: 10 }}>{new Date(metrics[metrics.length - 1].date).toLocaleDateString()}</Text>
-          </View>
-        </View>
-      )}
-
-      <View style={{ backgroundColor: "#1E293B", borderRadius: 16, padding: 16, marginBottom: 24 }}>
-        <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600", marginBottom: 12 }}>History</Text>
-        {metrics.length === 0 ? (
-          <Text style={{ color: "#94A3B8", fontSize: 14, textAlign: "center", padding: 16 }}>No entries yet</Text>
-        ) : (
-          metrics.slice().reverse().map((m) => (
-            <View key={m.id} style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingVertical: 10, borderBottomWidth: 1, borderBottomColor: "#334155" }}>
-              <View>
-                <Text style={{ color: "#CBD5E1", fontSize: 14 }}>{new Date(m.date).toLocaleDateString()}</Text>
-                {m.notes && <Text style={{ color: "#475569", fontSize: 12, marginTop: 2 }}>{m.notes}</Text>}
-              </View>
-              <View style={{ flexDirection: "row", alignItems: "center", gap: 12 }}>
-                <Text style={{ color: "#6366F1", fontSize: 16, fontWeight: "600" }}>{m.weightKg} kg</Text>
-                <TouchableOpacity onPress={() => handleDelete(m.id)}>
-                  <Text style={{ color: "#EF4444", fontSize: 12 }}>Delete</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          ))
-        )}
-      </View>
-
-      <TouchableOpacity
-        onPress={() => setModalVisible(true)}
-        style={{ backgroundColor: "#6366F1", borderRadius: 12, padding: 16, alignItems: "center" }}
+    <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg }} edges={["top"]}>
+      <ScrollView
+        style={{ flex: 1 }}
+        contentContainerStyle={{ paddingBottom: space.xl }}
+        showsVerticalScrollIndicator={false}
       >
-        <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>Log Weight</Text>
-      </TouchableOpacity>
+        {/* Header */}
+        <View style={{ paddingHorizontal: space.lg, paddingTop: space.md, paddingBottom: space.lg }}>
+          <Typography variant="caption" color={lightTheme.textMuted} weight="600">
+            TRACK OVER TIME
+          </Typography>
+          <Typography variant="heading1" color={lightTheme.textPrimary} style={{ marginTop: space.xs }}>
+            Body Weight
+          </Typography>
+        </View>
 
+        {latestWeight !== null && (
+          <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
+            <Card padding="lg" shadow="sm" style={{ alignItems: "center" }}>
+              <Typography variant="caption" color={lightTheme.textMuted} style={{ marginBottom: space.sm }}>
+                CURRENT WEIGHT
+              </Typography>
+              <Typography variant="display" color={lightTheme.textPrimary} style={{ fontSize: 56, lineHeight: 64 }}>
+                {latestWeight.toFixed(1)}
+                <Typography variant="body" color={lightTheme.textMuted}>kg</Typography>
+              </Typography>
+              {change !== 0 && sortedMetrics.length > 1 && (
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    marginTop: space.sm,
+                    gap: 4,
+                    paddingHorizontal: space.md,
+                    paddingVertical: space.xs,
+                    borderRadius: radius.full,
+                    backgroundColor: change < 0 ? lightTheme.successBg : lightTheme.errorBg,
+                  }}
+                >
+                  <Icon
+                    name={change < 0 ? "TrendingDown" : "TrendingUp"}
+                    size={14}
+                    color={change < 0 ? lightTheme.success.DEFAULT : lightTheme.danger.DEFAULT}
+                  />
+                  <Typography
+                    variant="bodySmall"
+                    color={change < 0 ? lightTheme.success.DEFAULT : lightTheme.danger.DEFAULT}
+                    weight="700"
+                  >
+                    {change > 0 ? "+" : ""}{change.toFixed(1)}kg ({changePct > 0 ? "+" : ""}{changePct.toFixed(1)}%)
+                  </Typography>
+                </View>
+              )}
+            </Card>
+          </View>
+        )}
+
+        {/* Weight Trend Chart */}
+        {chartData.length > 1 && (
+          <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
+            <Card shadow="sm" style={{ padding: space.lg }}>
+              <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.md }}>
+                <Icon name="TrendingUp" size={16} color={lightTheme.textMuted} />
+                <Typography variant="caption" color={lightTheme.textMuted} weight="700">
+                  WEIGHT TREND
+                </Typography>
+              </View>
+              <LineChart
+                data={chartData}
+                width={screenW - 80}
+                height={200}
+                color={lightTheme.primary}
+                yAxisFormatter={(v) => `${v.toFixed(0)}`}
+              />
+              <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: space.md, paddingTop: space.md, borderTopWidth: 1, borderTopColor: lightTheme.border }}>
+                <View>
+                  <Typography variant="caption" color={lightTheme.textMuted}>START</Typography>
+                  <Typography variant="body" color={lightTheme.textPrimary} weight="700">
+                    {firstWeight?.toFixed(1)}kg
+                  </Typography>
+                </View>
+                <View>
+                  <Typography variant="caption" color={lightTheme.textMuted} align="center" style={{ textAlign: "right" }}>ENTRIES</Typography>
+                  <Typography variant="body" color={lightTheme.textPrimary} weight="700" align="center" style={{ textAlign: "right" }}>
+                    {sortedMetrics.length}
+                  </Typography>
+                </View>
+                <View>
+                  <Typography variant="caption" color={lightTheme.textMuted} align="right" style={{ textAlign: "right" }}>LATEST</Typography>
+                  <Typography variant="body" color={lightTheme.textPrimary} weight="700" align="right" style={{ textAlign: "right" }}>
+                    {latestWeight?.toFixed(1)}kg
+                  </Typography>
+                </View>
+              </View>
+            </Card>
+          </View>
+        )}
+
+        {/* History */}
+        <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.md }}>
+            <Icon name="History" size={18} color={lightTheme.textPrimary} />
+            <Typography variant="heading3" color={lightTheme.textPrimary}>
+              History
+            </Typography>
+          </View>
+
+          {sortedMetrics.length === 0 ? (
+            <Card padding="lg" shadow="sm" style={{ alignItems: "center" }}>
+              <View
+                style={{
+                  width: 64,
+                  height: 64,
+                  borderRadius: 32,
+                  backgroundColor: lightTheme.primaryLight,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginBottom: space.md,
+                }}
+              >
+                <Icon name="Scale" size={28} color={lightTheme.primary} />
+              </View>
+              <Typography variant="body" color={lightTheme.textMuted} align="center">
+                No entries yet
+              </Typography>
+            </Card>
+          ) : (
+            sortedMetrics.slice().reverse().map((m) => (
+              <Card key={m.id} shadow="sm" style={{ marginBottom: space.sm, padding: space.md }}>
+                <View style={{ flexDirection: "row", alignItems: "center", gap: space.md }}>
+                  <View
+                    style={{
+                      width: 40,
+                      height: 40,
+                      borderRadius: radius.md,
+                      backgroundColor: lightTheme.primaryLight,
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Icon name="Scale" size={20} color={lightTheme.primary} />
+                  </View>
+                  <View style={{ flex: 1 }}>
+                    <Typography variant="body" color={lightTheme.textPrimary} weight="600">
+                      {new Date(m.date).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })}
+                    </Typography>
+                    {m.notes && (
+                      <Typography variant="caption" color={lightTheme.textMuted} style={{ marginTop: 2 }}>
+                        {m.notes}
+                      </Typography>
+                    )}
+                  </View>
+                  <Typography variant="heading3" color={lightTheme.textPrimary}>
+                    {m.weightKg}<Typography variant="body" color={lightTheme.textMuted}>kg</Typography>
+                  </Typography>
+                  <TouchableOpacity
+                    onPress={() => handleDelete(m.id)}
+                    style={{
+                      width: 32,
+                      height: 32,
+                      borderRadius: 16,
+                      backgroundColor: lightTheme.errorBg,
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Icon name="Trash2" size={14} color={lightTheme.danger.DEFAULT} />
+                  </TouchableOpacity>
+                </View>
+              </Card>
+            ))
+          )}
+        </View>
+
+        {/* Add Button */}
+        <View style={{ paddingHorizontal: space.lg }}>
+          <Button
+            title="Log Weight"
+            onPress={() => setModalVisible(true)}
+            variant="primary"
+            size="lg"
+            icon={<Icon name="Plus" size={20} color={lightTheme.primaryText} />}
+          />
+        </View>
+      </ScrollView>
+
+      {/* Add Modal */}
       <Modal visible={modalVisible} transparent animationType="slide">
-        <View style={{ flex: 1, justifyContent: "flex-end", backgroundColor: "rgba(0,0,0,0.5)" }}>
-          <View style={{ backgroundColor: "#1E293B", borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 24 }}>
-            <Text style={{ color: "#fff", fontSize: 20, fontWeight: "bold", marginBottom: 16 }}>Log Weight</Text>
-            <Text style={{ color: "#CBD5E1", marginBottom: 8, fontSize: 14 }}>Weight (kg)</Text>
-            <TextInput
-              style={{ backgroundColor: "#0F172A", borderRadius: 12, padding: 16, color: "#fff", marginBottom: 16, fontSize: 18 }}
-              value={weight}
-              onChangeText={setWeight}
-              placeholder="70.5"
-              placeholderTextColor="#475569"
-              keyboardType="decimal-pad"
-            />
-            <Text style={{ color: "#CBD5E1", marginBottom: 8, fontSize: 14 }}>Notes (optional)</Text>
-            <TextInput
-              style={{ backgroundColor: "#0F172A", borderRadius: 12, padding: 16, color: "#fff", marginBottom: 24, fontSize: 16 }}
-              value={notes}
-              onChangeText={setNotes}
-              placeholder="How are you feeling?"
-              placeholderTextColor="#475569"
-            />
-            <View style={{ flexDirection: "row", gap: 12 }}>
-              <TouchableOpacity onPress={() => setModalVisible(false)} style={{ flex: 1, backgroundColor: "#334155", borderRadius: 12, padding: 14, alignItems: "center" }}>
-                <Text style={{ color: "#94A3B8", fontSize: 16 }}>Cancel</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={handleLog} disabled={submitting} style={{ flex: 1, backgroundColor: "#6366F1", borderRadius: 12, padding: 14, alignItems: "center" }}>
-                {submitting ? <ActivityIndicator color="#fff" /> : <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>Save</Text>}
+        <View style={{ flex: 1, justifyContent: "flex-end", backgroundColor: lightTheme.bgOverlay }}>
+          <View
+            style={{
+              backgroundColor: lightTheme.surface,
+              borderTopLeftRadius: 24,
+              borderTopRightRadius: 24,
+              padding: space.lg,
+            }}
+          >
+            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: space.lg }}>
+              <Typography variant="heading2" color={lightTheme.textPrimary}>
+                Log Weight
+              </Typography>
+              <TouchableOpacity onPress={() => setModalVisible(false)}>
+                <Icon name="X" size={24} color={lightTheme.textMuted} />
               </TouchableOpacity>
             </View>
+
+            <View style={{ gap: space.md, marginBottom: space.lg }}>
+              <Input
+                label="Weight (kg)"
+                value={weight}
+                onChangeText={setWeight}
+                placeholder="70.5"
+                keyboardType="decimal-pad"
+                icon={<Icon name="Scale" size={20} color={lightTheme.textMuted} />}
+              />
+              <Input
+                label="Notes (optional)"
+                value={notes}
+                onChangeText={setNotes}
+                placeholder="How are you feeling?"
+                icon={<Icon name="MessageSquare" size={20} color={lightTheme.textMuted} />}
+              />
+            </View>
+
+            <Button
+              title="Save Entry"
+              onPress={handleLog}
+              loading={submitting}
+              disabled={submitting}
+              variant="primary"
+              size="lg"
+              icon={<Icon name="Save" size={20} color={lightTheme.primaryText} />}
+            />
           </View>
         </View>
       </Modal>
-    </ScrollView>
+    </SafeAreaView>
   );
 }

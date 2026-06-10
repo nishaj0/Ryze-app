@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Alert, ActivityIndicator, ScrollView } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AuthStackParamList } from "../../navigation/types";
 import { register } from "../../api/auth";
 import { useAuthStore } from "../../store/authStore";
+import { Screen, Button, Input, Typography, Card, Icon } from "../../components";
+import { lightTheme } from "../../theme/colors";
+import { space } from "../../theme/spacing";
 
 type Props = NativeStackScreenProps<AuthStackParamList, "Register">;
 
@@ -46,58 +49,92 @@ export default function RegisterScreen({ navigation }: Props) {
   };
 
   return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: "center", padding: 24, backgroundColor: "#0F172A" }}>
-      <Text style={{ fontSize: 28, fontWeight: "bold", color: "#fff", marginBottom: 32 }}>Create Account</Text>
-
-      <Text style={{ color: "#CBD5E1", marginBottom: 8, fontSize: 14 }}>Name (optional)</Text>
-      <TextInput
-        style={{ backgroundColor: "#1E293B", borderRadius: 12, padding: 16, color: "#fff", marginBottom: 16, fontSize: 16 }}
-        value={name}
-        onChangeText={setName}
-        placeholder="Your name"
-        placeholderTextColor="#475569"
-      />
-
-      <Text style={{ color: "#CBD5E1", marginBottom: 8, fontSize: 14 }}>Email</Text>
-      <TextInput
-        style={{ backgroundColor: "#1E293B", borderRadius: 12, padding: 16, color: "#fff", marginBottom: 16, fontSize: 16 }}
-        value={email}
-        onChangeText={setEmail}
-        placeholder="your@email.com"
-        placeholderTextColor="#475569"
-        keyboardType="email-address"
-        autoCapitalize="none"
-      />
-
-      <Text style={{ color: "#CBD5E1", marginBottom: 8, fontSize: 14 }}>Password</Text>
-      <TextInput
-        style={{ backgroundColor: "#1E293B", borderRadius: 12, padding: 16, color: "#fff", marginBottom: errorMsg ? 12 : 24, fontSize: 16 }}
-        value={password}
-        onChangeText={setPassword}
-        placeholder="Min 8 characters"
-        placeholderTextColor="#475569"
-        secureTextEntry
-      />
-
-      {errorMsg ? (
-        <View style={{ backgroundColor: "#7F1D1D", padding: 12, borderRadius: 8, marginBottom: 24 }}>
-          <Text style={{ color: "#FECACA", fontSize: 14 }}>{errorMsg}</Text>
+    <Screen scroll padding="lg">
+      <View style={{ flex: 1, justifyContent: "center" }}>
+        {/* Header */}
+        <View style={{ marginBottom: space.xl }}>
+          <Typography variant="heading2" color={lightTheme.textPrimary}>
+            Create Account
+          </Typography>
+          <Typography variant="body" color={lightTheme.textSecondary} style={{ marginTop: space.sm }}>
+            Join Ryze and start tracking your progress
+          </Typography>
         </View>
-      ) : null}
 
-      <TouchableOpacity
-        onPress={handleRegister}
-        disabled={loading}
-        style={{ backgroundColor: "#6366F1", borderRadius: 12, padding: 16, alignItems: "center", opacity: loading ? 0.7 : 1 }}
-      >
-        {loading ? <ActivityIndicator color="#fff" /> : <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>Create Account</Text>}
-      </TouchableOpacity>
+        {/* Error Card */}
+        {errorMsg && (
+          <Card
+            padding="md"
+            border
+            shadow="none"
+            style={{
+              backgroundColor: lightTheme.errorBg,
+              borderColor: lightTheme.error,
+              marginBottom: space.md,
+            }}
+          >
+            <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
+              <Icon name="AlertCircle" size={20} color={lightTheme.error} />
+              <Typography variant="bodySmall" color={lightTheme.errorText}>
+                {errorMsg}
+              </Typography>
+            </View>
+          </Card>
+        )}
 
-      <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginTop: 20, alignItems: "center" }}>
-        <Text style={{ color: "#94A3B8" }}>
-          Already have an account? <Text style={{ color: "#6366F1", fontWeight: "600" }}>Sign In</Text>
-        </Text>
-      </TouchableOpacity>
-    </ScrollView>
+        {/* Form */}
+        <View style={{ gap: space.md }}>
+          <Input
+            label="Name (optional)"
+            value={name}
+            onChangeText={setName}
+            placeholder="Your name"
+            icon={<Icon name="User" size={20} color={lightTheme.textMuted} />}
+          />
+
+          <Input
+            label="Email"
+            value={email}
+            onChangeText={setEmail}
+            placeholder="your@email.com"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            icon={<Icon name="Mail" size={20} color={lightTheme.textMuted} />}
+          />
+
+          <Input
+            label="Password"
+            value={password}
+            onChangeText={setPassword}
+            placeholder="Min 8 characters"
+            secureTextEntry
+            icon={<Icon name="Lock" size={20} color={lightTheme.textMuted} />}
+          />
+        </View>
+
+        <View style={{ marginTop: space.lg }}>
+          <Button
+            title="Create Account"
+            onPress={handleRegister}
+            loading={loading}
+            variant="primary"
+            size="lg"
+            icon={<Icon name="UserPlus" size={20} color={lightTheme.primaryText} />}
+          />
+        </View>
+
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={{ marginTop: space.lg, alignItems: "center" }}
+        >
+          <Typography variant="body" color={lightTheme.textSecondary}>
+            Already have an account?{" "}
+            <Typography variant="body" color={lightTheme.primary} weight="600">
+              Sign In
+            </Typography>
+          </Typography>
+        </TouchableOpacity>
+      </View>
+    </Screen>
   );
 }

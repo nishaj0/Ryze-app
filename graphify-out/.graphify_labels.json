@@ -4,6 +4,7 @@
   "2": "Onboarding Flow",
   "3": "Expo App Dependencies",
   "4": "API Server Dependencies",
+  "5": "Community 5",
   "6": "Backend Controllers Core",
   "7": "Expo App Configuration",
   "8": "API TypeScript Config",
@@ -11,6 +12,7 @@
   "10": "Root Package Scripts",
   "11": "Photos Feature",
   "12": "Workout Session Controller",
+  "13": "Community 13",
   "14": "Skills Lock Registry",
   "15": "Auth Controller",
   "16": "Notifications Feature",
@@ -20,10 +22,15 @@
   "20": "Personal Records Feature",
   "21": "Expo TypeScript Config",
   "22": "Exercise Controller",
+  "23": "Community 23",
   "24": "Metro Bundler Config",
   "25": "Device Detection",
   "26": "Babel Configuration",
   "27": "NativeWind Type Definitions",
   "28": "Tailwind Configuration",
-  "29": "Community 29"
+  "29": "Community 29",
+  "30": "Community 30",
+  "31": "Community 31",
+  "32": "Community 32",
+  "33": "Community 33"
 }

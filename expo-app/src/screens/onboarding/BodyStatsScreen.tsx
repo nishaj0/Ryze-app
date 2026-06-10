@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, ScrollView } from "react-native";
+import { View } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { OnboardingStackParamList } from "../../navigation/types";
 import { useOnboarding, OnboardingProvider } from "./OnboardingContext";
+import { Screen, Typography, Input, Button } from "../../components";
+import { lightTheme } from "../../theme/colors";
+import { space } from "../../theme/spacing";
 
 type Props = NativeStackScreenProps<OnboardingStackParamList, "BodyStats">;
 
@@ -12,43 +15,53 @@ function BodyStatsContent({ navigation }: Props) {
   const [height, setHeight] = useState(String(data.height));
 
   return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1, padding: 24, backgroundColor: "#0F172A" }}>
-      <Text style={{ fontSize: 24, fontWeight: "bold", color: "#fff", marginBottom: 8 }}>Body stats</Text>
-      <Text style={{ color: "#94A3B8", marginBottom: 32 }}>We'll track these over time.</Text>
+    <Screen scroll padding="lg">
+      <View style={{ flex: 1, justifyContent: "center" }}>
+        <Typography variant="heading2" color={lightTheme.textPrimary} style={{ marginBottom: space.sm }}>
+          Body stats
+        </Typography>
+        <Typography variant="body" color={lightTheme.textSecondary} style={{ marginBottom: space.xl }}>
+          We'll track these over time.
+        </Typography>
 
-      <Text style={{ color: "#CBD5E1", marginBottom: 8, fontSize: 14 }}>Current weight (kg)</Text>
-      <TextInput
-        style={{ backgroundColor: "#1E293B", borderRadius: 12, padding: 16, color: "#fff", marginBottom: 20, fontSize: 18 }}
-        value={weight}
-        onChangeText={setWeight}
-        placeholder="70"
-        placeholderTextColor="#475569"
-        keyboardType="decimal-pad"
-      />
+        <View style={{ gap: space.md }}>
+          <Input
+            label="Current weight (kg)"
+            value={weight}
+            onChangeText={setWeight}
+            placeholder="70"
+            keyboardType="decimal-pad"
+          />
 
-      <Text style={{ color: "#CBD5E1", marginBottom: 8, fontSize: 14 }}>Height (cm)</Text>
-      <TextInput
-        style={{ backgroundColor: "#1E293B", borderRadius: 12, padding: 16, color: "#fff", marginBottom: 32, fontSize: 18 }}
-        value={height}
-        onChangeText={setHeight}
-        placeholder="175"
-        placeholderTextColor="#475569"
-        keyboardType="decimal-pad"
-      />
+          <Input
+            label="Height (cm)"
+            value={height}
+            onChangeText={setHeight}
+            placeholder="175"
+            keyboardType="decimal-pad"
+          />
+        </View>
 
-      <TouchableOpacity
-        onPress={() => {
-          update({ currentWeight: parseFloat(weight) || 70, height: parseFloat(height) || 175 });
-          navigation.navigate("Sleep");
-        }}
-        style={{ backgroundColor: "#6366F1", borderRadius: 12, padding: 16, alignItems: "center" }}
-      >
-        <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>Continue</Text>
-      </TouchableOpacity>
-    </ScrollView>
+        <View style={{ marginTop: space.lg }}>
+          <Button
+            title="Continue"
+            onPress={() => {
+              update({ currentWeight: parseFloat(weight) || 70, height: parseFloat(height) || 175 });
+              navigation.navigate("Sleep");
+            }}
+            variant="primary"
+            size="lg"
+          />
+        </View>
+      </View>
+    </Screen>
   );
 }
 
 export default function BodyStatsScreen(props: Props) {
-  return <OnboardingProvider><BodyStatsContent {...props} /></OnboardingProvider>;
+  return (
+    <OnboardingProvider>
+      <BodyStatsContent {...props} />
+    </OnboardingProvider>
+  );
 }

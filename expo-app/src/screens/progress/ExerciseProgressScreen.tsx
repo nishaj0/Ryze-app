@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, ScrollView, ActivityIndicator } from "react-native";
+import { View, ScrollView, ActivityIndicator, Dimensions } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ProgressStackParamList } from "../../navigation/types";
 import { getExerciseProgress } from "../../api/progress";
 import { ExerciseProgress } from "../../types";
+import { Typography, Card, Icon } from "../../components";
+import { LineChart } from "../../components/charts";
+import { lightTheme } from "../../theme/colors";
+import { space } from "../../theme/spacing";
 
 type Props = NativeStackScreenProps<ProgressStackParamList, "ExerciseProgress">;
+
+const { width: screenW } = Dimensions.get("window");
 
 export default function ExerciseProgressScreen({ route }: Props) {
   const { exerciseId, exerciseName } = route.params;
@@ -20,71 +27,230 @@ export default function ExerciseProgressScreen({ route }: Props) {
     try {
       const res = await getExerciseProgress(exerciseId);
       setProgression(res.progression);
-    } catch (err) {}
-    finally { setLoading(false); }
+    } catch (err) {
+      console.error("[ExerciseProgress] load error:", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (loading) {
-    return <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#0F172A" }}><ActivityIndicator color="#6366F1" /></View>;
+    return (
+      <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator color={lightTheme.primary} size="large" />
+      </SafeAreaView>
+    );
   }
 
-  const maxWeight = Math.max(...progression.map((p) => p.maxWeight), 1);
-  const maxVolume = Math.max(...progression.map((p) => p.totalVolume), 1);
+  if (progression.length === 0) {
+    return (
+      <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg }} edges={["top"]}>
+        <View style={{ padding: space.lg }}>
+          <Typography variant="heading2" color={lightTheme.textPrimary} style={{ marginBottom: space.xl }}>
+            {exerciseName}
+          </Typography>
+          <Card padding="lg" shadow="sm" style={{ alignItems: "center" }}>
+            <View
+              style={{
+                width: 80,
+                height: 80,
+                borderRadius: 40,
+                backgroundColor: lightTheme.primaryLight,
+                alignItems: "center",
+                justifyContent: "center",
+                marginBottom: space.md,
+              }}
+            >
+              <Icon name="Dumbbell" size={36} color={lightTheme.primary} />
+            </View>
+            <Typography variant="heading3" color={lightTheme.textPrimary} align="center">
+              No data yet
+            </Typography>
+            <Typography variant="body" color={lightTheme.textSecondary} align="center" style={{ marginTop: space.sm }}>
+              Complete a workout with this exercise to see your progress.
+            </Typography>
+          </Card>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
+  // Prepare chart data — reverse to chronological order
+  const sorted = [...progression].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+  const weightData = sorted.map((p, i) => ({
+    label: `${i + 1}`,
+    value: p.maxWeight,
+  }));
+
+  const volumeData = sorted.map((p, i) => ({
+    label: `${i + 1}`,
+    value: p.totalVolume,
+  }));
+
+  // Stats
+  const maxWeight = Math.max(...sorted.map((p) => p.maxWeight));
+  const totalVolume = sorted.reduce((sum, p) => sum + p.totalVolume, 0);
+  const totalReps = sorted.reduce((sum, p) => sum + p.totalReps, 0);
+  const sessions = sorted.length;
+
+  // First vs last for trend
+  const firstWeight = sorted[0]?.maxWeight || 0;
+  const lastWeight = sorted[sorted.length - 1]?.maxWeight || 0;
+  const weightGain = firstWeight > 0 ? Math.round(((lastWeight - firstWeight) / firstWeight) * 100) : 0;
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: "#0F172A" }} contentContainerStyle={{ padding: 24 }}>
-      <Text style={{ fontSize: 24, fontWeight: "bold", color: "#fff", marginBottom: 24 }}>{exerciseName}</Text>
-
-      {progression.length === 0 ? (
-        <View style={{ backgroundColor: "#1E293B", borderRadius: 16, padding: 32, alignItems: "center" }}>
-          <Text style={{ color: "#94A3B8", fontSize: 16 }}>No data yet. Complete a workout to see progress!</Text>
+    <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg }} edges={["top"]}>
+      <ScrollView
+        style={{ flex: 1 }}
+        contentContainerStyle={{ paddingBottom: space.xl }}
+        showsVerticalScrollIndicator={false}
+      >
+        {/* Header */}
+        <View style={{ paddingHorizontal: space.lg, paddingTop: space.md, paddingBottom: space.lg }}>
+          <Typography variant="caption" color={lightTheme.textMuted} weight="600">
+            EXERCISE
+          </Typography>
+          <Typography variant="heading1" color={lightTheme.textPrimary} style={{ marginTop: space.xs }}>
+            {exerciseName}
+          </Typography>
         </View>
-      ) : (
-        <>
-          <View style={{ backgroundColor: "#1E293B", borderRadius: 16, padding: 16, marginBottom: 24 }}>
-            <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600", marginBottom: 16 }}>Weight Progression</Text>
-            {progression.map((p, idx) => (
-              <View key={idx} style={{ marginBottom: 12 }}>
-                <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 4 }}>
-                  <Text style={{ color: "#CBD5E1", fontSize: 12 }}>{new Date(p.date).toLocaleDateString()}</Text>
-                  <Text style={{ color: "#6366F1", fontSize: 12, fontWeight: "600" }}>{p.maxWeight}kg</Text>
-                </View>
-                <View style={{ backgroundColor: "#0F172A", borderRadius: 4, height: 6 }}>
-                  <View style={{ backgroundColor: "#6366F1", borderRadius: 4, height: 6, width: `${(p.maxWeight / maxWeight) * 100}%` }} />
-                </View>
+
+        {/* Quick Stats */}
+        <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
+          <View style={{ flexDirection: "row", gap: space.md }}>
+            <View style={{ flex: 1, backgroundColor: lightTheme.surface, borderRadius: 16, padding: space.md, borderWidth: 1, borderColor: lightTheme.border }}>
+              <View style={{ flexDirection: "row", alignItems: "center", gap: 6, marginBottom: space.xs }}>
+                <Icon name="Weight" size={14} color={lightTheme.primary} />
+                <Typography variant="caption" color={lightTheme.textMuted}>MAX</Typography>
               </View>
-            ))}
+              <Typography variant="heading1" color={lightTheme.textPrimary}>
+                {maxWeight}<Typography variant="body" color={lightTheme.textMuted}>kg</Typography>
+              </Typography>
+            </View>
+            <View style={{ flex: 1, backgroundColor: lightTheme.surface, borderRadius: 16, padding: space.md, borderWidth: 1, borderColor: lightTheme.border }}>
+              <View style={{ flexDirection: "row", alignItems: "center", gap: 6, marginBottom: space.xs }}>
+                <Icon name="TrendingUp" size={14} color={lightTheme.success} />
+                <Typography variant="caption" color={lightTheme.textMuted}>GAIN</Typography>
+              </View>
+              <Typography variant="heading1" color={weightGain >= 0 ? lightTheme.success.DEFAULT : lightTheme.danger.DEFAULT}>
+                {weightGain >= 0 ? "+" : ""}{weightGain}<Typography variant="body" color={lightTheme.textMuted}>%</Typography>
+              </Typography>
+            </View>
+            <View style={{ flex: 1, backgroundColor: lightTheme.surface, borderRadius: 16, padding: space.md, borderWidth: 1, borderColor: lightTheme.border }}>
+              <View style={{ flexDirection: "row", alignItems: "center", gap: 6, marginBottom: space.xs }}>
+                <Icon name="Layers" size={14} color={lightTheme.warning} />
+                <Typography variant="caption" color={lightTheme.textMuted}>VOLUME</Typography>
+              </View>
+              <Typography variant="heading1" color={lightTheme.textPrimary}>
+                {(totalVolume / 1000).toFixed(1)}<Typography variant="body" color={lightTheme.textMuted}>k</Typography>
+              </Typography>
+            </View>
+          </View>
+        </View>
+
+        {/* Weight Progression Chart */}
+        <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
+          <Card shadow="sm" style={{ padding: space.lg }}>
+            <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.md }}>
+              <Icon name="Weight" size={16} color={lightTheme.primary} />
+              <Typography variant="caption" color={lightTheme.textMuted} weight="600">
+                MAX WEIGHT PROGRESSION
+              </Typography>
+            </View>
+            <LineChart
+              data={weightData}
+              width={screenW - 80}
+              height={200}
+              color={lightTheme.primary}
+              yAxisFormatter={(v) => `${v}kg`}
+            />
+          </Card>
+        </View>
+
+        {/* Volume Progression Chart */}
+        <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
+          <Card shadow="sm" style={{ padding: space.lg }}>
+            <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.md }}>
+              <Icon name="BarChart3" size={16} color={lightTheme.success} />
+              <Typography variant="caption" color={lightTheme.textMuted} weight="600">
+                VOLUME PROGRESSION
+              </Typography>
+            </View>
+            <LineChart
+              data={volumeData}
+              width={screenW - 80}
+              height={200}
+              color={lightTheme.success.DEFAULT}
+              yAxisFormatter={(v) => v >= 1000 ? `${(v / 1000).toFixed(1)}k` : `${v}`}
+            />
+          </Card>
+        </View>
+
+        {/* History */}
+        <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.md }}>
+            <Icon name="History" size={18} color={lightTheme.textPrimary} />
+            <Typography variant="heading3" color={lightTheme.textPrimary}>
+              History
+            </Typography>
+            <Typography variant="caption" color={lightTheme.textMuted} style={{ marginLeft: "auto" }}>
+              {sessions} session{sessions !== 1 ? "s" : ""}
+            </Typography>
           </View>
 
-          <View style={{ backgroundColor: "#1E293B", borderRadius: 16, padding: 16, marginBottom: 24 }}>
-            <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600", marginBottom: 16 }}>Volume Progression</Text>
-            {progression.map((p, idx) => (
-              <View key={idx} style={{ marginBottom: 12 }}>
-                <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 4 }}>
-                  <Text style={{ color: "#CBD5E1", fontSize: 12 }}>{new Date(p.date).toLocaleDateString()}</Text>
-                  <Text style={{ color: "#10B981", fontSize: 12, fontWeight: "600" }}>{p.totalVolume.toLocaleString()}kg</Text>
+          {sorted.slice().reverse().map((p, idx) => {
+            const isPR = p.maxWeight === maxWeight;
+            return (
+              <Card
+                key={idx}
+                shadow="sm"
+                style={{
+                  marginBottom: space.sm,
+                  padding: space.md,
+                  borderColor: isPR ? lightTheme.warning : lightTheme.border,
+                  borderWidth: isPR ? 1.5 : 1,
+                }}
+              >
+                <View style={{ flexDirection: "row", alignItems: "center", gap: space.md }}>
+                  <View
+                    style={{
+                      width: 36,
+                      height: 36,
+                      borderRadius: 18,
+                      backgroundColor: isPR ? "#FEF3C7" : lightTheme.surfaceTertiary,
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Icon
+                      name={isPR ? "Trophy" : "Calendar"}
+                      size={16}
+                      color={isPR ? lightTheme.warning : lightTheme.textMuted}
+                    />
+                  </View>
+                  <View style={{ flex: 1 }}>
+                    <Typography variant="body" color={lightTheme.textPrimary} weight="600">
+                      {new Date(p.date).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })}
+                    </Typography>
+                    <Typography variant="caption" color={lightTheme.textMuted}>
+                      {p.sets} sets · {p.totalReps} reps
+                    </Typography>
+                  </View>
+                  <View style={{ alignItems: "flex-end" }}>
+                    <Typography variant="body" color={isPR ? lightTheme.warning : lightTheme.textPrimary} weight="700">
+                      {p.maxWeight}kg
+                    </Typography>
+                    <Typography variant="caption" color={lightTheme.textMuted}>
+                      {p.totalVolume.toLocaleString()}kg vol
+                    </Typography>
+                  </View>
                 </View>
-                <View style={{ backgroundColor: "#0F172A", borderRadius: 4, height: 6 }}>
-                  <View style={{ backgroundColor: "#10B981", borderRadius: 4, height: 6, width: `${(p.totalVolume / maxVolume) * 100}%` }} />
-                </View>
-              </View>
-            ))}
-          </View>
-
-          <View style={{ backgroundColor: "#1E293B", borderRadius: 16, padding: 16 }}>
-            <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600", marginBottom: 12 }}>History</Text>
-            {progression.slice().reverse().map((p, idx) => (
-              <View key={idx} style={{ flexDirection: "row", justifyContent: "space-between", paddingVertical: 8, borderBottomWidth: 1, borderBottomColor: "#334155" }}>
-                <Text style={{ color: "#CBD5E1", fontSize: 14 }}>{new Date(p.date).toLocaleDateString()}</Text>
-                <View style={{ flexDirection: "row", gap: 16 }}>
-                  <Text style={{ color: "#6366F1", fontSize: 14 }}>{p.maxWeight}kg</Text>
-                  <Text style={{ color: "#10B981", fontSize: 14 }}>{p.totalReps} reps</Text>
-                </View>
-              </View>
-            ))}
-          </View>
-        </>
-      )}
-    </ScrollView>
+              </Card>
+            );
+          })}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }

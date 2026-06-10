@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Alert, ActivityIndicator, ScrollView } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AuthStackParamList } from "../../navigation/types";
 import { login } from "../../api/auth";
 import { useAuthStore } from "../../store/authStore";
+import { Screen, Button, Input, Typography, Card, Icon } from "../../components";
+import { lightTheme } from "../../theme/colors";
+import { space } from "../../theme/spacing";
 
 type Props = NativeStackScreenProps<AuthStackParamList, "Login">;
 
@@ -41,50 +44,97 @@ export default function LoginScreen({ navigation }: Props) {
   };
 
   return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: "center", padding: 24, backgroundColor: "#0F172A" }}>
-      <Text style={{ fontSize: 36, fontWeight: "bold", color: "#fff", marginBottom: 8 }}>Ryze</Text>
-      <Text style={{ fontSize: 16, color: "#94A3B8", marginBottom: 40 }}>Track your gains. Rise above.</Text>
-
-      <Text style={{ color: "#CBD5E1", marginBottom: 8, fontSize: 14 }}>Email</Text>
-      <TextInput
-        style={{ backgroundColor: "#1E293B", borderRadius: 12, padding: 16, color: "#fff", marginBottom: 16, fontSize: 16 }}
-        value={email}
-        onChangeText={setEmail}
-        placeholder="your@email.com"
-        placeholderTextColor="#475569"
-        keyboardType="email-address"
-        autoCapitalize="none"
-      />
-
-      <Text style={{ color: "#CBD5E1", marginBottom: 8, fontSize: 14 }}>Password</Text>
-      <TextInput
-        style={{ backgroundColor: "#1E293B", borderRadius: 12, padding: 16, color: "#fff", marginBottom: errorMsg ? 12 : 24, fontSize: 16 }}
-        value={password}
-        onChangeText={setPassword}
-        placeholder="••••••••"
-        placeholderTextColor="#475569"
-        secureTextEntry
-      />
-
-      {errorMsg ? (
-        <View style={{ backgroundColor: "#7F1D1D", padding: 12, borderRadius: 8, marginBottom: 24 }}>
-          <Text style={{ color: "#FECACA", fontSize: 14 }}>{errorMsg}</Text>
+    <Screen scroll padding="lg">
+      <View style={{ flex: 1, justifyContent: "center" }}>
+        {/* Brand Header */}
+        <View style={{ alignItems: "center", marginBottom: space.xl }}>
+          <View
+            style={{
+              width: 64,
+              height: 64,
+              borderRadius: 16,
+              backgroundColor: lightTheme.primary,
+              alignItems: "center",
+              justifyContent: "center",
+              marginBottom: space.md,
+            }}
+          >
+            <Icon name="Dumbbell" size={32} color={lightTheme.primaryText} />
+          </View>
+          <Typography variant="display" color={lightTheme.textPrimary} align="center">
+            Ryze
+          </Typography>
+          <Typography variant="body" color={lightTheme.textSecondary} align="center" style={{ marginTop: space.sm }}>
+            Track your gains. Rise above.
+          </Typography>
         </View>
-      ) : null}
 
-      <TouchableOpacity
-        onPress={handleLogin}
-        disabled={loading}
-        style={{ backgroundColor: "#6366F1", borderRadius: 12, padding: 16, alignItems: "center", opacity: loading ? 0.7 : 1 }}
-      >
-        {loading ? <ActivityIndicator color="#fff" /> : <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>Sign In</Text>}
-      </TouchableOpacity>
+        {/* Error Card */}
+        {errorMsg && (
+          <Card
+            padding="md"
+            border
+            shadow="none"
+            style={{
+              backgroundColor: lightTheme.errorBg,
+              borderColor: lightTheme.error,
+              marginBottom: space.md,
+            }}
+          >
+            <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
+              <Icon name="AlertCircle" size={20} color={lightTheme.error} />
+              <Typography variant="bodySmall" color={lightTheme.errorText}>
+                {errorMsg}
+              </Typography>
+            </View>
+          </Card>
+        )}
 
-      <TouchableOpacity onPress={() => navigation.navigate("Register")} style={{ marginTop: 20, alignItems: "center" }}>
-        <Text style={{ color: "#94A3B8" }}>
-          Don't have an account? <Text style={{ color: "#6366F1", fontWeight: "600" }}>Sign Up</Text>
-        </Text>
-      </TouchableOpacity>
-    </ScrollView>
+        {/* Form */}
+        <View style={{ gap: space.md }}>
+          <Input
+            label="Email"
+            value={email}
+            onChangeText={setEmail}
+            placeholder="your@email.com"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            icon={<Icon name="Mail" size={20} color={lightTheme.textMuted} />}
+          />
+
+          <Input
+            label="Password"
+            value={password}
+            onChangeText={setPassword}
+            placeholder="Min 8 characters"
+            secureTextEntry
+            icon={<Icon name="Lock" size={20} color={lightTheme.textMuted} />}
+          />
+        </View>
+
+        <View style={{ marginTop: space.lg }}>
+          <Button
+            title="Sign In"
+            onPress={handleLogin}
+            loading={loading}
+            variant="primary"
+            size="lg"
+            icon={<Icon name="LogIn" size={20} color={lightTheme.primaryText} />}
+          />
+        </View>
+
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Register")}
+          style={{ marginTop: space.lg, alignItems: "center" }}
+        >
+          <Typography variant="body" color={lightTheme.textSecondary}>
+            Don't have an account?{" "}
+            <Typography variant="body" color={lightTheme.primary} weight="600">
+              Sign Up
+            </Typography>
+          </Typography>
+        </TouchableOpacity>
+      </View>
+    </Screen>
   );
 }

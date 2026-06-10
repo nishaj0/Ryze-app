@@ -1,10 +1,14 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, Image, Alert, ActivityIndicator, ScrollView, TextInput } from "react-native";
+import { View, TouchableOpacity, Image, Alert, ScrollView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { PhotosStackParamList } from "../../navigation/types";
 import * as ImagePicker from "expo-image-picker";
 import * as ImageManipulator from "expo-image-manipulator";
 import { uploadPhoto } from "../../api/photos";
+import { Typography, Card, Button, Icon, Input } from "../../components";
+import { lightTheme } from "../../theme/colors";
+import { space, radius } from "../../theme/spacing";
 
 type Props = NativeStackScreenProps<PhotosStackParamList, "PhotoCapture">;
 
@@ -61,83 +65,159 @@ export default function PhotoCaptureScreen({ navigation }: Props) {
   };
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: "#0F172A" }} contentContainerStyle={{ padding: 24 }}>
-      <Text style={{ fontSize: 24, fontWeight: "bold", color: "#fff", marginBottom: 24 }}>Take Progress Photo</Text>
-
-      {!imageUri ? (
-        <View style={{ gap: 12, marginBottom: 24 }}>
-          <TouchableOpacity
-            onPress={() => pickImage(true)}
-            style={{ backgroundColor: "#1E293B", borderRadius: 16, padding: 32, alignItems: "center" }}
-          >
-            <Text style={{ fontSize: 48, marginBottom: 12 }}>📷</Text>
-            <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>Take Photo</Text>
-            <Text style={{ color: "#94A3B8", fontSize: 14, marginTop: 4 }}>Use your camera</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => pickImage(false)}
-            style={{ backgroundColor: "#1E293B", borderRadius: 16, padding: 32, alignItems: "center" }}
-          >
-            <Text style={{ fontSize: 48, marginBottom: 12 }}>🖼️</Text>
-            <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>Choose from Gallery</Text>
-            <Text style={{ color: "#94A3B8", fontSize: 14, marginTop: 4 }}>Select existing photo</Text>
-          </TouchableOpacity>
+    <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg }} edges={["top"]}>
+      <ScrollView
+        style={{ flex: 1 }}
+        contentContainerStyle={{ padding: space.lg, paddingBottom: space.xl }}
+        showsVerticalScrollIndicator={false}
+      >
+        {/* Header */}
+        <View style={{ marginBottom: space.lg }}>
+          <Typography variant="caption" color={lightTheme.textMuted} weight="600">
+            NEW PHOTO
+          </Typography>
+          <Typography variant="heading1" color={lightTheme.textPrimary} style={{ marginTop: space.xs }}>
+            Take Progress Photo
+          </Typography>
+          <Typography variant="body" color={lightTheme.textSecondary} style={{ marginTop: space.sm }}>
+            Track your visual transformation
+          </Typography>
         </View>
-      ) : (
-        <View style={{ marginBottom: 24 }}>
-          <Image source={{ uri: imageUri }} style={{ width: "100%", height: 400, borderRadius: 16 }} resizeMode="cover" />
-          <TouchableOpacity
-            onPress={() => setImageUri(null)}
-            style={{ marginTop: 12, backgroundColor: "#334155", borderRadius: 8, padding: 12, alignItems: "center" }}
-          >
-            <Text style={{ color: "#94A3B8" }}>Choose Different Photo</Text>
-          </TouchableOpacity>
-        </View>
-      )}
 
-      {imageUri && (
-        <>
-          <Text style={{ color: "#CBD5E1", marginBottom: 12, fontSize: 14 }}>Photo Type</Text>
-          <View style={{ flexDirection: "row", gap: 8, marginBottom: 24 }}>
-            {(["FRONT", "BACK", "SIDE"] as const).map((t) => (
-              <TouchableOpacity
-                key={t}
-                onPress={() => setType(t)}
-                style={{
-                  flex: 1,
-                  backgroundColor: type === t ? "#4F46E5" : "#1E293B",
-                  borderRadius: 12,
-                  padding: 14,
-                  alignItems: "center",
-                  borderWidth: type === t ? 2 : 0,
-                  borderColor: "#6366F1",
-                }}
-              >
-                <Text style={{ color: "#fff", fontSize: 14, fontWeight: "600" }}>{t}</Text>
-              </TouchableOpacity>
-            ))}
+        {!imageUri ? (
+          <View style={{ gap: space.md, marginBottom: space.lg }}>
+            <TouchableOpacity onPress={() => pickImage(true)} activeOpacity={0.8}>
+              <Card shadow="sm" style={{ alignItems: "center", padding: space.xl }}>
+                <View
+                  style={{
+                    width: 80,
+                    height: 80,
+                    borderRadius: 40,
+                    backgroundColor: lightTheme.primaryLight,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginBottom: space.md,
+                  }}
+                >
+                  <Icon name="Camera" size={36} color={lightTheme.primary} />
+                </View>
+                <Typography variant="heading3" color={lightTheme.textPrimary}>
+                  Take Photo
+                </Typography>
+                <Typography variant="bodySmall" color={lightTheme.textSecondary} style={{ marginTop: space.xs }}>
+                  Use your camera
+                </Typography>
+              </Card>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => pickImage(false)} activeOpacity={0.8}>
+              <Card shadow="sm" style={{ alignItems: "center", padding: space.xl }}>
+                <View
+                  style={{
+                    width: 80,
+                    height: 80,
+                    borderRadius: 40,
+                    backgroundColor: lightTheme.primaryLight,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginBottom: space.md,
+                  }}
+                >
+                  <Icon name="Image" size={36} color={lightTheme.primary} />
+                </View>
+                <Typography variant="heading3" color={lightTheme.textPrimary}>
+                  Choose from Gallery
+                </Typography>
+                <Typography variant="bodySmall" color={lightTheme.textSecondary} style={{ marginTop: space.xs }}>
+                  Select existing photo
+                </Typography>
+              </Card>
+            </TouchableOpacity>
           </View>
+        ) : (
+          <View style={{ marginBottom: space.lg }}>
+            <Card shadow="sm" style={{ padding: 0, overflow: "hidden" }}>
+              <Image source={{ uri: imageUri }} style={{ width: "100%", height: 400 }} resizeMode="cover" />
+            </Card>
+            <TouchableOpacity
+              onPress={() => setImageUri(null)}
+              style={{
+                marginTop: space.md,
+                padding: space.md,
+                backgroundColor: lightTheme.surfaceSecondary,
+                borderRadius: radius.md,
+                alignItems: "center",
+                flexDirection: "row",
+                justifyContent: "center",
+                gap: space.sm,
+                borderWidth: 1,
+                borderColor: lightTheme.border,
+              }}
+            >
+              <Icon name="RefreshCw" size={16} color={lightTheme.textSecondary} />
+              <Typography variant="body" color={lightTheme.textSecondary}>
+                Choose Different Photo
+              </Typography>
+            </TouchableOpacity>
+          </View>
+        )}
 
-          <Text style={{ color: "#CBD5E1", marginBottom: 8, fontSize: 14 }}>Notes (optional)</Text>
-          <TextInput
-            style={{ backgroundColor: "#1E293B", borderRadius: 12, padding: 16, color: "#fff", marginBottom: 24, fontSize: 16, minHeight: 80, textAlignVertical: "top" }}
-            value={notes}
-            onChangeText={setNotes}
-            placeholder="How are you feeling?"
-            placeholderTextColor="#475569"
-            multiline
-          />
+        {imageUri && (
+          <>
+            <View style={{ marginBottom: space.lg }}>
+              <Typography variant="label" color={lightTheme.textSecondary} style={{ marginBottom: space.sm }}>
+                PHOTO TYPE
+              </Typography>
+              <View style={{ flexDirection: "row", gap: space.sm }}>
+                {(["FRONT", "BACK", "SIDE"] as const).map((t) => {
+                  const isSelected = type === t;
+                  return (
+                    <TouchableOpacity
+                      key={t}
+                      onPress={() => setType(t)}
+                      style={{
+                        flex: 1,
+                        backgroundColor: isSelected ? lightTheme.primary : lightTheme.surface,
+                        borderRadius: radius.md,
+                        padding: space.md,
+                        alignItems: "center",
+                        borderWidth: isSelected ? 2 : 1,
+                        borderColor: isSelected ? lightTheme.primary : lightTheme.border,
+                      }}
+                    >
+                      <Typography variant="body" color={isSelected ? lightTheme.primaryText : lightTheme.textPrimary} weight="600">
+                        {t}
+                      </Typography>
+                    </TouchableOpacity>
+                  );
+                })}
+              </View>
+            </View>
 
-          <TouchableOpacity
-            onPress={handleUpload}
-            disabled={uploading}
-            style={{ backgroundColor: "#6366F1", borderRadius: 12, padding: 16, alignItems: "center" }}
-          >
-            {uploading ? <ActivityIndicator color="#fff" /> : <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>Upload Photo</Text>}
-          </TouchableOpacity>
-        </>
-      )}
-    </ScrollView>
+            <View style={{ marginBottom: space.lg }}>
+              <Input
+                label="Notes (optional)"
+                value={notes}
+                onChangeText={setNotes}
+                placeholder="How are you feeling?"
+                multiline
+                numberOfLines={4}
+                style={{ minHeight: 100, textAlignVertical: "top" }}
+              />
+            </View>
+
+            <Button
+              title="Upload Photo"
+              onPress={handleUpload}
+              loading={uploading}
+              disabled={uploading}
+              variant="primary"
+              size="lg"
+              icon={<Icon name="Upload" size={20} color={lightTheme.primaryText} />}
+            />
+          </>
+        )}
+      </ScrollView>
+    </SafeAreaView>
   );
 }

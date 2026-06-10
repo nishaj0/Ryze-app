@@ -7,6 +7,7 @@ import AuthStack from "./AuthStack";
 import OnboardingStack from "./OnboardingStack";
 import MainTabs from "./MainTabs";
 import { View, ActivityIndicator } from "react-native";
+import { lightTheme } from "../theme/colors";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -19,8 +20,8 @@ export default function RootNavigator() {
 
   if (isLoading) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#0F172A" }}>
-        <ActivityIndicator size="large" color="#6366F1" />
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: lightTheme.bg }}>
+        <ActivityIndicator size="large" color={lightTheme.primary} />
       </View>
     );
   }

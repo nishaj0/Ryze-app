@@ -20,3 +20,11 @@ export const getHeatmap = async () => {
   const { data } = await client.get("/progress/heatmap");
   return data as { heatmap: HeatmapEntry[] };
 };
+
+export const getVolumeHistory = async (weeks: number = 8) => {
+  const { data } = await client.get(`/progress/volume-history?weeks=${weeks}`);
+  return data as {
+    weekly: { week: string; volume: number; workouts: number }[];
+    daily: { day: string; count: number }[];
+  };
+};

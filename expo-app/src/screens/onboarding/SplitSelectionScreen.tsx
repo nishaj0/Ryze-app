@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator, Alert } from "react-native";
+import { View, TouchableOpacity, ActivityIndicator, Alert } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { OnboardingStackParamList } from "../../navigation/types";
 import { useOnboarding, OnboardingProvider } from "./OnboardingContext";
 import { getRecommendedSplits, completeOnboarding } from "../../api/onboarding";
 import { useAuthStore } from "../../store/authStore";
 import { Split } from "../../types";
+import { Screen, Typography, Card, Button, Icon } from "../../components";
+import { lightTheme } from "../../theme/colors";
+import { space } from "../../theme/spacing";
 
 type Props = NativeStackScreenProps<OnboardingStackParamList, "SplitSelection">;
 
@@ -52,57 +55,103 @@ function SplitSelectionContent({ navigation }: Props) {
 
   if (loading) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#0F172A" }}>
-        <ActivityIndicator size="large" color="#6366F1" />
-      </View>
+      <Screen scroll={false} padding="none">
+        <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+          <ActivityIndicator size="large" color={lightTheme.primary} />
+        </View>
+      </Screen>
     );
   }
 
   return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1, padding: 24, backgroundColor: "#0F172A" }}>
-      <Text style={{ fontSize: 24, fontWeight: "bold", color: "#fff", marginBottom: 8 }}>Choose your split</Text>
-      <Text style={{ color: "#94A3B8", marginBottom: 32 }}>Based on your answers, we recommend the highlighted split.</Text>
+    <Screen scroll padding="lg">
+      <View style={{ flex: 1, justifyContent: "center" }}>
+        <Typography variant="heading2" color={lightTheme.textPrimary} style={{ marginBottom: space.sm }}>
+          Choose your split
+        </Typography>
+        <Typography variant="body" color={lightTheme.textSecondary} style={{ marginBottom: space.xl }}>
+          Based on your answers, we recommend the highlighted split.
+        </Typography>
 
-      {splits.map((split, idx) => {
-        const isRecommended = split.type === recommendedType;
-        const isSelected = selected === split.id;
+        {splits.map((split) => {
+          const isRecommended = split.type === recommendedType;
+          const isSelected = selected === split.id;
 
-        return (
-          <TouchableOpacity
-            key={split.id}
-            onPress={() => setSelected(split.id)}
-            style={{
-              backgroundColor: isSelected ? "#4F46E5" : "#1E293B",
-              borderRadius: 16,
-              padding: 20,
-              marginBottom: 12,
-              borderWidth: isSelected ? 2 : isRecommended ? 1 : 0,
-              borderColor: isSelected ? "#6366F1" : isRecommended ? "#6366F1" : "transparent",
-            }}
-          >
-            {isRecommended && (
-              <View style={{ backgroundColor: "#10B981", borderRadius: 8, paddingHorizontal: 8, paddingVertical: 2, alignSelf: "flex-start", marginBottom: 8 }}>
-                <Text style={{ color: "#fff", fontSize: 12, fontWeight: "600" }}>RECOMMENDED</Text>
-              </View>
-            )}
-            <Text style={{ color: "#fff", fontSize: 18, fontWeight: "600" }}>{split.name}</Text>
-            <Text style={{ color: "#CBD5E1", fontSize: 14, marginTop: 4 }}>{split.description}</Text>
-            <Text style={{ color: "#94A3B8", fontSize: 12, marginTop: 8 }}>{split.daysPerWeek} days/week</Text>
-          </TouchableOpacity>
-        );
-      })}
+          return (
+            <TouchableOpacity
+              key={split.id}
+              onPress={() => setSelected(split.id)}
+              style={{ marginBottom: space.md }}
+              activeOpacity={0.8}
+            >
+              <Card
+                padding="lg"
+                border={true}
+                shadow={isSelected ? "sm" : "none"}
+                style={{
+                  backgroundColor: isSelected ? lightTheme.primaryLight : lightTheme.surface,
+                  borderColor: isSelected ? lightTheme.primary : isRecommended ? lightTheme.primary : lightTheme.border,
+                  borderWidth: isSelected ? 2 : isRecommended ? 1.5 : 1,
+                }}
+              >
+                {isRecommended && (
+                  <View
+                    style={{
+                      backgroundColor: lightTheme.success.DEFAULT,
+                      borderRadius: 8,
+                      paddingHorizontal: space.sm,
+                      paddingVertical: space.xs,
+                      alignSelf: "flex-start",
+                      marginBottom: space.sm,
+                    }}
+                  >
+                    <Typography variant="caption" color={lightTheme.primaryText} weight="600">
+                      RECOMMENDED
+                    </Typography>
+                  </View>
+                )}
+                <View style={{ flexDirection: "row", alignItems: "center", gap: space.md }}>
+                  <View style={{ flex: 1 }}>
+                    <Typography variant="heading3" color={isSelected ? lightTheme.primary : lightTheme.textPrimary}>
+                      {split.name}
+                    </Typography>
+                    <Typography variant="bodySmall" color={lightTheme.textSecondary} style={{ marginTop: space.xs }}>
+                      {split.description}
+                    </Typography>
+                    <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginTop: space.sm }}>
+                      <Icon name="Calendar" size={14} color={lightTheme.textMuted} />
+                      <Typography variant="caption" color={lightTheme.textMuted}>
+                        {split.daysPerWeek} days/week
+                      </Typography>
+                    </View>
+                  </View>
+                  {isSelected && <Icon name="CheckCircle2" size={24} color={lightTheme.primary} />}
+                </View>
+              </Card>
+            </TouchableOpacity>
+          );
+        })}
 
-      <TouchableOpacity
-        onPress={handleComplete}
-        disabled={submitting || !selected}
-        style={{ backgroundColor: "#6366F1", borderRadius: 12, padding: 16, alignItems: "center", marginTop: 16 }}
-      >
-        {submitting ? <ActivityIndicator color="#fff" /> : <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>Start Training</Text>}
-      </TouchableOpacity>
-    </ScrollView>
+        <View style={{ marginTop: space.lg }}>
+          <Button
+            title="Start Training"
+            onPress={handleComplete}
+            loading={submitting}
+            disabled={!selected}
+            variant="primary"
+            size="lg"
+            icon={<Icon name="Rocket" size={20} color={lightTheme.primaryText} />}
+          />
+        </View>
+      </View>
+    </Screen>
   );
 }
 
 export default function SplitSelectionScreen(props: Props) {
-  return <OnboardingProvider><SplitSelectionContent {...props} /></OnboardingProvider>;
+  return (
+    <OnboardingProvider>
+      <SplitSelectionContent {...props} />
+    </OnboardingProvider>
+  );
 }
