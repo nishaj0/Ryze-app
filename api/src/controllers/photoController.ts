@@ -51,7 +51,7 @@ export const getPhotos = async (req: AuthRequest, res: Response) => {
 export const deletePhoto = async (req: AuthRequest, res: Response) => {
   const userId = req.userId!;
   const photo = await prisma.progressPhoto.findUnique({
-    where: { id: req.params.id },
+    where: { id: req.params.id as string },
   });
 
   if (!photo || photo.userId !== userId) {

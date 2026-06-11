@@ -84,9 +84,5 @@ function GoalContent({ navigation }: Props) {
 }
 
 export default function GoalScreen(props: Props) {
-  return (
-    <OnboardingProvider>
-      <GoalContent {...props} />
-    </OnboardingProvider>
-  );
+  return <GoalContent {...props} />;
 }

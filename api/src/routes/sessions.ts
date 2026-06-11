@@ -11,6 +11,7 @@ const wrap = (fn: (req: any, res: Response, next: NextFunction) => Promise<any>)
 };
 
 router.post("/", authMiddleware, wrap(sessionController.createSession));
+router.post("/sync", authMiddleware, wrap(sessionController.syncSession));
 router.get("/", authMiddleware, wrap(sessionController.listSessions));
 router.get("/:id", authMiddleware, wrap(sessionController.getSession));
 router.patch("/:id/complete", authMiddleware, wrap(sessionController.completeSession));
@@ -30,6 +31,11 @@ router.delete(
   "/exercises/:exerciseLogId/sets/:setId",
   authMiddleware,
   wrap(sessionController.deleteSet)
+);
+router.patch(
+  "/exercise-logs/:exerciseLogId/notes",
+  authMiddleware,
+  wrap(sessionController.updateExerciseNotes)
 );
 
 export default router;

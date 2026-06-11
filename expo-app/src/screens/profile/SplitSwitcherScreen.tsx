@@ -71,16 +71,35 @@ export default function SplitSwitcherScreen({ navigation }: Props) {
         showsVerticalScrollIndicator={false}
       >
         {/* Header */}
-        <View style={{ marginBottom: space.xl }}>
-          <Typography variant="caption" color={lightTheme.textMuted} weight="600">
-            AVAILABLE SPLITS
-          </Typography>
-          <Typography variant="heading1" color={lightTheme.textPrimary} style={{ marginTop: space.xs }}>
-            Switch Split
-          </Typography>
-          <Typography variant="body" color={lightTheme.textSecondary} style={{ marginTop: space.sm }}>
-            Choose a new training program
-          </Typography>
+        <View style={{ marginBottom: space.xl, flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+          <View style={{ flex: 1 }}>
+            <Typography variant="caption" color={lightTheme.textMuted} weight="600">
+              AVAILABLE SPLITS
+            </Typography>
+            <Typography variant="heading1" color={lightTheme.textPrimary} style={{ marginTop: space.xs }}>
+              Switch Split
+            </Typography>
+            <Typography variant="body" color={lightTheme.textSecondary} style={{ marginTop: space.xs }}>
+              Choose or create a program
+            </Typography>
+          </View>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("CustomSplit")}
+            style={{
+              backgroundColor: lightTheme.primary,
+              paddingHorizontal: space.md,
+              paddingVertical: space.sm,
+              borderRadius: radius.md,
+              flexDirection: "row",
+              alignItems: "center",
+              gap: space.xs,
+            }}
+          >
+            <Icon name="Plus" size={14} color={lightTheme.primaryText} />
+            <Typography variant="bodySmall" color={lightTheme.primaryText} weight="700">
+              CREATE
+            </Typography>
+          </TouchableOpacity>
         </View>
 
         {splits.length === 0 ? (
@@ -107,8 +126,7 @@ export default function SplitSwitcherScreen({ navigation }: Props) {
             {splits.map((split) => (
               <TouchableOpacity
                 key={split.id}
-                onPress={() => handleSwitch(split.id, split.name)}
-                disabled={switching !== null}
+                onPress={() => navigation.navigate("SplitDetails", { splitId: split.id, splitName: split.name })}
                 activeOpacity={0.8}
               >
                 <Card shadow="sm" style={{ padding: space.lg }}>

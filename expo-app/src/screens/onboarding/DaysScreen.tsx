@@ -77,9 +77,5 @@ function DaysContent({ navigation }: Props) {
 }
 
 export default function DaysScreen(props: Props) {
-  return (
-    <OnboardingProvider>
-      <DaysContent {...props} />
-    </OnboardingProvider>
-  );
+  return <DaysContent {...props} />;
 }

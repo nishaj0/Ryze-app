@@ -21,6 +21,23 @@ export const getOverview = async (req: AuthRequest, res: Response) => {
     select: { currentWeight: true, goal: true },
   });
 
+  const activeUserSplit = await prisma.userSplit.findFirst({
+    where: { userId, isActive: true },
+    include: { split: true },
+  });
+  const daysPerWeek = activeUserSplit?.split.daysPerWeek || 3;
+
+  const fourWeeksAgo = new Date();
+  fourWeeksAgo.setDate(fourWeeksAgo.getDate() - 28);
+  const completedInLast4Weeks = await prisma.workoutSession.count({
+    where: {
+      userId,
+      status: "COMPLETED",
+      date: { gte: fourWeeksAgo },
+    },
+  });
+  const consistencyScore = Math.min(Math.round((completedInLast4Weeks / (daysPerWeek * 4)) * 100), 100);
+
   res.json({
     overview: {
       totalWorkouts,
@@ -29,6 +46,7 @@ export const getOverview = async (req: AuthRequest, res: Response) => {
       thisWeekWorkouts,
       currentWeight: user?.currentWeight,
       goal: user?.goal,
+      consistencyScore,
     },
   });
 };
@@ -84,7 +102,7 @@ const getThisWeekWorkouts = async (userId: string): Promise<number> => {
 
 export const getExerciseProgress = async (req: AuthRequest, res: Response) => {
   const userId = req.userId!;
-  const exerciseId = req.params.id;
+  const exerciseId = req.params.id as string;
 
   const logs = await prisma.exerciseLog.findMany({
     where: {
@@ -98,10 +116,10 @@ export const getExerciseProgress = async (req: AuthRequest, res: Response) => {
     orderBy: { session: { date: "asc" } },
   });
 
-  const progression = logs.map((log) => {
-    const totalVolume = log.setLogs.reduce((sum, s) => sum + s.weightKg * s.reps, 0);
-    const maxWeight = Math.max(...log.setLogs.map((s) => s.weightKg), 0);
-    const totalReps = log.setLogs.reduce((sum, s) => sum + s.reps, 0);
+  const progression = logs.map((log: any) => {
+    const totalVolume = log.setLogs.reduce((sum: number, s: any) => sum + s.weightKg * s.reps, 0);
+    const maxWeight = Math.max(...log.setLogs.map((s: any) => s.weightKg), 0);
+    const totalReps = log.setLogs.reduce((sum: number, s: any) => sum + s.reps, 0);
 
     return {
       date: log.session.date,

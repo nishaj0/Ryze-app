@@ -80,9 +80,5 @@ function SleepContent({ navigation }: Props) {
 }
 
 export default function SleepScreen(props: Props) {
-  return (
-    <OnboardingProvider>
-      <SleepContent {...props} />
-    </OnboardingProvider>
-  );
+  return <SleepContent {...props} />;
 }

@@ -898,6 +898,90 @@ const broSplit = {
   ],
 };
 
+const upperLowerSplit = {
+  name: "Upper/Lower Split",
+  description: "Highly effective 4-day split for building muscle and strength. Separates upper body and lower body workouts.",
+  type: "UPPER_LOWER",
+  daysPerWeek: 4,
+  days: [
+    {
+      dayNumber: 1,
+      name: "Upper A",
+      muscleGroups: ["chest", "back", "shoulders", "arms"],
+      isRest: false,
+      exercises: [
+        { name: "Barbell Bench Press", targetSets: 4, targetRepsMin: 6, targetRepsMax: 8 },
+        { name: "Barbell Row", targetSets: 4, targetRepsMin: 6, targetRepsMax: 8 },
+        { name: "Overhead Press", targetSets: 3, targetRepsMin: 8, targetRepsMax: 10 },
+        { name: "Pull-ups", targetSets: 3, targetRepsMin: 8, targetRepsMax: 12 },
+        { name: "Barbell Curl", targetSets: 3, targetRepsMin: 10, targetRepsMax: 12 },
+        { name: "Tricep Pushdown", targetSets: 3, targetRepsMin: 10, targetRepsMax: 12 },
+      ],
+    },
+    {
+      dayNumber: 2,
+      name: "Lower A",
+      muscleGroups: ["legs", "core"],
+      isRest: false,
+      exercises: [
+        { name: "Barbell Squat", targetSets: 4, targetRepsMin: 6, targetRepsMax: 8 },
+        { name: "Romanian Deadlift", targetSets: 4, targetRepsMin: 8, targetRepsMax: 10 },
+        { name: "Leg Press", targetSets: 3, targetRepsMin: 10, targetRepsMax: 12 },
+        { name: "Hanging Leg Raise", targetSets: 3, targetRepsMin: 12, targetRepsMax: 15 },
+        { name: "Plank", targetSets: 3, targetRepsMin: 30, targetRepsMax: 60 },
+      ],
+    },
+    {
+      dayNumber: 3,
+      name: "Rest Day",
+      muscleGroups: [],
+      isRest: true,
+      exercises: [],
+    },
+    {
+      dayNumber: 4,
+      name: "Upper B",
+      muscleGroups: ["chest", "back", "shoulders", "arms"],
+      isRest: false,
+      exercises: [
+        { name: "Incline Dumbbell Press", targetSets: 4, targetRepsMin: 8, targetRepsMax: 12 },
+        { name: "Lat Pulldown", targetSets: 4, targetRepsMin: 8, targetRepsMax: 12 },
+        { name: "Dumbbell Shoulder Press", targetSets: 3, targetRepsMin: 8, targetRepsMax: 10 },
+        { name: "Dips", targetSets: 3, targetRepsMin: 8, targetRepsMax: 12 },
+        { name: "Dumbbell Curl", targetSets: 3, targetRepsMin: 10, targetRepsMax: 12 },
+        { name: "Skull Crusher", targetSets: 3, targetRepsMin: 10, targetRepsMax: 12 },
+      ],
+    },
+    {
+      dayNumber: 5,
+      name: "Lower B",
+      muscleGroups: ["legs", "core"],
+      isRest: false,
+      exercises: [
+        { name: "Leg Press", targetSets: 4, targetRepsMin: 10, targetRepsMax: 12 },
+        { name: "Lunges", targetSets: 3, targetRepsMin: 10, targetRepsMax: 12 },
+        { name: "Leg Extension", targetSets: 3, targetRepsMin: 12, targetRepsMax: 15 },
+        { name: "Leg Curl", targetSets: 3, targetRepsMin: 10, targetRepsMax: 12 },
+        { name: "Crunch", targetSets: 3, targetRepsMin: 15, targetRepsMax: 20 },
+      ],
+    },
+    {
+      dayNumber: 6,
+      name: "Rest Day",
+      muscleGroups: [],
+      isRest: true,
+      exercises: [],
+    },
+    {
+      dayNumber: 7,
+      name: "Rest Day",
+      muscleGroups: [],
+      isRest: true,
+      exercises: [],
+    },
+  ],
+};
+
 async function seed() {
   console.log("Seeding database...");
 
@@ -953,7 +1037,7 @@ async function seed() {
 
   console.log("Created exercise alternatives.");
 
-  const splitDataList = [fullBodySplit, pplSplit, broSplit];
+  const splitDataList = [fullBodySplit, pplSplit, broSplit, upperLowerSplit];
 
   for (const splitData of splitDataList) {
     const split = await prisma.split.create({

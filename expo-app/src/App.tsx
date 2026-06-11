@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View, ActivityIndicator } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import * as SplashScreen from "expo-splash-screen";
@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import RootNavigator from "./navigation/RootNavigator";
 import { lightTheme } from "./theme/colors";
+import { initMMKV } from "./utils/mmkv";
 import "../global.css";
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
@@ -21,6 +22,7 @@ const queryClient = new QueryClient({
 });
 
 export default function App() {
+  const [mmkvLoaded, setMmkvLoaded] = useState(false);
   const [fontsLoaded, fontError] = useFonts({
     Inter_400Regular,
     Inter_500Medium,
@@ -30,12 +32,21 @@ export default function App() {
   });
 
   useEffect(() => {
-    if (fontsLoaded || fontError) {
+    initMMKV()
+      .then(() => setMmkvLoaded(true))
+      .catch((err) => {
+        console.error("MMKV init failed:", err);
+        setMmkvLoaded(true); // fall through so app doesn't hang forever
+      });
+  }, []);
+
+  useEffect(() => {
+    if ((fontsLoaded || fontError) && mmkvLoaded) {
       SplashScreen.hideAsync().catch(() => {});
     }
-  }, [fontsLoaded, fontError]);
+  }, [fontsLoaded, fontError, mmkvLoaded]);
 
-  if (!fontsLoaded && !fontError) {
+  if ((!fontsLoaded && !fontError) || !mmkvLoaded) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: lightTheme.bg }}>
         <ActivityIndicator size="large" color={lightTheme.primary} />

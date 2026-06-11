@@ -149,9 +149,5 @@ function SplitSelectionContent({ navigation }: Props) {
 }
 
 export default function SplitSelectionScreen(props: Props) {
-  return (
-    <OnboardingProvider>
-      <SplitSelectionContent {...props} />
-    </OnboardingProvider>
-  );
+  return <SplitSelectionContent {...props} />;
 }

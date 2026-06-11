@@ -66,7 +66,7 @@ function GenderContent({ navigation }: Props) {
                   <Typography variant="heading3" color={isSelected ? lightTheme.primary : lightTheme.textPrimary}>
                     {opt.label}
                   </Typography>
-                  {isSelected && <Icon name="CheckCircle2" size={24} color={lightTheme.primary} style={{ marginLeft: "auto" }} />}
+                  {isSelected && <View style={{ marginLeft: "auto" }}><Icon name="CheckCircle2" size={24} color={lightTheme.primary} /></View>}
                 </View>
               </Card>
             </TouchableOpacity>
@@ -78,9 +78,5 @@ function GenderContent({ navigation }: Props) {
 }
 
 export default function GenderScreen(props: Props) {
-  return (
-    <OnboardingProvider>
-      <GenderContent {...props} />
-    </OnboardingProvider>
-  );
+  return <GenderContent {...props} />;
 }

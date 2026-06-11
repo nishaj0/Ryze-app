@@ -10,7 +10,7 @@ const prisma = new PrismaClient();
 const generateToken = (userId: string): string => {
   return jwt.sign({ userId }, process.env.JWT_SECRET || "secret", {
     expiresIn: process.env.JWT_EXPIRES_IN || "7d",
-  });
+  } as any);
 };
 
 export const register = async (req: AuthRequest, res: Response) => {

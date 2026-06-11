@@ -17,6 +17,8 @@ import PhotoCompareScreen from "../screens/photos/PhotoCompareScreen";
 import ProfileScreen from "../screens/profile/ProfileScreen";
 import EditProfileScreen from "../screens/profile/EditProfileScreen";
 import SplitSwitcherScreen from "../screens/profile/SplitSwitcherScreen";
+import SplitDetailsScreen from "../screens/profile/SplitDetailsScreen";
+import CustomSplitScreen from "../screens/profile/CustomSplitScreen";
 import SettingsScreen from "../screens/profile/SettingsScreen";
 import MetricsScreen from "../screens/metrics/MetricsScreen";
 
@@ -27,7 +29,7 @@ const ProgressStackNav = createNativeStackNavigator<ProgressStackParamList>();
 const PhotosStackNav = createNativeStackNavigator<PhotosStackParamList>();
 const ProfileStackNav = createNativeStackNavigator<ProfileStackParamList>();
 
-const headerStyle = { backgroundColor: lightTheme.bg as const };
+const headerStyle = { backgroundColor: lightTheme.bg };
 const headerTintColor = lightTheme.textPrimary;
 const headerTitleStyle = { fontFamily: "Inter", fontWeight: "600" as const, fontSize: 18, color: lightTheme.textPrimary };
 const stackOpts = { headerStyle, headerTintColor, headerTitleStyle };
@@ -77,6 +79,8 @@ function ProfileStack() {
       <ProfileStackNav.Screen name="ProfileMain" component={ProfileScreen} options={{ title: "Profile" }} />
       <ProfileStackNav.Screen name="EditProfile" component={EditProfileScreen} options={{ title: "Edit Profile" }} />
       <ProfileStackNav.Screen name="SplitSwitcher" component={SplitSwitcherScreen} options={{ title: "Switch Split" }} />
+      <ProfileStackNav.Screen name="SplitDetails" component={SplitDetailsScreen} options={{ title: "Split Details" }} />
+      <ProfileStackNav.Screen name="CustomSplit" component={CustomSplitScreen} options={{ title: "Create Custom Split" }} />
       <ProfileStackNav.Screen name="Settings" component={SettingsScreen} options={{ title: "Settings" }} />
       <ProfileStackNav.Screen name="Metrics" component={MetricsScreen} options={{ title: "Body Metrics" }} />
     </ProfileStackNav.Navigator>

@@ -11,6 +11,7 @@ export default function SettingsScreen() {
   const { user, updateUser } = useAuthStore();
   const [units, setUnits] = useState(user?.units || "kg");
   const [weeklyCheckin, setWeeklyCheckin] = useState(user?.weeklyCheckin ?? true);
+  const [reminderTime, setReminderTime] = useState(user?.reminderTime || "08:00");
 
   const handleUnitsChange = async (newUnits: string) => {
     setUnits(newUnits);
@@ -31,6 +32,17 @@ export default function SettingsScreen() {
     } catch (err) {
       Alert.alert("Error", "Failed to update preferences");
       setWeeklyCheckin(weeklyCheckin);
+    }
+  };
+
+  const handleReminderTimeChange = async (time: string) => {
+    setReminderTime(time);
+    try {
+      await updateProfile({ reminderTime: time });
+      updateUser({ reminderTime: time });
+    } catch (err) {
+      Alert.alert("Error", "Failed to update reminder time");
+      setReminderTime(user?.reminderTime || "08:00");
     }
   };
 
@@ -123,6 +135,58 @@ export default function SettingsScreen() {
               trackColor={{ false: lightTheme.surfaceTertiary, true: lightTheme.primary }}
               thumbColor={lightTheme.surface}
             />
+          </View>
+
+          <View style={{ height: 1, backgroundColor: lightTheme.border, marginVertical: space.md }} />
+
+          <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+            <View style={{ flex: 1 }}>
+              <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: 2 }}>
+                <Icon name="Clock" size={14} color={lightTheme.textPrimary} />
+                <Typography variant="body" color={lightTheme.textPrimary} weight="600">
+                  Reminder Time
+                </Typography>
+              </View>
+              <Typography variant="caption" color={lightTheme.textMuted} style={{ marginLeft: 22 }}>
+                Daily workout reminder notification
+              </Typography>
+            </View>
+            <TouchableOpacity
+              onPress={() => {
+                Alert.prompt(
+                  "Workout Reminder Time",
+                  "Enter notification time (HH:MM in 24h format):",
+                  [
+                    { text: "Cancel", style: "cancel" },
+                    {
+                      text: "Save",
+                      onPress: (val) => {
+                        const regex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
+                        if (val && regex.test(val)) {
+                          handleReminderTimeChange(val);
+                        } else {
+                          Alert.alert("Invalid Time", "Please enter in HH:MM 24-hour format (e.g. 08:30 or 17:00).");
+                        }
+                      }
+                    }
+                  ],
+                  "plain-text",
+                  reminderTime
+                );
+              }}
+              style={{
+                backgroundColor: lightTheme.surfaceSecondary,
+                borderColor: lightTheme.border,
+                borderWidth: 1,
+                borderRadius: radius.md,
+                paddingHorizontal: space.md,
+                paddingVertical: space.sm,
+              }}
+            >
+              <Typography variant="body" color={lightTheme.textPrimary} weight="700">
+                {reminderTime}
+              </Typography>
+            </TouchableOpacity>
           </View>
         </Card>
 

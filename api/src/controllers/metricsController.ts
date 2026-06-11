@@ -42,13 +42,13 @@ export const getBodyMetrics = async (req: AuthRequest, res: Response) => {
 
 export const deleteBodyMetric = async (req: AuthRequest, res: Response) => {
   const metric = await prisma.bodyMetric.findUnique({
-    where: { id: req.params.id },
+    where: { id: req.params.id as string },
   });
 
   if (!metric || metric.userId !== req.userId) {
     throw new AppError("Metric not found", 404);
   }
 
-  await prisma.bodyMetric.delete({ where: { id: req.params.id } });
+  await prisma.bodyMetric.delete({ where: { id: req.params.id as string } });
   res.json({ message: "Metric deleted" });
 };

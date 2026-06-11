@@ -59,9 +59,5 @@ function BodyStatsContent({ navigation }: Props) {
 }
 
 export default function BodyStatsScreen(props: Props) {
-  return (
-    <OnboardingProvider>
-      <BodyStatsContent {...props} />
-    </OnboardingProvider>
-  );
+  return <BodyStatsContent {...props} />;
 }

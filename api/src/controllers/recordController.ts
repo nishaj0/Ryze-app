@@ -30,7 +30,7 @@ export const getRecords = async (req: AuthRequest, res: Response) => {
 
 export const getExerciseRecords = async (req: AuthRequest, res: Response) => {
   const userId = req.userId!;
-  const exerciseId = req.params.exerciseId;
+  const exerciseId = req.params.exerciseId as string;
 
   const records = await prisma.personalRecord.findMany({
     where: { userId, exerciseId },

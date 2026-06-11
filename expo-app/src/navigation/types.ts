@@ -46,6 +46,8 @@ export type ProfileStackParamList = {
   ProfileMain: undefined;
   EditProfile: undefined;
   SplitSwitcher: undefined;
+  SplitDetails: { splitId: string; splitName: string };
+  CustomSplit: undefined;
   Settings: undefined;
   Metrics: undefined;
 };

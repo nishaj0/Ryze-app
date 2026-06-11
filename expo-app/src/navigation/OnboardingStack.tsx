@@ -10,6 +10,8 @@ import BodyStatsScreen from "../screens/onboarding/BodyStatsScreen";
 import SleepScreen from "../screens/onboarding/SleepScreen";
 import SplitSelectionScreen from "../screens/onboarding/SplitSelectionScreen";
 
+import { OnboardingProvider } from "../screens/onboarding/OnboardingContext";
+
 const Stack = createNativeStackNavigator<OnboardingStackParamList>();
 
 const screenOptions = {
@@ -20,15 +22,17 @@ const screenOptions = {
 
 export default function OnboardingStack() {
   return (
-    <Stack.Navigator screenOptions={screenOptions}>
-      <Stack.Screen name="Gender" component={GenderScreen} options={{ title: "Your Gender" }} />
-      <Stack.Screen name="Goal" component={GoalScreen} options={{ title: "Your Goal" }} />
-      <Stack.Screen name="Experience" component={ExperienceScreen} options={{ title: "Experience Level" }} />
-      <Stack.Screen name="Days" component={DaysScreen} options={{ title: "Days Per Week" }} />
-      <Stack.Screen name="Equipment" component={EquipmentScreen} options={{ title: "Equipment Access" }} />
-      <Stack.Screen name="BodyStats" component={BodyStatsScreen} options={{ title: "Body Stats" }} />
-      <Stack.Screen name="Sleep" component={SleepScreen} options={{ title: "Sleep Hours" }} />
-      <Stack.Screen name="SplitSelection" component={SplitSelectionScreen} options={{ title: "Choose Your Split" }} />
-    </Stack.Navigator>
+    <OnboardingProvider>
+      <Stack.Navigator screenOptions={screenOptions}>
+        <Stack.Screen name="Gender" component={GenderScreen} options={{ title: "Your Gender" }} />
+        <Stack.Screen name="Goal" component={GoalScreen} options={{ title: "Your Goal" }} />
+        <Stack.Screen name="Experience" component={ExperienceScreen} options={{ title: "Experience Level" }} />
+        <Stack.Screen name="Days" component={DaysScreen} options={{ title: "Days Per Week" }} />
+        <Stack.Screen name="Equipment" component={EquipmentScreen} options={{ title: "Equipment Access" }} />
+        <Stack.Screen name="BodyStats" component={BodyStatsScreen} options={{ title: "Body Stats" }} />
+        <Stack.Screen name="Sleep" component={SleepScreen} options={{ title: "Sleep Hours" }} />
+        <Stack.Screen name="SplitSelection" component={SplitSelectionScreen} options={{ title: "Choose Your Split" }} />
+      </Stack.Navigator>
+    </OnboardingProvider>
   );
 }

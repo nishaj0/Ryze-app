@@ -59,6 +59,14 @@ export const colors = {
   },
 } as const;
 
+const makeSemanticColor = (base: string, palette: { light: string; DEFAULT: string; dark: string }) => {
+  const s = new String(base) as any;
+  s.DEFAULT = palette.DEFAULT;
+  s.light = palette.light;
+  s.dark = palette.dark;
+  return s as string & { DEFAULT: string; light: string; dark: string };
+};
+
 // Light theme semantic aliases
 export const lightTheme = {
   // Backgrounds
@@ -104,12 +112,13 @@ export const lightTheme = {
   error: colors.danger.DEFAULT,
   errorBg: colors.danger.light,
   errorText: colors.danger.dark,
-  success: colors.success.DEFAULT,
+  success: makeSemanticColor(colors.success.DEFAULT, colors.success),
   successBg: colors.success.light,
   successText: colors.success.dark,
   warning: colors.warning.DEFAULT,
   warningBg: colors.warning.light,
   warningText: colors.warning.dark,
+  danger: makeSemanticColor(colors.danger.DEFAULT, colors.danger),
 
   // Input
   inputBg: colors.neutral[0],

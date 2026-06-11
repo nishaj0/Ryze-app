@@ -9,3 +9,4 @@ uploads/photos/*
 .DS_Store
 *.log
 graphify-out/cost.json
+.idea

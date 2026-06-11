@@ -112,7 +112,7 @@ export default function EditProfileScreen({ navigation }: Props) {
                           {g.label}
                         </Typography>
                         {isSelected && (
-                          <Icon name="CheckCircle2" size={20} color={lightTheme.primary} style={{ marginLeft: "auto" }} />
+                          <View style={{ marginLeft: "auto" }}><Icon name="CheckCircle2" size={20} color={lightTheme.primary} /></View>
                         )}
                       </View>
                     </Card>

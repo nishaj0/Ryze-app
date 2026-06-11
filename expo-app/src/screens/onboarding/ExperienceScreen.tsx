@@ -83,9 +83,5 @@ function ExperienceContent({ navigation }: Props) {
 }
 
 export default function ExperienceScreen(props: Props) {
-  return (
-    <OnboardingProvider>
-      <ExperienceContent {...props} />
-    </OnboardingProvider>
-  );
+  return <ExperienceContent {...props} />;
 }

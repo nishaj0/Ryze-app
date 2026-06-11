@@ -1,39 +1,129 @@
 import React, { useEffect, useState } from "react";
-import { View, TouchableOpacity, ActivityIndicator, Alert, Modal } from "react-native";
+import { View, TouchableOpacity, ActivityIndicator, Alert, Modal, ScrollView } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { HomeStackParamList } from "../../navigation/types";
 import { getActiveSplit } from "../../api/splits";
 import { getOverview } from "../../api/progress";
 import { markRestDay } from "../../api/sessions";
+import { getPhotos } from "../../api/photos";
 import { useAuthStore } from "../../store/authStore";
 import { useWorkoutStore } from "../../store/workoutStore";
-import { createSession } from "../../api/sessions";
+import { mmkv } from "../../utils/mmkv";
 import { UserSplit, ProgressOverview, SplitDay } from "../../types";
 import { Screen, Card, Typography, Button, Icon, Input } from "../../components";
 import { lightTheme } from "../../theme/colors";
-import { space } from "../../theme/spacing";
+import { space, radius } from "../../theme/spacing";
 
 type Props = NativeStackScreenProps<HomeStackParamList, "HomeMain">;
 
 export default function HomeScreen({ navigation }: Props) {
   const { user } = useAuthStore();
-  const { startSession } = useWorkoutStore();
+  const { initPreStartSession, resumeSession, discardSession, completeSession, syncOfflineSessions } = useWorkoutStore();
   const [userSplit, setUserSplit] = useState<UserSplit | null>(null);
   const [overview, setOverview] = useState<ProgressOverview | null>(null);
   const [loading, setLoading] = useState(true);
   const [restModalVisible, setRestModalVisible] = useState(false);
   const [restReason, setRestReason] = useState("");
   const [todaySplitDay, setTodaySplitDay] = useState<SplitDay | null>(null);
+  const [showPhotoPrompt, setShowPhotoPrompt] = useState(false);
+  const [workoutModalVisible, setWorkoutModalVisible] = useState(false);
 
   useEffect(() => {
     loadData();
+    // Auto-sync offline logs when app mounts
+    syncOfflineSessions()
+      .then(() => {
+        // Reload data after sync to reflect new stats
+        loadData();
+      })
+      .catch((err) => console.log("[HomeScreen] offline sync error:", err));
+  }, []);
+
+  // Check for unfinished session in MMKV
+  useEffect(() => {
+    const saved = mmkv.getString("active_session");
+    if (saved) {
+      try {
+        const sessionData = JSON.parse(saved);
+        if (sessionData) {
+          Alert.alert(
+            "Unfinished Workout",
+            `You have an unfinished workout from ${new Date(sessionData.startedAt).toLocaleTimeString()}. Resume or discard?`,
+            [
+              {
+                text: "Discard",
+                style: "destructive",
+                onPress: () => {
+                  Alert.alert(
+                    "Save Partial?",
+                    "Do you want to save this partial workout before discarding it?",
+                    [
+                      {
+                        text: "Discard Entirely",
+                        style: "destructive",
+                        onPress: () => discardSession(),
+                      },
+                      {
+                        text: "Save & Discard",
+                        onPress: async () => {
+                          resumeSession(sessionData);
+                          try {
+                            const res = await completeSession();
+                            loadData();
+                            if (res && !res.isOffline) {
+                              Alert.alert("Success", "Partial workout saved successfully.");
+                            } else {
+                              Alert.alert("Saved Offline", "Partial workout saved offline.");
+                            }
+                          } catch (err) {
+                            Alert.alert("Error", "Failed to save workout.");
+                          }
+                        },
+                      },
+                    ]
+                  );
+                },
+              },
+              {
+                text: "Resume",
+                onPress: () => {
+                  resumeSession(sessionData);
+                  navigation.navigate("WorkoutLogger", {
+                    splitDayId: sessionData.splitDayId,
+                    splitDayName: sessionData.splitDayName,
+                  });
+                },
+              },
+            ]
+          );
+        }
+      } catch (e) {
+        console.error("Failed to parse active session from MMKV", e);
+      }
+    }
   }, []);
 
   const loadData = async () => {
     try {
-      const [splitRes, overviewRes] = await Promise.all([getActiveSplit(), getOverview()]);
+      const [splitRes, overviewRes, photosRes] = await Promise.all([
+        getActiveSplit(),
+        getOverview(),
+        getPhotos().catch(() => ({ photos: [] })),
+      ]);
       setUserSplit(splitRes.userSplit);
       setOverview(overviewRes.overview);
+
+      // Check if weekly photo is needed
+      const photos = photosRes.photos || [];
+      if (photos.length === 0) {
+        setShowPhotoPrompt(true);
+      } else {
+        const sorted = [...photos].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        const latestPhoto = sorted[0];
+        const latestDate = new Date(latestPhoto.date);
+        const diffDays = Math.floor((Date.now() - latestDate.getTime()) / (1000 * 60 * 60 * 24));
+        setShowPhotoPrompt(diffDays >= 7);
+      }
 
       if (splitRes.userSplit) {
         const days = splitRes.userSplit.split.days;
@@ -51,18 +141,18 @@ export default function HomeScreen({ navigation }: Props) {
     }
   };
 
+  const handleStartWorkoutForDay = (day: SplitDay) => {
+    setWorkoutModalVisible(false);
+    initPreStartSession(day);
+    navigation.navigate("WorkoutLogger", {
+      splitDayId: day.id,
+      splitDayName: day.name,
+    });
+  };
+
   const handleStartWorkout = async () => {
     if (!todaySplitDay) return;
-    try {
-      const res = await createSession(todaySplitDay.id);
-      startSession(res.session, res.lastSessionLogs);
-      navigation.navigate("WorkoutLogger", {
-        splitDayId: todaySplitDay.id,
-        splitDayName: todaySplitDay.name,
-      });
-    } catch (err: any) {
-      Alert.alert("Error", err.response?.data?.error || "Failed to start workout");
-    }
+    await handleStartWorkoutForDay(todaySplitDay);
   };
 
   const handleMarkRest = async () => {
@@ -111,6 +201,38 @@ export default function HomeScreen({ navigation }: Props) {
         </Typography>
       </View>
 
+      {/* Progress Photo Prompt */}
+      {showPhotoPrompt && (
+        <Card
+          shadow="sm"
+          style={{
+            backgroundColor: lightTheme.primaryLight,
+            borderColor: lightTheme.primary,
+            borderWidth: 1,
+            marginBottom: space.lg,
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: space.md,
+          }}
+        >
+          <View style={{ flex: 1, marginRight: space.md }}>
+            <Typography variant="heading3" color={lightTheme.primary} style={{ marginBottom: 4 }}>
+              Progress Photo Reminder
+            </Typography>
+            <Typography variant="bodySmall" color={lightTheme.textSecondary}>
+              It's time for your weekly check-in. Keep track of your visual progress!
+            </Typography>
+          </View>
+          <Button
+            title="Take Photo"
+            onPress={() => (navigation as any).navigate("Photos", { screen: "PhotoCapture" })}
+            variant="primary"
+            size="sm"
+          />
+        </Card>
+      )}
+
       {/* Today's Plan Card */}
       {todaySplitDay && (
         <Card shadow="md" style={{ marginBottom: space.lg }}>
@@ -146,24 +268,33 @@ export default function HomeScreen({ navigation }: Props) {
           )}
 
           {todaySplitDay.isRest ? (
-            <Card
-              padding="md"
-              border={false}
-              shadow="none"
-              style={{ backgroundColor: lightTheme.successBg, marginTop: space.md }}
-            >
-              <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
-                <Icon name="Moon" size={24} color={lightTheme.success} />
-                <View>
-                  <Typography variant="heading3" color={lightTheme.success}>
-                    Rest Day
-                  </Typography>
-                  <Typography variant="bodySmall" color={lightTheme.successText}>
-                    Recovery is growth. Enjoy it!
-                  </Typography>
+            <View style={{ gap: space.md, marginTop: space.md }}>
+              <Card
+                padding="md"
+                border={false}
+                shadow="none"
+                style={{ backgroundColor: lightTheme.successBg }}
+              >
+                <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
+                  <Icon name="Moon" size={24} color={lightTheme.success} />
+                  <View style={{ flex: 1 }}>
+                    <Typography variant="heading3" color={lightTheme.success}>
+                      Rest Day
+                    </Typography>
+                    <Typography variant="bodySmall" color={lightTheme.successText}>
+                      Recovery is growth. Enjoy it!
+                    </Typography>
+                  </View>
                 </View>
-              </View>
-            </Card>
+              </Card>
+              <Button
+                title="Work Out Anyway"
+                onPress={() => setWorkoutModalVisible(true)}
+                variant="primary"
+                size="lg"
+                icon={<Icon name="Play" size={20} color={lightTheme.primaryText} />}
+              />
+            </View>
           ) : (
             <View style={{ flexDirection: "row", gap: space.md, marginTop: space.md }}>
               <Button
@@ -279,6 +410,69 @@ export default function HomeScreen({ navigation }: Props) {
                 style={{ flex: 1 }}
               />
             </View>
+          </Card>
+        </View>
+      </Modal>
+
+      {/* Work Out Anyway Modal */}
+      <Modal visible={workoutModalVisible} transparent animationType="slide">
+        <View style={{ flex: 1, justifyContent: "flex-end", backgroundColor: lightTheme.bgOverlay }}>
+          <Card
+            shadow="none"
+            border={false}
+            style={{
+              borderTopLeftRadius: 24,
+              borderTopRightRadius: 24,
+              maxHeight: "80%",
+              padding: space.lg,
+            }}
+          >
+            <Typography variant="heading2" color={lightTheme.textPrimary} style={{ marginBottom: space.md }}>
+              Choose a Workout Day
+            </Typography>
+            <Typography variant="body" color={lightTheme.textSecondary} style={{ marginBottom: space.md }}>
+              Select which day from your split you would like to perform today:
+            </Typography>
+
+            <ScrollView style={{ marginBottom: space.md }}>
+              {userSplit?.split.days
+                .filter((day) => !day.isRest)
+                .map((day) => {
+                  const dayMuscleGroups = (() => {
+                    try { return JSON.parse(day.muscleGroups); } catch { return []; }
+                  })();
+                  return (
+                    <TouchableOpacity
+                      key={day.id}
+                      onPress={() => handleStartWorkoutForDay(day)}
+                      style={{
+                        backgroundColor: lightTheme.surfaceSecondary,
+                        borderRadius: 12,
+                        padding: 16,
+                        marginBottom: space.sm,
+                        borderWidth: 1,
+                        borderColor: lightTheme.border,
+                      }}
+                    >
+                      <Typography variant="heading3" color={lightTheme.textPrimary}>
+                        {day.name}
+                      </Typography>
+                      {dayMuscleGroups.length > 0 && (
+                        <Typography variant="caption" color={lightTheme.textMuted} style={{ marginTop: 4 }}>
+                          Targets: {dayMuscleGroups.join(", ")}
+                        </Typography>
+                      )}
+                    </TouchableOpacity>
+                  );
+                })}
+            </ScrollView>
+
+            <Button
+              title="Cancel"
+              onPress={() => setWorkoutModalVisible(false)}
+              variant="secondary"
+              size="md"
+            />
           </Card>
         </View>
       </Modal>

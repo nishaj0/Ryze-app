@@ -17,5 +17,6 @@ router.get("/:id", authMiddleware, wrap(splitController.getSplit));
 router.get("/user/active", authMiddleware, wrap(splitController.getActiveSplit));
 router.put("/user/active", authMiddleware, wrap(splitController.setActiveSplit));
 router.post("/", authMiddleware, wrap(splitController.createSplit));
+router.patch("/exercises/:id", authMiddleware, wrap(splitController.updateSplitExercise));
 
 export default router;

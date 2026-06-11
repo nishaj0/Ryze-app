@@ -29,7 +29,7 @@ export const listExercises = async (req: AuthRequest, res: Response) => {
 
 export const getExercise = async (req: AuthRequest, res: Response) => {
   const exercise = await prisma.exercise.findUnique({
-    where: { id: req.params.id },
+    where: { id: req.params.id as string },
     include: {
       alternativesFrom: {
         include: { alternative: true },
@@ -46,7 +46,7 @@ export const getExercise = async (req: AuthRequest, res: Response) => {
 
 export const getAlternatives = async (req: AuthRequest, res: Response) => {
   const alternatives = await prisma.exerciseAlternative.findMany({
-    where: { exerciseId: req.params.id },
+    where: { exerciseId: req.params.id as string },
     include: { alternative: true },
   });
 
@@ -55,7 +55,7 @@ export const getAlternatives = async (req: AuthRequest, res: Response) => {
 
 export const getExerciseHistory = async (req: AuthRequest, res: Response) => {
   const userId = req.userId!;
-  const exerciseId = req.params.id;
+  const exerciseId = req.params.id as string;
 
   const logs = await prisma.exerciseLog.findMany({
     where: {

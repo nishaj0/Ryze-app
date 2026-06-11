@@ -143,7 +143,7 @@ export const listSessions = async (req: AuthRequest, res: Response) => {
 
 export const getSession = async (req: AuthRequest, res: Response) => {
   const session = await prisma.workoutSession.findUnique({
-    where: { id: req.params.id },
+    where: { id: req.params.id as string },
     include: {
       splitDay: true,
       exerciseLogs: {
@@ -164,14 +164,31 @@ export const getSession = async (req: AuthRequest, res: Response) => {
     throw new AppError("Session not found", 404);
   }
 
-  res.json({ session });
+  // Find PRs achieved on the same calendar day
+  const startOfDay = new Date(session.date);
+  startOfDay.setHours(0, 0, 0, 0);
+  const endOfDay = new Date(session.date);
+  endOfDay.setHours(23, 59, 59, 999);
+
+  const prs = await prisma.personalRecord.findMany({
+    where: {
+      userId: session.userId,
+      achievedAt: {
+        gte: startOfDay,
+        lte: endOfDay,
+      },
+    },
+    include: { exercise: true },
+  });
+
+  res.json({ session, prs });
 };
 
 export const completeSession = async (req: AuthRequest, res: Response) => {
   const { notes, durationMinutes } = req.body;
 
-  const session = await prisma.workoutSession.findUnique({
-    where: { id: req.params.id },
+  const session: any = await prisma.workoutSession.findUnique({
+    where: { id: req.params.id as string },
     include: {
       exerciseLogs: {
         include: { setLogs: true },
@@ -205,15 +222,17 @@ export const completeSession = async (req: AuthRequest, res: Response) => {
             weightKg: set.weightKg,
             reps: set.reps,
             estimated1rm,
+            achievedAt: session.date,
           },
+          include: { exercise: true },
         });
         newPRs.push(pr);
       }
     }
   }
 
-  const updated = await prisma.workoutSession.update({
-    where: { id: req.params.id },
+  const updated: any = await prisma.workoutSession.update({
+    where: { id: req.params.id as string },
     data: {
       status: "COMPLETED",
       notes,
@@ -272,9 +291,9 @@ export const markRestDay = async (req: AuthRequest, res: Response) => {
 
 export const addExerciseToSession = async (req: AuthRequest, res: Response) => {
   const { exerciseId } = req.body;
-  const sessionId = req.params.id;
+  const sessionId = req.params.id as string;
 
-  const session = await prisma.workoutSession.findUnique({
+  const session: any = await prisma.workoutSession.findUnique({
     where: { id: sessionId },
     include: { exerciseLogs: true },
   });
@@ -284,7 +303,7 @@ export const addExerciseToSession = async (req: AuthRequest, res: Response) => {
   }
 
   const maxOrder = session.exerciseLogs.reduce(
-    (max, log) => Math.max(max, log.order),
+    (max: number, log: any) => Math.max(max, log.order),
     -1
   );
 
@@ -305,7 +324,8 @@ export const addExerciseToSession = async (req: AuthRequest, res: Response) => {
 
 export const swapExercise = async (req: AuthRequest, res: Response) => {
   const { newExerciseId } = req.body;
-  const { id: sessionId, exerciseLogId } = req.params;
+  const sessionId = req.params.id as string;
+  const exerciseLogId = req.params.exerciseLogId as string;
 
   const exerciseLog = await prisma.exerciseLog.findUnique({
     where: { id: exerciseLogId },
@@ -332,9 +352,9 @@ export const swapExercise = async (req: AuthRequest, res: Response) => {
 
 export const logSet = async (req: AuthRequest, res: Response) => {
   const { weightKg, reps, rpe, notes } = req.body;
-  const { exerciseLogId } = req.params;
+  const exerciseLogId = req.params.exerciseLogId as string;
 
-  const exerciseLog = await prisma.exerciseLog.findUnique({
+  const exerciseLog: any = await prisma.exerciseLog.findUnique({
     where: { id: exerciseLogId },
     include: { setLogs: { orderBy: { setNumber: "desc" }, take: 1 } },
   });
@@ -406,8 +426,133 @@ export const logSet = async (req: AuthRequest, res: Response) => {
 };
 
 export const deleteSet = async (req: AuthRequest, res: Response) => {
-  const { setId } = req.params;
+  const setId = req.params.setId as string;
 
   await prisma.setLog.delete({ where: { id: setId } });
   res.json({ message: "Set deleted" });
+};
+
+export const syncSession = async (req: AuthRequest, res: Response) => {
+  const { splitDayId, date, durationMinutes, notes, exercises } = req.body;
+  const userId = req.userId!;
+
+  const sessionDate = new Date(date || new Date());
+
+  const result = await prisma.$transaction(async (tx) => {
+    const session = await tx.workoutSession.create({
+      data: {
+        userId,
+        splitDayId,
+        date: sessionDate,
+        status: "COMPLETED",
+        durationMinutes: durationMinutes ? Number(durationMinutes) : null,
+        notes: notes || null,
+      },
+    });
+
+    const newPRs: any[] = [];
+    let totalVolume = 0;
+    let totalSets = 0;
+
+    if (exercises && Array.isArray(exercises)) {
+      for (let i = 0; i < exercises.length; i++) {
+        const exData = exercises[i];
+        const exerciseLog = await tx.exerciseLog.create({
+          data: {
+            sessionId: session.id,
+            exerciseId: exData.exerciseId,
+            order: i,
+            notes: exData.notes || null,
+          },
+        });
+
+        if (exData.setLogs && Array.isArray(exData.setLogs)) {
+          for (let j = 0; j < exData.setLogs.length; j++) {
+            const setData = exData.setLogs[j];
+            const weightKg = Number(setData.weightKg);
+            const reps = Number(setData.reps);
+
+            await tx.setLog.create({
+              data: {
+                exerciseLogId: exerciseLog.id,
+                setNumber: j + 1,
+                weightKg,
+                reps,
+                notes: setData.notes || null,
+                completedAt: setData.completedAt ? new Date(setData.completedAt) : new Date(),
+              },
+            });
+
+            totalVolume += weightKg * reps;
+            totalSets++;
+
+            const estimated1rm = calculate1RM(weightKg, reps);
+            const previousPR = await tx.personalRecord.findFirst({
+              where: {
+                userId,
+                exerciseId: exData.exerciseId,
+              },
+              orderBy: { estimated1rm: "desc" },
+            });
+
+            if (!previousPR || estimated1rm > previousPR.estimated1rm) {
+              const pr = await tx.personalRecord.create({
+                data: {
+                  userId,
+                  exerciseId: exData.exerciseId,
+                  weightKg,
+                  reps,
+                  estimated1rm,
+                  achievedAt: sessionDate,
+                },
+                include: { exercise: true },
+              });
+              newPRs.push(pr);
+            }
+          }
+        }
+      }
+    }
+
+    return {
+      session,
+      summary: {
+        totalVolume: Math.round(totalVolume),
+        totalSets,
+        exercisesCompleted: exercises ? exercises.length : 0,
+        newPRs,
+      },
+    };
+  });
+
+  const populatedSession = await prisma.workoutSession.findUnique({
+    where: { id: result.session.id },
+    include: {
+      exerciseLogs: {
+        orderBy: { order: "asc" },
+        include: {
+          exercise: true,
+          setLogs: { orderBy: { setNumber: "asc" } },
+        },
+      },
+      splitDay: true,
+    },
+  });
+
+  res.status(201).json({
+    session: populatedSession,
+    summary: result.summary,
+  });
+};
+
+export const updateExerciseNotes = async (req: AuthRequest, res: Response) => {
+  const { notes } = req.body;
+  const exerciseLogId = req.params.exerciseLogId as string;
+
+  const exerciseLog = await prisma.exerciseLog.update({
+    where: { id: exerciseLogId },
+    data: { notes },
+  });
+
+  res.json({ exerciseLog });
 };

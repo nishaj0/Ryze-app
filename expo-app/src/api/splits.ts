@@ -16,7 +16,17 @@ export const getActiveSplit = async () => {
   return data as { userSplit: UserSplit | null };
 };
 
-export const setActiveSplit = async (splitId: string) => {
-  const { data } = await client.put("/splits/user/active", { splitId });
+export const setActiveSplit = async (splitId: string, phase?: string) => {
+  const { data } = await client.put("/splits/user/active", { splitId, phase });
   return data as { userSplit: UserSplit };
+};
+
+export const createSplit = async (splitData: any) => {
+  const { data } = await client.post("/splits", splitData);
+  return data as { split: Split };
+};
+
+export const updateSplitExercise = async (id: string, exerciseId: string) => {
+  const { data } = await client.patch(`/splits/exercises/${id}`, { exerciseId });
+  return data;
 };

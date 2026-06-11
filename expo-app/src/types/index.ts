@@ -104,8 +104,12 @@ export interface SetLog {
   id: string;
   exerciseLogId: string;
   setNumber: number;
-  weightKg: number;
-  reps: number;
+  weightKg: number | null;
+  reps: number | null;
+  durationSeconds?: number | null;
+  wasSkipped?: boolean;
+  wasAlternative?: boolean;
+  alternativeExerciseId?: string | null;
   rpe: number | null;
   notes: string | null;
   completedAt: string;
@@ -185,4 +189,31 @@ export interface MuscleVolume {
 export interface HeatmapEntry {
   date: string;
   count: number;
+}
+
+export interface ExerciseQueueItem {
+  id: string;
+  splitDayExerciseId?: string;
+  exercise: Exercise;
+  targetSets: number;
+  targetRepsMin: number;
+  targetRepsMax: number;
+  loggedSets: SetLog[];
+  status: 'pending' | 'in_progress' | 'complete' | 'skipped';
+  wasReplaced: boolean;
+  replacedWithExerciseId: string | null;
+}
+
+export interface ActiveSession {
+  sessionId: string;
+  splitDayId: string;
+  splitDayName: string;
+  startedAt: number;
+  exerciseQueue: ExerciseQueueItem[];
+  currentExerciseIndex: number;
+  currentSetNumber: number;
+  isRestTimerActive: boolean;
+  restStartedAt: number | null;
+  notes: string;
+  hasStarted: boolean;
 }

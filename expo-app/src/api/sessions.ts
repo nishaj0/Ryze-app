@@ -49,3 +49,13 @@ export const logSet = async (exerciseLogId: string, weightKg: number, reps: numb
 export const deleteSet = async (exerciseLogId: string, setId: string) => {
   await client.delete(`/sessions/exercises/${exerciseLogId}/sets/${setId}`);
 };
+
+export const syncSession = async (sessionData: any) => {
+  const { data } = await client.post("/sessions/sync", sessionData);
+  return data as { session: WorkoutSession; summary: WorkoutSummary };
+};
+
+export const updateExerciseNotes = async (exerciseLogId: string, notes: string) => {
+  const { data } = await client.patch(`/sessions/exercise-logs/${exerciseLogId}/notes`, { notes });
+  return data;
+};

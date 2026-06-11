@@ -5,9 +5,15 @@ import { AppError } from "../middleware/errorHandler";
 
 const prisma = new PrismaClient();
 
-export const listSplits = async (_req: AuthRequest, res: Response) => {
+export const listSplits = async (req: AuthRequest, res: Response) => {
+  const userId = req.userId!;
   const splits = await prisma.split.findMany({
-    where: { isPrebuilt: true },
+    where: {
+      OR: [
+        { isPrebuilt: true },
+        { createdById: userId }
+      ]
+    },
     include: {
       days: {
         orderBy: { dayNumber: "asc" },
@@ -20,7 +26,7 @@ export const listSplits = async (_req: AuthRequest, res: Response) => {
 
 export const getSplit = async (req: AuthRequest, res: Response) => {
   const split = await prisma.split.findUnique({
-    where: { id: req.params.id },
+    where: { id: req.params.id as string },
     include: {
       days: {
         orderBy: { dayNumber: "asc" },
@@ -102,7 +108,7 @@ export const createSplit = async (req: AuthRequest, res: Response) => {
 };
 
 export const setActiveSplit = async (req: AuthRequest, res: Response) => {
-  const { splitId } = req.body;
+  const { splitId, phase } = req.body;
   const userId = req.userId!;
 
   const split = await prisma.split.findUnique({ where: { id: splitId } });
@@ -120,6 +126,7 @@ export const setActiveSplit = async (req: AuthRequest, res: Response) => {
       userId,
       splitId,
       isActive: true,
+      phase: phase || null,
       startDate: new Date(),
     },
     include: { split: { include: { days: true } } },
@@ -163,4 +170,17 @@ export const getActiveSplit = async (req: AuthRequest, res: Response) => {
   }
 
   res.json({ userSplit });
+};
+
+export const updateSplitExercise = async (req: AuthRequest, res: Response) => {
+  const { id } = req.params;
+  const { exerciseId } = req.body;
+
+  const updated = await prisma.splitDayExercise.update({
+    where: { id: id as string },
+    data: { exerciseId },
+    include: { exercise: true },
+  });
+
+  res.json({ splitDayExercise: updated });
 };

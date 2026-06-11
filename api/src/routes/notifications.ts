@@ -13,5 +13,6 @@ const wrap = (fn: (req: any, res: Response, next: NextFunction) => Promise<any>)
 router.post("/token", authMiddleware, wrap(notificationController.saveToken));
 router.put("/preferences", authMiddleware, wrap(notificationController.updatePreferences));
 router.get("/preferences", authMiddleware, wrap(notificationController.getPreferences));
+router.post("/trigger-reminders", wrap(notificationController.triggerReminders));
 
 export default router;

@@ -12,7 +12,7 @@ type Props = NativeStackScreenProps<OnboardingStackParamList, "Equipment">;
 const options = [
   { value: "FULL_GYM", label: "Full Gym", desc: "Access to barbells, machines, cables, dumbbells", icon: "Dumbbell" as const },
   { value: "HOME", label: "Home Gym", desc: "Basic equipment: dumbbells, bench, maybe a barbell", icon: "Home" as const },
-  { value: "LIMITED", label: "Limited", desc: "Minimal equipment or bodyweight only", icon: "Arm" as const },
+  { value: "LIMITED", label: "Limited", desc: "Minimal equipment or bodyweight only", icon: "Activity" as const },
 ];
 
 function EquipmentContent({ navigation }: Props) {
@@ -83,9 +83,5 @@ function EquipmentContent({ navigation }: Props) {
 }
 
 export default function EquipmentScreen(props: Props) {
-  return (
-    <OnboardingProvider>
-      <EquipmentContent {...props} />
-    </OnboardingProvider>
-  );
+  return <EquipmentContent {...props} />;
 }
