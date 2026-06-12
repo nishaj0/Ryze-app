@@ -300,8 +300,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/screens/home/HomeScreen.tsx": {
-    "mtime": 1781209544.6926355,
-    "ast_hash": "5bcb9404828e12c3775ba2d44ec14eb9",
+    "mtime": 1781268289.3197482,
+    "ast_hash": "0f677c772f1571e18f6c37f232555ff9",
     "semantic_hash": ""
   },
   "expo-app/src/screens/metrics/MetricsScreen.tsx": {
@@ -715,8 +715,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/components/Card.tsx": {
-    "mtime": 1781125635.1337411,
-    "ast_hash": "ac5d8530d05226469657f6b5b9d95ae8",
+    "mtime": 1781266723.7794518,
+    "ast_hash": "b12792eae6d377ed36235962749293f9",
     "semantic_hash": ""
   },
   "expo-app/src/components/Icon.tsx": {
@@ -730,13 +730,13 @@
     "semantic_hash": ""
   },
   "expo-app/src/components/Screen.tsx": {
-    "mtime": 1781125646.4450457,
-    "ast_hash": "025f9ca25f9ba3dff4746048eb1b7c0c",
+    "mtime": 1781266723.780451,
+    "ast_hash": "87c487b84c2e6be1a469bec0c28d33b4",
     "semantic_hash": ""
   },
   "expo-app/src/components/Typography.tsx": {
-    "mtime": 1781126310.9744866,
-    "ast_hash": "d5f7ea50898a3b4e8a0169cb685a3907",
+    "mtime": 1781266723.7814517,
+    "ast_hash": "2740ab7c05aa33524f44d2d5efddd9bc",
     "semantic_hash": ""
   },
   "expo-app/src/components/charts/BarChart.tsx": {
@@ -770,8 +770,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/theme/colors.ts": {
-    "mtime": 1781209559.8232117,
-    "ast_hash": "2235c3c73e2861ee611eae235aded5f6",
+    "mtime": 1781266723.782956,
+    "ast_hash": "b82145e5c17158b83ec223d4d5870e40",
     "semantic_hash": ""
   },
   "expo-app/src/theme/index.ts": {
@@ -780,13 +780,13 @@
     "semantic_hash": ""
   },
   "expo-app/src/theme/spacing.ts": {
-    "mtime": 1781125597.6141882,
-    "ast_hash": "553d0b29630a441da06d4e72cc9413f2",
+    "mtime": 1781266723.7854772,
+    "ast_hash": "c0a0e7b0d5d9fd404564f20f73cf9cda",
     "semantic_hash": ""
   },
   "expo-app/src/theme/typography.ts": {
-    "mtime": 1781126298.7091813,
-    "ast_hash": "c1f2681efd8fcfc89be31c499802cfc5",
+    "mtime": 1781266723.786478,
+    "ast_hash": "a2705de0bb664bb15b15d87237009354",
     "semantic_hash": ""
   },
   "api/src/controllers/nutritionController.ts": {

@@ -229,12 +229,13 @@ export default function HomeScreen({ navigation }: Props) {
             onPress={() => (navigation as any).navigate("Photos", { screen: "PhotoCapture" })}
             variant="primary"
             size="sm"
+            fullWidth={false}
           />
         </Card>
       )}
 
       {/* Today's Plan Card */}
-      {todaySplitDay && (
+      {todaySplitDay ? (
         <Card shadow="md" style={{ marginBottom: space.lg }}>
           <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.sm }}>
             <Icon name="Calendar" size={18} color={lightTheme.textMuted} />
@@ -324,37 +325,63 @@ export default function HomeScreen({ navigation }: Props) {
             </View>
           )}
         </Card>
+      ) : (
+        <Card shadow="md" style={{ marginBottom: space.lg, padding: space.xl, alignItems: "center" }}>
+          <View style={{
+            width: 64,
+            height: 64,
+            borderRadius: 32,
+            backgroundColor: lightTheme.primaryLight,
+            alignItems: "center",
+            justifyContent: "center",
+            marginBottom: space.md,
+          }}>
+            <Icon name="Calendar" size={32} color={lightTheme.primary} />
+          </View>
+          <Typography variant="heading3" color={lightTheme.textPrimary} style={{ marginBottom: space.sm, textAlign: "center" }}>
+            No Active Workout Plan
+          </Typography>
+          <Typography variant="body" color={lightTheme.textSecondary} style={{ marginBottom: space.lg, textAlign: "center" }}>
+            Choose a workout split to get your daily exercises and start tracking your progress.
+          </Typography>
+          <Button
+            title="Browse Plans"
+            onPress={() => (navigation as any).navigate("Profile", { screen: "SplitSwitcher" })}
+            variant="primary"
+            size="lg"
+            style={{ width: "100%" }}
+            icon={<Icon name="Search" size={20} color={lightTheme.primaryText} />}
+          />
+        </Card>
       )}
 
       {/* Stats */}
-      {overview && (
-        <View style={{ flexDirection: "row", gap: space.md, marginBottom: space.lg }}>
-          <Card shadow="sm" style={{ flex: 1, alignItems: "center" }}>
-            <Typography variant="display" color={lightTheme.primary} style={{ fontSize: 32 }}>
-              {overview.currentStreak}
-            </Typography>
-            <Typography variant="caption" color={lightTheme.textMuted}>
-              Day Streak
-            </Typography>
-          </Card>
-          <Card shadow="sm" style={{ flex: 1, alignItems: "center" }}>
-            <Typography variant="display" color={lightTheme.success} style={{ fontSize: 32 }}>
-              {overview.thisWeekWorkouts}
-            </Typography>
-            <Typography variant="caption" color={lightTheme.textMuted}>
-              This Week
-            </Typography>
-          </Card>
-          <Card shadow="sm" style={{ flex: 1, alignItems: "center" }}>
-            <Typography variant="display" color={lightTheme.warning} style={{ fontSize: 32 }}>
-              {overview.totalWorkouts}
-            </Typography>
-            <Typography variant="caption" color={lightTheme.textMuted}>
-              Total
-            </Typography>
-          </Card>
-        </View>
-      )}
+      <View style={{ flexDirection: "row", gap: space.md, marginBottom: space.lg }}>
+        <Card shadow="sm" style={{ flex: 1, alignItems: "center" }}>
+          <Typography variant="display" color={lightTheme.primary} style={{ fontSize: 32 }}>
+            {overview?.currentStreak || 0}
+          </Typography>
+          <Typography variant="caption" color={lightTheme.textMuted}>
+            Day Streak
+          </Typography>
+        </Card>
+        <Card shadow="sm" style={{ flex: 1, alignItems: "center" }}>
+          <Typography variant="display" color={lightTheme.success} style={{ fontSize: 32 }}>
+            {overview?.thisWeekWorkouts || 0}
+          </Typography>
+          <Typography variant="caption" color={lightTheme.textMuted}>
+            This Week
+          </Typography>
+        </Card>
+        <Card shadow="sm" style={{ flex: 1, alignItems: "center" }}>
+          <Typography variant="display" color={lightTheme.warning} style={{ fontSize: 32 }}>
+            {overview?.totalWorkouts || 0}
+          </Typography>
+          <Typography variant="caption" color={lightTheme.textMuted}>
+            Total
+          </Typography>
+        </Card>
+      </View>
 
       {/* Rest Day Modal */}
       <Modal visible={restModalVisible} transparent animationType="slide">
