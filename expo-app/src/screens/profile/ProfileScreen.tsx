@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { View, TouchableOpacity, ActivityIndicator, Alert } from "react-native";
+import { View, TouchableOpacity, Alert } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ProfileStackParamList } from "../../navigation/types";
 import { useAuthStore } from "../../store/authStore";
 import { getActiveSplit } from "../../api/splits";
 import { deleteAccount } from "../../api/auth";
 import { UserSplit } from "../../types";
-import { Screen, Typography, Card, Button, Icon } from "../../components";
+import { Screen, Typography, Card, Button, Icon, ProfileScreenSkeleton } from "../../components";
 import { lightTheme } from "../../theme/colors";
 import { space } from "../../theme/spacing";
 
@@ -53,10 +53,8 @@ export default function ProfileScreen({ navigation }: Props) {
 
   if (loading) {
     return (
-      <Screen scroll={false} padding="none">
-        <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-          <ActivityIndicator color={lightTheme.primary} />
-        </View>
+      <Screen scroll padding="none">
+        <ProfileScreenSkeleton />
       </Screen>
     );
   }

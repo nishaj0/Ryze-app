@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, ScrollView, ActivityIndicator, Dimensions } from "react-native";
+import { View, ScrollView, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ProgressStackParamList } from "../../navigation/types";
 import { getExerciseProgress } from "../../api/progress";
 import { ExerciseProgress } from "../../types";
-import { Typography, Card, Icon } from "../../components";
+import { Typography, Card, Icon, ExerciseProgressScreenSkeleton } from "../../components";
 import { LineChart } from "../../components/charts";
 import { lightTheme } from "../../theme/colors";
 import { space } from "../../theme/spacing";
@@ -36,8 +36,8 @@ export default function ExerciseProgressScreen({ route }: Props) {
 
   if (loading) {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator color={lightTheme.primary} size="large" />
+      <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg }} edges={["top"]}>
+        <ExerciseProgressScreenSkeleton />
       </SafeAreaView>
     );
   }

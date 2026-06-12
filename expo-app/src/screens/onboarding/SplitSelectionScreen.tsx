@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { View, TouchableOpacity, ActivityIndicator, Alert } from "react-native";
+import { View, TouchableOpacity, Alert } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { OnboardingStackParamList } from "../../navigation/types";
 import { useOnboarding, OnboardingProvider } from "./OnboardingContext";
 import { getRecommendedSplits, completeOnboarding } from "../../api/onboarding";
 import { useAuthStore } from "../../store/authStore";
 import { Split } from "../../types";
-import { Screen, Typography, Card, Button, Icon } from "../../components";
+import { Screen, Typography, Card, Button, Icon, SplitSelectionScreenSkeleton } from "../../components";
 import { lightTheme } from "../../theme/colors";
 import { space } from "../../theme/spacing";
 
@@ -55,10 +55,8 @@ function SplitSelectionContent({ navigation }: Props) {
 
   if (loading) {
     return (
-      <Screen scroll={false} padding="none">
-        <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-          <ActivityIndicator size="large" color={lightTheme.primary} />
-        </View>
+      <Screen scroll padding="none">
+        <SplitSelectionScreenSkeleton />
       </Screen>
     );
   }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, ScrollView, TouchableOpacity, Alert, ActivityIndicator } from "react-native";
+import { View, ScrollView, TouchableOpacity, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ProfileStackParamList } from "../../navigation/types";

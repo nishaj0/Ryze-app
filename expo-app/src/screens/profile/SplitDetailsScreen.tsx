@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, ScrollView, ActivityIndicator, Alert, TouchableOpacity, Modal } from "react-native";
+import { View, ScrollView, Alert, TouchableOpacity, Modal } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ProfileStackParamList } from "../../navigation/types";
 import { getSplit, setActiveSplit } from "../../api/splits";
 import { Split } from "../../types";
-import { Typography, Card, Icon, Button, Input } from "../../components";
+import { Typography, Card, Icon, Button, Input, SplitDetailsScreenSkeleton } from "../../components";
 import { lightTheme } from "../../theme/colors";
 import { space, radius } from "../../theme/spacing";
 
@@ -52,8 +52,8 @@ export default function SplitDetailsScreen({ route, navigation }: Props) {
 
   if (loading || !split) {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator color={lightTheme.primary} size="large" />
+      <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg }} edges={["top"]}>
+        <SplitDetailsScreenSkeleton />
       </SafeAreaView>
     );
   }

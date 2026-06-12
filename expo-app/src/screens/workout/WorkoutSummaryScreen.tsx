@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { View, ScrollView, Dimensions, Alert, ActivityIndicator } from "react-native";
+import { View, ScrollView, Dimensions, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { HomeStackParamList } from "../../navigation/types";
 import { useWorkoutStore } from "../../store/workoutStore";
-import { Typography, Card, Button, Icon, Input } from "../../components";
+import { Typography, Card, Button, Icon, Input, WorkoutSummaryScreenSkeleton } from "../../components";
 import { BarChart } from "../../components/charts";
 import { lightTheme } from "../../theme/colors";
 import { space, radius } from "../../theme/spacing";
@@ -24,8 +24,8 @@ export default function WorkoutSummaryScreen({ navigation }: Props) {
 
   if (!activeSession) {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator color={lightTheme.primary} />
+      <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg }} edges={["top"]}>
+        <WorkoutSummaryScreenSkeleton />
       </SafeAreaView>
     );
   }

@@ -33,6 +33,7 @@ interface WorkoutState {
   syncOfflineSessions: () => Promise<void>;
   setCurrentExerciseIndex: (index: number) => void;
   setCurrentSetNumber: (num: number) => void;
+  addExtraSet: (queueItemId: string) => void;
 }
 
 export const useWorkoutStore = create<WorkoutState>((set, get) => ({
@@ -44,7 +45,7 @@ export const useWorkoutStore = create<WorkoutState>((set, get) => ({
       id: "log-" + Date.now() + "-" + idx + "-" + Math.random().toString(36).substring(2, 9),
       splitDayExerciseId: ex.id,
       exercise: ex.exercise,
-      targetSets: ex.targetSets || 3,
+      targetSets: 3,
       targetRepsMin: ex.targetRepsMin || 8,
       targetRepsMax: ex.targetRepsMax || 12,
       loggedSets: [],
@@ -150,10 +151,11 @@ export const useWorkoutStore = create<WorkoutState>((set, get) => ({
       let isRestTimerActive = false;
       let restStartedAt = null;
 
-      if (loggedCount < targetSets) {
+      if (loggedCount < targetSets && !wasSkipped) {
+        // Only start rest timer for real (non-skipped) completed sets
         isRestTimerActive = true;
         restStartedAt = Date.now();
-      } else {
+      } else if (loggedCount >= targetSets) {
         nextSetNumber = 1;
       }
 
@@ -355,6 +357,28 @@ export const useWorkoutStore = create<WorkoutState>((set, get) => ({
       const activeSession = {
         ...state.activeSession,
         currentSetNumber: num,
+      };
+      mmkv.set("active_session", JSON.stringify(activeSession));
+      return { activeSession };
+    });
+  },
+
+  addExtraSet: (queueItemId) => {
+    set((state) => {
+      if (!state.activeSession) return {};
+      const exerciseQueue = state.activeSession.exerciseQueue.map((item) => {
+        if (item.id === queueItemId) {
+          return {
+            ...item,
+            targetSets: item.targetSets + 1,
+            status: "in_progress" as const,
+          };
+        }
+        return item;
+      });
+      const activeSession = {
+        ...state.activeSession,
+        exerciseQueue,
       };
       mmkv.set("active_session", JSON.stringify(activeSession));
       return { activeSession };

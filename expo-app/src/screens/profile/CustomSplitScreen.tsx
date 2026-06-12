@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { View, ScrollView, TouchableOpacity, Switch, Modal, Alert, ActivityIndicator } from "react-native";
+import { View, ScrollView, TouchableOpacity, Switch, Modal, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ProfileStackParamList } from "../../navigation/types";
 import { createSplit, setActiveSplit } from "../../api/splits";
 import { listExercises } from "../../api/exercises";
 import { Exercise } from "../../types";
-import { Typography, Card, Icon, Button, Input } from "../../components";
+import { Typography, Card, Icon, Button, Input, InlineListSkeleton } from "../../components";
 import { lightTheme } from "../../theme/colors";
 import { space, radius } from "../../theme/spacing";
 
@@ -507,7 +507,7 @@ export default function CustomSplitScreen({ navigation }: Props) {
 
             <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: space.xl }}>
               {loadingExercises ? (
-                <ActivityIndicator color={lightTheme.primary} />
+                <InlineListSkeleton rows={4} />
               ) : filteredExercises.length === 0 ? (
                 <Typography variant="body" color={lightTheme.textMuted} align="center" style={{ padding: space.xl }}>
                   No exercises found matching filters.

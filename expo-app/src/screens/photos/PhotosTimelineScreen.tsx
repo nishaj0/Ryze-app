@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, ScrollView, TouchableOpacity, Image, ActivityIndicator, Alert, Dimensions } from "react-native";
+import { View, ScrollView, TouchableOpacity, Image, Alert, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { PhotosStackParamList } from "../../navigation/types";
 import { getPhotos, deletePhoto } from "../../api/photos";
 import { ProgressPhoto } from "../../types";
-import { Typography, Card, Button, Icon } from "../../components";
+import { Typography, Card, Button, Icon, PhotosTimelineScreenSkeleton } from "../../components";
 import { lightTheme } from "../../theme/colors";
 import { space, radius } from "../../theme/spacing";
 
@@ -52,8 +52,8 @@ export default function PhotosTimelineScreen({ navigation }: Props) {
 
   if (loading) {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator color={lightTheme.primary} size="large" />
+      <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg }} edges={["top"]}>
+        <PhotosTimelineScreenSkeleton />
       </SafeAreaView>
     );
   }

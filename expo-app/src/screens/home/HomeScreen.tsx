@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, TouchableOpacity, ActivityIndicator, Alert, Modal, ScrollView } from "react-native";
+import { View, TouchableOpacity, Alert, Modal, ScrollView } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { HomeStackParamList } from "../../navigation/types";
 import { getActiveSplit } from "../../api/splits";
@@ -10,7 +10,7 @@ import { useAuthStore } from "../../store/authStore";
 import { useWorkoutStore } from "../../store/workoutStore";
 import { mmkv } from "../../utils/mmkv";
 import { UserSplit, ProgressOverview, SplitDay } from "../../types";
-import { Screen, Card, Typography, Button, Icon, Input } from "../../components";
+import { Screen, Card, Typography, Button, Icon, Input, HomeScreenSkeleton } from "../../components";
 import { lightTheme } from "../../theme/colors";
 import { space, radius } from "../../theme/spacing";
 
@@ -170,10 +170,8 @@ export default function HomeScreen({ navigation }: Props) {
 
   if (loading) {
     return (
-      <Screen scroll={false} padding="none">
-        <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-          <ActivityIndicator size="large" color={lightTheme.primary} />
-        </View>
+      <Screen scroll padding="none">
+        <HomeScreenSkeleton />
       </Screen>
     );
   }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, TouchableOpacity, ActivityIndicator, ScrollView, Dimensions } from "react-native";
+import { View, TouchableOpacity, ScrollView, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ProgressStackParamList } from "../../navigation/types";
@@ -16,7 +16,7 @@ import {
   MuscleVolume,
   PersonalRecord,
 } from "../../types";
-import { Typography, Card, Icon, Button } from "../../components";
+import { Typography, Card, Icon, Button, DashboardScreenSkeleton } from "../../components";
 import { LineChart, BarChart, Heatmap, RingChart } from "../../components/charts";
 import { lightTheme } from "../../theme/colors";
 import { space, radius } from "../../theme/spacing";
@@ -62,8 +62,8 @@ export default function DashboardScreen({ navigation }: Props) {
 
   if (loading) {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator color={lightTheme.primary} size="large" />
+      <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg }} edges={["top"]}>
+        <DashboardScreenSkeleton />
       </SafeAreaView>
     );
   }

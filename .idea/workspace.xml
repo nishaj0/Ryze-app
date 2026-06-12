@@ -6,49 +6,25 @@
   <component name="ChangeListManager">
     <list default="true" id="e19c3f9d-e96e-4d34-9749-0a76372ee78f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/api/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/api/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/api/prisma/schema.prisma" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/controllers/authController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/controllers/authController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/controllers/exerciseController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/controllers/exerciseController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/controllers/metricsController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/controllers/metricsController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/controllers/notificationController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/controllers/notificationController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/controllers/photoController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/controllers/photoController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/controllers/progressController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/controllers/progressController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/controllers/recordController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/controllers/recordController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/controllers/sessionController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/controllers/sessionController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/controllers/splitController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/controllers/splitController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/prisma/seed.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/prisma/seed.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/routes/metrics.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/routes/metrics.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/routes/notifications.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/routes/notifications.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/routes/sessions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/routes/sessions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/api/metrics.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/api/metrics.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/api/sessions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/api/sessions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/api/splits.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/api/splits.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/navigation/MainTabs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/navigation/MainTabs.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/navigation/OnboardingStack.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/navigation/OnboardingStack.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/navigation/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/navigation/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expo-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expo-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expo-app/src/components/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/components/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/expo-app/src/screens/home/HomeScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/home/HomeScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/expo-app/src/screens/metrics/MetricsScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/metrics/MetricsScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/onboarding/BodyStatsScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/onboarding/BodyStatsScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/onboarding/DaysScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/onboarding/DaysScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/onboarding/EquipmentScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/onboarding/EquipmentScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/onboarding/ExperienceScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/onboarding/ExperienceScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/onboarding/GenderScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/onboarding/GenderScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/onboarding/GoalScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/onboarding/GoalScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/onboarding/SleepScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/onboarding/SleepScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/expo-app/src/screens/onboarding/SplitSelectionScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/onboarding/SplitSelectionScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/profile/SettingsScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/profile/SettingsScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/photos/PhotoCompareScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/photos/PhotoCompareScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/photos/PhotosTimelineScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/photos/PhotosTimelineScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/profile/CustomSplitScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/profile/CustomSplitScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/profile/EditProfileScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/profile/EditProfileScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/profile/ProfileScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/profile/ProfileScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/profile/SplitDetailsScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/profile/SplitDetailsScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/expo-app/src/screens/profile/SplitSwitcherScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/profile/SplitSwitcherScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/progress/DashboardScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/progress/DashboardScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/progress/ExerciseProgressScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/progress/ExerciseProgressScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/progress/RecordsScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/progress/RecordsScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/expo-app/src/screens/workout/WorkoutLoggerScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/workout/WorkoutLoggerScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/expo-app/src/screens/workout/WorkoutSummaryScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/workout/WorkoutSummaryScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/expo-app/src/store/workoutStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/store/workoutStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphify-out/.graphify_labels.json" beforeDir="false" afterPath="$PROJECT_DIR$/graphify-out/.graphify_labels.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphify-out/GRAPH_REPORT.md" beforeDir="false" afterPath="$PROJECT_DIR$/graphify-out/GRAPH_REPORT.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphify-out/cache/stat-index.json" beforeDir="false" afterPath="$PROJECT_DIR$/graphify-out/cache/stat-index.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphify-out/graph.html" beforeDir="false" afterPath="$PROJECT_DIR$/graphify-out/graph.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphify-out/graph.json" beforeDir="false" afterPath="$PROJECT_DIR$/graphify-out/graph.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphify-out/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/graphify-out/manifest.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
