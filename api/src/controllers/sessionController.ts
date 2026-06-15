@@ -556,3 +556,87 @@ export const updateExerciseNotes = async (req: AuthRequest, res: Response) => {
 
   res.json({ exerciseLog });
 };
+
+export const getCalendarSessions = async (req: AuthRequest, res: Response) => {
+  const userId = req.userId!;
+  const { start, end } = req.query;
+
+  if (!start || !end) {
+    throw new AppError("start and end query params are required", 400);
+  }
+
+  const startDate = new Date(start as string);
+  const endDate = new Date(end as string);
+  startDate.setHours(0, 0, 0, 0);
+  endDate.setHours(23, 59, 59, 999);
+
+  const sessions = await prisma.workoutSession.findMany({
+    where: {
+      userId,
+      date: { gte: startDate, lte: endDate },
+      status: { in: ["COMPLETED", "SKIPPED"] },
+    },
+    orderBy: { date: "asc" },
+    include: {
+      splitDay: { select: { name: true, muscleGroups: true, isRest: true } },
+      exerciseLogs: {
+        include: {
+          exercise: { select: { name: true, muscleGroup: true } },
+          setLogs: true,
+        },
+      },
+    },
+  });
+
+  const calendar = sessions.map((s: any) => {
+    const totalVolume = s.exerciseLogs.reduce((sum: number, log: any) => {
+      return sum + log.setLogs.reduce((setSum: number, set: any) => setSum + set.weightKg * set.reps, 0);
+    }, 0);
+
+    return {
+      id: s.id,
+      date: s.date,
+      status: s.status,
+      splitDayName: s.splitDay.name,
+      muscleGroups: s.splitDay.muscleGroups,
+      restReason: s.restReason,
+      durationMinutes: s.durationMinutes,
+      exerciseCount: s.exerciseLogs.length,
+      totalVolume: Math.round(totalVolume),
+      notes: s.notes,
+    };
+  });
+
+  res.json({ sessions: calendar });
+};
+
+export const updateSession = async (req: AuthRequest, res: Response) => {
+  const { restReason, notes } = req.body;
+  const sessionId = req.params.id as string;
+
+  const session = await prisma.workoutSession.findUnique({
+    where: { id: sessionId },
+  });
+
+  if (!session) {
+    throw new AppError("Session not found", 404);
+  }
+
+  if (session.userId !== req.userId) {
+    throw new AppError("Unauthorized", 403);
+  }
+
+  const data: any = {};
+  if (restReason !== undefined) data.restReason = restReason;
+  if (notes !== undefined) data.notes = notes;
+
+  const updated = await prisma.workoutSession.update({
+    where: { id: sessionId },
+    data,
+    include: {
+      splitDay: { select: { name: true, muscleGroups: true } },
+    },
+  });
+
+  res.json({ session: updated });
+};

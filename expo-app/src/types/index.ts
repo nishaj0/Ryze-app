@@ -217,3 +217,16 @@ export interface ActiveSession {
   notes: string;
   hasStarted: boolean;
 }
+
+export interface CalendarSession {
+  id: string;
+  date: string;
+  status: string;
+  splitDayName: string;
+  muscleGroups: string;
+  restReason: string | null;
+  durationMinutes: number | null;
+  exerciseCount: number;
+  totalVolume: number;
+  notes: string | null;
+}

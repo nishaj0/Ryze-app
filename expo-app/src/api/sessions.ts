@@ -1,5 +1,5 @@
 import client from "./client";
-import { WorkoutSession, WorkoutSummary } from "../types";
+import { WorkoutSession, WorkoutSummary, CalendarSession } from "../types";
 
 export const createSession = async (splitDayId: string, date?: string) => {
   const { data } = await client.post("/sessions", { splitDayId, date });
@@ -58,4 +58,14 @@ export const syncSession = async (sessionData: any) => {
 export const updateExerciseNotes = async (exerciseLogId: string, notes: string) => {
   const { data } = await client.patch(`/sessions/exercise-logs/${exerciseLogId}/notes`, { notes });
   return data;
+};
+
+export const getCalendarSessions = async (start: string, end: string) => {
+  const { data } = await client.get("/sessions/calendar", { params: { start, end } });
+  return data as { sessions: CalendarSession[] };
+};
+
+export const updateSession = async (id: string, updates: { restReason?: string; notes?: string }) => {
+  const { data } = await client.patch(`/sessions/${id}`, updates);
+  return data as { session: WorkoutSession };
 };

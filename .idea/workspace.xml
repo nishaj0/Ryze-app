@@ -6,25 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e19c3f9d-e96e-4d34-9749-0a76372ee78f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/components/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/components/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/home/HomeScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/home/HomeScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/metrics/MetricsScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/metrics/MetricsScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/onboarding/SplitSelectionScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/onboarding/SplitSelectionScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/photos/PhotoCompareScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/photos/PhotoCompareScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/photos/PhotosTimelineScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/photos/PhotosTimelineScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/profile/CustomSplitScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/profile/CustomSplitScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/profile/EditProfileScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/profile/EditProfileScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/profile/ProfileScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/profile/ProfileScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/profile/SplitDetailsScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/profile/SplitDetailsScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/profile/SplitSwitcherScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/profile/SplitSwitcherScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/progress/DashboardScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/progress/DashboardScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/progress/ExerciseProgressScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/progress/ExerciseProgressScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/progress/RecordsScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/progress/RecordsScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/workout/WorkoutLoggerScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/workout/WorkoutLoggerScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/workout/WorkoutSummaryScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/workout/WorkoutSummaryScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/store/workoutStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/store/workoutStore.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
