@@ -22,6 +22,7 @@ export type HomeStackParamList = {
   HomeMain: undefined;
   WorkoutLogger: { splitDayId: string; splitDayName: string };
   WorkoutSummary: { sessionId: string };
+  WorkoutHistory: undefined;
 };
 
 export type WorkoutStackParamList = {

@@ -12,10 +12,12 @@ const wrap = (fn: (req: any, res: Response, next: NextFunction) => Promise<any>)
 
 router.post("/", authMiddleware, wrap(sessionController.createSession));
 router.post("/sync", authMiddleware, wrap(sessionController.syncSession));
+router.post("/rest", authMiddleware, wrap(sessionController.markRestDay));
+router.get("/calendar", authMiddleware, wrap(sessionController.getCalendarSessions));
 router.get("/", authMiddleware, wrap(sessionController.listSessions));
 router.get("/:id", authMiddleware, wrap(sessionController.getSession));
+router.patch("/:id", authMiddleware, wrap(sessionController.updateSession));
 router.patch("/:id/complete", authMiddleware, wrap(sessionController.completeSession));
-router.post("/rest", authMiddleware, wrap(sessionController.markRestDay));
 router.post("/:id/exercises", authMiddleware, wrap(sessionController.addExerciseToSession));
 router.patch(
   "/:id/exercises/:exerciseLogId/swap",

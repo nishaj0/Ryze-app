@@ -18,6 +18,24 @@ const goals = [
   { value: "MAINTAIN", label: "Maintain", icon: "Scale" as const },
 ];
 
+const genders = [
+  { value: "MALE", label: "Male", icon: "User" as const },
+  { value: "FEMALE", label: "Female", icon: "User" as const },
+  { value: "OTHER", label: "Other", icon: "Users" as const },
+];
+
+const experienceLevels = [
+  { value: "BEGINNER", label: "Beginner", icon: "Sprout" as const },
+  { value: "INTERMEDIATE", label: "Intermediate", icon: "TreePine" as const },
+  { value: "ADVANCED", label: "Advanced", icon: "Mountain" as const },
+];
+
+const equipmentOptions = [
+  { value: "FULL_GYM", label: "Full Gym", icon: "Dumbbell" as const },
+  { value: "HOME", label: "Home", icon: "Home" as const },
+  { value: "LIMITED", label: "Limited", icon: "CircleDot" as const },
+];
+
 export default function EditProfileScreen({ navigation }: Props) {
   const { user, updateUser } = useAuthStore();
   const [name, setName] = useState(user?.name || "");
@@ -25,13 +43,23 @@ export default function EditProfileScreen({ navigation }: Props) {
   const [weight, setWeight] = useState(String(user?.currentWeight || ""));
   const [height, setHeight] = useState(String(user?.height || ""));
   const [sleep, setSleep] = useState(String(user?.sleepHours || ""));
+  const [gender, setGender] = useState(user?.gender || "OTHER");
+  const [experienceLevel, setExperienceLevel] = useState(user?.experienceLevel || "BEGINNER");
+  const [daysAvailable, setDaysAvailable] = useState(user?.daysAvailable || 3);
+  const [equipmentAccess, setEquipmentAccess] = useState(user?.equipmentAccess || "FULL_GYM");
   const [saving, setSaving] = useState(false);
 
   const handleSave = async () => {
     setSaving(true);
     try {
-      const updates: any = { name };
-      if (goal) updates.goal = goal;
+      const updates: any = {
+        name,
+        goal,
+        gender,
+        experienceLevel,
+        daysAvailable,
+        equipmentAccess,
+      };
       if (weight) updates.currentWeight = parseFloat(weight);
       if (height) updates.height = parseFloat(height);
       if (sleep) updates.sleepHours = parseFloat(sleep);
@@ -153,6 +181,184 @@ export default function EditProfileScreen({ navigation }: Props) {
             keyboardType="decimal-pad"
             icon={<Icon name="Moon" size={20} color={lightTheme.textMuted} />}
           />
+
+          <View>
+            <Typography variant="label" color={lightTheme.textSecondary} style={{ marginBottom: space.sm }}>
+              GENDER
+            </Typography>
+            <View style={{ flexDirection: "row", gap: space.sm }}>
+              {genders.map((g) => {
+                const isSelected = gender === g.value;
+                return (
+                  <TouchableOpacity
+                    key={g.value}
+                    onPress={() => setGender(g.value)}
+                    activeOpacity={0.8}
+                    style={{ flex: 1 }}
+                  >
+                    <Card
+                      shadow={isSelected ? "sm" : "none"}
+                      style={{
+                        padding: space.md,
+                        backgroundColor: isSelected ? lightTheme.primaryLight : lightTheme.surface,
+                        borderColor: isSelected ? lightTheme.primary : lightTheme.border,
+                        borderWidth: isSelected ? 2 : 1,
+                      }}
+                    >
+                      <View style={{ alignItems: "center" }}>
+                        <Icon name={g.icon} size={20} color={isSelected ? lightTheme.primary : lightTheme.textSecondary} />
+                        <Typography
+                          variant="caption"
+                          color={isSelected ? lightTheme.primary : lightTheme.textPrimary}
+                          weight="600"
+                          style={{ marginTop: space.xs }}
+                        >
+                          {g.label}
+                        </Typography>
+                      </View>
+                    </Card>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+          </View>
+
+          <View>
+            <Typography variant="label" color={lightTheme.textSecondary} style={{ marginBottom: space.sm }}>
+              EXPERIENCE LEVEL
+            </Typography>
+            <View style={{ gap: space.sm }}>
+              {experienceLevels.map((exp) => {
+                const isSelected = experienceLevel === exp.value;
+                return (
+                  <TouchableOpacity
+                    key={exp.value}
+                    onPress={() => setExperienceLevel(exp.value)}
+                    activeOpacity={0.8}
+                  >
+                    <Card
+                      shadow={isSelected ? "sm" : "none"}
+                      style={{
+                        padding: space.md,
+                        backgroundColor: isSelected ? lightTheme.primaryLight : lightTheme.surface,
+                        borderColor: isSelected ? lightTheme.primary : lightTheme.border,
+                        borderWidth: isSelected ? 2 : 1,
+                      }}
+                    >
+                      <View style={{ flexDirection: "row", alignItems: "center", gap: space.md }}>
+                        <View
+                          style={{
+                            width: 36,
+                            height: 36,
+                            borderRadius: radius.md,
+                            backgroundColor: isSelected ? lightTheme.primary : lightTheme.surfaceSecondary,
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <Icon name={exp.icon} size={18} color={isSelected ? lightTheme.primaryText : lightTheme.textSecondary} />
+                        </View>
+                        <Typography variant="body" color={isSelected ? lightTheme.primary : lightTheme.textPrimary} weight="600">
+                          {exp.label}
+                        </Typography>
+                        {isSelected && (
+                          <View style={{ marginLeft: "auto" }}><Icon name="CheckCircle2" size={20} color={lightTheme.primary} /></View>
+                        )}
+                      </View>
+                    </Card>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+          </View>
+
+          <View>
+            <Typography variant="label" color={lightTheme.textSecondary} style={{ marginBottom: space.sm }}>
+              DAYS PER WEEK
+            </Typography>
+            <View style={{ flexDirection: "row", gap: space.xs, flexWrap: "wrap" }}>
+              {[1, 2, 3, 4, 5, 6, 7].map((d) => {
+                const isSelected = daysAvailable === d;
+                return (
+                  <TouchableOpacity
+                    key={d}
+                    onPress={() => setDaysAvailable(d)}
+                    activeOpacity={0.8}
+                  >
+                    <View
+                      style={{
+                        width: 44,
+                        height: 44,
+                        borderRadius: 22,
+                        backgroundColor: isSelected ? lightTheme.primary : lightTheme.surfaceSecondary,
+                        alignItems: "center",
+                        justifyContent: "center",
+                        borderWidth: isSelected ? 0 : 1,
+                        borderColor: lightTheme.border,
+                      }}
+                    >
+                      <Typography
+                        variant="body"
+                        color={isSelected ? lightTheme.primaryText : lightTheme.textPrimary}
+                        weight="700"
+                      >
+                        {d}
+                      </Typography>
+                    </View>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+          </View>
+
+          <View>
+            <Typography variant="label" color={lightTheme.textSecondary} style={{ marginBottom: space.sm }}>
+              EQUIPMENT ACCESS
+            </Typography>
+            <View style={{ gap: space.sm }}>
+              {equipmentOptions.map((eq) => {
+                const isSelected = equipmentAccess === eq.value;
+                return (
+                  <TouchableOpacity
+                    key={eq.value}
+                    onPress={() => setEquipmentAccess(eq.value)}
+                    activeOpacity={0.8}
+                  >
+                    <Card
+                      shadow={isSelected ? "sm" : "none"}
+                      style={{
+                        padding: space.md,
+                        backgroundColor: isSelected ? lightTheme.primaryLight : lightTheme.surface,
+                        borderColor: isSelected ? lightTheme.primary : lightTheme.border,
+                        borderWidth: isSelected ? 2 : 1,
+                      }}
+                    >
+                      <View style={{ flexDirection: "row", alignItems: "center", gap: space.md }}>
+                        <View
+                          style={{
+                            width: 36,
+                            height: 36,
+                            borderRadius: radius.md,
+                            backgroundColor: isSelected ? lightTheme.primary : lightTheme.surfaceSecondary,
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <Icon name={eq.icon} size={18} color={isSelected ? lightTheme.primaryText : lightTheme.textSecondary} />
+                        </View>
+                        <Typography variant="body" color={isSelected ? lightTheme.primary : lightTheme.textPrimary} weight="600">
+                          {eq.label}
+                        </Typography>
+                        {isSelected && (
+                          <View style={{ marginLeft: "auto" }}><Icon name="CheckCircle2" size={20} color={lightTheme.primary} /></View>
+                        )}
+                      </View>
+                    </Card>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+          </View>
         </View>
 
         <View style={{ marginTop: space.xl }}>

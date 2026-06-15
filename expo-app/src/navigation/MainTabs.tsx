@@ -8,6 +8,7 @@ import { lightTheme } from "../theme/colors";
 import HomeScreen from "../screens/home/HomeScreen";
 import WorkoutLoggerScreen from "../screens/workout/WorkoutLoggerScreen";
 import WorkoutSummaryScreen from "../screens/workout/WorkoutSummaryScreen";
+import WorkoutHistoryScreen from "../screens/workout/WorkoutHistoryScreen";
 import DashboardScreen from "../screens/progress/DashboardScreen";
 import ExerciseProgressScreen from "../screens/progress/ExerciseProgressScreen";
 import RecordsScreen from "../screens/progress/RecordsScreen";
@@ -40,6 +41,7 @@ function HomeStack() {
       <HomeStackNav.Screen name="HomeMain" component={HomeScreen} options={{ title: "Home", headerShown: false }} />
       <HomeStackNav.Screen name="WorkoutLogger" component={WorkoutLoggerScreen} options={{ title: "Workout" }} />
       <HomeStackNav.Screen name="WorkoutSummary" component={WorkoutSummaryScreen} options={{ title: "Summary", headerLeft: () => null }} />
+      <HomeStackNav.Screen name="WorkoutHistory" component={WorkoutHistoryScreen} options={{ title: "Workout History" }} />
     </HomeStackNav.Navigator>
   );
 }

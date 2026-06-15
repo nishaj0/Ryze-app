@@ -85,8 +85,8 @@
     "semantic_hash": ""
   },
   "api/src/controllers/sessionController.ts": {
-    "mtime": 1781475573.8745735,
-    "ast_hash": "331f2afa0f5f9a7e495515f030e9221b",
+    "mtime": 1781203170.7676322,
+    "ast_hash": "04ff8f2d9296ab272b436fa5fd8a49bb",
     "semantic_hash": ""
   },
   "api/src/controllers/splitController.ts": {
@@ -160,8 +160,8 @@
     "semantic_hash": "8fa026321afb9bf54f7f1d1feefd6a1c"
   },
   "api/src/routes/sessions.ts": {
-    "mtime": 1781475721.829709,
-    "ast_hash": "669e717fdef5c6531a51bfe160b20cf3",
+    "mtime": 1781202701.4112806,
+    "ast_hash": "8a0a31d6eff934f4b025b4019e1db507",
     "semantic_hash": ""
   },
   "api/src/routes/splits.ts": {
@@ -250,8 +250,8 @@
     "semantic_hash": "ba84c610fcdf2d344ec1b7ed54f981d9"
   },
   "expo-app/src/api/sessions.ts": {
-    "mtime": 1781500721.121183,
-    "ast_hash": "4202ebb066f005b181b895cfa35e91f2",
+    "mtime": 1781202775.1139126,
+    "ast_hash": "af09bfb24f5f788e66fb4d9b636af370",
     "semantic_hash": ""
   },
   "expo-app/src/api/splits.ts": {
@@ -270,8 +270,8 @@
     "semantic_hash": "7b015c2924d7afa4ce9985a3dbac5678"
   },
   "expo-app/src/navigation/MainTabs.tsx": {
-    "mtime": 1781501643.9095192,
-    "ast_hash": "2c0adbfc401e17e4b12c45545bae7263",
+    "mtime": 1781209541.491442,
+    "ast_hash": "169d65161724eb7901d29ff0b80d7cc4",
     "semantic_hash": ""
   },
   "expo-app/src/navigation/OnboardingStack.tsx": {
@@ -285,8 +285,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/navigation/types.ts": {
-    "mtime": 1781501366.162972,
-    "ast_hash": "d3c0063e0b3c87d42a32e86340e412e6",
+    "mtime": 1781202845.1643448,
+    "ast_hash": "95decf984ea2d190f22f1a7cb635d449",
     "semantic_hash": ""
   },
   "expo-app/src/screens/auth/LoginScreen.tsx": {
@@ -370,13 +370,13 @@
     "semantic_hash": ""
   },
   "expo-app/src/screens/profile/EditProfileScreen.tsx": {
-    "mtime": 1781502798.7588887,
-    "ast_hash": "0062b7e965f48b63764fef5580b3970c",
+    "mtime": 1781269401.6805732,
+    "ast_hash": "22639dfed122987027544c728a7eaa22",
     "semantic_hash": ""
   },
   "expo-app/src/screens/profile/ProfileScreen.tsx": {
-    "mtime": 1781502050.0203407,
-    "ast_hash": "7b4734145f1dba970f6145e7bd07bdfc",
+    "mtime": 1781269226.2956703,
+    "ast_hash": "eab844286b7603081e9de4777644d5ae",
     "semantic_hash": ""
   },
   "expo-app/src/screens/profile/SettingsScreen.tsx": {
@@ -425,8 +425,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/types/index.ts": {
-    "mtime": 1781500714.4153435,
-    "ast_hash": "b9e8fc384602caac552df0e376d1c9ab",
+    "mtime": 1781209408.6504405,
+    "ast_hash": "ba12d60fa71d7f1cdf65ac15b234f290",
     "semantic_hash": ""
   },
   "expo-app/src/utils/storage.ts": {
@@ -817,11 +817,6 @@
   "expo-app/src/components/Skeleton.tsx": {
     "mtime": 1781269415.3704042,
     "ast_hash": "d744bbdb0f9a1a1085d11f8138f73600",
-    "semantic_hash": ""
-  },
-  "expo-app/src/screens/workout/WorkoutHistoryScreen.tsx": {
-    "mtime": 1781504316.1540022,
-    "ast_hash": "684784e1647a4f8ee5169b397024eea7",
     "semantic_hash": ""
   }
 }
