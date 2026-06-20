@@ -69,20 +69,51 @@ model SplitDay {
 }
 
 model Exercise {
-  id               String   @id @default(cuid())
-  name             String
-  muscleGroup      String
-  secondaryMuscles String
-  equipmentNeeded  String
-  demoUrl          String?
-  instructions     String?
-  createdAt        DateTime @default(now())
+  id           String   @id @default(cuid())
+  name         String   @unique
+  force        String?
+  level        String?
+  mechanic     String?
+  equipment    String?
+  category     String?
+  instructions String?
+  createdAt    DateTime @default(now())
 
+  muscles           ExerciseMuscle[]
+  images            ExerciseImage[]
   splitDayExercises SplitDayExercise[]
   exerciseLogs      ExerciseLog[]
   alternativesFrom  ExerciseAlternative[] @relation("fromExercise")
   alternativesTo    ExerciseAlternative[] @relation("toExercise")
   personalRecords   PersonalRecord[]
+}
+
+model Muscle {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  exercises ExerciseMuscle[]
+}
+
+model ExerciseMuscle {
+  id         String   @id @default(cuid())
+  exerciseId String
+  muscleId   String
+  isPrimary  Boolean
+
+  exercise   Exercise @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+  muscle     Muscle   @relation(fields: [muscleId], references: [id])
+
+  @@unique([exerciseId, muscleId])
+}
+
+model ExerciseImage {
+  id         String   @id @default(cuid())
+  exerciseId String
+  url        String
+  publicId   String
+  order      Int
+
+  exercise   Exercise @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
 }
 
 model ExerciseAlternative {

@@ -5,12 +5,12 @@
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 667 nodes · 1294 edges · 42 communities (37 shown, 5 thin omitted)
+- 665 nodes · 1289 edges · 37 communities (33 shown, 4 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `a2a4058a`
+- Built from commit: `ba8169a3`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -45,11 +45,6 @@
 - [[_COMMUNITY_Community 30|Community 30]]
 - [[_COMMUNITY_Community 31|Community 31]]
 - [[_COMMUNITY_Community 32|Community 32]]
-- [[_COMMUNITY_Community 33|Community 33]]
-- [[_COMMUNITY_Community 34|Community 34]]
-- [[_COMMUNITY_Community 35|Community 35]]
-- [[_COMMUNITY_Community 36|Community 36]]
-- [[_COMMUNITY_Community 37|Community 37]]
 - [[_COMMUNITY_Community 38|Community 38]]
 - [[_COMMUNITY_Community 39|Community 39]]
 - [[_COMMUNITY_Community 40|Community 40]]
@@ -61,48 +56,48 @@
 3. `useAuthStore` - 22 edges
 4. `radius` - 21 edges
 5. `useOnboarding()` - 17 edges
-6. `compilerOptions` - 16 edges
+6. `compilerOptions` - 15 edges
 7. `expo` - 13 edges
 8. `AuthRequest` - 12 edges
 9. `authMiddleware()` - 11 edges
 10. `scripts` - 11 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `MetricsScreen()` --calls--> `useAuthStore`  [EXTRACTED]
-  expo-app/src/screens/metrics/MetricsScreen.tsx → expo-app/src/store/authStore.ts
+- `RootNavigator()` --calls--> `useAuthStore`  [EXTRACTED]
+  expo-app/src/navigation/RootNavigator.tsx → expo-app/src/store/authStore.ts
+- `LoginScreen()` --calls--> `useAuthStore`  [EXTRACTED]
+  expo-app/src/screens/auth/LoginScreen.tsx → expo-app/src/store/authStore.ts
+- `RegisterScreen()` --calls--> `useAuthStore`  [EXTRACTED]
+  expo-app/src/screens/auth/RegisterScreen.tsx → expo-app/src/store/authStore.ts
 - `EditProfileScreen()` --calls--> `useAuthStore`  [EXTRACTED]
   expo-app/src/screens/profile/EditProfileScreen.tsx → expo-app/src/store/authStore.ts
 - `ProfileScreen()` --calls--> `useAuthStore`  [EXTRACTED]
   expo-app/src/screens/profile/ProfileScreen.tsx → expo-app/src/store/authStore.ts
-- `HomeScreen()` --calls--> `useAuthStore`  [EXTRACTED]
-  expo-app/src/screens/home/HomeScreen.tsx → expo-app/src/store/authStore.ts
-- `SplitSelectionContent()` --calls--> `useOnboarding()`  [EXTRACTED]
-  expo-app/src/screens/onboarding/SplitSelectionScreen.tsx → expo-app/src/screens/onboarding/OnboardingContext.tsx
 
 ## Import Cycles
 - None detected.
 
-## Communities (42 total, 5 thin omitted)
+## Communities (37 total, 4 thin omitted)
 
 ### Community 0 - "Frontend API Client"
-Cohesion: 0.06
-Nodes (31): deleteAccount(), login(), register(), updateProfile(), client, LoginScreen(), Props, Props (+23 more)
+Cohesion: 0.09
+Nodes (15): client, deleteBodyMetric(), getBodyMetrics(), logBodyMetric(), Props, { width: screenW }, AuthState, BodyMetric (+7 more)
 
 ### Community 1 - "Auth & Splits Routes"
 Cohesion: 0.08
-Nodes (33): completeOnboarding(), getRecommendedSplits(), screenOptions, Stack, OnboardingStackParamList, ScreenProps, BodyStatsContent(), Props (+25 more)
+Nodes (35): completeOnboarding(), getRecommendedSplits(), ScreenProps, screenOptions, Stack, OnboardingStackParamList, ScreenProps, BodyStatsContent() (+27 more)
 
 ### Community 2 - "Onboarding Flow"
 Cohesion: 0.05
 Nodes (43): dependencies, axios, expo, expo-camera, expo-font, @expo-google-fonts/inter, expo-image-manipulator, expo-image-picker (+35 more)
 
 ### Community 3 - "Expo App Dependencies"
-Cohesion: 0.10
-Nodes (25): getExerciseProgress(), IconName, IconProps, DashboardScreenSkeleton(), ExerciseProgressScreenSkeleton(), HomeScreenSkeleton(), InlineListSkeleton(), MetricsScreenSkeleton() (+17 more)
+Cohesion: 0.08
+Nodes (31): createSplit(), getActiveSplit(), getSplit(), listSplits(), IconName, IconProps, DashboardScreenSkeleton(), ExerciseProgressScreenSkeleton() (+23 more)
 
 ### Community 4 - "API Server Dependencies"
-Cohesion: 0.24
-Nodes (7): addExercise(), completeSession(), deleteSet(), logSet(), swapExercise(), Props, { width: screenW, height: screenH }
+Cohesion: 0.07
+Nodes (46): listExercises(), addExercise(), completeSession(), createSession(), deleteSet(), getCalendarSessions(), getSession(), logSet() (+38 more)
 
 ### Community 5 - "Community 5"
 Cohesion: 0.24
@@ -114,7 +109,7 @@ Nodes (32): dependencies, axios, bcryptjs, cloudinary, cors, dotenv, express, js
 
 ### Community 7 - "Expo App Configuration"
 Cohesion: 0.18
-Nodes (7): validate(), loginSchema, registerSchema, router, onboardingSchema, router, router
+Nodes (7): validate(), loginSchema, registerSchema, router, bodyMetricSchema, router, router
 
 ### Community 8 - "API TypeScript Config"
 Cohesion: 0.10
@@ -125,12 +120,12 @@ Cohesion: 0.21
 Nodes (8): deletePhoto(), prisma, uploadPhoto(), router, storage, upload, deleteFromCloudinary(), uploadToCloudinary()
 
 ### Community 10 - "Root Package Scripts"
-Cohesion: 0.12
+Cohesion: 0.11
 Nodes (17): compilerOptions, declaration, declarationMap, esModuleInterop, forceConsistentCasingInFileNames, lib, module, moduleResolution (+9 more)
 
 ### Community 11 - "Photos Feature"
-Cohesion: 0.24
-Nodes (4): prisma, AppError, errorHandler(), app
+Cohesion: 0.18
+Nodes (6): prisma, AppError, errorHandler(), onboardingSchema, router, app
 
 ### Community 12 - "Workout Session Controller"
 Cohesion: 0.12
@@ -170,75 +165,59 @@ Nodes (7): prisma, authMiddleware(), prisma, router, router, router, router
 
 ### Community 22 - "Exercise Controller"
 Cohesion: 0.29
-Nodes (6): compilerOptions, baseUrl, paths, strict, extends, @/*
+Nodes (6): compilerOptions, moduleResolution, paths, strict, extends, @/*
 
 ### Community 23 - "Community 23"
-Cohesion: 0.17
-Nodes (14): getHeatmap(), getMuscleVolume(), getVolumeHistory(), getRecords(), Props, StatCardProps, { width: screenW }, ExerciseAlternative (+6 more)
+Cohesion: 0.11
+Nodes (17): getExerciseProgress(), getHeatmap(), getMuscleVolume(), getOverview(), getVolumeHistory(), getRecords(), ProgressStackParamList, Props (+9 more)
 
 ### Community 30 - "Community 30"
 Cohesion: 0.07
 Nodes (22): deletePhoto(), getPhotos(), uploadPhoto(), headerStyle, headerTitleStyle, HomeStackNav, PhotosStackNav, ProfileStackNav (+14 more)
 
 ### Community 31 - "Community 31"
-Cohesion: 0.15
-Nodes (5): prisma, prisma, AuthRequest, bodyMetricSchema, router
+Cohesion: 0.20
+Nodes (3): prisma, prisma, AuthRequest
 
 ### Community 32 - "Community 32"
-Cohesion: 0.27
-Nodes (10): WorkoutState, ActiveSession, Exercise, ExerciseLog, ExerciseQueueItem, SetLog, WorkoutSession, getSetRecommendation() (+2 more)
-
-### Community 33 - "Community 33"
-Cohesion: 0.20
-Nodes (9): getOverview(), createSession(), markRestDay(), Props, SplitDay, UserSplit, cache, initMMKV() (+1 more)
-
-### Community 34 - "Community 34"
-Cohesion: 0.20
-Nodes (9): getCalendarSessions(), updateSession(), Colors, CalendarSession, DAYS, getMonthDays(), MONTHS, REST_REASONS (+1 more)
-
-### Community 35 - "Community 35"
-Cohesion: 0.27
-Nodes (9): getSession(), HomeScreen(), HomeStackParamList, useWorkoutStore, WorkoutSummary, WorkoutLoggerScreen(), Props, { width: screenW } (+1 more)
-
-### Community 37 - "Community 37"
-Cohesion: 0.15
-Nodes (11): createSplit(), getActiveSplit(), getSplit(), listSplits(), setActiveSplit(), ProfileStackParamList, AVAILABLE_MUSCLE_GROUPS, DayConfig (+3 more)
+Cohesion: 0.18
+Nodes (9): deleteAccount(), login(), register(), LoginScreen(), Props, Props, RegisterScreen(), Stack (+1 more)
 
 ### Community 38 - "Community 38"
-Cohesion: 0.17
-Nodes (6): RingChartProps, ScreenProps, Stack, RootStackParamList, queryClient, LightTheme
+Cohesion: 0.25
+Nodes (4): RootNavigator(), Stack, RootStackParamList, queryClient
 
 ### Community 39 - "Community 39"
 Cohesion: 0.19
 Nodes (6): BarChartProps, BarItem, HeatmapDay, HeatmapProps, ChartPoint, LineChartProps
 
 ### Community 40 - "Community 40"
-Cohesion: 0.17
-Nodes (6): ButtonProps, Size, Variant, CardProps, InputProps, radius
+Cohesion: 0.13
+Nodes (9): RingChartProps, ButtonProps, Size, Variant, CardProps, InputProps, Props, LightTheme (+1 more)
 
 ### Community 41 - "Community 41"
-Cohesion: 0.25
-Nodes (7): deleteBodyMetric(), getBodyMetrics(), logBodyMetric(), MetricsScreen(), Props, { width: screenW }, BodyMetric
+Cohesion: 0.19
+Nodes (11): updateProfile(), MetricsScreen(), EditProfileScreen(), equipmentOptions, experienceLevels, genders, goals, Props (+3 more)
 
 ## Knowledge Gaps
-- **255 isolated node(s):** `prisma`, `{ getDefaultConfig }`, `config`, `name`, `version` (+250 more)
+- **258 isolated node(s):** `target`, `module`, `lib`, `outDir`, `rootDir` (+253 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **5 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **4 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `setActiveSplit()` connect `Community 37` to `Community 29`?**
-  _High betweenness centrality (0.249) - this node is a cross-community bridge._
+- **Why does `setActiveSplit()` connect `Community 29` to `Community 40`, `Expo App Dependencies`?**
+  _High betweenness centrality (0.251) - this node is a cross-community bridge._
 - **Why does `dependencies` connect `Backend Controllers Core` to `Middleware & Route Setup`?**
-  _High betweenness centrality (0.069) - this node is a cross-community bridge._
+  _High betweenness centrality (0.070) - this node is a cross-community bridge._
 - **Why does `AuthRequest` connect `Community 31` to `Middleware & Route Setup`, `Photos Feature`, `Skills Lock Registry`, `Auth Controller`, `Photo Controller & Cloudinary`, `Progress Analytics Controller`, `Database Seed Data`, `Expo TypeScript Config`, `Community 29`?**
   _High betweenness centrality (0.062) - this node is a cross-community bridge._
-- **What connects `prisma`, `{ getDefaultConfig }`, `config` to the rest of the system?**
-  _255 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `target`, `module`, `lib` to the rest of the system?**
+  _258 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Frontend API Client` be split into smaller, more focused modules?**
-  _Cohesion score 0.06079664570230608 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.08712121212121213 - nodes in this community are weakly interconnected._
 - **Should `Auth & Splits Routes` be split into smaller, more focused modules?**
-  _Cohesion score 0.08282828282828283 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07539450613676213 - nodes in this community are weakly interconnected._
 - **Should `Onboarding Flow` be split into smaller, more focused modules?**
   _Cohesion score 0.045454545454545456 - nodes in this community are weakly interconnected._

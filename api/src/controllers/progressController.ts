@@ -150,7 +150,7 @@ export const getMuscleVolume = async (req: AuthRequest, res: Response) => {
     include: {
       exerciseLogs: {
         include: {
-          exercise: { select: { muscleGroup: true } },
+          exercise: { select: { muscles: { include: { muscle: true } } } },
           setLogs: true,
         },
       },
@@ -162,7 +162,8 @@ export const getMuscleVolume = async (req: AuthRequest, res: Response) => {
   for (const session of sessions) {
     for (const log of session.exerciseLogs) {
       const volume = log.setLogs.reduce((sum, s) => sum + s.weightKg * s.reps, 0);
-      const muscle = log.exercise.muscleGroup;
+      const primaryMuscle = log.exercise.muscles.find((m) => m.isPrimary);
+      const muscle = primaryMuscle?.muscle.name || "unknown";
       muscleVolumes[muscle] = (muscleVolumes[muscle] || 0) + volume;
     }
   }

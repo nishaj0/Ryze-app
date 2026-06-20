@@ -5,11 +5,16 @@ import { AuthRequest } from "../middleware/auth";
 const prisma = new PrismaClient();
 
 export const listExercises = async (req: AuthRequest, res: Response) => {
-  const { muscleGroup, search, equipment } = req.query;
+  const { muscle, search, equipment, category, level, mechanic } = req.query;
 
   const where: any = {};
-  if (muscleGroup) where.muscleGroup = muscleGroup;
-  if (equipment) where.equipmentNeeded = equipment;
+  if (muscle) {
+    where.muscles = { some: { muscle: { name: String(muscle) } } };
+  }
+  if (equipment) where.equipment = equipment;
+  if (category) where.category = category;
+  if (level) where.level = level;
+  if (mechanic) where.mechanic = mechanic;
   if (search) {
     where.name = { contains: String(search), mode: "insensitive" };
   }
@@ -17,6 +22,8 @@ export const listExercises = async (req: AuthRequest, res: Response) => {
   const exercises = await prisma.exercise.findMany({
     where,
     include: {
+      muscles: { include: { muscle: true } },
+      images: { orderBy: { order: "asc" } },
       alternativesFrom: {
         include: { alternative: true },
       },
@@ -31,6 +38,8 @@ export const getExercise = async (req: AuthRequest, res: Response) => {
   const exercise = await prisma.exercise.findUnique({
     where: { id: req.params.id as string },
     include: {
+      muscles: { include: { muscle: true } },
+      images: { orderBy: { order: "asc" } },
       alternativesFrom: {
         include: { alternative: true },
       },

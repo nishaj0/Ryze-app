@@ -129,7 +129,7 @@ export const listSessions = async (req: AuthRequest, res: Response) => {
         splitDay: { select: { name: true, muscleGroups: true } },
         exerciseLogs: {
           include: {
-            exercise: { select: { name: true, muscleGroup: true } },
+            exercise: { select: { name: true, muscles: { include: { muscle: true } } } },
             setLogs: true,
           },
         },
@@ -581,7 +581,7 @@ export const getCalendarSessions = async (req: AuthRequest, res: Response) => {
       splitDay: { select: { name: true, muscleGroups: true, isRest: true } },
       exerciseLogs: {
         include: {
-          exercise: { select: { name: true, muscleGroup: true } },
+          exercise: { select: { name: true, muscles: { include: { muscle: true } } } },
           setLogs: true,
         },
       },

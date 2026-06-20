@@ -10,3 +10,4 @@ uploads/photos/*
 *.log
 graphify-out/cost.json
 .idea
+api/free-exercise-db

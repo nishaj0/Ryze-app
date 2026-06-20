@@ -5,7 +5,7 @@ A comprehensive gym progress tracking app built with Expo (React Native) and Nod
 ## Features
 
 - **Onboarding Flow**: Personalized setup based on goals, experience, and equipment
-- **Prebuilt Splits**: Full Body 3x, PPL, and Bro Split with 55+ exercises
+- **Prebuilt Splits**: Full Body 3x, PPL, and Bro Split with 873+ exercises
 - **Workout Logger**: Track sets, reps, weight with progressive overload detection
 - **Progress Tracking**: Charts for weight progression, volume, and personal records
 - **Progress Photos**: Capture and compare progress photos over time
@@ -26,14 +26,18 @@ A comprehensive gym progress tracking app built with Expo (React Native) and Nod
 ### Backend
 - Node.js + Express + TypeScript
 - Prisma ORM
-- SQLite (dev) / PostgreSQL (production)
+- PostgreSQL
 - JWT authentication
+- Cloudinary (exercise images)
 
 ## Project Structure
 
 ```
 gym-tracker-app/
 ├── api/                    # Backend API
+│   ├── scripts/            # One-off scripts (migrations, etc.)
+│   │   ├── migrate-exercises.ts
+│   │   └── README.md
 │   ├── src/
 │   │   ├── controllers/
 │   │   ├── middleware/
@@ -59,6 +63,7 @@ gym-tracker-app/
 - Node.js 18+
 - npm
 - Expo Go app (for mobile testing)
+- Cloudinary account (for exercise images)
 
 ### Installation
 
@@ -67,14 +72,49 @@ gym-tracker-app/
 npm run setup
 ```
 
-2. **Setup database:**
+2. **Setup environment variables:**
+
+Create `api/.env` with:
+```
+DATABASE_URL="postgresql://..."
+JWT_SECRET="your-secret-key"
+JWT_EXPIRES_IN="7d"
+PORT=3000
+NODE_ENV="development"
+CLOUDINARY_CLOUD_NAME="your-cloud-name"
+CLOUDINARY_API_KEY="your-api-key"
+CLOUDINARY_API_SECRET="your-api-secret"
+```
+
+3. **Setup database:**
 ```bash
 cd api
 npx prisma migrate dev
-npm run prisma:seed
 ```
 
-3. **Start development servers:**
+4. **Seed exercises (873 exercises with images):**
+
+Clone the free exercise database:
+```bash
+cd api
+git clone https://github.com/yuhonas/free-exercise-db.git
+```
+
+Run the migration script:
+```bash
+npm run migrate:exercises
+```
+
+This will:
+- Create 17 muscle records
+- Migrate 873 exercises with metadata (force, level, mechanic, equipment, category)
+- Upload ~1700 images to Cloudinary
+- Create ExerciseMuscle relationships (primary/secondary muscles)
+- Create ExerciseImage records
+
+The migration takes ~90 minutes due to image uploads. You can safely delete the `free-exercise-db` folder after completion.
+
+5. **Start development servers:**
 ```bash
 # Start both API and mobile app
 npm run dev
@@ -133,21 +173,33 @@ The app uses Prisma with the following main entities:
 - User
 - Split, SplitDay, SplitDayExercise
 - Exercise, ExerciseAlternative
+- Muscle, ExerciseMuscle (primary/secondary muscle relationships)
+- ExerciseImage (Cloudinary URLs)
 - UserSplit
 - WorkoutSession, ExerciseLog, SetLog
 - BodyMetric
 - ProgressPhoto
 - PersonalRecord
 
-## Seed Data
+## Exercise Data
 
-The seed script includes:
-- **3 Prebuilt Splits:**
-  - Full Body 3x (beginner, 3 days)
-  - Push/Pull/Legs (intermediate, 6 days)
-  - Bro Split (5 days)
+The app includes 873 exercises from the [free-exercise-db](https://github.com/yuhonas/free-exercise-db) dataset:
+- **17 muscle groups**: abdominals, biceps, calves, chest, forearms, glutes, hamstrings, lats, lower back, middle back, neck, quadriceps, shoulders, traps, triceps, abductors, adductors
+- **Exercise metadata**: force (push/pull/static), level (beginner/intermediate/expert), mechanic (isolation/compound), equipment, category
+- **Images**: 2 images per exercise uploaded to Cloudinary
+- **Muscle relationships**: Primary and secondary muscles for each exercise
 
-- **55+ Exercises** covering all major muscle groups with alternatives
+### Re-running the migration
+
+If you need to reset and re-migrate exercises:
+```bash
+cd api
+# Clone the dataset if not already present
+git clone https://github.com/yuhonas/free-exercise-db.git
+
+# Run migration (clears existing exercise data first)
+npm run migrate:exercises
+```
 
 ## Development
 
@@ -156,7 +208,7 @@ The seed script includes:
 cd api
 npm run dev              # Start dev server
 npm run prisma:studio    # Open Prisma Studio
-npm run prisma:seed      # Reseed database
+npm run migrate:exercises # Re-run exercise migration
 ```
 
 ### Mobile App
@@ -171,11 +223,14 @@ npm run ios            # Run on iOS
 
 ### Backend (api/.env)
 ```
-DATABASE_URL="file:./dev.db"
+DATABASE_URL="postgresql://..."
 JWT_SECRET="your-secret-key"
 JWT_EXPIRES_IN="7d"
 PORT=3000
 NODE_ENV="development"
+CLOUDINARY_CLOUD_NAME="your-cloud-name"
+CLOUDINARY_API_KEY="your-api-key"
+CLOUDINARY_API_SECRET="your-api-secret"
 ```
 
 ### Mobile (expo-app/.env)

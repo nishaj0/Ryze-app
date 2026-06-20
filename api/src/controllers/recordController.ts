@@ -10,7 +10,7 @@ export const getRecords = async (req: AuthRequest, res: Response) => {
   const records = await prisma.personalRecord.findMany({
     where: { userId },
     include: {
-      exercise: { select: { name: true, muscleGroup: true } },
+      exercise: { select: { name: true, muscles: { include: { muscle: true } } } },
     },
     orderBy: { achievedAt: "desc" },
   });

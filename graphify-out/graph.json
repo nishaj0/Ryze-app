@@ -4,382 +4,1012 @@
   "graph": {},
   "nodes": [
     {
-      "label": "tsconfig.json",
+      "label": "package.json",
       "file_type": "code",
-      "source_file": "api/tsconfig.json",
+      "source_file": "api/package.json",
       "source_location": "L1",
-      "id": "api_tsconfig",
-      "community": 10,
-      "norm_label": "tsconfig.json"
+      "id": "api_package",
+      "community": 6,
+      "norm_label": "package.json"
     },
     {
-      "label": "compilerOptions",
+      "label": "name",
       "file_type": "code",
-      "source_file": "api/tsconfig.json",
+      "source_file": "api/package.json",
       "source_location": "L2",
-      "id": "api_tsconfig_compileroptions",
-      "community": 10,
-      "norm_label": "compileroptions"
+      "id": "api_package_name",
+      "community": 6,
+      "norm_label": "name"
     },
     {
-      "label": "target",
+      "label": "version",
       "file_type": "code",
-      "source_file": "api/tsconfig.json",
+      "source_file": "api/package.json",
       "source_location": "L3",
-      "id": "api_tsconfig_compileroptions_target",
-      "community": 10,
-      "norm_label": "target"
+      "id": "api_package_version",
+      "community": 6,
+      "norm_label": "version"
     },
     {
-      "label": "module",
+      "label": "private",
       "file_type": "code",
-      "source_file": "api/tsconfig.json",
+      "source_file": "api/package.json",
       "source_location": "L4",
-      "id": "api_tsconfig_compileroptions_module",
-      "community": 10,
-      "norm_label": "module"
+      "id": "api_package_private",
+      "community": 6,
+      "norm_label": "private"
     },
     {
-      "label": "lib",
+      "label": "scripts",
       "file_type": "code",
-      "source_file": "api/tsconfig.json",
+      "source_file": "api/package.json",
       "source_location": "L5",
-      "id": "api_tsconfig_compileroptions_lib",
-      "community": 10,
-      "norm_label": "lib"
+      "id": "api_package_scripts",
+      "community": 6,
+      "norm_label": "scripts"
     },
     {
-      "label": "outDir",
+      "label": "dev",
       "file_type": "code",
-      "source_file": "api/tsconfig.json",
+      "source_file": "api/package.json",
       "source_location": "L6",
-      "id": "api_tsconfig_compileroptions_outdir",
-      "community": 10,
-      "norm_label": "outdir"
+      "id": "api_package_scripts_dev",
+      "community": 6,
+      "norm_label": "dev"
     },
     {
-      "label": "rootDir",
+      "label": "build",
       "file_type": "code",
-      "source_file": "api/tsconfig.json",
+      "source_file": "api/package.json",
       "source_location": "L7",
-      "id": "api_tsconfig_compileroptions_rootdir",
-      "community": 10,
-      "norm_label": "rootdir"
+      "id": "api_package_scripts_build",
+      "community": 6,
+      "norm_label": "build"
     },
     {
-      "label": "strict",
+      "label": "start",
       "file_type": "code",
-      "source_file": "api/tsconfig.json",
+      "source_file": "api/package.json",
       "source_location": "L8",
-      "id": "api_tsconfig_compileroptions_strict",
-      "community": 10,
-      "norm_label": "strict"
+      "id": "api_package_scripts_start",
+      "community": 6,
+      "norm_label": "start"
     },
     {
-      "label": "esModuleInterop",
+      "label": "prisma:migrate",
       "file_type": "code",
-      "source_file": "api/tsconfig.json",
+      "source_file": "api/package.json",
       "source_location": "L9",
-      "id": "api_tsconfig_compileroptions_esmoduleinterop",
-      "community": 10,
-      "norm_label": "esmoduleinterop"
+      "id": "api_package_scripts_prisma_migrate",
+      "community": 6,
+      "norm_label": "prisma:migrate"
     },
     {
-      "label": "skipLibCheck",
+      "label": "prisma:studio",
       "file_type": "code",
-      "source_file": "api/tsconfig.json",
+      "source_file": "api/package.json",
       "source_location": "L10",
-      "id": "api_tsconfig_compileroptions_skiplibcheck",
-      "community": 10,
-      "norm_label": "skiplibcheck"
+      "id": "api_package_scripts_prisma_studio",
+      "community": 6,
+      "norm_label": "prisma:studio"
     },
     {
-      "label": "forceConsistentCasingInFileNames",
+      "label": "prisma:generate",
       "file_type": "code",
-      "source_file": "api/tsconfig.json",
+      "source_file": "api/package.json",
       "source_location": "L11",
-      "id": "api_tsconfig_compileroptions_forceconsistentcasinginfilenames",
-      "community": 10,
-      "norm_label": "forceconsistentcasinginfilenames"
+      "id": "api_package_scripts_prisma_generate",
+      "community": 6,
+      "norm_label": "prisma:generate"
     },
     {
-      "label": "resolveJsonModule",
+      "label": "migrate:exercises",
       "file_type": "code",
-      "source_file": "api/tsconfig.json",
+      "source_file": "api/package.json",
       "source_location": "L12",
-      "id": "api_tsconfig_compileroptions_resolvejsonmodule",
-      "community": 10,
-      "norm_label": "resolvejsonmodule"
+      "id": "api_package_scripts_migrate_exercises",
+      "community": 6,
+      "norm_label": "migrate:exercises"
     },
     {
-      "label": "declaration",
+      "label": "dependencies",
       "file_type": "code",
-      "source_file": "api/tsconfig.json",
-      "source_location": "L13",
-      "id": "api_tsconfig_compileroptions_declaration",
-      "community": 10,
-      "norm_label": "declaration"
-    },
-    {
-      "label": "declarationMap",
-      "file_type": "code",
-      "source_file": "api/tsconfig.json",
+      "source_file": "api/package.json",
       "source_location": "L14",
-      "id": "api_tsconfig_compileroptions_declarationmap",
-      "community": 10,
-      "norm_label": "declarationmap"
+      "id": "api_package_dependencies",
+      "community": 6,
+      "norm_label": "dependencies"
     },
     {
-      "label": "sourceMap",
+      "label": "@prisma/client",
       "file_type": "code",
-      "source_file": "api/tsconfig.json",
+      "source_file": "api/package.json",
       "source_location": "L15",
-      "id": "api_tsconfig_compileroptions_sourcemap",
-      "community": 10,
-      "norm_label": "sourcemap"
+      "id": "api_package_dependencies_prisma_client",
+      "community": 6,
+      "norm_label": "@prisma/client"
     },
     {
-      "label": "moduleResolution",
+      "label": "axios",
       "file_type": "code",
-      "source_file": "api/tsconfig.json",
+      "source_file": "api/package.json",
       "source_location": "L16",
-      "id": "api_tsconfig_compileroptions_moduleresolution",
-      "community": 10,
-      "norm_label": "moduleresolution"
+      "id": "api_package_dependencies_axios",
+      "community": 6,
+      "norm_label": "axios"
     },
     {
-      "label": "include",
+      "label": "bcryptjs",
       "file_type": "code",
-      "source_file": "api/tsconfig.json",
+      "source_file": "api/package.json",
+      "source_location": "L17",
+      "id": "api_package_dependencies_bcryptjs",
+      "community": 6,
+      "norm_label": "bcryptjs"
+    },
+    {
+      "label": "cloudinary",
+      "file_type": "code",
+      "source_file": "api/package.json",
       "source_location": "L18",
-      "id": "api_tsconfig_include",
-      "community": 10,
-      "norm_label": "include"
+      "id": "api_package_dependencies_cloudinary",
+      "community": 6,
+      "norm_label": "cloudinary"
     },
     {
-      "label": "exclude",
+      "label": "cors",
       "file_type": "code",
-      "source_file": "api/tsconfig.json",
+      "source_file": "api/package.json",
       "source_location": "L19",
-      "id": "api_tsconfig_exclude",
-      "community": 10,
-      "norm_label": "exclude"
+      "id": "api_package_dependencies_cors",
+      "community": 6,
+      "norm_label": "cors"
     },
     {
-      "label": "tsconfig.json",
+      "label": "dotenv",
       "file_type": "code",
-      "source_file": "expo-app/tsconfig.json",
+      "source_file": "api/package.json",
+      "source_location": "L20",
+      "id": "api_package_dependencies_dotenv",
+      "community": 6,
+      "norm_label": "dotenv"
+    },
+    {
+      "label": "express",
+      "file_type": "code",
+      "source_file": "api/package.json",
+      "source_location": "L21",
+      "id": "api_package_dependencies_express",
+      "community": 6,
+      "norm_label": "express"
+    },
+    {
+      "label": "jsonwebtoken",
+      "file_type": "code",
+      "source_file": "api/package.json",
+      "source_location": "L22",
+      "id": "api_package_dependencies_jsonwebtoken",
+      "community": 6,
+      "norm_label": "jsonwebtoken"
+    },
+    {
+      "label": "multer",
+      "file_type": "code",
+      "source_file": "api/package.json",
+      "source_location": "L23",
+      "id": "api_package_dependencies_multer",
+      "community": 6,
+      "norm_label": "multer"
+    },
+    {
+      "label": "zod",
+      "file_type": "code",
+      "source_file": "api/package.json",
+      "source_location": "L24",
+      "id": "api_package_dependencies_zod",
+      "community": 6,
+      "norm_label": "zod"
+    },
+    {
+      "label": "devDependencies",
+      "file_type": "code",
+      "source_file": "api/package.json",
+      "source_location": "L26",
+      "id": "api_package_devdependencies",
+      "community": 6,
+      "norm_label": "devdependencies"
+    },
+    {
+      "label": "@types/bcryptjs",
+      "file_type": "code",
+      "source_file": "api/package.json",
+      "source_location": "L27",
+      "id": "api_package_devdependencies_types_bcryptjs",
+      "community": 6,
+      "norm_label": "@types/bcryptjs"
+    },
+    {
+      "label": "@types/cors",
+      "file_type": "code",
+      "source_file": "api/package.json",
+      "source_location": "L28",
+      "id": "api_package_devdependencies_types_cors",
+      "community": 6,
+      "norm_label": "@types/cors"
+    },
+    {
+      "label": "@types/express",
+      "file_type": "code",
+      "source_file": "api/package.json",
+      "source_location": "L29",
+      "id": "api_package_devdependencies_types_express",
+      "community": 6,
+      "norm_label": "@types/express"
+    },
+    {
+      "label": "@types/jsonwebtoken",
+      "file_type": "code",
+      "source_file": "api/package.json",
+      "source_location": "L30",
+      "id": "api_package_devdependencies_types_jsonwebtoken",
+      "community": 6,
+      "norm_label": "@types/jsonwebtoken"
+    },
+    {
+      "label": "@types/multer",
+      "file_type": "code",
+      "source_file": "api/package.json",
+      "source_location": "L31",
+      "id": "api_package_devdependencies_types_multer",
+      "community": 6,
+      "norm_label": "@types/multer"
+    },
+    {
+      "label": "@types/node",
+      "file_type": "code",
+      "source_file": "api/package.json",
+      "source_location": "L32",
+      "id": "api_package_devdependencies_types_node",
+      "community": 6,
+      "norm_label": "@types/node"
+    },
+    {
+      "label": "prisma",
+      "file_type": "code",
+      "source_file": "api/package.json",
+      "source_location": "L33",
+      "id": "api_package_devdependencies_prisma",
+      "community": 6,
+      "norm_label": "prisma"
+    },
+    {
+      "label": "tsx",
+      "file_type": "code",
+      "source_file": "api/package.json",
+      "source_location": "L34",
+      "id": "api_package_devdependencies_tsx",
+      "community": 6,
+      "norm_label": "tsx"
+    },
+    {
+      "label": "typescript",
+      "file_type": "code",
+      "source_file": "api/package.json",
+      "source_location": "L35",
+      "id": "api_package_devdependencies_typescript",
+      "community": 6,
+      "norm_label": "typescript"
+    },
+    {
+      "label": "migrate-exercises.ts",
+      "file_type": "code",
+      "source_file": "api/scripts/migrate-exercises.ts",
       "source_location": "L1",
-      "id": "expo_app_tsconfig",
-      "community": 22,
-      "norm_label": "tsconfig.json"
+      "id": "scripts_migrate_exercises",
+      "community": 35,
+      "norm_label": "migrate-exercises.ts"
     },
     {
-      "label": "extends",
+      "label": "prisma",
       "file_type": "code",
-      "source_file": "expo-app/tsconfig.json",
-      "source_location": "L2",
-      "id": "expo_app_tsconfig_extends",
-      "community": 22,
-      "norm_label": "extends"
+      "source_file": "api/scripts/migrate-exercises.ts",
+      "source_location": "L13",
+      "id": "scripts_migrate_exercises_prisma",
+      "community": 35,
+      "norm_label": "prisma"
     },
     {
-      "label": "compilerOptions",
+      "label": "MUSCLES",
       "file_type": "code",
-      "source_file": "expo-app/tsconfig.json",
-      "source_location": "L3",
-      "id": "expo_app_tsconfig_compileroptions",
-      "community": 22,
-      "norm_label": "compileroptions"
+      "source_file": "api/scripts/migrate-exercises.ts",
+      "source_location": "L17",
+      "id": "scripts_migrate_exercises_muscles",
+      "community": 35,
+      "norm_label": "muscles"
     },
     {
-      "label": "strict",
+      "label": "SourceExercise",
       "file_type": "code",
-      "source_file": "expo-app/tsconfig.json",
-      "source_location": "L4",
-      "id": "expo_app_tsconfig_compileroptions_strict",
-      "community": 22,
-      "norm_label": "strict"
+      "source_file": "api/scripts/migrate-exercises.ts",
+      "source_location": "L37",
+      "id": "scripts_migrate_exercises_sourceexercise",
+      "community": 35,
+      "norm_label": "sourceexercise"
     },
     {
-      "label": "moduleResolution",
+      "label": "uploadImageToCloudinary()",
       "file_type": "code",
-      "source_file": "expo-app/tsconfig.json",
+      "source_file": "api/scripts/migrate-exercises.ts",
+      "source_location": "L51",
+      "id": "scripts_migrate_exercises_uploadimagetocloudinary",
+      "community": 35,
+      "norm_label": "uploadimagetocloudinary()"
+    },
+    {
+      "label": "migrate()",
+      "file_type": "code",
+      "source_file": "api/scripts/migrate-exercises.ts",
+      "source_location": "L77",
+      "id": "scripts_migrate_exercises_migrate",
+      "community": 35,
+      "norm_label": "migrate()"
+    },
+    {
+      "label": "exerciseController.ts",
+      "file_type": "code",
+      "source_file": "api/src/controllers/exerciseController.ts",
+      "source_location": "L1",
+      "id": "controllers_exercisecontroller",
+      "community": 15,
+      "norm_label": "exercisecontroller.ts"
+    },
+    {
+      "label": "prisma",
+      "file_type": "code",
+      "source_file": "api/src/controllers/exerciseController.ts",
       "source_location": "L5",
-      "id": "expo_app_tsconfig_compileroptions_moduleresolution",
-      "community": 22,
-      "norm_label": "moduleresolution"
+      "id": "controllers_exercisecontroller_prisma",
+      "community": 15,
+      "norm_label": "prisma"
     },
     {
-      "label": "paths",
+      "label": "listExercises()",
       "file_type": "code",
-      "source_file": "expo-app/tsconfig.json",
-      "source_location": "L6",
-      "id": "expo_app_tsconfig_compileroptions_paths",
-      "community": 22,
-      "norm_label": "paths"
-    },
-    {
-      "label": "@/*",
-      "file_type": "code",
-      "source_file": "expo-app/tsconfig.json",
+      "source_file": "api/src/controllers/exerciseController.ts",
       "source_location": "L7",
-      "id": "expo_app_tsconfig_paths",
-      "community": 22,
-      "norm_label": "@/*"
+      "id": "controllers_exercisecontroller_listexercises",
+      "community": 15,
+      "norm_label": "listexercises()"
+    },
+    {
+      "label": "getExercise()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/exerciseController.ts",
+      "source_location": "L37",
+      "id": "controllers_exercisecontroller_getexercise",
+      "community": 15,
+      "norm_label": "getexercise()"
+    },
+    {
+      "label": "getAlternatives()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/exerciseController.ts",
+      "source_location": "L56",
+      "id": "controllers_exercisecontroller_getalternatives",
+      "community": 15,
+      "norm_label": "getalternatives()"
+    },
+    {
+      "label": "getExerciseHistory()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/exerciseController.ts",
+      "source_location": "L65",
+      "id": "controllers_exercisecontroller_getexercisehistory",
+      "community": 15,
+      "norm_label": "getexercisehistory()"
+    },
+    {
+      "label": "progressController.ts",
+      "file_type": "code",
+      "source_file": "api/src/controllers/progressController.ts",
+      "source_location": "L1",
+      "id": "controllers_progresscontroller",
+      "community": 19,
+      "norm_label": "progresscontroller.ts"
+    },
+    {
+      "label": "prisma",
+      "file_type": "code",
+      "source_file": "api/src/controllers/progressController.ts",
+      "source_location": "L5",
+      "id": "controllers_progresscontroller_prisma",
+      "community": 19,
+      "norm_label": "prisma"
+    },
+    {
+      "label": "getOverview()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/progressController.ts",
+      "source_location": "L7",
+      "id": "controllers_progresscontroller_getoverview",
+      "community": 19,
+      "norm_label": "getoverview()"
+    },
+    {
+      "label": "calculateStreak()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/progressController.ts",
+      "source_location": "L54",
+      "id": "controllers_progresscontroller_calculatestreak",
+      "community": 19,
+      "norm_label": "calculatestreak()"
+    },
+    {
+      "label": "getThisWeekWorkouts()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/progressController.ts",
+      "source_location": "L89",
+      "id": "controllers_progresscontroller_getthisweekworkouts",
+      "community": 19,
+      "norm_label": "getthisweekworkouts()"
+    },
+    {
+      "label": "getExerciseProgress()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/progressController.ts",
+      "source_location": "L103",
+      "id": "controllers_progresscontroller_getexerciseprogress",
+      "community": 19,
+      "norm_label": "getexerciseprogress()"
+    },
+    {
+      "label": "getMuscleVolume()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/progressController.ts",
+      "source_location": "L137",
+      "id": "controllers_progresscontroller_getmusclevolume",
+      "community": 19,
+      "norm_label": "getmusclevolume()"
+    },
+    {
+      "label": "getHeatmap()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/progressController.ts",
+      "source_location": "L179",
+      "id": "controllers_progresscontroller_getheatmap",
+      "community": 19,
+      "norm_label": "getheatmap()"
+    },
+    {
+      "label": "getVolumeHistory()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/progressController.ts",
+      "source_location": "L208",
+      "id": "controllers_progresscontroller_getvolumehistory",
+      "community": 19,
+      "norm_label": "getvolumehistory()"
+    },
+    {
+      "label": "recordController.ts",
+      "file_type": "code",
+      "source_file": "api/src/controllers/recordController.ts",
+      "source_location": "L1",
+      "id": "controllers_recordcontroller",
+      "community": 21,
+      "norm_label": "recordcontroller.ts"
+    },
+    {
+      "label": "prisma",
+      "file_type": "code",
+      "source_file": "api/src/controllers/recordController.ts",
+      "source_location": "L5",
+      "id": "controllers_recordcontroller_prisma",
+      "community": 21,
+      "norm_label": "prisma"
+    },
+    {
+      "label": "getRecords()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/recordController.ts",
+      "source_location": "L7",
+      "id": "controllers_recordcontroller_getrecords",
+      "community": 21,
+      "norm_label": "getrecords()"
+    },
+    {
+      "label": "getExerciseRecords()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/recordController.ts",
+      "source_location": "L31",
+      "id": "controllers_recordcontroller_getexerciserecords",
+      "community": 21,
+      "norm_label": "getexerciserecords()"
     },
     {
       "label": "sessionController.ts",
       "file_type": "code",
       "source_file": "api/src/controllers/sessionController.ts",
       "source_location": "L1",
+      "id": "controllers_sessioncontroller",
       "community": 14,
-      "norm_label": "sessioncontroller.ts",
-      "id": "controllers_sessioncontroller"
+      "norm_label": "sessioncontroller.ts"
     },
     {
       "label": "prisma",
       "file_type": "code",
       "source_file": "api/src/controllers/sessionController.ts",
       "source_location": "L6",
+      "id": "controllers_sessioncontroller_prisma",
       "community": 14,
-      "norm_label": "prisma",
-      "id": "controllers_sessioncontroller_prisma"
+      "norm_label": "prisma"
     },
     {
       "label": "calculate1RM()",
       "file_type": "code",
       "source_file": "api/src/controllers/sessionController.ts",
       "source_location": "L8",
+      "id": "controllers_sessioncontroller_calculate1rm",
       "community": 14,
-      "norm_label": "calculate1rm()",
-      "id": "controllers_sessioncontroller_calculate1rm"
+      "norm_label": "calculate1rm()"
     },
     {
       "label": "createSession()",
       "file_type": "code",
       "source_file": "api/src/controllers/sessionController.ts",
       "source_location": "L12",
+      "id": "controllers_sessioncontroller_createsession",
       "community": 14,
-      "norm_label": "createsession()",
-      "id": "controllers_sessioncontroller_createsession"
+      "norm_label": "createsession()"
     },
     {
       "label": "getLastSessionLogs()",
       "file_type": "code",
       "source_file": "api/src/controllers/sessionController.ts",
       "source_location": "L78",
+      "id": "controllers_sessioncontroller_getlastsessionlogs",
       "community": 14,
-      "norm_label": "getlastsessionlogs()",
-      "id": "controllers_sessioncontroller_getlastsessionlogs"
+      "norm_label": "getlastsessionlogs()"
     },
     {
       "label": "listSessions()",
       "file_type": "code",
       "source_file": "api/src/controllers/sessionController.ts",
       "source_location": "L117",
+      "id": "controllers_sessioncontroller_listsessions",
       "community": 14,
-      "norm_label": "listsessions()",
-      "id": "controllers_sessioncontroller_listsessions"
+      "norm_label": "listsessions()"
     },
     {
       "label": "getSession()",
       "file_type": "code",
       "source_file": "api/src/controllers/sessionController.ts",
       "source_location": "L144",
+      "id": "controllers_sessioncontroller_getsession",
       "community": 14,
-      "norm_label": "getsession()",
-      "id": "controllers_sessioncontroller_getsession"
+      "norm_label": "getsession()"
     },
     {
       "label": "completeSession()",
       "file_type": "code",
       "source_file": "api/src/controllers/sessionController.ts",
       "source_location": "L187",
+      "id": "controllers_sessioncontroller_completesession",
       "community": 14,
-      "norm_label": "completesession()",
-      "id": "controllers_sessioncontroller_completesession"
+      "norm_label": "completesession()"
     },
     {
       "label": "markRestDay()",
       "file_type": "code",
       "source_file": "api/src/controllers/sessionController.ts",
       "source_location": "L272",
+      "id": "controllers_sessioncontroller_markrestday",
       "community": 14,
-      "norm_label": "markrestday()",
-      "id": "controllers_sessioncontroller_markrestday"
+      "norm_label": "markrestday()"
     },
     {
       "label": "addExerciseToSession()",
       "file_type": "code",
       "source_file": "api/src/controllers/sessionController.ts",
       "source_location": "L292",
+      "id": "controllers_sessioncontroller_addexercisetosession",
       "community": 14,
-      "norm_label": "addexercisetosession()",
-      "id": "controllers_sessioncontroller_addexercisetosession"
+      "norm_label": "addexercisetosession()"
     },
     {
       "label": "swapExercise()",
       "file_type": "code",
       "source_file": "api/src/controllers/sessionController.ts",
       "source_location": "L325",
+      "id": "controllers_sessioncontroller_swapexercise",
       "community": 14,
-      "norm_label": "swapexercise()",
-      "id": "controllers_sessioncontroller_swapexercise"
+      "norm_label": "swapexercise()"
     },
     {
       "label": "logSet()",
       "file_type": "code",
       "source_file": "api/src/controllers/sessionController.ts",
       "source_location": "L353",
+      "id": "controllers_sessioncontroller_logset",
       "community": 14,
-      "norm_label": "logset()",
-      "id": "controllers_sessioncontroller_logset"
+      "norm_label": "logset()"
     },
     {
       "label": "deleteSet()",
       "file_type": "code",
       "source_file": "api/src/controllers/sessionController.ts",
       "source_location": "L428",
+      "id": "controllers_sessioncontroller_deleteset",
       "community": 14,
-      "norm_label": "deleteset()",
-      "id": "controllers_sessioncontroller_deleteset"
+      "norm_label": "deleteset()"
     },
     {
       "label": "syncSession()",
       "file_type": "code",
       "source_file": "api/src/controllers/sessionController.ts",
       "source_location": "L435",
+      "id": "controllers_sessioncontroller_syncsession",
       "community": 14,
-      "norm_label": "syncsession()",
-      "id": "controllers_sessioncontroller_syncsession"
+      "norm_label": "syncsession()"
     },
     {
       "label": "updateExerciseNotes()",
       "file_type": "code",
       "source_file": "api/src/controllers/sessionController.ts",
       "source_location": "L548",
+      "id": "controllers_sessioncontroller_updateexercisenotes",
       "community": 14,
-      "norm_label": "updateexercisenotes()",
-      "id": "controllers_sessioncontroller_updateexercisenotes"
+      "norm_label": "updateexercisenotes()"
     },
     {
       "label": "getCalendarSessions()",
       "file_type": "code",
       "source_file": "api/src/controllers/sessionController.ts",
       "source_location": "L560",
+      "id": "controllers_sessioncontroller_getcalendarsessions",
       "community": 14,
-      "norm_label": "getcalendarsessions()",
-      "id": "controllers_sessioncontroller_getcalendarsessions"
+      "norm_label": "getcalendarsessions()"
     },
     {
       "label": "updateSession()",
       "file_type": "code",
       "source_file": "api/src/controllers/sessionController.ts",
       "source_location": "L613",
+      "id": "controllers_sessioncontroller_updatesession",
       "community": 14,
-      "norm_label": "updatesession()",
-      "id": "controllers_sessioncontroller_updatesession"
+      "norm_label": "updatesession()"
+    },
+    {
+      "label": "tsconfig.scripts.json",
+      "file_type": "code",
+      "source_file": "api/tsconfig.scripts.json",
+      "source_location": "L1",
+      "id": "api_tsconfig_scripts",
+      "community": 33,
+      "norm_label": "tsconfig.scripts.json"
+    },
+    {
+      "label": "compilerOptions",
+      "file_type": "code",
+      "source_file": "api/tsconfig.scripts.json",
+      "source_location": "L2",
+      "id": "api_tsconfig_scripts_compileroptions",
+      "community": 33,
+      "norm_label": "compileroptions"
+    },
+    {
+      "label": "target",
+      "file_type": "code",
+      "source_file": "api/tsconfig.scripts.json",
+      "source_location": "L3",
+      "id": "api_tsconfig_scripts_compileroptions_target",
+      "community": 33,
+      "norm_label": "target"
+    },
+    {
+      "label": "module",
+      "file_type": "code",
+      "source_file": "api/tsconfig.scripts.json",
+      "source_location": "L4",
+      "id": "api_tsconfig_scripts_compileroptions_module",
+      "community": 33,
+      "norm_label": "module"
+    },
+    {
+      "label": "lib",
+      "file_type": "code",
+      "source_file": "api/tsconfig.scripts.json",
+      "source_location": "L5",
+      "id": "api_tsconfig_scripts_compileroptions_lib",
+      "community": 33,
+      "norm_label": "lib"
+    },
+    {
+      "label": "strict",
+      "file_type": "code",
+      "source_file": "api/tsconfig.scripts.json",
+      "source_location": "L6",
+      "id": "api_tsconfig_scripts_compileroptions_strict",
+      "community": 33,
+      "norm_label": "strict"
+    },
+    {
+      "label": "esModuleInterop",
+      "file_type": "code",
+      "source_file": "api/tsconfig.scripts.json",
+      "source_location": "L7",
+      "id": "api_tsconfig_scripts_compileroptions_esmoduleinterop",
+      "community": 33,
+      "norm_label": "esmoduleinterop"
+    },
+    {
+      "label": "skipLibCheck",
+      "file_type": "code",
+      "source_file": "api/tsconfig.scripts.json",
+      "source_location": "L8",
+      "id": "api_tsconfig_scripts_compileroptions_skiplibcheck",
+      "community": 33,
+      "norm_label": "skiplibcheck"
+    },
+    {
+      "label": "forceConsistentCasingInFileNames",
+      "file_type": "code",
+      "source_file": "api/tsconfig.scripts.json",
+      "source_location": "L9",
+      "id": "api_tsconfig_scripts_compileroptions_forceconsistentcasinginfilenames",
+      "community": 33,
+      "norm_label": "forceconsistentcasinginfilenames"
+    },
+    {
+      "label": "resolveJsonModule",
+      "file_type": "code",
+      "source_file": "api/tsconfig.scripts.json",
+      "source_location": "L10",
+      "id": "api_tsconfig_scripts_compileroptions_resolvejsonmodule",
+      "community": 33,
+      "norm_label": "resolvejsonmodule"
+    },
+    {
+      "label": "moduleResolution",
+      "file_type": "code",
+      "source_file": "api/tsconfig.scripts.json",
+      "source_location": "L11",
+      "id": "api_tsconfig_scripts_compileroptions_moduleresolution",
+      "community": 33,
+      "norm_label": "moduleresolution"
+    },
+    {
+      "label": "include",
+      "file_type": "code",
+      "source_file": "api/tsconfig.scripts.json",
+      "source_location": "L13",
+      "id": "api_tsconfig_scripts_include",
+      "community": 33,
+      "norm_label": "include"
+    },
+    {
+      "label": "tsconfig.json",
+      "file_type": "code",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L1",
+      "community": 10,
+      "norm_label": "tsconfig.json",
+      "id": "api_tsconfig"
+    },
+    {
+      "label": "compilerOptions",
+      "file_type": "code",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L2",
+      "community": 10,
+      "norm_label": "compileroptions",
+      "id": "api_tsconfig_compileroptions"
+    },
+    {
+      "label": "target",
+      "file_type": "code",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L3",
+      "community": 10,
+      "norm_label": "target",
+      "id": "api_tsconfig_compileroptions_target"
+    },
+    {
+      "label": "module",
+      "file_type": "code",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L4",
+      "community": 10,
+      "norm_label": "module",
+      "id": "api_tsconfig_compileroptions_module"
+    },
+    {
+      "label": "lib",
+      "file_type": "code",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L5",
+      "community": 10,
+      "norm_label": "lib",
+      "id": "api_tsconfig_compileroptions_lib"
+    },
+    {
+      "label": "outDir",
+      "file_type": "code",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L6",
+      "community": 10,
+      "norm_label": "outdir",
+      "id": "api_tsconfig_compileroptions_outdir"
+    },
+    {
+      "label": "rootDir",
+      "file_type": "code",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L7",
+      "community": 10,
+      "norm_label": "rootdir",
+      "id": "api_tsconfig_compileroptions_rootdir"
+    },
+    {
+      "label": "strict",
+      "file_type": "code",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L8",
+      "community": 10,
+      "norm_label": "strict",
+      "id": "api_tsconfig_compileroptions_strict"
+    },
+    {
+      "label": "esModuleInterop",
+      "file_type": "code",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L9",
+      "community": 10,
+      "norm_label": "esmoduleinterop",
+      "id": "api_tsconfig_compileroptions_esmoduleinterop"
+    },
+    {
+      "label": "skipLibCheck",
+      "file_type": "code",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L10",
+      "community": 10,
+      "norm_label": "skiplibcheck",
+      "id": "api_tsconfig_compileroptions_skiplibcheck"
+    },
+    {
+      "label": "forceConsistentCasingInFileNames",
+      "file_type": "code",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L11",
+      "community": 10,
+      "norm_label": "forceconsistentcasinginfilenames",
+      "id": "api_tsconfig_compileroptions_forceconsistentcasinginfilenames"
+    },
+    {
+      "label": "resolveJsonModule",
+      "file_type": "code",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L12",
+      "community": 10,
+      "norm_label": "resolvejsonmodule",
+      "id": "api_tsconfig_compileroptions_resolvejsonmodule"
+    },
+    {
+      "label": "declaration",
+      "file_type": "code",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L13",
+      "community": 10,
+      "norm_label": "declaration",
+      "id": "api_tsconfig_compileroptions_declaration"
+    },
+    {
+      "label": "declarationMap",
+      "file_type": "code",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L14",
+      "community": 10,
+      "norm_label": "declarationmap",
+      "id": "api_tsconfig_compileroptions_declarationmap"
+    },
+    {
+      "label": "sourceMap",
+      "file_type": "code",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L15",
+      "community": 10,
+      "norm_label": "sourcemap",
+      "id": "api_tsconfig_compileroptions_sourcemap"
+    },
+    {
+      "label": "moduleResolution",
+      "file_type": "code",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L16",
+      "community": 10,
+      "norm_label": "moduleresolution",
+      "id": "api_tsconfig_compileroptions_moduleresolution"
+    },
+    {
+      "label": "include",
+      "file_type": "code",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L18",
+      "community": 10,
+      "norm_label": "include",
+      "id": "api_tsconfig_include"
+    },
+    {
+      "label": "exclude",
+      "file_type": "code",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L19",
+      "community": 10,
+      "norm_label": "exclude",
+      "id": "api_tsconfig_exclude"
+    },
+    {
+      "label": "tsconfig.json",
+      "file_type": "code",
+      "source_file": "expo-app/tsconfig.json",
+      "source_location": "L1",
+      "community": 22,
+      "norm_label": "tsconfig.json",
+      "id": "expo_app_tsconfig"
+    },
+    {
+      "label": "extends",
+      "file_type": "code",
+      "source_file": "expo-app/tsconfig.json",
+      "source_location": "L2",
+      "community": 22,
+      "norm_label": "extends",
+      "id": "expo_app_tsconfig_extends"
+    },
+    {
+      "label": "compilerOptions",
+      "file_type": "code",
+      "source_file": "expo-app/tsconfig.json",
+      "source_location": "L3",
+      "community": 22,
+      "norm_label": "compileroptions",
+      "id": "expo_app_tsconfig_compileroptions"
+    },
+    {
+      "label": "strict",
+      "file_type": "code",
+      "source_file": "expo-app/tsconfig.json",
+      "source_location": "L4",
+      "community": 22,
+      "norm_label": "strict",
+      "id": "expo_app_tsconfig_compileroptions_strict"
+    },
+    {
+      "label": "moduleResolution",
+      "file_type": "code",
+      "source_file": "expo-app/tsconfig.json",
+      "source_location": "L5",
+      "community": 22,
+      "norm_label": "moduleresolution",
+      "id": "expo_app_tsconfig_compileroptions_moduleresolution"
+    },
+    {
+      "label": "paths",
+      "file_type": "code",
+      "source_file": "expo-app/tsconfig.json",
+      "source_location": "L6",
+      "community": 22,
+      "norm_label": "paths",
+      "id": "expo_app_tsconfig_compileroptions_paths"
+    },
+    {
+      "label": "@/*",
+      "file_type": "code",
+      "source_file": "expo-app/tsconfig.json",
+      "source_location": "L7",
+      "community": 22,
+      "norm_label": "@/*",
+      "id": "expo_app_tsconfig_paths"
     },
     {
       "label": "babel.config.js",
@@ -818,7 +1448,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/App.tsx",
       "source_location": "L1",
-      "community": 38,
+      "community": 4,
       "norm_label": "app.tsx",
       "id": "src_app"
     },
@@ -827,7 +1457,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/App.tsx",
       "source_location": "L14",
-      "community": 38,
+      "community": 4,
       "norm_label": "queryclient",
       "id": "src_app_queryclient"
     },
@@ -836,7 +1466,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/App.tsx",
       "source_location": "L23",
-      "community": 38,
+      "community": 4,
       "norm_label": "app()",
       "id": "src_app_app"
     },
@@ -881,7 +1511,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/profile/SplitSwitcherScreen.tsx",
       "source_location": "L1",
-      "community": 3,
+      "community": 20,
       "norm_label": "splitswitcherscreen.tsx",
       "id": "profile_splitswitcherscreen"
     },
@@ -890,7 +1520,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/profile/SplitSwitcherScreen.tsx",
       "source_location": "L12",
-      "community": 3,
+      "community": 20,
       "norm_label": "props",
       "id": "profile_splitswitcherscreen_props"
     },
@@ -899,7 +1529,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/profile/SplitSwitcherScreen.tsx",
       "source_location": "L14",
-      "community": 3,
+      "community": 20,
       "norm_label": "splitswitcherscreen()",
       "id": "profile_splitswitcherscreen_splitswitcherscreen"
     },
@@ -1277,7 +1907,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/navigation/types.ts",
       "source_location": "L1",
-      "community": 1,
+      "community": 38,
       "norm_label": "types.ts",
       "id": "navigation_types"
     },
@@ -1313,7 +1943,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/navigation/types.ts",
       "source_location": "L28",
-      "community": 30,
+      "community": 38,
       "norm_label": "workoutstackparamlist",
       "id": "navigation_types_workoutstackparamlist"
     },
@@ -1331,7 +1961,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/navigation/types.ts",
       "source_location": "L40",
-      "community": 30,
+      "community": 3,
       "norm_label": "photosstackparamlist",
       "id": "navigation_types_photosstackparamlist"
     },
@@ -1340,7 +1970,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/navigation/types.ts",
       "source_location": "L46",
-      "community": 3,
+      "community": 20,
       "norm_label": "profilestackparamlist",
       "id": "navigation_types_profilestackparamlist"
     },
@@ -1349,7 +1979,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/navigation/types.ts",
       "source_location": "L56",
-      "community": 30,
+      "community": 38,
       "norm_label": "maintabparamlist",
       "id": "navigation_types_maintabparamlist"
     },
@@ -1367,7 +1997,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/navigation/types.ts",
       "source_location": "L70",
-      "community": 1,
+      "community": 38,
       "norm_label": "screenprops",
       "id": "navigation_types_screenprops"
     },
@@ -1439,7 +2069,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/profile/ProfileScreen.tsx",
       "source_location": "L1",
-      "community": 3,
+      "community": 20,
       "norm_label": "profilescreen.tsx",
       "id": "profile_profilescreen"
     },
@@ -1448,7 +2078,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/profile/ProfileScreen.tsx",
       "source_location": "L13",
-      "community": 3,
+      "community": 20,
       "norm_label": "props",
       "id": "profile_profilescreen_props"
     },
@@ -1484,7 +2114,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L20",
-      "community": 1,
+      "community": 34,
       "norm_label": "split",
       "id": "types_index_split"
     },
@@ -1529,7 +2159,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L71",
-      "community": 3,
+      "community": 20,
       "norm_label": "usersplit",
       "id": "types_index_usersplit"
     },
@@ -1574,7 +2204,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L126",
-      "community": 30,
+      "community": 3,
       "norm_label": "progressphoto",
       "id": "types_index_progressphoto"
     },
@@ -1592,7 +2222,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L146",
-      "community": 1,
+      "community": 34,
       "norm_label": "onboardingdata",
       "id": "types_index_onboardingdata"
     },
@@ -1916,7 +2546,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/onboarding/SplitSelectionScreen.tsx",
       "source_location": "L1",
-      "community": 1,
+      "community": 34,
       "norm_label": "splitselectionscreen.tsx",
       "id": "onboarding_splitselectionscreen"
     },
@@ -1925,7 +2555,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/onboarding/SplitSelectionScreen.tsx",
       "source_location": "L13",
-      "community": 1,
+      "community": 34,
       "norm_label": "props",
       "id": "onboarding_splitselectionscreen_props"
     },
@@ -1934,7 +2564,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/onboarding/SplitSelectionScreen.tsx",
       "source_location": "L15",
-      "community": 1,
+      "community": 41,
       "norm_label": "splitselectioncontent()",
       "id": "onboarding_splitselectionscreen_splitselectioncontent"
     },
@@ -1943,7 +2573,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/onboarding/SplitSelectionScreen.tsx",
       "source_location": "L149",
-      "community": 1,
+      "community": 34,
       "norm_label": "splitselectionscreen()",
       "id": "onboarding_splitselectionscreen_splitselectionscreen"
     },
@@ -1952,7 +2582,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/photos/PhotoCompareScreen.tsx",
       "source_location": "L1",
-      "community": 30,
+      "community": 3,
       "norm_label": "photocomparescreen.tsx",
       "id": "photos_photocomparescreen"
     },
@@ -1961,7 +2591,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/photos/PhotoCompareScreen.tsx",
       "source_location": "L12",
-      "community": 30,
+      "community": 3,
       "norm_label": "props",
       "id": "photos_photocomparescreen_props"
     },
@@ -1970,7 +2600,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/photos/PhotoCompareScreen.tsx",
       "source_location": "L14",
-      "community": 30,
+      "community": 3,
       "norm_label": "{ width: screenw }",
       "id": "photos_photocomparescreen_width_screenw"
     },
@@ -1979,7 +2609,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/photos/PhotoCompareScreen.tsx",
       "source_location": "L16",
-      "community": 30,
+      "community": 3,
       "norm_label": "photocomparescreen()",
       "id": "photos_photocomparescreen_photocomparescreen"
     },
@@ -1988,7 +2618,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/photos/PhotosTimelineScreen.tsx",
       "source_location": "L1",
-      "community": 30,
+      "community": 3,
       "norm_label": "photostimelinescreen.tsx",
       "id": "photos_photostimelinescreen"
     },
@@ -1997,7 +2627,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/photos/PhotosTimelineScreen.tsx",
       "source_location": "L12",
-      "community": 30,
+      "community": 3,
       "norm_label": "props",
       "id": "photos_photostimelinescreen_props"
     },
@@ -2006,7 +2636,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/photos/PhotosTimelineScreen.tsx",
       "source_location": "L14",
-      "community": 30,
+      "community": 3,
       "norm_label": "{ width: screenw }",
       "id": "photos_photostimelinescreen_width_screenw"
     },
@@ -2015,7 +2645,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/photos/PhotosTimelineScreen.tsx",
       "source_location": "L16",
-      "community": 30,
+      "community": 3,
       "norm_label": "photostimelinescreen()",
       "id": "photos_photostimelinescreen_photostimelinescreen"
     },
@@ -2024,7 +2654,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/profile/CustomSplitScreen.tsx",
       "source_location": "L1",
-      "community": 3,
+      "community": 20,
       "norm_label": "customsplitscreen.tsx",
       "id": "profile_customsplitscreen"
     },
@@ -2033,7 +2663,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/profile/CustomSplitScreen.tsx",
       "source_location": "L13",
-      "community": 3,
+      "community": 20,
       "norm_label": "props",
       "id": "profile_customsplitscreen_props"
     },
@@ -2042,7 +2672,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/profile/CustomSplitScreen.tsx",
       "source_location": "L15",
-      "community": 3,
+      "community": 20,
       "norm_label": "dayconfig",
       "id": "profile_customsplitscreen_dayconfig"
     },
@@ -2051,7 +2681,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/profile/CustomSplitScreen.tsx",
       "source_location": "L29",
-      "community": 3,
+      "community": 20,
       "norm_label": "available_muscle_groups",
       "id": "profile_customsplitscreen_available_muscle_groups"
     },
@@ -2060,7 +2690,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/profile/CustomSplitScreen.tsx",
       "source_location": "L31",
-      "community": 3,
+      "community": 20,
       "norm_label": "customsplitscreen()",
       "id": "profile_customsplitscreen_customsplitscreen"
     },
@@ -2308,303 +2938,6 @@
       "id": "store_workoutstore_useworkoutstore"
     },
     {
-      "label": "package.json",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L1",
-      "community": 6,
-      "norm_label": "package.json",
-      "id": "api_package"
-    },
-    {
-      "label": "name",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L2",
-      "community": 6,
-      "norm_label": "name",
-      "id": "api_package_name"
-    },
-    {
-      "label": "version",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L3",
-      "community": 6,
-      "norm_label": "version",
-      "id": "api_package_version"
-    },
-    {
-      "label": "private",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L4",
-      "community": 6,
-      "norm_label": "private",
-      "id": "api_package_private"
-    },
-    {
-      "label": "scripts",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L5",
-      "community": 6,
-      "norm_label": "scripts",
-      "id": "api_package_scripts"
-    },
-    {
-      "label": "dev",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L6",
-      "community": 6,
-      "norm_label": "dev",
-      "id": "api_package_scripts_dev"
-    },
-    {
-      "label": "build",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L7",
-      "community": 6,
-      "norm_label": "build",
-      "id": "api_package_scripts_build"
-    },
-    {
-      "label": "start",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L8",
-      "community": 6,
-      "norm_label": "start",
-      "id": "api_package_scripts_start"
-    },
-    {
-      "label": "prisma:migrate",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L9",
-      "community": 6,
-      "norm_label": "prisma:migrate",
-      "id": "api_package_scripts_prisma_migrate"
-    },
-    {
-      "label": "prisma:seed",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L10",
-      "community": 6,
-      "norm_label": "prisma:seed",
-      "id": "api_package_scripts_prisma_seed"
-    },
-    {
-      "label": "prisma:studio",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L11",
-      "community": 6,
-      "norm_label": "prisma:studio",
-      "id": "api_package_scripts_prisma_studio"
-    },
-    {
-      "label": "prisma:generate",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L12",
-      "community": 6,
-      "norm_label": "prisma:generate",
-      "id": "api_package_scripts_prisma_generate"
-    },
-    {
-      "label": "dependencies",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L14",
-      "community": 6,
-      "norm_label": "dependencies",
-      "id": "api_package_dependencies"
-    },
-    {
-      "label": "@prisma/client",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L15",
-      "community": 6,
-      "norm_label": "@prisma/client",
-      "id": "api_package_dependencies_prisma_client"
-    },
-    {
-      "label": "axios",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L16",
-      "community": 6,
-      "norm_label": "axios",
-      "id": "api_package_dependencies_axios"
-    },
-    {
-      "label": "bcryptjs",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L17",
-      "community": 6,
-      "norm_label": "bcryptjs",
-      "id": "api_package_dependencies_bcryptjs"
-    },
-    {
-      "label": "cloudinary",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L18",
-      "community": 6,
-      "norm_label": "cloudinary",
-      "id": "api_package_dependencies_cloudinary"
-    },
-    {
-      "label": "cors",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L19",
-      "community": 6,
-      "norm_label": "cors",
-      "id": "api_package_dependencies_cors"
-    },
-    {
-      "label": "dotenv",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L20",
-      "community": 6,
-      "norm_label": "dotenv",
-      "id": "api_package_dependencies_dotenv"
-    },
-    {
-      "label": "express",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L21",
-      "community": 6,
-      "norm_label": "express",
-      "id": "api_package_dependencies_express"
-    },
-    {
-      "label": "jsonwebtoken",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L22",
-      "community": 6,
-      "norm_label": "jsonwebtoken",
-      "id": "api_package_dependencies_jsonwebtoken"
-    },
-    {
-      "label": "multer",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L23",
-      "community": 6,
-      "norm_label": "multer",
-      "id": "api_package_dependencies_multer"
-    },
-    {
-      "label": "zod",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L24",
-      "community": 6,
-      "norm_label": "zod",
-      "id": "api_package_dependencies_zod"
-    },
-    {
-      "label": "devDependencies",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L26",
-      "community": 6,
-      "norm_label": "devdependencies",
-      "id": "api_package_devdependencies"
-    },
-    {
-      "label": "@types/bcryptjs",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L27",
-      "community": 6,
-      "norm_label": "@types/bcryptjs",
-      "id": "api_package_devdependencies_types_bcryptjs"
-    },
-    {
-      "label": "@types/cors",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L28",
-      "community": 6,
-      "norm_label": "@types/cors",
-      "id": "api_package_devdependencies_types_cors"
-    },
-    {
-      "label": "@types/express",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L29",
-      "community": 6,
-      "norm_label": "@types/express",
-      "id": "api_package_devdependencies_types_express"
-    },
-    {
-      "label": "@types/jsonwebtoken",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L30",
-      "community": 6,
-      "norm_label": "@types/jsonwebtoken",
-      "id": "api_package_devdependencies_types_jsonwebtoken"
-    },
-    {
-      "label": "@types/multer",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L31",
-      "community": 6,
-      "norm_label": "@types/multer",
-      "id": "api_package_devdependencies_types_multer"
-    },
-    {
-      "label": "@types/node",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L32",
-      "community": 6,
-      "norm_label": "@types/node",
-      "id": "api_package_devdependencies_types_node"
-    },
-    {
-      "label": "prisma",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L33",
-      "community": 6,
-      "norm_label": "prisma",
-      "id": "api_package_devdependencies_prisma"
-    },
-    {
-      "label": "tsx",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L34",
-      "community": 6,
-      "norm_label": "tsx",
-      "id": "api_package_devdependencies_tsx"
-    },
-    {
-      "label": "typescript",
-      "file_type": "code",
-      "source_file": "api/package.json",
-      "source_location": "L35",
-      "community": 6,
-      "norm_label": "typescript",
-      "id": "api_package_devdependencies_typescript"
-    },
-    {
       "label": "authController.ts",
       "file_type": "code",
       "source_file": "api/src/controllers/authController.ts",
@@ -2675,60 +3008,6 @@
       "community": 17,
       "norm_label": "deleteaccount()",
       "id": "controllers_authcontroller_deleteaccount"
-    },
-    {
-      "label": "exerciseController.ts",
-      "file_type": "code",
-      "source_file": "api/src/controllers/exerciseController.ts",
-      "source_location": "L1",
-      "community": 15,
-      "norm_label": "exercisecontroller.ts",
-      "id": "controllers_exercisecontroller"
-    },
-    {
-      "label": "prisma",
-      "file_type": "code",
-      "source_file": "api/src/controllers/exerciseController.ts",
-      "source_location": "L5",
-      "community": 15,
-      "norm_label": "prisma",
-      "id": "controllers_exercisecontroller_prisma"
-    },
-    {
-      "label": "listExercises()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/exerciseController.ts",
-      "source_location": "L7",
-      "community": 15,
-      "norm_label": "listexercises()",
-      "id": "controllers_exercisecontroller_listexercises"
-    },
-    {
-      "label": "getExercise()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/exerciseController.ts",
-      "source_location": "L30",
-      "community": 15,
-      "norm_label": "getexercise()",
-      "id": "controllers_exercisecontroller_getexercise"
-    },
-    {
-      "label": "getAlternatives()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/exerciseController.ts",
-      "source_location": "L47",
-      "community": 15,
-      "norm_label": "getalternatives()",
-      "id": "controllers_exercisecontroller_getalternatives"
-    },
-    {
-      "label": "getExerciseHistory()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/exerciseController.ts",
-      "source_location": "L56",
-      "community": 15,
-      "norm_label": "getexercisehistory()",
-      "id": "controllers_exercisecontroller_getexercisehistory"
     },
     {
       "label": "metricsController.ts",
@@ -2956,123 +3235,6 @@
       "id": "controllers_photocontroller_deletephoto"
     },
     {
-      "label": "progressController.ts",
-      "file_type": "code",
-      "source_file": "api/src/controllers/progressController.ts",
-      "source_location": "L1",
-      "community": 19,
-      "norm_label": "progresscontroller.ts",
-      "id": "controllers_progresscontroller"
-    },
-    {
-      "label": "prisma",
-      "file_type": "code",
-      "source_file": "api/src/controllers/progressController.ts",
-      "source_location": "L5",
-      "community": 19,
-      "norm_label": "prisma",
-      "id": "controllers_progresscontroller_prisma"
-    },
-    {
-      "label": "getOverview()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/progressController.ts",
-      "source_location": "L7",
-      "community": 19,
-      "norm_label": "getoverview()",
-      "id": "controllers_progresscontroller_getoverview"
-    },
-    {
-      "label": "calculateStreak()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/progressController.ts",
-      "source_location": "L54",
-      "community": 19,
-      "norm_label": "calculatestreak()",
-      "id": "controllers_progresscontroller_calculatestreak"
-    },
-    {
-      "label": "getThisWeekWorkouts()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/progressController.ts",
-      "source_location": "L89",
-      "community": 19,
-      "norm_label": "getthisweekworkouts()",
-      "id": "controllers_progresscontroller_getthisweekworkouts"
-    },
-    {
-      "label": "getExerciseProgress()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/progressController.ts",
-      "source_location": "L103",
-      "community": 19,
-      "norm_label": "getexerciseprogress()",
-      "id": "controllers_progresscontroller_getexerciseprogress"
-    },
-    {
-      "label": "getMuscleVolume()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/progressController.ts",
-      "source_location": "L137",
-      "community": 19,
-      "norm_label": "getmusclevolume()",
-      "id": "controllers_progresscontroller_getmusclevolume"
-    },
-    {
-      "label": "getHeatmap()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/progressController.ts",
-      "source_location": "L178",
-      "community": 19,
-      "norm_label": "getheatmap()",
-      "id": "controllers_progresscontroller_getheatmap"
-    },
-    {
-      "label": "getVolumeHistory()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/progressController.ts",
-      "source_location": "L207",
-      "community": 19,
-      "norm_label": "getvolumehistory()",
-      "id": "controllers_progresscontroller_getvolumehistory"
-    },
-    {
-      "label": "recordController.ts",
-      "file_type": "code",
-      "source_file": "api/src/controllers/recordController.ts",
-      "source_location": "L1",
-      "community": 21,
-      "norm_label": "recordcontroller.ts",
-      "id": "controllers_recordcontroller"
-    },
-    {
-      "label": "prisma",
-      "file_type": "code",
-      "source_file": "api/src/controllers/recordController.ts",
-      "source_location": "L5",
-      "community": 21,
-      "norm_label": "prisma",
-      "id": "controllers_recordcontroller_prisma"
-    },
-    {
-      "label": "getRecords()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/recordController.ts",
-      "source_location": "L7",
-      "community": 21,
-      "norm_label": "getrecords()",
-      "id": "controllers_recordcontroller_getrecords"
-    },
-    {
-      "label": "getExerciseRecords()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/recordController.ts",
-      "source_location": "L31",
-      "community": 21,
-      "norm_label": "getexerciserecords()",
-      "id": "controllers_recordcontroller_getexerciserecords"
-    },
-    {
       "label": "splitController.ts",
       "file_type": "code",
       "source_file": "api/src/controllers/splitController.ts",
@@ -3251,87 +3413,6 @@
       "community": 7,
       "norm_label": "validate()",
       "id": "middleware_validate_validate"
-    },
-    {
-      "label": "seed.ts",
-      "file_type": "code",
-      "source_file": "api/src/prisma/seed.ts",
-      "source_location": "L1",
-      "community": 20,
-      "norm_label": "seed.ts",
-      "id": "prisma_seed"
-    },
-    {
-      "label": "prisma",
-      "file_type": "code",
-      "source_file": "api/src/prisma/seed.ts",
-      "source_location": "L3",
-      "community": 20,
-      "norm_label": "prisma",
-      "id": "prisma_seed_prisma"
-    },
-    {
-      "label": "ExerciseData",
-      "file_type": "code",
-      "source_file": "api/src/prisma/seed.ts",
-      "source_location": "L5",
-      "community": 20,
-      "norm_label": "exercisedata",
-      "id": "prisma_seed_exercisedata"
-    },
-    {
-      "label": "exercises",
-      "file_type": "code",
-      "source_file": "api/src/prisma/seed.ts",
-      "source_location": "L14",
-      "community": 20,
-      "norm_label": "exercises",
-      "id": "prisma_seed_exercises"
-    },
-    {
-      "label": "fullBodySplit",
-      "file_type": "code",
-      "source_file": "api/src/prisma/seed.ts",
-      "source_location": "L625",
-      "community": 20,
-      "norm_label": "fullbodysplit",
-      "id": "prisma_seed_fullbodysplit"
-    },
-    {
-      "label": "pplSplit",
-      "file_type": "code",
-      "source_file": "api/src/prisma/seed.ts",
-      "source_location": "L702",
-      "community": 20,
-      "norm_label": "pplsplit",
-      "id": "prisma_seed_pplsplit"
-    },
-    {
-      "label": "broSplit",
-      "file_type": "code",
-      "source_file": "api/src/prisma/seed.ts",
-      "source_location": "L804",
-      "community": 20,
-      "norm_label": "brosplit",
-      "id": "prisma_seed_brosplit"
-    },
-    {
-      "label": "upperLowerSplit",
-      "file_type": "code",
-      "source_file": "api/src/prisma/seed.ts",
-      "source_location": "L901",
-      "community": 20,
-      "norm_label": "upperlowersplit",
-      "id": "prisma_seed_upperlowersplit"
-    },
-    {
-      "label": "seed()",
-      "file_type": "code",
-      "source_file": "api/src/prisma/seed.ts",
-      "source_location": "L985",
-      "community": 20,
-      "norm_label": "seed()",
-      "id": "prisma_seed_seed"
     },
     {
       "label": "auth.ts",
@@ -3878,7 +3959,7 @@
       "file_type": "code",
       "source_file": "expo-app/index.js",
       "source_location": "L1",
-      "community": 38,
+      "community": 4,
       "norm_label": "index.js",
       "id": "expo_app_index"
     },
@@ -3932,7 +4013,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/api/auth.ts",
       "source_location": "L19",
-      "community": 41,
+      "community": 32,
       "norm_label": "updateprofile()",
       "id": "api_auth_updateprofile"
     },
@@ -4103,7 +4184,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/api/onboarding.ts",
       "source_location": "L1",
-      "community": 1,
+      "community": 34,
       "norm_label": "onboarding.ts",
       "id": "api_onboarding"
     },
@@ -4112,7 +4193,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/api/onboarding.ts",
       "source_location": "L4",
-      "community": 1,
+      "community": 34,
       "norm_label": "completeonboarding()",
       "id": "api_onboarding_completeonboarding"
     },
@@ -4121,7 +4202,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/api/onboarding.ts",
       "source_location": "L9",
-      "community": 1,
+      "community": 34,
       "norm_label": "getrecommendedsplits()",
       "id": "api_onboarding_getrecommendedsplits"
     },
@@ -4130,7 +4211,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/api/photos.ts",
       "source_location": "L1",
-      "community": 30,
+      "community": 3,
       "norm_label": "photos.ts",
       "id": "api_photos"
     },
@@ -4139,7 +4220,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/api/photos.ts",
       "source_location": "L4",
-      "community": 30,
+      "community": 3,
       "norm_label": "uploadphoto()",
       "id": "api_photos_uploadphoto"
     },
@@ -4148,7 +4229,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/api/photos.ts",
       "source_location": "L25",
-      "community": 30,
+      "community": 3,
       "norm_label": "getphotos()",
       "id": "api_photos_getphotos"
     },
@@ -4157,7 +4238,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/api/photos.ts",
       "source_location": "L30",
-      "community": 30,
+      "community": 3,
       "norm_label": "deletephoto()",
       "id": "api_photos_deletephoto"
     },
@@ -4247,7 +4328,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/api/splits.ts",
       "source_location": "L1",
-      "community": 3,
+      "community": 20,
       "norm_label": "splits.ts",
       "id": "api_splits"
     },
@@ -4256,7 +4337,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/api/splits.ts",
       "source_location": "L4",
-      "community": 3,
+      "community": 20,
       "norm_label": "listsplits()",
       "id": "api_splits_listsplits"
     },
@@ -4265,7 +4346,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/api/splits.ts",
       "source_location": "L9",
-      "community": 3,
+      "community": 20,
       "norm_label": "getsplit()",
       "id": "api_splits_getsplit"
     },
@@ -4274,7 +4355,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/api/splits.ts",
       "source_location": "L14",
-      "community": 3,
+      "community": 20,
       "norm_label": "getactivesplit()",
       "id": "api_splits_getactivesplit"
     },
@@ -4292,7 +4373,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/api/splits.ts",
       "source_location": "L24",
-      "community": 3,
+      "community": 20,
       "norm_label": "createsplit()",
       "id": "api_splits_createsplit"
     },
@@ -4301,7 +4382,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/api/splits.ts",
       "source_location": "L29",
-      "community": 3,
+      "community": 20,
       "norm_label": "updatesplitexercise()",
       "id": "api_splits_updatesplitexercise"
     },
@@ -4445,7 +4526,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/components/Screen.tsx",
       "source_location": "L1",
-      "community": 1,
+      "community": 39,
       "norm_label": "screen.tsx",
       "id": "components_screen"
     },
@@ -4454,7 +4535,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/components/Screen.tsx",
       "source_location": "L7",
-      "community": 1,
+      "community": 39,
       "norm_label": "screenprops",
       "id": "components_screen_screenprops"
     },
@@ -4463,7 +4544,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/components/Screen.tsx",
       "source_location": "L15",
-      "community": 1,
+      "community": 39,
       "norm_label": "screen()",
       "id": "components_screen_screen"
     },
@@ -4580,7 +4661,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/components/charts/RingChart.tsx",
       "source_location": "L1",
-      "community": 40,
+      "community": 39,
       "norm_label": "ringchart.tsx",
       "id": "charts_ringchart"
     },
@@ -4589,7 +4670,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/components/charts/RingChart.tsx",
       "source_location": "L5",
-      "community": 40,
+      "community": 39,
       "norm_label": "ringchartprops",
       "id": "charts_ringchart_ringchartprops"
     },
@@ -4598,7 +4679,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/components/charts/RingChart.tsx",
       "source_location": "L16",
-      "community": 40,
+      "community": 39,
       "norm_label": "ringchart()",
       "id": "charts_ringchart_ringchart"
     },
@@ -4733,7 +4814,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/auth/LoginScreen.tsx",
       "source_location": "L13",
-      "community": 32,
+      "community": 41,
       "norm_label": "loginscreen()",
       "id": "auth_loginscreen_loginscreen"
     },
@@ -4886,7 +4967,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/onboarding/ExperienceScreen.tsx",
       "source_location": "L1",
-      "community": 1,
+      "community": 36,
       "norm_label": "experiencescreen.tsx",
       "id": "onboarding_experiencescreen"
     },
@@ -4895,7 +4976,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/onboarding/ExperienceScreen.tsx",
       "source_location": "L10",
-      "community": 1,
+      "community": 36,
       "norm_label": "props",
       "id": "onboarding_experiencescreen_props"
     },
@@ -4904,7 +4985,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/onboarding/ExperienceScreen.tsx",
       "source_location": "L12",
-      "community": 1,
+      "community": 36,
       "norm_label": "options",
       "id": "onboarding_experiencescreen_options"
     },
@@ -4913,7 +4994,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/onboarding/ExperienceScreen.tsx",
       "source_location": "L18",
-      "community": 1,
+      "community": 36,
       "norm_label": "experiencecontent()",
       "id": "onboarding_experiencescreen_experiencecontent"
     },
@@ -4922,7 +5003,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/onboarding/ExperienceScreen.tsx",
       "source_location": "L85",
-      "community": 1,
+      "community": 36,
       "norm_label": "experiencescreen()",
       "id": "onboarding_experiencescreen_experiencescreen"
     },
@@ -5030,7 +5111,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/onboarding/OnboardingContext.tsx",
       "source_location": "L4",
-      "community": 1,
+      "community": 34,
       "norm_label": "onboardingcontexttype",
       "id": "onboarding_onboardingcontext_onboardingcontexttype"
     },
@@ -5111,7 +5192,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/photos/PhotoCaptureScreen.tsx",
       "source_location": "L1",
-      "community": 30,
+      "community": 40,
       "norm_label": "photocapturescreen.tsx",
       "id": "photos_photocapturescreen"
     },
@@ -5120,7 +5201,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/photos/PhotoCaptureScreen.tsx",
       "source_location": "L13",
-      "community": 30,
+      "community": 40,
       "norm_label": "props",
       "id": "photos_photocapturescreen_props"
     },
@@ -5129,7 +5210,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/photos/PhotoCaptureScreen.tsx",
       "source_location": "L15",
-      "community": 30,
+      "community": 40,
       "norm_label": "photocapturescreen()",
       "id": "photos_photocapturescreen_photocapturescreen"
     },
@@ -5138,7 +5219,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/profile/SettingsScreen.tsx",
       "source_location": "L1",
-      "community": 41,
+      "community": 40,
       "norm_label": "settingsscreen.tsx",
       "id": "profile_settingsscreen"
     },
@@ -5183,7 +5264,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/theme/colors.ts",
       "source_location": "L1",
-      "community": 40,
+      "community": 39,
       "norm_label": "colors.ts",
       "id": "theme_colors"
     },
@@ -5192,7 +5273,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/theme/colors.ts",
       "source_location": "L137",
-      "community": 4,
+      "community": 39,
       "norm_label": "colors",
       "id": "theme_colors_colors"
     },
@@ -5201,7 +5282,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/theme/colors.ts",
       "source_location": "L62",
-      "community": 40,
+      "community": 39,
       "norm_label": "makesemanticcolor()",
       "id": "theme_colors_makesemanticcolor"
     },
@@ -5210,7 +5291,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/theme/colors.ts",
       "source_location": "L138",
-      "community": 40,
+      "community": 39,
       "norm_label": "lighttheme",
       "id": "theme_colors_lighttheme"
     },
@@ -5228,7 +5309,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/theme/spacing.ts",
       "source_location": "L1",
-      "community": 1,
+      "community": 40,
       "norm_label": "spacing.ts",
       "id": "theme_spacing"
     },
@@ -5246,7 +5327,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/theme/spacing.ts",
       "source_location": "L28",
-      "community": 1,
+      "community": 40,
       "norm_label": "space",
       "id": "theme_spacing_space"
     },
@@ -5993,232 +6074,674 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "api/tsconfig.json",
+      "source_file": "api/package.json",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_package",
+      "target": "api_package_dependencies"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/package.json",
+      "source_location": "L25",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_package",
+      "target": "api_package_devdependencies"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/package.json",
       "source_location": "L2",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "api_tsconfig",
-      "target": "api_tsconfig_compileroptions"
+      "source": "api_package",
+      "target": "api_package_name"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "api/tsconfig.json",
-      "source_location": "L19",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_tsconfig",
-      "target": "api_tsconfig_exclude"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/tsconfig.json",
-      "source_location": "L18",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_tsconfig",
-      "target": "api_tsconfig_include"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/tsconfig.json",
-      "source_location": "L14",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_tsconfig_compileroptions",
-      "target": "api_tsconfig_compileroptions_declaration"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/tsconfig.json",
-      "source_location": "L14",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_tsconfig_compileroptions",
-      "target": "api_tsconfig_compileroptions_declarationmap"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/tsconfig.json",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_tsconfig_compileroptions",
-      "target": "api_tsconfig_compileroptions_esmoduleinterop"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/tsconfig.json",
-      "source_location": "L11",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_tsconfig_compileroptions",
-      "target": "api_tsconfig_compileroptions_forceconsistentcasinginfilenames"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/tsconfig.json",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_tsconfig_compileroptions",
-      "target": "api_tsconfig_compileroptions_lib"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/tsconfig.json",
+      "source_file": "api/package.json",
       "source_location": "L4",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "api_tsconfig_compileroptions",
-      "target": "api_tsconfig_compileroptions_module"
+      "source": "api_package",
+      "target": "api_package_private"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "api/tsconfig.json",
-      "source_location": "L16",
+      "source_file": "api/package.json",
+      "source_location": "L5",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "api_tsconfig_compileroptions",
-      "target": "api_tsconfig_compileroptions_moduleresolution"
+      "source": "api_package",
+      "target": "api_package_scripts"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "api/tsconfig.json",
-      "source_location": "L6",
+      "source_file": "api/package.json",
+      "source_location": "L3",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "api_tsconfig_compileroptions",
-      "target": "api_tsconfig_compileroptions_outdir"
+      "source": "api_package",
+      "target": "api_package_version"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "api/tsconfig.json",
-      "source_location": "L12",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_tsconfig_compileroptions",
-      "target": "api_tsconfig_compileroptions_resolvejsonmodule"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/tsconfig.json",
+      "source_file": "api/package.json",
       "source_location": "L7",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "api_tsconfig_compileroptions",
-      "target": "api_tsconfig_compileroptions_rootdir"
+      "source": "api_package_scripts",
+      "target": "api_package_scripts_build"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "api/tsconfig.json",
-      "source_location": "L10",
+      "source_file": "api/package.json",
+      "source_location": "L6",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "api_tsconfig_compileroptions",
-      "target": "api_tsconfig_compileroptions_skiplibcheck"
+      "source": "api_package_scripts",
+      "target": "api_package_scripts_dev"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "api/tsconfig.json",
-      "source_location": "L15",
+      "source_file": "api/package.json",
+      "source_location": "L12",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_tsconfig_compileroptions",
-      "target": "api_tsconfig_compileroptions_sourcemap"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/tsconfig.json",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_tsconfig_compileroptions",
-      "target": "api_tsconfig_compileroptions_strict"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/tsconfig.json",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_tsconfig_compileroptions",
-      "target": "api_tsconfig_compileroptions_target"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/tsconfig.json",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_tsconfig",
-      "target": "expo_app_tsconfig_compileroptions"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/tsconfig.json",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "expo_app_tsconfig",
-      "target": "expo_app_tsconfig_extends"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "expo-app/tsconfig.json",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "expo_app_tsconfig_compileroptions",
-      "target": "expo_app_tsconfig_compileroptions_moduleresolution",
+      "source": "api_package_scripts",
+      "target": "api_package_scripts_migrate_exercises",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "expo-app/tsconfig.json",
-      "source_location": "L6",
+      "source_file": "api/package.json",
+      "source_location": "L12",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "expo_app_tsconfig_compileroptions",
-      "target": "expo_app_tsconfig_compileroptions_paths"
+      "source": "api_package_scripts",
+      "target": "api_package_scripts_prisma_generate"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "expo-app/tsconfig.json",
-      "source_location": "L4",
+      "source_file": "api/package.json",
+      "source_location": "L9",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "expo_app_tsconfig_compileroptions",
-      "target": "expo_app_tsconfig_compileroptions_strict"
+      "source": "api_package_scripts",
+      "target": "api_package_scripts_prisma_migrate"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "expo-app/tsconfig.json",
+      "source_file": "api/package.json",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_package_scripts",
+      "target": "api_package_scripts_prisma_studio"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/package.json",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_package_scripts",
+      "target": "api_package_scripts_start"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/package.json",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_package_dependencies",
+      "target": "api_package_dependencies_axios"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/package.json",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_package_dependencies",
+      "target": "api_package_dependencies_bcryptjs"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/package.json",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_package_dependencies",
+      "target": "api_package_dependencies_cloudinary"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/package.json",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_package_dependencies",
+      "target": "api_package_dependencies_cors"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/package.json",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_package_dependencies",
+      "target": "api_package_dependencies_dotenv"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/package.json",
+      "source_location": "L20",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_package_dependencies",
+      "target": "api_package_dependencies_express"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/package.json",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_package_dependencies",
+      "target": "api_package_dependencies_jsonwebtoken"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/package.json",
+      "source_location": "L22",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_package_dependencies",
+      "target": "api_package_dependencies_multer"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/package.json",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_package_dependencies",
+      "target": "api_package_dependencies_prisma_client"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/package.json",
+      "source_location": "L23",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_package_dependencies",
+      "target": "api_package_dependencies_zod"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/package.json",
+      "source_location": "L17",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_package_dependencies",
+      "target": "utils_cloudinary"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/package.json",
+      "source_location": "L32",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_package_devdependencies",
+      "target": "api_package_devdependencies_prisma"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/package.json",
+      "source_location": "L33",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_package_devdependencies",
+      "target": "api_package_devdependencies_tsx"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/package.json",
+      "source_location": "L26",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_package_devdependencies",
+      "target": "api_package_devdependencies_types_bcryptjs"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/package.json",
+      "source_location": "L27",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_package_devdependencies",
+      "target": "api_package_devdependencies_types_cors"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/package.json",
+      "source_location": "L28",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_package_devdependencies",
+      "target": "api_package_devdependencies_types_express"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/package.json",
+      "source_location": "L29",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_package_devdependencies",
+      "target": "api_package_devdependencies_types_jsonwebtoken"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/package.json",
+      "source_location": "L30",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_package_devdependencies",
+      "target": "api_package_devdependencies_types_multer"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/package.json",
+      "source_location": "L31",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_package_devdependencies",
+      "target": "api_package_devdependencies_types_node"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/package.json",
+      "source_location": "L34",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_package_devdependencies",
+      "target": "api_package_devdependencies_typescript"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/scripts/migrate-exercises.ts",
+      "source_location": "L77",
+      "weight": 1.0,
+      "source": "scripts_migrate_exercises",
+      "target": "scripts_migrate_exercises_migrate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/scripts/migrate-exercises.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "scripts_migrate_exercises",
+      "target": "scripts_migrate_exercises_muscles",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/scripts/migrate-exercises.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "scripts_migrate_exercises",
+      "target": "scripts_migrate_exercises_prisma",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/scripts/migrate-exercises.ts",
+      "source_location": "L37",
+      "weight": 1.0,
+      "source": "scripts_migrate_exercises",
+      "target": "scripts_migrate_exercises_sourceexercise",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/scripts/migrate-exercises.ts",
+      "source_location": "L51",
+      "weight": 1.0,
+      "source": "scripts_migrate_exercises",
+      "target": "scripts_migrate_exercises_uploadimagetocloudinary",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "api/scripts/migrate-exercises.ts",
+      "source_location": "L182",
+      "weight": 1.0,
+      "source": "scripts_migrate_exercises_migrate",
+      "target": "scripts_migrate_exercises_uploadimagetocloudinary",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/exerciseController.ts",
+      "source_location": "L47",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_exercisecontroller",
+      "target": "controllers_exercisecontroller_getalternatives"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/exerciseController.ts",
+      "source_location": "L30",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_exercisecontroller",
+      "target": "controllers_exercisecontroller_getexercise"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/exerciseController.ts",
+      "source_location": "L56",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_exercisecontroller",
+      "target": "controllers_exercisecontroller_getexercisehistory"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/exerciseController.ts",
       "source_location": "L7",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "expo_app_tsconfig_compileroptions_paths",
-      "target": "expo_app_tsconfig_paths"
+      "source": "controllers_exercisecontroller",
+      "target": "controllers_exercisecontroller_listexercises"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/exerciseController.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_exercisecontroller",
+      "target": "controllers_exercisecontroller_prisma"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/exerciseController.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_exercisecontroller",
+      "target": "middleware_auth"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/exerciseController.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_exercisecontroller",
+      "target": "middleware_auth_authrequest"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/routes/exercises.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_exercises",
+      "target": "controllers_exercisecontroller"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/progressController.ts",
+      "source_location": "L36",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_progresscontroller",
+      "target": "controllers_progresscontroller_calculatestreak"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/progressController.ts",
+      "source_location": "L85",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_progresscontroller",
+      "target": "controllers_progresscontroller_getexerciseprogress"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/progressController.ts",
+      "source_location": "L160",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_progresscontroller",
+      "target": "controllers_progresscontroller_getheatmap"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/progressController.ts",
+      "source_location": "L119",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_progresscontroller",
+      "target": "controllers_progresscontroller_getmusclevolume"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/progressController.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_progresscontroller",
+      "target": "controllers_progresscontroller_getoverview"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/progressController.ts",
+      "source_location": "L71",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_progresscontroller",
+      "target": "controllers_progresscontroller_getthisweekworkouts"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/progressController.ts",
+      "source_location": "L189",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_progresscontroller",
+      "target": "controllers_progresscontroller_getvolumehistory"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/progressController.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_progresscontroller",
+      "target": "controllers_progresscontroller_prisma"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/progressController.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_progresscontroller",
+      "target": "middleware_auth"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/progressController.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_progresscontroller",
+      "target": "middleware_auth_authrequest"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/routes/progress.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_progress",
+      "target": "controllers_progresscontroller"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/progressController.ts",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_progresscontroller_getoverview",
+      "target": "controllers_progresscontroller_calculatestreak"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/progressController.ts",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_progresscontroller_getoverview",
+      "target": "controllers_progresscontroller_getthisweekworkouts"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/recordController.ts",
+      "source_location": "L31",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_recordcontroller",
+      "target": "controllers_recordcontroller_getexerciserecords"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/recordController.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_recordcontroller",
+      "target": "controllers_recordcontroller_getrecords"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/recordController.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_recordcontroller",
+      "target": "controllers_recordcontroller_prisma"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/recordController.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_recordcontroller",
+      "target": "middleware_auth"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/recordController.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_recordcontroller",
+      "target": "middleware_auth_authrequest"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/routes/records.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_records",
+      "target": "controllers_recordcontroller"
     },
     {
       "relation": "contains",
@@ -6456,6 +6979,346 @@
       "confidence_score": 1.0,
       "source": "controllers_sessioncontroller_createsession",
       "target": "controllers_sessioncontroller_getlastsessionlogs"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/tsconfig.scripts.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "api_tsconfig_scripts",
+      "target": "api_tsconfig_scripts_compileroptions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/tsconfig.scripts.json",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "api_tsconfig_scripts",
+      "target": "api_tsconfig_scripts_include",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/tsconfig.scripts.json",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "api_tsconfig_scripts_compileroptions",
+      "target": "api_tsconfig_scripts_compileroptions_esmoduleinterop",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/tsconfig.scripts.json",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "api_tsconfig_scripts_compileroptions",
+      "target": "api_tsconfig_scripts_compileroptions_forceconsistentcasinginfilenames",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/tsconfig.scripts.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "api_tsconfig_scripts_compileroptions",
+      "target": "api_tsconfig_scripts_compileroptions_lib",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/tsconfig.scripts.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "api_tsconfig_scripts_compileroptions",
+      "target": "api_tsconfig_scripts_compileroptions_module",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/tsconfig.scripts.json",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "api_tsconfig_scripts_compileroptions",
+      "target": "api_tsconfig_scripts_compileroptions_moduleresolution",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/tsconfig.scripts.json",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "api_tsconfig_scripts_compileroptions",
+      "target": "api_tsconfig_scripts_compileroptions_resolvejsonmodule",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/tsconfig.scripts.json",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "api_tsconfig_scripts_compileroptions",
+      "target": "api_tsconfig_scripts_compileroptions_skiplibcheck",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/tsconfig.scripts.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "api_tsconfig_scripts_compileroptions",
+      "target": "api_tsconfig_scripts_compileroptions_strict",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/tsconfig.scripts.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "api_tsconfig_scripts_compileroptions",
+      "target": "api_tsconfig_scripts_compileroptions_target",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_tsconfig",
+      "target": "api_tsconfig_compileroptions"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_tsconfig",
+      "target": "api_tsconfig_exclude"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_tsconfig",
+      "target": "api_tsconfig_include"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_tsconfig_compileroptions",
+      "target": "api_tsconfig_compileroptions_declaration"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_tsconfig_compileroptions",
+      "target": "api_tsconfig_compileroptions_declarationmap"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_tsconfig_compileroptions",
+      "target": "api_tsconfig_compileroptions_esmoduleinterop"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_tsconfig_compileroptions",
+      "target": "api_tsconfig_compileroptions_forceconsistentcasinginfilenames"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_tsconfig_compileroptions",
+      "target": "api_tsconfig_compileroptions_lib"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_tsconfig_compileroptions",
+      "target": "api_tsconfig_compileroptions_module"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_tsconfig_compileroptions",
+      "target": "api_tsconfig_compileroptions_moduleresolution"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_tsconfig_compileroptions",
+      "target": "api_tsconfig_compileroptions_outdir"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_tsconfig_compileroptions",
+      "target": "api_tsconfig_compileroptions_resolvejsonmodule"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_tsconfig_compileroptions",
+      "target": "api_tsconfig_compileroptions_rootdir"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_tsconfig_compileroptions",
+      "target": "api_tsconfig_compileroptions_skiplibcheck"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_tsconfig_compileroptions",
+      "target": "api_tsconfig_compileroptions_sourcemap"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_tsconfig_compileroptions",
+      "target": "api_tsconfig_compileroptions_strict"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/tsconfig.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "api_tsconfig_compileroptions",
+      "target": "api_tsconfig_compileroptions_target"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/tsconfig.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_tsconfig",
+      "target": "expo_app_tsconfig_compileroptions"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/tsconfig.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_tsconfig",
+      "target": "expo_app_tsconfig_extends"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/tsconfig.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_tsconfig_compileroptions",
+      "target": "expo_app_tsconfig_compileroptions_moduleresolution"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/tsconfig.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_tsconfig_compileroptions",
+      "target": "expo_app_tsconfig_compileroptions_paths"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/tsconfig.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_tsconfig_compileroptions",
+      "target": "expo_app_tsconfig_compileroptions_strict"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/tsconfig.json",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_app_tsconfig_compileroptions_paths",
+      "target": "expo_app_tsconfig_paths"
     },
     {
       "relation": "contains",
@@ -13161,336 +14024,6 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L14",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package",
-      "target": "api_package_dependencies"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L25",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package",
-      "target": "api_package_devdependencies"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package",
-      "target": "api_package_name"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package",
-      "target": "api_package_private"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package",
-      "target": "api_package_scripts"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package",
-      "target": "api_package_version"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package_scripts",
-      "target": "api_package_scripts_build"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package_scripts",
-      "target": "api_package_scripts_dev"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L12",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package_scripts",
-      "target": "api_package_scripts_prisma_generate"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package_scripts",
-      "target": "api_package_scripts_prisma_migrate"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L10",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package_scripts",
-      "target": "api_package_scripts_prisma_seed"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L11",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package_scripts",
-      "target": "api_package_scripts_prisma_studio"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package_scripts",
-      "target": "api_package_scripts_start"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L16",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package_dependencies",
-      "target": "api_package_dependencies_axios"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L16",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package_dependencies",
-      "target": "api_package_dependencies_bcryptjs"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L18",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package_dependencies",
-      "target": "api_package_dependencies_cloudinary"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L18",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package_dependencies",
-      "target": "api_package_dependencies_cors"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L19",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package_dependencies",
-      "target": "api_package_dependencies_dotenv"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L20",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package_dependencies",
-      "target": "api_package_dependencies_express"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package_dependencies",
-      "target": "api_package_dependencies_jsonwebtoken"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L22",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package_dependencies",
-      "target": "api_package_dependencies_multer"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package_dependencies",
-      "target": "api_package_dependencies_prisma_client"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L23",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package_dependencies",
-      "target": "api_package_dependencies_zod"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L17",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package_dependencies",
-      "target": "utils_cloudinary"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L32",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package_devdependencies",
-      "target": "api_package_devdependencies_prisma"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L33",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package_devdependencies",
-      "target": "api_package_devdependencies_tsx"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L26",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package_devdependencies",
-      "target": "api_package_devdependencies_types_bcryptjs"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L27",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package_devdependencies",
-      "target": "api_package_devdependencies_types_cors"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L28",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package_devdependencies",
-      "target": "api_package_devdependencies_types_express"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L29",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package_devdependencies",
-      "target": "api_package_devdependencies_types_jsonwebtoken"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L30",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package_devdependencies",
-      "target": "api_package_devdependencies_types_multer"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L31",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package_devdependencies",
-      "target": "api_package_devdependencies_types_node"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/package.json",
-      "source_location": "L34",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_package_devdependencies",
-      "target": "api_package_devdependencies_typescript"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "api/src/controllers/authController.ts",
       "source_location": "L117",
       "weight": 1.0,
@@ -13634,89 +14167,6 @@
       "confidence_score": 1.0,
       "source": "controllers_authcontroller_register",
       "target": "controllers_authcontroller_generatetoken"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/exerciseController.ts",
-      "source_location": "L47",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_exercisecontroller",
-      "target": "controllers_exercisecontroller_getalternatives"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/exerciseController.ts",
-      "source_location": "L30",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_exercisecontroller",
-      "target": "controllers_exercisecontroller_getexercise"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/exerciseController.ts",
-      "source_location": "L56",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_exercisecontroller",
-      "target": "controllers_exercisecontroller_getexercisehistory"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/exerciseController.ts",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_exercisecontroller",
-      "target": "controllers_exercisecontroller_listexercises"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/exerciseController.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_exercisecontroller",
-      "target": "controllers_exercisecontroller_prisma"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/exerciseController.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_exercisecontroller",
-      "target": "middleware_auth"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/exerciseController.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_exercisecontroller",
-      "target": "middleware_auth_authrequest"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/routes/exercises.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "routes_exercises",
-      "target": "controllers_exercisecontroller"
     },
     {
       "relation": "contains",
@@ -14214,204 +14664,6 @@
       "weight": 1.0,
       "source": "controllers_photocontroller_deletephoto",
       "target": "utils_cloudinary_deletefromcloudinary"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/progressController.ts",
-      "source_location": "L36",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_progresscontroller",
-      "target": "controllers_progresscontroller_calculatestreak"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/progressController.ts",
-      "source_location": "L85",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_progresscontroller",
-      "target": "controllers_progresscontroller_getexerciseprogress"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/progressController.ts",
-      "source_location": "L160",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_progresscontroller",
-      "target": "controllers_progresscontroller_getheatmap"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/progressController.ts",
-      "source_location": "L119",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_progresscontroller",
-      "target": "controllers_progresscontroller_getmusclevolume"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/progressController.ts",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_progresscontroller",
-      "target": "controllers_progresscontroller_getoverview"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/progressController.ts",
-      "source_location": "L71",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_progresscontroller",
-      "target": "controllers_progresscontroller_getthisweekworkouts"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/progressController.ts",
-      "source_location": "L189",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_progresscontroller",
-      "target": "controllers_progresscontroller_getvolumehistory"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/progressController.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_progresscontroller",
-      "target": "controllers_progresscontroller_prisma"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/progressController.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_progresscontroller",
-      "target": "middleware_auth"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/progressController.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_progresscontroller",
-      "target": "middleware_auth_authrequest"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/routes/progress.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "routes_progress",
-      "target": "controllers_progresscontroller"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/progressController.ts",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_progresscontroller_getoverview",
-      "target": "controllers_progresscontroller_calculatestreak"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/progressController.ts",
-      "source_location": "L16",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_progresscontroller_getoverview",
-      "target": "controllers_progresscontroller_getthisweekworkouts"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/recordController.ts",
-      "source_location": "L31",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_recordcontroller",
-      "target": "controllers_recordcontroller_getexerciserecords"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/recordController.ts",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_recordcontroller",
-      "target": "controllers_recordcontroller_getrecords"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/recordController.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_recordcontroller",
-      "target": "controllers_recordcontroller_prisma"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/recordController.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_recordcontroller",
-      "target": "middleware_auth"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/recordController.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_recordcontroller",
-      "target": "middleware_auth_authrequest"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/routes/records.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "routes_records",
-      "target": "controllers_recordcontroller"
     },
     {
       "relation": "contains",
@@ -15056,86 +15308,6 @@
       "confidence_score": 1.0,
       "source": "routes_splits",
       "target": "middleware_validate_validate"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/prisma/seed.ts",
-      "source_location": "L804",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "prisma_seed",
-      "target": "prisma_seed_brosplit"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/prisma/seed.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "prisma_seed",
-      "target": "prisma_seed_exercisedata"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/prisma/seed.ts",
-      "source_location": "L14",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "prisma_seed",
-      "target": "prisma_seed_exercises"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/prisma/seed.ts",
-      "source_location": "L625",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "prisma_seed",
-      "target": "prisma_seed_fullbodysplit"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/prisma/seed.ts",
-      "source_location": "L702",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "prisma_seed",
-      "target": "prisma_seed_pplsplit"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/prisma/seed.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "prisma_seed",
-      "target": "prisma_seed_prisma"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/prisma/seed.ts",
-      "source_location": "L901",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "prisma_seed",
-      "target": "prisma_seed_seed"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/prisma/seed.ts",
-      "source_location": "L901",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "prisma_seed",
-      "target": "prisma_seed_upperlowersplit"
     },
     {
       "relation": "contains",
@@ -19601,5 +19773,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "ba8169a331d4f38408374941a1d654cfc2e3578e"
+  "built_at_commit": "7170bc2e69fb6f3ea0db224e8622e3d83ed5f96d"
 }
