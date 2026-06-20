@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, TextStyle, TextProps } from "react-native";
 import { lightTheme } from "../theme/colors";
-import { typography, fontFamily } from "../theme/typography";
+import { typography } from "../theme/typography";
 
 type Variant = keyof typeof typography;
 
@@ -13,14 +13,6 @@ interface TypographyProps extends TextProps {
   children: React.ReactNode;
 }
 
-const familyFor = (weight: string): string => {
-  if (weight === "500") return fontFamily.medium;
-  if (weight === "600") return fontFamily.semibold;
-  if (weight === "700") return fontFamily.bold;
-  if (weight === "800" || weight === "900") return fontFamily.extrabold;
-  return fontFamily.primary;
-};
-
 export default function Typography({
   variant = "body",
   color = lightTheme.textPrimary,
@@ -31,17 +23,14 @@ export default function Typography({
   ...props
 }: TypographyProps) {
   const config = typography[variant];
-  const finalWeight = (weight || config.fontWeight) as string;
-  const finalFamily = familyFor(finalWeight);
+  const finalWeight = (weight || config.fontWeight) as TextStyle["fontWeight"];
 
   return (
     <Text
       style={[
         {
-          fontFamily: finalFamily,
           fontSize: config.fontSize,
-          fontWeight: finalWeight as TextStyle["fontWeight"],
-          lineHeight: config.fontSize * config.lineHeight,
+          fontWeight: finalWeight,
           color,
           textAlign: align,
         },

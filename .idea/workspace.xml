@@ -6,6 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="e19c3f9d-e96e-4d34-9749-0a76372ee78f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/controllers/sessionController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/controllers/sessionController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expo-app/babel.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/babel.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expo-app/metro.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/metro.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expo-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expo-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expo-app/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expo-app/src/components/Typography.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/components/Typography.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/profile/SplitSwitcherScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/profile/SplitSwitcherScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/workout/WorkoutHistoryScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/workout/WorkoutHistoryScreen.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { View, TouchableOpacity, Modal, ScrollView, Dimensions, Alert } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { View, TouchableOpacity, Modal, Dimensions, Alert } from "react-native";
 import { getCalendarSessions, updateSession } from "../../api/sessions";
 import { CalendarSession } from "../../types";
 import { Screen, Card, Typography, Button, Icon } from "../../components";
@@ -121,20 +120,16 @@ export default function WorkoutHistoryScreen() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg }} edges={["top"]}>
-      <ScrollView
-        style={{ flex: 1 }}
-        contentContainerStyle={{ padding: space.lg, paddingBottom: space.xl }}
-        showsVerticalScrollIndicator={false}
-      >
-        <View style={{ marginBottom: space.lg }}>
-          <Typography variant="caption" color={lightTheme.textMuted} weight="600">
-            WORKOUT HISTORY
-          </Typography>
-          <Typography variant="heading1" color={lightTheme.textPrimary} style={{ marginTop: space.xs }}>
-            Calendar
-          </Typography>
-        </View>
+    <>
+    <Screen scroll padding="lg">
+      <View style={{ marginBottom: space.lg }}>
+        <Typography variant="caption" color={lightTheme.textMuted} weight="600">
+          WORKOUT HISTORY
+        </Typography>
+        <Typography variant="heading1" color={lightTheme.textPrimary} style={{ marginTop: space.xs }}>
+          Calendar
+        </Typography>
+      </View>
 
         <Card shadow="sm" style={{ padding: space.md, marginBottom: space.lg }}>
           <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginBottom: space.md }}>
@@ -254,7 +249,7 @@ export default function WorkoutHistoryScreen() {
             <Typography variant="body" color={lightTheme.textMuted}>Loading...</Typography>
           </View>
         )}
-      </ScrollView>
+    </Screen>
 
       <Modal visible={detailVisible} transparent animationType="slide">
         <View style={{ flex: 1, justifyContent: "flex-end", backgroundColor: lightTheme.bgOverlay }}>
@@ -269,7 +264,7 @@ export default function WorkoutHistoryScreen() {
           >
             <View style={{ width: 40, height: 4, borderRadius: 2, backgroundColor: lightTheme.border, alignSelf: "center", marginBottom: space.md }} />
 
-            {selectedSession?.status === "COMPLETED" ? (
+            {!selectedSession ? null : selectedSession.status === "COMPLETED" ? (
               <>
                 <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.md }}>
                   <View
@@ -482,6 +477,6 @@ export default function WorkoutHistoryScreen() {
           </Card>
         </View>
       </Modal>
-    </SafeAreaView>
+    </>
   );
 }

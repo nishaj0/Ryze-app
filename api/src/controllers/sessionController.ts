@@ -523,7 +523,7 @@ export const syncSession = async (req: AuthRequest, res: Response) => {
         newPRs,
       },
     };
-  });
+  }, { timeout: 30000 });
 
   const populatedSession = await prisma.workoutSession.findUnique({
     where: { id: result.session.id },

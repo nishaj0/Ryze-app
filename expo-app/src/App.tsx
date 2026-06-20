@@ -8,7 +8,6 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import RootNavigator from "./navigation/RootNavigator";
 import { lightTheme } from "./theme/colors";
 import { initMMKV } from "./utils/mmkv";
-import "../global.css";
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
