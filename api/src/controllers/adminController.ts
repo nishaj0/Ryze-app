@@ -90,7 +90,7 @@ export const listUsers = async (req: Request, res: Response, next: NextFunction)
 export const getUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = await prisma.user.findUnique({
-      where: { id: req.params.id },
+      where: { id: (req.params.id as string) },
       include: {
         userSplits: { include: { split: { select: { id: true, name: true, type: true } } } },
         _count: { select: { workoutSessions: true, personalRecords: true, bodyMetrics: true, progressPhotos: true } },
@@ -106,7 +106,7 @@ export const updateUser = async (req: Request, res: Response, next: NextFunction
   try {
     const { name, email, goal, gender, experienceLevel, onboardingDone } = req.body;
     const user = await prisma.user.update({
-      where: { id: req.params.id },
+      where: { id: (req.params.id as string) },
       data: { name, email, goal, gender, experienceLevel, onboardingDone },
       select: { id: true, name: true, email: true, goal: true, gender: true, experienceLevel: true, onboardingDone: true },
     });
@@ -116,7 +116,7 @@ export const updateUser = async (req: Request, res: Response, next: NextFunction
 
 export const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    await prisma.user.delete({ where: { id: req.params.id } });
+    await prisma.user.delete({ where: { id: (req.params.id as string) } });
     res.json({ message: "User deleted" });
   } catch (err) { next(err); }
 };
@@ -124,7 +124,7 @@ export const deleteUser = async (req: Request, res: Response, next: NextFunction
 export const resetOnboarding = async (req: Request, res: Response, next: NextFunction) => {
   try {
     await prisma.user.update({
-      where: { id: req.params.id },
+      where: { id: (req.params.id as string) },
       data: {
         onboardingDone: false,
         gender: null, goal: null, experienceLevel: null,
@@ -200,17 +200,17 @@ export const createPrebuiltSplit = async (req: Request, res: Response, next: Nex
 
 export const deleteSplit = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    await prisma.split.delete({ where: { id: req.params.id } });
+    await prisma.split.delete({ where: { id: (req.params.id as string) } });
     res.json({ message: "Split deleted" });
   } catch (err) { next(err); }
 };
 
 export const toggleSplitPrebuilt = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const split = await prisma.split.findUnique({ where: { id: req.params.id } });
+    const split = await prisma.split.findUnique({ where: { id: (req.params.id as string) } });
     if (!split) return res.status(404).json({ error: "Split not found" });
     const updated = await prisma.split.update({
-      where: { id: req.params.id },
+      where: { id: (req.params.id as string) },
       data: { isPrebuilt: !split.isPrebuilt },
     });
     res.json({ split: updated });
@@ -315,6 +315,148 @@ export const getOnboardingStats = async (_req: Request, res: Response, next: Nex
       daysStats: daysStats.map(d => ({ days: d.daysAvailable || 0, count: d._count.id })),
       averages: averages._avg,
     });
+  } catch (err) { next(err); }
+};
+
+// ─── Exercise Requests ────────────────────────────────────────────────────────
+export const listExerciseRequests = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 20;
+    const status = (req.query.status as string) || "";
+    const skip = (page - 1) * limit;
+
+    const where = status ? { status } : {};
+
+    const [requests, total] = await Promise.all([
+      prisma.exerciseRequest.findMany({
+        where,
+        skip,
+        take: limit,
+        orderBy: { createdAt: "desc" },
+        include: {
+          requestedBy: { select: { id: true, name: true, email: true } },
+        },
+      }),
+      prisma.exerciseRequest.count({ where }),
+    ]);
+
+    res.json({ requests, total, page, totalPages: Math.ceil(total / limit) });
+  } catch (err) { next(err); }
+};
+
+export const updateExerciseRequest = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { status, adminNotes } = req.body;
+    const request = await prisma.exerciseRequest.findUnique({ where: { id: (req.params.id as string) } });
+    if (!request) return res.status(404).json({ error: "Exercise request not found" });
+
+    const updated = await prisma.exerciseRequest.update({
+      where: { id: (req.params.id as string) },
+      data: {
+        status: status || request.status,
+        adminNotes: adminNotes !== undefined ? adminNotes : request.adminNotes,
+      },
+    });
+
+    res.json({ exerciseRequest: updated });
+  } catch (err) { next(err); }
+};
+
+// ─── Create Exercise ──────────────────────────────────────────────────────────
+export const createExercise = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const {
+      name,
+      force,
+      level,
+      mechanic,
+      equipment,
+      category,
+      instructions,
+      primaryMuscles,
+      secondaryMuscles,
+      images,
+    } = req.body;
+
+    if (!name || typeof name !== "string" || name.trim().length === 0) {
+      return res.status(400).json({ error: "Exercise name is required" });
+    }
+
+    // Check if exercise already exists
+    const existing = await prisma.exercise.findUnique({ where: { name: name.trim() } });
+    if (existing) {
+      return res.status(409).json({ error: "Exercise with this name already exists" });
+    }
+
+    const exercise = await prisma.exercise.create({
+      data: {
+        name: name.trim(),
+        force: force || null,
+        level: level || null,
+        mechanic: mechanic || null,
+        equipment: equipment?.trim() || null,
+        category: category || null,
+        instructions: instructions?.trim() || null,
+      },
+    });
+
+    // Add muscle relationships
+    if (primaryMuscles && Array.isArray(primaryMuscles)) {
+      for (const muscleName of primaryMuscles) {
+        let muscle = await prisma.muscle.findUnique({ where: { name: muscleName } });
+        if (!muscle) {
+          muscle = await prisma.muscle.create({ data: { name: muscleName } });
+        }
+        await prisma.exerciseMuscle.create({
+          data: {
+            exerciseId: exercise.id,
+            muscleId: muscle.id,
+            isPrimary: true,
+          },
+        });
+      }
+    }
+
+    if (secondaryMuscles && Array.isArray(secondaryMuscles)) {
+      for (const muscleName of secondaryMuscles) {
+        let muscle = await prisma.muscle.findUnique({ where: { name: muscleName } });
+        if (!muscle) {
+          muscle = await prisma.muscle.create({ data: { name: muscleName } });
+        }
+        await prisma.exerciseMuscle.create({
+          data: {
+            exerciseId: exercise.id,
+            muscleId: muscle.id,
+            isPrimary: false,
+          },
+        });
+      }
+    }
+
+    // Add images
+    if (images && Array.isArray(images)) {
+      for (let i = 0; i < images.length; i++) {
+        await prisma.exerciseImage.create({
+          data: {
+            exerciseId: exercise.id,
+            url: images[i].url,
+            publicId: images[i].publicId || "",
+            order: i,
+          },
+        });
+      }
+    }
+
+    const fullExercise = await prisma.exercise.findUnique({
+      where: { id: exercise.id },
+      include: {
+        muscles: { include: { muscle: true } },
+        images: true,
+      },
+    });
+
+    res.status(201).json({ exercise: fullExercise });
   } catch (err) { next(err); }
 };
 

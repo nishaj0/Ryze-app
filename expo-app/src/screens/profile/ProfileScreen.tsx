@@ -62,6 +62,7 @@ export default function ProfileScreen({ navigation }: Props) {
 
   const menuItems = [
     { label: "Edit Profile", icon: "User" as const, onPress: () => navigation.navigate("EditProfile") },
+    { label: "Browse Exercises", icon: "Dumbbell" as const, onPress: () => navigation.navigate("AllExercises") },
     { label: "Workout History", icon: "Calendar" as const, onPress: () => (navigation as any).navigate("Home", { screen: "WorkoutHistory" }) },
     { label: "Switch Split", icon: "Repeat" as const, onPress: () => navigation.navigate("SplitSwitcher") },
     { label: "Body Metrics", icon: "Ruler" as const, onPress: () => navigation.navigate("Metrics") },

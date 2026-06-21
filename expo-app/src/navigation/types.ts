@@ -51,6 +51,9 @@ export type ProfileStackParamList = {
   CustomSplit: undefined;
   Settings: undefined;
   Metrics: undefined;
+  AllExercises: undefined;
+  ExerciseDetail: { exerciseId: string };
+  RequestExercise: undefined;
 };
 
 export type MainTabParamList = {

@@ -7,6 +7,8 @@ import DashboardPage from './pages/DashboardPage'
 import UsersPage from './pages/UsersPage'
 import SplitsPage from './pages/SplitsPage'
 import ExercisesPage from './pages/ExercisesPage'
+import ExerciseRequestsPage from './pages/ExerciseRequestsPage'
+import CreateExercisePage from './pages/CreateExercisePage'
 import ActivityPage from './pages/ActivityPage'
 import NotificationsPage from './pages/NotificationsPage'
 import SettingsPage from './pages/SettingsPage'
@@ -18,6 +20,8 @@ const PAGE_TITLES: Record<string, string> = {
   '/users': 'Users',
   '/splits': 'Splits',
   '/exercises': 'Exercises',
+  '/exercise-requests': 'Exercise Requests',
+  '/create-exercise': 'Create Exercise',
   '/activity': 'Live Activity',
   '/notifications': 'Notifications',
   '/settings': 'Settings',
@@ -45,6 +49,8 @@ function ProtectedLayout() {
             <Route path="/users" element={<UsersPage />} />
             <Route path="/splits" element={<SplitsPage />} />
             <Route path="/exercises" element={<ExercisesPage />} />
+            <Route path="/exercise-requests" element={<ExerciseRequestsPage />} />
+            <Route path="/create-exercise" element={<CreateExercisePage />} />
             <Route path="/activity" element={<ActivityPage />} />
             <Route path="/notifications" element={<NotificationsPage />} />
             <Route path="/settings" element={<SettingsPage />} />

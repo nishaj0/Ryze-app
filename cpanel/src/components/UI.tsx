@@ -72,3 +72,34 @@ export function Avatar({ name, size = 34 }: AvatarProps) {
     </div>
   )
 }
+
+interface BadgeProps {
+  children: React.ReactNode
+  color?: string
+}
+
+const badgeColors: Record<string, { bg: string; text: string }> = {
+  success: { bg: '#d1fae5', text: '#065f46' },
+  warning: { bg: '#fef3c7', text: '#92400e' },
+  danger: { bg: '#fee2e2', text: '#991b1b' },
+  info: { bg: '#dbeafe', text: '#1e40af' },
+  default: { bg: '#f3f4f6', text: '#374151' },
+}
+
+export function Badge({ children, color = 'default' }: BadgeProps) {
+  const c = badgeColors[color] || badgeColors.default
+  return (
+    <span style={{
+      display: 'inline-block',
+      padding: '2px 10px',
+      borderRadius: 12,
+      fontSize: 12,
+      fontWeight: 600,
+      backgroundColor: c.bg,
+      color: c.text,
+      textTransform: 'capitalize',
+    }}>
+      {children}
+    </span>
+  )
+}

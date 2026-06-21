@@ -22,6 +22,8 @@ import SplitDetailsScreen from "../screens/profile/SplitDetailsScreen";
 import CustomSplitScreen from "../screens/profile/CustomSplitScreen";
 import SettingsScreen from "../screens/profile/SettingsScreen";
 import MetricsScreen from "../screens/metrics/MetricsScreen";
+import AllExercisesScreen from "../screens/exercises/AllExercisesScreen";
+import RequestExerciseScreen from "../screens/exercises/RequestExerciseScreen";
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 const HomeStackNav = createNativeStackNavigator<HomeStackParamList>();
@@ -117,6 +119,8 @@ function ProfileStack() {
       <ProfileStackNav.Screen name="CustomSplit" component={CustomSplitScreen} options={{ title: "Create Custom Split" }} />
       <ProfileStackNav.Screen name="Settings" component={SettingsScreen} options={{ title: "Settings" }} />
       <ProfileStackNav.Screen name="Metrics" component={MetricsScreen} options={{ title: "Body Metrics" }} />
+      <ProfileStackNav.Screen name="AllExercises" component={AllExercisesScreen} options={{ title: "All Exercises" }} />
+      <ProfileStackNav.Screen name="RequestExercise" component={RequestExerciseScreen} options={{ title: "Request Exercise" }} />
     </ProfileStackNav.Navigator>
   );
 }
