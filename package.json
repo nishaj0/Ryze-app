@@ -11,8 +11,11 @@
     "app:start": "npm start --prefix expo-app",
     "app:android": "npm run android --prefix expo-app",
     "app:ios": "npm run ios --prefix expo-app",
+    "cpanel:dev": "npm run dev --prefix cpanel",
+    "cpanel:build": "npm run build --prefix cpanel",
     "dev": "concurrently \"npm run api:dev\" \"npm run app:start\"",
-    "setup": "npm install && npm install --prefix api && npm install --prefix expo-app"
+    "dev:all": "concurrently \"npm run api:dev\" \"npm run app:start\" \"npm run cpanel:dev\"",
+    "setup": "npm install && npm install --prefix api && npm install --prefix expo-app && npm install --prefix cpanel"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"

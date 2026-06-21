@@ -1,3 +1,4 @@
+import { create } from "zustand";
 import { mmkv } from "../utils/mmkv";
 import { lightTheme, darkTheme, Theme } from "./colors";
 
@@ -18,32 +19,53 @@ function getTheme(mode: ThemeMode): Theme {
   return lightTheme;
 }
 
-let currentMode: ThemeMode = getStoredMode();
-let currentTheme: Theme = getTheme(currentMode);
+interface ThemeState {
+  mode: ThemeMode;
+  theme: Theme;
+  setMode: (mode: ThemeMode) => void;
+  toggleMode: () => void;
+}
+
+export const useThemeStore = create<ThemeState>((set) => {
+  const initialMode = getStoredMode();
+  return {
+    mode: initialMode,
+    theme: getTheme(initialMode),
+    setMode: (mode) => {
+      mmkv.set(THEME_KEY, mode);
+      set({ mode, theme: getTheme(mode) });
+    },
+    toggleMode: () => {
+      set((state) => {
+        const newMode = state.mode === "dark" ? "light" : "dark";
+        mmkv.set(THEME_KEY, newMode);
+        return { mode: newMode, theme: getTheme(newMode) };
+      });
+    },
+  };
+});
 
 export function getThemeState() {
-  return { mode: currentMode, theme: currentTheme };
+  const state = useThemeStore.getState();
+  return { mode: state.mode, theme: state.theme };
 }
 
 export function setThemeMode(mode: ThemeMode) {
-  currentMode = mode;
-  currentTheme = getTheme(mode);
-  mmkv.set(THEME_KEY, mode);
+  useThemeStore.getState().setMode(mode);
 }
 
 export function toggleThemeMode() {
-  setThemeMode(currentMode === "dark" ? "light" : "dark");
+  useThemeStore.getState().toggleMode();
 }
 
-// Simple getter - no hooks needed
 export function useTheme(): Theme {
-  return currentTheme;
+  return useThemeStore((state) => state.theme);
 }
 
 export function useThemeMode() {
-  return {
-    mode: currentMode,
-    setMode: setThemeMode,
-    toggleMode: toggleThemeMode,
-  };
+  const mode = useThemeStore((state) => state.mode);
+  const setMode = useThemeStore((state) => state.setMode);
+  const toggleMode = useThemeStore((state) => state.toggleMode);
+  return { mode, setMode, toggleMode };
 }
+

@@ -95,9 +95,9 @@
     "semantic_hash": ""
   },
   "api/src/index.ts": {
-    "mtime": 1781037168.1276884,
-    "ast_hash": "95932d346a83137a8860f29f7f80e909",
-    "semantic_hash": "95932d346a83137a8860f29f7f80e909"
+    "mtime": 1782029842.5153131,
+    "ast_hash": "a6f8e75b5484403403932328c9ce7735",
+    "semantic_hash": ""
   },
   "api/src/middleware/auth.ts": {
     "mtime": 1781125031.524928,
@@ -440,8 +440,8 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1781121058.2440746,
-    "ast_hash": "169fbe9abf48b08e87701fff66cda17d",
+    "mtime": 1782030238.2929506,
+    "ast_hash": "cebe608f908882b79e10ddb2632ef06b",
     "semantic_hash": ""
   },
   ".agents/skills/dashboard/SKILL.md": {
@@ -765,8 +765,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/theme/colors.ts": {
-    "mtime": 1782027415.6184232,
-    "ast_hash": "4d0cdead2f5745d566535d26456639e0",
+    "mtime": 1782030875.714979,
+    "ast_hash": "34218ecc34bcd968f206d462f1995791",
     "semantic_hash": ""
   },
   "expo-app/src/theme/index.ts": {
@@ -14105,8 +14105,148 @@
     "semantic_hash": ""
   },
   "expo-app/src/theme/themeStore.ts": {
-    "mtime": 1782028161.20124,
-    "ast_hash": "1203634a99daeffa2b7415aa38442308",
+    "mtime": 1782030871.0588372,
+    "ast_hash": "1d613985e2c60d7bff2c67a4479693f8",
+    "semantic_hash": ""
+  },
+  "api/src/controllers/adminController.ts": {
+    "mtime": 1782029824.9561348,
+    "ast_hash": "a39276beb394443b4a2a9d49b6121d1f",
+    "semantic_hash": ""
+  },
+  "api/src/routes/admin.ts": {
+    "mtime": 1782029835.4960017,
+    "ast_hash": "3ed6b2a30e0c1df5fba07fa7f94edb19",
+    "semantic_hash": ""
+  },
+  "cpanel/eslint.config.js": {
+    "mtime": 1780132608.2489798,
+    "ast_hash": "0355276bc79439afe3c53e3a2470ca1e",
+    "semantic_hash": ""
+  },
+  "cpanel/package.json": {
+    "mtime": 1782029836.379174,
+    "ast_hash": "c6f9bdaaf1bd5c50f08dad9992a840b0",
+    "semantic_hash": ""
+  },
+  "cpanel/src/App.tsx": {
+    "mtime": 1782030268.0818095,
+    "ast_hash": "689d78f2d1adeea54d9c87465cbe8d4f",
+    "semantic_hash": ""
+  },
+  "cpanel/src/api.ts": {
+    "mtime": 1782029921.0786808,
+    "ast_hash": "a6190e4788a2204bca41bb57b34b7a36",
+    "semantic_hash": ""
+  },
+  "cpanel/src/components/Sidebar.tsx": {
+    "mtime": 1782030275.4703126,
+    "ast_hash": "aa4dbd20765bde992c5dee0b954f0717",
+    "semantic_hash": ""
+  },
+  "cpanel/src/components/Toast.tsx": {
+    "mtime": 1782030280.9952028,
+    "ast_hash": "a4e4a2e93b75ba3e0d9fabe312201b36",
+    "semantic_hash": ""
+  },
+  "cpanel/src/components/UI.tsx": {
+    "mtime": 1782030360.8416846,
+    "ast_hash": "69c08cfe9a427eb40219d7a81da314a6",
+    "semantic_hash": ""
+  },
+  "cpanel/src/main.tsx": {
+    "mtime": 1782030214.7611108,
+    "ast_hash": "787e5a07efeb2bf6209d5937195f2f68",
+    "semantic_hash": ""
+  },
+  "cpanel/src/pages/ActivityPage.tsx": {
+    "mtime": 1782030295.620257,
+    "ast_hash": "37a918a3bb4353f773685cc24b51a916",
+    "semantic_hash": ""
+  },
+  "cpanel/src/pages/DashboardPage.tsx": {
+    "mtime": 1782030300.427953,
+    "ast_hash": "73aa51b417d98a38be2e16dcc2f619a3",
+    "semantic_hash": ""
+  },
+  "cpanel/src/pages/ExercisesPage.tsx": {
+    "mtime": 1782030328.737675,
+    "ast_hash": "38a09d752d942dfbeea8a6ea0e43b551",
+    "semantic_hash": ""
+  },
+  "cpanel/src/pages/LoginPage.tsx": {
+    "mtime": 1782030340.112593,
+    "ast_hash": "a9543c74f8ba9f6d241e14990801f93c",
+    "semantic_hash": ""
+  },
+  "cpanel/src/pages/NotificationsPage.tsx": {
+    "mtime": 1782030333.491151,
+    "ast_hash": "8cbae796d682075c4884997a0435d2ac",
+    "semantic_hash": ""
+  },
+  "cpanel/src/pages/SettingsPage.tsx": {
+    "mtime": 1782030306.4167783,
+    "ast_hash": "4996f9cf299550a4322fe055ec446fdd",
+    "semantic_hash": ""
+  },
+  "cpanel/src/pages/SplitsPage.tsx": {
+    "mtime": 1782030315.4399004,
+    "ast_hash": "372828fdb6261a5b2a5749cd3ce890c6",
+    "semantic_hash": ""
+  },
+  "cpanel/src/pages/UsersPage.tsx": {
+    "mtime": 1782030324.0332549,
+    "ast_hash": "ac66c179bd28318bd13153923343a008",
+    "semantic_hash": ""
+  },
+  "cpanel/tsconfig.app.json": {
+    "mtime": 1780132608.282979,
+    "ast_hash": "136630b5accce1ca50663df229534a26",
+    "semantic_hash": ""
+  },
+  "cpanel/tsconfig.json": {
+    "mtime": 1780132608.2869704,
+    "ast_hash": "a3d39fa780ebff65444de257f291ce6c",
+    "semantic_hash": ""
+  },
+  "cpanel/tsconfig.node.json": {
+    "mtime": 1780132608.2919765,
+    "ast_hash": "70bdd0a673bcfc0e828080b306e7c680",
+    "semantic_hash": ""
+  },
+  "cpanel/vite.config.ts": {
+    "mtime": 1782029848.9692116,
+    "ast_hash": "ee1db7b84555fd1b259804cc93b45691",
+    "semantic_hash": ""
+  },
+  "cpanel/index.html": {
+    "mtime": 1782030227.3222988,
+    "ast_hash": "d2bb3e05e8fccdce3203d067ebe4bf48",
+    "semantic_hash": ""
+  },
+  "cpanel/public/favicon.svg": {
+    "mtime": 1780132608.3422315,
+    "ast_hash": "7e840862161341271697daa99a40d76b",
+    "semantic_hash": ""
+  },
+  "cpanel/public/icons.svg": {
+    "mtime": 1780132608.359702,
+    "ast_hash": "3b4fcfcf393eca4d264dca4a4663bc37",
+    "semantic_hash": ""
+  },
+  "cpanel/src/assets/hero.png": {
+    "mtime": 1780132608.3184953,
+    "ast_hash": "aead493361b27e7510691c5d7072dfc1",
+    "semantic_hash": ""
+  },
+  "cpanel/src/assets/react.svg": {
+    "mtime": 1780132608.3797033,
+    "ast_hash": "f0402b67b6ce880f65666bb49e841696",
+    "semantic_hash": ""
+  },
+  "cpanel/src/assets/vite.svg": {
+    "mtime": 1780132608.3957043,
+    "ast_hash": "9960a24288958394ac50e57ff638b036",
     "semantic_hash": ""
   }
 }
