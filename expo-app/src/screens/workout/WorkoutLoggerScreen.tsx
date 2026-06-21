@@ -17,7 +17,18 @@ import { useWorkoutStore } from "../../store/workoutStore";
 import { getSetRecommendation } from "../../utils/progression";
 import { listExercises } from "../../api/exercises";
 import { Exercise, SetLog, ExerciseQueueItem } from "../../types";
-import { Typography, Card, Button, Icon, Input, InlineListSkeleton } from "../../components";
+import {
+  Typography,
+  Card,
+  Button,
+  Icon,
+  Input,
+  InlineListSkeleton,
+  ExerciseImageCarousel,
+  InstructionStepper,
+  SetTrackerStrip,
+  ExerciseMetaBadges,
+} from "../../components";
 import { lightTheme } from "../../theme/colors";
 import { space, radius } from "../../theme/spacing";
 import { useAuthStore } from "../../store/authStore";
@@ -76,9 +87,9 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
   // Helper to determine exercise style
   const isBodyweight = (ex?: Exercise) => {
     if (!ex) return false;
-    const eq = (ex.equipmentNeeded || "").toLowerCase();
+    const eq = (ex.equipment || "").toLowerCase();
     const name = (ex.name || "").toLowerCase();
-    return eq.includes("bodyweight") || eq.includes("none") || eq.includes("body weight");
+    return eq.includes("body") || eq.includes("none") || name.includes("bodyweight");
   };
 
   const isTimed = (ex?: Exercise) => {
@@ -267,7 +278,7 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
       setPhase("exercise_complete");
     }
     // If not last set and not skipped, the store already started isRestTimerActive=true
-    // so the full-screen rest view renders automatically.
+    // so the inline rest view renders automatically.
   };
 
   const handleSkipSet = () => {
@@ -396,7 +407,7 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
                     {item.exercise.name}
                   </Typography>
                   <Typography variant="caption" color={lightTheme.textMuted}>
-                    {item.exercise.muscleGroup} · {item.targetSets} sets × {item.targetRepsMin}-{item.targetRepsMax} reps
+                    {item.targetSets} sets × {item.targetRepsMin}-{item.targetRepsMax} reps
                   </Typography>
                 </View>
 
@@ -446,21 +457,35 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
     <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg }} edges={["top", "bottom"]}>
       {/* Sticky Header */}
       <View style={{ backgroundColor: lightTheme.surface, borderBottomWidth: 1, borderBottomColor: lightTheme.border }}>
-        <View style={{ paddingHorizontal: space.lg, paddingVertical: space.md, flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-          <View>
-            <Typography variant="caption" color={lightTheme.textMuted} weight="700">
-              ACTIVE SESSION · {activeSession.splitDayName}
+        <View style={{ paddingHorizontal: space.lg, paddingTop: space.md, paddingBottom: space.sm }}>
+          {/* Split name - small, muted */}
+          {activeSession.splitName ? (
+            <Typography variant="caption" color={lightTheme.textMuted} weight="600">
+              {activeSession.splitName.toUpperCase()}
             </Typography>
-            <Typography variant="heading2" color={lightTheme.textPrimary}>
+          ) : null}
+
+          {/* Day name + exercise counter */}
+          <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 2 }}>
+            <Typography variant="heading3" color={lightTheme.textPrimary} weight="700">
+              {activeSession.splitDayName}
+            </Typography>
+            <Typography variant="caption" color={lightTheme.textSecondary} weight="600">
               Exercise {activeSession.currentExerciseIndex + 1} of {activeSession.exerciseQueue.length}
             </Typography>
           </View>
-          <View style={{ backgroundColor: lightTheme.primaryLight, paddingHorizontal: space.md, paddingVertical: space.sm, borderRadius: radius.md, flexDirection: "row", alignItems: "center", gap: space.sm }}>
-            <Icon name="Timer" size={16} color={lightTheme.primary} />
-            <Typography variant="body" color={lightTheme.primary} weight="700">
-              {formatTime(elapsed)}
+
+          {/* Workout name */}
+          <Typography variant="display" color={lightTheme.textPrimary} weight="800" style={{ marginTop: space.sm, fontSize: 24 }}>
+            {currentItem?.exercise.name || ""}
+          </Typography>
+
+          {/* Day number */}
+          {activeSession.dayNumber > 0 && activeSession.totalDays > 0 && (
+            <Typography variant="caption" color={lightTheme.textSecondary} style={{ marginTop: 2 }}>
+              Day {activeSession.dayNumber} of {activeSession.totalDays}
             </Typography>
-          </View>
+          )}
         </View>
 
         {/* Progress Bar */}
@@ -469,10 +494,10 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
         </View>
       </View>
 
-      {/* Main Focus Exercise Area */}
+      {/* Main Content Area */}
       <View style={{ flex: 1 }}>
         {phase === "exercise_complete" ? (
-          /* Exercise Complete banner with Add Another Set option */
+          /* Exercise Complete banner */
           <View style={{ flex: 1, justifyContent: "center", alignItems: "center", padding: space.xl }}>
             <Card style={{ width: "100%", padding: space.xl, alignItems: "center", borderColor: "#10B981", borderWidth: 2 }} shadow="md">
               <View style={{ width: 72, height: 72, borderRadius: 36, backgroundColor: "#D1FAE5", alignItems: "center", justifyContent: "center", marginBottom: space.md }}>
@@ -545,209 +570,106 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
             </Card>
           </View>
         ) : currentItem ? (
-          /* ── FULL-SCREEN REST VIEW ── */
-          activeSession.isRestTimerActive && activeSession.restStartedAt ? (
-            <View style={{ flex: 1, backgroundColor: lightTheme.bg, alignItems: "center", justifyContent: "center", padding: space.xl }}>
-              {/* Exercise name context */}
-              <Typography variant="caption" color={lightTheme.textMuted} weight="700" style={{ marginBottom: space.sm }}>
-                {currentItem.exercise.name.toUpperCase()}
-              </Typography>
-
-              {/* SET completed badge */}
-              <View style={{
-                backgroundColor: "#D1FAE5",
-                borderRadius: 100,
-                paddingHorizontal: space.lg,
-                paddingVertical: space.xs,
-                marginBottom: space.lg,
-              }}>
-                <Typography variant="bodySmall" color="#065F46" weight="700">
-                  ✓ SET {activeSession.currentSetNumber - 1} of {currentItem.targetSets} DONE
-                </Typography>
-              </View>
-
-              {/* Big rest countdown */}
-              <Typography
-                variant="display"
-                color={isGoodToGo ? "#10B981" : lightTheme.textPrimary}
-                style={{ fontSize: 80, fontWeight: "800", letterSpacing: -2, marginBottom: space.sm }}
-              >
-                {formatTime(restTimeElapsed)}
-              </Typography>
-
-              <View style={{
-                backgroundColor: lightTheme.surfaceSecondary,
-                borderRadius: radius.md,
-                paddingVertical: space.sm,
-                paddingHorizontal: space.lg,
-                marginBottom: space.lg,
-              }}>
-                <Typography variant="caption" color={lightTheme.textSecondary} weight="600">
-                  {restConfig.range}
-                </Typography>
-              </View>
-
-              {/* Good to go badge */}
-              {isGoodToGo && (
-                <View style={{
-                  backgroundColor: "#D1FAE5",
-                  borderRadius: radius.md,
-                  paddingVertical: space.sm,
-                  paddingHorizontal: space.lg,
-                  marginBottom: space.lg,
-                  flexDirection: "row",
-                  alignItems: "center",
-                  gap: 6,
-                }}>
-                  <Icon name="CheckCircle2" size={16} color="#059669" />
-                  <Typography variant="body" color="#065F46" weight="700">Good to go!</Typography>
-                </View>
-              )}
-
-              {/* Tip card */}
-              {currentItem.exercise.instructions && (
-                <Card style={{ backgroundColor: lightTheme.primaryLight, borderColor: lightTheme.primary, borderWidth: 0.5, padding: space.md, marginBottom: space.xl, width: "100%" }} border={false}>
-                  <View style={{ flexDirection: "row", gap: space.sm }}>
-                    <Icon name="Sparkles" color={lightTheme.primary} size={18} />
-                    <View style={{ flex: 1 }}>
-                      <Typography variant="caption" color={lightTheme.primary} weight="800">
-                        TIPS FOR NEXT SET
-                      </Typography>
-                      <Typography variant="bodySmall" color={lightTheme.textSecondary} numberOfLines={3}>
-                        {currentItem.exercise.instructions}
-                      </Typography>
-                    </View>
-                  </View>
-                </Card>
-              )}
-
-              {/* CTA */}
-              <TouchableOpacity
-                onPress={() => setRestTimer(false, null)}
-                style={{
-                  backgroundColor: lightTheme.primary,
-                  borderRadius: radius.lg,
-                  paddingVertical: 16,
-                  paddingHorizontal: space.xl,
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: space.sm,
-                  width: "100%",
-                  shadowColor: lightTheme.primary,
-                  shadowOffset: { width: 0, height: 4 },
-                  shadowOpacity: 0.35,
-                  shadowRadius: 8,
-                  elevation: 6,
-                }}
-              >
-                <Icon name="Play" size={20} color="#fff" />
-                <Typography variant="heading3" color="#fff" weight="700">
-                  Start Next Set
-                </Typography>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                onPress={() => setRestTimer(false, null)}
-                style={{ marginTop: space.md, paddingVertical: space.sm }}
-              >
-                <Typography variant="bodySmall" color={lightTheme.textMuted} weight="600">
-                  Skip rest, go now
-                </Typography>
-              </TouchableOpacity>
-            </View>
-          ) : (
           <ScrollView
             contentContainerStyle={{ padding: space.lg, paddingBottom: 120 }}
             style={{ flex: 1 }}
             keyboardShouldPersistTaps="handled"
           >
-            {/* Active Exercise Title details */}
-            <Card style={{ padding: space.lg, marginBottom: space.lg }} shadow="sm">
-              <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start" }}>
-                <View style={{ flex: 1 }}>
-                  <Typography variant="heading2" color={lightTheme.textPrimary}>
-                    {currentItem.exercise.name}
-                  </Typography>
-                  <Typography variant="bodySmall" color={lightTheme.textSecondary} style={{ textTransform: "capitalize", marginTop: 4 }}>
-                    Primary Muscle: {currentItem.exercise.muscleGroup}
-                  </Typography>
-                </View>
-                {currentItem.exercise.demoUrl && (
-                  <TouchableOpacity
-                    onPress={() => Linking.openURL(currentItem.exercise.demoUrl!).catch(() => {})}
-                    style={{ padding: space.sm, backgroundColor: lightTheme.primaryLight, borderRadius: radius.md, flexDirection: "row", alignItems: "center", gap: 4 }}
-                  >
-                    <Icon name="Video" size={16} color={lightTheme.primary} />
-                    <Typography variant="caption" color={lightTheme.primary} weight="700">DEMO</Typography>
-                  </TouchableOpacity>
-                )}
+            {/* Exercise Image Carousel */}
+            {currentItem.exercise.images && currentItem.exercise.images.length > 0 && (
+              <View style={{ marginBottom: space.md }}>
+                <ExerciseImageCarousel images={currentItem.exercise.images} intervalMs={2000} />
               </View>
+            )}
 
-              {/* Set list completed */}
-              {currentItem.loggedSets.length > 0 && (
-                <View style={{ marginTop: space.lg, borderTopWidth: 1, borderTopColor: lightTheme.border, paddingTop: space.md }}>
-                  <Typography variant="caption" color={lightTheme.textMuted} weight="700" style={{ marginBottom: space.sm }}>
-                    COMPLETED SETS
+            {/* Meta Badges */}
+            <ExerciseMetaBadges
+              level={currentItem.exercise.level}
+              mechanic={currentItem.exercise.mechanic}
+              equipment={currentItem.exercise.equipment}
+              muscles={currentItem.exercise.muscles}
+            />
+
+            {/* Instruction Stepper */}
+            <InstructionStepper instructions={currentItem.exercise.instructions} autoRotateMs={5000} />
+
+            {/* Set Tracker Strip */}
+            <SetTrackerStrip
+              targetSets={currentItem.targetSets}
+              loggedSets={currentItem.loggedSets}
+              currentSetNumber={activeSession.currentSetNumber}
+            />
+
+            {/* Inline Rest Timer OR Active Input */}
+            {activeSession.isRestTimerActive && activeSession.restStartedAt ? (
+              /* Inline Rest Timer */
+              <Card style={{ padding: space.lg, marginBottom: space.lg, alignItems: "center" }} shadow="sm">
+                <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.md }}>
+                  <Icon name="Timer" size={20} color={lightTheme.primary} />
+                  <Typography variant="heading3" color={lightTheme.primary} weight="700">
+                    REST
                   </Typography>
-                  {currentItem.loggedSets.map((set, idx) => (
-                    <View
-                      key={set.id}
-                      style={{
-                        flexDirection: "row",
-                        alignItems: "center",
-                        backgroundColor: set.wasSkipped ? "rgba(239, 68, 68, 0.05)" : lightTheme.surfaceSecondary,
-                        borderRadius: radius.md,
-                        padding: space.md,
-                        marginBottom: space.xs,
-                      }}
-                    >
-                      <View
-                        style={{
-                          width: 24,
-                          height: 24,
-                          borderRadius: 12,
-                          backgroundColor: set.wasSkipped ? lightTheme.error : lightTheme.success,
-                          alignItems: "center",
-                          justifyContent: "center",
-                          marginRight: space.md,
-                        }}
-                      >
-                        <Typography variant="bodySmall" color={lightTheme.primaryText} weight="700">
-                          {set.setNumber}
-                        </Typography>
-                      </View>
-                      <View style={{ flex: 1 }}>
-                        <Typography
-                          variant="body"
-                          color={set.wasSkipped ? lightTheme.textMuted : lightTheme.textPrimary}
-                          style={{ textDecorationLine: set.wasSkipped ? "line-through" : "none", fontWeight: "600" }}
-                        >
-                          {set.wasSkipped
-                            ? "Set Skipped"
-                            : isCardTimed
-                            ? `${set.durationSeconds}s duration`
-                            : isCardBodyweight
-                            ? `${set.reps} reps`
-                            : `${set.weightKg}kg × ${set.reps}`}
-                        </Typography>
-                      </View>
-                      <TouchableOpacity onPress={() => deleteSet(currentItem.id, set.id)}>
-                        <Icon name="Trash2" size={16} color={lightTheme.error} />
-                      </TouchableOpacity>
-                    </View>
-                  ))}
                 </View>
-              )}
 
-              {/* Active input row */}
-              <View style={{ marginTop: space.lg, borderTopWidth: 1, borderTopColor: lightTheme.border, paddingTop: space.md }}>
-                <Typography variant="caption" color={lightTheme.primary} weight="800" style={{ marginBottom: space.sm }}>
+                <Typography
+                  variant="display"
+                  color={isGoodToGo ? lightTheme.success : lightTheme.textPrimary}
+                  style={{ fontSize: 48, fontWeight: "800", marginBottom: space.sm }}
+                >
+                  {formatTime(restTimeElapsed)}
+                </Typography>
+
+                <Typography variant="caption" color={lightTheme.textSecondary} style={{ marginBottom: space.md }}>
+                  {restConfig.range}
+                </Typography>
+
+                {isGoodToGo && (
+                  <View style={{ backgroundColor: lightTheme.successBg, borderRadius: radius.sm, paddingVertical: space.xs, paddingHorizontal: space.md, marginBottom: space.md, flexDirection: "row", alignItems: "center", gap: 4 }}>
+                    <Icon name="CheckCircle2" size={14} color={lightTheme.success} />
+                    <Typography variant="caption" color={lightTheme.successText} weight="700">
+                      Good to go!
+                    </Typography>
+                  </View>
+                )}
+
+                <TouchableOpacity
+                  onPress={() => setRestTimer(false, null)}
+                  style={{
+                    backgroundColor: lightTheme.primary,
+                    borderRadius: radius.md,
+                    paddingVertical: 12,
+                    paddingHorizontal: space.xl,
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: space.sm,
+                    width: "100%",
+                  }}
+                >
+                  <Icon name="Play" size={18} color="#fff" />
+                  <Typography variant="body" color="#fff" weight="700">
+                    Start Next Set
+                  </Typography>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  onPress={() => setRestTimer(false, null)}
+                  style={{ marginTop: space.sm, paddingVertical: space.xs }}
+                >
+                  <Typography variant="caption" color={lightTheme.textMuted} weight="600">
+                    Skip rest
+                  </Typography>
+                </TouchableOpacity>
+              </Card>
+            ) : (
+              /* Active Set Input */
+              <Card style={{ padding: space.lg, marginBottom: space.lg }} shadow="sm">
+                <Typography variant="caption" color={lightTheme.primary} weight="800" style={{ marginBottom: space.md }}>
                   LOG SET {activeSession.currentSetNumber} OF {currentItem.targetSets}
                 </Typography>
 
                 {/* Input row: weight + reps */}
-                <View style={{ flexDirection: "row", gap: space.sm }}>
+                <View style={{ flexDirection: "row", gap: space.sm, marginBottom: space.md }}>
                   {!isCardBodyweight && (
                     <View style={{ flex: 1 }}>
                       <Input
@@ -785,7 +707,7 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
 
                 {/* Progressive recommendation */}
                 {(!isCardBodyweight || recommendation.lastReps !== null) && (
-                  <View style={{ marginTop: space.sm, padding: space.sm, backgroundColor: lightTheme.surfaceTertiary, borderRadius: radius.md, gap: 4 }}>
+                  <View style={{ marginBottom: space.md, padding: space.sm, backgroundColor: lightTheme.surfaceTertiary, borderRadius: radius.md, gap: 4 }}>
                     {recommendation.lastWeight !== null && (
                       <Typography variant="caption" color={lightTheme.textSecondary} style={{ fontStyle: "italic" }}>
                         Last session: {isCardBodyweight ? "" : `${recommendation.lastWeight}kg × `}{recommendation.lastReps} reps
@@ -799,14 +721,13 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
                   </View>
                 )}
 
-                {/* PRIMARY: Done Set + Start Rest CTA */}
+                {/* Done Button */}
                 <TouchableOpacity
                   onPress={() => handleLogSet(false)}
                   style={{
-                    marginTop: space.md,
                     backgroundColor: "#10B981",
                     borderRadius: radius.lg,
-                    paddingVertical: 16,
+                    paddingVertical: 14,
                     flexDirection: "row",
                     alignItems: "center",
                     justifyContent: "center",
@@ -818,77 +739,44 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
                     elevation: 6,
                   }}
                 >
-                  <Icon name="CheckCircle2" size={22} color="#fff" />
+                  <Icon name="CheckCircle2" size={20} color="#fff" />
                   <Typography variant="heading3" color="#fff" weight="700">
-                    Done — Start Rest
+                    Done
                   </Typography>
                 </TouchableOpacity>
 
-                {/* Skip Set Button */}
+                {/* Skip Button */}
                 <TouchableOpacity
                   onPress={handleSkipSet}
-                  style={{
-                    marginTop: space.sm,
-                    paddingVertical: space.sm,
-                    borderRadius: radius.md,
-                    borderWidth: 1,
-                    borderColor: lightTheme.border,
-                    alignItems: "center",
-                  }}
+                  style={{ marginTop: space.sm, alignItems: "center", paddingVertical: space.sm }}
                 >
                   <Typography variant="bodySmall" color={lightTheme.textMuted} weight="600">
-                    Skip this set
+                    Skip →
                   </Typography>
                 </TouchableOpacity>
-              </View>
 
-              {/* Notes for current exercise */}
-              <View style={{ marginTop: space.lg }}>
-                <Input
-                  value={(currentItem as any).notes || ""}
-                  onChangeText={(val) => updateExerciseNotes(currentItem.id, val)}
-                  placeholder="Notes for this exercise..."
-                  containerStyle={{ marginBottom: 0 }}
-                  style={{ fontSize: 13 }}
-                />
-              </View>
-            </Card>
-
-            {/* Inactive future sets indicators preview */}
-            {currentItem.targetSets > currentItem.loggedSets.length + 1 && (
-              <View style={{ opacity: 0.5, gap: space.xs, marginBottom: space.lg }}>
-                {Array.from({ length: currentItem.targetSets - (currentItem.loggedSets.length + 1) }).map((_, idx) => (
-                  <View
-                    key={idx}
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      backgroundColor: lightTheme.surfaceSecondary,
-                      borderRadius: radius.md,
-                      padding: space.md,
-                    }}
-                  >
-                    <View style={{ width: 24, height: 24, borderRadius: 12, backgroundColor: lightTheme.disabledText, alignItems: "center", justifyContent: "center", marginRight: space.md }}>
-                      <Typography variant="bodySmall" color={lightTheme.primaryText} weight="700">
-                        {currentItem.loggedSets.length + 2 + idx}
-                      </Typography>
-                    </View>
-                    <Typography variant="body" color={lightTheme.textMuted} weight="500">
-                      Set Target: {isCardTimed ? "Duration" : isCardBodyweight ? "Bodyweight reps" : "Weight × reps"}
-                    </Typography>
-                  </View>
-                ))}
-              </View>
+                {/* Notes */}
+                <View style={{ marginTop: space.md }}>
+                  <Typography variant="caption" color={lightTheme.textMuted} weight="600" style={{ marginBottom: space.xs }}>
+                    NOTES
+                  </Typography>
+                  <Input
+                    value={(currentItem as any).notes || ""}
+                    onChangeText={(val) => updateExerciseNotes(currentItem.id, val)}
+                    placeholder="Add notes..."
+                    containerStyle={{ marginBottom: 0 }}
+                    style={{ fontSize: 13 }}
+                  />
+                </View>
+              </Card>
             )}
           </ScrollView>
-          )
         ) : (
           <View style={{ flex: 1, padding: space.md }}>
             <InlineListSkeleton rows={3} />
           </View>
         )}
       </View>
-
 
       {/* BOTTOM PERSISTENT BAR */}
       <View
@@ -922,7 +810,7 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
         >
           <Icon name="List" size={18} color={lightTheme.textSecondary} />
           <Typography variant="body" color={lightTheme.textSecondary} weight="600">
-            Switch Exercise
+            Switch
           </Typography>
         </TouchableOpacity>
 
@@ -942,7 +830,7 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
         >
           <Icon name="Repeat" size={18} color={lightTheme.textSecondary} />
           <Typography variant="body" color={lightTheme.textSecondary} weight="600">
-            Replace Exercise
+            Replace
           </Typography>
         </TouchableOpacity>
       </View>
@@ -1023,7 +911,7 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
                         {item.exercise.name}
                       </Typography>
                       <Typography variant="caption" color={lightTheme.textMuted} style={{ marginTop: 2 }}>
-                        {item.exercise.muscleGroup} · {item.loggedSets.length} / {item.targetSets} sets
+                        {item.loggedSets.length} / {item.targetSets} sets
                       </Typography>
                     </View>
 
@@ -1142,9 +1030,6 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
                           <Typography variant="body" color={lightTheme.textPrimary} weight="600">
                             {ex.name}
                           </Typography>
-                          <Typography variant="caption" color={lightTheme.textMuted} style={{ textTransform: "capitalize", marginTop: 2 }}>
-                            {ex.muscleGroup}
-                          </Typography>
                         </View>
                         <View style={{ backgroundColor: tagBg, borderRadius: 6, paddingHorizontal: space.sm, paddingVertical: space.xs }}>
                           <Typography variant="caption" color={tagColor} weight="800" style={{ fontSize: 9 }}>
@@ -1198,23 +1083,36 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
                       <Typography variant="body" color={lightTheme.textPrimary} weight="600">
                         {ex.name}
                       </Typography>
-                      <Typography variant="caption" color={lightTheme.textMuted} style={{ textTransform: "capitalize", marginTop: 2 }}>
-                        {ex.muscleGroup}
-                      </Typography>
                     </View>
 
                     <View style={{ flexDirection: "row", gap: space.sm }}>
                       <TouchableOpacity
                         onPress={() => handleReplaceConfirm(ex)}
-                        style={{ paddingVertical: space.xs, paddingHorizontal: space.sm, backgroundColor: lightTheme.primaryLight, borderRadius: radius.sm }}
+                        style={{
+                          backgroundColor: lightTheme.primary,
+                          borderRadius: radius.sm,
+                          paddingHorizontal: space.md,
+                          paddingVertical: space.xs,
+                        }}
                       >
-                        <Typography variant="caption" color={lightTheme.primary} weight="800">SWAP</Typography>
+                        <Typography variant="caption" color={lightTheme.primaryText} weight="700">
+                          SWAP
+                        </Typography>
                       </TouchableOpacity>
                       <TouchableOpacity
                         onPress={() => handleAddExercise(ex)}
-                        style={{ paddingVertical: space.xs, paddingHorizontal: space.sm, backgroundColor: lightTheme.successBg, borderRadius: radius.sm }}
+                        style={{
+                          backgroundColor: lightTheme.surfaceSecondary,
+                          borderRadius: radius.sm,
+                          paddingHorizontal: space.md,
+                          paddingVertical: space.xs,
+                          borderWidth: 1,
+                          borderColor: lightTheme.border,
+                        }}
                       >
-                        <Typography variant="caption" color={lightTheme.success} weight="800">ADD QUEUE</Typography>
+                        <Typography variant="caption" color={lightTheme.textSecondary} weight="700">
+                          ADD
+                        </Typography>
                       </TouchableOpacity>
                     </View>
                   </View>

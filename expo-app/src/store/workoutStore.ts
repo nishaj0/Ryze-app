@@ -6,7 +6,7 @@ interface WorkoutState {
   activeSession: ActiveSession | null;
   isOffline: boolean;
   
-  initPreStartSession: (splitDay: any) => void;
+  initPreStartSession: (splitDay: any, splitName?: string, dayNumber?: number, totalDays?: number) => void;
   reorderQueue: (fromIndex: number, toIndex: number) => void;
   beginSession: () => void;
   logSet: (
@@ -40,7 +40,7 @@ export const useWorkoutStore = create<WorkoutState>((set, get) => ({
   activeSession: null,
   isOffline: false,
 
-  initPreStartSession: (splitDay) => {
+  initPreStartSession: (splitDay: any, splitName?: string, dayNumber?: number, totalDays?: number) => {
     const queue: ExerciseQueueItem[] = splitDay.exercises?.map((ex: any, idx: number) => ({
       id: "log-" + Date.now() + "-" + idx + "-" + Math.random().toString(36).substring(2, 9),
       splitDayExerciseId: ex.id,
@@ -58,6 +58,9 @@ export const useWorkoutStore = create<WorkoutState>((set, get) => ({
       sessionId: "session-" + Date.now() + "-" + Math.random().toString(36).substring(2, 9),
       splitDayId: splitDay.id,
       splitDayName: splitDay.name,
+      splitName: splitName || "",
+      dayNumber: dayNumber || 0,
+      totalDays: totalDays || 0,
       startedAt: Date.now(),
       exerciseQueue: queue,
       currentExerciseIndex: 0,

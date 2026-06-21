@@ -36,6 +36,8 @@ export const getSplit = async (req: AuthRequest, res: Response) => {
             include: {
               exercise: {
                 include: {
+                  muscles: { include: { muscle: true } },
+                  images: { orderBy: { order: "asc" } },
                   alternativesFrom: {
                     include: { alternative: true },
                   },
@@ -151,6 +153,8 @@ export const getActiveSplit = async (req: AuthRequest, res: Response) => {
                 include: {
                   exercise: {
                     include: {
+                      muscles: { include: { muscle: true } },
+                      images: { orderBy: { order: "asc" } },
                       alternativesFrom: {
                         include: { alternative: true },
                       },
@@ -179,7 +183,14 @@ export const updateSplitExercise = async (req: AuthRequest, res: Response) => {
   const updated = await prisma.splitDayExercise.update({
     where: { id: id as string },
     data: { exerciseId },
-    include: { exercise: true },
+    include: {
+      exercise: {
+        include: {
+          muscles: { include: { muscle: true } },
+          images: { orderBy: { order: "asc" } },
+        },
+      },
+    },
   });
 
   res.json({ splitDayExercise: updated });

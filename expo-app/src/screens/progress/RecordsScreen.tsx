@@ -112,7 +112,7 @@ export default function RecordsScreen({ navigation }: Props) {
                         {pr.exercise?.name || "Exercise"}
                       </Typography>
                       <Typography variant="caption" color={lightTheme.textMuted} style={{ textTransform: "capitalize", marginTop: 2 }}>
-                        {pr.exercise?.muscleGroup || ""}
+                        {pr.exercise?.muscles?.find(m => m.isPrimary)?.muscle.name || ""}
                       </Typography>
                       <Typography variant="caption" color={lightTheme.textMuted} style={{ marginTop: 4 }}>
                         {new Date(pr.achievedAt).toLocaleDateString(undefined, {

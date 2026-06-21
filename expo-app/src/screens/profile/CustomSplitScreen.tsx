@@ -187,7 +187,8 @@ export default function CustomSplitScreen({ navigation }: Props) {
 
   const filteredExercises = exercises.filter((ex) => {
     const matchesSearch = ex.name.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesMuscle = selectedMuscleFilter ? ex.muscleGroup === selectedMuscleFilter : true;
+    const primaryMuscle = ex.muscles?.find(m => m.isPrimary)?.muscle.name;
+    const matchesMuscle = selectedMuscleFilter ? primaryMuscle === selectedMuscleFilter : true;
     return matchesSearch && matchesMuscle;
   });
 
@@ -530,7 +531,7 @@ export default function CustomSplitScreen({ navigation }: Props) {
                       {ex.name}
                     </Typography>
                     <Typography variant="caption" color={lightTheme.textMuted} style={{ textTransform: "capitalize", marginTop: 2 }}>
-                      {ex.muscleGroup}
+                      {ex.muscles?.find(m => m.isPrimary)?.muscle.name || ""}
                     </Typography>
                   </TouchableOpacity>
                 ))

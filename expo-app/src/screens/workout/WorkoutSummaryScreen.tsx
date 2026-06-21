@@ -65,7 +65,7 @@ export default function WorkoutSummaryScreen({ navigation }: Props) {
 
     const breakdownItem = {
       name: item.exercise.name,
-      muscle: item.exercise.muscleGroup,
+      muscle: item.exercise.muscles?.find(m => m.isPrimary)?.muscle.name || "",
       volume: exerciseVolume,
       sets: completedSets.length,
       targetSets: item.targetSets,

@@ -20,13 +20,13 @@ export type OnboardingStackParamList = {
 
 export type HomeStackParamList = {
   HomeMain: undefined;
-  WorkoutLogger: { splitDayId: string; splitDayName: string };
+  WorkoutLogger: { splitDayId: string; splitDayName: string; splitName?: string; dayNumber?: number; totalDays?: number };
   WorkoutSummary: { sessionId: string };
   WorkoutHistory: undefined;
 };
 
 export type WorkoutStackParamList = {
-  WorkoutLogger: { splitDayId: string; splitDayName: string };
+  WorkoutLogger: { splitDayId: string; splitDayName: string; splitName?: string; dayNumber?: number; totalDays?: number };
   ExerciseDetail: { exerciseId: string };
   WorkoutSummary: { sessionId: string };
 };

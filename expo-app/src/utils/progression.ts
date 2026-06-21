@@ -129,7 +129,7 @@ export function getSetRecommendation(
   let recommendedReps = bestSet.reps;
 
   // Get weight increment
-  const increment = getWeightIncrement(exercise.equipmentNeeded, exercise.name);
+  const increment = getWeightIncrement(exercise.equipment || "", exercise.name);
 
   if (bestSet.reps < repMin) {
     // reps < repMin → same weight, same reps (still building)

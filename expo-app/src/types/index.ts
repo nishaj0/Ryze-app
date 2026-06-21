@@ -52,12 +52,36 @@ export interface SplitDayExercise {
 export interface Exercise {
   id: string;
   name: string;
-  muscleGroup: string;
-  secondaryMuscles: string;
-  equipmentNeeded: string;
-  demoUrl: string | null;
+  force: string | null;
+  level: string;
+  mechanic: string | null;
+  equipment: string | null;
+  category: string;
   instructions: string | null;
+  muscles?: ExerciseMuscle[];
+  images?: ExerciseImage[];
   alternativesFrom?: ExerciseAlternative[];
+}
+
+export interface ExerciseMuscle {
+  id: string;
+  exerciseId: string;
+  muscleId: string;
+  isPrimary: boolean;
+  muscle: Muscle;
+}
+
+export interface Muscle {
+  id: string;
+  name: string;
+}
+
+export interface ExerciseImage {
+  id: string;
+  exerciseId: string;
+  url: string;
+  publicId: string;
+  order: number;
 }
 
 export interface ExerciseAlternative {
@@ -208,6 +232,9 @@ export interface ActiveSession {
   sessionId: string;
   splitDayId: string;
   splitDayName: string;
+  splitName: string;
+  dayNumber: number;
+  totalDays: number;
   startedAt: number;
   exerciseQueue: ExerciseQueueItem[];
   currentExerciseIndex: number;

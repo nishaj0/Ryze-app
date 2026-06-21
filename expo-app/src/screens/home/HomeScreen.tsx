@@ -91,6 +91,9 @@ export default function HomeScreen({ navigation }: Props) {
                   navigation.navigate("WorkoutLogger", {
                     splitDayId: sessionData.splitDayId,
                     splitDayName: sessionData.splitDayName,
+                    splitName: sessionData.splitName || "",
+                    dayNumber: sessionData.dayNumber || 0,
+                    totalDays: sessionData.totalDays || 0,
                   });
                 },
               },
@@ -143,10 +146,16 @@ export default function HomeScreen({ navigation }: Props) {
 
   const handleStartWorkoutForDay = (day: SplitDay) => {
     setWorkoutModalVisible(false);
-    initPreStartSession(day);
+    const splitName = userSplit?.split.name || "";
+    const dayNumber = day.dayNumber;
+    const totalDays = userSplit?.split.days.length || 0;
+    initPreStartSession(day, splitName, dayNumber, totalDays);
     navigation.navigate("WorkoutLogger", {
       splitDayId: day.id,
       splitDayName: day.name,
+      splitName,
+      dayNumber,
+      totalDays,
     });
   };
 

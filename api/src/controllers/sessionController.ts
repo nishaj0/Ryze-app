@@ -36,7 +36,14 @@ export const createSession = async (req: AuthRequest, res: Response) => {
     include: {
       exercises: {
         orderBy: { order: "asc" },
-        include: { exercise: true },
+        include: {
+          exercise: {
+            include: {
+              muscles: { include: { muscle: true } },
+              images: { orderBy: { order: "asc" } },
+            },
+          },
+        },
       },
     },
   });
@@ -62,7 +69,12 @@ export const createSession = async (req: AuthRequest, res: Response) => {
       exerciseLogs: {
         orderBy: { order: "asc" },
         include: {
-          exercise: true,
+          exercise: {
+            include: {
+              muscles: { include: { muscle: true } },
+              images: { orderBy: { order: "asc" } },
+            },
+          },
           setLogs: { orderBy: { setNumber: "asc" } },
         },
       },
@@ -151,6 +163,8 @@ export const getSession = async (req: AuthRequest, res: Response) => {
         include: {
           exercise: {
             include: {
+              muscles: { include: { muscle: true } },
+              images: { orderBy: { order: "asc" } },
               alternativesFrom: { include: { alternative: true } },
             },
           },
@@ -178,7 +192,14 @@ export const getSession = async (req: AuthRequest, res: Response) => {
         lte: endOfDay,
       },
     },
-    include: { exercise: true },
+    include: {
+      exercise: {
+        include: {
+          muscles: { include: { muscle: true } },
+          images: { orderBy: { order: "asc" } },
+        },
+      },
+    },
   });
 
   res.json({ session, prs });
@@ -224,7 +245,14 @@ export const completeSession = async (req: AuthRequest, res: Response) => {
             estimated1rm,
             achievedAt: session.date,
           },
-          include: { exercise: true },
+          include: {
+            exercise: {
+              include: {
+                muscles: { include: { muscle: true } },
+                images: { orderBy: { order: "asc" } },
+              },
+            },
+          },
         });
         newPRs.push(pr);
       }
@@ -242,7 +270,12 @@ export const completeSession = async (req: AuthRequest, res: Response) => {
       exerciseLogs: {
         orderBy: { order: "asc" },
         include: {
-          exercise: true,
+          exercise: {
+            include: {
+              muscles: { include: { muscle: true } },
+              images: { orderBy: { order: "asc" } },
+            },
+          },
           setLogs: { orderBy: { setNumber: "asc" } },
         },
       },
@@ -314,7 +347,12 @@ export const addExerciseToSession = async (req: AuthRequest, res: Response) => {
       order: maxOrder + 1,
     },
     include: {
-      exercise: true,
+      exercise: {
+        include: {
+          muscles: { include: { muscle: true } },
+          images: { orderBy: { order: "asc" } },
+        },
+      },
       setLogs: true,
     },
   });
@@ -342,7 +380,12 @@ export const swapExercise = async (req: AuthRequest, res: Response) => {
     where: { id: exerciseLogId },
     data: { exerciseId: newExerciseId },
     include: {
-      exercise: true,
+      exercise: {
+        include: {
+          muscles: { include: { muscle: true } },
+          images: { orderBy: { order: "asc" } },
+        },
+      },
       setLogs: true,
     },
   });
@@ -505,7 +548,14 @@ export const syncSession = async (req: AuthRequest, res: Response) => {
                   estimated1rm,
                   achievedAt: sessionDate,
                 },
-                include: { exercise: true },
+                include: {
+                  exercise: {
+                    include: {
+                      muscles: { include: { muscle: true } },
+                      images: { orderBy: { order: "asc" } },
+                    },
+                  },
+                },
               });
               newPRs.push(pr);
             }
@@ -531,7 +581,12 @@ export const syncSession = async (req: AuthRequest, res: Response) => {
       exerciseLogs: {
         orderBy: { order: "asc" },
         include: {
-          exercise: true,
+          exercise: {
+            include: {
+              muscles: { include: { muscle: true } },
+              images: { orderBy: { order: "asc" } },
+            },
+          },
           setLogs: { orderBy: { setNumber: "asc" } },
         },
       },

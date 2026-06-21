@@ -334,7 +334,7 @@ export default function DashboardScreen({ navigation }: Props) {
                       {pr.exercise?.name || "Exercise"}
                     </Typography>
                     <Typography variant="caption" color={lightTheme.textMuted} style={{ textTransform: "capitalize" }}>
-                      {pr.exercise?.muscleGroup || ""}
+                      {pr.exercise?.muscles?.find(m => m.isPrimary)?.muscle.name || ""}
                     </Typography>
                   </View>
                   <View style={{ alignItems: "flex-end" }}>

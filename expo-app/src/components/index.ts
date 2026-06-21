@@ -5,6 +5,10 @@ export { default as Screen } from "./Screen";
 export { default as Typography } from "./Typography";
 export { default as Icon } from "./Icon";
 export type { IconName } from "./Icon";
+export { default as ExerciseImageCarousel } from "./ExerciseImageCarousel";
+export { default as InstructionStepper } from "./InstructionStepper";
+export { default as SetTrackerStrip } from "./SetTrackerStrip";
+export { default as ExerciseMetaBadges } from "./ExerciseMetaBadges";
 export {
   Skeleton,
   SkeletonCard,
