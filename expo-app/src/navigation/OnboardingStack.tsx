@@ -11,16 +11,19 @@ import SleepScreen from "../screens/onboarding/SleepScreen";
 import SplitSelectionScreen from "../screens/onboarding/SplitSelectionScreen";
 
 import { OnboardingProvider } from "../screens/onboarding/OnboardingContext";
+import { useTheme } from "../theme/themeStore";
 
 const Stack = createNativeStackNavigator<OnboardingStackParamList>();
 
-const screenOptions = {
-  headerStyle: { backgroundColor: "#0F172A" },
-  headerTintColor: "#fff",
-  headerBackTitle: "Back",
-};
-
 export default function OnboardingStack() {
+  const theme = useTheme();
+  const screenOptions = {
+    headerStyle: { backgroundColor: theme.bg },
+    headerTintColor: theme.textPrimary,
+    headerTitleStyle: { fontFamily: "Inter", fontWeight: "600" as const, fontSize: 18, color: theme.textPrimary },
+    headerBackTitle: "Back",
+  };
+
   return (
     <OnboardingProvider>
       <Stack.Navigator screenOptions={screenOptions}>
@@ -36,3 +39,4 @@ export default function OnboardingStack() {
     </OnboardingProvider>
   );
 }
+

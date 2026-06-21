@@ -11,9 +11,9 @@ import { space, radius } from "../../theme/spacing";
 
 type Props = NativeStackScreenProps<HomeStackParamList, "WorkoutSummary">;
 const { width: screenW } = Dimensions.get("window");
-const theme = useTheme();
 
 export default function WorkoutSummaryScreen({ navigation }: Props) {
+  const theme = useTheme();
   const { activeSession, completeSession, updateSessionNotes } = useWorkoutStore();
   const [saving, setSaving] = useState(false);
 
@@ -154,15 +154,15 @@ export default function WorkoutSummaryScreen({ navigation }: Props) {
           <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
             <Card
               style={{
-                backgroundColor: "#FEF3C7", // gold background
-                borderColor: "#F59E0B",
+                backgroundColor: theme.warningBg,
+                borderColor: theme.warning,
                 borderWidth: 1.5,
                 padding: space.lg,
               }}
             >
               <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.md }}>
-                <Icon name="Trophy" size={24} color="#D97706" />
-                <Typography variant="heading2" color="#92400E" weight="800">
+                <Icon name="Trophy" size={24} color={theme.warning} />
+                <Typography variant="heading2" color={theme.warningText} weight="800">
                   New PRs Achieved!
                 </Typography>
               </View>
@@ -170,7 +170,7 @@ export default function WorkoutSummaryScreen({ navigation }: Props) {
                 <View
                   key={pr.id}
                   style={{
-                    backgroundColor: "rgba(255, 255, 255, 0.6)",
+                    backgroundColor: theme.surfaceSecondary,
                     borderRadius: radius.md,
                     padding: space.md,
                     marginBottom: space.xs,
@@ -180,14 +180,14 @@ export default function WorkoutSummaryScreen({ navigation }: Props) {
                   }}
                 >
                   <View style={{ flex: 1 }}>
-                    <Typography variant="body" color="#92400E" weight="700">
+                    <Typography variant="body" color={theme.textPrimary} weight="700">
                       {pr.exerciseName}
                     </Typography>
-                    <Typography variant="caption" color="#B45309">
+                    <Typography variant="caption" color={theme.textSecondary}>
                       1RM Est: {Math.round(pr.estimated1rm)}kg
                     </Typography>
                   </View>
-                  <Typography variant="heading3" color="#D97706" weight="800">
+                  <Typography variant="heading3" color={theme.warning} weight="800">
                     {pr.weightKg}kg × {pr.reps}
                   </Typography>
                 </View>
@@ -201,7 +201,7 @@ export default function WorkoutSummaryScreen({ navigation }: Props) {
           <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
             <Card
               style={{
-                backgroundColor: "rgba(239, 68, 68, 0.05)",
+                backgroundColor: theme.errorBg,
                 borderColor: theme.error,
                 borderWidth: 1.5,
                 padding: space.lg,
@@ -318,7 +318,7 @@ export default function WorkoutSummaryScreen({ navigation }: Props) {
                     width: 32,
                     height: 32,
                     borderRadius: 16,
-                    backgroundColor: ex.status === "skipped" ? "rgba(239, 68, 68, 0.05)" : theme.successBg,
+                    backgroundColor: ex.status === "skipped" ? theme.errorBg : theme.successBg,
                     alignItems: "center",
                     justifyContent: "center",
                   }}
@@ -339,8 +339,8 @@ export default function WorkoutSummaryScreen({ navigation }: Props) {
                   </Typography>
                   {ex.hasPR && (
                     <View style={{ flexDirection: "row", alignItems: "center", gap: 2 }}>
-                      <Icon name="Trophy" size={10} color="#D97706" />
-                      <Typography variant="caption" color="#D97706" weight="700">PR</Typography>
+                      <Icon name="Trophy" size={10} color={theme.warning} />
+                      <Typography variant="caption" color={theme.warning} weight="700">PR</Typography>
                     </View>
                   )}
                 </View>

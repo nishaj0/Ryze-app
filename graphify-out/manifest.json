@@ -260,9 +260,9 @@
     "semantic_hash": "15f46621637ae1f3049cf19942bc4eb8"
   },
   "expo-app/src/navigation/AuthStack.tsx": {
-    "mtime": 1781024063.6165597,
-    "ast_hash": "7b015c2924d7afa4ce9985a3dbac5678",
-    "semantic_hash": "7b015c2924d7afa4ce9985a3dbac5678"
+    "mtime": 1782028771.3951082,
+    "ast_hash": "08d9d9887109dc3d5da8132a814352bb",
+    "semantic_hash": ""
   },
   "expo-app/src/navigation/MainTabs.tsx": {
     "mtime": 1782026691.1057036,
@@ -270,8 +270,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/navigation/OnboardingStack.tsx": {
-    "mtime": 1781202802.8020318,
-    "ast_hash": "7222bcf79379b766dad033aaf21fcaec",
+    "mtime": 1782028786.9448514,
+    "ast_hash": "094922c097b363e98c6615bd9ce13497",
     "semantic_hash": ""
   },
   "expo-app/src/navigation/RootNavigator.tsx": {
@@ -385,8 +385,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/screens/progress/DashboardScreen.tsx": {
-    "mtime": 1782027378.8352811,
-    "ast_hash": "0415411fb8eacd316859c43b5e9cd022",
+    "mtime": 1782028809.801208,
+    "ast_hash": "e5a38792d2b1b58a402f3f229463d9fb",
     "semantic_hash": ""
   },
   "expo-app/src/screens/progress/ExerciseProgressScreen.tsx": {
@@ -395,18 +395,18 @@
     "semantic_hash": ""
   },
   "expo-app/src/screens/progress/RecordsScreen.tsx": {
-    "mtime": 1782027002.9627361,
-    "ast_hash": "440bfaf66bde36dba10157a1a13c8c47",
+    "mtime": 1782028821.127004,
+    "ast_hash": "fd3d412a68fbe4a2077af207ef46bba0",
     "semantic_hash": ""
   },
   "expo-app/src/screens/workout/WorkoutLoggerScreen.tsx": {
-    "mtime": 1782027002.9657466,
-    "ast_hash": "493cc71d1248895c590185900d227ff8",
+    "mtime": 1782028914.138699,
+    "ast_hash": "d053e47e641013a8404e31594c384280",
     "semantic_hash": ""
   },
   "expo-app/src/screens/workout/WorkoutSummaryScreen.tsx": {
-    "mtime": 1782027002.9667363,
-    "ast_hash": "767e871ae421d5bd00a9af7c86e4f2fd",
+    "mtime": 1782028907.863423,
+    "ast_hash": "a404c08eb120ef2d15ac25dd507c3a05",
     "semantic_hash": ""
   },
   "expo-app/src/store/authStore.ts": {

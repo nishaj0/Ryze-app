@@ -67,7 +67,7 @@ export default function RecordsScreen({ navigation }: Props) {
                   width: 80,
                   height: 80,
                   borderRadius: 40,
-                  backgroundColor: "#FEF3C7",
+                  backgroundColor: theme.warningBg,
                   alignItems: "center",
                   justifyContent: "center",
                   marginBottom: space.md,
@@ -101,7 +101,7 @@ export default function RecordsScreen({ navigation }: Props) {
                         width: 48,
                         height: 48,
                         borderRadius: radius.md,
-                        backgroundColor: "#FEF3C7",
+                        backgroundColor: theme.warningBg,
                         alignItems: "center",
                         justifyContent: "center",
                       }}

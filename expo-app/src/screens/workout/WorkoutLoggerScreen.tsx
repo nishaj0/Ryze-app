@@ -500,9 +500,9 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
         {phase === "exercise_complete" ? (
           /* Exercise Complete banner */
           <View style={{ flex: 1, justifyContent: "center", alignItems: "center", padding: space.xl }}>
-            <Card style={{ width: "100%", padding: space.xl, alignItems: "center", borderColor: "#10B981", borderWidth: 2 }} shadow="md">
-              <View style={{ width: 72, height: 72, borderRadius: 36, backgroundColor: "#D1FAE5", alignItems: "center", justifyContent: "center", marginBottom: space.md }}>
-                <Icon name="Check" size={40} color="#059669" strokeWidth={3} />
+            <Card style={{ width: "100%", padding: space.xl, alignItems: "center", borderColor: theme.success, borderWidth: 2 }} shadow="md">
+              <View style={{ width: 72, height: 72, borderRadius: 36, backgroundColor: theme.successBg, alignItems: "center", justifyContent: "center", marginBottom: space.md }}>
+                <Icon name="Check" size={40} color={theme.success} strokeWidth={3} />
               </View>
               <Typography variant="heading1" color={theme.textPrimary} style={{ marginBottom: space.xs }}>
                 Exercise Done!
@@ -512,9 +512,9 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
               </Typography>
 
               {detectedPR && (
-                <View style={{ backgroundColor: "#FEF3C7", borderColor: "#F59E0B", borderWidth: 1, paddingVertical: space.sm, paddingHorizontal: space.lg, borderRadius: radius.md, marginBottom: space.lg, flexDirection: "row", alignItems: "center", gap: space.sm }}>
-                  <Icon name="Trophy" size={20} color="#D97706" />
-                  <Typography variant="body" color="#92400E" weight="800">
+                <View style={{ backgroundColor: theme.warningBg, borderColor: theme.warning, borderWidth: 1, paddingVertical: space.sm, paddingHorizontal: space.lg, borderRadius: radius.md, marginBottom: space.lg, flexDirection: "row", alignItems: "center", gap: space.sm }}>
+                  <Icon name="Trophy" size={20} color={theme.warning} />
+                  <Typography variant="body" color={theme.warningText} weight="800">
                     {detectedPR}
                   </Typography>
                 </View>
@@ -726,14 +726,14 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
                 <TouchableOpacity
                   onPress={() => handleLogSet(false)}
                   style={{
-                    backgroundColor: "#10B981",
+                    backgroundColor: theme.success,
                     borderRadius: radius.lg,
                     paddingVertical: 14,
                     flexDirection: "row",
                     alignItems: "center",
                     justifyContent: "center",
                     gap: space.sm,
-                    shadowColor: "#10B981",
+                    shadowColor: theme.success,
                     shadowOffset: { width: 0, height: 4 },
                     shadowOpacity: 0.4,
                     shadowRadius: 8,
@@ -893,7 +893,7 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
                     style={{
                       flexDirection: "row",
                       alignItems: "center",
-                      backgroundColor: isActive ? "rgba(99, 102, 241, 0.05)" : theme.surface,
+                      backgroundColor: isActive ? theme.primaryLight : theme.surface,
                       borderRadius: radius.lg,
                       padding: space.md,
                       marginBottom: space.sm,

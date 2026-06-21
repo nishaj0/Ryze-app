@@ -24,9 +24,9 @@ import { space, radius } from "../../theme/spacing";
 type Props = NativeStackScreenProps<ProgressStackParamList, "Dashboard">;
 
 const { width: screenW } = Dimensions.get("window");
-const theme = useTheme();
 
 export default function DashboardScreen({ navigation }: Props) {
+  const theme = useTheme();
   const [overview, setOverview] = useState<ProgressOverview | null>(null);
   const [heatmap, setHeatmap] = useState<HeatmapEntry[]>([]);
   const [muscleVolumes, setMuscleVolumes] = useState<MuscleVolume[]>([]);
@@ -115,7 +115,7 @@ export default function DashboardScreen({ navigation }: Props) {
             <StatCard
               icon="Trophy"
               color={theme.warning}
-              bg="#FEF3C7"
+              bg={theme.warningBg}
               value={overview?.totalPRs || 0}
               label="PRs Set"
             />
@@ -323,7 +323,7 @@ export default function DashboardScreen({ navigation }: Props) {
                       width: 40,
                       height: 40,
                       borderRadius: radius.md,
-                      backgroundColor: "#FEF3C7",
+                      backgroundColor: theme.warningBg,
                       alignItems: "center",
                       justifyContent: "center",
                     }}
@@ -392,6 +392,7 @@ interface StatCardProps {
 }
 
 function StatCard({ icon, color, bg, value, label }: StatCardProps) {
+  const theme = useTheme();
   return (
     <View
       style={{
