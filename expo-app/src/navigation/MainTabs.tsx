@@ -24,6 +24,10 @@ import SettingsScreen from "../screens/profile/SettingsScreen";
 import MetricsScreen from "../screens/metrics/MetricsScreen";
 import AllExercisesScreen from "../screens/exercises/AllExercisesScreen";
 import RequestExerciseScreen from "../screens/exercises/RequestExerciseScreen";
+import ReportBugScreen from "../screens/support/ReportBugScreen";
+import RequestHelpScreen from "../screens/support/RequestHelpScreen";
+import MyTicketsScreen from "../screens/support/MyTicketsScreen";
+
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 const HomeStackNav = createNativeStackNavigator<HomeStackParamList>();
@@ -121,6 +125,9 @@ function ProfileStack() {
       <ProfileStackNav.Screen name="Metrics" component={MetricsScreen} options={{ title: "Body Metrics" }} />
       <ProfileStackNav.Screen name="AllExercises" component={AllExercisesScreen} options={{ title: "All Exercises" }} />
       <ProfileStackNav.Screen name="RequestExercise" component={RequestExerciseScreen} options={{ title: "Request Exercise" }} />
+      <ProfileStackNav.Screen name="ReportBug" component={ReportBugScreen} options={{ title: "Report a Bug" }} />
+      <ProfileStackNav.Screen name="RequestHelp" component={RequestHelpScreen} options={{ title: "Request Help" }} />
+      <ProfileStackNav.Screen name="MyTickets" component={MyTicketsScreen} options={{ title: "My Support Tickets" }} />
     </ProfileStackNav.Navigator>
   );
 }

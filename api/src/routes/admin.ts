@@ -1,5 +1,7 @@
 import { Router, Request, Response, NextFunction } from "express";
 import * as admin from "../controllers/adminController";
+import * as settings from "../controllers/settingsController";
+
 
 const router = Router();
 
@@ -49,5 +51,11 @@ router.post("/notifications/broadcast", wrap(admin.sendBroadcast));
 
 // Onboarding Stats
 router.get("/onboarding/stats", wrap(admin.getOnboardingStats));
+
+// App Settings & Support Tickets
+router.get("/settings", wrap(settings.getAppSettings));
+router.put("/settings", wrap(settings.updateAppSettings));
+router.get("/support/tickets", wrap(settings.listAllTickets));
+router.put("/support/tickets/:id", wrap(settings.respondToTicket));
 
 export default router;

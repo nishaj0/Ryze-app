@@ -27,9 +27,9 @@ interface DayConfig {
 }
 
 const AVAILABLE_MUSCLE_GROUPS = ["chest", "back", "shoulders", "legs", "arms", "core"];
-const theme = useTheme();
 
 export default function CustomSplitScreen({ navigation }: Props) {
+  const theme = useTheme();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [daysPerWeek, setDaysPerWeek] = useState(3);

@@ -15,6 +15,8 @@ import progressRoutes from "./routes/progress";
 import recordRoutes from "./routes/records";
 import notificationRoutes from "./routes/notifications";
 import adminRoutes from "./routes/admin";
+import appRoutes from "./routes/app";
+import supportRoutes from "./routes/support";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -33,6 +35,8 @@ app.use("/api/progress", progressRoutes);
 app.use("/api/records", recordRoutes);
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/app", appRoutes);
+app.use("/api/support", supportRoutes);
 
 app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });

@@ -13,9 +13,9 @@ import { space } from "../../theme/spacing";
 type Props = NativeStackScreenProps<ProgressStackParamList, "ExerciseProgress">;
 
 const { width: screenW } = Dimensions.get("window");
-const theme = useTheme();
 
 export default function ExerciseProgressScreen({ route }: Props) {
+  const theme = useTheme();
   const { exerciseId, exerciseName } = route.params;
   const [progression, setProgression] = useState<ExerciseProgress[]>([]);
   const [loading, setLoading] = useState(true);

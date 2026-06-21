@@ -12,9 +12,9 @@ import { space, radius } from "../../theme/spacing";
 type Props = NativeStackScreenProps<PhotosStackParamList, "PhotosTimeline">;
 
 const { width: screenW } = Dimensions.get("window");
-const theme = useTheme();
 
 export default function PhotosTimelineScreen({ navigation }: Props) {
+  const theme = useTheme();
   const [photos, setPhotos] = useState<ProgressPhoto[]>([]);
   const [loading, setLoading] = useState(true);
 

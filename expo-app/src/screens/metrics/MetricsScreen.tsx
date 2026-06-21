@@ -14,9 +14,9 @@ import { useAuthStore } from "../../store/authStore";
 type Props = NativeStackScreenProps<ProfileStackParamList, "Metrics">;
 
 const { width: screenW } = Dimensions.get("window");
-const theme = useTheme();
 
 export default function MetricsScreen({ navigation }: Props) {
+  const theme = useTheme();
   const { user } = useAuthStore();
   const [activeTab, setActiveTab] = useState<"weight" | "nutrition">("weight");
   

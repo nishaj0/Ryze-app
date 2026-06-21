@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { View, TouchableOpacity, Alert } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ProfileStackParamList } from "../../navigation/types";
 import { useAuthStore } from "../../store/authStore";
 import { getActiveSplit } from "../../api/splits";
 import { deleteAccount } from "../../api/auth";
+import { getAppSettings, AppSettings } from "../../api/app";
+import { getMyTickets } from "../../api/support";
 import { UserSplit } from "../../types";
-import { Screen, Typography, Card, Button, Icon, ProfileScreenSkeleton } from "../../components";
+import { Screen, Typography, Card, Button, Icon, ProfileScreenSkeleton, IconName } from "../../components";
 import { useTheme } from "../../theme/themeStore";
 import { space } from "../../theme/spacing";
 
@@ -16,19 +18,33 @@ export default function ProfileScreen({ navigation }: Props) {
   const { user, logout } = useAuthStore();
   const theme = useTheme();
   const [userSplit, setUserSplit] = useState<UserSplit | null>(null);
+  const [appSettings, setAppSettings] = useState<AppSettings | null>(null);
+  const [hasTickets, setHasTickets] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    loadSplit();
+  const loadData = useCallback(async () => {
+    try {
+      const [splitRes, settingsRes, ticketsRes] = await Promise.all([
+        getActiveSplit(),
+        getAppSettings().catch(() => null),
+        getMyTickets().catch(() => []),
+      ]);
+      setUserSplit(splitRes.userSplit);
+      setAppSettings(settingsRes);
+      setHasTickets(ticketsRes && ticketsRes.length > 0);
+    } catch (err) {
+      console.error("[ProfileScreen] Failed to load data:", err);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
-  const loadSplit = async () => {
-    try {
-      const res = await getActiveSplit();
-      setUserSplit(res.userSplit);
-    } catch (err) {}
-    finally { setLoading(false); }
-  };
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      loadData();
+    });
+    return unsubscribe;
+  }, [navigation, loadData]);
 
   const handleDeleteAccount = () => {
     Alert.alert(
@@ -60,14 +76,33 @@ export default function ProfileScreen({ navigation }: Props) {
     );
   }
 
-  const menuItems = [
-    { label: "Edit Profile", icon: "User" as const, onPress: () => navigation.navigate("EditProfile") },
-    { label: "Browse Exercises", icon: "Dumbbell" as const, onPress: () => navigation.navigate("AllExercises") },
-    { label: "Workout History", icon: "Calendar" as const, onPress: () => (navigation as any).navigate("Home", { screen: "WorkoutHistory" }) },
-    { label: "Switch Split", icon: "Repeat" as const, onPress: () => navigation.navigate("SplitSwitcher") },
-    { label: "Body Metrics", icon: "Ruler" as const, onPress: () => navigation.navigate("Metrics") },
-    { label: "Settings", icon: "Settings" as const, onPress: () => navigation.navigate("Settings") },
+  interface MenuItem {
+    label: string;
+    icon: IconName;
+    onPress: () => void;
+  }
+
+  const menuItems: MenuItem[] = [
+    { label: "Edit Profile", icon: "User", onPress: () => navigation.navigate("EditProfile") },
+    { label: "Browse Exercises", icon: "Dumbbell", onPress: () => navigation.navigate("AllExercises") },
+    { label: "Workout History", icon: "Calendar", onPress: () => (navigation as any).navigate("Home", { screen: "WorkoutHistory" }) },
+    { label: "Switch Split", icon: "Repeat", onPress: () => navigation.navigate("SplitSwitcher") },
+    { label: "Body Metrics", icon: "Ruler", onPress: () => navigation.navigate("Metrics") },
   ];
+
+  if (!appSettings || appSettings.bugReportingEnabled) {
+    menuItems.push({ label: "Report Bug", icon: "AlertTriangle", onPress: () => navigation.navigate("ReportBug") });
+  }
+
+  if (!appSettings || appSettings.helpRequestsEnabled) {
+    menuItems.push({ label: "Request Help", icon: "HelpCircle", onPress: () => navigation.navigate("RequestHelp") });
+  }
+
+  if (hasTickets || !appSettings || appSettings.bugReportingEnabled || appSettings.helpRequestsEnabled) {
+    menuItems.push({ label: "My Tickets", icon: "MessageSquare", onPress: () => navigation.navigate("MyTickets") });
+  }
+
+  menuItems.push({ label: "Settings", icon: "Settings", onPress: () => navigation.navigate("Settings") });
 
   return (
     <Screen scroll padding="lg">

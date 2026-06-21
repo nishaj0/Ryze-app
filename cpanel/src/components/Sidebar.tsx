@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import {
   LayoutDashboard, Users, Dumbbell, Layers, Activity,
-  Bell, Settings, Zap, LogOut, ClipboardList, PlusCircle, MessageSquare
+  Bell, Settings, Zap, LogOut, ClipboardList, PlusCircle, MessageSquare, LifeBuoy
 } from 'lucide-react'
 import { setAdminKey } from '../api'
 
@@ -17,6 +17,7 @@ const nav = [
     { to: '/exercise-requests', icon: MessageSquare, label: 'Exercise Requests' },
     { to: '/create-exercise', icon: PlusCircle, label: 'Create Exercise' },
     { to: '/onboarding', icon: ClipboardList, label: 'Onboarding' },
+    { to: '/support-tickets', icon: LifeBuoy, label: 'Support Tickets' },
   ]},
   { label: 'TOOLS', items: [
     { to: '/notifications', icon: Bell, label: 'Notifications' },

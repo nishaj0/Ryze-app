@@ -35,9 +35,9 @@ import { useAuthStore } from "../../store/authStore";
 
 type Props = NativeStackScreenProps<HomeStackParamList, "WorkoutLogger">;
 const { width: screenW, height: screenH } = Dimensions.get("window");
-const theme = useTheme();
 
 export default function WorkoutLoggerScreen({ navigation }: Props) {
+  const theme = useTheme();
   const { user } = useAuthStore();
   const {
     activeSession,

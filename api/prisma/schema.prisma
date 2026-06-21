@@ -39,6 +39,7 @@ model User {
   createdSplits    Split[]
   nutritionLogs    DailyNutrition[]
   exerciseRequests ExerciseRequest[]
+  supportTickets   SupportTicket[]
 }
 
 model Split {
@@ -278,3 +279,26 @@ model ExerciseRequest {
 
   requestedBy      User?    @relation(fields: [requestedById], references: [id])
 }
+
+model AppSettings {
+  id                      String   @id @default("default")
+  bugReportingEnabled     Boolean  @default(true)
+  helpRequestsEnabled     Boolean  @default(true)
+  exerciseRequestsEnabled Boolean  @default(true)
+  updatedAt               DateTime @updatedAt
+}
+
+model SupportTicket {
+  id            String   @id @default(cuid())
+  userId        String
+  type          String   // BUG, HELP, EXERCISE_REQUEST
+  title         String
+  description   String
+  status        String   @default("PENDING") // PENDING, IN_PROGRESS, RESOLVED
+  adminResponse String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+

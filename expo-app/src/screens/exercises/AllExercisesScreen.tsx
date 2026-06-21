@@ -5,6 +5,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ProfileStackParamList } from "../../navigation/types";
 import { listExercises } from "../../api/exercises";
 import { Exercise } from "../../types";
+import { getAppSettings, AppSettings } from "../../api/app";
 import { Typography, Card, Icon } from "../../components";
 import { useTheme } from "../../theme/themeStore";
 import { space, radius } from "../../theme/spacing";
@@ -19,6 +20,13 @@ export default function AllExercisesScreen({ navigation }: Props) {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [settings, setSettings] = useState<AppSettings | null>(null);
+
+  useEffect(() => {
+    getAppSettings()
+      .then(setSettings)
+      .catch(console.error);
+  }, []);
 
   const muscles = [
     "abdominals", "abductors", "adductors", "biceps", "calves", "chest",
@@ -210,24 +218,26 @@ export default function AllExercisesScreen({ navigation }: Props) {
       />
 
       {/* Request Exercise Button */}
-      <TouchableOpacity
-        onPress={() => navigation.navigate("RequestExercise")}
-        style={{
-          position: "absolute",
-          bottom: space.xl,
-          right: space.xl,
-          backgroundColor: theme.primary,
-          borderRadius: radius.full,
-          padding: space.lg,
-          shadowColor: theme.primary,
-          shadowOffset: { width: 0, height: 4 },
-          shadowOpacity: 0.3,
-          shadowRadius: 8,
-          elevation: 6,
-        }}
-      >
-        <Icon name="Plus" size={24} color={theme.primaryText} />
-      </TouchableOpacity>
+      {(!settings || settings.exerciseRequestsEnabled) && (
+        <TouchableOpacity
+          onPress={() => navigation.navigate("RequestExercise")}
+          style={{
+            position: "absolute",
+            bottom: space.xl,
+            right: space.xl,
+            backgroundColor: theme.primary,
+            borderRadius: radius.full,
+            padding: space.lg,
+            shadowColor: theme.primary,
+            shadowOffset: { width: 0, height: 4 },
+            shadowOpacity: 0.3,
+            shadowRadius: 8,
+            elevation: 6,
+          }}
+        >
+          <Icon name="Plus" size={24} color={theme.primaryText} />
+        </TouchableOpacity>
+      )}
     </SafeAreaView>
   );
 }

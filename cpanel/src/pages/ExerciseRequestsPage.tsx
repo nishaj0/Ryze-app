@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { PageLoader, Pagination, Badge } from "../components/UI";
 import api from "../api";
 
@@ -37,6 +37,7 @@ export default function ExerciseRequestsPage() {
   const [requests, setRequests] = useState<ExerciseRequest[]>([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
   const [statusFilter, setStatusFilter] = useState<string>("");
   const [selectedRequest, setSelectedRequest] = useState<ExerciseRequest | null>(null);
@@ -54,6 +55,7 @@ export default function ExerciseRequestsPage() {
       if (statusFilter) params.status = statusFilter;
       const { data } = await api.get("/admin/exercise-requests", { params });
       setRequests(data.requests);
+      setTotal(data.total || 0);
       setTotalPages(data.totalPages);
     } catch (err) {
       console.error("Failed to fetch exercise requests:", err);
@@ -186,7 +188,7 @@ export default function ExerciseRequestsPage() {
             </tbody>
           </table>
 
-          <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
+          <Pagination page={page} totalPages={totalPages} total={total} limit={20} onPage={setPage} />
         </>
       )}
 

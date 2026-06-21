@@ -13,6 +13,7 @@ import ActivityPage from './pages/ActivityPage'
 import NotificationsPage from './pages/NotificationsPage'
 import SettingsPage from './pages/SettingsPage'
 import OnboardingPage from './pages/OnboardingPage'
+import SupportTicketsPage from './pages/SupportTicketsPage'
 import { getAdminKey } from './api'
 
 const PAGE_TITLES: Record<string, string> = {
@@ -26,6 +27,7 @@ const PAGE_TITLES: Record<string, string> = {
   '/notifications': 'Notifications',
   '/settings': 'Settings',
   '/onboarding': 'Onboarding Analytics',
+  '/support-tickets': 'Support Tickets',
 }
 
 function ProtectedLayout() {
@@ -55,6 +57,7 @@ function ProtectedLayout() {
             <Route path="/notifications" element={<NotificationsPage />} />
             <Route path="/settings" element={<SettingsPage />} />
             <Route path="/onboarding" element={<OnboardingPage />} />
+            <Route path="/support-tickets" element={<SupportTicketsPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>

@@ -7,7 +7,6 @@ import { useTheme } from "../../theme/themeStore";
 import { space, radius } from "../../theme/spacing";
 
 const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-const theme = useTheme();
 const MONTHS = [
   "January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December",
@@ -29,6 +28,7 @@ function formatDate(year: number, month: number, day: number): string {
 }
 
 export default function WorkoutHistoryScreen() {
+  const theme = useTheme();
   const today = new Date();
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
   const [currentMonth, setCurrentMonth] = useState(today.getMonth());

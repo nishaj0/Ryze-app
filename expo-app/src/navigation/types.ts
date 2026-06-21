@@ -54,6 +54,9 @@ export type ProfileStackParamList = {
   AllExercises: undefined;
   ExerciseDetail: { exerciseId: string };
   RequestExercise: undefined;
+  ReportBug: undefined;
+  RequestHelp: undefined;
+  MyTickets: undefined;
 };
 
 export type MainTabParamList = {

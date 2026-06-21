@@ -51,4 +51,11 @@ export const sendBroadcast = (data: { title: string; body: string }) =>
 // Onboarding Stats
 export const getOnboardingStats = () => api.get('/onboarding/stats').then(r => r.data)
 
+// App Settings & Support Tickets
+export const getAppSettings = () => api.get('/settings').then(r => r.data)
+export const updateAppSettings = (data: Record<string, any>) => api.put('/settings', data).then(r => r.data)
+export const getSupportTickets = (params: Record<string, any>) => api.get('/support/tickets', { params }).then(r => r.data)
+export const respondToSupportTicket = (id: string, data: { adminResponse: string; status: string }) =>
+  api.put(`/support/tickets/${id}`, data).then(r => r.data)
+
 export default api;

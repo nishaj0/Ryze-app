@@ -12,9 +12,9 @@ import { space, radius } from "../../theme/spacing";
 type Props = NativeStackScreenProps<PhotosStackParamList, "PhotoCompare">;
 
 const { width: screenW } = Dimensions.get("window");
-const theme = useTheme();
 
 export default function PhotoCompareScreen({ navigation }: Props) {
+  const theme = useTheme();
   const [photos, setPhotos] = useState<ProgressPhoto[]>([]);
   const [selected1, setSelected1] = useState<string | null>(null);
   const [selected2, setSelected2] = useState<string | null>(null);

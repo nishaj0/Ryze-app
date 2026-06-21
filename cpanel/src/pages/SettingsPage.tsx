@@ -1,6 +1,6 @@
-import { useState } from 'react'
-import { Key, Eye, EyeOff, Save, Database } from 'lucide-react'
-import { getAdminKey, setAdminKey } from '../api'
+import { useState, useEffect } from 'react'
+import { Key, Eye, EyeOff, Save, Database, ToggleLeft, ToggleRight, Sliders } from 'lucide-react'
+import { getAdminKey, setAdminKey, getAppSettings, updateAppSettings } from '../api'
 import { useToast } from '../components/Toast'
 
 export default function SettingsPage() {
@@ -8,9 +8,43 @@ export default function SettingsPage() {
   const [showKey, setShowKey] = useState(false)
   const { toast } = useToast()
 
+  const [settings, setSettings] = useState({
+    bugReportingEnabled: true,
+    helpRequestsEnabled: true,
+    exerciseRequestsEnabled: true,
+  })
+  const [loadingSettings, setLoadingSettings] = useState(true)
+
+  useEffect(() => {
+    getAppSettings()
+      .then(d => {
+        if (d.settings) {
+          setSettings({
+            bugReportingEnabled: d.settings.bugReportingEnabled,
+            helpRequestsEnabled: d.settings.helpRequestsEnabled,
+            exerciseRequestsEnabled: d.settings.exerciseRequestsEnabled,
+          })
+        }
+      })
+      .catch(console.error)
+      .finally(() => setLoadingSettings(false))
+  }, [])
+
   const handleSaveKey = () => {
     setAdminKey(keyInput)
     toast('Admin key updated', 'success')
+  }
+
+  const handleToggle = async (field: keyof typeof settings) => {
+    const updated = { ...settings, [field]: !settings[field] }
+    setSettings(updated)
+    try {
+      await updateAppSettings(updated)
+      toast('App settings updated successfully', 'success')
+    } catch {
+      toast('Failed to update app settings', 'error')
+      setSettings(settings) // rollback
+    }
   }
 
   const apiBase = window.location.origin.includes('5173')
@@ -27,6 +61,73 @@ export default function SettingsPage() {
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 640 }}>
+        {/* App Feature Toggles */}
+        <div className="card">
+          <div className="row" style={{ gap: 10, marginBottom: 20 }}>
+            <div style={{ width: 40, height: 40, background: 'var(--primary-light)', borderRadius: 'var(--radius-md)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Sliders size={18} color="var(--primary)" />
+            </div>
+            <div>
+              <div style={{ fontWeight: 700, fontSize: 15 }}>App Feature Toggles</div>
+              <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>Enable/disable app support options dynamically</div>
+            </div>
+          </div>
+          {loadingSettings ? <div style={{ fontSize: 13, color: 'var(--text-muted)' }}>Loading settings...</div> : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+              <div className="row-between" style={{ paddingBottom: 10, borderBottom: '1px solid var(--border)' }}>
+                <div>
+                  <div style={{ fontSize: 14, fontWeight: 600 }}>Bug Reporting</div>
+                  <div style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 2 }}>Allow users to submit bug tickets</div>
+                </div>
+                <button
+                  onClick={() => handleToggle('bugReportingEnabled')}
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                >
+                  {settings.bugReportingEnabled ? (
+                    <ToggleRight size={38} color="var(--success)" fill="var(--success)" />
+                  ) : (
+                    <ToggleLeft size={38} color="var(--text-muted)" fill="var(--surface-secondary)" />
+                  )}
+                </button>
+              </div>
+
+              <div className="row-between" style={{ paddingBottom: 10, borderBottom: '1px solid var(--border)' }}>
+                <div>
+                  <div style={{ fontSize: 14, fontWeight: 600 }}>Help Requests</div>
+                  <div style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 2 }}>Allow users to request customer support/help</div>
+                </div>
+                <button
+                  onClick={() => handleToggle('helpRequestsEnabled')}
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                >
+                  {settings.helpRequestsEnabled ? (
+                    <ToggleRight size={38} color="var(--success)" fill="var(--success)" />
+                  ) : (
+                    <ToggleLeft size={38} color="var(--text-muted)" fill="var(--surface-secondary)" />
+                  )}
+                </button>
+              </div>
+
+              <div className="row-between" style={{ paddingBottom: 10, borderBottom: '1px solid var(--border)' }}>
+                <div>
+                  <div style={{ fontSize: 14, fontWeight: 600 }}>Request Exercise</div>
+                  <div style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 2 }}>Allow users to request missing exercises in library</div>
+                </div>
+                <button
+                  onClick={() => handleToggle('exerciseRequestsEnabled')}
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                >
+                  {settings.exerciseRequestsEnabled ? (
+                    <ToggleRight size={38} color="var(--success)" fill="var(--success)" />
+                  ) : (
+                    <ToggleLeft size={38} color="var(--text-muted)" fill="var(--surface-secondary)" />
+                  )}
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+
         {/* Admin Key */}
         <div className="card">
           <div className="row" style={{ gap: 10, marginBottom: 20 }}>
