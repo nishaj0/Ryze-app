@@ -11,13 +11,14 @@ import { useWorkoutStore } from "../../store/workoutStore";
 import { mmkv } from "../../utils/mmkv";
 import { UserSplit, ProgressOverview, SplitDay } from "../../types";
 import { Screen, Card, Typography, Button, Icon, Input, HomeScreenSkeleton } from "../../components";
-import { lightTheme } from "../../theme/colors";
+import { useTheme } from "../../theme/themeStore";
 import { space, radius } from "../../theme/spacing";
 
 type Props = NativeStackScreenProps<HomeStackParamList, "HomeMain">;
 
 export default function HomeScreen({ navigation }: Props) {
   const { user } = useAuthStore();
+  const theme = useTheme();
   const { initPreStartSession, resumeSession, discardSession, completeSession, syncOfflineSessions } = useWorkoutStore();
   const [userSplit, setUserSplit] = useState<UserSplit | null>(null);
   const [overview, setOverview] = useState<ProgressOverview | null>(null);
@@ -200,10 +201,10 @@ export default function HomeScreen({ navigation }: Props) {
     <Screen scroll padding="lg">
       {/* Greeting */}
       <View style={{ marginBottom: space.lg }}>
-        <Typography variant="heading2" color={lightTheme.textPrimary}>
+        <Typography variant="heading2" color={theme.textPrimary}>
           {greeting()}{user?.name ? `, ${user.name}` : ""}
         </Typography>
-        <Typography variant="body" color={lightTheme.textSecondary} style={{ marginTop: space.sm }}>
+        <Typography variant="body" color={theme.textSecondary} style={{ marginTop: space.sm }}>
           Let's make today count.
         </Typography>
       </View>
@@ -213,8 +214,8 @@ export default function HomeScreen({ navigation }: Props) {
         <Card
           shadow="sm"
           style={{
-            backgroundColor: lightTheme.primaryLight,
-            borderColor: lightTheme.primary,
+            backgroundColor: theme.primaryLight,
+            borderColor: theme.primary,
             borderWidth: 1,
             marginBottom: space.lg,
             flexDirection: "row",
@@ -224,10 +225,10 @@ export default function HomeScreen({ navigation }: Props) {
           }}
         >
           <View style={{ flex: 1, marginRight: space.md }}>
-            <Typography variant="heading3" color={lightTheme.primary} style={{ marginBottom: 4 }}>
+            <Typography variant="heading3" color={theme.primary} style={{ marginBottom: 4 }}>
               Progress Photo Reminder
             </Typography>
-            <Typography variant="bodySmall" color={lightTheme.textSecondary}>
+            <Typography variant="bodySmall" color={theme.textSecondary}>
               It's time for your weekly check-in. Keep track of your visual progress!
             </Typography>
           </View>
@@ -245,13 +246,13 @@ export default function HomeScreen({ navigation }: Props) {
       {todaySplitDay ? (
         <Card shadow="md" style={{ marginBottom: space.lg }}>
           <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.sm }}>
-            <Icon name="Calendar" size={18} color={lightTheme.textMuted} />
-            <Typography variant="caption" color={lightTheme.textMuted}>
+            <Icon name="Calendar" size={18} color={theme.textMuted} />
+            <Typography variant="caption" color={theme.textMuted}>
               TODAY'S PLAN
             </Typography>
           </View>
 
-          <Typography variant="heading2" color={lightTheme.textPrimary} style={{ marginBottom: space.sm }}>
+          <Typography variant="heading2" color={theme.textPrimary} style={{ marginBottom: space.sm }}>
             {todaySplitDay.name}
           </Typography>
 
@@ -261,13 +262,13 @@ export default function HomeScreen({ navigation }: Props) {
                 <View
                   key={mg}
                   style={{
-                    backgroundColor: lightTheme.primaryLight,
+                    backgroundColor: theme.primaryLight,
                     borderRadius: 8,
                     paddingHorizontal: space.md,
                     paddingVertical: space.xs,
                   }}
                 >
-                  <Typography variant="caption" color={lightTheme.primary} weight="600">
+                  <Typography variant="caption" color={theme.primary} weight="600">
                     {mg.charAt(0).toUpperCase() + mg.slice(1)}
                   </Typography>
                 </View>
@@ -281,15 +282,15 @@ export default function HomeScreen({ navigation }: Props) {
                 padding="md"
                 border={false}
                 shadow="none"
-                style={{ backgroundColor: lightTheme.successBg }}
+                style={{ backgroundColor: theme.successBg }}
               >
                 <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
-                  <Icon name="Moon" size={24} color={lightTheme.success} />
+                  <Icon name="Moon" size={24} color={theme.success} />
                   <View style={{ flex: 1 }}>
-                    <Typography variant="heading3" color={lightTheme.success}>
+                    <Typography variant="heading3" color={theme.success}>
                       Rest Day
                     </Typography>
-                    <Typography variant="bodySmall" color={lightTheme.successText}>
+                    <Typography variant="bodySmall" color={theme.successText}>
                       Recovery is growth. Enjoy it!
                     </Typography>
                   </View>
@@ -300,7 +301,7 @@ export default function HomeScreen({ navigation }: Props) {
                 onPress={() => setWorkoutModalVisible(true)}
                 variant="primary"
                 size="lg"
-                icon={<Icon name="Play" size={20} color={lightTheme.primaryText} />}
+                icon={<Icon name="Play" size={20} color={theme.primaryText} />}
               />
             </View>
           ) : (
@@ -310,13 +311,13 @@ export default function HomeScreen({ navigation }: Props) {
                 onPress={handleStartWorkout}
                 variant="primary"
                 size="lg"
-                icon={<Icon name="Play" size={20} color={lightTheme.primaryText} />}
+                icon={<Icon name="Play" size={20} color={theme.primaryText} />}
                 style={{ flex: 1 }}
               />
               <TouchableOpacity
                 onPress={() => setRestModalVisible(true)}
                 style={{
-                  backgroundColor: lightTheme.secondary,
+                  backgroundColor: theme.secondary,
                   borderRadius: 16,
                   padding: 16,
                   alignItems: "center",
@@ -324,8 +325,8 @@ export default function HomeScreen({ navigation }: Props) {
                   aspectRatio: 1,
                 }}
               >
-                <Icon name="Moon" size={24} color={lightTheme.textSecondary} />
-                <Typography variant="caption" color={lightTheme.textSecondary} style={{ marginTop: 4 }}>
+                <Icon name="Moon" size={24} color={theme.textSecondary} />
+                <Typography variant="caption" color={theme.textSecondary} style={{ marginTop: 4 }}>
                   Rest
                 </Typography>
               </TouchableOpacity>
@@ -338,17 +339,17 @@ export default function HomeScreen({ navigation }: Props) {
             width: 64,
             height: 64,
             borderRadius: 32,
-            backgroundColor: lightTheme.primaryLight,
+            backgroundColor: theme.primaryLight,
             alignItems: "center",
             justifyContent: "center",
             marginBottom: space.md,
           }}>
-            <Icon name="Calendar" size={32} color={lightTheme.primary} />
+            <Icon name="Calendar" size={32} color={theme.primary} />
           </View>
-          <Typography variant="heading3" color={lightTheme.textPrimary} style={{ marginBottom: space.sm, textAlign: "center" }}>
+          <Typography variant="heading3" color={theme.textPrimary} style={{ marginBottom: space.sm, textAlign: "center" }}>
             No Active Workout Plan
           </Typography>
-          <Typography variant="body" color={lightTheme.textSecondary} style={{ marginBottom: space.lg, textAlign: "center" }}>
+          <Typography variant="body" color={theme.textSecondary} style={{ marginBottom: space.lg, textAlign: "center" }}>
             Choose a workout split to get your daily exercises and start tracking your progress.
           </Typography>
           <Button
@@ -357,7 +358,7 @@ export default function HomeScreen({ navigation }: Props) {
             variant="primary"
             size="lg"
             style={{ width: "100%" }}
-            icon={<Icon name="Search" size={20} color={lightTheme.primaryText} />}
+            icon={<Icon name="Search" size={20} color={theme.primaryText} />}
           />
         </Card>
       )}
@@ -365,26 +366,26 @@ export default function HomeScreen({ navigation }: Props) {
       {/* Stats */}
       <View style={{ flexDirection: "row", gap: space.md, marginBottom: space.lg }}>
         <Card shadow="sm" style={{ flex: 1, alignItems: "center" }}>
-          <Typography variant="display" color={lightTheme.primary} style={{ fontSize: 32 }}>
+          <Typography variant="display" color={theme.primary} style={{ fontSize: 32 }}>
             {overview?.currentStreak || 0}
           </Typography>
-          <Typography variant="caption" color={lightTheme.textMuted}>
+          <Typography variant="caption" color={theme.textMuted}>
             Day Streak
           </Typography>
         </Card>
         <Card shadow="sm" style={{ flex: 1, alignItems: "center" }}>
-          <Typography variant="display" color={lightTheme.success} style={{ fontSize: 32 }}>
+          <Typography variant="display" color={theme.success} style={{ fontSize: 32 }}>
             {overview?.thisWeekWorkouts || 0}
           </Typography>
-          <Typography variant="caption" color={lightTheme.textMuted}>
+          <Typography variant="caption" color={theme.textMuted}>
             This Week
           </Typography>
         </Card>
         <Card shadow="sm" style={{ flex: 1, alignItems: "center" }}>
-          <Typography variant="display" color={lightTheme.warning} style={{ fontSize: 32 }}>
+          <Typography variant="display" color={theme.warning} style={{ fontSize: 32 }}>
             {overview?.totalWorkouts || 0}
           </Typography>
-          <Typography variant="caption" color={lightTheme.textMuted}>
+          <Typography variant="caption" color={theme.textMuted}>
             Total
           </Typography>
         </Card>
@@ -392,7 +393,7 @@ export default function HomeScreen({ navigation }: Props) {
 
       {/* Rest Day Modal */}
       <Modal visible={restModalVisible} transparent animationType="slide">
-        <View style={{ flex: 1, justifyContent: "flex-end", backgroundColor: lightTheme.bgOverlay }}>
+        <View style={{ flex: 1, justifyContent: "flex-end", backgroundColor: theme.bgOverlay }}>
           <Card
             shadow="none"
             border={false}
@@ -402,10 +403,10 @@ export default function HomeScreen({ navigation }: Props) {
               padding: space.lg,
             }}
           >
-            <Typography variant="heading2" color={lightTheme.textPrimary} style={{ marginBottom: space.md }}>
+            <Typography variant="heading2" color={theme.textPrimary} style={{ marginBottom: space.md }}>
               Mark Rest Day
             </Typography>
-            <Typography variant="body" color={lightTheme.textSecondary} style={{ marginBottom: space.md }}>
+            <Typography variant="body" color={theme.textSecondary} style={{ marginBottom: space.md }}>
               Optional: Why are you resting today?
             </Typography>
 
@@ -414,15 +415,15 @@ export default function HomeScreen({ navigation }: Props) {
                 key={reason}
                 onPress={() => setRestReason(reason.toLowerCase())}
                 style={{
-                  backgroundColor: restReason === reason.toLowerCase() ? lightTheme.primary : lightTheme.surfaceSecondary,
+                  backgroundColor: restReason === reason.toLowerCase() ? theme.primary : theme.surfaceSecondary,
                   borderRadius: 12,
                   padding: 14,
                   marginBottom: space.sm,
                   borderWidth: restReason === reason.toLowerCase() ? 0 : 1,
-                  borderColor: lightTheme.border,
+                  borderColor: theme.border,
                 }}
               >
-                <Typography variant="body" color={restReason === reason.toLowerCase() ? lightTheme.primaryText : lightTheme.textPrimary}>
+                <Typography variant="body" color={restReason === reason.toLowerCase() ? theme.primaryText : theme.textPrimary}>
                   {reason}
                 </Typography>
               </TouchableOpacity>
@@ -450,7 +451,7 @@ export default function HomeScreen({ navigation }: Props) {
 
       {/* Work Out Anyway Modal */}
       <Modal visible={workoutModalVisible} transparent animationType="slide">
-        <View style={{ flex: 1, justifyContent: "flex-end", backgroundColor: lightTheme.bgOverlay }}>
+        <View style={{ flex: 1, justifyContent: "flex-end", backgroundColor: theme.bgOverlay }}>
           <Card
             shadow="none"
             border={false}
@@ -461,10 +462,10 @@ export default function HomeScreen({ navigation }: Props) {
               padding: space.lg,
             }}
           >
-            <Typography variant="heading2" color={lightTheme.textPrimary} style={{ marginBottom: space.md }}>
+            <Typography variant="heading2" color={theme.textPrimary} style={{ marginBottom: space.md }}>
               Choose a Workout Day
             </Typography>
-            <Typography variant="body" color={lightTheme.textSecondary} style={{ marginBottom: space.md }}>
+            <Typography variant="body" color={theme.textSecondary} style={{ marginBottom: space.md }}>
               Select which day from your split you would like to perform today:
             </Typography>
 
@@ -480,19 +481,19 @@ export default function HomeScreen({ navigation }: Props) {
                       key={day.id}
                       onPress={() => handleStartWorkoutForDay(day)}
                       style={{
-                        backgroundColor: lightTheme.surfaceSecondary,
+                        backgroundColor: theme.surfaceSecondary,
                         borderRadius: 12,
                         padding: 16,
                         marginBottom: space.sm,
                         borderWidth: 1,
-                        borderColor: lightTheme.border,
+                        borderColor: theme.border,
                       }}
                     >
-                      <Typography variant="heading3" color={lightTheme.textPrimary}>
+                      <Typography variant="heading3" color={theme.textPrimary}>
                         {day.name}
                       </Typography>
                       {dayMuscleGroups.length > 0 && (
-                        <Typography variant="caption" color={lightTheme.textMuted} style={{ marginTop: 4 }}>
+                        <Typography variant="caption" color={theme.textMuted} style={{ marginTop: 4 }}>
                           Targets: {dayMuscleGroups.join(", ")}
                         </Typography>
                       )}

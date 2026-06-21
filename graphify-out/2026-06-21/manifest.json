@@ -85,13 +85,13 @@
     "semantic_hash": ""
   },
   "api/src/controllers/sessionController.ts": {
-    "mtime": 1781957553.3395379,
-    "ast_hash": "cc19b3d262ec88d47eda0a0410293147",
+    "mtime": 1782025114.8089402,
+    "ast_hash": "8b0fc85deec7021d1c0e66eb03ab2ccc",
     "semantic_hash": ""
   },
   "api/src/controllers/splitController.ts": {
-    "mtime": 1781209459.604943,
-    "ast_hash": "f56fd476e72af3f6fccc986f0113b7d4",
+    "mtime": 1782024958.596632,
+    "ast_hash": "58b66452b2d00f12370afe0c469a3d0c",
     "semantic_hash": ""
   },
   "api/src/index.ts": {
@@ -280,8 +280,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/navigation/types.ts": {
-    "mtime": 1781501366.162972,
-    "ast_hash": "d3c0063e0b3c87d42a32e86340e412e6",
+    "mtime": 1781972080.4367898,
+    "ast_hash": "fc7798e6e47156c9a2ddadc164b43034",
     "semantic_hash": ""
   },
   "expo-app/src/screens/auth/LoginScreen.tsx": {
@@ -295,8 +295,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/screens/home/HomeScreen.tsx": {
-    "mtime": 1781269217.5250974,
-    "ast_hash": "0e48c298b3b7badc7cc69a3c1777ed1b",
+    "mtime": 1781972108.7403946,
+    "ast_hash": "16790d2a44ef1da08dc7e5d4c8e4067a",
     "semantic_hash": ""
   },
   "expo-app/src/screens/metrics/MetricsScreen.tsx": {
@@ -385,8 +385,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/screens/progress/DashboardScreen.tsx": {
-    "mtime": 1781269234.7742105,
-    "ast_hash": "96a6ec0bb41d9fcd5893ea9435baf320",
+    "mtime": 1781972586.1335595,
+    "ast_hash": "7d6b0c005833a440acbbf8c4b193f559",
     "semantic_hash": ""
   },
   "expo-app/src/screens/progress/ExerciseProgressScreen.tsx": {
@@ -395,18 +395,18 @@
     "semantic_hash": ""
   },
   "expo-app/src/screens/progress/RecordsScreen.tsx": {
-    "mtime": 1781269245.154663,
-    "ast_hash": "28f1c0e499c85145eb2c6338243972a9",
+    "mtime": 1781972604.3445103,
+    "ast_hash": "159cb7f96eb7c1926bce57b1faf4eb03",
     "semantic_hash": ""
   },
   "expo-app/src/screens/workout/WorkoutLoggerScreen.tsx": {
-    "mtime": 1781271218.5277839,
-    "ast_hash": "fcb9ba766538d8f374137fa667aeb39f",
+    "mtime": 1781972441.551754,
+    "ast_hash": "7dd99cba306185ab1c7a9fd7bd3e7b01",
     "semantic_hash": ""
   },
   "expo-app/src/screens/workout/WorkoutSummaryScreen.tsx": {
-    "mtime": 1781269431.0378582,
-    "ast_hash": "4cf52d6e0a968565e66c868da52c33d9",
+    "mtime": 1781972624.0170972,
+    "ast_hash": "b357cc7786ad75399d270ec71267db9d",
     "semantic_hash": ""
   },
   "expo-app/src/store/authStore.ts": {
@@ -415,13 +415,13 @@
     "semantic_hash": ""
   },
   "expo-app/src/store/workoutStore.ts": {
-    "mtime": 1781270965.3104413,
-    "ast_hash": "4c55faf7136e3a4edefe4693e711ceae",
+    "mtime": 1781972061.1834223,
+    "ast_hash": "a1a1d61fc8cd18bede5b7f81827c95d9",
     "semantic_hash": ""
   },
   "expo-app/src/types/index.ts": {
-    "mtime": 1781500714.4153435,
-    "ast_hash": "b9e8fc384602caac552df0e376d1c9ab",
+    "mtime": 1781972027.9129894,
+    "ast_hash": "7a1270841d61c1f278dae9818fe4e789",
     "semantic_hash": ""
   },
   "expo-app/src/utils/storage.ts": {
@@ -760,8 +760,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/components/index.ts": {
-    "mtime": 1781269422.151675,
-    "ast_hash": "b861afc5bc4c858406f3a2783a6b80c0",
+    "mtime": 1781972241.7699966,
+    "ast_hash": "b34a605beb15e96975c9950c0a40147c",
     "semantic_hash": ""
   },
   "expo-app/src/theme/colors.ts": {
@@ -790,8 +790,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/screens/profile/CustomSplitScreen.tsx": {
-    "mtime": 1781269323.045094,
-    "ast_hash": "6ed499e76d0c0de27c5c703bcfd0433c",
+    "mtime": 1781972570.139929,
+    "ast_hash": "d714e7c04f5baaf616ff96d91e6dae5f",
     "semantic_hash": ""
   },
   "expo-app/src/screens/profile/SplitDetailsScreen.tsx": {
@@ -805,8 +805,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/utils/progression.ts": {
-    "mtime": 1781208759.5555463,
-    "ast_hash": "ff157e1c8604b60905a0d0e485752b2c",
+    "mtime": 1781972652.274856,
+    "ast_hash": "2c473b33d09670dfd3a5fd8ee391d365",
     "semantic_hash": ""
   },
   "expo-app/src/components/Skeleton.tsx": {
@@ -14082,6 +14082,26 @@
   "api/free-exercise-db/site/public/screenshot.png": {
     "mtime": 1781955097.5665781,
     "ast_hash": "cf8b24947f80c7a3bd68a02328f6e500",
+    "semantic_hash": ""
+  },
+  "expo-app/src/components/ExerciseImageCarousel.tsx": {
+    "mtime": 1781972143.2922635,
+    "ast_hash": "13ab10775ba06183bd7dd42a3962caa3",
+    "semantic_hash": ""
+  },
+  "expo-app/src/components/ExerciseMetaBadges.tsx": {
+    "mtime": 1781972226.749649,
+    "ast_hash": "571ab590df70bb9f7feceec47c1dc090",
+    "semantic_hash": ""
+  },
+  "expo-app/src/components/InstructionStepper.tsx": {
+    "mtime": 1781972168.8049095,
+    "ast_hash": "ea27b58e9747b0a5d0f22811599ad575",
+    "semantic_hash": ""
+  },
+  "expo-app/src/components/SetTrackerStrip.tsx": {
+    "mtime": 1781972517.3729424,
+    "ast_hash": "0283e0e1ab38283a5a873a44c56d937a",
     "semantic_hash": ""
   }
 }

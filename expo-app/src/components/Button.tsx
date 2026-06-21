@@ -8,7 +8,7 @@ import {
   GestureResponderEvent,
 } from "react-native";
 import Typography from "./Typography";
-import { lightTheme } from "../theme/colors";
+import { useTheme } from "../theme/themeStore";
 import { radius, space } from "../theme/spacing";
 
 type Variant = "primary" | "secondary" | "outline" | "ghost" | "danger";
@@ -39,6 +39,7 @@ export default function Button({
   textStyle,
   icon,
 }: ButtonProps) {
+  const theme = useTheme();
   const isDisabled = disabled || loading;
 
   const sizeStyles: Record<Size, ViewStyle> = {
@@ -49,28 +50,28 @@ export default function Button({
 
   const variantStyles: Record<Variant, { bg: string; text: string; border: string }> = {
     primary: {
-      bg: isDisabled ? lightTheme.disabled : lightTheme.primary,
-      text: lightTheme.primaryText,
+      bg: isDisabled ? theme.disabled : theme.primary,
+      text: theme.primaryText,
       border: "transparent",
     },
     secondary: {
-      bg: isDisabled ? lightTheme.disabled : lightTheme.secondary,
-      text: isDisabled ? lightTheme.disabledText : lightTheme.secondaryText,
+      bg: isDisabled ? theme.disabled : theme.secondary,
+      text: isDisabled ? theme.disabledText : theme.secondaryText,
       border: "transparent",
     },
     outline: {
       bg: "transparent",
-      text: isDisabled ? lightTheme.disabledText : lightTheme.primary,
-      border: isDisabled ? lightTheme.disabled : lightTheme.primary,
+      text: isDisabled ? theme.disabledText : theme.primary,
+      border: isDisabled ? theme.disabled : theme.primary,
     },
     ghost: {
       bg: "transparent",
-      text: isDisabled ? lightTheme.disabledText : lightTheme.primary,
+      text: isDisabled ? theme.disabledText : theme.primary,
       border: "transparent",
     },
     danger: {
-      bg: isDisabled ? lightTheme.disabled : lightTheme.danger,
-      text: lightTheme.primaryText,
+      bg: isDisabled ? theme.disabled : theme.danger,
+      text: theme.primaryText,
       border: "transparent",
     },
   };

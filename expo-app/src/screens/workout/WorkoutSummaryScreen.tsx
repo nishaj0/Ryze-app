@@ -6,11 +6,12 @@ import { HomeStackParamList } from "../../navigation/types";
 import { useWorkoutStore } from "../../store/workoutStore";
 import { Typography, Card, Button, Icon, Input, WorkoutSummaryScreenSkeleton } from "../../components";
 import { BarChart } from "../../components/charts";
-import { lightTheme } from "../../theme/colors";
+import { useTheme } from "../../theme/themeStore";
 import { space, radius } from "../../theme/spacing";
 
 type Props = NativeStackScreenProps<HomeStackParamList, "WorkoutSummary">;
 const { width: screenW } = Dimensions.get("window");
+const theme = useTheme();
 
 export default function WorkoutSummaryScreen({ navigation }: Props) {
   const { activeSession, completeSession, updateSessionNotes } = useWorkoutStore();
@@ -24,7 +25,7 @@ export default function WorkoutSummaryScreen({ navigation }: Props) {
 
   if (!activeSession) {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg }} edges={["top"]}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: theme.bg }} edges={["top"]}>
         <WorkoutSummaryScreenSkeleton />
       </SafeAreaView>
     );
@@ -119,7 +120,7 @@ export default function WorkoutSummaryScreen({ navigation }: Props) {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg }} edges={["top", "bottom"]}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: theme.bg }} edges={["top", "bottom"]}>
       <ScrollView
         style={{ flex: 1 }}
         contentContainerStyle={{ paddingBottom: space.xl }}
@@ -132,18 +133,18 @@ export default function WorkoutSummaryScreen({ navigation }: Props) {
               width: 80,
               height: 80,
               borderRadius: 40,
-              backgroundColor: lightTheme.successBg,
+              backgroundColor: theme.successBg,
               alignItems: "center",
               justifyContent: "center",
               marginBottom: space.lg,
             }}
           >
-            <Icon name="Trophy" size={40} color={lightTheme.success} />
+            <Icon name="Trophy" size={40} color={theme.success} />
           </View>
-          <Typography variant="display" color={lightTheme.textPrimary} align="center">
+          <Typography variant="display" color={theme.textPrimary} align="center">
             Workout Summary
           </Typography>
-          <Typography variant="body" color={lightTheme.textSecondary} align="center" style={{ marginTop: space.sm }}>
+          <Typography variant="body" color={theme.textSecondary} align="center" style={{ marginTop: space.sm }}>
             Review your workout and save it below.
           </Typography>
         </View>
@@ -201,22 +202,22 @@ export default function WorkoutSummaryScreen({ navigation }: Props) {
             <Card
               style={{
                 backgroundColor: "rgba(239, 68, 68, 0.05)",
-                borderColor: lightTheme.error,
+                borderColor: theme.error,
                 borderWidth: 1.5,
                 padding: space.lg,
               }}
             >
               <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.sm }}>
-                <Icon name="AlertTriangle" size={24} color={lightTheme.error} />
-                <Typography variant="heading3" color={lightTheme.error} weight="800">
+                <Icon name="AlertTriangle" size={24} color={theme.error} />
+                <Typography variant="heading3" color={theme.error} weight="800">
                   Incomplete Exercises
                 </Typography>
               </View>
-              <Typography variant="bodySmall" color={lightTheme.textSecondary} style={{ marginBottom: space.md }}>
+              <Typography variant="bodySmall" color={theme.textSecondary} style={{ marginBottom: space.md }}>
                 You have {incompleteExercisesList.length} incomplete exercise(s). You can go back to finish them.
               </Typography>
               {incompleteExercisesList.map((item, idx) => (
-                <Typography key={idx} variant="caption" color={lightTheme.textPrimary} style={{ marginLeft: 8 }}>
+                <Typography key={idx} variant="caption" color={theme.textPrimary} style={{ marginLeft: 8 }}>
                   • {item.name} ({item.status})
                 </Typography>
               ))}
@@ -234,30 +235,30 @@ export default function WorkoutSummaryScreen({ navigation }: Props) {
         {/* Stats Grid */}
         <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
           <View style={{ flexDirection: "row", gap: space.md }}>
-            <View style={{ flex: 1, backgroundColor: lightTheme.surface, borderRadius: radius.lg, padding: space.lg, borderWidth: 1, borderColor: lightTheme.border, alignItems: "center" }}>
-              <View style={{ marginBottom: space.xs }}><Icon name="Weight" size={24} color={lightTheme.primary} /></View>
-              <Typography variant="display" color={lightTheme.textPrimary} style={{ fontSize: 24 }}>
+            <View style={{ flex: 1, backgroundColor: theme.surface, borderRadius: radius.lg, padding: space.lg, borderWidth: 1, borderColor: theme.border, alignItems: "center" }}>
+              <View style={{ marginBottom: space.xs }}><Icon name="Weight" size={24} color={theme.primary} /></View>
+              <Typography variant="display" color={theme.textPrimary} style={{ fontSize: 24 }}>
                 {totalVolume.toLocaleString()}
               </Typography>
-              <Typography variant="caption" color={lightTheme.textMuted}>
+              <Typography variant="caption" color={theme.textMuted}>
                 VOLUME (KG)
               </Typography>
             </View>
-            <View style={{ flex: 1, backgroundColor: lightTheme.surface, borderRadius: radius.lg, padding: space.lg, borderWidth: 1, borderColor: lightTheme.border, alignItems: "center" }}>
-              <View style={{ marginBottom: space.xs }}><Icon name="Layers" size={24} color={lightTheme.success} /></View>
-              <Typography variant="display" color={lightTheme.textPrimary} style={{ fontSize: 24 }}>
+            <View style={{ flex: 1, backgroundColor: theme.surface, borderRadius: radius.lg, padding: space.lg, borderWidth: 1, borderColor: theme.border, alignItems: "center" }}>
+              <View style={{ marginBottom: space.xs }}><Icon name="Layers" size={24} color={theme.success} /></View>
+              <Typography variant="display" color={theme.textPrimary} style={{ fontSize: 24 }}>
                 {totalSets}
               </Typography>
-              <Typography variant="caption" color={lightTheme.textMuted}>
+              <Typography variant="caption" color={theme.textMuted}>
                 SETS
               </Typography>
             </View>
-            <View style={{ flex: 1, backgroundColor: lightTheme.surface, borderRadius: radius.lg, padding: space.lg, borderWidth: 1, borderColor: lightTheme.border, alignItems: "center" }}>
-              <View style={{ marginBottom: space.xs }}><Icon name="Clock" size={24} color={lightTheme.warning} /></View>
-              <Typography variant="display" color={lightTheme.textPrimary} style={{ fontSize: 24 }}>
+            <View style={{ flex: 1, backgroundColor: theme.surface, borderRadius: radius.lg, padding: space.lg, borderWidth: 1, borderColor: theme.border, alignItems: "center" }}>
+              <View style={{ marginBottom: space.xs }}><Icon name="Clock" size={24} color={theme.warning} /></View>
+              <Typography variant="display" color={theme.textPrimary} style={{ fontSize: 24 }}>
                 {durationMinutes}
               </Typography>
-              <Typography variant="caption" color={lightTheme.textMuted}>
+              <Typography variant="caption" color={theme.textMuted}>
                 MINUTES
               </Typography>
             </View>
@@ -269,8 +270,8 @@ export default function WorkoutSummaryScreen({ navigation }: Props) {
           <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
             <Card shadow="sm" style={{ padding: space.lg }}>
               <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.md }}>
-                <Icon name="BarChart3" size={16} color={lightTheme.textMuted} />
-                <Typography variant="caption" color={lightTheme.textMuted} weight="600">
+                <Icon name="BarChart3" size={16} color={theme.textMuted} />
+                <Typography variant="caption" color={theme.textMuted} weight="600">
                   VOLUME BY EXERCISE
                 </Typography>
               </View>
@@ -278,7 +279,7 @@ export default function WorkoutSummaryScreen({ navigation }: Props) {
                 data={completedExercisesList.map((e) => ({ label: e.name.substring(0, 8), value: e.volume }))}
                 width={screenW - 80}
                 height={180}
-                color={lightTheme.primary}
+                color={theme.primary}
                 yAxisFormatter={(v) => v >= 1000 ? `${(v / 1000).toFixed(1)}k` : `${v}`}
                 showValues={true}
                 horizontal={true}
@@ -290,7 +291,7 @@ export default function WorkoutSummaryScreen({ navigation }: Props) {
         {/* Notes Card */}
         <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
           <Card shadow="sm" style={{ padding: space.lg }}>
-            <Typography variant="heading3" color={lightTheme.textPrimary} style={{ marginBottom: space.sm }}>
+            <Typography variant="heading3" color={theme.textPrimary} style={{ marginBottom: space.sm }}>
               Session Notes
             </Typography>
             <Input
@@ -306,7 +307,7 @@ export default function WorkoutSummaryScreen({ navigation }: Props) {
 
         {/* Exercise breakdown */}
         <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
-          <Typography variant="heading3" color={lightTheme.textPrimary} style={{ marginBottom: space.sm }}>
+          <Typography variant="heading3" color={theme.textPrimary} style={{ marginBottom: space.sm }}>
             Exercises Completed
           </Typography>
           {completedExercisesList.map((ex, idx) => (
@@ -317,23 +318,23 @@ export default function WorkoutSummaryScreen({ navigation }: Props) {
                     width: 32,
                     height: 32,
                     borderRadius: 16,
-                    backgroundColor: ex.status === "skipped" ? "rgba(239, 68, 68, 0.05)" : lightTheme.successBg,
+                    backgroundColor: ex.status === "skipped" ? "rgba(239, 68, 68, 0.05)" : theme.successBg,
                     alignItems: "center",
                     justifyContent: "center",
                   }}
                 >
-                  <Icon name={ex.status === "skipped" ? "X" : "Check"} size={16} color={ex.status === "skipped" ? lightTheme.error : lightTheme.success} strokeWidth={3} />
+                  <Icon name={ex.status === "skipped" ? "X" : "Check"} size={16} color={ex.status === "skipped" ? theme.error : theme.success} strokeWidth={3} />
                 </View>
                 <View style={{ flex: 1 }}>
-                  <Typography variant="body" color={lightTheme.textPrimary} weight="600">
+                  <Typography variant="body" color={theme.textPrimary} weight="600">
                     {ex.name}
                   </Typography>
-                  <Typography variant="caption" color={lightTheme.textMuted} style={{ textTransform: "capitalize" }}>
+                  <Typography variant="caption" color={theme.textMuted} style={{ textTransform: "capitalize" }}>
                     {ex.muscle} · {ex.sets} / {ex.targetSets} sets completed
                   </Typography>
                 </View>
                 <View style={{ alignItems: "flex-end" }}>
-                  <Typography variant="body" color={lightTheme.textPrimary} weight="700">
+                  <Typography variant="body" color={theme.textPrimary} weight="700">
                     {ex.volume.toLocaleString()}kg
                   </Typography>
                   {ex.hasPR && (
@@ -357,7 +358,7 @@ export default function WorkoutSummaryScreen({ navigation }: Props) {
             loading={saving}
             variant="primary"
             size="lg"
-            icon={<Icon name="CheckCircle2" size={20} color={lightTheme.primaryText} />}
+            icon={<Icon name="CheckCircle2" size={20} color={theme.primaryText} />}
           />
         </View>
       </ScrollView>

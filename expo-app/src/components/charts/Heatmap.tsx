@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import Svg, { Rect, Text as SvgText } from "react-native-svg";
-import { lightTheme } from "../../theme/colors";
+import { useTheme } from "../../theme/themeStore";
 
 export interface HeatmapDay {
   date: string; // YYYY-MM-DD
@@ -19,6 +19,7 @@ interface HeatmapProps {
 export default function Heatmap({ data, width = 320, cellSize = 14, gap = 3, weeks = 13 }: HeatmapProps) {
   // Build a map for quick lookup
   const map = new Map<string, number>();
+  const theme = useTheme();
   data.forEach((d) => map.set(d.date, d.count));
 
   // Determine max count for color scaling
@@ -43,11 +44,11 @@ export default function Heatmap({ data, width = 320, cellSize = 14, gap = 3, wee
   const finalH = gridH;
 
   const colorFor = (count: number): string => {
-    if (count === 0) return lightTheme.surfaceTertiary;
-    if (count === 1) return lightTheme.primary[100];
-    if (count === 2) return lightTheme.primary[300];
-    if (count >= 3) return lightTheme.primary[600];
-    return lightTheme.primary[100];
+    if (count === 0) return theme.surfaceTertiary;
+    if (count === 1) return theme.primary[100];
+    if (count === 2) return theme.primary[300];
+    if (count >= 3) return theme.primary[600];
+    return theme.primary[100];
   };
 
   const days = ["S", "M", "T", "W", "T", "F", "S"];
@@ -94,7 +95,7 @@ export default function Heatmap({ data, width = 320, cellSize = 14, gap = 3, wee
             x={20}
             y={18 + i * (cellSize + gap) + cellSize - 2}
             fontSize={9}
-            fill={lightTheme.textMuted}
+            fill={theme.textMuted}
             textAnchor="end"
           >
             {i % 2 === 1 ? d : ""}
@@ -108,7 +109,7 @@ export default function Heatmap({ data, width = 320, cellSize = 14, gap = 3, wee
             x={m.x}
             y={10}
             fontSize={9}
-            fill={lightTheme.textMuted}
+            fill={theme.textMuted}
           >
             {monthNames[m.month]}
           </SvgText>
@@ -124,7 +125,7 @@ export default function Heatmap({ data, width = 320, cellSize = 14, gap = 3, wee
             height={cellSize}
             rx={3}
             fill={c.isFuture ? "transparent" : colorFor(c.count)}
-            stroke={c.isFuture ? lightTheme.border : "transparent"}
+            stroke={c.isFuture ? theme.border : "transparent"}
             strokeWidth={c.isFuture ? 0.5 : 0}
           />
         ))}
@@ -132,11 +133,11 @@ export default function Heatmap({ data, width = 320, cellSize = 14, gap = 3, wee
 
       {/* Legend */}
       <View style={{ flexDirection: "row", alignItems: "center", marginTop: 8, gap: 6 }}>
-        <SvgText fontSize={9} fill={lightTheme.textMuted}>Less</SvgText>
+        <SvgText fontSize={9} fill={theme.textMuted}>Less</SvgText>
         {[0, 1, 2, 3, 4].map((c) => (
           <Rect key={c} width={10} height={10} rx={2} fill={colorFor(c)} />
         ))}
-        <SvgText fontSize={9} fill={lightTheme.textMuted}>More</SvgText>
+        <SvgText fontSize={9} fill={theme.textMuted}>More</SvgText>
       </View>
     </View>
   );

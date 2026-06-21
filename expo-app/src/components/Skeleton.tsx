@@ -8,7 +8,7 @@
 import React from "react";
 import { View, Dimensions } from "react-native";
 import { MotiView } from "moti";
-import { lightTheme } from "../theme/colors";
+import { useTheme } from "../theme/themeStore";
 import { space, radius } from "../theme/spacing";
 
 // ---------------------------------------------------------------------------
@@ -28,6 +28,7 @@ interface SkeletonProps {
 }
 
 export function Skeleton({ width = "100%", height = 16, borderRadius = 8, style }: SkeletonProps) {
+  const theme = useTheme();
   return (
     <MotiView
       from={{ opacity: 0.4 }}
@@ -62,16 +63,17 @@ interface SkeletonCardProps {
 }
 
 export function SkeletonCard({ height, style, children }: SkeletonCardProps) {
+  const theme = useTheme();
   return (
     <View
       style={[
         {
-          backgroundColor: lightTheme.surface,
+          backgroundColor: theme.surface,
           borderRadius: radius.lg,
           borderWidth: 1,
-          borderColor: lightTheme.border,
+          borderColor: theme.border,
           padding: space.lg,
-          shadowColor: lightTheme.shadowSm,
+          shadowColor: theme.shadowSm,
           shadowOffset: { width: 0, height: 2 },
           shadowOpacity: 1,
           shadowRadius: 4,
@@ -96,8 +98,9 @@ const { width: screenW } = Dimensions.get("window");
 // HomeScreen skeleton
 // ---------------------------------------------------------------------------
 export function HomeScreenSkeleton() {
+  const theme = useTheme();
   return (
-    <View style={{ flex: 1, padding: space.lg, backgroundColor: lightTheme.bg }}>
+    <View style={{ flex: 1, padding: space.lg, backgroundColor: theme.bg }}>
       {/* Greeting */}
       <Skeleton width="60%" height={28} borderRadius={8} style={{ marginBottom: space.sm }} />
       <Skeleton width="40%" height={16} borderRadius={6} style={{ marginBottom: space.xl }} />
@@ -130,8 +133,9 @@ export function HomeScreenSkeleton() {
 // ProfileScreen skeleton
 // ---------------------------------------------------------------------------
 export function ProfileScreenSkeleton() {
+  const theme = useTheme();
   return (
-    <View style={{ flex: 1, padding: space.lg, backgroundColor: lightTheme.bg }}>
+    <View style={{ flex: 1, padding: space.lg, backgroundColor: theme.bg }}>
       {/* Avatar */}
       <View style={{ alignItems: "center", marginBottom: space.lg }}>
         <Skeleton width={80} height={80} borderRadius={40} style={{ marginBottom: space.md }} />
@@ -156,7 +160,7 @@ export function ProfileScreenSkeleton() {
               alignItems: "center",
               padding: space.md,
               borderBottomWidth: i < 3 ? 1 : 0,
-              borderBottomColor: lightTheme.border,
+              borderBottomColor: theme.border,
               gap: space.md,
             }}
           >
@@ -173,8 +177,9 @@ export function ProfileScreenSkeleton() {
 // DashboardScreen skeleton
 // ---------------------------------------------------------------------------
 export function DashboardScreenSkeleton() {
+  const theme = useTheme();
   return (
-    <View style={{ flex: 1, backgroundColor: lightTheme.bg }}>
+    <View style={{ flex: 1, backgroundColor: theme.bg }}>
       {/* Header */}
       <View style={{ paddingHorizontal: space.lg, paddingTop: space.md, paddingBottom: space.lg }}>
         <Skeleton width="40%" height={32} borderRadius={8} style={{ marginBottom: space.sm }} />
@@ -218,8 +223,9 @@ export function DashboardScreenSkeleton() {
 // RecordsScreen skeleton
 // ---------------------------------------------------------------------------
 export function RecordsScreenSkeleton() {
+  const theme = useTheme();
   return (
-    <View style={{ flex: 1, backgroundColor: lightTheme.bg }}>
+    <View style={{ flex: 1, backgroundColor: theme.bg }}>
       <View style={{ paddingHorizontal: space.lg, paddingTop: space.md, paddingBottom: space.lg }}>
         <Skeleton width="30%" height={12} borderRadius={4} style={{ marginBottom: space.sm }} />
         <Skeleton width="55%" height={32} borderRadius={8} style={{ marginBottom: space.sm }} />
@@ -250,8 +256,9 @@ export function RecordsScreenSkeleton() {
 // MetricsScreen skeleton
 // ---------------------------------------------------------------------------
 export function MetricsScreenSkeleton() {
+  const theme = useTheme();
   return (
-    <View style={{ flex: 1, backgroundColor: lightTheme.bg }}>
+    <View style={{ flex: 1, backgroundColor: theme.bg }}>
       <View style={{ paddingHorizontal: space.lg, paddingTop: space.md, paddingBottom: space.lg }}>
         <Skeleton width="45%" height={32} borderRadius={8} style={{ marginBottom: space.sm }} />
         <Skeleton width="55%" height={14} borderRadius={4} />
@@ -295,8 +302,9 @@ export function MetricsScreenSkeleton() {
 // PhotosTimelineScreen skeleton
 // ---------------------------------------------------------------------------
 export function PhotosTimelineScreenSkeleton() {
+  const theme = useTheme();
   return (
-    <View style={{ flex: 1, backgroundColor: lightTheme.bg }}>
+    <View style={{ flex: 1, backgroundColor: theme.bg }}>
       <View style={{ paddingHorizontal: space.lg, paddingTop: space.md, paddingBottom: space.lg }}>
         <Skeleton width="30%" height={12} borderRadius={4} style={{ marginBottom: space.sm }} />
         <Skeleton width="60%" height={32} borderRadius={8} style={{ marginBottom: space.sm }} />
@@ -321,9 +329,10 @@ export function PhotosTimelineScreenSkeleton() {
 // PhotoCompareScreen skeleton
 // ---------------------------------------------------------------------------
 export function PhotoCompareScreenSkeleton() {
+  const theme = useTheme();
   const halfW = (screenW - space.lg * 2 - space.md) / 2;
   return (
-    <View style={{ flex: 1, backgroundColor: lightTheme.bg }}>
+    <View style={{ flex: 1, backgroundColor: theme.bg }}>
       <View style={{ paddingHorizontal: space.lg, paddingTop: space.md, paddingBottom: space.lg }}>
         <Skeleton width="50%" height={32} borderRadius={8} style={{ marginBottom: space.sm }} />
         <Skeleton width="65%" height={14} borderRadius={4} />
@@ -340,8 +349,9 @@ export function PhotoCompareScreenSkeleton() {
 // SplitSwitcherScreen skeleton
 // ---------------------------------------------------------------------------
 export function SplitSwitcherScreenSkeleton() {
+  const theme = useTheme();
   return (
-    <View style={{ flex: 1, padding: space.lg, backgroundColor: lightTheme.bg }}>
+    <View style={{ flex: 1, padding: space.lg, backgroundColor: theme.bg }}>
       <Skeleton width="30%" height={12} borderRadius={4} style={{ marginBottom: space.sm }} />
       <Skeleton width="50%" height={32} borderRadius={8} style={{ marginBottom: space.xl }} />
       <View style={{ gap: space.sm }}>
@@ -364,8 +374,9 @@ export function SplitSwitcherScreenSkeleton() {
 // SplitDetailsScreen skeleton
 // ---------------------------------------------------------------------------
 export function SplitDetailsScreenSkeleton() {
+  const theme = useTheme();
   return (
-    <View style={{ flex: 1, padding: space.lg, backgroundColor: lightTheme.bg }}>
+    <View style={{ flex: 1, padding: space.lg, backgroundColor: theme.bg }}>
       <Skeleton width="25%" height={12} borderRadius={4} style={{ marginBottom: space.sm }} />
       <Skeleton width="65%" height={32} borderRadius={8} style={{ marginBottom: space.sm }} />
       <Skeleton width="45%" height={14} borderRadius={4} style={{ marginBottom: space.xl }} />
@@ -387,8 +398,9 @@ export function SplitDetailsScreenSkeleton() {
 // SplitSelectionScreen skeleton
 // ---------------------------------------------------------------------------
 export function SplitSelectionScreenSkeleton() {
+  const theme = useTheme();
   return (
-    <View style={{ flex: 1, padding: space.lg, backgroundColor: lightTheme.bg }}>
+    <View style={{ flex: 1, padding: space.lg, backgroundColor: theme.bg }}>
       <Skeleton width="55%" height={28} borderRadius={8} style={{ marginBottom: space.sm }} />
       <Skeleton width="70%" height={16} borderRadius={4} style={{ marginBottom: space.xl }} />
       <View style={{ gap: space.md }}>
@@ -408,8 +420,9 @@ export function SplitSelectionScreenSkeleton() {
 // ExerciseProgressScreen skeleton
 // ---------------------------------------------------------------------------
 export function ExerciseProgressScreenSkeleton() {
+  const theme = useTheme();
   return (
-    <View style={{ flex: 1, padding: space.lg, backgroundColor: lightTheme.bg }}>
+    <View style={{ flex: 1, padding: space.lg, backgroundColor: theme.bg }}>
       <Skeleton width="60%" height={28} borderRadius={8} style={{ marginBottom: space.xl }} />
       <SkeletonCard style={{ marginBottom: space.lg }}>
         <Skeleton width="35%" height={12} borderRadius={4} style={{ marginBottom: space.md }} />
@@ -434,17 +447,18 @@ export function ExerciseProgressScreenSkeleton() {
 // Inline skeleton for small inline loading (alternatives, exercises list)
 // ---------------------------------------------------------------------------
 export function InlineListSkeleton({ rows = 3 }: { rows?: number }) {
+  const theme = useTheme();
   return (
     <View style={{ gap: space.sm }}>
       {Array.from({ length: rows }).map((_, i) => (
         <View
           key={i}
           style={{
-            backgroundColor: lightTheme.surfaceSecondary,
+            backgroundColor: theme.surfaceSecondary,
             borderRadius: radius.md,
             padding: space.md,
             borderWidth: 1,
-            borderColor: lightTheme.border,
+            borderColor: theme.border,
             gap: space.sm,
           }}
         >
@@ -460,8 +474,9 @@ export function InlineListSkeleton({ rows = 3 }: { rows?: number }) {
 // WorkoutSummaryScreen skeleton
 // ---------------------------------------------------------------------------
 export function WorkoutSummaryScreenSkeleton() {
+  const theme = useTheme();
   return (
-    <View style={{ flex: 1, padding: space.lg, backgroundColor: lightTheme.bg }}>
+    <View style={{ flex: 1, padding: space.lg, backgroundColor: theme.bg }}>
       {/* Header */}
       <Skeleton width="65%" height={32} borderRadius={8} style={{ marginBottom: space.sm }} />
       <Skeleton width="40%" height={14} borderRadius={4} style={{ marginBottom: space.xl }} />

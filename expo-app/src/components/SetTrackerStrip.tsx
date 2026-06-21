@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, TouchableOpacity, ScrollView, StyleSheet } from "react-native";
 import { Typography } from "./index";
-import { lightTheme } from "../theme/colors";
+import { useTheme } from "../theme/themeStore";
 import { radius, space } from "../theme/spacing";
 import { SetLog } from "../types";
 
@@ -18,6 +18,7 @@ export default function SetTrackerStrip({
   currentSetNumber,
   onSetPress,
 }: SetTrackerStripProps) {
+  const theme = useTheme();
   const [expandedSet, setExpandedSet] = useState<number | null>(null);
 
   const handleSetPress = (index: number) => {
@@ -37,24 +38,24 @@ export default function SetTrackerStrip({
 
   return (
     <View style={styles.container}>
-      <Typography variant="caption" color={lightTheme.textMuted} weight="600" style={styles.label}>
+      <Typography variant="caption" color={theme.textMuted} weight="600" style={styles.label}>
         SETS
       </Typography>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
         {sets.map((set) => {
           const isExpanded = expandedSet === set.index;
-          let bgColor: string = lightTheme.surfaceSecondary;
-          let textColor: string = lightTheme.textMuted;
+          let bgColor: string = theme.surfaceSecondary;
+          let textColor: string = theme.textMuted;
 
           if (set.isDone) {
-            bgColor = lightTheme.successBg;
-            textColor = lightTheme.successText;
+            bgColor = theme.successBg;
+            textColor = theme.successText;
           } else if (set.isSkipped) {
-            bgColor = lightTheme.surfaceTertiary;
-            textColor = lightTheme.textMuted;
+            bgColor = theme.surfaceTertiary;
+            textColor = theme.textMuted;
           } else if (set.isCurrent) {
-            bgColor = lightTheme.primaryLight;
-            textColor = lightTheme.primary;
+            bgColor = theme.primaryLight;
+            textColor = theme.primary;
           }
 
           return (
@@ -65,7 +66,7 @@ export default function SetTrackerStrip({
               >
                 <Typography variant="caption" color={textColor} weight="700">
                   {set.isDone
-                    ? `✓ ${set.logged?.weightKg ?? 0}×${set.logged?.reps ?? 0}`
+                    ? `\u2713 ${set.logged?.weightKg ?? 0}\u00d7${set.logged?.reps ?? 0}`
                     : set.isSkipped
                       ? "SKIP"
                       : set.isCurrent
@@ -74,12 +75,12 @@ export default function SetTrackerStrip({
                 </Typography>
               </TouchableOpacity>
               {isExpanded && set.logged && (
-                <View style={styles.expandedDetail}>
-                  <Typography variant="caption" color={lightTheme.textSecondary}>
-                    {set.logged.weightKg}kg × {set.logged.reps} reps
+                <View style={[styles.expandedDetail, { backgroundColor: theme.bgSurface }]}>
+                  <Typography variant="caption" color={theme.textSecondary}>
+                    {set.logged.weightKg}kg \u00d7 {set.logged.reps} reps
                   </Typography>
                   {set.logged.notes && (
-                    <Typography variant="caption" color={lightTheme.textMuted} style={{ marginTop: 2 }}>
+                    <Typography variant="caption" color={theme.textMuted} style={{ marginTop: 2 }}>
                       {set.logged.notes}
                     </Typography>
                   )}
@@ -117,7 +118,6 @@ const styles = StyleSheet.create({
   expandedDetail: {
     marginTop: space.xs,
     alignItems: "center",
-    backgroundColor: lightTheme.bgSurface,
     borderRadius: radius.sm,
     padding: space.xs,
     minWidth: 64,

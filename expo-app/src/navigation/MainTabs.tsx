@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { MainTabParamList, HomeStackParamList, WorkoutStackParamList, ProgressStackParamList, PhotosStackParamList, ProfileStackParamList } from "./types";
 import { Icon } from "../components";
-import { lightTheme } from "../theme/colors";
+import { useTheme } from "../theme/themeStore";
 
 import HomeScreen from "../screens/home/HomeScreen";
 import WorkoutLoggerScreen from "../screens/workout/WorkoutLoggerScreen";
@@ -30,12 +30,20 @@ const ProgressStackNav = createNativeStackNavigator<ProgressStackParamList>();
 const PhotosStackNav = createNativeStackNavigator<PhotosStackParamList>();
 const ProfileStackNav = createNativeStackNavigator<ProfileStackParamList>();
 
-const headerStyle = { backgroundColor: lightTheme.bg };
-const headerTintColor = lightTheme.textPrimary;
-const headerTitleStyle = { fontFamily: "Inter", fontWeight: "600" as const, fontSize: 18, color: lightTheme.textPrimary };
-const stackOpts = { headerStyle, headerTintColor, headerTitleStyle };
+const tabIcons: Record<string, { active: any; inactive: any }> = {
+  Home: { active: "Home", inactive: "Home" },
+  Progress: { active: "BarChart3", inactive: "BarChart3" },
+  Photos: { active: "Camera", inactive: "Camera" },
+  Profile: { active: "User", inactive: "User" },
+};
 
 function HomeStack() {
+  const theme = useTheme();
+  const stackOpts = {
+    headerStyle: { backgroundColor: theme.bg },
+    headerTintColor: theme.textPrimary,
+    headerTitleStyle: { fontFamily: "Inter", fontWeight: "600" as const, fontSize: 18, color: theme.textPrimary },
+  };
   return (
     <HomeStackNav.Navigator screenOptions={stackOpts}>
       <HomeStackNav.Screen name="HomeMain" component={HomeScreen} options={{ title: "Home", headerShown: false }} />
@@ -47,6 +55,12 @@ function HomeStack() {
 }
 
 function WorkoutStack() {
+  const theme = useTheme();
+  const stackOpts = {
+    headerStyle: { backgroundColor: theme.bg },
+    headerTintColor: theme.textPrimary,
+    headerTitleStyle: { fontFamily: "Inter", fontWeight: "600" as const, fontSize: 18, color: theme.textPrimary },
+  };
   return (
     <WorkoutStackNav.Navigator screenOptions={stackOpts}>
       <WorkoutStackNav.Screen name="WorkoutLogger" component={WorkoutLoggerScreen} options={{ title: "Workout" }} />
@@ -56,6 +70,12 @@ function WorkoutStack() {
 }
 
 function ProgressStack() {
+  const theme = useTheme();
+  const stackOpts = {
+    headerStyle: { backgroundColor: theme.bg },
+    headerTintColor: theme.textPrimary,
+    headerTitleStyle: { fontFamily: "Inter", fontWeight: "600" as const, fontSize: 18, color: theme.textPrimary },
+  };
   return (
     <ProgressStackNav.Navigator screenOptions={stackOpts}>
       <ProgressStackNav.Screen name="Dashboard" component={DashboardScreen} options={{ title: "Progress" }} />
@@ -66,6 +86,12 @@ function ProgressStack() {
 }
 
 function PhotosStack() {
+  const theme = useTheme();
+  const stackOpts = {
+    headerStyle: { backgroundColor: theme.bg },
+    headerTintColor: theme.textPrimary,
+    headerTitleStyle: { fontFamily: "Inter", fontWeight: "600" as const, fontSize: 18, color: theme.textPrimary },
+  };
   return (
     <PhotosStackNav.Navigator screenOptions={stackOpts}>
       <PhotosStackNav.Screen name="PhotosTimeline" component={PhotosTimelineScreen} options={{ title: "Progress Photos" }} />
@@ -76,6 +102,12 @@ function PhotosStack() {
 }
 
 function ProfileStack() {
+  const theme = useTheme();
+  const stackOpts = {
+    headerStyle: { backgroundColor: theme.bg },
+    headerTintColor: theme.textPrimary,
+    headerTitleStyle: { fontFamily: "Inter", fontWeight: "600" as const, fontSize: 18, color: theme.textPrimary },
+  };
   return (
     <ProfileStackNav.Navigator screenOptions={stackOpts}>
       <ProfileStackNav.Screen name="ProfileMain" component={ProfileScreen} options={{ title: "Profile" }} />
@@ -89,20 +121,15 @@ function ProfileStack() {
   );
 }
 
-const tabIcons: Record<string, { active: any; inactive: any }> = {
-  Home: { active: "Home", inactive: "Home" },
-  Progress: { active: "BarChart3", inactive: "BarChart3" },
-  Photos: { active: "Camera", inactive: "Camera" },
-  Profile: { active: "User", inactive: "User" },
-};
-
 export default function MainTabs() {
+  const theme = useTheme();
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarStyle: {
-          backgroundColor: lightTheme.surface,
-          borderTopColor: lightTheme.border,
+          backgroundColor: theme.surface,
+          borderTopColor: theme.border,
           borderTopWidth: 1,
           elevation: 0,
           shadowOpacity: 0,
@@ -110,8 +137,8 @@ export default function MainTabs() {
           paddingBottom: 8,
           paddingTop: 8,
         },
-        tabBarActiveTintColor: lightTheme.primary,
-        tabBarInactiveTintColor: lightTheme.textMuted,
+        tabBarActiveTintColor: theme.primary,
+        tabBarInactiveTintColor: theme.textMuted,
         tabBarLabelStyle: {
           fontFamily: "Inter",
           fontSize: 12,

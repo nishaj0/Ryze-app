@@ -4,22 +4,23 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { OnboardingStackParamList } from "../../navigation/types";
 import { useOnboarding, OnboardingProvider } from "./OnboardingContext";
 import { Screen, Typography, Button, Card, Icon } from "../../components";
-import { lightTheme } from "../../theme/colors";
+import { useTheme } from "../../theme/themeStore";
 import { space } from "../../theme/spacing";
 
 type Props = NativeStackScreenProps<OnboardingStackParamList, "Sleep">;
 
 function SleepContent({ navigation }: Props) {
+  const theme = useTheme();
   const { data, update } = useOnboarding();
-  const [hours, setHours] = useState(data.sleepHours);
+    const [hours, setHours] = useState(data.sleepHours);
 
   return (
     <Screen scroll padding="lg">
       <View style={{ flex: 1, justifyContent: "center" }}>
-        <Typography variant="heading2" color={lightTheme.textPrimary} style={{ marginBottom: space.sm }}>
+        <Typography variant="heading2" color={theme.textPrimary} style={{ marginBottom: space.sm }}>
           Sleep hours?
         </Typography>
-        <Typography variant="body" color={lightTheme.textSecondary} style={{ marginBottom: space.xl }}>
+        <Typography variant="body" color={theme.textSecondary} style={{ marginBottom: space.xl }}>
           Recovery starts with sleep.
         </Typography>
 
@@ -28,15 +29,15 @@ function SleepContent({ navigation }: Props) {
           padding="lg"
           border={false}
           shadow="sm"
-          style={{ alignItems: "center", marginBottom: space.xl, backgroundColor: lightTheme.primaryLight }}
+          style={{ alignItems: "center", marginBottom: space.xl, backgroundColor: theme.primaryLight }}
         >
           <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.sm }}>
-            <Icon name="Moon" size={24} color={lightTheme.primary} />
+            <Icon name="Moon" size={24} color={theme.primary} />
           </View>
-          <Typography variant="display" color={lightTheme.primary} style={{ fontSize: 72 }}>
+          <Typography variant="display" color={theme.primary} style={{ fontSize: 72 }}>
             {hours}
           </Typography>
-          <Typography variant="body" color={lightTheme.textSecondary}>
+          <Typography variant="body" color={theme.textSecondary}>
             hours per night
           </Typography>
         </Card>
@@ -51,14 +52,14 @@ function SleepContent({ navigation }: Props) {
                 width: 56,
                 height: 56,
                 borderRadius: 28,
-                backgroundColor: hours === h ? lightTheme.primary : lightTheme.surfaceSecondary,
+                backgroundColor: hours === h ? theme.primary : theme.surfaceSecondary,
                 justifyContent: "center",
                 alignItems: "center",
                 borderWidth: hours === h ? 2 : 1,
-                borderColor: hours === h ? lightTheme.primary : lightTheme.border,
+                borderColor: hours === h ? theme.primary : theme.border,
               }}
             >
-              <Typography variant="heading3" color={hours === h ? lightTheme.primaryText : lightTheme.textPrimary}>
+              <Typography variant="heading3" color={hours === h ? theme.primaryText : theme.textPrimary}>
                 {h}
               </Typography>
             </TouchableOpacity>
@@ -80,5 +81,6 @@ function SleepContent({ navigation }: Props) {
 }
 
 export default function SleepScreen(props: Props) {
+  const theme = useTheme();
   return <SleepContent {...props} />;
 }

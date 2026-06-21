@@ -6,12 +6,13 @@ import { PhotosStackParamList } from "../../navigation/types";
 import { getPhotos, deletePhoto } from "../../api/photos";
 import { ProgressPhoto } from "../../types";
 import { Typography, Card, Button, Icon, PhotosTimelineScreenSkeleton } from "../../components";
-import { lightTheme } from "../../theme/colors";
+import { useTheme } from "../../theme/themeStore";
 import { space, radius } from "../../theme/spacing";
 
 type Props = NativeStackScreenProps<PhotosStackParamList, "PhotosTimeline">;
 
 const { width: screenW } = Dimensions.get("window");
+const theme = useTheme();
 
 export default function PhotosTimelineScreen({ navigation }: Props) {
   const [photos, setPhotos] = useState<ProgressPhoto[]>([]);
@@ -52,14 +53,14 @@ export default function PhotosTimelineScreen({ navigation }: Props) {
 
   if (loading) {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg }} edges={["top"]}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: theme.bg }} edges={["top"]}>
         <PhotosTimelineScreenSkeleton />
       </SafeAreaView>
     );
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg }} edges={["top"]}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: theme.bg }} edges={["top"]}>
       <ScrollView
         style={{ flex: 1 }}
         contentContainerStyle={{ paddingBottom: space.xl }}
@@ -68,20 +69,20 @@ export default function PhotosTimelineScreen({ navigation }: Props) {
         {/* Header */}
         <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: space.lg, paddingTop: space.md, paddingBottom: space.lg }}>
           <View>
-            <Typography variant="caption" color={lightTheme.textMuted} weight="600">
+            <Typography variant="caption" color={theme.textMuted} weight="600">
               VISUAL JOURNEY
             </Typography>
-            <Typography variant="heading1" color={lightTheme.textPrimary} style={{ marginTop: space.xs }}>
+            <Typography variant="heading1" color={theme.textPrimary} style={{ marginTop: space.xs }}>
               Progress Photos
             </Typography>
-            <Typography variant="body" color={lightTheme.textSecondary} style={{ marginTop: space.sm }}>
+            <Typography variant="body" color={theme.textSecondary} style={{ marginTop: space.sm }}>
               {photos.length} photo{photos.length !== 1 ? "s" : ""} captured
             </Typography>
           </View>
           <TouchableOpacity
             onPress={() => navigation.navigate("PhotoCompare")}
             style={{
-              backgroundColor: lightTheme.primaryLight,
+              backgroundColor: theme.primaryLight,
               paddingHorizontal: space.md,
               paddingVertical: space.sm,
               borderRadius: radius.md,
@@ -90,8 +91,8 @@ export default function PhotosTimelineScreen({ navigation }: Props) {
               gap: space.xs,
             }}
           >
-            <Icon name="GitCompare" size={14} color={lightTheme.primary} />
-            <Typography variant="bodySmall" color={lightTheme.primary} weight="700">
+            <Icon name="GitCompare" size={14} color={theme.primary} />
+            <Typography variant="bodySmall" color={theme.primary} weight="700">
               COMPARE
             </Typography>
           </TouchableOpacity>
@@ -105,18 +106,18 @@ export default function PhotosTimelineScreen({ navigation }: Props) {
                   width: 80,
                   height: 80,
                   borderRadius: 40,
-                  backgroundColor: lightTheme.primaryLight,
+                  backgroundColor: theme.primaryLight,
                   alignItems: "center",
                   justifyContent: "center",
                   marginBottom: space.md,
                 }}
               >
-                <Icon name="Camera" size={36} color={lightTheme.primary} />
+                <Icon name="Camera" size={36} color={theme.primary} />
               </View>
-              <Typography variant="heading3" color={lightTheme.textPrimary} align="center">
+              <Typography variant="heading3" color={theme.textPrimary} align="center">
                 No photos yet
               </Typography>
-              <Typography variant="body" color={lightTheme.textSecondary} align="center" style={{ marginTop: space.sm }}>
+              <Typography variant="body" color={theme.textSecondary} align="center" style={{ marginTop: space.sm }}>
                 Take your first progress photo to start tracking your visual journey!
               </Typography>
               <View style={{ marginTop: space.lg, width: "100%" }}>
@@ -125,7 +126,7 @@ export default function PhotosTimelineScreen({ navigation }: Props) {
                   onPress={() => navigation.navigate("PhotoCapture")}
                   variant="primary"
                   size="md"
-                  icon={<Icon name="Camera" size={18} color={lightTheme.primaryText} />}
+                  icon={<Icon name="Camera" size={18} color={theme.primaryText} />}
                 />
               </View>
             </Card>
@@ -145,18 +146,18 @@ export default function PhotosTimelineScreen({ navigation }: Props) {
                       <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: 4 }}>
                         <View
                           style={{
-                            backgroundColor: lightTheme.primaryLight,
+                            backgroundColor: theme.primaryLight,
                             paddingHorizontal: space.sm,
                             paddingVertical: 2,
                             borderRadius: 6,
                           }}
                         >
-                          <Typography variant="caption" color={lightTheme.primary} weight="700" style={{ textTransform: "uppercase" }}>
+                          <Typography variant="caption" color={theme.primary} weight="700" style={{ textTransform: "uppercase" }}>
                             {photo.type}
                           </Typography>
                         </View>
                       </View>
-                      <Typography variant="body" color={lightTheme.textPrimary} weight="600">
+                      <Typography variant="body" color={theme.textPrimary} weight="600">
                         {new Date(photo.date).toLocaleDateString(undefined, {
                           month: "long",
                           day: "numeric",
@@ -170,12 +171,12 @@ export default function PhotosTimelineScreen({ navigation }: Props) {
                         width: 36,
                         height: 36,
                         borderRadius: 18,
-                        backgroundColor: lightTheme.errorBg,
+                        backgroundColor: theme.errorBg,
                         alignItems: "center",
                         justifyContent: "center",
                       }}
                     >
-                      <Icon name="Trash2" size={16} color={lightTheme.danger.DEFAULT} />
+                      <Icon name="Trash2" size={16} color={theme.danger} />
                     </TouchableOpacity>
                   </View>
                   {photo.notes && (
@@ -183,14 +184,14 @@ export default function PhotosTimelineScreen({ navigation }: Props) {
                       style={{
                         marginTop: space.md,
                         padding: space.md,
-                        backgroundColor: lightTheme.surfaceSecondary,
+                        backgroundColor: theme.surfaceSecondary,
                         borderRadius: radius.md,
                         flexDirection: "row",
                         gap: space.sm,
                       }}
                     >
-                      <Icon name="MessageSquare" size={14} color={lightTheme.textMuted} />
-                      <Typography variant="bodySmall" color={lightTheme.textSecondary} style={{ flex: 1 }}>
+                      <Icon name="MessageSquare" size={14} color={theme.textMuted} />
+                      <Typography variant="bodySmall" color={theme.textSecondary} style={{ flex: 1 }}>
                         {photo.notes}
                       </Typography>
                     </View>
@@ -208,7 +209,7 @@ export default function PhotosTimelineScreen({ navigation }: Props) {
               onPress={() => navigation.navigate("PhotoCapture")}
               variant="primary"
               size="lg"
-              icon={<Icon name="Camera" size={20} color={lightTheme.primaryText} />}
+              icon={<Icon name="Camera" size={20} color={theme.primaryText} />}
             />
           </View>
         )}

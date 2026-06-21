@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { Typography } from "./index";
 import { Icon } from "./index";
-import { lightTheme } from "../theme/colors";
+import { useTheme } from "../theme/themeStore";
 import { radius, space } from "../theme/spacing";
 
 interface InstructionStepperProps {
@@ -14,6 +14,7 @@ export default function InstructionStepper({
   instructions,
   autoRotateMs = 5000,
 }: InstructionStepperProps) {
+  const theme = useTheme();
   const [currentStep, setCurrentStep] = useState(0);
 
   const steps = instructions
@@ -30,8 +31,8 @@ export default function InstructionStepper({
 
   if (steps.length === 0) {
     return (
-      <View style={styles.container}>
-        <Typography variant="bodySmall" color={lightTheme.textMuted} style={{ fontStyle: "italic" }}>
+      <View style={[styles.container, { backgroundColor: theme.bgSurface }]}>
+        <Typography variant="bodySmall" color={theme.textMuted} style={{ fontStyle: "italic" }}>
           No instructions available
         </Typography>
       </View>
@@ -42,10 +43,10 @@ export default function InstructionStepper({
   const goPrev = () => setCurrentStep((prev) => (prev - 1 + steps.length) % steps.length);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: theme.bgSurface }]}>
       <View style={styles.header}>
-        <Icon name="Lightbulb" size={16} color={lightTheme.primary} />
-        <Typography variant="caption" color={lightTheme.primary} weight="700">
+        <Icon name="Lightbulb" size={16} color={theme.primary} />
+        <Typography variant="caption" color={theme.primary} weight="700">
           HOW TO PERFORM
         </Typography>
       </View>
@@ -55,12 +56,12 @@ export default function InstructionStepper({
           <Icon
             name="ChevronLeft"
             size={20}
-            color={steps.length > 1 ? lightTheme.textSecondary : lightTheme.textMuted}
+            color={steps.length > 1 ? theme.textSecondary : theme.textMuted}
           />
         </TouchableOpacity>
 
         <View style={styles.stepContent}>
-          <Typography variant="bodySmall" color={lightTheme.textPrimary} style={styles.stepText}>
+          <Typography variant="bodySmall" color={theme.textPrimary} style={styles.stepText}>
             {steps[currentStep]}
           </Typography>
         </View>
@@ -69,7 +70,7 @@ export default function InstructionStepper({
           <Icon
             name="ChevronRight"
             size={20}
-            color={steps.length > 1 ? lightTheme.textSecondary : lightTheme.textMuted}
+            color={steps.length > 1 ? theme.textSecondary : theme.textMuted}
           />
         </TouchableOpacity>
       </View>
@@ -81,7 +82,7 @@ export default function InstructionStepper({
               key={i}
               style={[
                 styles.dot,
-                { backgroundColor: i === currentStep ? lightTheme.primary : lightTheme.border },
+                { backgroundColor: i === currentStep ? theme.primary : theme.border },
               ]}
             />
           ))}
@@ -93,7 +94,6 @@ export default function InstructionStepper({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: lightTheme.bgSurface,
     borderRadius: radius.md,
     padding: space.md,
     marginBottom: space.md,

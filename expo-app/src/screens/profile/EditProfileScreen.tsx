@@ -6,7 +6,7 @@ import { ProfileStackParamList } from "../../navigation/types";
 import { useAuthStore } from "../../store/authStore";
 import { updateProfile } from "../../api/auth";
 import { Typography, Card, Button, Icon, Input } from "../../components";
-import { lightTheme } from "../../theme/colors";
+import { useTheme } from "../../theme/themeStore";
 import { space, radius } from "../../theme/spacing";
 
 type Props = NativeStackScreenProps<ProfileStackParamList, "EditProfile">;
@@ -37,6 +37,7 @@ const equipmentOptions = [
 ];
 
 export default function EditProfileScreen({ navigation }: Props) {
+  const theme = useTheme();
   const { user, updateUser } = useAuthStore();
   const [name, setName] = useState(user?.name || "");
   const [goal, setGoal] = useState(user?.goal || "GET_FIT");
@@ -75,7 +76,7 @@ export default function EditProfileScreen({ navigation }: Props) {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg }} edges={["top"]}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: theme.bg }} edges={["top"]}>
       <ScrollView
         style={{ flex: 1 }}
         contentContainerStyle={{ padding: space.lg, paddingBottom: space.xl }}
@@ -84,10 +85,10 @@ export default function EditProfileScreen({ navigation }: Props) {
       >
         {/* Header */}
         <View style={{ marginBottom: space.xl }}>
-          <Typography variant="caption" color={lightTheme.textMuted} weight="600">
+          <Typography variant="caption" color={theme.textMuted} weight="600">
             EDIT YOUR PROFILE
           </Typography>
-          <Typography variant="heading1" color={lightTheme.textPrimary} style={{ marginTop: space.xs }}>
+          <Typography variant="heading1" color={theme.textPrimary} style={{ marginTop: space.xs }}>
             Edit Profile
           </Typography>
         </View>
@@ -98,11 +99,11 @@ export default function EditProfileScreen({ navigation }: Props) {
             value={name}
             onChangeText={setName}
             placeholder="Your name"
-            icon={<Icon name="User" size={20} color={lightTheme.textMuted} />}
+            icon={<Icon name="User" size={20} color={theme.textMuted} />}
           />
 
           <View>
-            <Typography variant="label" color={lightTheme.textSecondary} style={{ marginBottom: space.sm }}>
+            <Typography variant="label" color={theme.textSecondary} style={{ marginBottom: space.sm }}>
               GOAL
             </Typography>
             <View style={{ gap: space.sm }}>
@@ -118,8 +119,8 @@ export default function EditProfileScreen({ navigation }: Props) {
                       shadow={isSelected ? "sm" : "none"}
                       style={{
                         padding: space.md,
-                        backgroundColor: isSelected ? lightTheme.primaryLight : lightTheme.surface,
-                        borderColor: isSelected ? lightTheme.primary : lightTheme.border,
+                        backgroundColor: isSelected ? theme.primaryLight : theme.surface,
+                        borderColor: isSelected ? theme.primary : theme.border,
                         borderWidth: isSelected ? 2 : 1,
                       }}
                     >
@@ -129,18 +130,18 @@ export default function EditProfileScreen({ navigation }: Props) {
                             width: 40,
                             height: 40,
                             borderRadius: radius.md,
-                            backgroundColor: isSelected ? lightTheme.primary : lightTheme.surfaceSecondary,
+                            backgroundColor: isSelected ? theme.primary : theme.surfaceSecondary,
                             alignItems: "center",
                             justifyContent: "center",
                           }}
                         >
-                          <Icon name={g.icon} size={20} color={isSelected ? lightTheme.primaryText : lightTheme.textSecondary} />
+                          <Icon name={g.icon} size={20} color={isSelected ? theme.primaryText : theme.textSecondary} />
                         </View>
-                        <Typography variant="body" color={isSelected ? lightTheme.primary : lightTheme.textPrimary} weight="600">
+                        <Typography variant="body" color={isSelected ? theme.primary : theme.textPrimary} weight="600">
                           {g.label}
                         </Typography>
                         {isSelected && (
-                          <View style={{ marginLeft: "auto" }}><Icon name="CheckCircle2" size={20} color={lightTheme.primary} /></View>
+                          <View style={{ marginLeft: "auto" }}><Icon name="CheckCircle2" size={20} color={theme.primary} /></View>
                         )}
                       </View>
                     </Card>
@@ -179,11 +180,11 @@ export default function EditProfileScreen({ navigation }: Props) {
             onChangeText={setSleep}
             placeholder="8"
             keyboardType="decimal-pad"
-            icon={<Icon name="Moon" size={20} color={lightTheme.textMuted} />}
+            icon={<Icon name="Moon" size={20} color={theme.textMuted} />}
           />
 
           <View>
-            <Typography variant="label" color={lightTheme.textSecondary} style={{ marginBottom: space.sm }}>
+            <Typography variant="label" color={theme.textSecondary} style={{ marginBottom: space.sm }}>
               GENDER
             </Typography>
             <View style={{ flexDirection: "row", gap: space.sm }}>
@@ -200,16 +201,16 @@ export default function EditProfileScreen({ navigation }: Props) {
                       shadow={isSelected ? "sm" : "none"}
                       style={{
                         padding: space.md,
-                        backgroundColor: isSelected ? lightTheme.primaryLight : lightTheme.surface,
-                        borderColor: isSelected ? lightTheme.primary : lightTheme.border,
+                        backgroundColor: isSelected ? theme.primaryLight : theme.surface,
+                        borderColor: isSelected ? theme.primary : theme.border,
                         borderWidth: isSelected ? 2 : 1,
                       }}
                     >
                       <View style={{ alignItems: "center" }}>
-                        <Icon name={g.icon} size={20} color={isSelected ? lightTheme.primary : lightTheme.textSecondary} />
+                        <Icon name={g.icon} size={20} color={isSelected ? theme.primary : theme.textSecondary} />
                         <Typography
                           variant="caption"
-                          color={isSelected ? lightTheme.primary : lightTheme.textPrimary}
+                          color={isSelected ? theme.primary : theme.textPrimary}
                           weight="600"
                           style={{ marginTop: space.xs }}
                         >
@@ -224,7 +225,7 @@ export default function EditProfileScreen({ navigation }: Props) {
           </View>
 
           <View>
-            <Typography variant="label" color={lightTheme.textSecondary} style={{ marginBottom: space.sm }}>
+            <Typography variant="label" color={theme.textSecondary} style={{ marginBottom: space.sm }}>
               EXPERIENCE LEVEL
             </Typography>
             <View style={{ gap: space.sm }}>
@@ -240,8 +241,8 @@ export default function EditProfileScreen({ navigation }: Props) {
                       shadow={isSelected ? "sm" : "none"}
                       style={{
                         padding: space.md,
-                        backgroundColor: isSelected ? lightTheme.primaryLight : lightTheme.surface,
-                        borderColor: isSelected ? lightTheme.primary : lightTheme.border,
+                        backgroundColor: isSelected ? theme.primaryLight : theme.surface,
+                        borderColor: isSelected ? theme.primary : theme.border,
                         borderWidth: isSelected ? 2 : 1,
                       }}
                     >
@@ -251,18 +252,18 @@ export default function EditProfileScreen({ navigation }: Props) {
                             width: 36,
                             height: 36,
                             borderRadius: radius.md,
-                            backgroundColor: isSelected ? lightTheme.primary : lightTheme.surfaceSecondary,
+                            backgroundColor: isSelected ? theme.primary : theme.surfaceSecondary,
                             alignItems: "center",
                             justifyContent: "center",
                           }}
                         >
-                          <Icon name={exp.icon} size={18} color={isSelected ? lightTheme.primaryText : lightTheme.textSecondary} />
+                          <Icon name={exp.icon} size={18} color={isSelected ? theme.primaryText : theme.textSecondary} />
                         </View>
-                        <Typography variant="body" color={isSelected ? lightTheme.primary : lightTheme.textPrimary} weight="600">
+                        <Typography variant="body" color={isSelected ? theme.primary : theme.textPrimary} weight="600">
                           {exp.label}
                         </Typography>
                         {isSelected && (
-                          <View style={{ marginLeft: "auto" }}><Icon name="CheckCircle2" size={20} color={lightTheme.primary} /></View>
+                          <View style={{ marginLeft: "auto" }}><Icon name="CheckCircle2" size={20} color={theme.primary} /></View>
                         )}
                       </View>
                     </Card>
@@ -273,7 +274,7 @@ export default function EditProfileScreen({ navigation }: Props) {
           </View>
 
           <View>
-            <Typography variant="label" color={lightTheme.textSecondary} style={{ marginBottom: space.sm }}>
+            <Typography variant="label" color={theme.textSecondary} style={{ marginBottom: space.sm }}>
               DAYS PER WEEK
             </Typography>
             <View style={{ flexDirection: "row", gap: space.xs, flexWrap: "wrap" }}>
@@ -290,16 +291,16 @@ export default function EditProfileScreen({ navigation }: Props) {
                         width: 44,
                         height: 44,
                         borderRadius: 22,
-                        backgroundColor: isSelected ? lightTheme.primary : lightTheme.surfaceSecondary,
+                        backgroundColor: isSelected ? theme.primary : theme.surfaceSecondary,
                         alignItems: "center",
                         justifyContent: "center",
                         borderWidth: isSelected ? 0 : 1,
-                        borderColor: lightTheme.border,
+                        borderColor: theme.border,
                       }}
                     >
                       <Typography
                         variant="body"
-                        color={isSelected ? lightTheme.primaryText : lightTheme.textPrimary}
+                        color={isSelected ? theme.primaryText : theme.textPrimary}
                         weight="700"
                       >
                         {d}
@@ -312,7 +313,7 @@ export default function EditProfileScreen({ navigation }: Props) {
           </View>
 
           <View>
-            <Typography variant="label" color={lightTheme.textSecondary} style={{ marginBottom: space.sm }}>
+            <Typography variant="label" color={theme.textSecondary} style={{ marginBottom: space.sm }}>
               EQUIPMENT ACCESS
             </Typography>
             <View style={{ gap: space.sm }}>
@@ -328,8 +329,8 @@ export default function EditProfileScreen({ navigation }: Props) {
                       shadow={isSelected ? "sm" : "none"}
                       style={{
                         padding: space.md,
-                        backgroundColor: isSelected ? lightTheme.primaryLight : lightTheme.surface,
-                        borderColor: isSelected ? lightTheme.primary : lightTheme.border,
+                        backgroundColor: isSelected ? theme.primaryLight : theme.surface,
+                        borderColor: isSelected ? theme.primary : theme.border,
                         borderWidth: isSelected ? 2 : 1,
                       }}
                     >
@@ -339,18 +340,18 @@ export default function EditProfileScreen({ navigation }: Props) {
                             width: 36,
                             height: 36,
                             borderRadius: radius.md,
-                            backgroundColor: isSelected ? lightTheme.primary : lightTheme.surfaceSecondary,
+                            backgroundColor: isSelected ? theme.primary : theme.surfaceSecondary,
                             alignItems: "center",
                             justifyContent: "center",
                           }}
                         >
-                          <Icon name={eq.icon} size={18} color={isSelected ? lightTheme.primaryText : lightTheme.textSecondary} />
+                          <Icon name={eq.icon} size={18} color={isSelected ? theme.primaryText : theme.textSecondary} />
                         </View>
-                        <Typography variant="body" color={isSelected ? lightTheme.primary : lightTheme.textPrimary} weight="600">
+                        <Typography variant="body" color={isSelected ? theme.primary : theme.textPrimary} weight="600">
                           {eq.label}
                         </Typography>
                         {isSelected && (
-                          <View style={{ marginLeft: "auto" }}><Icon name="CheckCircle2" size={20} color={lightTheme.primary} /></View>
+                          <View style={{ marginLeft: "auto" }}><Icon name="CheckCircle2" size={20} color={theme.primary} /></View>
                         )}
                       </View>
                     </Card>
@@ -369,7 +370,7 @@ export default function EditProfileScreen({ navigation }: Props) {
             disabled={saving}
             variant="primary"
             size="lg"
-            icon={<Icon name="Save" size={20} color={lightTheme.primaryText} />}
+            icon={<Icon name="Save" size={20} color={theme.primaryText} />}
           />
         </View>
       </ScrollView>

@@ -7,11 +7,12 @@ import AuthStack from "./AuthStack";
 import OnboardingStack from "./OnboardingStack";
 import MainTabs from "./MainTabs";
 import { View, ActivityIndicator } from "react-native";
-import { lightTheme } from "../theme/colors";
+import { useTheme } from "../theme/themeStore";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function RootNavigator() {
+  const theme = useTheme();
   const { isAuthenticated, user, isLoading, loadAuth } = useAuthStore();
 
   useEffect(() => {
@@ -20,8 +21,8 @@ export default function RootNavigator() {
 
   if (isLoading) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: lightTheme.bg }}>
-        <ActivityIndicator size="large" color={lightTheme.primary} />
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: theme.bg }}>
+        <ActivityIndicator size="large" color={theme.primary} />
       </View>
     );
   }

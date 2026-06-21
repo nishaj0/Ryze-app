@@ -1,138 +1,162 @@
 /**
  * Ryze Design System — Color Tokens
- * Light theme with Red/White primary palette
- * Inspired by Dashboard skill: clean, cloud-platform aesthetic, accessible
+ * Light: "Chalk" — warm concrete, rust orange accents
+ * Dark: "Iron" — near-black warm, ember accents
  */
 
-export const colors = {
-  // Primary brand (Red)
-  primary: {
-    50: "#FEF2F2",
-    100: "#FEE2E2",
-    200: "#FECACA",
-    300: "#FCA5A5",
-    400: "#F87171",
-    500: "#EF4444",
-    600: "#DC2626",
-    700: "#B91C1C",
-    800: "#991B1B",
-    900: "#7F1D1D",
-    950: "#450A0A",
-  },
-
-  // Neutral (Slate — for text, borders, surfaces)
-  neutral: {
-    0: "#FFFFFF",
-    50: "#F8FAFC",
-    100: "#F1F5F9",
-    200: "#E2E8F0",
-    300: "#CBD5E1",
-    400: "#94A3B8",
-    500: "#64748B",
-    600: "#475569",
-    700: "#334155",
-    800: "#1E293B",
-    900: "#0F172A",
-    950: "#020617",
-  },
-
-  // Semantic
-  success: {
-    light: "#D1FAE5",
-    DEFAULT: "#10B981",
-    dark: "#047857",
-  },
-  warning: {
-    light: "#FEF3C7",
-    DEFAULT: "#F59E0B",
-    dark: "#B45309",
-  },
-  danger: {
-    light: "#FEE2E2",
-    DEFAULT: "#EF4444",
-    dark: "#991B1B",
-  },
-  info: {
-    light: "#DBEAFE",
-    DEFAULT: "#3B82F6",
-    dark: "#1D4ED8",
-  },
-} as const;
-
-const makeSemanticColor = (base: string, palette: { light: string; DEFAULT: string; dark: string }) => {
-  const s = new String(base) as any;
-  s.DEFAULT = palette.DEFAULT;
-  s.light = palette.light;
-  s.dark = palette.dark;
-  return s as string & { DEFAULT: string; light: string; dark: string };
-};
-
-// Light theme semantic aliases
-export const lightTheme = {
-  // Backgrounds
-  bg: colors.neutral[0],           // page background
-  bgSurface: colors.neutral[50],   // section/alternate background
-  bgElevated: colors.neutral[0],   // cards, modals
-  bgOverlay: "rgba(15, 23, 42, 0.4)", // modal overlay
-
-  // Text
-  textPrimary: colors.neutral[900],
-  textSecondary: colors.neutral[500],
-  textMuted: colors.neutral[400],
-  textInverse: colors.neutral[0],
-  textPlaceholder: colors.neutral[400],
-
-  // Borders
-  border: colors.neutral[200],
-  borderFocus: colors.primary[600],
-  borderError: colors.danger.DEFAULT,
-
-  // Surfaces
-  surface: colors.neutral[0],
-  surfaceSecondary: colors.neutral[50],
-  surfaceTertiary: colors.neutral[100],
-  surfaceDisabled: colors.neutral[100],
-
-  // Primary actions
-  primary: colors.primary[600],
-  primaryHover: colors.primary[700],
-  primaryActive: colors.primary[800],
-  primaryLight: colors.primary[50],
-  primaryText: colors.neutral[0],
-
-  // Secondary actions
-  secondary: colors.neutral[100],
-  secondaryHover: colors.neutral[200],
-  secondaryActive: colors.neutral[300],
-  secondaryText: colors.neutral[700],
-
-  // States
-  disabled: colors.neutral[200],
-  disabledText: colors.neutral[400],
-  error: colors.danger.DEFAULT,
-  errorBg: colors.danger.light,
-  errorText: colors.danger.dark,
-  success: makeSemanticColor(colors.success.DEFAULT, colors.success),
-  successBg: colors.success.light,
-  successText: colors.success.dark,
-  warning: colors.warning.DEFAULT,
-  warningBg: colors.warning.light,
-  warningText: colors.warning.dark,
-  danger: makeSemanticColor(colors.danger.DEFAULT, colors.danger),
-
-  // Input
-  inputBg: colors.neutral[0],
-  inputBorder: colors.neutral[200],
-  inputBorderFocus: colors.primary[600],
-  inputText: colors.neutral[900],
-  inputPlaceholder: colors.neutral[400],
-
-  // Shadows
+// Raw color values
+export const chalk = {
+  bg: "#F2EFE9",
+  surface: "#FFFFFF",
+  ink: "#1C1B19",
+  muted: "#6B665E",
+  accent: "#C24914",
+  accentSoft: "#E8D9C7",
+  line: "#DDD7CC",
+  success: "#3D6B47",
+  danger: "#A23B2E",
+  warning: "#B45309",
+  warningBg: "#FEF3C7",
+  successBg: "#D1FAE5",
+  successText: "#047857",
+  dangerBg: "#FEE2E2",
+  dangerText: "#991B1B",
+  overlay: "rgba(28, 27, 25, 0.4)",
   shadowSm: "rgba(0, 0, 0, 0.04)",
   shadowMd: "rgba(0, 0, 0, 0.08)",
   shadowLg: "rgba(0, 0, 0, 0.12)",
   shadowXl: "rgba(0, 0, 0, 0.16)",
 } as const;
 
-export type Colors = typeof colors;
-export type LightTheme = typeof lightTheme;
+export const iron = {
+  bg: "#161513",
+  surface: "#211F1C",
+  ink: "#EDE8DF",
+  muted: "#8C857A",
+  accent: "#E8631F",
+  accentSoft: "#3A2A1E",
+  line: "#332F2A",
+  success: "#5FA86C",
+  danger: "#C2543F",
+  warning: "#F59E0B",
+  warningBg: "#3A2A1E",
+  successBg: "#1A3A22",
+  successText: "#5FA86C",
+  dangerBg: "#3A1E18",
+  dangerText: "#E8856F",
+  overlay: "rgba(0, 0, 0, 0.6)",
+  shadowSm: "rgba(0, 0, 0, 0.2)",
+  shadowMd: "rgba(0, 0, 0, 0.3)",
+  shadowLg: "rgba(0, 0, 0, 0.4)",
+  shadowXl: "rgba(0, 0, 0, 0.5)",
+} as const;
+
+export type ThemePalette = typeof chalk;
+
+// Theme type — both palettes share the same shape
+export interface Theme {
+  bg: string;
+  bgSurface: string;
+  bgElevated: string;
+  bgOverlay: string;
+  textPrimary: string;
+  textSecondary: string;
+  textMuted: string;
+  textInverse: string;
+  textPlaceholder: string;
+  border: string;
+  borderFocus: string;
+  borderError: string;
+  surface: string;
+  surfaceSecondary: string;
+  surfaceTertiary: string;
+  surfaceDisabled: string;
+  primary: string;
+  primaryHover: string;
+  primaryActive: string;
+  primaryLight: string;
+  primaryText: string;
+  secondary: string;
+  secondaryHover: string;
+  secondaryActive: string;
+  secondaryText: string;
+  disabled: string;
+  disabledText: string;
+  error: string;
+  errorBg: string;
+  errorText: string;
+  success: string;
+  successBg: string;
+  successText: string;
+  warning: string;
+  warningBg: string;
+  warningText: string;
+  danger: string;
+  inputBg: string;
+  inputBorder: string;
+  inputBorderFocus: string;
+  inputText: string;
+  inputPlaceholder: string;
+  shadowSm: string;
+  shadowMd: string;
+  shadowLg: string;
+  shadowXl: string;
+}
+
+function buildTheme(palette: { bg: string; surface: string; ink: string; muted: string; accent: string; accentSoft: string; line: string; success: string; danger: string; warning: string; warningBg: string; successBg: string; successText: string; dangerBg: string; dangerText: string; overlay: string; shadowSm: string; shadowMd: string; shadowLg: string; shadowXl: string }, isDark: boolean): Theme {
+  return {
+    bg: palette.bg,
+    bgSurface: isDark ? "#1C1A17" : "#F8F5F0",
+    bgElevated: palette.surface,
+    bgOverlay: palette.overlay,
+    textPrimary: palette.ink,
+    textSecondary: palette.muted,
+    textMuted: isDark ? "#6B665E" : "#94A3B8",
+    textInverse: isDark ? palette.bg : palette.ink,
+    textPlaceholder: palette.muted,
+    border: palette.line,
+    borderFocus: palette.accent,
+    borderError: palette.danger,
+    surface: palette.surface,
+    surfaceSecondary: isDark ? "#2A2723" : "#F8F5F0",
+    surfaceTertiary: isDark ? "#332F2A" : "#EDE8DF",
+    surfaceDisabled: isDark ? "#2A2723" : "#E2E8F0",
+    primary: palette.accent,
+    primaryHover: isDark ? "#F07030" : "#A83D10",
+    primaryActive: isDark ? "#F58040" : "#8B3210",
+    primaryLight: palette.accentSoft,
+    primaryText: isDark ? "#FFFFFF" : "#FFFFFF",
+    secondary: isDark ? "#2A2723" : "#F1F5F9",
+    secondaryHover: isDark ? "#332F2A" : "#E2E8F0",
+    secondaryActive: isDark ? "#3A3530" : "#CBD5E1",
+    secondaryText: isDark ? "#EDE8DF" : "#334155",
+    disabled: isDark ? "#332F2A" : "#E2E8F0",
+    disabledText: isDark ? "#6B665E" : "#94A3B8",
+    error: palette.danger,
+    errorBg: palette.dangerBg,
+    errorText: palette.dangerText,
+    success: palette.success,
+    successBg: palette.successBg,
+    successText: palette.successText,
+    warning: palette.warning,
+    warningBg: palette.warningBg,
+    warningText: isDark ? "#F59E0B" : "#B45309",
+    danger: palette.danger,
+    inputBg: palette.surface,
+    inputBorder: palette.line,
+    inputBorderFocus: palette.accent,
+    inputText: palette.ink,
+    inputPlaceholder: palette.muted,
+    shadowSm: palette.shadowSm,
+    shadowMd: palette.shadowMd,
+    shadowLg: palette.shadowLg,
+    shadowXl: palette.shadowXl,
+  };
+}
+
+export const lightTheme: Theme = buildTheme(chalk, false);
+export const darkTheme: Theme = buildTheme(iron, true);
+
+export const colors = { chalk, iron };
+
+export type LightTheme = Theme;

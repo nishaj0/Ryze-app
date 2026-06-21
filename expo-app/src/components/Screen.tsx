@@ -1,7 +1,7 @@
 import React from "react";
 import { ScrollView, View, StyleProp, ViewStyle } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { lightTheme } from "../theme/colors";
+import { useTheme } from "../theme/themeStore";
 import { space } from "../theme/spacing";
 
 interface ScreenProps {
@@ -17,8 +17,11 @@ export default function Screen({
   style,
   scroll = true,
   padding = "lg",
-  bg = lightTheme.bg,
+  bg,
 }: ScreenProps) {
+  const theme = useTheme();
+  const backgroundColor = bg || theme.bg;
+
   const paddingMap = {
     none: 0,
     sm: space.sm,
@@ -31,7 +34,7 @@ export default function Screen({
       style={[
         {
           flex: 1,
-          backgroundColor: bg,
+          backgroundColor,
           padding: paddingMap[padding],
         },
         style,
@@ -43,7 +46,7 @@ export default function Screen({
 
   if (scroll) {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: bg }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor }}>
         <ScrollView
           style={{ flex: 1 }}
           contentContainerStyle={{ flexGrow: 1 }}
@@ -56,7 +59,7 @@ export default function Screen({
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: bg }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor }}>
       {content}
     </SafeAreaView>
   );

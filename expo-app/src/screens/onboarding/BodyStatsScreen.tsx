@@ -4,23 +4,24 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { OnboardingStackParamList } from "../../navigation/types";
 import { useOnboarding, OnboardingProvider } from "./OnboardingContext";
 import { Screen, Typography, Input, Button } from "../../components";
-import { lightTheme } from "../../theme/colors";
+import { useTheme } from "../../theme/themeStore";
 import { space } from "../../theme/spacing";
 
 type Props = NativeStackScreenProps<OnboardingStackParamList, "BodyStats">;
 
 function BodyStatsContent({ navigation }: Props) {
+  const theme = useTheme();
   const { data, update } = useOnboarding();
-  const [weight, setWeight] = useState(String(data.currentWeight));
+    const [weight, setWeight] = useState(String(data.currentWeight));
   const [height, setHeight] = useState(String(data.height));
 
   return (
     <Screen scroll padding="lg">
       <View style={{ flex: 1, justifyContent: "center" }}>
-        <Typography variant="heading2" color={lightTheme.textPrimary} style={{ marginBottom: space.sm }}>
+        <Typography variant="heading2" color={theme.textPrimary} style={{ marginBottom: space.sm }}>
           Body stats
         </Typography>
-        <Typography variant="body" color={lightTheme.textSecondary} style={{ marginBottom: space.xl }}>
+        <Typography variant="body" color={theme.textSecondary} style={{ marginBottom: space.xl }}>
           We'll track these over time.
         </Typography>
 
@@ -59,5 +60,6 @@ function BodyStatsContent({ navigation }: Props) {
 }
 
 export default function BodyStatsScreen(props: Props) {
+  const theme = useTheme();
   return <BodyStatsContent {...props} />;
 }

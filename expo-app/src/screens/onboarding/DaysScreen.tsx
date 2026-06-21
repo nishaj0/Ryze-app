@@ -4,22 +4,23 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { OnboardingStackParamList } from "../../navigation/types";
 import { useOnboarding, OnboardingProvider } from "./OnboardingContext";
 import { Screen, Typography, Button, Card } from "../../components";
-import { lightTheme } from "../../theme/colors";
+import { useTheme } from "../../theme/themeStore";
 import { space } from "../../theme/spacing";
 
 type Props = NativeStackScreenProps<OnboardingStackParamList, "Days">;
 
 function DaysContent({ navigation }: Props) {
+  const theme = useTheme();
   const { data, update } = useOnboarding();
-  const [days, setDays] = useState(data.daysAvailable);
+    const [days, setDays] = useState(data.daysAvailable);
 
   return (
     <Screen scroll padding="lg">
       <View style={{ flex: 1, justifyContent: "center" }}>
-        <Typography variant="heading2" color={lightTheme.textPrimary} style={{ marginBottom: space.sm }}>
+        <Typography variant="heading2" color={theme.textPrimary} style={{ marginBottom: space.sm }}>
           How many days per week?
         </Typography>
-        <Typography variant="body" color={lightTheme.textSecondary} style={{ marginBottom: space.xl }}>
+        <Typography variant="body" color={theme.textSecondary} style={{ marginBottom: space.xl }}>
           How many days can you commit to working out?
         </Typography>
 
@@ -28,12 +29,12 @@ function DaysContent({ navigation }: Props) {
           padding="lg"
           border={false}
           shadow="sm"
-          style={{ alignItems: "center", marginBottom: space.xl, backgroundColor: lightTheme.primaryLight }}
+          style={{ alignItems: "center", marginBottom: space.xl, backgroundColor: theme.primaryLight }}
         >
-          <Typography variant="display" color={lightTheme.primary} style={{ fontSize: 72 }}>
+          <Typography variant="display" color={theme.primary} style={{ fontSize: 72 }}>
             {days}
           </Typography>
-          <Typography variant="body" color={lightTheme.textSecondary}>
+          <Typography variant="body" color={theme.textSecondary}>
             days per week
           </Typography>
         </Card>
@@ -48,14 +49,14 @@ function DaysContent({ navigation }: Props) {
                 width: 56,
                 height: 56,
                 borderRadius: 28,
-                backgroundColor: days === d ? lightTheme.primary : lightTheme.surfaceSecondary,
+                backgroundColor: days === d ? theme.primary : theme.surfaceSecondary,
                 justifyContent: "center",
                 alignItems: "center",
                 borderWidth: days === d ? 2 : 1,
-                borderColor: days === d ? lightTheme.primary : lightTheme.border,
+                borderColor: days === d ? theme.primary : theme.border,
               }}
             >
-              <Typography variant="heading3" color={days === d ? lightTheme.primaryText : lightTheme.textPrimary}>
+              <Typography variant="heading3" color={days === d ? theme.primaryText : theme.textPrimary}>
                 {d}
               </Typography>
             </TouchableOpacity>
@@ -77,5 +78,6 @@ function DaysContent({ navigation }: Props) {
 }
 
 export default function DaysScreen(props: Props) {
+  const theme = useTheme();
   return <DaysContent {...props} />;
 }

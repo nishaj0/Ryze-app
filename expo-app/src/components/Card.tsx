@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleProp, ViewStyle } from "react-native";
-import { lightTheme } from "../theme/colors";
+import { useTheme } from "../theme/themeStore";
 import { radius, space } from "../theme/spacing";
 
 interface CardProps {
@@ -18,6 +18,8 @@ export default function Card({
   border = true,
   shadow = "sm",
 }: CardProps) {
+  const theme = useTheme();
+
   const paddingMap = {
     none: 0,
     sm: space.sm,
@@ -28,14 +30,14 @@ export default function Card({
   const shadowMap = {
     none: {},
     sm: {
-      shadowColor: lightTheme.shadowMd,
+      shadowColor: theme.shadowMd,
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 1,
       shadowRadius: 4,
       elevation: 2,
     },
     md: {
-      shadowColor: lightTheme.shadowLg,
+      shadowColor: theme.shadowLg,
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 1,
       shadowRadius: 8,
@@ -47,11 +49,11 @@ export default function Card({
     <View
       style={[
         {
-          backgroundColor: lightTheme.surface,
+          backgroundColor: theme.surface,
           borderRadius: radius.lg,
           padding: paddingMap[padding],
           borderWidth: border ? 1 : 0,
-          borderColor: lightTheme.border,
+          borderColor: theme.border,
         },
         shadowMap[shadow],
         style,

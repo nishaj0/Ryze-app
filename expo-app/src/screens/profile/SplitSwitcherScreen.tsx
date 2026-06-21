@@ -6,13 +6,14 @@ import { ProfileStackParamList } from "../../navigation/types";
 import { listSplits, setActiveSplit } from "../../api/splits";
 import { Split } from "../../types";
 import { Typography, Card, Icon, SplitSwitcherScreenSkeleton } from "../../components";
-import { lightTheme } from "../../theme/colors";
+import { useTheme } from "../../theme/themeStore";
 import { space, radius } from "../../theme/spacing";
 
 type Props = NativeStackScreenProps<ProfileStackParamList, "SplitSwitcher">;
 
 export default function SplitSwitcherScreen({ navigation }: Props) {
   const [splits, setSplits] = useState<Split[]>([]);
+  const theme = useTheme();
   const [loading, setLoading] = useState(true);
   const [switching, setSwitching] = useState<string | null>(null);
 
@@ -57,14 +58,14 @@ export default function SplitSwitcherScreen({ navigation }: Props) {
 
   if (loading) {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg }} edges={["top"]}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: theme.bg }} edges={["top"]}>
         <SplitSwitcherScreenSkeleton />
       </SafeAreaView>
     );
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg }} edges={["top"]}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: theme.bg }} edges={["top"]}>
       <ScrollView
         style={{ flex: 1 }}
         contentContainerStyle={{ padding: space.lg, paddingBottom: space.xl }}
@@ -73,20 +74,20 @@ export default function SplitSwitcherScreen({ navigation }: Props) {
         {/* Header */}
         <View style={{ marginBottom: space.xl, flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
           <View style={{ flex: 1 }}>
-            <Typography variant="caption" color={lightTheme.textMuted} weight="600">
+            <Typography variant="caption" color={theme.textMuted} weight="600">
               AVAILABLE SPLITS
             </Typography>
-            <Typography variant="heading1" color={lightTheme.textPrimary} style={{ marginTop: space.xs }}>
+            <Typography variant="heading1" color={theme.textPrimary} style={{ marginTop: space.xs }}>
               Switch Split
             </Typography>
-            <Typography variant="body" color={lightTheme.textSecondary} style={{ marginTop: space.xs }}>
+            <Typography variant="body" color={theme.textSecondary} style={{ marginTop: space.xs }}>
               Choose or create a program
             </Typography>
           </View>
           <TouchableOpacity
             onPress={() => navigation.navigate("CustomSplit")}
             style={{
-              backgroundColor: lightTheme.primary,
+              backgroundColor: theme.primary,
               paddingHorizontal: space.md,
               paddingVertical: space.sm,
               borderRadius: radius.md,
@@ -95,8 +96,8 @@ export default function SplitSwitcherScreen({ navigation }: Props) {
               gap: space.xs,
             }}
           >
-            <Icon name="Plus" size={14} color={lightTheme.primaryText} />
-            <Typography variant="bodySmall" color={lightTheme.primaryText} weight="700">
+            <Icon name="Plus" size={14} color={theme.primaryText} />
+            <Typography variant="bodySmall" color={theme.primaryText} weight="700">
               CREATE
             </Typography>
           </TouchableOpacity>
@@ -109,15 +110,15 @@ export default function SplitSwitcherScreen({ navigation }: Props) {
                 width: 80,
                 height: 80,
                 borderRadius: 40,
-                backgroundColor: lightTheme.primaryLight,
+                backgroundColor: theme.primaryLight,
                 alignItems: "center",
                 justifyContent: "center",
                 marginBottom: space.md,
               }}
             >
-              <Icon name="Layers" size={36} color={lightTheme.primary} />
+              <Icon name="Layers" size={36} color={theme.primary} />
             </View>
-            <Typography variant="heading3" color={lightTheme.textPrimary} align="center">
+            <Typography variant="heading3" color={theme.textPrimary} align="center">
               No splits available
             </Typography>
           </Card>
@@ -136,47 +137,47 @@ export default function SplitSwitcherScreen({ navigation }: Props) {
                         width: 48,
                         height: 48,
                         borderRadius: radius.md,
-                        backgroundColor: lightTheme.primaryLight,
+                        backgroundColor: theme.primaryLight,
                         alignItems: "center",
                         justifyContent: "center",
                       }}
                     >
-                      <Icon name="Layers" size={24} color={lightTheme.primary} />
+                      <Icon name="Layers" size={24} color={theme.primary} />
                     </View>
                     <View style={{ flex: 1 }}>
-                      <Typography variant="heading3" color={lightTheme.textPrimary}>
+                      <Typography variant="heading3" color={theme.textPrimary}>
                         {split.name}
                       </Typography>
                       {split.description && (
-                        <Typography variant="bodySmall" color={lightTheme.textSecondary} style={{ marginTop: 4 }}>
+                        <Typography variant="bodySmall" color={theme.textSecondary} style={{ marginTop: 4 }}>
                           {split.description}
                         </Typography>
                       )}
                       <View style={{ flexDirection: "row", alignItems: "center", gap: space.md, marginTop: space.sm }}>
                         <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
-                          <Icon name="Calendar" size={12} color={lightTheme.textMuted} />
-                          <Typography variant="caption" color={lightTheme.textMuted}>
+                          <Icon name="Calendar" size={12} color={theme.textMuted} />
+                          <Typography variant="caption" color={theme.textMuted}>
                             {split.daysPerWeek} days/week
                           </Typography>
                         </View>
                         <View
                           style={{
-                            backgroundColor: lightTheme.surfaceTertiary,
+                            backgroundColor: theme.surfaceTertiary,
                             paddingHorizontal: 6,
                             paddingVertical: 1,
                             borderRadius: 4,
                           }}
                         >
-                          <Typography variant="caption" color={lightTheme.textSecondary} weight="600" style={{ textTransform: "capitalize", fontSize: 10 }}>
+                          <Typography variant="caption" color={theme.textSecondary} weight="600" style={{ textTransform: "capitalize", fontSize: 10 }}>
                             {split.type.replace("_", " ")}
                           </Typography>
                         </View>
                       </View>
                     </View>
                     {switching === split.id ? (
-                      <ActivityIndicator color={lightTheme.primary} />
+                      <ActivityIndicator color={theme.primary} />
                     ) : (
-                      <Icon name="ChevronRight" size={20} color={lightTheme.textMuted} />
+                      <Icon name="ChevronRight" size={20} color={theme.textMuted} />
                     )}
                   </View>
                 </Card>

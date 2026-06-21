@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import Svg, { Rect, Text as SvgText, Line } from "react-native-svg";
-import { lightTheme } from "../../theme/colors";
+import { useTheme } from "../../theme/themeStore";
 
 export interface BarItem {
   label: string;
@@ -23,11 +23,14 @@ export default function BarChart({
   data,
   width = 320,
   height = 200,
-  color = lightTheme.primary,
+  color,
   yAxisFormatter = (v) => Math.round(v).toString(),
   showValues = true,
   horizontal = false,
 }: BarChartProps) {
+  const theme = useTheme();
+  const defaultColor = color || theme.primary;
+
   if (!data || data.length === 0) {
     return <View style={{ height, width }} />;
   }
@@ -46,33 +49,27 @@ export default function BarChart({
         {data.map((d, i) => {
           const y = padding.top + i * (barH + gap) + gap / 2;
           const w = (d.value / maxV) * chartW;
-          const barColor = d.color || color;
+          const barColor = d.color || defaultColor;
           return (
             <React.Fragment key={i}>
               <SvgText
                 x={padding.left - 8}
                 y={y + barH / 2 + 4}
                 fontSize={11}
-                fill={lightTheme.textSecondary}
+                fill={theme.textMuted}
                 textAnchor="end"
+                fontFamily="Inter"
               >
                 {d.label}
               </SvgText>
-              <Rect
-                x={padding.left}
-                y={y}
-                width={w}
-                height={barH}
-                fill={barColor}
-                rx={4}
-              />
+              <Rect x={padding.left} y={y} width={w} height={barH} rx={4} fill={barColor} />
               {showValues && (
                 <SvgText
                   x={padding.left + w + 6}
                   y={y + barH / 2 + 4}
                   fontSize={11}
-                  fill={lightTheme.textPrimary}
-                  fontWeight="600"
+                  fill={theme.textSecondary}
+                  fontFamily="Inter"
                 >
                   {yAxisFormatter(d.value)}
                 </SvgText>
@@ -84,61 +81,66 @@ export default function BarChart({
     );
   }
 
-  // Vertical bars
-  const barW = (chartW / data.length) * 0.7;
-  const gap = (chartW / data.length) * 0.3;
-
-  // Grid lines
-  const gridLines = [0, 0.5, 1].map((t) => ({
-    y: padding.top + chartH * (1 - t),
-    v: maxV * t,
-  }));
+  const barW = (chartW / data.length) * 0.6;
+  const gap = (chartW / data.length) * 0.4;
 
   return (
     <Svg width={width} height={height}>
-      {gridLines.map((g, i) => (
-        <React.Fragment key={i}>
-          <Line
-            x1={padding.left}
-            y1={g.y}
-            x2={width - padding.right}
-            y2={g.y}
-            stroke={lightTheme.border}
-            strokeWidth={1}
-            strokeDasharray={i === 2 ? "0" : "3,3"}
-          />
-          <SvgText x={padding.left - 8} y={g.y + 4} fontSize={10} fill={lightTheme.textMuted} textAnchor="end">
-            {yAxisFormatter(g.v)}
-          </SvgText>
-        </React.Fragment>
-      ))}
-
-      {data.map((d, i) => {
-        const x = padding.left + i * (barW + gap) + gap / 2;
-        const h = (d.value / maxV) * chartH;
-        const y = padding.top + chartH - h;
-        const barColor = d.color || color;
+      {/* Grid lines */}
+      {[0, 0.25, 0.5, 0.75, 1].map((frac, i) => {
+        const y = padding.top + chartH * (1 - frac);
         return (
           <React.Fragment key={i}>
-            <Rect x={x} y={y} width={barW} height={h} fill={barColor} rx={6} />
+            <Line
+              x1={padding.left}
+              y1={y}
+              x2={width - padding.right}
+              y2={y}
+              stroke={theme.border}
+              strokeWidth={0.5}
+            />
+            <SvgText
+              x={padding.left - 8}
+              y={y + 4}
+              fontSize={10}
+              fill={theme.textMuted}
+              textAnchor="end"
+              fontFamily="Inter"
+            >
+              {yAxisFormatter(maxV * frac)}
+            </SvgText>
+          </React.Fragment>
+        );
+      })}
+
+      {/* Bars */}
+      {data.map((d, i) => {
+        const x = padding.left + i * (barW + gap) + gap / 2;
+        const barH = (d.value / maxV) * chartH;
+        const y = padding.top + chartH - barH;
+        const barColor = d.color || defaultColor;
+        return (
+          <React.Fragment key={i}>
+            <Rect x={x} y={y} width={barW} height={barH} rx={4} fill={barColor} />
             {showValues && (
               <SvgText
                 x={x + barW / 2}
                 y={y - 6}
                 fontSize={10}
-                fill={lightTheme.textPrimary}
-                fontWeight="600"
+                fill={theme.textSecondary}
                 textAnchor="middle"
+                fontFamily="Inter"
               >
                 {yAxisFormatter(d.value)}
               </SvgText>
             )}
             <SvgText
               x={x + barW / 2}
-              y={height - 16}
+              y={height - 8}
               fontSize={10}
-              fill={lightTheme.textMuted}
+              fill={theme.textMuted}
               textAnchor="middle"
+              fontFamily="Inter"
             >
               {d.label}
             </SvgText>

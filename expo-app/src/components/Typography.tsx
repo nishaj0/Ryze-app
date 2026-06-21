@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, TextStyle, TextProps } from "react-native";
-import { lightTheme } from "../theme/colors";
+import { useTheme } from "../theme/themeStore";
 import { typography } from "../theme/typography";
 
 type Variant = keyof typeof typography;
@@ -15,15 +15,17 @@ interface TypographyProps extends TextProps {
 
 export default function Typography({
   variant = "body",
-  color = lightTheme.textPrimary,
+  color,
   align = "left",
   weight,
   style,
   children,
   ...props
 }: TypographyProps) {
+  const theme = useTheme();
   const config = typography[variant];
   const finalWeight = (weight || config.fontWeight) as TextStyle["fontWeight"];
+  const finalColor = color || theme.textPrimary;
 
   return (
     <Text
@@ -31,7 +33,7 @@ export default function Typography({
         {
           fontSize: config.fontSize,
           fontWeight: finalWeight,
-          color,
+          color: finalColor,
           textAlign: align,
         },
         style,

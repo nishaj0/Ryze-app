@@ -3,10 +3,11 @@ import { View, TouchableOpacity, Modal, Dimensions, Alert } from "react-native";
 import { getCalendarSessions, updateSession } from "../../api/sessions";
 import { CalendarSession } from "../../types";
 import { Screen, Card, Typography, Button, Icon } from "../../components";
-import { lightTheme, colors } from "../../theme/colors";
+import { useTheme } from "../../theme/themeStore";
 import { space, radius } from "../../theme/spacing";
 
 const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const theme = useTheme();
 const MONTHS = [
   "January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December",
@@ -123,10 +124,10 @@ export default function WorkoutHistoryScreen() {
     <>
     <Screen scroll padding="lg">
       <View style={{ marginBottom: space.lg }}>
-        <Typography variant="caption" color={lightTheme.textMuted} weight="600">
+        <Typography variant="caption" color={theme.textMuted} weight="600">
           WORKOUT HISTORY
         </Typography>
-        <Typography variant="heading1" color={lightTheme.textPrimary} style={{ marginTop: space.xs }}>
+        <Typography variant="heading1" color={theme.textPrimary} style={{ marginTop: space.xs }}>
           Calendar
         </Typography>
       </View>
@@ -134,20 +135,20 @@ export default function WorkoutHistoryScreen() {
         <Card shadow="sm" style={{ padding: space.md, marginBottom: space.lg }}>
           <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginBottom: space.md }}>
             <TouchableOpacity onPress={prevMonth} style={{ padding: space.sm }}>
-              <Icon name="ChevronLeft" size={24} color={lightTheme.textPrimary} />
+              <Icon name="ChevronLeft" size={24} color={theme.textPrimary} />
             </TouchableOpacity>
-            <Typography variant="heading2" color={lightTheme.textPrimary}>
+            <Typography variant="heading2" color={theme.textPrimary}>
               {MONTHS[currentMonth]} {currentYear}
             </Typography>
             <TouchableOpacity onPress={nextMonth} style={{ padding: space.sm }}>
-              <Icon name="ChevronRight" size={24} color={lightTheme.textPrimary} />
+              <Icon name="ChevronRight" size={24} color={theme.textPrimary} />
             </TouchableOpacity>
           </View>
 
           <View style={{ flexDirection: "row", marginBottom: space.sm }}>
             {DAYS.map((d) => (
               <View key={d} style={{ width: cellSize, alignItems: "center" }}>
-                <Typography variant="caption" color={lightTheme.textMuted} weight="600">
+                <Typography variant="caption" color={theme.textMuted} weight="600">
                   {d}
                 </Typography>
               </View>
@@ -182,16 +183,16 @@ export default function WorkoutHistoryScreen() {
                       width: cellSize - 4,
                       height: cellSize - 4,
                       borderRadius: (cellSize - 4) / 2,
-                      backgroundColor: isToday ? lightTheme.primaryLight : "transparent",
+                      backgroundColor: isToday ? theme.primaryLight : "transparent",
                       alignItems: "center",
                       justifyContent: "center",
                       borderWidth: isToday ? 2 : 0,
-                      borderColor: lightTheme.primary,
+                      borderColor: theme.primary,
                     }}
                   >
                     <Typography
                       variant="body"
-                      color={isToday ? lightTheme.primary : lightTheme.textPrimary}
+                      color={isToday ? theme.primary : theme.textPrimary}
                       weight={isToday ? "700" : "400"}
                     >
                       {day}
@@ -202,7 +203,7 @@ export default function WorkoutHistoryScreen() {
                           width: 6,
                           height: 6,
                           borderRadius: 3,
-                          backgroundColor: lightTheme.success.DEFAULT,
+                          backgroundColor: theme.success,
                           position: "absolute",
                           bottom: 4,
                         }}
@@ -214,7 +215,7 @@ export default function WorkoutHistoryScreen() {
                           width: 6,
                           height: 6,
                           borderRadius: 3,
-                          backgroundColor: colors.info.DEFAULT,
+                          backgroundColor: theme.primary,
                           position: "absolute",
                           bottom: 4,
                         }}
@@ -230,29 +231,29 @@ export default function WorkoutHistoryScreen() {
         <View style={{ flexDirection: "row", gap: space.md, marginBottom: space.lg }}>
           <Card shadow="sm" style={{ flex: 1, alignItems: "center" }}>
             <View style={{ flexDirection: "row", alignItems: "center", gap: space.xs, marginBottom: space.xs }}>
-              <View style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: lightTheme.success.DEFAULT }} />
-              <Typography variant="caption" color={lightTheme.textMuted}>Workouts</Typography>
+              <View style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: theme.success }} />
+              <Typography variant="caption" color={theme.textMuted}>Workouts</Typography>
             </View>
-            <Typography variant="heading2" color={lightTheme.success.DEFAULT}>{completedCount}</Typography>
+            <Typography variant="heading2" color={theme.success}>{completedCount}</Typography>
           </Card>
           <Card shadow="sm" style={{ flex: 1, alignItems: "center" }}>
             <View style={{ flexDirection: "row", alignItems: "center", gap: space.xs, marginBottom: space.xs }}>
-              <View style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: colors.info.DEFAULT }} />
-              <Typography variant="caption" color={lightTheme.textMuted}>Rest Days</Typography>
+              <View style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: theme.primary }} />
+              <Typography variant="caption" color={theme.textMuted}>Rest Days</Typography>
             </View>
-            <Typography variant="heading2" color={colors.info.DEFAULT}>{restCount}</Typography>
+            <Typography variant="heading2" color={theme.primary}>{restCount}</Typography>
           </Card>
         </View>
 
         {loading && (
           <View style={{ alignItems: "center", padding: space.lg }}>
-            <Typography variant="body" color={lightTheme.textMuted}>Loading...</Typography>
+            <Typography variant="body" color={theme.textMuted}>Loading...</Typography>
           </View>
         )}
     </Screen>
 
       <Modal visible={detailVisible} transparent animationType="slide">
-        <View style={{ flex: 1, justifyContent: "flex-end", backgroundColor: lightTheme.bgOverlay }}>
+        <View style={{ flex: 1, justifyContent: "flex-end", backgroundColor: theme.bgOverlay }}>
           <Card
             shadow="none"
             border={false}
@@ -262,7 +263,7 @@ export default function WorkoutHistoryScreen() {
               padding: space.lg,
             }}
           >
-            <View style={{ width: 40, height: 4, borderRadius: 2, backgroundColor: lightTheme.border, alignSelf: "center", marginBottom: space.md }} />
+            <View style={{ width: 40, height: 4, borderRadius: 2, backgroundColor: theme.border, alignSelf: "center", marginBottom: space.md }} />
 
             {!selectedSession ? null : selectedSession.status === "COMPLETED" ? (
               <>
@@ -272,18 +273,18 @@ export default function WorkoutHistoryScreen() {
                       width: 40,
                       height: 40,
                       borderRadius: 20,
-                      backgroundColor: lightTheme.successBg,
+                      backgroundColor: theme.successBg,
                       alignItems: "center",
                       justifyContent: "center",
                     }}
                   >
-                    <Icon name="Dumbbell" size={20} color={lightTheme.success.DEFAULT} />
+                    <Icon name="Dumbbell" size={20} color={theme.success} />
                   </View>
                   <View style={{ flex: 1 }}>
-                    <Typography variant="heading2" color={lightTheme.textPrimary}>
+                    <Typography variant="heading2" color={theme.textPrimary}>
                       {selectedSession.splitDayName}
                     </Typography>
-                    <Typography variant="caption" color={lightTheme.textMuted}>
+                    <Typography variant="caption" color={theme.textMuted}>
                       {new Date(selectedSession.date).toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}
                     </Typography>
                   </View>
@@ -295,13 +296,13 @@ export default function WorkoutHistoryScreen() {
                       <View
                         key={mg}
                         style={{
-                          backgroundColor: lightTheme.primaryLight,
+                          backgroundColor: theme.primaryLight,
                           borderRadius: radius.sm,
                           paddingHorizontal: space.md,
                           paddingVertical: space.xs,
                         }}
                       >
-                        <Typography variant="caption" color={lightTheme.primary} weight="600">
+                        <Typography variant="caption" color={theme.primary} weight="600">
                           {mg.charAt(0).toUpperCase() + mg.slice(1)}
                         </Typography>
                       </View>
@@ -311,36 +312,36 @@ export default function WorkoutHistoryScreen() {
 
                 <View style={{ flexDirection: "row", gap: space.md, marginBottom: space.md }}>
                   {selectedSession.durationMinutes && (
-                    <Card shadow="none" style={{ flex: 1, alignItems: "center", backgroundColor: lightTheme.surfaceSecondary }}>
-                      <Icon name="Clock" size={16} color={lightTheme.textMuted} />
-                      <Typography variant="heading3" color={lightTheme.textPrimary} style={{ marginTop: space.xs }}>
+                    <Card shadow="none" style={{ flex: 1, alignItems: "center", backgroundColor: theme.surfaceSecondary }}>
+                      <Icon name="Clock" size={16} color={theme.textMuted} />
+                      <Typography variant="heading3" color={theme.textPrimary} style={{ marginTop: space.xs }}>
                         {selectedSession.durationMinutes}m
                       </Typography>
-                      <Typography variant="caption" color={lightTheme.textMuted}>Duration</Typography>
+                      <Typography variant="caption" color={theme.textMuted}>Duration</Typography>
                     </Card>
                   )}
-                  <Card shadow="none" style={{ flex: 1, alignItems: "center", backgroundColor: lightTheme.surfaceSecondary }}>
-                    <Icon name="ListChecks" size={16} color={lightTheme.textMuted} />
-                    <Typography variant="heading3" color={lightTheme.textPrimary} style={{ marginTop: space.xs }}>
+                  <Card shadow="none" style={{ flex: 1, alignItems: "center", backgroundColor: theme.surfaceSecondary }}>
+                    <Icon name="ListChecks" size={16} color={theme.textMuted} />
+                    <Typography variant="heading3" color={theme.textPrimary} style={{ marginTop: space.xs }}>
                       {selectedSession.exerciseCount}
                     </Typography>
-                    <Typography variant="caption" color={lightTheme.textMuted}>Exercises</Typography>
+                    <Typography variant="caption" color={theme.textMuted}>Exercises</Typography>
                   </Card>
                   {selectedSession.totalVolume > 0 && (
-                    <Card shadow="none" style={{ flex: 1, alignItems: "center", backgroundColor: lightTheme.surfaceSecondary }}>
-                      <Icon name="TrendingUp" size={16} color={lightTheme.textMuted} />
-                      <Typography variant="heading3" color={lightTheme.textPrimary} style={{ marginTop: space.xs }}>
+                    <Card shadow="none" style={{ flex: 1, alignItems: "center", backgroundColor: theme.surfaceSecondary }}>
+                      <Icon name="TrendingUp" size={16} color={theme.textMuted} />
+                      <Typography variant="heading3" color={theme.textPrimary} style={{ marginTop: space.xs }}>
                         {selectedSession.totalVolume.toLocaleString()}
                       </Typography>
-                      <Typography variant="caption" color={lightTheme.textMuted}>Volume (kg)</Typography>
+                      <Typography variant="caption" color={theme.textMuted}>Volume (kg)</Typography>
                     </Card>
                   )}
                 </View>
 
                 {selectedSession.notes && (
-                  <Card shadow="none" style={{ backgroundColor: lightTheme.surfaceSecondary, marginBottom: space.md }}>
-                    <Typography variant="caption" color={lightTheme.textMuted} weight="600">NOTES</Typography>
-                    <Typography variant="body" color={lightTheme.textPrimary} style={{ marginTop: space.xs }}>
+                  <Card shadow="none" style={{ backgroundColor: theme.surfaceSecondary, marginBottom: space.md }}>
+                    <Typography variant="caption" color={theme.textMuted} weight="600">NOTES</Typography>
+                    <Typography variant="body" color={theme.textPrimary} style={{ marginTop: space.xs }}>
                       {selectedSession.notes}
                     </Typography>
                   </Card>
@@ -354,18 +355,18 @@ export default function WorkoutHistoryScreen() {
                       width: 40,
                       height: 40,
                       borderRadius: 20,
-                      backgroundColor: colors.info.light,
+                      backgroundColor: theme.primaryLight,
                       alignItems: "center",
                       justifyContent: "center",
                     }}
                   >
-                    <Icon name="Moon" size={20} color={colors.info.DEFAULT} />
+                    <Icon name="Moon" size={20} color={theme.primary} />
                   </View>
                   <View style={{ flex: 1 }}>
-                    <Typography variant="heading2" color={lightTheme.textPrimary}>
+                    <Typography variant="heading2" color={theme.textPrimary}>
                       Rest Day
                     </Typography>
-                    <Typography variant="caption" color={lightTheme.textMuted}>
+                    <Typography variant="caption" color={theme.textMuted}>
                       {new Date(selectedSession!.date).toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}
                     </Typography>
                   </View>
@@ -375,15 +376,15 @@ export default function WorkoutHistoryScreen() {
                   shadow="none"
                   padding="md"
                   border={false}
-                  style={{ backgroundColor: lightTheme.successBg, marginBottom: space.md }}
+                  style={{ backgroundColor: theme.successBg, marginBottom: space.md }}
                 >
                   <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
-                    <Icon name="Heart" size={20} color={lightTheme.success.DEFAULT} />
+                    <Icon name="Heart" size={20} color={theme.success} />
                     <View style={{ flex: 1 }}>
-                      <Typography variant="body" color={lightTheme.successText} weight="600">
+                      <Typography variant="body" color={theme.successText} weight="600">
                         Reason: {selectedSession?.restReason ? selectedSession.restReason.charAt(0).toUpperCase() + selectedSession.restReason.slice(1) : "Not specified"}
                       </Typography>
-                      <Typography variant="caption" color={lightTheme.successText}>
+                      <Typography variant="caption" color={theme.successText}>
                         Recovery is part of the plan
                       </Typography>
                     </View>
@@ -395,7 +396,7 @@ export default function WorkoutHistoryScreen() {
                   onPress={openEditReason}
                   variant="secondary"
                   size="md"
-                  icon={<Icon name="Pencil" size={16} color={lightTheme.secondaryText} />}
+                  icon={<Icon name="Pencil" size={16} color={theme.secondaryText} />}
                 />
               </>
             )}
@@ -413,7 +414,7 @@ export default function WorkoutHistoryScreen() {
       </Modal>
 
       <Modal visible={editReasonVisible} transparent animationType="slide">
-        <View style={{ flex: 1, justifyContent: "flex-end", backgroundColor: lightTheme.bgOverlay }}>
+        <View style={{ flex: 1, justifyContent: "flex-end", backgroundColor: theme.bgOverlay }}>
           <Card
             shadow="none"
             border={false}
@@ -423,12 +424,12 @@ export default function WorkoutHistoryScreen() {
               padding: space.lg,
             }}
           >
-            <View style={{ width: 40, height: 4, borderRadius: 2, backgroundColor: lightTheme.border, alignSelf: "center", marginBottom: space.md }} />
+            <View style={{ width: 40, height: 4, borderRadius: 2, backgroundColor: theme.border, alignSelf: "center", marginBottom: space.md }} />
 
-            <Typography variant="heading2" color={lightTheme.textPrimary} style={{ marginBottom: space.sm }}>
+            <Typography variant="heading2" color={theme.textPrimary} style={{ marginBottom: space.sm }}>
               Edit Rest Reason
             </Typography>
-            <Typography variant="body" color={lightTheme.textSecondary} style={{ marginBottom: space.md }}>
+            <Typography variant="body" color={theme.textSecondary} style={{ marginBottom: space.md }}>
               Why did you rest on this day?
             </Typography>
 
@@ -437,17 +438,17 @@ export default function WorkoutHistoryScreen() {
                 key={reason}
                 onPress={() => setEditReason(reason.toLowerCase())}
                 style={{
-                  backgroundColor: editReason === reason.toLowerCase() ? lightTheme.primary : lightTheme.surfaceSecondary,
+                  backgroundColor: editReason === reason.toLowerCase() ? theme.primary : theme.surfaceSecondary,
                   borderRadius: radius.md,
                   padding: 14,
                   marginBottom: space.sm,
                   borderWidth: editReason === reason.toLowerCase() ? 0 : 1,
-                  borderColor: lightTheme.border,
+                  borderColor: theme.border,
                 }}
               >
                 <Typography
                   variant="body"
-                  color={editReason === reason.toLowerCase() ? lightTheme.primaryText : lightTheme.textPrimary}
+                  color={editReason === reason.toLowerCase() ? theme.primaryText : theme.textPrimary}
                   weight={editReason === reason.toLowerCase() ? "600" : "400"}
                 >
                   {reason}

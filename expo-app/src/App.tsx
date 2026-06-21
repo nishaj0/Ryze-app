@@ -6,7 +6,7 @@ import { useFonts, Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_7
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import RootNavigator from "./navigation/RootNavigator";
-import { lightTheme } from "./theme/colors";
+import { useTheme } from "./theme/themeStore";
 import { initMMKV } from "./utils/mmkv";
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
@@ -21,6 +21,7 @@ const queryClient = new QueryClient({
 });
 
 export default function App() {
+  const theme = useTheme();
   const [mmkvLoaded, setMmkvLoaded] = useState(false);
   const [fontsLoaded, fontError] = useFonts({
     Inter_400Regular,
@@ -47,8 +48,8 @@ export default function App() {
 
   if ((!fontsLoaded && !fontError) || !mmkvLoaded) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: lightTheme.bg }}>
-        <ActivityIndicator size="large" color={lightTheme.primary} />
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: theme.bg }}>
+        <ActivityIndicator size="large" color={theme.primary} />
       </View>
     );
   }
@@ -56,7 +57,7 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <QueryClientProvider client={queryClient}>
-        <StatusBar style="dark" />
+        <StatusBar style={theme.bg === "#161513" ? "light" : "dark"} />
         <RootNavigator />
       </QueryClientProvider>
     </SafeAreaProvider>

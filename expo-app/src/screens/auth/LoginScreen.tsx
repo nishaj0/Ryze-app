@@ -5,13 +5,14 @@ import { AuthStackParamList } from "../../navigation/types";
 import { login } from "../../api/auth";
 import { useAuthStore } from "../../store/authStore";
 import { Screen, Button, Input, Typography, Card, Icon } from "../../components";
-import { lightTheme } from "../../theme/colors";
+import { useTheme } from "../../theme/themeStore";
 import { space } from "../../theme/spacing";
 
 type Props = NativeStackScreenProps<AuthStackParamList, "Login">;
 
 export default function LoginScreen({ navigation }: Props) {
   const [email, setEmail] = useState("");
+  const theme = useTheme();
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -53,18 +54,18 @@ export default function LoginScreen({ navigation }: Props) {
               width: 64,
               height: 64,
               borderRadius: 16,
-              backgroundColor: lightTheme.primary,
+              backgroundColor: theme.primary,
               alignItems: "center",
               justifyContent: "center",
               marginBottom: space.md,
             }}
           >
-            <Icon name="Dumbbell" size={32} color={lightTheme.primaryText} />
+            <Icon name="Dumbbell" size={32} color={theme.primaryText} />
           </View>
-          <Typography variant="display" color={lightTheme.textPrimary} align="center">
+          <Typography variant="display" color={theme.textPrimary} align="center">
             Ryze
           </Typography>
-          <Typography variant="body" color={lightTheme.textSecondary} align="center" style={{ marginTop: space.sm }}>
+          <Typography variant="body" color={theme.textSecondary} align="center" style={{ marginTop: space.sm }}>
             Track your gains. Rise above.
           </Typography>
         </View>
@@ -76,14 +77,14 @@ export default function LoginScreen({ navigation }: Props) {
             border
             shadow="none"
             style={{
-              backgroundColor: lightTheme.errorBg,
-              borderColor: lightTheme.error,
+              backgroundColor: theme.errorBg,
+              borderColor: theme.error,
               marginBottom: space.md,
             }}
           >
             <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
-              <Icon name="AlertCircle" size={20} color={lightTheme.error} />
-              <Typography variant="bodySmall" color={lightTheme.errorText}>
+              <Icon name="AlertCircle" size={20} color={theme.error} />
+              <Typography variant="bodySmall" color={theme.errorText}>
                 {errorMsg}
               </Typography>
             </View>
@@ -99,7 +100,7 @@ export default function LoginScreen({ navigation }: Props) {
             placeholder="your@email.com"
             keyboardType="email-address"
             autoCapitalize="none"
-            icon={<Icon name="Mail" size={20} color={lightTheme.textMuted} />}
+            icon={<Icon name="Mail" size={20} color={theme.textMuted} />}
           />
 
           <Input
@@ -108,7 +109,7 @@ export default function LoginScreen({ navigation }: Props) {
             onChangeText={setPassword}
             placeholder="Min 8 characters"
             secureTextEntry
-            icon={<Icon name="Lock" size={20} color={lightTheme.textMuted} />}
+            icon={<Icon name="Lock" size={20} color={theme.textMuted} />}
           />
         </View>
 
@@ -119,7 +120,7 @@ export default function LoginScreen({ navigation }: Props) {
             loading={loading}
             variant="primary"
             size="lg"
-            icon={<Icon name="LogIn" size={20} color={lightTheme.primaryText} />}
+            icon={<Icon name="LogIn" size={20} color={theme.primaryText} />}
           />
         </View>
 
@@ -127,9 +128,9 @@ export default function LoginScreen({ navigation }: Props) {
           onPress={() => navigation.navigate("Register")}
           style={{ marginTop: space.lg, alignItems: "center" }}
         >
-          <Typography variant="body" color={lightTheme.textSecondary}>
+          <Typography variant="body" color={theme.textSecondary}>
             Don't have an account?{" "}
-            <Typography variant="body" color={lightTheme.primary} weight="600">
+            <Typography variant="body" color={theme.primary} weight="600">
               Sign Up
             </Typography>
           </Typography>

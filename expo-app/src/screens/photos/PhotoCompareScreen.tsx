@@ -6,12 +6,13 @@ import { PhotosStackParamList } from "../../navigation/types";
 import { getPhotos } from "../../api/photos";
 import { ProgressPhoto } from "../../types";
 import { Typography, Card, Button, Icon, PhotoCompareScreenSkeleton } from "../../components";
-import { lightTheme } from "../../theme/colors";
+import { useTheme } from "../../theme/themeStore";
 import { space, radius } from "../../theme/spacing";
 
 type Props = NativeStackScreenProps<PhotosStackParamList, "PhotoCompare">;
 
 const { width: screenW } = Dimensions.get("window");
+const theme = useTheme();
 
 export default function PhotoCompareScreen({ navigation }: Props) {
   const [photos, setPhotos] = useState<ProgressPhoto[]>([]);
@@ -44,14 +45,14 @@ export default function PhotoCompareScreen({ navigation }: Props) {
 
   if (loading) {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg }} edges={["top"]}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: theme.bg }} edges={["top"]}>
         <PhotoCompareScreenSkeleton />
       </SafeAreaView>
     );
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg }} edges={["top"]}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: theme.bg }} edges={["top"]}>
       <ScrollView
         style={{ flex: 1 }}
         contentContainerStyle={{ paddingBottom: space.xl }}
@@ -59,13 +60,13 @@ export default function PhotoCompareScreen({ navigation }: Props) {
       >
         {/* Header */}
         <View style={{ paddingHorizontal: space.lg, paddingTop: space.md, paddingBottom: space.lg }}>
-          <Typography variant="caption" color={lightTheme.textMuted} weight="600">
+          <Typography variant="caption" color={theme.textMuted} weight="600">
             SIDE BY SIDE
           </Typography>
-          <Typography variant="heading1" color={lightTheme.textPrimary} style={{ marginTop: space.xs }}>
+          <Typography variant="heading1" color={theme.textPrimary} style={{ marginTop: space.xs }}>
             Compare Photos
           </Typography>
-          <Typography variant="body" color={lightTheme.textSecondary} style={{ marginTop: space.sm }}>
+          <Typography variant="body" color={theme.textSecondary} style={{ marginTop: space.sm }}>
             See your transformation
           </Typography>
         </View>
@@ -78,18 +79,18 @@ export default function PhotoCompareScreen({ navigation }: Props) {
                   width: 80,
                   height: 80,
                   borderRadius: 40,
-                  backgroundColor: lightTheme.primaryLight,
+                  backgroundColor: theme.primaryLight,
                   alignItems: "center",
                   justifyContent: "center",
                   marginBottom: space.md,
                 }}
               >
-                <Icon name="GitCompare" size={36} color={lightTheme.primary} />
+                <Icon name="GitCompare" size={36} color={theme.primary} />
               </View>
-              <Typography variant="heading3" color={lightTheme.textPrimary} align="center">
+              <Typography variant="heading3" color={theme.textPrimary} align="center">
                 Need more photos
               </Typography>
-              <Typography variant="body" color={lightTheme.textSecondary} align="center" style={{ marginTop: space.sm }}>
+              <Typography variant="body" color={theme.textSecondary} align="center" style={{ marginTop: space.sm }}>
                 Capture at least 2 photos to start comparing your progress.
               </Typography>
             </Card>
@@ -106,16 +107,16 @@ export default function PhotoCompareScreen({ navigation }: Props) {
                         width: 24,
                         height: 24,
                         borderRadius: 12,
-                        backgroundColor: lightTheme.primary,
+                        backgroundColor: theme.primary,
                         alignItems: "center",
                         justifyContent: "center",
                       }}
                     >
-                      <Typography variant="caption" color={lightTheme.primaryText} weight="700">
+                      <Typography variant="caption" color={theme.primaryText} weight="700">
                         1
                       </Typography>
                     </View>
-                    <Typography variant="caption" color={lightTheme.textMuted} weight="700">
+                    <Typography variant="caption" color={theme.textMuted} weight="700">
                       BEFORE
                     </Typography>
                   </View>
@@ -127,17 +128,17 @@ export default function PhotoCompareScreen({ navigation }: Props) {
                         style={{
                           width: "100%",
                           height: 220,
-                          backgroundColor: lightTheme.surfaceSecondary,
+                          backgroundColor: theme.surfaceSecondary,
                           alignItems: "center",
                           justifyContent: "center",
                         }}
                       >
-                        <Icon name="Image" size={32} color={lightTheme.textMuted} />
+                        <Icon name="Image" size={32} color={theme.textMuted} />
                       </View>
                     )}
                   </Card>
                   {photo1 && (
-                    <Typography variant="caption" color={lightTheme.textPrimary} weight="600" style={{ marginTop: space.sm, textAlign: "center" }}>
+                    <Typography variant="caption" color={theme.textPrimary} weight="600" style={{ marginTop: space.sm, textAlign: "center" }}>
                       {new Date(photo1.date).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })}
                     </Typography>
                   )}
@@ -149,16 +150,16 @@ export default function PhotoCompareScreen({ navigation }: Props) {
                         width: 24,
                         height: 24,
                         borderRadius: 12,
-                        backgroundColor: lightTheme.success.DEFAULT,
+                        backgroundColor: theme.success,
                         alignItems: "center",
                         justifyContent: "center",
                       }}
                     >
-                      <Typography variant="caption" color={lightTheme.primaryText} weight="700">
+                      <Typography variant="caption" color={theme.primaryText} weight="700">
                         2
                       </Typography>
                     </View>
-                    <Typography variant="caption" color={lightTheme.textMuted} weight="700">
+                    <Typography variant="caption" color={theme.textMuted} weight="700">
                       AFTER
                     </Typography>
                   </View>
@@ -170,17 +171,17 @@ export default function PhotoCompareScreen({ navigation }: Props) {
                         style={{
                           width: "100%",
                           height: 220,
-                          backgroundColor: lightTheme.surfaceSecondary,
+                          backgroundColor: theme.surfaceSecondary,
                           alignItems: "center",
                           justifyContent: "center",
                         }}
                       >
-                        <Icon name="Image" size={32} color={lightTheme.textMuted} />
+                        <Icon name="Image" size={32} color={theme.textMuted} />
                       </View>
                     )}
                   </Card>
                   {photo2 && (
-                    <Typography variant="caption" color={lightTheme.textPrimary} weight="600" style={{ marginTop: space.sm, textAlign: "center" }}>
+                    <Typography variant="caption" color={theme.textPrimary} weight="600" style={{ marginTop: space.sm, textAlign: "center" }}>
                       {new Date(photo2.date).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })}
                     </Typography>
                   )}
@@ -190,7 +191,7 @@ export default function PhotoCompareScreen({ navigation }: Props) {
               {photo1 && photo2 && (
                 <View
                   style={{
-                    backgroundColor: lightTheme.primaryLight,
+                    backgroundColor: theme.primaryLight,
                     borderRadius: radius.md,
                     padding: space.md,
                     marginTop: space.lg,
@@ -199,8 +200,8 @@ export default function PhotoCompareScreen({ navigation }: Props) {
                     gap: space.sm,
                   }}
                 >
-                  <Icon name="Calendar" size={16} color={lightTheme.primary} />
-                  <Typography variant="bodySmall" color={lightTheme.primary} weight="700">
+                  <Icon name="Calendar" size={16} color={theme.primary} />
+                  <Typography variant="bodySmall" color={theme.primary} weight="700">
                     {daysBetween} day{daysBetween !== 1 ? "s" : ""} of progress
                   </Typography>
                 </View>
@@ -210,8 +211,8 @@ export default function PhotoCompareScreen({ navigation }: Props) {
             {/* Photo selection */}
             <View style={{ paddingHorizontal: space.lg }}>
               <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.md }}>
-                <Icon name="Images" size={18} color={lightTheme.textPrimary} />
-                <Typography variant="heading3" color={lightTheme.textPrimary}>
+                <Icon name="Images" size={18} color={theme.textPrimary} />
+                <Typography variant="heading3" color={theme.textPrimary}>
                   Select Photos
                 </Typography>
               </View>
@@ -238,9 +239,9 @@ export default function PhotoCompareScreen({ navigation }: Props) {
                       shadow="sm"
                       style={{
                         padding: space.md,
-                        borderColor: isSelected ? lightTheme.primary : lightTheme.border,
+                        borderColor: isSelected ? theme.primary : theme.border,
                         borderWidth: isSelected ? 2 : 1,
-                        backgroundColor: isSelected ? lightTheme.primaryLight : lightTheme.surface,
+                        backgroundColor: isSelected ? theme.primaryLight : theme.surface,
                       }}
                     >
                       <View style={{ flexDirection: "row", alignItems: "center", gap: space.md }}>
@@ -250,19 +251,19 @@ export default function PhotoCompareScreen({ navigation }: Props) {
                           resizeMode="cover"
                         />
                         <View style={{ flex: 1 }}>
-                          <Typography variant="body" color={lightTheme.textPrimary} weight="600">
+                          <Typography variant="body" color={theme.textPrimary} weight="600">
                             {new Date(photo.date).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })}
                           </Typography>
                           <View style={{ flexDirection: "row", alignItems: "center", gap: space.xs, marginTop: 2 }}>
                             <View
                               style={{
-                                backgroundColor: lightTheme.primary,
+                                backgroundColor: theme.primary,
                                 paddingHorizontal: 6,
                                 paddingVertical: 1,
                                 borderRadius: 4,
                               }}
                             >
-                              <Typography variant="caption" color={lightTheme.primaryText} weight="700" style={{ fontSize: 10 }}>
+                              <Typography variant="caption" color={theme.primaryText} weight="700" style={{ fontSize: 10 }}>
                                 {photo.type}
                               </Typography>
                             </View>
@@ -274,12 +275,12 @@ export default function PhotoCompareScreen({ navigation }: Props) {
                               width: 32,
                               height: 32,
                               borderRadius: 16,
-                              backgroundColor: lightTheme.primary,
+                              backgroundColor: theme.primary,
                               alignItems: "center",
                               justifyContent: "center",
                             }}
                           >
-                            <Typography variant="bodySmall" color={lightTheme.primaryText} weight="700">
+                            <Typography variant="bodySmall" color={theme.primaryText} weight="700">
                               1
                             </Typography>
                           </View>
@@ -290,12 +291,12 @@ export default function PhotoCompareScreen({ navigation }: Props) {
                               width: 32,
                               height: 32,
                               borderRadius: 16,
-                              backgroundColor: lightTheme.success.DEFAULT,
+                              backgroundColor: theme.success,
                               alignItems: "center",
                               justifyContent: "center",
                             }}
                           >
-                            <Typography variant="bodySmall" color={lightTheme.primaryText} weight="700">
+                            <Typography variant="bodySmall" color={theme.primaryText} weight="700">
                               2
                             </Typography>
                           </View>
@@ -313,7 +314,7 @@ export default function PhotoCompareScreen({ navigation }: Props) {
                     onPress={() => { setSelected1(null); setSelected2(null); }}
                     variant="secondary"
                     size="md"
-                    icon={<Icon name="X" size={18} color={lightTheme.secondaryText} />}
+                    icon={<Icon name="X" size={18} color={theme.secondaryText} />}
                   />
                 </View>
               )}

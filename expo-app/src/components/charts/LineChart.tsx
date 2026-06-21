@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import Svg, { Path, Line, Circle, Text as SvgText, Defs, LinearGradient, Stop } from "react-native-svg";
-import { lightTheme } from "../../theme/colors";
+import { useTheme } from "../../theme/themeStore";
 import { typography } from "../../theme/typography";
 
 export interface ChartPoint {
@@ -25,13 +25,15 @@ export default function LineChart({
   data,
   width = 320,
   height = 200,
-  color = lightTheme.primary,
+  color,
   showDots = true,
   showLabels = true,
   showGrid = true,
   yAxisFormatter = (v) => Math.round(v).toString(),
   unit = "",
 }: LineChartProps) {
+  const theme = useTheme();
+  const defaultColor = color || theme.primary;
   if (!data || data.length === 0) {
     return <View style={{ height, width, justifyContent: "center", alignItems: "center" }} />;
   }
@@ -82,8 +84,8 @@ export default function LineChart({
     <Svg width={width} height={height}>
       <Defs>
         <LinearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1">
-          <Stop offset="0%" stopColor={color} stopOpacity={0.25} />
-          <Stop offset="100%" stopColor={color} stopOpacity={0} />
+          <Stop offset="0%" stopColor={defaultColor} stopOpacity={0.25} />
+          <Stop offset="100%" stopColor={defaultColor} stopOpacity={0} />
         </LinearGradient>
       </Defs>
 
@@ -96,7 +98,7 @@ export default function LineChart({
               y1={g.y}
               x2={width - padding.right}
               y2={g.y}
-              stroke={lightTheme.border}
+              stroke={theme.border}
               strokeWidth={1}
               strokeDasharray={i === 4 ? "0" : "3,3"}
             />
@@ -104,7 +106,7 @@ export default function LineChart({
               x={padding.left - 8}
               y={g.y + 4}
               fontSize={10}
-              fill={lightTheme.textMuted}
+              fill={theme.textMuted}
               textAnchor="end"
             >
               {yAxisFormatter(g.v)}
@@ -116,12 +118,12 @@ export default function LineChart({
       {areaPath && <Path d={areaPath} fill="url(#lineGrad)" />}
 
       {/* Line */}
-      <Path d={linePath} stroke={color} strokeWidth={2.5} fill="none" />
+      <Path d={linePath} stroke={defaultColor} strokeWidth={2.5} fill="none" />
 
       {/* Dots */}
       {showDots &&
         points.map((p, i) => (
-          <Circle key={`d-${i}`} cx={p.x} cy={p.y} r={4} fill="#fff" stroke={color} strokeWidth={2} />
+          <Circle key={`d-${i}`} cx={p.x} cy={p.y} r={4} fill="#fff" stroke={defaultColor} strokeWidth={2} />
         ))}
 
       {/* X labels */}
@@ -134,7 +136,7 @@ export default function LineChart({
               x={x}
               y={height - 8}
               fontSize={10}
-              fill={lightTheme.textMuted}
+              fill={theme.textMuted}
               textAnchor="middle"
             >
               {d.label}

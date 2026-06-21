@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Image, StyleSheet, ActivityIndicator } from "react-native";
-import { lightTheme } from "../theme/colors";
-import { radius, space } from "../theme/spacing";
+import { useTheme } from "../theme/themeStore";
+import { radius } from "../theme/spacing";
 
 interface ExerciseImageCarouselProps {
   images: { url: string }[];
@@ -12,6 +12,7 @@ export default function ExerciseImageCarousel({
   images,
   intervalMs = 2000,
 }: ExerciseImageCarouselProps) {
+  const theme = useTheme();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
 
@@ -25,14 +26,14 @@ export default function ExerciseImageCarousel({
 
   if (!images || images.length === 0) {
     return (
-      <View style={styles.placeholder}>
-        <ActivityIndicator color={lightTheme.textMuted} />
+      <View style={[styles.placeholder, { backgroundColor: theme.surfaceSecondary }]}>
+        <ActivityIndicator color={theme.textMuted} />
       </View>
     );
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: theme.surfaceSecondary }]}>
       {images.map((img, index) => (
         <Image
           key={img.url}
@@ -46,8 +47,8 @@ export default function ExerciseImageCarousel({
         />
       ))}
       {loading && (
-        <View style={styles.loadingOverlay}>
-          <ActivityIndicator color={lightTheme.textMuted} />
+        <View style={[styles.loadingOverlay, { backgroundColor: theme.surfaceSecondary }]}>
+          <ActivityIndicator color={theme.textMuted} />
         </View>
       )}
     </View>
@@ -60,7 +61,6 @@ const styles = StyleSheet.create({
     height: 200,
     borderRadius: radius.lg,
     overflow: "hidden",
-    backgroundColor: lightTheme.surfaceSecondary,
   },
   image: {
     ...StyleSheet.absoluteFillObject,
@@ -71,7 +71,6 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 200,
     borderRadius: radius.lg,
-    backgroundColor: lightTheme.surfaceSecondary,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -79,6 +78,5 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: lightTheme.surfaceSecondary,
   },
 });

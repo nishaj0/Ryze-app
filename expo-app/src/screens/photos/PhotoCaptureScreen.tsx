@@ -7,13 +7,14 @@ import * as ImagePicker from "expo-image-picker";
 import * as ImageManipulator from "expo-image-manipulator";
 import { uploadPhoto } from "../../api/photos";
 import { Typography, Card, Button, Icon, Input } from "../../components";
-import { lightTheme } from "../../theme/colors";
+import { useTheme } from "../../theme/themeStore";
 import { space, radius } from "../../theme/spacing";
 
 type Props = NativeStackScreenProps<PhotosStackParamList, "PhotoCapture">;
 
 export default function PhotoCaptureScreen({ navigation }: Props) {
   const [imageUri, setImageUri] = useState<string | null>(null);
+  const theme = useTheme();
   const [type, setType] = useState<"FRONT" | "BACK" | "SIDE">("FRONT");
   const [notes, setNotes] = useState("");
   const [uploading, setUploading] = useState(false);
@@ -65,7 +66,7 @@ export default function PhotoCaptureScreen({ navigation }: Props) {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg }} edges={["top"]}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: theme.bg }} edges={["top"]}>
       <ScrollView
         style={{ flex: 1 }}
         contentContainerStyle={{ padding: space.lg, paddingBottom: space.xl }}
@@ -73,13 +74,13 @@ export default function PhotoCaptureScreen({ navigation }: Props) {
       >
         {/* Header */}
         <View style={{ marginBottom: space.lg }}>
-          <Typography variant="caption" color={lightTheme.textMuted} weight="600">
+          <Typography variant="caption" color={theme.textMuted} weight="600">
             NEW PHOTO
           </Typography>
-          <Typography variant="heading1" color={lightTheme.textPrimary} style={{ marginTop: space.xs }}>
+          <Typography variant="heading1" color={theme.textPrimary} style={{ marginTop: space.xs }}>
             Take Progress Photo
           </Typography>
-          <Typography variant="body" color={lightTheme.textSecondary} style={{ marginTop: space.sm }}>
+          <Typography variant="body" color={theme.textSecondary} style={{ marginTop: space.sm }}>
             Track your visual transformation
           </Typography>
         </View>
@@ -93,18 +94,18 @@ export default function PhotoCaptureScreen({ navigation }: Props) {
                     width: 80,
                     height: 80,
                     borderRadius: 40,
-                    backgroundColor: lightTheme.primaryLight,
+                    backgroundColor: theme.primaryLight,
                     alignItems: "center",
                     justifyContent: "center",
                     marginBottom: space.md,
                   }}
                 >
-                  <Icon name="Camera" size={36} color={lightTheme.primary} />
+                  <Icon name="Camera" size={36} color={theme.primary} />
                 </View>
-                <Typography variant="heading3" color={lightTheme.textPrimary}>
+                <Typography variant="heading3" color={theme.textPrimary}>
                   Take Photo
                 </Typography>
-                <Typography variant="bodySmall" color={lightTheme.textSecondary} style={{ marginTop: space.xs }}>
+                <Typography variant="bodySmall" color={theme.textSecondary} style={{ marginTop: space.xs }}>
                   Use your camera
                 </Typography>
               </Card>
@@ -117,18 +118,18 @@ export default function PhotoCaptureScreen({ navigation }: Props) {
                     width: 80,
                     height: 80,
                     borderRadius: 40,
-                    backgroundColor: lightTheme.primaryLight,
+                    backgroundColor: theme.primaryLight,
                     alignItems: "center",
                     justifyContent: "center",
                     marginBottom: space.md,
                   }}
                 >
-                  <Icon name="Image" size={36} color={lightTheme.primary} />
+                  <Icon name="Image" size={36} color={theme.primary} />
                 </View>
-                <Typography variant="heading3" color={lightTheme.textPrimary}>
+                <Typography variant="heading3" color={theme.textPrimary}>
                   Choose from Gallery
                 </Typography>
-                <Typography variant="bodySmall" color={lightTheme.textSecondary} style={{ marginTop: space.xs }}>
+                <Typography variant="bodySmall" color={theme.textSecondary} style={{ marginTop: space.xs }}>
                   Select existing photo
                 </Typography>
               </Card>
@@ -144,18 +145,18 @@ export default function PhotoCaptureScreen({ navigation }: Props) {
               style={{
                 marginTop: space.md,
                 padding: space.md,
-                backgroundColor: lightTheme.surfaceSecondary,
+                backgroundColor: theme.surfaceSecondary,
                 borderRadius: radius.md,
                 alignItems: "center",
                 flexDirection: "row",
                 justifyContent: "center",
                 gap: space.sm,
                 borderWidth: 1,
-                borderColor: lightTheme.border,
+                borderColor: theme.border,
               }}
             >
-              <Icon name="RefreshCw" size={16} color={lightTheme.textSecondary} />
-              <Typography variant="body" color={lightTheme.textSecondary}>
+              <Icon name="RefreshCw" size={16} color={theme.textSecondary} />
+              <Typography variant="body" color={theme.textSecondary}>
                 Choose Different Photo
               </Typography>
             </TouchableOpacity>
@@ -165,7 +166,7 @@ export default function PhotoCaptureScreen({ navigation }: Props) {
         {imageUri && (
           <>
             <View style={{ marginBottom: space.lg }}>
-              <Typography variant="label" color={lightTheme.textSecondary} style={{ marginBottom: space.sm }}>
+              <Typography variant="label" color={theme.textSecondary} style={{ marginBottom: space.sm }}>
                 PHOTO TYPE
               </Typography>
               <View style={{ flexDirection: "row", gap: space.sm }}>
@@ -177,15 +178,15 @@ export default function PhotoCaptureScreen({ navigation }: Props) {
                       onPress={() => setType(t)}
                       style={{
                         flex: 1,
-                        backgroundColor: isSelected ? lightTheme.primary : lightTheme.surface,
+                        backgroundColor: isSelected ? theme.primary : theme.surface,
                         borderRadius: radius.md,
                         padding: space.md,
                         alignItems: "center",
                         borderWidth: isSelected ? 2 : 1,
-                        borderColor: isSelected ? lightTheme.primary : lightTheme.border,
+                        borderColor: isSelected ? theme.primary : theme.border,
                       }}
                     >
-                      <Typography variant="body" color={isSelected ? lightTheme.primaryText : lightTheme.textPrimary} weight="600">
+                      <Typography variant="body" color={isSelected ? theme.primaryText : theme.textPrimary} weight="600">
                         {t}
                       </Typography>
                     </TouchableOpacity>
@@ -213,7 +214,7 @@ export default function PhotoCaptureScreen({ navigation }: Props) {
               disabled={uploading}
               variant="primary"
               size="lg"
-              icon={<Icon name="Upload" size={20} color={lightTheme.primaryText} />}
+              icon={<Icon name="Upload" size={20} color={theme.primaryText} />}
             />
           </>
         )}

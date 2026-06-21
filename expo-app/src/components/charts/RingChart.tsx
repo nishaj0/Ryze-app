@@ -1,6 +1,6 @@
 import React from "react";
 import Svg, { Circle, Text as SvgText } from "react-native-svg";
-import { lightTheme } from "../../theme/colors";
+import { useTheme } from "../../theme/themeStore";
 
 interface RingChartProps {
   value: number;
@@ -18,11 +18,14 @@ export default function RingChart({
   max,
   size = 120,
   strokeWidth = 12,
-  color = lightTheme.primary,
-  trackColor = lightTheme.surfaceTertiary,
+  color,
+  trackColor,
   label,
   unit = "",
 }: RingChartProps) {
+  const theme = useTheme();
+  const defaultColor = color || theme.primary;
+  const defaultTrackColor = trackColor || theme.surfaceTertiary;
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
   const percent = Math.min(value / Math.max(max, 1), 1);
@@ -35,7 +38,7 @@ export default function RingChart({
         cx={size / 2}
         cy={size / 2}
         r={radius}
-        stroke={trackColor}
+        stroke={defaultTrackColor}
         strokeWidth={strokeWidth}
         fill="none"
       />
@@ -44,7 +47,7 @@ export default function RingChart({
         cx={size / 2}
         cy={size / 2}
         r={radius}
-        stroke={color}
+        stroke={defaultColor}
         strokeWidth={strokeWidth}
         fill="none"
         strokeDasharray={circumference}
@@ -61,18 +64,18 @@ export default function RingChart({
         y={size / 2 - 4}
         fontSize={size / 4.5}
         fontWeight="700"
-        fill={lightTheme.textPrimary}
+        fill={theme.textPrimary}
         textAnchor="middle"
       >
         {Math.round(value)}
-        {unit && <SvgText fontSize={size / 9} fill={lightTheme.textMuted}>{unit}</SvgText>}
+        {unit && <SvgText fontSize={size / 9} fill={theme.textMuted}>{unit}</SvgText>}
       </SvgText>
       {label && (
         <SvgText
           x={size / 2}
           y={size / 2 + size / 5.5}
           fontSize={size / 12}
-          fill={lightTheme.textMuted}
+          fill={theme.textMuted}
           textAnchor="middle"
         >
           {label}

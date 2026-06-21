@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Typography } from "./index";
-import { lightTheme } from "../theme/colors";
+import { useTheme } from "../theme/themeStore";
 import { radius, space } from "../theme/spacing";
 import { ExerciseMuscle } from "../types";
 
@@ -12,19 +12,20 @@ interface ExerciseMetaBadgesProps {
   muscles: ExerciseMuscle[] | undefined;
 }
 
-const levelColors: Record<string, { bg: string; text: string }> = {
-  beginner: { bg: lightTheme.successBg, text: lightTheme.successText },
-  intermediate: { bg: lightTheme.warningBg, text: lightTheme.warningText },
-  expert: { bg: lightTheme.errorBg, text: lightTheme.errorText },
-};
-
 export default function ExerciseMetaBadges({
   level,
   mechanic,
   equipment,
   muscles,
 }: ExerciseMetaBadgesProps) {
-  const levelColor = levelColors[level] || { bg: lightTheme.surfaceSecondary, text: lightTheme.textSecondary };
+  const theme = useTheme();
+
+  const levelColorMap: Record<string, { bg: string; text: string }> = {
+    beginner: { bg: theme.successBg, text: theme.successText },
+    intermediate: { bg: theme.warningBg, text: theme.warningText },
+    expert: { bg: theme.errorBg, text: theme.errorText },
+  };
+  const levelColor = levelColorMap[level] || { bg: theme.surfaceSecondary, text: theme.textSecondary };
 
   const primaryMuscles = muscles?.filter((m) => m.isPrimary).map((m) => m.muscle.name) || [];
   const secondaryMuscles = muscles?.filter((m) => !m.isPrimary).map((m) => m.muscle.name) || [];
@@ -38,15 +39,15 @@ export default function ExerciseMetaBadges({
           </Typography>
         </View>
         {mechanic && (
-          <View style={[styles.badge, { backgroundColor: lightTheme.surfaceSecondary }]}>
-            <Typography variant="caption" color={lightTheme.textSecondary} weight="600">
+          <View style={[styles.badge, { backgroundColor: theme.surfaceSecondary }]}>
+            <Typography variant="caption" color={theme.textSecondary} weight="600">
               {mechanic}
             </Typography>
           </View>
         )}
         {equipment && equipment !== "body only" && (
-          <View style={[styles.badge, { backgroundColor: lightTheme.surfaceSecondary }]}>
-            <Typography variant="caption" color={lightTheme.textSecondary} weight="600">
+          <View style={[styles.badge, { backgroundColor: theme.surfaceSecondary }]}>
+            <Typography variant="caption" color={theme.textSecondary} weight="600">
               {equipment}
             </Typography>
           </View>
@@ -56,14 +57,14 @@ export default function ExerciseMetaBadges({
       {(primaryMuscles.length > 0 || secondaryMuscles.length > 0) && (
         <View style={styles.muscleRow}>
           {primaryMuscles.length > 0 && (
-            <Typography variant="caption" color={lightTheme.textSecondary} style={styles.muscleText}>
-              <Typography variant="caption" color={lightTheme.primary} weight="700">Primary: </Typography>
+            <Typography variant="caption" color={theme.textSecondary} style={styles.muscleText}>
+              <Typography variant="caption" color={theme.primary} weight="700">Primary: </Typography>
               {primaryMuscles.join(", ")}
             </Typography>
           )}
           {secondaryMuscles.length > 0 && (
-            <Typography variant="caption" color={lightTheme.textMuted} style={styles.muscleText}>
-              <Typography variant="caption" color={lightTheme.textSecondary} weight="600">Secondary: </Typography>
+            <Typography variant="caption" color={theme.textMuted} style={styles.muscleText}>
+              <Typography variant="caption" color={theme.textSecondary} weight="600">Secondary: </Typography>
               {secondaryMuscles.join(", ")}
             </Typography>
           )}

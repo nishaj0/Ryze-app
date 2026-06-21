@@ -7,7 +7,7 @@ import { createSplit, setActiveSplit } from "../../api/splits";
 import { listExercises } from "../../api/exercises";
 import { Exercise } from "../../types";
 import { Typography, Card, Icon, Button, Input, InlineListSkeleton } from "../../components";
-import { lightTheme } from "../../theme/colors";
+import { useTheme } from "../../theme/themeStore";
 import { space, radius } from "../../theme/spacing";
 
 type Props = NativeStackScreenProps<ProfileStackParamList, "CustomSplit">;
@@ -27,6 +27,7 @@ interface DayConfig {
 }
 
 const AVAILABLE_MUSCLE_GROUPS = ["chest", "back", "shoulders", "legs", "arms", "core"];
+const theme = useTheme();
 
 export default function CustomSplitScreen({ navigation }: Props) {
   const [name, setName] = useState("");
@@ -193,14 +194,14 @@ export default function CustomSplitScreen({ navigation }: Props) {
   });
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg }} edges={["top"]}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: theme.bg }} edges={["top"]}>
       <ScrollView style={{ flex: 1 }} contentContainerStyle={{ padding: space.lg, paddingBottom: 120 }} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
         {/* Header */}
         <View style={{ marginBottom: space.lg }}>
-          <Typography variant="caption" color={lightTheme.textMuted} weight="600">
+          <Typography variant="caption" color={theme.textMuted} weight="600">
             CREATOR
           </Typography>
-          <Typography variant="heading1" color={lightTheme.textPrimary} style={{ marginTop: space.xs }}>
+          <Typography variant="heading1" color={theme.textPrimary} style={{ marginTop: space.xs }}>
             Custom Split
           </Typography>
         </View>
@@ -212,21 +213,21 @@ export default function CustomSplitScreen({ navigation }: Props) {
             value={name}
             onChangeText={setName}
             placeholder="e.g. My Hypertrophy Split"
-            icon={<Icon name="PenTool" size={20} color={lightTheme.textMuted} />}
+            icon={<Icon name="PenTool" size={20} color={theme.textMuted} />}
           />
           <Input
             label="Description"
             value={description}
             onChangeText={setDescription}
             placeholder="e.g. Focused on upper body width"
-            icon={<Icon name="AlignLeft" size={20} color={lightTheme.textMuted} />}
+            icon={<Icon name="AlignLeft" size={20} color={theme.textMuted} />}
             containerStyle={{ marginBottom: 0 }}
           />
         </Card>
 
         {/* Days Select */}
         <Card shadow="sm" style={{ padding: space.lg, marginBottom: space.lg }}>
-          <Typography variant="label" color={lightTheme.textSecondary} style={{ marginBottom: space.sm }}>
+          <Typography variant="label" color={theme.textSecondary} style={{ marginBottom: space.sm }}>
             DAYS PER WEEK
           </Typography>
           <View style={{ flexDirection: "row", gap: space.xs }}>
@@ -240,14 +241,14 @@ export default function CustomSplitScreen({ navigation }: Props) {
                     flex: 1,
                     height: 40,
                     borderRadius: radius.md,
-                    backgroundColor: isSelected ? lightTheme.primary : lightTheme.surfaceSecondary,
+                    backgroundColor: isSelected ? theme.primary : theme.surfaceSecondary,
                     borderWidth: 1,
-                    borderColor: isSelected ? lightTheme.primary : lightTheme.border,
+                    borderColor: isSelected ? theme.primary : theme.border,
                     alignItems: "center",
                     justifyContent: "center",
                   }}
                 >
-                  <Typography variant="body" color={isSelected ? lightTheme.primaryText : lightTheme.textPrimary} weight="600">
+                  <Typography variant="body" color={isSelected ? theme.primaryText : theme.textPrimary} weight="600">
                     {num}
                   </Typography>
                 </TouchableOpacity>
@@ -257,7 +258,7 @@ export default function CustomSplitScreen({ navigation }: Props) {
         </Card>
 
         {/* Config area per Day */}
-        <Typography variant="heading3" color={lightTheme.textPrimary} style={{ marginBottom: space.sm }}>
+        <Typography variant="heading3" color={theme.textPrimary} style={{ marginBottom: space.sm }}>
           Configure Days
         </Typography>
 
@@ -274,12 +275,12 @@ export default function CustomSplitScreen({ navigation }: Props) {
                     paddingHorizontal: space.md,
                     paddingVertical: space.sm,
                     borderRadius: radius.full,
-                    backgroundColor: isActive ? lightTheme.primaryLight : lightTheme.surface,
+                    backgroundColor: isActive ? theme.primaryLight : theme.surface,
                     borderWidth: 1,
-                    borderColor: isActive ? lightTheme.primary : lightTheme.border,
+                    borderColor: isActive ? theme.primary : theme.border,
                   }}
                 >
-                  <Typography variant="bodySmall" color={isActive ? lightTheme.primary : lightTheme.textPrimary} weight="700">
+                  <Typography variant="bodySmall" color={isActive ? theme.primary : theme.textPrimary} weight="700">
                     Day {d.dayNumber} {d.isRest ? "💤" : "🔥"}
                   </Typography>
                 </TouchableOpacity>
@@ -292,18 +293,18 @@ export default function CustomSplitScreen({ navigation }: Props) {
         {days[activeDayIdx] && (
           <Card shadow="sm" style={{ padding: space.lg }}>
             <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: space.md }}>
-              <Typography variant="heading2" color={lightTheme.textPrimary}>
+              <Typography variant="heading2" color={theme.textPrimary}>
                 {days[activeDayIdx].name}
               </Typography>
               <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
-                <Typography variant="bodySmall" color={lightTheme.textSecondary}>
+                <Typography variant="bodySmall" color={theme.textSecondary}>
                   Rest Day?
                 </Typography>
                 <Switch
                   value={days[activeDayIdx].isRest}
                   onValueChange={(val) => handleToggleRest(activeDayIdx, val)}
-                  trackColor={{ false: lightTheme.surfaceTertiary, true: lightTheme.primary }}
-                  thumbColor={lightTheme.surface}
+                  trackColor={{ false: theme.surfaceTertiary, true: theme.primary }}
+                  thumbColor={theme.surface}
                 />
               </View>
             </View>
@@ -323,7 +324,7 @@ export default function CustomSplitScreen({ navigation }: Props) {
             {!days[activeDayIdx].isRest && (
               <>
                 {/* Muscle Target Selection */}
-                <Typography variant="label" color={lightTheme.textSecondary} style={{ marginBottom: space.sm }}>
+                <Typography variant="label" color={theme.textSecondary} style={{ marginBottom: space.sm }}>
                   TARGET MUSCLE GROUPS
                 </Typography>
                 <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space.xs, marginBottom: space.lg }}>
@@ -334,15 +335,15 @@ export default function CustomSplitScreen({ navigation }: Props) {
                         key={mg}
                         onPress={() => handleToggleMuscle(activeDayIdx, mg)}
                         style={{
-                          backgroundColor: isSelected ? lightTheme.primaryLight : lightTheme.surfaceSecondary,
-                          borderColor: isSelected ? lightTheme.primary : lightTheme.border,
+                          backgroundColor: isSelected ? theme.primaryLight : theme.surfaceSecondary,
+                          borderColor: isSelected ? theme.primary : theme.border,
                           borderWidth: 1,
                           borderRadius: 8,
                           paddingHorizontal: space.md,
                           paddingVertical: space.sm,
                         }}
                       >
-                        <Typography variant="caption" color={isSelected ? lightTheme.primary : lightTheme.textPrimary} weight="600" style={{ textTransform: "capitalize" }}>
+                        <Typography variant="caption" color={isSelected ? theme.primary : theme.textPrimary} weight="600" style={{ textTransform: "capitalize" }}>
                           {mg}
                         </Typography>
                       </TouchableOpacity>
@@ -352,7 +353,7 @@ export default function CustomSplitScreen({ navigation }: Props) {
 
                 {/* Exercises list for this Day */}
                 <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: space.sm }}>
-                  <Typography variant="label" color={lightTheme.textSecondary}>
+                  <Typography variant="label" color={theme.textSecondary}>
                     EXERCISES ({days[activeDayIdx].exercises.length})
                   </Typography>
                   <TouchableOpacity
@@ -363,48 +364,48 @@ export default function CustomSplitScreen({ navigation }: Props) {
                     }}
                     style={{ flexDirection: "row", alignItems: "center", gap: 4 }}
                   >
-                    <Icon name="Plus" size={14} color={lightTheme.primary} />
-                    <Typography variant="bodySmall" color={lightTheme.primary} weight="600">
+                    <Icon name="Plus" size={14} color={theme.primary} />
+                    <Typography variant="bodySmall" color={theme.primary} weight="600">
                       Add
                     </Typography>
                   </TouchableOpacity>
                 </View>
 
                 {days[activeDayIdx].exercises.length === 0 ? (
-                  <View style={{ padding: space.xl, alignItems: "center", borderWidth: 1, borderColor: lightTheme.border, borderStyle: "dashed", borderRadius: radius.md }}>
-                    <Typography variant="bodySmall" color={lightTheme.textMuted}>
+                  <View style={{ padding: space.xl, alignItems: "center", borderWidth: 1, borderColor: theme.border, borderStyle: "dashed", borderRadius: radius.md }}>
+                    <Typography variant="bodySmall" color={theme.textMuted}>
                       No exercises added yet. Tap "Add" above.
                     </Typography>
                   </View>
                 ) : (
                   <View style={{ gap: space.sm }}>
                     {days[activeDayIdx].exercises.map((ex) => (
-                      <Card key={ex.exerciseId} style={{ backgroundColor: lightTheme.surfaceSecondary, padding: space.md }}>
+                      <Card key={ex.exerciseId} style={{ backgroundColor: theme.surfaceSecondary, padding: space.md }}>
                         <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: space.md }}>
-                          <Typography variant="body" color={lightTheme.textPrimary} weight="700">
+                          <Typography variant="body" color={theme.textPrimary} weight="700">
                             {ex.name}
                           </Typography>
                           <TouchableOpacity onPress={() => handleRemoveExercise(activeDayIdx, ex.exerciseId)}>
-                            <Icon name="X" size={16} color={lightTheme.danger.DEFAULT} />
+                            <Icon name="X" size={16} color={theme.danger} />
                           </TouchableOpacity>
                         </View>
 
                         {/* Sets / Reps targets */}
                         <View style={{ flexDirection: "row", gap: space.md }}>
                           <View style={{ flex: 1 }}>
-                            <Typography variant="caption" color={lightTheme.textMuted} style={{ marginBottom: 4 }}>SETS</Typography>
+                            <Typography variant="caption" color={theme.textMuted} style={{ marginBottom: 4 }}>SETS</Typography>
                             <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
-                              <TouchableOpacity onPress={() => handleUpdateExerciseTarget(activeDayIdx, ex.exerciseId, "targetSets", ex.targetSets - 1)} style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: lightTheme.surface, borderWidth: 1, borderColor: lightTheme.border, alignItems: "center", justifyContent: "center" }}>
-                                <Typography variant="body" color={lightTheme.textPrimary}>-</Typography>
+                              <TouchableOpacity onPress={() => handleUpdateExerciseTarget(activeDayIdx, ex.exerciseId, "targetSets", ex.targetSets - 1)} style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: theme.surface, borderWidth: 1, borderColor: theme.border, alignItems: "center", justifyContent: "center" }}>
+                                <Typography variant="body" color={theme.textPrimary}>-</Typography>
                               </TouchableOpacity>
-                              <Typography variant="body" color={lightTheme.textPrimary} weight="700">{ex.targetSets}</Typography>
-                              <TouchableOpacity onPress={() => handleUpdateExerciseTarget(activeDayIdx, ex.exerciseId, "targetSets", ex.targetSets + 1)} style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: lightTheme.surface, borderWidth: 1, borderColor: lightTheme.border, alignItems: "center", justifyContent: "center" }}>
-                                <Typography variant="body" color={lightTheme.textPrimary}>+</Typography>
+                              <Typography variant="body" color={theme.textPrimary} weight="700">{ex.targetSets}</Typography>
+                              <TouchableOpacity onPress={() => handleUpdateExerciseTarget(activeDayIdx, ex.exerciseId, "targetSets", ex.targetSets + 1)} style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: theme.surface, borderWidth: 1, borderColor: theme.border, alignItems: "center", justifyContent: "center" }}>
+                                <Typography variant="body" color={theme.textPrimary}>+</Typography>
                               </TouchableOpacity>
                             </View>
                           </View>
                           <View style={{ flex: 1.5 }}>
-                            <Typography variant="caption" color={lightTheme.textMuted} style={{ marginBottom: 4 }}>REPS RANGE</Typography>
+                            <Typography variant="caption" color={theme.textMuted} style={{ marginBottom: 4 }}>REPS RANGE</Typography>
                             <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
                               <View style={{ flex: 1 }}>
                                 <Input
@@ -416,7 +417,7 @@ export default function CustomSplitScreen({ navigation }: Props) {
                                   style={{ paddingVertical: 4, height: 32, textAlign: "center" }}
                                 />
                               </View>
-                              <Typography variant="bodySmall" color={lightTheme.textMuted}>-</Typography>
+                              <Typography variant="bodySmall" color={theme.textMuted}>-</Typography>
                               <View style={{ flex: 1 }}>
                                 <Input
                                   value={String(ex.targetRepsMax)}
@@ -441,26 +442,26 @@ export default function CustomSplitScreen({ navigation }: Props) {
       </ScrollView>
 
       {/* Save Button */}
-      <View style={{ position: "absolute", bottom: 0, left: 0, right: 0, backgroundColor: lightTheme.surface, borderTopWidth: 1, borderTopColor: lightTheme.border, padding: space.lg }}>
+      <View style={{ position: "absolute", bottom: 0, left: 0, right: 0, backgroundColor: theme.surface, borderTopWidth: 1, borderTopColor: theme.border, padding: space.lg }}>
         <Button
           title="Create & Activate Split"
           onPress={handleCreateSplit}
           variant="primary"
           size="lg"
-          icon={<Icon name="Save" size={20} color={lightTheme.primaryText} />}
+          icon={<Icon name="Save" size={20} color={theme.primaryText} />}
         />
       </View>
 
       {/* Add Exercise Modal */}
       <Modal visible={exerciseModalVisible} transparent animationType="slide">
-        <View style={{ flex: 1, justifyContent: "flex-end", backgroundColor: lightTheme.bgOverlay }}>
-          <View style={{ backgroundColor: lightTheme.surface, borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: space.lg, maxHeight: "80%" }}>
+        <View style={{ flex: 1, justifyContent: "flex-end", backgroundColor: theme.bgOverlay }}>
+          <View style={{ backgroundColor: theme.surface, borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: space.lg, maxHeight: "80%" }}>
             <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: space.md }}>
-              <Typography variant="heading2" color={lightTheme.textPrimary}>
+              <Typography variant="heading2" color={theme.textPrimary}>
                 Select Exercise
               </Typography>
               <TouchableOpacity onPress={() => setExerciseModalVisible(false)}>
-                <Icon name="X" size={24} color={lightTheme.textMuted} />
+                <Icon name="X" size={24} color={theme.textMuted} />
               </TouchableOpacity>
             </View>
 
@@ -468,7 +469,7 @@ export default function CustomSplitScreen({ navigation }: Props) {
               value={searchQuery}
               onChangeText={setSearchQuery}
               placeholder="Search exercise library..."
-              icon={<Icon name="Search" size={18} color={lightTheme.textMuted} />}
+              icon={<Icon name="Search" size={18} color={theme.textMuted} />}
             />
 
             {/* Muscle Filter Row */}
@@ -477,13 +478,13 @@ export default function CustomSplitScreen({ navigation }: Props) {
                 <TouchableOpacity
                   onPress={() => setSelectedMuscleFilter(null)}
                   style={{
-                    backgroundColor: selectedMuscleFilter === null ? lightTheme.primaryLight : lightTheme.surfaceSecondary,
+                    backgroundColor: selectedMuscleFilter === null ? theme.primaryLight : theme.surfaceSecondary,
                     paddingHorizontal: space.md,
                     paddingVertical: space.sm,
                     borderRadius: radius.full,
                   }}
                 >
-                  <Typography variant="caption" color={selectedMuscleFilter === null ? lightTheme.primary : lightTheme.textPrimary} weight="600">
+                  <Typography variant="caption" color={selectedMuscleFilter === null ? theme.primary : theme.textPrimary} weight="600">
                     All
                   </Typography>
                 </TouchableOpacity>
@@ -492,13 +493,13 @@ export default function CustomSplitScreen({ navigation }: Props) {
                     key={mg}
                     onPress={() => setSelectedMuscleFilter(mg)}
                     style={{
-                      backgroundColor: selectedMuscleFilter === mg ? lightTheme.primaryLight : lightTheme.surfaceSecondary,
+                      backgroundColor: selectedMuscleFilter === mg ? theme.primaryLight : theme.surfaceSecondary,
                       paddingHorizontal: space.md,
                       paddingVertical: space.sm,
                       borderRadius: radius.full,
                     }}
                   >
-                    <Typography variant="caption" color={selectedMuscleFilter === mg ? lightTheme.primary : lightTheme.textPrimary} weight="600" style={{ textTransform: "capitalize" }}>
+                    <Typography variant="caption" color={selectedMuscleFilter === mg ? theme.primary : theme.textPrimary} weight="600" style={{ textTransform: "capitalize" }}>
                       {mg}
                     </Typography>
                   </TouchableOpacity>
@@ -510,7 +511,7 @@ export default function CustomSplitScreen({ navigation }: Props) {
               {loadingExercises ? (
                 <InlineListSkeleton rows={4} />
               ) : filteredExercises.length === 0 ? (
-                <Typography variant="body" color={lightTheme.textMuted} align="center" style={{ padding: space.xl }}>
+                <Typography variant="body" color={theme.textMuted} align="center" style={{ padding: space.xl }}>
                   No exercises found matching filters.
                 </Typography>
               ) : (
@@ -519,18 +520,18 @@ export default function CustomSplitScreen({ navigation }: Props) {
                     key={ex.id}
                     onPress={() => handleAddExerciseToDay(ex)}
                     style={{
-                      backgroundColor: lightTheme.surfaceSecondary,
+                      backgroundColor: theme.surfaceSecondary,
                       borderRadius: radius.md,
                       padding: space.md,
                       marginBottom: space.sm,
                       borderWidth: 1,
-                      borderColor: lightTheme.border,
+                      borderColor: theme.border,
                     }}
                   >
-                    <Typography variant="body" color={lightTheme.textPrimary} weight="600">
+                    <Typography variant="body" color={theme.textPrimary} weight="600">
                       {ex.name}
                     </Typography>
-                    <Typography variant="caption" color={lightTheme.textMuted} style={{ textTransform: "capitalize", marginTop: 2 }}>
+                    <Typography variant="caption" color={theme.textMuted} style={{ textTransform: "capitalize", marginTop: 2 }}>
                       {ex.muscles?.find(m => m.isPrimary)?.muscle.name || ""}
                     </Typography>
                   </TouchableOpacity>

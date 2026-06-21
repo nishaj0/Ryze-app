@@ -18,12 +18,13 @@ import {
 } from "../../types";
 import { Typography, Card, Icon, Button, DashboardScreenSkeleton } from "../../components";
 import { LineChart, BarChart, Heatmap, RingChart } from "../../components/charts";
-import { lightTheme } from "../../theme/colors";
+import { useTheme } from "../../theme/themeStore";
 import { space, radius } from "../../theme/spacing";
 
 type Props = NativeStackScreenProps<ProgressStackParamList, "Dashboard">;
 
 const { width: screenW } = Dimensions.get("window");
+const theme = useTheme();
 
 export default function DashboardScreen({ navigation }: Props) {
   const [overview, setOverview] = useState<ProgressOverview | null>(null);
@@ -62,7 +63,7 @@ export default function DashboardScreen({ navigation }: Props) {
 
   if (loading) {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg }} edges={["top"]}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: theme.bg }} edges={["top"]}>
         <DashboardScreenSkeleton />
       </SafeAreaView>
     );
@@ -85,7 +86,7 @@ export default function DashboardScreen({ navigation }: Props) {
   const heatmapData = heatmap.map((h) => ({ date: h.date, count: h.count }));
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: lightTheme.bg }} edges={["top"]}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: theme.bg }} edges={["top"]}>
       <ScrollView
         style={{ flex: 1 }}
         contentContainerStyle={{ paddingBottom: space.xl }}
@@ -93,10 +94,10 @@ export default function DashboardScreen({ navigation }: Props) {
       >
         {/* Header */}
         <View style={{ paddingHorizontal: space.lg, paddingTop: space.md, paddingBottom: space.lg }}>
-          <Typography variant="heading1" color={lightTheme.textPrimary}>
+          <Typography variant="heading1" color={theme.textPrimary}>
             Progress
           </Typography>
-          <Typography variant="body" color={lightTheme.textSecondary} style={{ marginTop: space.xs }}>
+          <Typography variant="body" color={theme.textSecondary} style={{ marginTop: space.xs }}>
             Track your gains over time
           </Typography>
         </View>
@@ -106,22 +107,22 @@ export default function DashboardScreen({ navigation }: Props) {
           <View style={{ flexDirection: "row", gap: space.md }}>
             <StatCard
               icon="Flame"
-              color={lightTheme.primary}
-              bg={lightTheme.primaryLight}
+              color={theme.primary}
+              bg={theme.primaryLight}
               value={overview?.currentStreak || 0}
               label="Day Streak"
             />
             <StatCard
               icon="Trophy"
-              color={lightTheme.warning}
+              color={theme.warning}
               bg="#FEF3C7"
               value={overview?.totalPRs || 0}
               label="PRs Set"
             />
             <StatCard
               icon="Dumbbell"
-              color={lightTheme.success}
-              bg={lightTheme.successBg}
+              color={theme.success}
+              bg={theme.successBg}
               value={overview?.totalWorkouts || 0}
               label="Workouts"
             />
@@ -134,24 +135,24 @@ export default function DashboardScreen({ navigation }: Props) {
             <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", marginBottom: space.md }}>
               <View style={{ flex: 1 }}>
                 <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.xs }}>
-                  <Icon name="TrendingUp" size={16} color={lightTheme.textMuted} />
-                  <Typography variant="caption" color={lightTheme.textMuted} weight="600">
+                  <Icon name="TrendingUp" size={16} color={theme.textMuted} />
+                  <Typography variant="caption" color={theme.textMuted} weight="600">
                     WEEKLY VOLUME
                   </Typography>
                 </View>
-                <Typography variant="heading1" color={lightTheme.textPrimary}>
-                  {currentWeekVol.toLocaleString()} <Typography variant="body" color={lightTheme.textMuted}>kg</Typography>
+                <Typography variant="heading1" color={theme.textPrimary}>
+                  {currentWeekVol.toLocaleString()} <Typography variant="body" color={theme.textMuted}>kg</Typography>
                 </Typography>
                 {volDelta !== 0 && (
                   <View style={{ flexDirection: "row", alignItems: "center", marginTop: 4, gap: 4 }}>
                     <Icon
                       name={volDelta > 0 ? "ArrowUp" : "ArrowDown"}
                       size={14}
-                      color={volDelta > 0 ? lightTheme.success.DEFAULT : lightTheme.danger.DEFAULT}
+                      color={volDelta > 0 ? theme.success : theme.danger}
                     />
                     <Typography
                       variant="bodySmall"
-                      color={volDelta > 0 ? lightTheme.success.DEFAULT : lightTheme.danger.DEFAULT}
+                      color={volDelta > 0 ? theme.success : theme.danger}
                       weight="600"
                     >
                       {Math.abs(volDelta)}% vs last week
@@ -166,21 +167,21 @@ export default function DashboardScreen({ navigation }: Props) {
                 data={volumeHistory.map((w) => ({ label: w.week, value: w.volume }))}
                 width={screenW - 80}
                 height={180}
-                color={lightTheme.primary}
+                color={theme.primary}
                 yAxisFormatter={(v) => v >= 1000 ? `${(v / 1000).toFixed(1)}k` : `${v}`}
               />
             )}
 
-            <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: space.md, paddingTop: space.md, borderTopWidth: 1, borderTopColor: lightTheme.border }}>
+            <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: space.md, paddingTop: space.md, borderTopWidth: 1, borderTopColor: theme.border }}>
               <View>
-                <Typography variant="caption" color={lightTheme.textMuted}>8-WEEK TOTAL</Typography>
-                <Typography variant="heading3" color={lightTheme.textPrimary}>
+                <Typography variant="caption" color={theme.textMuted}>8-WEEK TOTAL</Typography>
+                <Typography variant="heading3" color={theme.textPrimary}>
                   {(totalVolume / 1000).toFixed(1)}k kg
                 </Typography>
               </View>
               <View>
-                <Typography variant="caption" color={lightTheme.textMuted}>THIS WEEK</Typography>
-                <Typography variant="heading3" color={lightTheme.textPrimary}>
+                <Typography variant="caption" color={theme.textMuted}>THIS WEEK</Typography>
+                <Typography variant="heading3" color={theme.textPrimary}>
                   {overview?.thisWeekWorkouts || 0} workouts
                 </Typography>
               </View>
@@ -192,12 +193,12 @@ export default function DashboardScreen({ navigation }: Props) {
         <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
           <Card shadow="sm" style={{ padding: space.lg }}>
             <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.md }}>
-              <Icon name="Calendar" size={16} color={lightTheme.textMuted} />
-              <Typography variant="caption" color={lightTheme.textMuted} weight="600">
+              <Icon name="Calendar" size={16} color={theme.textMuted} />
+              <Typography variant="caption" color={theme.textMuted} weight="600">
                 LAST 7 DAYS
               </Typography>
             </View>
-            <Typography variant="heading3" color={lightTheme.textPrimary} style={{ marginBottom: space.md }}>
+            <Typography variant="heading3" color={theme.textPrimary} style={{ marginBottom: space.md }}>
               Weekly Activity
             </Typography>
             {dailyActivity.length > 0 && (
@@ -205,7 +206,7 @@ export default function DashboardScreen({ navigation }: Props) {
                 data={dailyActivity.map((d) => ({ label: d.day, value: d.count }))}
                 width={screenW - 80}
                 height={160}
-                color={lightTheme.primary}
+                color={theme.primary}
                 yAxisFormatter={(v) => `${v}`}
                 showValues={true}
               />
@@ -217,8 +218,8 @@ export default function DashboardScreen({ navigation }: Props) {
         <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
           <Card shadow="sm" style={{ padding: space.lg }}>
             <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.md }}>
-              <Icon name="Activity" size={16} color={lightTheme.textMuted} />
-              <Typography variant="caption" color={lightTheme.textMuted} weight="600">
+              <Icon name="Activity" size={16} color={theme.textMuted} />
+              <Typography variant="caption" color={theme.textMuted} weight="600">
                 WORKOUT HEATMAP (90 DAYS)
               </Typography>
             </View>
@@ -233,8 +234,8 @@ export default function DashboardScreen({ navigation }: Props) {
           {muscleVolumes.length > 0 && (
             <Card shadow="sm" style={{ padding: space.lg }}>
               <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.md }}>
-                <Icon name="BarChart3" size={16} color={lightTheme.textMuted} />
-                <Typography variant="caption" color={lightTheme.textMuted} weight="600">
+                <Icon name="BarChart3" size={16} color={theme.textMuted} />
+                <Typography variant="caption" color={theme.textMuted} weight="600">
                   MUSCLE GROUP VOLUME (THIS WEEK)
                 </Typography>
               </View>
@@ -245,16 +246,16 @@ export default function DashboardScreen({ navigation }: Props) {
                     value={topMuscle.volume}
                     max={Math.max(...muscleVolumes.map((m) => m.volume), 1)}
                     size={100}
-                    color={lightTheme.primary}
+                    color={theme.primary}
                     label="Top"
                     unit="kg"
                   />
                   <View style={{ flex: 1 }}>
-                    <Typography variant="caption" color={lightTheme.textMuted}>TOP MUSCLE</Typography>
-                    <Typography variant="heading2" color={lightTheme.textPrimary} style={{ textTransform: "capitalize" }}>
+                    <Typography variant="caption" color={theme.textMuted}>TOP MUSCLE</Typography>
+                    <Typography variant="heading2" color={theme.textPrimary} style={{ textTransform: "capitalize" }}>
                       {topMuscle.muscleGroup}
                     </Typography>
-                    <Typography variant="bodySmall" color={lightTheme.textSecondary} style={{ marginTop: space.xs }}>
+                    <Typography variant="bodySmall" color={theme.textSecondary} style={{ marginTop: space.xs }}>
                       {topMuscle.volume.toLocaleString()} kg lifted
                     </Typography>
                   </View>
@@ -268,19 +269,19 @@ export default function DashboardScreen({ navigation }: Props) {
                   return (
                     <View key={mv.muscleGroup}>
                       <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: space.xs }}>
-                        <Typography variant="bodySmall" color={lightTheme.textPrimary} weight="600" style={{ textTransform: "capitalize" }}>
+                        <Typography variant="bodySmall" color={theme.textPrimary} weight="600" style={{ textTransform: "capitalize" }}>
                           {mv.muscleGroup}
                         </Typography>
-                        <Typography variant="bodySmall" color={lightTheme.textMuted}>
+                        <Typography variant="bodySmall" color={theme.textMuted}>
                           {mv.volume.toLocaleString()} kg
                         </Typography>
                       </View>
-                      <View style={{ height: 8, backgroundColor: lightTheme.surfaceTertiary, borderRadius: 4, overflow: "hidden" }}>
+                      <View style={{ height: 8, backgroundColor: theme.surfaceTertiary, borderRadius: 4, overflow: "hidden" }}>
                         <View
                           style={{
                             height: "100%",
                             width: `${pct}%`,
-                            backgroundColor: lightTheme.primary,
+                            backgroundColor: theme.primary,
                             borderRadius: 4,
                           }}
                         />
@@ -298,13 +299,13 @@ export default function DashboardScreen({ navigation }: Props) {
           <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
             <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginBottom: space.md }}>
               <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
-                <Icon name="Award" size={18} color={lightTheme.textPrimary} />
-                <Typography variant="heading3" color={lightTheme.textPrimary}>
+                <Icon name="Award" size={18} color={theme.textPrimary} />
+                <Typography variant="heading3" color={theme.textPrimary}>
                   Recent PRs
                 </Typography>
               </View>
               <TouchableOpacity onPress={() => navigation.navigate("Records")}>
-                <Typography variant="bodySmall" color={lightTheme.primary} weight="600">
+                <Typography variant="bodySmall" color={theme.primary} weight="600">
                   See all
                 </Typography>
               </TouchableOpacity>
@@ -327,21 +328,21 @@ export default function DashboardScreen({ navigation }: Props) {
                       justifyContent: "center",
                     }}
                   >
-                    <Icon name="Trophy" size={20} color={lightTheme.warning} />
+                    <Icon name="Trophy" size={20} color={theme.warning} />
                   </View>
                   <View style={{ flex: 1 }}>
-                    <Typography variant="body" color={lightTheme.textPrimary} weight="600">
+                    <Typography variant="body" color={theme.textPrimary} weight="600">
                       {pr.exercise?.name || "Exercise"}
                     </Typography>
-                    <Typography variant="caption" color={lightTheme.textMuted} style={{ textTransform: "capitalize" }}>
+                    <Typography variant="caption" color={theme.textMuted} style={{ textTransform: "capitalize" }}>
                       {pr.exercise?.muscles?.find(m => m.isPrimary)?.muscle.name || ""}
                     </Typography>
                   </View>
                   <View style={{ alignItems: "flex-end" }}>
-                    <Typography variant="body" color={lightTheme.primary} weight="700">
+                    <Typography variant="body" color={theme.primary} weight="700">
                       {pr.weightKg}kg × {pr.reps}
                     </Typography>
-                    <Typography variant="caption" color={lightTheme.textMuted}>
+                    <Typography variant="caption" color={theme.textMuted}>
                       ~{pr.estimated1rm}kg 1RM
                     </Typography>
                   </View>
@@ -360,18 +361,18 @@ export default function DashboardScreen({ navigation }: Props) {
                   width: 80,
                   height: 80,
                   borderRadius: 40,
-                  backgroundColor: lightTheme.primaryLight,
+                  backgroundColor: theme.primaryLight,
                   alignItems: "center",
                   justifyContent: "center",
                   marginBottom: space.md,
                 }}
               >
-                <Icon name="BarChart3" size={36} color={lightTheme.primary} />
+                <Icon name="BarChart3" size={36} color={theme.primary} />
               </View>
-              <Typography variant="heading3" color={lightTheme.textPrimary} align="center">
+              <Typography variant="heading3" color={theme.textPrimary} align="center">
                 No data yet
               </Typography>
-              <Typography variant="body" color={lightTheme.textSecondary} align="center" style={{ marginTop: space.sm }}>
+              <Typography variant="body" color={theme.textSecondary} align="center" style={{ marginTop: space.sm }}>
                 Complete your first workout to see your progress charts and stats.
               </Typography>
             </Card>
@@ -395,12 +396,12 @@ function StatCard({ icon, color, bg, value, label }: StatCardProps) {
     <View
       style={{
         flex: 1,
-        backgroundColor: lightTheme.surface,
+        backgroundColor: theme.surface,
         borderRadius: radius.lg,
         padding: space.md,
         borderWidth: 1,
-        borderColor: lightTheme.border,
-        shadowColor: lightTheme.shadowSm,
+        borderColor: theme.border,
+        shadowColor: theme.shadowSm,
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 1,
         shadowRadius: 4,
@@ -420,10 +421,10 @@ function StatCard({ icon, color, bg, value, label }: StatCardProps) {
       >
         <Icon name={icon} size={18} color={color} />
       </View>
-      <Typography variant="heading1" color={lightTheme.textPrimary}>
+      <Typography variant="heading1" color={theme.textPrimary}>
         {value}
       </Typography>
-      <Typography variant="caption" color={lightTheme.textMuted}>
+      <Typography variant="caption" color={theme.textMuted}>
         {label}
       </Typography>
     </View>

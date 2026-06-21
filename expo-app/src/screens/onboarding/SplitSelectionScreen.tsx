@@ -7,14 +7,15 @@ import { getRecommendedSplits, completeOnboarding } from "../../api/onboarding";
 import { useAuthStore } from "../../store/authStore";
 import { Split } from "../../types";
 import { Screen, Typography, Card, Button, Icon, SplitSelectionScreenSkeleton } from "../../components";
-import { lightTheme } from "../../theme/colors";
+import { useTheme } from "../../theme/themeStore";
 import { space } from "../../theme/spacing";
 
 type Props = NativeStackScreenProps<OnboardingStackParamList, "SplitSelection">;
 
 function SplitSelectionContent({ navigation }: Props) {
+  const theme = useTheme();
   const { data } = useOnboarding();
-  const { setAuth, token } = useAuthStore();
+    const { setAuth, token } = useAuthStore();
   const [splits, setSplits] = useState<Split[]>([]);
   const [selected, setSelected] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -64,10 +65,10 @@ function SplitSelectionContent({ navigation }: Props) {
   return (
     <Screen scroll padding="lg">
       <View style={{ flex: 1, justifyContent: "center" }}>
-        <Typography variant="heading2" color={lightTheme.textPrimary} style={{ marginBottom: space.sm }}>
+        <Typography variant="heading2" color={theme.textPrimary} style={{ marginBottom: space.sm }}>
           Choose your split
         </Typography>
-        <Typography variant="body" color={lightTheme.textSecondary} style={{ marginBottom: space.xl }}>
+        <Typography variant="body" color={theme.textSecondary} style={{ marginBottom: space.xl }}>
           Based on your answers, we recommend the highlighted split.
         </Typography>
 
@@ -87,15 +88,15 @@ function SplitSelectionContent({ navigation }: Props) {
                 border={true}
                 shadow={isSelected ? "sm" : "none"}
                 style={{
-                  backgroundColor: isSelected ? lightTheme.primaryLight : lightTheme.surface,
-                  borderColor: isSelected ? lightTheme.primary : isRecommended ? lightTheme.primary : lightTheme.border,
+                  backgroundColor: isSelected ? theme.primaryLight : theme.surface,
+                  borderColor: isSelected ? theme.primary : isRecommended ? theme.primary : theme.border,
                   borderWidth: isSelected ? 2 : isRecommended ? 1.5 : 1,
                 }}
               >
                 {isRecommended && (
                   <View
                     style={{
-                      backgroundColor: lightTheme.success.DEFAULT,
+                      backgroundColor: theme.success,
                       borderRadius: 8,
                       paddingHorizontal: space.sm,
                       paddingVertical: space.xs,
@@ -103,27 +104,27 @@ function SplitSelectionContent({ navigation }: Props) {
                       marginBottom: space.sm,
                     }}
                   >
-                    <Typography variant="caption" color={lightTheme.primaryText} weight="600">
+                    <Typography variant="caption" color={theme.primaryText} weight="600">
                       RECOMMENDED
                     </Typography>
                   </View>
                 )}
                 <View style={{ flexDirection: "row", alignItems: "center", gap: space.md }}>
                   <View style={{ flex: 1 }}>
-                    <Typography variant="heading3" color={isSelected ? lightTheme.primary : lightTheme.textPrimary}>
+                    <Typography variant="heading3" color={isSelected ? theme.primary : theme.textPrimary}>
                       {split.name}
                     </Typography>
-                    <Typography variant="bodySmall" color={lightTheme.textSecondary} style={{ marginTop: space.xs }}>
+                    <Typography variant="bodySmall" color={theme.textSecondary} style={{ marginTop: space.xs }}>
                       {split.description}
                     </Typography>
                     <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginTop: space.sm }}>
-                      <Icon name="Calendar" size={14} color={lightTheme.textMuted} />
-                      <Typography variant="caption" color={lightTheme.textMuted}>
+                      <Icon name="Calendar" size={14} color={theme.textMuted} />
+                      <Typography variant="caption" color={theme.textMuted}>
                         {split.daysPerWeek} days/week
                       </Typography>
                     </View>
                   </View>
-                  {isSelected && <Icon name="CheckCircle2" size={24} color={lightTheme.primary} />}
+                  {isSelected && <Icon name="CheckCircle2" size={24} color={theme.primary} />}
                 </View>
               </Card>
             </TouchableOpacity>
@@ -138,7 +139,7 @@ function SplitSelectionContent({ navigation }: Props) {
             disabled={!selected}
             variant="primary"
             size="lg"
-            icon={<Icon name="Rocket" size={20} color={lightTheme.primaryText} />}
+            icon={<Icon name="Rocket" size={20} color={theme.primaryText} />}
           />
         </View>
       </View>
@@ -147,5 +148,6 @@ function SplitSelectionContent({ navigation }: Props) {
 }
 
 export default function SplitSelectionScreen(props: Props) {
+  const theme = useTheme();
   return <SplitSelectionContent {...props} />;
 }

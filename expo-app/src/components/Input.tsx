@@ -1,7 +1,7 @@
 import React from "react";
 import { View, TextInput, TextInputProps, StyleProp, ViewStyle } from "react-native";
 import Typography from "./Typography";
-import { lightTheme } from "../theme/colors";
+import { useTheme } from "../theme/themeStore";
 import { radius, space } from "../theme/spacing";
 
 interface InputProps extends TextInputProps {
@@ -20,10 +20,12 @@ export default function Input({
   placeholderTextColor,
   ...props
 }: InputProps) {
+  const theme = useTheme();
+
   return (
     <View style={[{ width: "100%" }, containerStyle]}>
       {label && (
-        <Typography variant="label" color={lightTheme.textSecondary} style={{ marginBottom: space.sm }}>
+        <Typography variant="label" color={theme.textSecondary} style={{ marginBottom: space.sm }}>
           {label}
         </Typography>
       )}
@@ -32,24 +34,24 @@ export default function Input({
           {
             flexDirection: "row",
             alignItems: "center",
-            backgroundColor: lightTheme.inputBg,
+            backgroundColor: theme.inputBg,
             borderWidth: 1.5,
-            borderColor: error ? lightTheme.borderError : lightTheme.inputBorder,
+            borderColor: error ? theme.borderError : theme.inputBorder,
             borderRadius: radius.lg,
             paddingHorizontal: space.md,
             minHeight: 48,
           },
-          error && { backgroundColor: lightTheme.errorBg },
+          error && { backgroundColor: theme.errorBg },
         ]}
       >
         {icon && <View style={{ marginRight: space.sm }}>{icon}</View>}
         <TextInput
-          placeholderTextColor={placeholderTextColor || lightTheme.inputPlaceholder}
+          placeholderTextColor={placeholderTextColor || theme.inputPlaceholder}
           style={[
             {
               flex: 1,
               fontSize: 16,
-              color: lightTheme.inputText,
+              color: theme.inputText,
               paddingVertical: 12,
               fontFamily: "Inter",
             },
@@ -61,7 +63,7 @@ export default function Input({
       {error && (
         <Typography
           variant="caption"
-          color={lightTheme.errorText}
+          color={theme.errorText}
           style={{ marginTop: space.xs }}
         >
           {error}
