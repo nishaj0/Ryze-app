@@ -95746,6 +95746,15 @@
       "norm_label": "sendbroadcast()"
     },
     {
+      "label": "getOnboardingStats()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L283",
+      "id": "controllers_admincontroller_getonboardingstats",
+      "community": 925,
+      "norm_label": "getonboardingstats()"
+    },
+    {
       "label": "authController.ts",
       "file_type": "code",
       "source_file": "api/src/controllers/authController.ts",
@@ -95877,7 +95886,7 @@
       "source_file": "api/src/controllers/metricsController.ts",
       "source_location": "L1",
       "id": "controllers_metricscontroller",
-      "community": 928,
+      "community": 11,
       "norm_label": "metricscontroller.ts"
     },
     {
@@ -95886,7 +95895,7 @@
       "source_file": "api/src/controllers/metricsController.ts",
       "source_location": "L6",
       "id": "controllers_metricscontroller_prisma",
-      "community": 928,
+      "community": 11,
       "norm_label": "prisma"
     },
     {
@@ -95895,7 +95904,7 @@
       "source_file": "api/src/controllers/metricsController.ts",
       "source_location": "L8",
       "id": "controllers_metricscontroller_logbodymetric",
-      "community": 928,
+      "community": 11,
       "norm_label": "logbodymetric()"
     },
     {
@@ -95904,7 +95913,7 @@
       "source_file": "api/src/controllers/metricsController.ts",
       "source_location": "L24",
       "id": "controllers_metricscontroller_getbodymetrics",
-      "community": 928,
+      "community": 11,
       "norm_label": "getbodymetrics()"
     },
     {
@@ -95913,7 +95922,7 @@
       "source_file": "api/src/controllers/metricsController.ts",
       "source_location": "L43",
       "id": "controllers_metricscontroller_deletebodymetric",
-      "community": 928,
+      "community": 11,
       "norm_label": "deletebodymetric()"
     },
     {
@@ -95985,7 +95994,7 @@
       "source_file": "api/src/controllers/nutritionController.ts",
       "source_location": "L1",
       "id": "controllers_nutritioncontroller",
-      "community": 928,
+      "community": 15,
       "norm_label": "nutritioncontroller.ts"
     },
     {
@@ -95994,7 +96003,7 @@
       "source_file": "api/src/controllers/nutritionController.ts",
       "source_location": "L5",
       "id": "controllers_nutritioncontroller_prisma",
-      "community": 928,
+      "community": 15,
       "norm_label": "prisma"
     },
     {
@@ -96003,7 +96012,7 @@
       "source_file": "api/src/controllers/nutritionController.ts",
       "source_location": "L7",
       "id": "controllers_nutritioncontroller_lognutrition",
-      "community": 928,
+      "community": 15,
       "norm_label": "lognutrition()"
     },
     {
@@ -96012,7 +96021,7 @@
       "source_file": "api/src/controllers/nutritionController.ts",
       "source_location": "L39",
       "id": "controllers_nutritioncontroller_getnutritionlogs",
-      "community": 928,
+      "community": 15,
       "norm_label": "getnutritionlogs()"
     },
     {
@@ -96480,7 +96489,7 @@
       "source_file": "api/src/middleware/auth.ts",
       "source_location": "L8",
       "id": "middleware_auth_authrequest",
-      "community": 928,
+      "community": 15,
       "norm_label": "authrequest"
     },
     {
@@ -96633,7 +96642,7 @@
       "source_file": "api/src/routes/exercises.ts",
       "source_location": "L1",
       "id": "routes_exercises",
-      "community": 15,
+      "community": 21,
       "norm_label": "exercises.ts"
     },
     {
@@ -96642,7 +96651,7 @@
       "source_file": "api/src/routes/exercises.ts",
       "source_location": "L5",
       "id": "routes_exercises_router",
-      "community": 15,
+      "community": 21,
       "norm_label": "router"
     },
     {
@@ -96651,7 +96660,7 @@
       "source_file": "api/src/routes/exercises.ts",
       "source_location": "L7",
       "id": "routes_exercises_wrap",
-      "community": 15,
+      "community": 21,
       "norm_label": "wrap()"
     },
     {
@@ -96660,7 +96669,7 @@
       "source_file": "api/src/routes/metrics.ts",
       "source_location": "L1",
       "id": "routes_metrics",
-      "community": 928,
+      "community": 7,
       "norm_label": "metrics.ts"
     },
     {
@@ -96669,7 +96678,7 @@
       "source_file": "api/src/routes/metrics.ts",
       "source_location": "L8",
       "id": "routes_metrics_router",
-      "community": 928,
+      "community": 7,
       "norm_label": "router"
     },
     {
@@ -96678,7 +96687,7 @@
       "source_file": "api/src/routes/metrics.ts",
       "source_location": "L10",
       "id": "routes_metrics_wrap",
-      "community": 928,
+      "community": 7,
       "norm_label": "wrap()"
     },
     {
@@ -96687,7 +96696,7 @@
       "source_file": "api/src/routes/metrics.ts",
       "source_location": "L16",
       "id": "routes_metrics_bodymetricschema",
-      "community": 928,
+      "community": 7,
       "norm_label": "bodymetricschema"
     },
     {
@@ -96696,7 +96705,7 @@
       "source_file": "api/src/routes/notifications.ts",
       "source_location": "L1",
       "id": "routes_notifications",
-      "community": 21,
+      "community": 18,
       "norm_label": "notifications.ts"
     },
     {
@@ -96705,7 +96714,7 @@
       "source_file": "api/src/routes/notifications.ts",
       "source_location": "L5",
       "id": "routes_notifications_router",
-      "community": 21,
+      "community": 18,
       "norm_label": "router"
     },
     {
@@ -96714,7 +96723,7 @@
       "source_file": "api/src/routes/notifications.ts",
       "source_location": "L7",
       "id": "routes_notifications_wrap",
-      "community": 21,
+      "community": 18,
       "norm_label": "wrap()"
     },
     {
@@ -97504,7 +97513,7 @@
       "label": "PAGE_TITLES",
       "file_type": "code",
       "source_file": "cpanel/src/App.tsx",
-      "source_location": "L15",
+      "source_location": "L16",
       "id": "src_app_page_titles",
       "community": 31,
       "norm_label": "page_titles"
@@ -97513,7 +97522,7 @@
       "label": "ProtectedLayout()",
       "file_type": "code",
       "source_file": "cpanel/src/App.tsx",
-      "source_location": "L25",
+      "source_location": "L27",
       "id": "src_app_protectedlayout",
       "community": 31,
       "norm_label": "protectedlayout()"
@@ -97522,7 +97531,7 @@
       "label": "AuthGuard()",
       "file_type": "code",
       "source_file": "cpanel/src/App.tsx",
-      "source_location": "L57",
+      "source_location": "L60",
       "id": "src_app_authguard",
       "community": 31,
       "norm_label": "authguard()"
@@ -97531,7 +97540,7 @@
       "label": "App()",
       "file_type": "code",
       "source_file": "cpanel/src/App.tsx",
-      "source_location": "L62",
+      "source_location": "L65",
       "id": "cpanel_src_app_tsx_src_app_app",
       "community": 31,
       "norm_label": "app()"
@@ -97690,6 +97699,15 @@
       "norm_label": "sendbroadcast()"
     },
     {
+      "label": "getOnboardingStats()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L47",
+      "id": "src_api_getonboardingstats",
+      "community": 31,
+      "norm_label": "getonboardingstats()"
+    },
+    {
       "label": "Sidebar.tsx",
       "file_type": "code",
       "source_file": "cpanel/src/components/Sidebar.tsx",
@@ -97711,7 +97729,7 @@
       "label": "Sidebar()",
       "file_type": "code",
       "source_file": "cpanel/src/components/Sidebar.tsx",
-      "source_location": "L24",
+      "source_location": "L25",
       "id": "components_sidebar_sidebar",
       "community": 31,
       "norm_label": "sidebar()"
@@ -98003,6 +98021,42 @@
       "id": "pages_notificationspage_notificationspage",
       "community": 31,
       "norm_label": "notificationspage()"
+    },
+    {
+      "label": "OnboardingPage.tsx",
+      "file_type": "code",
+      "source_file": "cpanel/src/pages/OnboardingPage.tsx",
+      "source_location": "L1",
+      "id": "pages_onboardingpage",
+      "community": 31,
+      "norm_label": "onboardingpage.tsx"
+    },
+    {
+      "label": "OnboardingStats",
+      "file_type": "code",
+      "source_file": "cpanel/src/pages/OnboardingPage.tsx",
+      "source_location": "L9",
+      "id": "pages_onboardingpage_onboardingstats",
+      "community": 31,
+      "norm_label": "onboardingstats"
+    },
+    {
+      "label": "COLORS",
+      "file_type": "code",
+      "source_file": "cpanel/src/pages/OnboardingPage.tsx",
+      "source_location": "L24",
+      "id": "pages_onboardingpage_colors",
+      "community": 31,
+      "norm_label": "colors"
+    },
+    {
+      "label": "OnboardingPage()",
+      "file_type": "code",
+      "source_file": "cpanel/src/pages/OnboardingPage.tsx",
+      "source_location": "L26",
+      "id": "pages_onboardingpage_onboardingpage",
+      "community": 31,
+      "norm_label": "onboardingpage()"
     },
     {
       "label": "SettingsPage.tsx",
@@ -200140,9 +200194,9 @@
       "source_file": "api/free-exercise-db/site/src/main.js",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "api_free_exercise_db_site_src_main_js_src_main",
-      "target": "src_app",
-      "confidence_score": 1.0
+      "target": "src_app"
     },
     {
       "relation": "imports_from",
@@ -200552,9 +200606,9 @@
       "source_file": "api/src/controllers/adminController.ts",
       "source_location": "L167",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_createprebuiltsplit",
-      "confidence_score": 1.0
+      "target": "controllers_admincontroller_createprebuiltsplit"
     },
     {
       "relation": "contains",
@@ -200562,9 +200616,9 @@
       "source_file": "api/src/controllers/adminController.ts",
       "source_location": "L201",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_deletesplit",
-      "confidence_score": 1.0
+      "target": "controllers_admincontroller_deletesplit"
     },
     {
       "relation": "contains",
@@ -200572,9 +200626,9 @@
       "source_file": "api/src/controllers/adminController.ts",
       "source_location": "L117",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_deleteuser",
-      "confidence_score": 1.0
+      "target": "controllers_admincontroller_deleteuser"
     },
     {
       "relation": "contains",
@@ -200582,8 +200636,18 @@
       "source_file": "api/src/controllers/adminController.ts",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_getdashboardstats",
+      "target": "controllers_admincontroller_getdashboardstats"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L283",
+      "weight": 1.0,
+      "source": "controllers_admincontroller",
+      "target": "controllers_admincontroller_getonboardingstats",
       "confidence_score": 1.0
     },
     {
@@ -200592,9 +200656,9 @@
       "source_file": "api/src/controllers/adminController.ts",
       "source_location": "L90",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_getuser",
-      "confidence_score": 1.0
+      "target": "controllers_admincontroller_getuser"
     },
     {
       "relation": "contains",
@@ -200602,9 +200666,9 @@
       "source_file": "api/src/controllers/adminController.ts",
       "source_location": "L140",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_listallsplits",
-      "confidence_score": 1.0
+      "target": "controllers_admincontroller_listallsplits"
     },
     {
       "relation": "contains",
@@ -200612,9 +200676,9 @@
       "source_file": "api/src/controllers/adminController.ts",
       "source_location": "L221",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_listexercises",
-      "confidence_score": 1.0
+      "target": "controllers_admincontroller_listexercises"
     },
     {
       "relation": "contains",
@@ -200622,9 +200686,9 @@
       "source_file": "api/src/controllers/adminController.ts",
       "source_location": "L246",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_listsessions",
-      "confidence_score": 1.0
+      "target": "controllers_admincontroller_listsessions"
     },
     {
       "relation": "contains",
@@ -200632,9 +200696,9 @@
       "source_file": "api/src/controllers/adminController.ts",
       "source_location": "L60",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_listusers",
-      "confidence_score": 1.0
+      "target": "controllers_admincontroller_listusers"
     },
     {
       "relation": "contains",
@@ -200642,9 +200706,9 @@
       "source_file": "api/src/controllers/adminController.ts",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_prisma",
-      "confidence_score": 1.0
+      "target": "controllers_admincontroller_prisma"
     },
     {
       "relation": "contains",
@@ -200652,9 +200716,9 @@
       "source_file": "api/src/controllers/adminController.ts",
       "source_location": "L124",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_resetonboarding",
-      "confidence_score": 1.0
+      "target": "controllers_admincontroller_resetonboarding"
     },
     {
       "relation": "contains",
@@ -200662,9 +200726,9 @@
       "source_file": "api/src/controllers/adminController.ts",
       "source_location": "L271",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_sendbroadcast",
-      "confidence_score": 1.0
+      "target": "controllers_admincontroller_sendbroadcast"
     },
     {
       "relation": "contains",
@@ -200672,9 +200736,9 @@
       "source_file": "api/src/controllers/adminController.ts",
       "source_location": "L208",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_togglesplitprebuilt",
-      "confidence_score": 1.0
+      "target": "controllers_admincontroller_togglesplitprebuilt"
     },
     {
       "relation": "contains",
@@ -200682,9 +200746,9 @@
       "source_file": "api/src/controllers/adminController.ts",
       "source_location": "L105",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_updateuser",
-      "confidence_score": 1.0
+      "target": "controllers_admincontroller_updateuser"
     },
     {
       "relation": "imports_from",
@@ -200693,9 +200757,9 @@
       "source_file": "api/src/routes/admin.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "routes_admin",
-      "target": "controllers_admincontroller",
-      "confidence_score": 1.0
+      "target": "controllers_admincontroller"
     },
     {
       "relation": "contains",
@@ -202023,9 +202087,9 @@
       "source_file": "api/src/index.ts",
       "source_location": "L17",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_index",
-      "target": "routes_admin",
-      "confidence_score": 1.0
+      "target": "routes_admin"
     },
     {
       "relation": "imports_from",
@@ -202553,9 +202617,9 @@
       "source_file": "api/src/routes/admin.ts",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "routes_admin",
-      "target": "routes_admin_adminauth",
-      "confidence_score": 1.0
+      "target": "routes_admin_adminauth"
     },
     {
       "relation": "contains",
@@ -202563,9 +202627,9 @@
       "source_file": "api/src/routes/admin.ts",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "routes_admin",
-      "target": "routes_admin_router",
-      "confidence_score": 1.0
+      "target": "routes_admin_router"
     },
     {
       "relation": "contains",
@@ -202573,9 +202637,9 @@
       "source_file": "api/src/routes/admin.ts",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "routes_admin",
-      "target": "routes_admin_wrap",
-      "confidence_score": 1.0
+      "target": "routes_admin_wrap"
     },
     {
       "relation": "contains",
@@ -203143,9 +203207,9 @@
       "source_file": "cpanel/package.json",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_package",
-      "target": "cpanel_package_dependencies",
-      "confidence_score": 1.0
+      "target": "cpanel_package_dependencies"
     },
     {
       "relation": "contains",
@@ -203153,9 +203217,9 @@
       "source_file": "cpanel/package.json",
       "source_location": "L21",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_package",
-      "target": "cpanel_package_devdependencies",
-      "confidence_score": 1.0
+      "target": "cpanel_package_devdependencies"
     },
     {
       "relation": "contains",
@@ -203163,9 +203227,9 @@
       "source_file": "cpanel/package.json",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_package",
-      "target": "cpanel_package_name",
-      "confidence_score": 1.0
+      "target": "cpanel_package_name"
     },
     {
       "relation": "contains",
@@ -203173,9 +203237,9 @@
       "source_file": "cpanel/package.json",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_package",
-      "target": "cpanel_package_private",
-      "confidence_score": 1.0
+      "target": "cpanel_package_private"
     },
     {
       "relation": "contains",
@@ -203183,9 +203247,9 @@
       "source_file": "cpanel/package.json",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_package",
-      "target": "cpanel_package_scripts",
-      "confidence_score": 1.0
+      "target": "cpanel_package_scripts"
     },
     {
       "relation": "contains",
@@ -203193,9 +203257,9 @@
       "source_file": "cpanel/package.json",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_package",
-      "target": "cpanel_package_type",
-      "confidence_score": 1.0
+      "target": "cpanel_package_type"
     },
     {
       "relation": "contains",
@@ -203203,9 +203267,9 @@
       "source_file": "cpanel/package.json",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_package",
-      "target": "cpanel_package_version",
-      "confidence_score": 1.0
+      "target": "cpanel_package_version"
     },
     {
       "relation": "contains",
@@ -203213,9 +203277,9 @@
       "source_file": "cpanel/package.json",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_package_scripts",
-      "target": "cpanel_package_scripts_build",
-      "confidence_score": 1.0
+      "target": "cpanel_package_scripts_build"
     },
     {
       "relation": "contains",
@@ -203223,9 +203287,9 @@
       "source_file": "cpanel/package.json",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_package_scripts",
-      "target": "cpanel_package_scripts_dev",
-      "confidence_score": 1.0
+      "target": "cpanel_package_scripts_dev"
     },
     {
       "relation": "contains",
@@ -203233,9 +203297,9 @@
       "source_file": "cpanel/package.json",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_package_scripts",
-      "target": "cpanel_package_scripts_lint",
-      "confidence_score": 1.0
+      "target": "cpanel_package_scripts_lint"
     },
     {
       "relation": "contains",
@@ -203243,9 +203307,9 @@
       "source_file": "cpanel/package.json",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_package_scripts",
-      "target": "cpanel_package_scripts_preview",
-      "confidence_score": 1.0
+      "target": "cpanel_package_scripts_preview"
     },
     {
       "relation": "contains",
@@ -203253,9 +203317,9 @@
       "source_file": "cpanel/package.json",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_package_dependencies",
-      "target": "cpanel_package_dependencies_axios",
-      "confidence_score": 1.0
+      "target": "cpanel_package_dependencies_axios"
     },
     {
       "relation": "contains",
@@ -203263,9 +203327,9 @@
       "source_file": "cpanel/package.json",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_package_dependencies",
-      "target": "cpanel_package_dependencies_date_fns",
-      "confidence_score": 1.0
+      "target": "cpanel_package_dependencies_date_fns"
     },
     {
       "relation": "contains",
@@ -203273,9 +203337,9 @@
       "source_file": "cpanel/package.json",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_package_dependencies",
-      "target": "cpanel_package_dependencies_lucide_react",
-      "confidence_score": 1.0
+      "target": "cpanel_package_dependencies_lucide_react"
     },
     {
       "relation": "contains",
@@ -203283,9 +203347,9 @@
       "source_file": "cpanel/package.json",
       "source_location": "L16",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_package_dependencies",
-      "target": "cpanel_package_dependencies_react",
-      "confidence_score": 1.0
+      "target": "cpanel_package_dependencies_react"
     },
     {
       "relation": "contains",
@@ -203293,9 +203357,9 @@
       "source_file": "cpanel/package.json",
       "source_location": "L17",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_package_dependencies",
-      "target": "cpanel_package_dependencies_react_dom",
-      "confidence_score": 1.0
+      "target": "cpanel_package_dependencies_react_dom"
     },
     {
       "relation": "contains",
@@ -203303,9 +203367,9 @@
       "source_file": "cpanel/package.json",
       "source_location": "L18",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_package_dependencies",
-      "target": "cpanel_package_dependencies_react_router_dom",
-      "confidence_score": 1.0
+      "target": "cpanel_package_dependencies_react_router_dom"
     },
     {
       "relation": "contains",
@@ -203313,9 +203377,9 @@
       "source_file": "cpanel/package.json",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_package_dependencies",
-      "target": "cpanel_package_dependencies_recharts",
-      "confidence_score": 1.0
+      "target": "cpanel_package_dependencies_recharts"
     },
     {
       "relation": "contains",
@@ -203323,9 +203387,9 @@
       "source_file": "cpanel/package.json",
       "source_location": "L27",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_package_devdependencies",
-      "target": "cpanel_package_devdependencies_eslint",
-      "confidence_score": 1.0
+      "target": "cpanel_package_devdependencies_eslint"
     },
     {
       "relation": "contains",
@@ -203333,9 +203397,9 @@
       "source_file": "cpanel/package.json",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_package_devdependencies",
-      "target": "cpanel_package_devdependencies_eslint_js",
-      "confidence_score": 1.0
+      "target": "cpanel_package_devdependencies_eslint_js"
     },
     {
       "relation": "contains",
@@ -203343,9 +203407,9 @@
       "source_file": "cpanel/package.json",
       "source_location": "L28",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_package_devdependencies",
-      "target": "cpanel_package_devdependencies_eslint_plugin_react_hooks",
-      "confidence_score": 1.0
+      "target": "cpanel_package_devdependencies_eslint_plugin_react_hooks"
     },
     {
       "relation": "contains",
@@ -203353,9 +203417,9 @@
       "source_file": "cpanel/package.json",
       "source_location": "L29",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_package_devdependencies",
-      "target": "cpanel_package_devdependencies_eslint_plugin_react_refresh",
-      "confidence_score": 1.0
+      "target": "cpanel_package_devdependencies_eslint_plugin_react_refresh"
     },
     {
       "relation": "contains",
@@ -203363,9 +203427,9 @@
       "source_file": "cpanel/package.json",
       "source_location": "L30",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_package_devdependencies",
-      "target": "cpanel_package_devdependencies_globals",
-      "confidence_score": 1.0
+      "target": "cpanel_package_devdependencies_globals"
     },
     {
       "relation": "contains",
@@ -203373,9 +203437,9 @@
       "source_file": "cpanel/package.json",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_package_devdependencies",
-      "target": "cpanel_package_devdependencies_types_node",
-      "confidence_score": 1.0
+      "target": "cpanel_package_devdependencies_types_node"
     },
     {
       "relation": "contains",
@@ -203383,9 +203447,9 @@
       "source_file": "cpanel/package.json",
       "source_location": "L24",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_package_devdependencies",
-      "target": "cpanel_package_devdependencies_types_react",
-      "confidence_score": 1.0
+      "target": "cpanel_package_devdependencies_types_react"
     },
     {
       "relation": "contains",
@@ -203393,9 +203457,9 @@
       "source_file": "cpanel/package.json",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_package_devdependencies",
-      "target": "cpanel_package_devdependencies_types_react_dom",
-      "confidence_score": 1.0
+      "target": "cpanel_package_devdependencies_types_react_dom"
     },
     {
       "relation": "contains",
@@ -203403,9 +203467,9 @@
       "source_file": "cpanel/package.json",
       "source_location": "L31",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_package_devdependencies",
-      "target": "cpanel_package_devdependencies_typescript",
-      "confidence_score": 1.0
+      "target": "cpanel_package_devdependencies_typescript"
     },
     {
       "relation": "contains",
@@ -203413,9 +203477,9 @@
       "source_file": "cpanel/package.json",
       "source_location": "L32",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_package_devdependencies",
-      "target": "cpanel_package_devdependencies_typescript_eslint",
-      "confidence_score": 1.0
+      "target": "cpanel_package_devdependencies_typescript_eslint"
     },
     {
       "relation": "contains",
@@ -203423,9 +203487,9 @@
       "source_file": "cpanel/package.json",
       "source_location": "L33",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_package_devdependencies",
-      "target": "cpanel_package_devdependencies_vite",
-      "confidence_score": 1.0
+      "target": "cpanel_package_devdependencies_vite"
     },
     {
       "relation": "contains",
@@ -203433,9 +203497,9 @@
       "source_file": "cpanel/package.json",
       "source_location": "L26",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_package_devdependencies",
-      "target": "cpanel_package_devdependencies_vitejs_plugin_react",
-      "confidence_score": 1.0
+      "target": "cpanel_package_devdependencies_vitejs_plugin_react"
     },
     {
       "relation": "imports_from",
@@ -203444,9 +203508,9 @@
       "source_file": "cpanel/src/App.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_src_app_tsx_src_app",
-      "target": "components_sidebar",
-      "confidence_score": 1.0
+      "target": "components_sidebar"
     },
     {
       "relation": "imports_from",
@@ -203455,9 +203519,9 @@
       "source_file": "cpanel/src/App.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_src_app_tsx_src_app",
-      "target": "components_toast",
-      "confidence_score": 1.0
+      "target": "components_toast"
     },
     {
       "relation": "imports",
@@ -203466,9 +203530,9 @@
       "source_file": "cpanel/src/App.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_src_app_tsx_src_app",
-      "target": "components_toast_toastprovider",
-      "confidence_score": 1.0
+      "target": "components_toast_toastprovider"
     },
     {
       "relation": "contains",
@@ -203476,9 +203540,9 @@
       "source_file": "cpanel/src/App.tsx",
       "source_location": "L62",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_src_app_tsx_src_app",
-      "target": "cpanel_src_app_tsx_src_app_app",
-      "confidence_score": 1.0
+      "target": "cpanel_src_app_tsx_src_app_app"
     },
     {
       "relation": "imports_from",
@@ -203487,9 +203551,9 @@
       "source_file": "cpanel/src/App.tsx",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_src_app_tsx_src_app",
-      "target": "pages_activitypage",
-      "confidence_score": 1.0
+      "target": "pages_activitypage"
     },
     {
       "relation": "imports_from",
@@ -203498,9 +203562,9 @@
       "source_file": "cpanel/src/App.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_src_app_tsx_src_app",
-      "target": "pages_dashboardpage",
-      "confidence_score": 1.0
+      "target": "pages_dashboardpage"
     },
     {
       "relation": "imports_from",
@@ -203509,9 +203573,9 @@
       "source_file": "cpanel/src/App.tsx",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_src_app_tsx_src_app",
-      "target": "pages_exercisespage",
-      "confidence_score": 1.0
+      "target": "pages_exercisespage"
     },
     {
       "relation": "imports_from",
@@ -203520,9 +203584,9 @@
       "source_file": "cpanel/src/App.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_src_app_tsx_src_app",
-      "target": "pages_loginpage",
-      "confidence_score": 1.0
+      "target": "pages_loginpage"
     },
     {
       "relation": "imports_from",
@@ -203531,8 +203595,19 @@
       "source_file": "cpanel/src/App.tsx",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_src_app_tsx_src_app",
-      "target": "pages_notificationspage",
+      "target": "pages_notificationspage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/App.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "cpanel_src_app_tsx_src_app",
+      "target": "pages_onboardingpage",
       "confidence_score": 1.0
     },
     {
@@ -203542,9 +203617,9 @@
       "source_file": "cpanel/src/App.tsx",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_src_app_tsx_src_app",
-      "target": "pages_settingspage",
-      "confidence_score": 1.0
+      "target": "pages_settingspage"
     },
     {
       "relation": "imports_from",
@@ -203553,9 +203628,9 @@
       "source_file": "cpanel/src/App.tsx",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_src_app_tsx_src_app",
-      "target": "pages_splitspage",
-      "confidence_score": 1.0
+      "target": "pages_splitspage"
     },
     {
       "relation": "imports_from",
@@ -203564,9 +203639,9 @@
       "source_file": "cpanel/src/App.tsx",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_src_app_tsx_src_app",
-      "target": "pages_userspage",
-      "confidence_score": 1.0
+      "target": "pages_userspage"
     },
     {
       "relation": "imports_from",
@@ -203575,9 +203650,9 @@
       "source_file": "cpanel/src/App.tsx",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_src_app_tsx_src_app",
-      "target": "src_api",
-      "confidence_score": 1.0
+      "target": "src_api"
     },
     {
       "relation": "imports",
@@ -203586,9 +203661,9 @@
       "source_file": "cpanel/src/App.tsx",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_src_app_tsx_src_app",
-      "target": "src_api_getadminkey",
-      "confidence_score": 1.0
+      "target": "src_api_getadminkey"
     },
     {
       "relation": "contains",
@@ -203596,9 +203671,9 @@
       "source_file": "cpanel/src/App.tsx",
       "source_location": "L57",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_src_app_tsx_src_app",
-      "target": "src_app_authguard",
-      "confidence_score": 1.0
+      "target": "src_app_authguard"
     },
     {
       "relation": "contains",
@@ -203606,9 +203681,9 @@
       "source_file": "cpanel/src/App.tsx",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_src_app_tsx_src_app",
-      "target": "src_app_page_titles",
-      "confidence_score": 1.0
+      "target": "src_app_page_titles"
     },
     {
       "relation": "contains",
@@ -203616,9 +203691,9 @@
       "source_file": "cpanel/src/App.tsx",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_src_app_tsx_src_app",
-      "target": "src_app_protectedlayout",
-      "confidence_score": 1.0
+      "target": "src_app_protectedlayout"
     },
     {
       "relation": "calls",
@@ -203638,9 +203713,9 @@
       "source_file": "cpanel/src/components/Sidebar.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_sidebar",
-      "target": "src_api",
-      "confidence_score": 1.0
+      "target": "src_api"
     },
     {
       "relation": "imports_from",
@@ -203649,9 +203724,9 @@
       "source_file": "cpanel/src/pages/ActivityPage.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_activitypage",
-      "target": "src_api",
-      "confidence_score": 1.0
+      "target": "src_api"
     },
     {
       "relation": "imports_from",
@@ -203660,9 +203735,9 @@
       "source_file": "cpanel/src/pages/DashboardPage.tsx",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_dashboardpage",
-      "target": "src_api",
-      "confidence_score": 1.0
+      "target": "src_api"
     },
     {
       "relation": "imports_from",
@@ -203671,9 +203746,9 @@
       "source_file": "cpanel/src/pages/ExercisesPage.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_exercisespage",
-      "target": "src_api",
-      "confidence_score": 1.0
+      "target": "src_api"
     },
     {
       "relation": "imports_from",
@@ -203682,9 +203757,9 @@
       "source_file": "cpanel/src/pages/LoginPage.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_loginpage",
-      "target": "src_api",
-      "confidence_score": 1.0
+      "target": "src_api"
     },
     {
       "relation": "imports_from",
@@ -203693,7 +203768,18 @@
       "source_file": "cpanel/src/pages/NotificationsPage.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_notificationspage",
+      "target": "src_api"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/OnboardingPage.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "pages_onboardingpage",
       "target": "src_api",
       "confidence_score": 1.0
     },
@@ -203704,9 +203790,9 @@
       "source_file": "cpanel/src/pages/SettingsPage.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_settingspage",
-      "target": "src_api",
-      "confidence_score": 1.0
+      "target": "src_api"
     },
     {
       "relation": "imports_from",
@@ -203715,9 +203801,9 @@
       "source_file": "cpanel/src/pages/SplitsPage.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_splitspage",
-      "target": "src_api",
-      "confidence_score": 1.0
+      "target": "src_api"
     },
     {
       "relation": "imports_from",
@@ -203726,9 +203812,9 @@
       "source_file": "cpanel/src/pages/UsersPage.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_userspage",
-      "target": "src_api",
-      "confidence_score": 1.0
+      "target": "src_api"
     },
     {
       "relation": "contains",
@@ -203736,9 +203822,9 @@
       "source_file": "cpanel/src/api.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_api",
-      "target": "src_api_api",
-      "confidence_score": 1.0
+      "target": "src_api_api"
     },
     {
       "relation": "contains",
@@ -203746,9 +203832,9 @@
       "source_file": "cpanel/src/api.ts",
       "source_location": "L32",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_api",
-      "target": "src_api_createsplit",
-      "confidence_score": 1.0
+      "target": "src_api_createsplit"
     },
     {
       "relation": "contains",
@@ -203756,9 +203842,9 @@
       "source_file": "cpanel/src/api.ts",
       "source_location": "L33",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_api",
-      "target": "src_api_deletesplit",
-      "confidence_score": 1.0
+      "target": "src_api_deletesplit"
     },
     {
       "relation": "contains",
@@ -203766,9 +203852,9 @@
       "source_file": "cpanel/src/api.ts",
       "source_location": "L27",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_api",
-      "target": "src_api_deleteuser",
-      "confidence_score": 1.0
+      "target": "src_api_deleteuser"
     },
     {
       "relation": "contains",
@@ -203776,9 +203862,9 @@
       "source_file": "cpanel/src/api.ts",
       "source_location": "L16",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_api",
-      "target": "src_api_getadminkey",
-      "confidence_score": 1.0
+      "target": "src_api_getadminkey"
     },
     {
       "relation": "contains",
@@ -203786,9 +203872,9 @@
       "source_file": "cpanel/src/api.ts",
       "source_location": "L21",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_api",
-      "target": "src_api_getdashboard",
-      "confidence_score": 1.0
+      "target": "src_api_getdashboard"
     },
     {
       "relation": "contains",
@@ -203796,8 +203882,18 @@
       "source_file": "cpanel/src/api.ts",
       "source_location": "L37",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_api",
-      "target": "src_api_getexercises",
+      "target": "src_api_getexercises"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L47",
+      "weight": 1.0,
+      "source": "src_api",
+      "target": "src_api_getonboardingstats",
       "confidence_score": 1.0
     },
     {
@@ -203806,9 +203902,9 @@
       "source_file": "cpanel/src/api.ts",
       "source_location": "L40",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_api",
-      "target": "src_api_getsessions",
-      "confidence_score": 1.0
+      "target": "src_api_getsessions"
     },
     {
       "relation": "contains",
@@ -203816,9 +203912,9 @@
       "source_file": "cpanel/src/api.ts",
       "source_location": "L31",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_api",
-      "target": "src_api_getsplits",
-      "confidence_score": 1.0
+      "target": "src_api_getsplits"
     },
     {
       "relation": "contains",
@@ -203826,9 +203922,9 @@
       "source_file": "cpanel/src/api.ts",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_api",
-      "target": "src_api_getuser",
-      "confidence_score": 1.0
+      "target": "src_api_getuser"
     },
     {
       "relation": "contains",
@@ -203836,9 +203932,9 @@
       "source_file": "cpanel/src/api.ts",
       "source_location": "L24",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_api",
-      "target": "src_api_getusers",
-      "confidence_score": 1.0
+      "target": "src_api_getusers"
     },
     {
       "relation": "contains",
@@ -203846,9 +203942,9 @@
       "source_file": "cpanel/src/api.ts",
       "source_location": "L28",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_api",
-      "target": "src_api_resetonboarding",
-      "confidence_score": 1.0
+      "target": "src_api_resetonboarding"
     },
     {
       "relation": "contains",
@@ -203856,9 +203952,9 @@
       "source_file": "cpanel/src/api.ts",
       "source_location": "L43",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_api",
-      "target": "src_api_sendbroadcast",
-      "confidence_score": 1.0
+      "target": "src_api_sendbroadcast"
     },
     {
       "relation": "contains",
@@ -203866,9 +203962,9 @@
       "source_file": "cpanel/src/api.ts",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_api",
-      "target": "src_api_setadminkey",
-      "confidence_score": 1.0
+      "target": "src_api_setadminkey"
     },
     {
       "relation": "contains",
@@ -203876,9 +203972,9 @@
       "source_file": "cpanel/src/api.ts",
       "source_location": "L34",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_api",
-      "target": "src_api_toggleprebuilt",
-      "confidence_score": 1.0
+      "target": "src_api_toggleprebuilt"
     },
     {
       "relation": "contains",
@@ -203886,9 +203982,9 @@
       "source_file": "cpanel/src/api.ts",
       "source_location": "L26",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_api",
-      "target": "src_api_updateuser",
-      "confidence_score": 1.0
+      "target": "src_api_updateuser"
     },
     {
       "relation": "imports",
@@ -203897,9 +203993,9 @@
       "source_file": "cpanel/src/components/Sidebar.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_sidebar",
-      "target": "src_api_setadminkey",
-      "confidence_score": 1.0
+      "target": "src_api_setadminkey"
     },
     {
       "relation": "imports",
@@ -203908,9 +204004,9 @@
       "source_file": "cpanel/src/pages/LoginPage.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_loginpage",
-      "target": "src_api_setadminkey",
-      "confidence_score": 1.0
+      "target": "src_api_setadminkey"
     },
     {
       "relation": "imports",
@@ -203919,9 +204015,9 @@
       "source_file": "cpanel/src/pages/SettingsPage.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_settingspage",
-      "target": "src_api_setadminkey",
-      "confidence_score": 1.0
+      "target": "src_api_setadminkey"
     },
     {
       "relation": "imports",
@@ -203930,9 +204026,9 @@
       "source_file": "cpanel/src/pages/SettingsPage.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_settingspage",
-      "target": "src_api_getadminkey",
-      "confidence_score": 1.0
+      "target": "src_api_getadminkey"
     },
     {
       "relation": "calls",
@@ -203952,9 +204048,9 @@
       "source_file": "cpanel/src/pages/DashboardPage.tsx",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_dashboardpage",
-      "target": "src_api_getdashboard",
-      "confidence_score": 1.0
+      "target": "src_api_getdashboard"
     },
     {
       "relation": "imports",
@@ -203963,9 +204059,9 @@
       "source_file": "cpanel/src/pages/LoginPage.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_loginpage",
-      "target": "src_api_getdashboard",
-      "confidence_score": 1.0
+      "target": "src_api_getdashboard"
     },
     {
       "relation": "imports",
@@ -203974,9 +204070,9 @@
       "source_file": "cpanel/src/pages/UsersPage.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_userspage",
-      "target": "src_api_getusers",
-      "confidence_score": 1.0
+      "target": "src_api_getusers"
     },
     {
       "relation": "imports",
@@ -203985,9 +204081,9 @@
       "source_file": "cpanel/src/pages/UsersPage.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_userspage",
-      "target": "src_api_updateuser",
-      "confidence_score": 1.0
+      "target": "src_api_updateuser"
     },
     {
       "relation": "imports",
@@ -203996,9 +204092,9 @@
       "source_file": "cpanel/src/pages/UsersPage.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_userspage",
-      "target": "src_api_deleteuser",
-      "confidence_score": 1.0
+      "target": "src_api_deleteuser"
     },
     {
       "relation": "imports",
@@ -204007,9 +204103,9 @@
       "source_file": "cpanel/src/pages/UsersPage.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_userspage",
-      "target": "src_api_resetonboarding",
-      "confidence_score": 1.0
+      "target": "src_api_resetonboarding"
     },
     {
       "relation": "imports",
@@ -204018,9 +204114,9 @@
       "source_file": "cpanel/src/pages/SplitsPage.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_splitspage",
-      "target": "src_api_getsplits",
-      "confidence_score": 1.0
+      "target": "src_api_getsplits"
     },
     {
       "relation": "imports",
@@ -204029,9 +204125,9 @@
       "source_file": "cpanel/src/pages/SplitsPage.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_splitspage",
-      "target": "src_api_createsplit",
-      "confidence_score": 1.0
+      "target": "src_api_createsplit"
     },
     {
       "relation": "imports",
@@ -204040,9 +204136,9 @@
       "source_file": "cpanel/src/pages/SplitsPage.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_splitspage",
-      "target": "src_api_deletesplit",
-      "confidence_score": 1.0
+      "target": "src_api_deletesplit"
     },
     {
       "relation": "imports",
@@ -204051,9 +204147,9 @@
       "source_file": "cpanel/src/pages/SplitsPage.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_splitspage",
-      "target": "src_api_toggleprebuilt",
-      "confidence_score": 1.0
+      "target": "src_api_toggleprebuilt"
     },
     {
       "relation": "imports",
@@ -204062,9 +204158,9 @@
       "source_file": "cpanel/src/pages/ExercisesPage.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_exercisespage",
-      "target": "src_api_getexercises",
-      "confidence_score": 1.0
+      "target": "src_api_getexercises"
     },
     {
       "relation": "imports",
@@ -204073,9 +204169,9 @@
       "source_file": "cpanel/src/pages/SplitsPage.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_splitspage",
-      "target": "src_api_getexercises",
-      "confidence_score": 1.0
+      "target": "src_api_getexercises"
     },
     {
       "relation": "imports",
@@ -204084,9 +204180,9 @@
       "source_file": "cpanel/src/pages/ActivityPage.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_activitypage",
-      "target": "src_api_getsessions",
-      "confidence_score": 1.0
+      "target": "src_api_getsessions"
     },
     {
       "relation": "imports",
@@ -204095,8 +204191,19 @@
       "source_file": "cpanel/src/pages/NotificationsPage.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_notificationspage",
-      "target": "src_api_sendbroadcast",
+      "target": "src_api_sendbroadcast"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/OnboardingPage.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "pages_onboardingpage",
+      "target": "src_api_getonboardingstats",
       "confidence_score": 1.0
     },
     {
@@ -204105,9 +204212,9 @@
       "source_file": "cpanel/src/components/Sidebar.tsx",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_sidebar",
-      "target": "components_sidebar_nav",
-      "confidence_score": 1.0
+      "target": "components_sidebar_nav"
     },
     {
       "relation": "contains",
@@ -204115,9 +204222,9 @@
       "source_file": "cpanel/src/components/Sidebar.tsx",
       "source_location": "L24",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_sidebar",
-      "target": "components_sidebar_sidebar",
-      "confidence_score": 1.0
+      "target": "components_sidebar_sidebar"
     },
     {
       "relation": "contains",
@@ -204125,9 +204232,9 @@
       "source_file": "cpanel/src/components/Toast.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_toast",
-      "target": "components_toast_toast",
-      "confidence_score": 1.0
+      "target": "components_toast_toast"
     },
     {
       "relation": "contains",
@@ -204135,9 +204242,9 @@
       "source_file": "cpanel/src/components/Toast.tsx",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_toast",
-      "target": "components_toast_toastcontext",
-      "confidence_score": 1.0
+      "target": "components_toast_toastcontext"
     },
     {
       "relation": "contains",
@@ -204145,9 +204252,9 @@
       "source_file": "cpanel/src/components/Toast.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_toast",
-      "target": "components_toast_toastctx",
-      "confidence_score": 1.0
+      "target": "components_toast_toastctx"
     },
     {
       "relation": "contains",
@@ -204155,9 +204262,9 @@
       "source_file": "cpanel/src/components/Toast.tsx",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_toast",
-      "target": "components_toast_toastprovider",
-      "confidence_score": 1.0
+      "target": "components_toast_toastprovider"
     },
     {
       "relation": "contains",
@@ -204165,9 +204272,9 @@
       "source_file": "cpanel/src/components/Toast.tsx",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_toast",
-      "target": "components_toast_usetoast",
-      "confidence_score": 1.0
+      "target": "components_toast_usetoast"
     },
     {
       "relation": "imports_from",
@@ -204176,9 +204283,9 @@
       "source_file": "cpanel/src/pages/LoginPage.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_loginpage",
-      "target": "components_toast",
-      "confidence_score": 1.0
+      "target": "components_toast"
     },
     {
       "relation": "imports_from",
@@ -204187,9 +204294,9 @@
       "source_file": "cpanel/src/pages/NotificationsPage.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_notificationspage",
-      "target": "components_toast",
-      "confidence_score": 1.0
+      "target": "components_toast"
     },
     {
       "relation": "imports_from",
@@ -204198,9 +204305,9 @@
       "source_file": "cpanel/src/pages/SettingsPage.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_settingspage",
-      "target": "components_toast",
-      "confidence_score": 1.0
+      "target": "components_toast"
     },
     {
       "relation": "imports_from",
@@ -204209,9 +204316,9 @@
       "source_file": "cpanel/src/pages/SplitsPage.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_splitspage",
-      "target": "components_toast",
-      "confidence_score": 1.0
+      "target": "components_toast"
     },
     {
       "relation": "imports_from",
@@ -204220,9 +204327,9 @@
       "source_file": "cpanel/src/pages/UsersPage.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_userspage",
-      "target": "components_toast",
-      "confidence_score": 1.0
+      "target": "components_toast"
     },
     {
       "relation": "imports",
@@ -204231,9 +204338,9 @@
       "source_file": "cpanel/src/pages/LoginPage.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_loginpage",
-      "target": "components_toast_usetoast",
-      "confidence_score": 1.0
+      "target": "components_toast_usetoast"
     },
     {
       "relation": "calls",
@@ -204253,9 +204360,9 @@
       "source_file": "cpanel/src/pages/NotificationsPage.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_notificationspage",
-      "target": "components_toast_usetoast",
-      "confidence_score": 1.0
+      "target": "components_toast_usetoast"
     },
     {
       "relation": "calls",
@@ -204275,9 +204382,9 @@
       "source_file": "cpanel/src/pages/SettingsPage.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_settingspage",
-      "target": "components_toast_usetoast",
-      "confidence_score": 1.0
+      "target": "components_toast_usetoast"
     },
     {
       "relation": "calls",
@@ -204297,9 +204404,9 @@
       "source_file": "cpanel/src/pages/SplitsPage.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_splitspage",
-      "target": "components_toast_usetoast",
-      "confidence_score": 1.0
+      "target": "components_toast_usetoast"
     },
     {
       "relation": "calls",
@@ -204319,9 +204426,9 @@
       "source_file": "cpanel/src/pages/UsersPage.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_userspage",
-      "target": "components_toast_usetoast",
-      "confidence_score": 1.0
+      "target": "components_toast_usetoast"
     },
     {
       "relation": "calls",
@@ -204340,9 +204447,9 @@
       "source_file": "cpanel/src/components/UI.tsx",
       "source_location": "L67",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_ui",
-      "target": "components_ui_avatar",
-      "confidence_score": 1.0
+      "target": "components_ui_avatar"
     },
     {
       "relation": "contains",
@@ -204350,9 +204457,9 @@
       "source_file": "cpanel/src/components/UI.tsx",
       "source_location": "L66",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_ui",
-      "target": "components_ui_avatarprops",
-      "confidence_score": 1.0
+      "target": "components_ui_avatarprops"
     },
     {
       "relation": "contains",
@@ -204360,9 +204467,9 @@
       "source_file": "cpanel/src/components/UI.tsx",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_ui",
-      "target": "components_ui_confirmdialog",
-      "confidence_score": 1.0
+      "target": "components_ui_confirmdialog"
     },
     {
       "relation": "contains",
@@ -204370,9 +204477,9 @@
       "source_file": "cpanel/src/components/UI.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_ui",
-      "target": "components_ui_confirmprops",
-      "confidence_score": 1.0
+      "target": "components_ui_confirmprops"
     },
     {
       "relation": "contains",
@@ -204380,9 +204487,9 @@
       "source_file": "cpanel/src/components/UI.tsx",
       "source_location": "L58",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_ui",
-      "target": "components_ui_pageloader",
-      "confidence_score": 1.0
+      "target": "components_ui_pageloader"
     },
     {
       "relation": "contains",
@@ -204390,9 +204497,9 @@
       "source_file": "cpanel/src/components/UI.tsx",
       "source_location": "L39",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_ui",
-      "target": "components_ui_pagination",
-      "confidence_score": 1.0
+      "target": "components_ui_pagination"
     },
     {
       "relation": "contains",
@@ -204400,9 +204507,9 @@
       "source_file": "cpanel/src/components/UI.tsx",
       "source_location": "L31",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_ui",
-      "target": "components_ui_paginationprops",
-      "confidence_score": 1.0
+      "target": "components_ui_paginationprops"
     },
     {
       "relation": "contains",
@@ -204410,9 +204517,9 @@
       "source_file": "cpanel/src/components/UI.tsx",
       "source_location": "L54",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_ui",
-      "target": "components_ui_spinner",
-      "confidence_score": 1.0
+      "target": "components_ui_spinner"
     },
     {
       "relation": "imports_from",
@@ -204421,9 +204528,9 @@
       "source_file": "cpanel/src/pages/ActivityPage.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_activitypage",
-      "target": "components_ui",
-      "confidence_score": 1.0
+      "target": "components_ui"
     },
     {
       "relation": "imports_from",
@@ -204432,9 +204539,9 @@
       "source_file": "cpanel/src/pages/DashboardPage.tsx",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_dashboardpage",
-      "target": "components_ui",
-      "confidence_score": 1.0
+      "target": "components_ui"
     },
     {
       "relation": "imports_from",
@@ -204443,7 +204550,18 @@
       "source_file": "cpanel/src/pages/ExercisesPage.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_exercisespage",
+      "target": "components_ui"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/OnboardingPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "pages_onboardingpage",
       "target": "components_ui",
       "confidence_score": 1.0
     },
@@ -204454,9 +204572,9 @@
       "source_file": "cpanel/src/pages/SplitsPage.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_splitspage",
-      "target": "components_ui",
-      "confidence_score": 1.0
+      "target": "components_ui"
     },
     {
       "relation": "imports_from",
@@ -204465,9 +204583,9 @@
       "source_file": "cpanel/src/pages/UsersPage.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_userspage",
-      "target": "components_ui",
-      "confidence_score": 1.0
+      "target": "components_ui"
     },
     {
       "relation": "imports",
@@ -204476,9 +204594,9 @@
       "source_file": "cpanel/src/pages/SplitsPage.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_splitspage",
-      "target": "components_ui_confirmdialog",
-      "confidence_score": 1.0
+      "target": "components_ui_confirmdialog"
     },
     {
       "relation": "imports",
@@ -204487,9 +204605,9 @@
       "source_file": "cpanel/src/pages/UsersPage.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_userspage",
-      "target": "components_ui_confirmdialog",
-      "confidence_score": 1.0
+      "target": "components_ui_confirmdialog"
     },
     {
       "relation": "imports",
@@ -204498,9 +204616,9 @@
       "source_file": "cpanel/src/pages/ActivityPage.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_activitypage",
-      "target": "components_ui_pagination",
-      "confidence_score": 1.0
+      "target": "components_ui_pagination"
     },
     {
       "relation": "imports",
@@ -204509,9 +204627,9 @@
       "source_file": "cpanel/src/pages/ExercisesPage.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_exercisespage",
-      "target": "components_ui_pagination",
-      "confidence_score": 1.0
+      "target": "components_ui_pagination"
     },
     {
       "relation": "imports",
@@ -204520,9 +204638,9 @@
       "source_file": "cpanel/src/pages/SplitsPage.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_splitspage",
-      "target": "components_ui_pagination",
-      "confidence_score": 1.0
+      "target": "components_ui_pagination"
     },
     {
       "relation": "imports",
@@ -204531,9 +204649,9 @@
       "source_file": "cpanel/src/pages/UsersPage.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_userspage",
-      "target": "components_ui_pagination",
-      "confidence_score": 1.0
+      "target": "components_ui_pagination"
     },
     {
       "relation": "imports",
@@ -204542,9 +204660,9 @@
       "source_file": "cpanel/src/pages/ActivityPage.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_activitypage",
-      "target": "components_ui_pageloader",
-      "confidence_score": 1.0
+      "target": "components_ui_pageloader"
     },
     {
       "relation": "imports",
@@ -204553,9 +204671,9 @@
       "source_file": "cpanel/src/pages/DashboardPage.tsx",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_dashboardpage",
-      "target": "components_ui_pageloader",
-      "confidence_score": 1.0
+      "target": "components_ui_pageloader"
     },
     {
       "relation": "imports",
@@ -204564,7 +204682,18 @@
       "source_file": "cpanel/src/pages/ExercisesPage.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_exercisespage",
+      "target": "components_ui_pageloader"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/OnboardingPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "pages_onboardingpage",
       "target": "components_ui_pageloader",
       "confidence_score": 1.0
     },
@@ -204575,9 +204704,9 @@
       "source_file": "cpanel/src/pages/SplitsPage.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_splitspage",
-      "target": "components_ui_pageloader",
-      "confidence_score": 1.0
+      "target": "components_ui_pageloader"
     },
     {
       "relation": "imports",
@@ -204586,9 +204715,9 @@
       "source_file": "cpanel/src/pages/UsersPage.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_userspage",
-      "target": "components_ui_pageloader",
-      "confidence_score": 1.0
+      "target": "components_ui_pageloader"
     },
     {
       "relation": "imports",
@@ -204597,9 +204726,9 @@
       "source_file": "cpanel/src/pages/ActivityPage.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_activitypage",
-      "target": "components_ui_avatar",
-      "confidence_score": 1.0
+      "target": "components_ui_avatar"
     },
     {
       "relation": "imports",
@@ -204608,9 +204737,9 @@
       "source_file": "cpanel/src/pages/DashboardPage.tsx",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_dashboardpage",
-      "target": "components_ui_avatar",
-      "confidence_score": 1.0
+      "target": "components_ui_avatar"
     },
     {
       "relation": "imports",
@@ -204619,9 +204748,9 @@
       "source_file": "cpanel/src/pages/UsersPage.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_userspage",
-      "target": "components_ui_avatar",
-      "confidence_score": 1.0
+      "target": "components_ui_avatar"
     },
     {
       "relation": "imports_from",
@@ -204630,9 +204759,9 @@
       "source_file": "cpanel/src/main.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_src_main_tsx_src_main",
-      "target": "src_app",
-      "confidence_score": 1.0
+      "target": "src_app"
     },
     {
       "relation": "contains",
@@ -204640,9 +204769,9 @@
       "source_file": "cpanel/src/pages/ActivityPage.tsx",
       "source_location": "L20",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_activitypage",
-      "target": "pages_activitypage_activitypage",
-      "confidence_score": 1.0
+      "target": "pages_activitypage_activitypage"
     },
     {
       "relation": "contains",
@@ -204650,9 +204779,9 @@
       "source_file": "cpanel/src/pages/ActivityPage.tsx",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_activitypage",
-      "target": "pages_activitypage_session",
-      "confidence_score": 1.0
+      "target": "pages_activitypage_session"
     },
     {
       "relation": "contains",
@@ -204660,9 +204789,9 @@
       "source_file": "cpanel/src/pages/ActivityPage.tsx",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_activitypage",
-      "target": "pages_activitypage_statusbadge",
-      "confidence_score": 1.0
+      "target": "pages_activitypage_statusbadge"
     },
     {
       "relation": "contains",
@@ -204670,9 +204799,9 @@
       "source_file": "cpanel/src/pages/DashboardPage.tsx",
       "source_location": "L27",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_dashboardpage",
-      "target": "pages_dashboardpage_customtooltip",
-      "confidence_score": 1.0
+      "target": "pages_dashboardpage_customtooltip"
     },
     {
       "relation": "contains",
@@ -204680,9 +204809,9 @@
       "source_file": "cpanel/src/pages/DashboardPage.tsx",
       "source_location": "L39",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_dashboardpage",
-      "target": "pages_dashboardpage_dashboardpage",
-      "confidence_score": 1.0
+      "target": "pages_dashboardpage_dashboardpage"
     },
     {
       "relation": "contains",
@@ -204690,9 +204819,9 @@
       "source_file": "cpanel/src/pages/DashboardPage.tsx",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_dashboardpage",
-      "target": "pages_dashboardpage_dashdata",
-      "confidence_score": 1.0
+      "target": "pages_dashboardpage_dashdata"
     },
     {
       "relation": "contains",
@@ -204700,9 +204829,9 @@
       "source_file": "cpanel/src/pages/DashboardPage.tsx",
       "source_location": "L188",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_dashboardpage",
-      "target": "pages_dashboardpage_funnelbar",
-      "confidence_score": 1.0
+      "target": "pages_dashboardpage_funnelbar"
     },
     {
       "relation": "contains",
@@ -204710,9 +204839,9 @@
       "source_file": "cpanel/src/pages/ExercisesPage.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_exercisespage",
-      "target": "pages_exercisespage_exercise",
-      "confidence_score": 1.0
+      "target": "pages_exercisespage_exercise"
     },
     {
       "relation": "contains",
@@ -204720,9 +204849,9 @@
       "source_file": "cpanel/src/pages/ExercisesPage.tsx",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_exercisespage",
-      "target": "pages_exercisespage_exercisespage",
-      "confidence_score": 1.0
+      "target": "pages_exercisespage_exercisespage"
     },
     {
       "relation": "contains",
@@ -204730,9 +204859,9 @@
       "source_file": "cpanel/src/pages/LoginPage.tsx",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_loginpage",
-      "target": "pages_loginpage_loginpage",
-      "confidence_score": 1.0
+      "target": "pages_loginpage_loginpage"
     },
     {
       "relation": "contains",
@@ -204740,8 +204869,38 @@
       "source_file": "cpanel/src/pages/NotificationsPage.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_notificationspage",
-      "target": "pages_notificationspage_notificationspage",
+      "target": "pages_notificationspage_notificationspage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/OnboardingPage.tsx",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "pages_onboardingpage",
+      "target": "pages_onboardingpage_colors",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/OnboardingPage.tsx",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "pages_onboardingpage",
+      "target": "pages_onboardingpage_onboardingpage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/OnboardingPage.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "pages_onboardingpage",
+      "target": "pages_onboardingpage_onboardingstats",
       "confidence_score": 1.0
     },
     {
@@ -204750,9 +204909,9 @@
       "source_file": "cpanel/src/pages/SettingsPage.tsx",
       "source_location": "L107",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_settingspage",
-      "target": "pages_settingspage_inforow",
-      "confidence_score": 1.0
+      "target": "pages_settingspage_inforow"
     },
     {
       "relation": "contains",
@@ -204760,9 +204919,9 @@
       "source_file": "cpanel/src/pages/SettingsPage.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_settingspage",
-      "target": "pages_settingspage_settingspage",
-      "confidence_score": 1.0
+      "target": "pages_settingspage_settingspage"
     },
     {
       "relation": "contains",
@@ -204770,9 +204929,9 @@
       "source_file": "cpanel/src/pages/SplitsPage.tsx",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_splitspage",
-      "target": "pages_splitspage_dayform",
-      "confidence_score": 1.0
+      "target": "pages_splitspage_dayform"
     },
     {
       "relation": "contains",
@@ -204780,9 +204939,9 @@
       "source_file": "cpanel/src/pages/SplitsPage.tsx",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_splitspage",
-      "target": "pages_splitspage_muscle_groups",
-      "confidence_score": 1.0
+      "target": "pages_splitspage_muscle_groups"
     },
     {
       "relation": "contains",
@@ -204790,9 +204949,9 @@
       "source_file": "cpanel/src/pages/SplitsPage.tsx",
       "source_location": "L380",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_splitspage",
-      "target": "pages_splitspage_search",
-      "confidence_score": 1.0
+      "target": "pages_splitspage_search"
     },
     {
       "relation": "contains",
@@ -204800,9 +204959,9 @@
       "source_file": "cpanel/src/pages/SplitsPage.tsx",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_splitspage",
-      "target": "pages_splitspage_split",
-      "confidence_score": 1.0
+      "target": "pages_splitspage_split"
     },
     {
       "relation": "contains",
@@ -204810,9 +204969,9 @@
       "source_file": "cpanel/src/pages/SplitsPage.tsx",
       "source_location": "L21",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_splitspage",
-      "target": "pages_splitspage_splitspage",
-      "confidence_score": 1.0
+      "target": "pages_splitspage_splitspage"
     },
     {
       "relation": "contains",
@@ -204820,9 +204979,9 @@
       "source_file": "cpanel/src/pages/UsersPage.tsx",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_userspage",
-      "target": "pages_userspage_editform",
-      "confidence_score": 1.0
+      "target": "pages_userspage_editform"
     },
     {
       "relation": "contains",
@@ -204830,9 +204989,9 @@
       "source_file": "cpanel/src/pages/UsersPage.tsx",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_userspage",
-      "target": "pages_userspage_user",
-      "confidence_score": 1.0
+      "target": "pages_userspage_user"
     },
     {
       "relation": "contains",
@@ -204840,9 +204999,9 @@
       "source_file": "cpanel/src/pages/UsersPage.tsx",
       "source_location": "L16",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_userspage",
-      "target": "pages_userspage_userspage",
-      "confidence_score": 1.0
+      "target": "pages_userspage_userspage"
     },
     {
       "relation": "contains",
@@ -204850,9 +205009,9 @@
       "source_file": "cpanel/tsconfig.app.json",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_app",
-      "target": "cpanel_tsconfig_app_compileroptions",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_app_compileroptions"
     },
     {
       "relation": "contains",
@@ -204860,9 +205019,9 @@
       "source_file": "cpanel/tsconfig.app.json",
       "source_location": "L24",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_app",
-      "target": "cpanel_tsconfig_app_include",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_app_include"
     },
     {
       "relation": "contains",
@@ -204870,9 +205029,9 @@
       "source_file": "cpanel/tsconfig.app.json",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_app_compileroptions",
-      "target": "cpanel_tsconfig_app_compileroptions_allowimportingtsextensions",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_app_compileroptions_allowimportingtsextensions"
     },
     {
       "relation": "contains",
@@ -204880,9 +205039,9 @@
       "source_file": "cpanel/tsconfig.app.json",
       "source_location": "L21",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_app_compileroptions",
-      "target": "cpanel_tsconfig_app_compileroptions_erasablesyntaxonly",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_app_compileroptions_erasablesyntaxonly"
     },
     {
       "relation": "contains",
@@ -204890,9 +205049,9 @@
       "source_file": "cpanel/tsconfig.app.json",
       "source_location": "L16",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_app_compileroptions",
-      "target": "cpanel_tsconfig_app_compileroptions_jsx",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_app_compileroptions_jsx"
     },
     {
       "relation": "contains",
@@ -204900,9 +205059,9 @@
       "source_file": "cpanel/tsconfig.app.json",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_app_compileroptions",
-      "target": "cpanel_tsconfig_app_compileroptions_lib",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_app_compileroptions_lib"
     },
     {
       "relation": "contains",
@@ -204910,9 +205069,9 @@
       "source_file": "cpanel/tsconfig.app.json",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_app_compileroptions",
-      "target": "cpanel_tsconfig_app_compileroptions_module",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_app_compileroptions_module"
     },
     {
       "relation": "contains",
@@ -204920,9 +205079,9 @@
       "source_file": "cpanel/tsconfig.app.json",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_app_compileroptions",
-      "target": "cpanel_tsconfig_app_compileroptions_moduledetection",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_app_compileroptions_moduledetection"
     },
     {
       "relation": "contains",
@@ -204930,9 +205089,9 @@
       "source_file": "cpanel/tsconfig.app.json",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_app_compileroptions",
-      "target": "cpanel_tsconfig_app_compileroptions_moduleresolution",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_app_compileroptions_moduleresolution"
     },
     {
       "relation": "contains",
@@ -204940,9 +205099,9 @@
       "source_file": "cpanel/tsconfig.app.json",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_app_compileroptions",
-      "target": "cpanel_tsconfig_app_compileroptions_noemit",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_app_compileroptions_noemit"
     },
     {
       "relation": "contains",
@@ -204950,9 +205109,9 @@
       "source_file": "cpanel/tsconfig.app.json",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_app_compileroptions",
-      "target": "cpanel_tsconfig_app_compileroptions_nofallthroughcasesinswitch",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_app_compileroptions_nofallthroughcasesinswitch"
     },
     {
       "relation": "contains",
@@ -204960,9 +205119,9 @@
       "source_file": "cpanel/tsconfig.app.json",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_app_compileroptions",
-      "target": "cpanel_tsconfig_app_compileroptions_nounusedlocals",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_app_compileroptions_nounusedlocals"
     },
     {
       "relation": "contains",
@@ -204970,9 +205129,9 @@
       "source_file": "cpanel/tsconfig.app.json",
       "source_location": "L20",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_app_compileroptions",
-      "target": "cpanel_tsconfig_app_compileroptions_nounusedparameters",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_app_compileroptions_nounusedparameters"
     },
     {
       "relation": "contains",
@@ -204980,9 +205139,9 @@
       "source_file": "cpanel/tsconfig.app.json",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_app_compileroptions",
-      "target": "cpanel_tsconfig_app_compileroptions_skiplibcheck",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_app_compileroptions_skiplibcheck"
     },
     {
       "relation": "contains",
@@ -204990,9 +205149,9 @@
       "source_file": "cpanel/tsconfig.app.json",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_app_compileroptions",
-      "target": "cpanel_tsconfig_app_compileroptions_target",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_app_compileroptions_target"
     },
     {
       "relation": "contains",
@@ -205000,9 +205159,9 @@
       "source_file": "cpanel/tsconfig.app.json",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_app_compileroptions",
-      "target": "cpanel_tsconfig_app_compileroptions_tsbuildinfofile",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_app_compileroptions_tsbuildinfofile"
     },
     {
       "relation": "contains",
@@ -205010,9 +205169,9 @@
       "source_file": "cpanel/tsconfig.app.json",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_app_compileroptions",
-      "target": "cpanel_tsconfig_app_compileroptions_types",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_app_compileroptions_types"
     },
     {
       "relation": "contains",
@@ -205020,9 +205179,9 @@
       "source_file": "cpanel/tsconfig.app.json",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_app_compileroptions",
-      "target": "cpanel_tsconfig_app_compileroptions_verbatimmodulesyntax",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_app_compileroptions_verbatimmodulesyntax"
     },
     {
       "relation": "contains",
@@ -205030,9 +205189,9 @@
       "source_file": "cpanel/tsconfig.json",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig",
-      "target": "cpanel_tsconfig_files",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_files"
     },
     {
       "relation": "contains",
@@ -205040,9 +205199,9 @@
       "source_file": "cpanel/tsconfig.json",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig",
-      "target": "cpanel_tsconfig_references",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_references"
     },
     {
       "relation": "contains",
@@ -205050,9 +205209,9 @@
       "source_file": "cpanel/tsconfig.node.json",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_node",
-      "target": "cpanel_tsconfig_node_compileroptions",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_node_compileroptions"
     },
     {
       "relation": "contains",
@@ -205060,9 +205219,9 @@
       "source_file": "cpanel/tsconfig.node.json",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_node",
-      "target": "cpanel_tsconfig_node_include",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_node_include"
     },
     {
       "relation": "contains",
@@ -205070,9 +205229,9 @@
       "source_file": "cpanel/tsconfig.node.json",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_node_compileroptions",
-      "target": "cpanel_tsconfig_node_compileroptions_allowimportingtsextensions",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_node_compileroptions_allowimportingtsextensions"
     },
     {
       "relation": "contains",
@@ -205080,9 +205239,9 @@
       "source_file": "cpanel/tsconfig.node.json",
       "source_location": "L20",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_node_compileroptions",
-      "target": "cpanel_tsconfig_node_compileroptions_erasablesyntaxonly",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_node_compileroptions_erasablesyntaxonly"
     },
     {
       "relation": "contains",
@@ -205090,9 +205249,9 @@
       "source_file": "cpanel/tsconfig.node.json",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_node_compileroptions",
-      "target": "cpanel_tsconfig_node_compileroptions_lib",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_node_compileroptions_lib"
     },
     {
       "relation": "contains",
@@ -205100,9 +205259,9 @@
       "source_file": "cpanel/tsconfig.node.json",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_node_compileroptions",
-      "target": "cpanel_tsconfig_node_compileroptions_module",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_node_compileroptions_module"
     },
     {
       "relation": "contains",
@@ -205110,9 +205269,9 @@
       "source_file": "cpanel/tsconfig.node.json",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_node_compileroptions",
-      "target": "cpanel_tsconfig_node_compileroptions_moduledetection",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_node_compileroptions_moduledetection"
     },
     {
       "relation": "contains",
@@ -205120,9 +205279,9 @@
       "source_file": "cpanel/tsconfig.node.json",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_node_compileroptions",
-      "target": "cpanel_tsconfig_node_compileroptions_moduleresolution",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_node_compileroptions_moduleresolution"
     },
     {
       "relation": "contains",
@@ -205130,9 +205289,9 @@
       "source_file": "cpanel/tsconfig.node.json",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_node_compileroptions",
-      "target": "cpanel_tsconfig_node_compileroptions_noemit",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_node_compileroptions_noemit"
     },
     {
       "relation": "contains",
@@ -205140,9 +205299,9 @@
       "source_file": "cpanel/tsconfig.node.json",
       "source_location": "L21",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_node_compileroptions",
-      "target": "cpanel_tsconfig_node_compileroptions_nofallthroughcasesinswitch",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_node_compileroptions_nofallthroughcasesinswitch"
     },
     {
       "relation": "contains",
@@ -205150,9 +205309,9 @@
       "source_file": "cpanel/tsconfig.node.json",
       "source_location": "L18",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_node_compileroptions",
-      "target": "cpanel_tsconfig_node_compileroptions_nounusedlocals",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_node_compileroptions_nounusedlocals"
     },
     {
       "relation": "contains",
@@ -205160,9 +205319,9 @@
       "source_file": "cpanel/tsconfig.node.json",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_node_compileroptions",
-      "target": "cpanel_tsconfig_node_compileroptions_nounusedparameters",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_node_compileroptions_nounusedparameters"
     },
     {
       "relation": "contains",
@@ -205170,9 +205329,9 @@
       "source_file": "cpanel/tsconfig.node.json",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_node_compileroptions",
-      "target": "cpanel_tsconfig_node_compileroptions_skiplibcheck",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_node_compileroptions_skiplibcheck"
     },
     {
       "relation": "contains",
@@ -205180,9 +205339,9 @@
       "source_file": "cpanel/tsconfig.node.json",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_node_compileroptions",
-      "target": "cpanel_tsconfig_node_compileroptions_target",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_node_compileroptions_target"
     },
     {
       "relation": "contains",
@@ -205190,9 +205349,9 @@
       "source_file": "cpanel/tsconfig.node.json",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_node_compileroptions",
-      "target": "cpanel_tsconfig_node_compileroptions_tsbuildinfofile",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_node_compileroptions_tsbuildinfofile"
     },
     {
       "relation": "contains",
@@ -205200,9 +205359,9 @@
       "source_file": "cpanel/tsconfig.node.json",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_node_compileroptions",
-      "target": "cpanel_tsconfig_node_compileroptions_types",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_node_compileroptions_types"
     },
     {
       "relation": "contains",
@@ -205210,9 +205369,9 @@
       "source_file": "cpanel/tsconfig.node.json",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cpanel_tsconfig_node_compileroptions",
-      "target": "cpanel_tsconfig_node_compileroptions_verbatimmodulesyntax",
-      "confidence_score": 1.0
+      "target": "cpanel_tsconfig_node_compileroptions_verbatimmodulesyntax"
     },
     {
       "relation": "contains",
@@ -205921,9 +206080,9 @@
       "source_file": "expo-app/src/App.tsx",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "expo_app_src_app_tsx_src_app",
-      "target": "expo_app_src_app_tsx_src_app_app",
-      "confidence_score": 1.0
+      "target": "expo_app_src_app_tsx_src_app_app"
     },
     {
       "relation": "imports_from",
@@ -217147,9 +217306,9 @@
       "source_file": "expo-app/src/theme/themeStore.ts",
       "source_location": "L24",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "theme_themestore_themestate",
-      "target": "theme_colors_theme",
-      "confidence_score": 1.0
+      "target": "theme_colors_theme"
     },
     {
       "relation": "imports",
@@ -217510,9 +217669,9 @@
       "source_file": "expo-app/src/theme/themeStore.ts",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "theme_themestore",
-      "target": "theme_themestore_themestate",
-      "confidence_score": 1.0
+      "target": "theme_themestore_themestate"
     },
     {
       "relation": "contains",
@@ -217550,9 +217709,9 @@
       "source_file": "expo-app/src/theme/themeStore.ts",
       "source_location": "L29",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "theme_themestore",
-      "target": "theme_themestore_usethemestore",
-      "confidence_score": 1.0
+      "target": "theme_themestore_usethemestore"
     },
     {
       "relation": "imports_from",
@@ -217594,9 +217753,9 @@
       "source_file": "expo-app/src/theme/themeStore.ts",
       "source_location": "L62",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "theme_themestore_usetheme",
-      "target": "theme_themestore_usethemestore",
-      "confidence_score": 1.0
+      "target": "theme_themestore_usethemestore"
     },
     {
       "relation": "calls",
@@ -217605,9 +217764,9 @@
       "source_file": "expo-app/src/theme/themeStore.ts",
       "source_location": "L66",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "theme_themestore_usethememode",
-      "target": "theme_themestore_usethemestore",
-      "confidence_score": 1.0
+      "target": "theme_themestore_usethemestore"
     },
     {
       "relation": "calls",
@@ -218417,9 +218576,9 @@
       "source_file": "package.json",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "package_scripts",
-      "target": "package_scripts_cpanel_build",
-      "confidence_score": 1.0
+      "target": "package_scripts_cpanel_build"
     },
     {
       "relation": "contains",
@@ -218427,9 +218586,9 @@
       "source_file": "package.json",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "package_scripts",
-      "target": "package_scripts_cpanel_dev",
-      "confidence_score": 1.0
+      "target": "package_scripts_cpanel_dev"
     },
     {
       "relation": "contains",
@@ -218447,9 +218606,9 @@
       "source_file": "package.json",
       "source_location": "L17",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "package_scripts",
-      "target": "package_scripts_dev_all",
-      "confidence_score": 1.0
+      "target": "package_scripts_dev_all"
     },
     {
       "relation": "contains",

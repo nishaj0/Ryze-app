@@ -1,11 +1,11 @@
 # Graph Report - Ryze  (2026-06-21)
 
 ## Corpus Check
-- 1032 files · ~3,567,509 words
+- 1033 files · ~3,568,740 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 11466 nodes · 11471 edges · 932 communities (924 shown, 8 thin omitted)
+- 11472 nodes · 11481 edges · 931 communities (924 shown, 7 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 2 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
@@ -931,7 +931,6 @@
 - [[_COMMUNITY_Community 925|Community 925]]
 - [[_COMMUNITY_Community 926|Community 926]]
 - [[_COMMUNITY_Community 927|Community 927]]
-- [[_COMMUNITY_Community 928|Community 928]]
 - [[_COMMUNITY_Community 929|Community 929]]
 
 ## God Nodes (most connected - your core abstractions)
@@ -961,7 +960,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (932 total, 8 thin omitted)
+## Communities (931 total, 7 thin omitted)
 
 ### Community 0 - "Frontend API Client"
 Cohesion: 0.05
@@ -992,8 +991,8 @@ Cohesion: 0.06
 Nodes (32): dependencies, axios, bcryptjs, cloudinary, cors, dotenv, express, jsonwebtoken (+24 more)
 
 ### Community 7 - "Expo App Configuration"
-Cohesion: 0.18
-Nodes (7): validate(), loginSchema, registerSchema, router, onboardingSchema, router, router
+Cohesion: 0.14
+Nodes (9): validate(), loginSchema, registerSchema, router, bodyMetricSchema, router, onboardingSchema, router (+1 more)
 
 ### Community 8 - "API TypeScript Config"
 Cohesion: 0.10
@@ -1008,8 +1007,8 @@ Cohesion: 0.11
 Nodes (17): compilerOptions, declaration, declarationMap, esModuleInterop, forceConsistentCasingInFileNames, lib, module, moduleResolution (+9 more)
 
 ### Community 11 - "Photos Feature"
-Cohesion: 0.24
-Nodes (4): prisma, AppError, errorHandler(), app
+Cohesion: 0.16
+Nodes (5): prisma, prisma, AppError, errorHandler(), app
 
 ### Community 12 - "Workout Session Controller"
 Cohesion: 0.10
@@ -1023,6 +1022,10 @@ Nodes (22): computedHash, skillPath, source, sourceType, computedHash, skillPath
 Cohesion: 0.13
 Nodes (5): calculate1RM(), completeSession(), createSession(), getLastSessionLogs(), prisma
 
+### Community 15 - "Auth Controller"
+Cohesion: 0.18
+Nodes (3): prisma, prisma, AuthRequest
+
 ### Community 16 - "Notifications Feature"
 Cohesion: 0.40
 Nodes (10): computedHash, skillPath, source, sourceType, skills, caveman, find-skills, supabase (+2 more)
@@ -1032,8 +1035,8 @@ Cohesion: 0.32
 Nodes (4): generateToken(), login(), prisma, register()
 
 ### Community 18 - "Progress Analytics Controller"
-Cohesion: 0.33
-Nodes (3): prisma, sendPushNotification(), triggerReminders()
+Cohesion: 0.22
+Nodes (4): prisma, sendPushNotification(), triggerReminders(), router
 
 ### Community 19 - "Database Seed Data"
 Cohesion: 0.28
@@ -1064,8 +1067,8 @@ Cohesion: 0.08
 Nodes (26): deletePhoto(), getPhotos(), uploadPhoto(), HomeStack(), HomeStackNav, MainTabs(), PhotosStack(), PhotosStackNav (+18 more)
 
 ### Community 31 - "Community 31"
-Cohesion: 0.06
-Nodes (43): nav, Toast, ToastContext, ToastCtx, ToastProvider(), useToast(), Avatar(), AvatarProps (+35 more)
+Cohesion: 0.05
+Nodes (46): nav, Toast, ToastContext, ToastCtx, ToastProvider(), useToast(), Avatar(), AvatarProps (+38 more)
 
 ### Community 32 - "Community 32"
 Cohesion: 0.17
@@ -4599,14 +4602,10 @@ Nodes (18): compilerOptions, allowImportingTsExtensions, erasableSyntaxOnly, jsx
 Cohesion: 0.11
 Nodes (17): compilerOptions, allowImportingTsExtensions, erasableSyntaxOnly, lib, module, moduleDetection, moduleResolution, noEmit (+9 more)
 
-### Community 928 - "Community 928"
-Cohesion: 0.15
-Nodes (5): prisma, prisma, AuthRequest, bodyMetricSchema, router
-
 ## Knowledge Gaps
-- **10036 isolated node(s):** `name`, `force`, `level`, `mechanic`, `equipment` (+10031 more)
+- **10038 isolated node(s):** `name`, `force`, `level`, `mechanic`, `equipment` (+10033 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
@@ -4615,10 +4614,10 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
 - **Why does `useTheme()` connect `Community 924` to `Frontend API Client`, `Auth & Splits Routes`, `Expo App Dependencies`, `API Server Dependencies`, `Community 39`, `Community 23`, `Community 29`, `Community 30`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
-- **Why does `AuthRequest` connect `Community 928` to `Middleware & Route Setup`, `Photos Feature`, `Community 908`, `Skills Lock Registry`, `Auth Controller`, `Photo Controller & Cloudinary`, `Progress Analytics Controller`, `Database Seed Data`, `Expo TypeScript Config`?**
+- **Why does `AuthRequest` connect `Auth Controller` to `Middleware & Route Setup`, `Photos Feature`, `Community 908`, `Skills Lock Registry`, `Photo Controller & Cloudinary`, `Progress Analytics Controller`, `Database Seed Data`, `Expo TypeScript Config`?**
   _High betweenness centrality (0.000) - this node is a cross-community bridge._
 - **What connects `name`, `force`, `level` to the rest of the system?**
-  _10036 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _10038 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Frontend API Client` be split into smaller, more focused modules?**
   _Cohesion score 0.048846675712347354 - nodes in this community are weakly interconnected._
 - **Should `Auth & Splits Routes` be split into smaller, more focused modules?**

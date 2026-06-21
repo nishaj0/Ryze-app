@@ -14110,13 +14110,13 @@
     "semantic_hash": ""
   },
   "api/src/controllers/adminController.ts": {
-    "mtime": 1782029824.9561348,
-    "ast_hash": "a39276beb394443b4a2a9d49b6121d1f",
+    "mtime": 1782031047.6029549,
+    "ast_hash": "9150e2b51bf6a18d907953559995cc47",
     "semantic_hash": ""
   },
   "api/src/routes/admin.ts": {
-    "mtime": 1782029835.4960017,
-    "ast_hash": "3ed6b2a30e0c1df5fba07fa7f94edb19",
+    "mtime": 1782031049.7467487,
+    "ast_hash": "c88415992aaf300de99471d9fa9c2566",
     "semantic_hash": ""
   },
   "cpanel/eslint.config.js": {
@@ -14130,18 +14130,18 @@
     "semantic_hash": ""
   },
   "cpanel/src/App.tsx": {
-    "mtime": 1782030268.0818095,
-    "ast_hash": "689d78f2d1adeea54d9c87465cbe8d4f",
+    "mtime": 1782031068.7272544,
+    "ast_hash": "ae4e37f894db5ba398a67c20b7872aa8",
     "semantic_hash": ""
   },
   "cpanel/src/api.ts": {
-    "mtime": 1782029921.0786808,
-    "ast_hash": "a6190e4788a2204bca41bb57b34b7a36",
+    "mtime": 1782031052.4256587,
+    "ast_hash": "c2210c2a030eaf952e8cd76e6633b990",
     "semantic_hash": ""
   },
   "cpanel/src/components/Sidebar.tsx": {
-    "mtime": 1782030275.4703126,
-    "ast_hash": "aa4dbd20765bde992c5dee0b954f0717",
+    "mtime": 1782031071.4029627,
+    "ast_hash": "5b8589ba435b40d836564cebdd927c9f",
     "semantic_hash": ""
   },
   "cpanel/src/components/Toast.tsx": {
@@ -14247,6 +14247,11 @@
   "cpanel/src/assets/vite.svg": {
     "mtime": 1780132608.3957043,
     "ast_hash": "9960a24288958394ac50e57ff638b036",
+    "semantic_hash": ""
+  },
+  "cpanel/src/pages/OnboardingPage.tsx": {
+    "mtime": 1782031060.5288458,
+    "ast_hash": "c03296106b312d1f2e2a20c163e94bf9",
     "semantic_hash": ""
   }
 }
