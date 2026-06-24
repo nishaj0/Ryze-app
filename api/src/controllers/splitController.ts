@@ -176,6 +176,138 @@ export const getActiveSplit = async (req: AuthRequest, res: Response) => {
   res.json({ userSplit });
 };
 
+export const updateSplit = async (req: AuthRequest, res: Response) => {
+  const { id } = req.params;
+  const { name, description, daysPerWeek, days } = req.body;
+  const userId = req.userId!;
+
+  const split = await prisma.split.findUnique({
+    where: { id: id as string },
+    include: { days: true },
+  });
+
+  if (!split) {
+    throw new AppError("Split not found", 404);
+  }
+  if (split.isPrebuilt) {
+    throw new AppError("Cannot edit a prebuilt split", 403);
+  }
+  if (split.createdById !== userId) {
+    throw new AppError("You can only edit splits you created", 403);
+  }
+
+  await prisma.$transaction(async (tx) => {
+    const payloadDayIds = (days as any[]).filter((d) => d.id).map((d) => d.id);
+    const daysToDelete = split.days.filter((d) => !payloadDayIds.includes(d.id));
+
+    for (const day of daysToDelete) {
+      const sessionCount = await tx.workoutSession.count({ where: { splitDayId: day.id } });
+      if (sessionCount > 0) {
+        await tx.workoutSession.deleteMany({ where: { splitDayId: day.id } });
+      }
+      await tx.splitDay.delete({ where: { id: day.id } });
+    }
+
+    await tx.split.update({
+      where: { id: id as string },
+      data: { name, description, daysPerWeek },
+    });
+
+    for (let dayIdx = 0; dayIdx < days.length; dayIdx++) {
+      const day = days[dayIdx];
+      const dayNumber = dayIdx + 1;
+
+      if (day.id) {
+        await tx.splitDay.update({
+          where: { id: day.id },
+          data: {
+            dayNumber,
+            name: day.name,
+            muscleGroups: JSON.stringify(day.muscleGroups),
+            isRest: day.isRest,
+          },
+        });
+
+        if (!day.isRest && day.exercises) {
+          const payloadExIds = day.exercises.filter((e: any) => e.id).map((e: any) => e.id);
+          await tx.splitDayExercise.deleteMany({
+            where: { splitDayId: day.id, id: { notIn: payloadExIds } },
+          });
+
+          for (let i = 0; i < day.exercises.length; i++) {
+            const ex = day.exercises[i];
+            if (ex.id) {
+              await tx.splitDayExercise.update({
+                where: { id: ex.id },
+                data: {
+                  exerciseId: ex.exerciseId,
+                  order: i,
+                  targetSets: ex.targetSets,
+                  targetRepsMin: ex.targetRepsMin,
+                  targetRepsMax: ex.targetRepsMax,
+                },
+              });
+            } else {
+              await tx.splitDayExercise.create({
+                data: {
+                  splitDayId: day.id,
+                  exerciseId: ex.exerciseId,
+                  order: i,
+                  targetSets: ex.targetSets,
+                  targetRepsMin: ex.targetRepsMin,
+                  targetRepsMax: ex.targetRepsMax,
+                },
+              });
+            }
+          }
+        }
+
+        if (day.isRest) {
+          await tx.splitDayExercise.deleteMany({ where: { splitDayId: day.id } });
+        }
+      } else {
+        await tx.splitDay.create({
+          data: {
+            splitId: id as string,
+            dayNumber,
+            name: day.name,
+            muscleGroups: JSON.stringify(day.muscleGroups),
+            isRest: day.isRest,
+            exercises: !day.isRest && day.exercises && day.exercises.length > 0
+              ? {
+                  create: day.exercises.map((ex: any, i: number) => ({
+                    exerciseId: ex.exerciseId,
+                    order: i,
+                    targetSets: ex.targetSets,
+                    targetRepsMin: ex.targetRepsMin,
+                    targetRepsMax: ex.targetRepsMax,
+                  })),
+                }
+              : undefined,
+          },
+        });
+      }
+    }
+  });
+
+  const updated = await prisma.split.findUnique({
+    where: { id: id as string },
+    include: {
+      days: {
+        orderBy: { dayNumber: "asc" },
+        include: {
+          exercises: {
+            orderBy: { order: "asc" },
+            include: { exercise: { include: { muscles: { include: { muscle: true } } } } },
+          },
+        },
+      },
+    },
+  });
+
+  res.json({ split: updated });
+};
+
 export const updateSplitExercise = async (req: AuthRequest, res: Response) => {
   const { id } = req.params;
   const { exerciseId } = req.body;

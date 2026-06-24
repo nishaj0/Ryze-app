@@ -352,14 +352,24 @@ export default function HomeScreen({ navigation }: Props) {
           <Typography variant="body" color={theme.textSecondary} style={{ marginBottom: space.lg, textAlign: "center" }}>
             Choose a workout split to get your daily exercises and start tracking your progress.
           </Typography>
-          <Button
-            title="Browse Plans"
-            onPress={() => (navigation as any).navigate("Profile", { screen: "SplitSwitcher" })}
-            variant="primary"
-            size="lg"
-            style={{ width: "100%" }}
-            icon={<Icon name="Search" size={20} color={theme.primaryText} />}
-          />
+          <View style={{ flexDirection: "row", gap: space.sm, width: "100%" }}>
+            <Button
+              title="Create My Own"
+              onPress={() => (navigation as any).navigate("Profile", { screen: "CustomSplit" })}
+              variant="outline"
+              size="lg"
+              style={{ flex: 1 }}
+              icon={<Icon name="Plus" size={20} color={theme.primary} />}
+            />
+            <Button
+              title="Browse Plans"
+              onPress={() => (navigation as any).navigate("Profile", { screen: "SplitSwitcher" })}
+              variant="primary"
+              size="lg"
+              style={{ flex: 1 }}
+              icon={<Icon name="Search" size={20} color={theme.primaryText} />}
+            />
+          </View>
         </Card>
       )}
 

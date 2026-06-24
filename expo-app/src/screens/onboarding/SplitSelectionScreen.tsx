@@ -54,6 +54,22 @@ function SplitSelectionContent({ navigation }: Props) {
     }
   };
 
+  const handleCreateOwnPlan = () => {
+    navigation.navigate("OnboardingCustomSplit");
+  };
+
+  const handleSkipForNow = async () => {
+    setSubmitting(true);
+    try {
+      const res = await completeOnboarding(data);
+      await setAuth(token!, res.user);
+    } catch (err: any) {
+      Alert.alert("Error", err.response?.data?.error || "Failed to complete onboarding");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   if (loading) {
     return (
       <Screen scroll padding="none">
@@ -131,6 +147,34 @@ function SplitSelectionContent({ navigation }: Props) {
           );
         })}
 
+        {/* Create My Own Plan Option */}
+        <TouchableOpacity
+          onPress={handleCreateOwnPlan}
+          disabled={submitting}
+          style={{ marginBottom: space.md }}
+          activeOpacity={0.8}
+        >
+          <Card
+            padding="lg"
+            border={true}
+            style={{
+              borderStyle: "dashed",
+              borderColor: theme.primary,
+              borderWidth: 2,
+              backgroundColor: theme.bg,
+              alignItems: "center",
+            }}
+          >
+            <Icon name="PlusCircle" size={32} color={theme.primary} />
+            <Typography variant="heading3" color={theme.primary} style={{ marginTop: space.sm }}>
+              Create My Own Plan
+            </Typography>
+            <Typography variant="bodySmall" color={theme.textSecondary} style={{ marginTop: space.xs, textAlign: "center" }}>
+              Design your own split day-by-day with custom exercises
+            </Typography>
+          </Card>
+        </TouchableOpacity>
+
         <View style={{ marginTop: space.lg }}>
           <Button
             title="Start Training"
@@ -141,6 +185,15 @@ function SplitSelectionContent({ navigation }: Props) {
             size="lg"
             icon={<Icon name="Rocket" size={20} color={theme.primaryText} />}
           />
+          <TouchableOpacity
+            onPress={handleSkipForNow}
+            disabled={submitting}
+            style={{ marginTop: space.md, alignItems: "center" }}
+          >
+            <Typography variant="bodySmall" color={theme.textMuted}>
+              Skip for now — I'll set up a plan later
+            </Typography>
+          </TouchableOpacity>
         </View>
       </View>
     </Screen>

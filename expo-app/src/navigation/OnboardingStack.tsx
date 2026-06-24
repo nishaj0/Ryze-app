@@ -9,6 +9,7 @@ import EquipmentScreen from "../screens/onboarding/EquipmentScreen";
 import BodyStatsScreen from "../screens/onboarding/BodyStatsScreen";
 import SleepScreen from "../screens/onboarding/SleepScreen";
 import SplitSelectionScreen from "../screens/onboarding/SplitSelectionScreen";
+import OnboardingCustomSplitScreen from "../screens/onboarding/OnboardingCustomSplitScreen";
 
 import { OnboardingProvider } from "../screens/onboarding/OnboardingContext";
 import { useTheme } from "../theme/themeStore";
@@ -35,6 +36,7 @@ export default function OnboardingStack() {
         <Stack.Screen name="BodyStats" component={BodyStatsScreen} options={{ title: "Body Stats" }} />
         <Stack.Screen name="Sleep" component={SleepScreen} options={{ title: "Sleep Hours" }} />
         <Stack.Screen name="SplitSelection" component={SplitSelectionScreen} options={{ title: "Choose Your Split" }} />
+        <Stack.Screen name="OnboardingCustomSplit" component={OnboardingCustomSplitScreen} options={{ title: "Create Your Plan" }} />
       </Stack.Navigator>
     </OnboardingProvider>
   );

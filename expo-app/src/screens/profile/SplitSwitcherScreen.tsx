@@ -177,7 +177,25 @@ export default function SplitSwitcherScreen({ navigation }: Props) {
                     {switching === split.id ? (
                       <ActivityIndicator color={theme.primary} />
                     ) : (
-                      <Icon name="ChevronRight" size={20} color={theme.textMuted} />
+                      <View style={{ flexDirection: "row", alignItems: "center", gap: space.xs }}>
+                        {!split.isPrebuilt && (
+                          <TouchableOpacity
+                            onPress={() => navigation.navigate("CustomSplit", { splitId: split.id })}
+                            style={{ padding: 6, borderRadius: radius.sm, backgroundColor: theme.surfaceTertiary }}
+                          >
+                            <Icon name="Pencil" size={16} color={theme.primary} />
+                          </TouchableOpacity>
+                        )}
+                        {split.isPrebuilt && (
+                          <TouchableOpacity
+                            onPress={() => navigation.navigate("CustomSplit", { splitId: split.id, fromPrebuilt: true })}
+                            style={{ padding: 6, borderRadius: radius.sm, backgroundColor: theme.surfaceTertiary }}
+                          >
+                            <Icon name="Pencil" size={16} color={theme.primary} />
+                          </TouchableOpacity>
+                        )}
+                        <Icon name="ChevronRight" size={20} color={theme.textMuted} />
+                      </View>
                     )}
                   </View>
                 </Card>

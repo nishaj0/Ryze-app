@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { View, ScrollView, TouchableOpacity, Switch, Modal, Alert } from "react-native";
+import { View, ScrollView, TouchableOpacity, Switch, Modal, Alert, ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ProfileStackParamList } from "../../navigation/types";
-import { createSplit, setActiveSplit } from "../../api/splits";
+import { createSplit, setActiveSplit, getSplit, updateSplit } from "../../api/splits";
 import { listExercises } from "../../api/exercises";
 import { Exercise } from "../../types";
 import { Typography, Card, Icon, Button, Input, InlineListSkeleton } from "../../components";
@@ -13,11 +13,13 @@ import { space, radius } from "../../theme/spacing";
 type Props = NativeStackScreenProps<ProfileStackParamList, "CustomSplit">;
 
 interface DayConfig {
+  id?: string;
   dayNumber: number;
   name: string;
   isRest: boolean;
   muscleGroups: string[];
   exercises: {
+    id?: string;
     exerciseId: string;
     name: string;
     targetSets: number;
@@ -27,14 +29,22 @@ interface DayConfig {
 }
 
 const AVAILABLE_MUSCLE_GROUPS = ["chest", "back", "shoulders", "legs", "arms", "core"];
+const MIN_DAYS = 1;
+const MAX_DAYS = 14;
 
-export default function CustomSplitScreen({ navigation }: Props) {
+export default function CustomSplitScreen({ route, navigation }: Props) {
   const theme = useTheme();
+  const splitId = route.params?.splitId;
+  const fromPrebuilt = route.params?.fromPrebuilt;
+  const isEditMode = !!splitId;
+
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [daysPerWeek, setDaysPerWeek] = useState(3);
   const [days, setDays] = useState<DayConfig[]>([]);
   const [activeDayIdx, setActiveDayIdx] = useState(0);
+  const [loadingSplit, setLoadingSplit] = useState(isEditMode);
+  const [saving, setSaving] = useState(false);
 
   // Exercise library state
   const [exercises, setExercises] = useState<Exercise[]>([]);
@@ -43,21 +53,69 @@ export default function CustomSplitScreen({ navigation }: Props) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedMuscleFilter, setSelectedMuscleFilter] = useState<string | null>(null);
 
-  // Initialize days when daysPerWeek changes
+  // Load existing split in edit mode
   useEffect(() => {
-    const newDays: DayConfig[] = [];
-    for (let i = 1; i <= daysPerWeek; i++) {
-      newDays.push({
-        dayNumber: i,
-        name: `Day ${i}`,
-        isRest: i === daysPerWeek, // Default last day to rest
-        muscleGroups: [],
-        exercises: [],
-      });
+    if (!isEditMode || !splitId) return;
+    loadExistingSplit();
+  }, [splitId]);
+
+  const loadExistingSplit = async () => {
+    try {
+      const res = await getSplit(splitId!);
+      const s = res.split;
+      setName(s.name);
+      setDescription(s.description || "");
+      setDaysPerWeek(s.daysPerWeek);
+      const loadedDays: DayConfig[] = s.days.map((d) => ({
+        id: d.id,
+        dayNumber: d.dayNumber,
+        name: d.name,
+        isRest: d.isRest,
+        muscleGroups: (() => {
+          try { return JSON.parse(d.muscleGroups); } catch { return []; }
+        })(),
+        exercises: (d.exercises || []).map((ex) => ({
+          id: ex.id,
+          exerciseId: ex.exerciseId,
+          name: ex.exercise.name,
+          targetSets: ex.targetSets,
+          targetRepsMin: ex.targetRepsMin,
+          targetRepsMax: ex.targetRepsMax,
+        })),
+      }));
+      setDays(loadedDays);
+      setActiveDayIdx(0);
+    } catch (err) {
+      Alert.alert("Error", "Failed to load split for editing");
+      navigation.goBack();
+    } finally {
+      setLoadingSplit(false);
     }
-    setDays(newDays);
+  };
+
+  // Initialize days when daysPerWeek changes (create mode only)
+  useEffect(() => {
+    if (isEditMode) return;
+    setDays((prev) => {
+      if (prev.length === daysPerWeek) return prev;
+      const newDays: DayConfig[] = [];
+      for (let i = 1; i <= daysPerWeek; i++) {
+        if (prev[i - 1]) {
+          newDays.push(prev[i - 1]);
+        } else {
+          newDays.push({
+            dayNumber: i,
+            name: `Day ${i}`,
+            isRest: false,
+            muscleGroups: [],
+            exercises: [],
+          });
+        }
+      }
+      return newDays;
+    });
     setActiveDayIdx(0);
-  }, [daysPerWeek]);
+  }, [daysPerWeek, isEditMode]);
 
   useEffect(() => {
     loadExerciseLibrary();
@@ -73,6 +131,85 @@ export default function CustomSplitScreen({ navigation }: Props) {
     } finally {
       setLoadingExercises(false);
     }
+  };
+
+  const handleDaysPerWeekChange = (newCount: number) => {
+    if (newCount < MIN_DAYS || newCount > MAX_DAYS) return;
+
+    if (isEditMode && newCount < days.length) {
+      const removedDays = days.slice(newCount);
+      const removedNames = removedDays.map((d) => d.name).join(", ");
+      Alert.alert(
+        "Remove Day(s)?",
+        `Removing ${removedNames}. Any workout sessions logged for these days will be permanently deleted. Continue?`,
+        [
+          { text: "Cancel", style: "cancel" },
+          {
+            text: "Remove",
+            style: "destructive",
+            onPress: () => {
+              setDaysPerWeek(newCount);
+              setDays((prev) => prev.slice(0, newCount));
+              if (activeDayIdx >= newCount) setActiveDayIdx(newCount - 1);
+            },
+          },
+        ]
+      );
+    } else {
+      setDaysPerWeek(newCount);
+      if (isEditMode) {
+        setDays((prev) => {
+          const newDays = [...prev];
+          while (newDays.length < newCount) {
+            newDays.push({
+              dayNumber: newDays.length + 1,
+              name: `Day ${newDays.length + 1}`,
+              isRest: false,
+              muscleGroups: [],
+              exercises: [],
+            });
+          }
+          return newDays.slice(0, newCount);
+        });
+      }
+      if (activeDayIdx >= newCount) setActiveDayIdx(newCount - 1);
+    }
+  };
+
+  const handleReorderDay = (idx: number, direction: "up" | "down") => {
+    const newIdx = direction === "up" ? idx - 1 : idx + 1;
+    if (newIdx < 0 || newIdx >= days.length) return;
+    const updated = [...days];
+    [updated[idx], updated[newIdx]] = [updated[newIdx], updated[idx]];
+    updated.forEach((d, i) => (d.dayNumber = i + 1));
+    setDays(updated);
+    setActiveDayIdx(newIdx);
+  };
+
+  const handleDeleteDay = (idx: number) => {
+    if (days.length <= 1) {
+      Alert.alert("Cannot Remove", "You must have at least one day.");
+      return;
+    }
+    const dayName = days[idx].name;
+    Alert.alert(
+      "Remove Day?",
+      `Removing "${dayName}". Any workout sessions logged for this day will be permanently deleted. Continue?`,
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Remove",
+          style: "destructive",
+          onPress: () => {
+            const updated = days.filter((_, i) => i !== idx);
+            updated.forEach((d, i) => (d.dayNumber = i + 1));
+            setDays(updated);
+            setDaysPerWeek(updated.length);
+            if (activeDayIdx >= updated.length) setActiveDayIdx(updated.length - 1);
+          },
+        },
+      ]
+    );
   };
 
   const handleToggleRest = (idx: number, isRest: boolean) => {
@@ -98,7 +235,6 @@ export default function CustomSplitScreen({ navigation }: Props) {
 
   const handleAddExerciseToDay = (ex: Exercise) => {
     const updated = [...days];
-    // Check if already added
     if (updated[activeDayIdx].exercises.some((e) => e.exerciseId === ex.id)) {
       Alert.alert("Already Added", `${ex.name} is already in this day's workout.`);
       return;
@@ -135,13 +271,12 @@ export default function CustomSplitScreen({ navigation }: Props) {
     setDays(updated);
   };
 
-  const handleCreateSplit = async () => {
+  const handleSave = async () => {
     if (!name.trim()) {
       Alert.alert("Validation Error", "Please provide a name for your split.");
       return;
     }
 
-    // Validate that at least one day has workout or rest
     for (const d of days) {
       if (!d.isRest && d.exercises.length === 0) {
         Alert.alert(
@@ -152,20 +287,21 @@ export default function CustomSplitScreen({ navigation }: Props) {
       }
     }
 
+    setSaving(true);
     try {
       const payload = {
         name,
         description: description || undefined,
-        type: "CUSTOM",
         daysPerWeek,
         days: days.map((d) => ({
-          dayNumber: d.dayNumber,
+          id: d.id,
           name: d.name,
           isRest: d.isRest,
           muscleGroups: d.muscleGroups,
           exercises: d.isRest
             ? []
             : d.exercises.map((e) => ({
+                id: e.id,
                 exerciseId: e.exerciseId,
                 targetSets: e.targetSets,
                 targetRepsMin: e.targetRepsMin,
@@ -174,15 +310,35 @@ export default function CustomSplitScreen({ navigation }: Props) {
         })),
       };
 
-      const res = await createSplit(payload);
-      // Automatically activate
-      await setActiveSplit(res.split.id);
-
-      Alert.alert("Success", "Custom split created and activated!", [
-        { text: "OK", onPress: () => navigation.getParent()?.getParent()?.navigate("Home", { screen: "HomeMain" }) },
-      ]);
+      if (fromPrebuilt) {
+        const res = await createSplit({
+          ...payload,
+          name: name.endsWith(" (Edited)") ? name : `${name} (Edited)`,
+          type: "CUSTOM",
+        });
+        await setActiveSplit(res.split.id);
+        Alert.alert("Success", "Your edited split has been created and activated!", [
+          { text: "OK", onPress: () => navigation.getParent()?.getParent()?.navigate("Home", { screen: "HomeMain" }) },
+        ]);
+      } else if (isEditMode) {
+        await updateSplit(splitId!, {
+          ...payload,
+          type: "CUSTOM",
+        });
+        Alert.alert("Success", "Split updated successfully!", [
+          { text: "OK", onPress: () => navigation.goBack() },
+        ]);
+      } else {
+        const res = await createSplit({ ...payload, type: "CUSTOM" });
+        await setActiveSplit(res.split.id);
+        Alert.alert("Success", "Custom split created and activated!", [
+          { text: "OK", onPress: () => navigation.getParent()?.getParent()?.navigate("Home", { screen: "HomeMain" }) },
+        ]);
+      }
     } catch (err) {
-      Alert.alert("Error", "Failed to create custom split");
+      Alert.alert("Error", fromPrebuilt ? "Failed to create edited split" : isEditMode ? "Failed to update split" : "Failed to create custom split");
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -193,17 +349,35 @@ export default function CustomSplitScreen({ navigation }: Props) {
     return matchesSearch && matchesMuscle;
   });
 
+  if (loadingSplit) {
+    return (
+      <SafeAreaView style={{ flex: 1, backgroundColor: theme.bg }} edges={["top"]}>
+        <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+          <ActivityIndicator size="large" color={theme.primary} />
+          <Typography variant="body" color={theme.textSecondary} style={{ marginTop: space.md }}>
+            Loading split...
+          </Typography>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: theme.bg }} edges={["top"]}>
       <ScrollView style={{ flex: 1 }} contentContainerStyle={{ padding: space.lg, paddingBottom: 120 }} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
         {/* Header */}
         <View style={{ marginBottom: space.lg }}>
           <Typography variant="caption" color={theme.textMuted} weight="600">
-            CREATOR
+            {isEditMode ? "EDITOR" : "CREATOR"}
           </Typography>
           <Typography variant="heading1" color={theme.textPrimary} style={{ marginTop: space.xs }}>
-            Custom Split
+            {fromPrebuilt ? "Edit Prebuilt Split" : isEditMode ? "Edit Split" : "Custom Split"}
           </Typography>
+          {fromPrebuilt && (
+            <Typography variant="bodySmall" color={theme.textSecondary} style={{ marginTop: space.sm }}>
+              Saving will create your own editable copy of this prebuilt split.
+            </Typography>
+          )}
         </View>
 
         {/* Name & Desc */}
@@ -225,35 +399,50 @@ export default function CustomSplitScreen({ navigation }: Props) {
           />
         </Card>
 
-        {/* Days Select */}
+        {/* Days Select - Stepper */}
         <Card shadow="sm" style={{ padding: space.lg, marginBottom: space.lg }}>
           <Typography variant="label" color={theme.textSecondary} style={{ marginBottom: space.sm }}>
             DAYS PER WEEK
           </Typography>
-          <View style={{ flexDirection: "row", gap: space.xs }}>
-            {[3, 4, 5, 6, 7].map((num) => {
-              const isSelected = daysPerWeek === num;
-              return (
-                <TouchableOpacity
-                  key={num}
-                  onPress={() => setDaysPerWeek(num)}
-                  style={{
-                    flex: 1,
-                    height: 40,
-                    borderRadius: radius.md,
-                    backgroundColor: isSelected ? theme.primary : theme.surfaceSecondary,
-                    borderWidth: 1,
-                    borderColor: isSelected ? theme.primary : theme.border,
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Typography variant="body" color={isSelected ? theme.primaryText : theme.textPrimary} weight="600">
-                    {num}
-                  </Typography>
-                </TouchableOpacity>
-              );
-            })}
+          <View style={{ flexDirection: "row", alignItems: "center", gap: space.md }}>
+            <TouchableOpacity
+              onPress={() => handleDaysPerWeekChange(daysPerWeek - 1)}
+              disabled={daysPerWeek <= MIN_DAYS}
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: radius.md,
+                backgroundColor: daysPerWeek <= MIN_DAYS ? theme.surfaceTertiary : theme.primary,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Typography variant="heading2" color={daysPerWeek <= MIN_DAYS ? theme.textMuted : theme.primaryText}>
+                -
+              </Typography>
+            </TouchableOpacity>
+            <Typography variant="heading1" color={theme.textPrimary} style={{ minWidth: 50, textAlign: "center" }}>
+              {daysPerWeek}
+            </Typography>
+            <TouchableOpacity
+              onPress={() => handleDaysPerWeekChange(daysPerWeek + 1)}
+              disabled={daysPerWeek >= MAX_DAYS}
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: radius.md,
+                backgroundColor: daysPerWeek >= MAX_DAYS ? theme.surfaceTertiary : theme.primary,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Typography variant="heading2" color={daysPerWeek >= MAX_DAYS ? theme.textMuted : theme.primaryText}>
+                +
+              </Typography>
+            </TouchableOpacity>
+            <Typography variant="caption" color={theme.textMuted} style={{ marginLeft: space.xs }}>
+              ({MIN_DAYS}-{MAX_DAYS} days)
+            </Typography>
           </View>
         </Card>
 
@@ -262,7 +451,7 @@ export default function CustomSplitScreen({ navigation }: Props) {
           Configure Days
         </Typography>
 
-        {/* Day Selector Tabs */}
+        {/* Day Selector Tabs with Reorder */}
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginBottom: space.md }}>
           <View style={{ flexDirection: "row", gap: space.sm }}>
             {days.map((d, idx) => {
@@ -292,21 +481,51 @@ export default function CustomSplitScreen({ navigation }: Props) {
         {/* Selected Day Card */}
         {days[activeDayIdx] && (
           <Card shadow="sm" style={{ padding: space.lg }}>
+            {/* Day header with reorder + delete controls */}
             <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: space.md }}>
               <Typography variant="heading2" color={theme.textPrimary}>
                 {days[activeDayIdx].name}
               </Typography>
               <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
-                <Typography variant="bodySmall" color={theme.textSecondary}>
-                  Rest Day?
-                </Typography>
-                <Switch
-                  value={days[activeDayIdx].isRest}
-                  onValueChange={(val) => handleToggleRest(activeDayIdx, val)}
-                  trackColor={{ false: theme.surfaceTertiary, true: theme.primary }}
-                  thumbColor={theme.surface}
-                />
+                {/* Reorder up */}
+                <TouchableOpacity
+                  onPress={() => handleReorderDay(activeDayIdx, "up")}
+                  disabled={activeDayIdx === 0}
+                  style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: theme.surfaceSecondary, alignItems: "center", justifyContent: "center", opacity: activeDayIdx === 0 ? 0.4 : 1 }}
+                >
+                  <Icon name="ChevronUp" size={16} color={theme.textSecondary} />
+                </TouchableOpacity>
+                {/* Reorder down */}
+                <TouchableOpacity
+                  onPress={() => handleReorderDay(activeDayIdx, "down")}
+                  disabled={activeDayIdx === days.length - 1}
+                  style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: theme.surfaceSecondary, alignItems: "center", justifyContent: "center", opacity: activeDayIdx === days.length - 1 ? 0.4 : 1 }}
+                >
+                  <Icon name="ChevronDown" size={16} color={theme.textSecondary} />
+                </TouchableOpacity>
+                {/* Delete day (edit mode only) */}
+                {isEditMode && (
+                  <TouchableOpacity
+                    onPress={() => handleDeleteDay(activeDayIdx)}
+                    style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: theme.surfaceSecondary, alignItems: "center", justifyContent: "center" }}
+                  >
+                    <Icon name="Trash2" size={14} color={theme.danger} />
+                  </TouchableOpacity>
+                )}
               </View>
+            </View>
+
+            {/* Rest toggle */}
+            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: space.md }}>
+              <Typography variant="bodySmall" color={theme.textSecondary}>
+                Rest Day?
+              </Typography>
+              <Switch
+                value={days[activeDayIdx].isRest}
+                onValueChange={(val) => handleToggleRest(activeDayIdx, val)}
+                trackColor={{ false: theme.surfaceTertiary, true: theme.primary }}
+                thumbColor={theme.surface}
+              />
             </View>
 
             {/* Custom Day Name */}
@@ -444,8 +663,10 @@ export default function CustomSplitScreen({ navigation }: Props) {
       {/* Save Button */}
       <View style={{ position: "absolute", bottom: 0, left: 0, right: 0, backgroundColor: theme.surface, borderTopWidth: 1, borderTopColor: theme.border, padding: space.lg }}>
         <Button
-          title="Create & Activate Split"
-          onPress={handleCreateSplit}
+          title={fromPrebuilt ? "Save Edited Copy" : isEditMode ? "Save Changes" : "Create & Activate Split"}
+          onPress={handleSave}
+          loading={saving}
+          disabled={saving}
           variant="primary"
           size="lg"
           icon={<Icon name="Save" size={20} color={theme.primaryText} />}

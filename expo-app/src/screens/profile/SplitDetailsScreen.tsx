@@ -161,17 +161,54 @@ export default function SplitDetailsScreen({ route, navigation }: Props) {
         </View>
       </ScrollView>
 
-      {/* Switch Split Button */}
+      {/* Switch Split Button + Edit */}
       <View style={{ position: "absolute", bottom: 0, left: 0, right: 0, backgroundColor: theme.surface, borderTopWidth: 1, borderTopColor: theme.border, padding: space.lg }}>
-        <Button
-          title="Switch to this Split"
-          onPress={() => setPhaseModalVisible(true)}
-          loading={switching}
-          disabled={switching}
-          variant="primary"
-          size="lg"
-          icon={<Icon name="Play" size={20} color={theme.primaryText} />}
-        />
+        {split.isPrebuilt && (
+          <View style={{ flexDirection: "row", gap: space.md }}>
+            <Button
+              title="Switch"
+              onPress={() => setPhaseModalVisible(true)}
+              loading={switching}
+              disabled={switching}
+              variant="primary"
+              size="lg"
+              icon={<Icon name="Play" size={20} color={theme.primaryText} />}
+              style={{ flex: 1 }}
+            />
+            <Button
+              title="Edit"
+              onPress={() => navigation.navigate("CustomSplit", { splitId: split.id, fromPrebuilt: true })}
+              variant="outline"
+              size="lg"
+              icon={<Icon name="Pencil" size={20} color={theme.primary} />}
+              style={{ flex: 1 }}
+              fullWidth={false}
+            />
+          </View>
+        )}
+        {!split.isPrebuilt && (
+          <View style={{ flexDirection: "row", gap: space.md }}>
+            <Button
+              title="Switch"
+              onPress={() => setPhaseModalVisible(true)}
+              loading={switching}
+              disabled={switching}
+              variant="primary"
+              size="lg"
+              icon={<Icon name="Play" size={20} color={theme.primaryText} />}
+              style={{ flex: 1 }}
+            />
+            <Button
+              title="Edit"
+              onPress={() => navigation.navigate("CustomSplit", { splitId: split.id })}
+              variant="outline"
+              size="lg"
+              icon={<Icon name="Pencil" size={20} color={theme.primary} />}
+              style={{ flex: 1 }}
+              fullWidth={false}
+            />
+          </View>
+        )}
       </View>
 
       {/* Phase Modal */}

@@ -134,11 +134,29 @@ export default function ProfileScreen({ navigation }: Props) {
       {/* Current Split Card */}
       {userSplit && (
         <Card shadow="sm" style={{ marginBottom: space.lg }}>
-          <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.sm }}>
-            <Icon name="Calendar" size={18} color={theme.textMuted} />
-            <Typography variant="caption" color={theme.textMuted}>
-              CURRENT SPLIT
-            </Typography>
+          <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginBottom: space.sm }}>
+            <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
+              <Icon name="Calendar" size={18} color={theme.textMuted} />
+              <Typography variant="caption" color={theme.textMuted}>
+                CURRENT SPLIT
+              </Typography>
+            </View>
+            {!userSplit.split.isPrebuilt && (
+              <TouchableOpacity
+                onPress={() => navigation.navigate("CustomSplit", { splitId: userSplit.splitId })}
+                style={{ padding: 4 }}
+              >
+                <Icon name="Pencil" size={18} color={theme.primary} />
+              </TouchableOpacity>
+            )}
+            {userSplit.split.isPrebuilt && (
+              <TouchableOpacity
+                onPress={() => navigation.navigate("CustomSplit", { splitId: userSplit.splitId, fromPrebuilt: true })}
+                style={{ padding: 4 }}
+              >
+                <Icon name="Pencil" size={18} color={theme.primary} />
+              </TouchableOpacity>
+            )}
           </View>
           <Typography variant="heading3" color={theme.textPrimary}>
             {userSplit.split.name}

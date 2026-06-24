@@ -26,6 +26,11 @@ export const createSplit = async (splitData: any) => {
   return data as { split: Split };
 };
 
+export const updateSplit = async (id: string, splitData: any) => {
+  const { data } = await client.put(`/splits/${id}`, splitData);
+  return data as { split: Split };
+};
+
 export const updateSplitExercise = async (id: string, exerciseId: string) => {
   const { data } = await client.patch(`/splits/exercises/${id}`, { exerciseId });
   return data;
