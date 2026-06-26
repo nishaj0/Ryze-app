@@ -40,6 +40,7 @@ model User {
   nutritionLogs    DailyNutrition[]
   exerciseRequests ExerciseRequest[]
   supportTickets   SupportTicket[]
+  checkIns         CheckIn[]
 }
 
 model Split {
@@ -88,6 +89,7 @@ model Exercise {
   alternativesFrom  ExerciseAlternative[] @relation("fromExercise")
   alternativesTo    ExerciseAlternative[] @relation("toExercise")
   personalRecords   PersonalRecord[]
+  checkIns          CheckIn[]
 }
 
 model Muscle {
@@ -168,6 +170,7 @@ model WorkoutSession {
   user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   splitDay       SplitDay      @relation(fields: [splitDayId], references: [id])
   exerciseLogs   ExerciseLog[]
+  checkIn        CheckIn?
 }
 
 model ExerciseLog {
@@ -300,5 +303,21 @@ model SupportTicket {
   updatedAt     DateTime @updatedAt
 
   user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model CheckIn {
+  id                 String   @id @default(cuid())
+  sessionId          String   @unique
+  userId             String
+  rawText            String
+  extractedIssues    String[] @default([])
+  affectedExerciseId String?
+  sentiment          String   @default("NEUTRAL")
+  aiProcessed        Boolean  @default(false)
+  createdAt          DateTime @default(now())
+
+  session          WorkoutSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  user             User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  affectedExercise Exercise?      @relation(fields: [affectedExerciseId], references: [id])
 }
 

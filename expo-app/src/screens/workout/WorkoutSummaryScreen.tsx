@@ -8,6 +8,7 @@ import { Typography, Card, Button, Icon, Input, WorkoutSummaryScreenSkeleton } f
 import { BarChart } from "../../components/charts";
 import { useTheme } from "../../theme/themeStore";
 import { space, radius } from "../../theme/spacing";
+import { createCheckIn, getCheckIn, updateCheckIn } from "../../api/checkins";
 
 type Props = NativeStackScreenProps<HomeStackParamList, "WorkoutSummary">;
 const { width: screenW } = Dimensions.get("window");
@@ -16,11 +17,22 @@ export default function WorkoutSummaryScreen({ navigation }: Props) {
   const theme = useTheme();
   const { activeSession, completeSession, updateSessionNotes } = useWorkoutStore();
   const [saving, setSaving] = useState(false);
+  const [checkInText, setCheckInText] = useState("");
+  const [existingCheckInId, setExistingCheckInId] = useState<string | null>(null);
 
   useEffect(() => {
     if (!activeSession) {
       navigation.getParent()?.getParent()?.navigate("Home", { screen: "HomeMain" });
+      return;
     }
+    getCheckIn(activeSession.sessionId)
+      .then((res) => {
+        if (res?.checkIn) {
+          setCheckInText(res.checkIn.rawText);
+          setExistingCheckInId(res.checkIn.id);
+        }
+      })
+      .catch(() => {});
   }, [activeSession]);
 
   if (!activeSession) {
@@ -84,6 +96,18 @@ export default function WorkoutSummaryScreen({ navigation }: Props) {
   const handleSave = async () => {
     setSaving(true);
     try {
+      if (activeSession && checkInText.trim()) {
+        try {
+          if (existingCheckInId) {
+            await updateCheckIn(activeSession.sessionId, checkInText.trim());
+          } else {
+            await createCheckIn(activeSession.sessionId, checkInText.trim());
+          }
+        } catch (err) {
+          console.error("Failed to save check-in:", err);
+        }
+      }
+
       const res = await completeSession();
       if (res && res.isOffline) {
         Alert.alert(
@@ -298,6 +322,29 @@ export default function WorkoutSummaryScreen({ navigation }: Props) {
               value={activeSession.notes}
               onChangeText={(val) => updateSessionNotes(val)}
               placeholder="How did you feel? Energy level, fatigue, general notes..."
+              multiline
+              numberOfLines={3}
+              containerStyle={{ marginBottom: 0 }}
+            />
+          </Card>
+        </View>
+
+        {/* Check-In Card */}
+        <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
+          <Card shadow="sm" style={{ padding: space.lg }}>
+            <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.sm }}>
+              <Icon name="MessageCircle" size={16} color={theme.primary} />
+              <Typography variant="heading3" color={theme.textPrimary}>
+                How did today feel?
+              </Typography>
+            </View>
+            <Typography variant="bodySmall" color={theme.textSecondary} style={{ marginBottom: space.sm }}>
+              Anything uncomfortable? Your feedback helps us adapt your training.
+            </Typography>
+            <Input
+              value={checkInText}
+              onChangeText={setCheckInText}
+              placeholder="e.g. Shoulder felt a bit tight on press, but overall good energy..."
               multiline
               numberOfLines={3}
               containerStyle={{ marginBottom: 0 }}
