@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Key, Eye, EyeOff, Save, Database, ToggleLeft, ToggleRight, Sliders } from 'lucide-react'
+import { Key, Eye, EyeOff, Save, Database, ToggleLeft, ToggleRight, Sliders, Clock } from 'lucide-react'
 import { getAdminKey, setAdminKey, getAppSettings, updateAppSettings } from '../api'
 import { useToast } from '../components/Toast'
 
@@ -12,6 +12,8 @@ export default function SettingsPage() {
     bugReportingEnabled: true,
     helpRequestsEnabled: true,
     exerciseRequestsEnabled: true,
+    aiSuggestionsEnabled: true,
+    aiSuggestionScheduleCron: '0 9 * * 0',
   })
   const [loadingSettings, setLoadingSettings] = useState(true)
 
@@ -23,6 +25,8 @@ export default function SettingsPage() {
             bugReportingEnabled: d.settings.bugReportingEnabled,
             helpRequestsEnabled: d.settings.helpRequestsEnabled,
             exerciseRequestsEnabled: d.settings.exerciseRequestsEnabled,
+            aiSuggestionsEnabled: d.settings.aiSuggestionsEnabled ?? true,
+            aiSuggestionScheduleCron: d.settings.aiSuggestionScheduleCron ?? '0 9 * * 0',
           })
         }
       })
@@ -123,6 +127,41 @@ export default function SettingsPage() {
                     <ToggleLeft size={38} color="var(--text-muted)" fill="var(--surface-secondary)" />
                   )}
                 </button>
+              </div>
+
+              <div className="row-between" style={{ paddingBottom: 10, borderBottom: '1px solid var(--border)' }}>
+                <div>
+                  <div style={{ fontSize: 14, fontWeight: 600 }}>AI Suggestions</div>
+                  <div style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 2 }}>Enable AI-powered workout adjustment suggestions</div>
+                </div>
+                <button
+                  onClick={() => handleToggle('aiSuggestionsEnabled')}
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                >
+                  {settings.aiSuggestionsEnabled ? (
+                    <ToggleRight size={38} color="var(--success)" fill="var(--success)" />
+                  ) : (
+                    <ToggleLeft size={38} color="var(--text-muted)" fill="var(--surface-secondary)" />
+                  )}
+                </button>
+              </div>
+
+              <div style={{ paddingBottom: 10, borderBottom: '1px solid var(--border)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
+                  <Clock size={14} color="var(--text-muted)" />
+                  <div style={{ fontSize: 14, fontWeight: 600 }}>AI Suggestion Schedule</div>
+                </div>
+                <div style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 8 }}>
+                  Cron expression for weekly AI suggestion generation (default: Sunday 9am)
+                </div>
+                <input
+                  type="text"
+                  value={settings.aiSuggestionScheduleCron}
+                  onChange={e => setSettings({ ...settings, aiSuggestionScheduleCron: e.target.value })}
+                  onBlur={() => updateAppSettings(settings).then(() => toast('Schedule updated', 'success')).catch(() => toast('Failed to update', 'error'))}
+                  style={{ width: '100%', padding: '8px 12px', fontSize: 13, fontFamily: 'Courier New, monospace' }}
+                  placeholder="0 9 * * 0"
+                />
               </div>
             </div>
           )}

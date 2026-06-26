@@ -95,8 +95,8 @@
     "semantic_hash": ""
   },
   "api/src/index.ts": {
-    "mtime": 1782510952.2319899,
-    "ast_hash": "6f1e0d1faf40da6fb789b51b0a51b575",
+    "mtime": 1782513508.0254653,
+    "ast_hash": "965210f1212f3713af3427f96fe31a6f",
     "semantic_hash": ""
   },
   "api/src/middleware/auth.ts": {
@@ -295,8 +295,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/screens/home/HomeScreen.tsx": {
-    "mtime": 1782250700.4894311,
-    "ast_hash": "b725bc513cba23e83a873d71c9886cd6",
+    "mtime": 1782513736.4467847,
+    "ast_hash": "b42c324b3469bb095aebc6d512f2bb50",
     "semantic_hash": ""
   },
   "expo-app/src/screens/metrics/MetricsScreen.tsx": {
@@ -14185,8 +14185,8 @@
     "semantic_hash": ""
   },
   "cpanel/src/pages/SettingsPage.tsx": {
-    "mtime": 1782037125.7633128,
-    "ast_hash": "ceba9fcb5184386efdf2ab9eb49f66fe",
+    "mtime": 1782513780.0968502,
+    "ast_hash": "6da651293dfe508e4b21d3743846ea24",
     "semantic_hash": ""
   },
   "cpanel/src/pages/SplitsPage.tsx": {
@@ -14280,8 +14280,8 @@
     "semantic_hash": ""
   },
   "api/src/controllers/settingsController.ts": {
-    "mtime": 1782037073.3307588,
-    "ast_hash": "ce1401b1c8ea9b33f782aea11ebb7b81",
+    "mtime": 1782513581.004167,
+    "ast_hash": "42345c23b0fa9f667574f8bd98d51d25",
     "semantic_hash": ""
   },
   "api/src/routes/app.ts": {
@@ -14330,8 +14330,8 @@
     "semantic_hash": ""
   },
   "api/src/controllers/checkinController.ts": {
-    "mtime": 1782511146.7951264,
-    "ast_hash": "6074f688833584763a634ed8621f6f10",
+    "mtime": 1782513536.931149,
+    "ast_hash": "be9f2daa09f3827ed27577f374322efd",
     "semantic_hash": ""
   },
   "api/src/routes/checkins.ts": {
@@ -14345,13 +14345,28 @@
     "semantic_hash": ""
   },
   "api/src/utils/scheduler.ts": {
-    "mtime": 1782511109.6180005,
-    "ast_hash": "02e18e5b6efe6173d870af1687c9647c",
+    "mtime": 1782513556.6622353,
+    "ast_hash": "74686f2a606b632b2f3029ee39b5bd65",
     "semantic_hash": ""
   },
   "expo-app/src/api/checkins.ts": {
     "mtime": 1782510976.9356694,
     "ast_hash": "d7adf6a46b3ebc58ba8a169a7e52fc0b",
+    "semantic_hash": ""
+  },
+  "api/src/controllers/splitSuggestionController.ts": {
+    "mtime": 1782513875.3743742,
+    "ast_hash": "b219ffa80be1f464533bc11e23525a31",
+    "semantic_hash": ""
+  },
+  "api/src/routes/suggestions.ts": {
+    "mtime": 1782513488.78397,
+    "ast_hash": "27de4854771b041cea926c1d91a119ee",
+    "semantic_hash": ""
+  },
+  "expo-app/src/api/suggestions.ts": {
+    "mtime": 1782513671.7783496,
+    "ast_hash": "76085f33200d2cb4bf738112f1af8856",
     "semantic_hash": ""
   }
 }

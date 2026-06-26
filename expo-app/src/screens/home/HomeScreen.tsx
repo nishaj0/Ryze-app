@@ -6,6 +6,7 @@ import { getActiveSplit } from "../../api/splits";
 import { getOverview } from "../../api/progress";
 import { markRestDay } from "../../api/sessions";
 import { getPhotos } from "../../api/photos";
+import { getSuggestions, acceptSuggestion, dismissSuggestion, SplitSuggestion } from "../../api/suggestions";
 import { useAuthStore } from "../../store/authStore";
 import { useWorkoutStore } from "../../store/workoutStore";
 import { mmkv } from "../../utils/mmkv";
@@ -28,6 +29,7 @@ export default function HomeScreen({ navigation }: Props) {
   const [todaySplitDay, setTodaySplitDay] = useState<SplitDay | null>(null);
   const [showPhotoPrompt, setShowPhotoPrompt] = useState(false);
   const [workoutModalVisible, setWorkoutModalVisible] = useState(false);
+  const [suggestions, setSuggestions] = useState<SplitSuggestion[]>([]);
 
   useEffect(() => {
     loadData();
@@ -109,13 +111,15 @@ export default function HomeScreen({ navigation }: Props) {
 
   const loadData = async () => {
     try {
-      const [splitRes, overviewRes, photosRes] = await Promise.all([
+      const [splitRes, overviewRes, photosRes, suggestionsRes] = await Promise.all([
         getActiveSplit(),
         getOverview(),
         getPhotos().catch(() => ({ photos: [] })),
+        getSuggestions().catch(() => ({ suggestions: [] })),
       ]);
       setUserSplit(splitRes.userSplit);
       setOverview(overviewRes.overview);
+      setSuggestions(suggestionsRes.suggestions);
 
       // Check if weekly photo is needed
       const photos = photosRes.photos || [];
@@ -178,6 +182,25 @@ export default function HomeScreen({ navigation }: Props) {
     }
   };
 
+  const handleAcceptSuggestion = async (id: string) => {
+    try {
+      await acceptSuggestion(id);
+      setSuggestions((prev) => prev.filter((s) => s.id !== id));
+      Alert.alert("Applied", "Suggestion applied to your split.");
+    } catch (err) {
+      Alert.alert("Error", "Failed to apply suggestion");
+    }
+  };
+
+  const handleDismissSuggestion = async (id: string) => {
+    try {
+      await dismissSuggestion(id);
+      setSuggestions((prev) => prev.filter((s) => s.id !== id));
+    } catch (err) {
+      Alert.alert("Error", "Failed to dismiss suggestion");
+    }
+  };
+
   if (loading) {
     return (
       <Screen scroll padding="none">
@@ -208,6 +231,62 @@ export default function HomeScreen({ navigation }: Props) {
           Let's make today count.
         </Typography>
       </View>
+
+      {/* AI Suggestions */}
+      {suggestions.length > 0 && (
+        <View style={{ marginBottom: space.lg }}>
+          {suggestions.map((suggestion) => (
+            <Card
+              key={suggestion.id}
+              shadow="sm"
+              style={{
+                backgroundColor: theme.primaryLight,
+                borderColor: theme.primary,
+                borderWidth: 1,
+                marginBottom: space.md,
+                padding: space.lg,
+              }}
+            >
+              <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.md }}>
+                <Icon name="Sparkles" size={20} color={theme.primary} />
+                <Typography variant="caption" color={theme.primary} weight="700">
+                  AI SUGGESTION
+                </Typography>
+              </View>
+
+              {suggestion.exercise && (
+                <Typography variant="heading3" color={theme.textPrimary} style={{ marginBottom: space.sm }}>
+                  {suggestion.exercise.name}
+                  {suggestion.suggestedAlternative && (
+                    <Typography variant="body" color={theme.textSecondary}> → {suggestion.suggestedAlternative.name}</Typography>
+                  )}
+                </Typography>
+              )}
+
+              <Typography variant="body" color={theme.textSecondary} style={{ marginBottom: space.md }}>
+                {suggestion.reasoning}
+              </Typography>
+
+              <View style={{ flexDirection: "row", gap: space.sm }}>
+                <Button
+                  title="Apply"
+                  onPress={() => handleAcceptSuggestion(suggestion.id)}
+                  variant="primary"
+                  size="sm"
+                  style={{ flex: 1 }}
+                />
+                <Button
+                  title="Dismiss"
+                  onPress={() => handleDismissSuggestion(suggestion.id)}
+                  variant="secondary"
+                  size="sm"
+                  style={{ flex: 1 }}
+                />
+              </View>
+            </Card>
+          ))}
+        </View>
+      )}
 
       {/* Progress Photo Prompt */}
       {showPhotoPrompt && (

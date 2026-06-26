@@ -19,6 +19,8 @@ export const getAppSettings = async (_req: Request, res: Response, next: NextFun
           bugReportingEnabled: true,
           helpRequestsEnabled: true,
           exerciseRequestsEnabled: true,
+          aiSuggestionsEnabled: true,
+          aiSuggestionScheduleCron: "0 9 * * 0",
         },
       });
     }
@@ -31,7 +33,13 @@ export const getAppSettings = async (_req: Request, res: Response, next: NextFun
 
 export const updateAppSettings = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { bugReportingEnabled, helpRequestsEnabled, exerciseRequestsEnabled } = req.body;
+    const {
+      bugReportingEnabled,
+      helpRequestsEnabled,
+      exerciseRequestsEnabled,
+      aiSuggestionsEnabled,
+      aiSuggestionScheduleCron,
+    } = req.body;
 
     const settings = await prisma.appSettings.upsert({
       where: { id: "default" },
@@ -39,12 +47,16 @@ export const updateAppSettings = async (req: Request, res: Response, next: NextF
         bugReportingEnabled,
         helpRequestsEnabled,
         exerciseRequestsEnabled,
+        aiSuggestionsEnabled,
+        aiSuggestionScheduleCron,
       },
       create: {
         id: "default",
         bugReportingEnabled: bugReportingEnabled ?? true,
         helpRequestsEnabled: helpRequestsEnabled ?? true,
         exerciseRequestsEnabled: exerciseRequestsEnabled ?? true,
+        aiSuggestionsEnabled: aiSuggestionsEnabled ?? true,
+        aiSuggestionScheduleCron: aiSuggestionScheduleCron ?? "0 9 * * 0",
       },
     });
 

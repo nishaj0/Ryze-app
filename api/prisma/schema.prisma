@@ -41,6 +41,7 @@ model User {
   exerciseRequests ExerciseRequest[]
   supportTickets   SupportTicket[]
   checkIns         CheckIn[]
+  splitSuggestions SplitSuggestion[]
 }
 
 model Split {
@@ -69,6 +70,7 @@ model SplitDay {
   split        Split              @relation(fields: [splitId], references: [id], onDelete: Cascade)
   exercises    SplitDayExercise[]
   sessions     WorkoutSession[]
+  splitSuggestions SplitSuggestion[]
 }
 
 model Exercise {
@@ -90,6 +92,8 @@ model Exercise {
   alternativesTo    ExerciseAlternative[] @relation("toExercise")
   personalRecords   PersonalRecord[]
   checkIns          CheckIn[]
+  suggestedAlternatives SplitSuggestion[] @relation("suggestedAlternative")
+  suggestions       SplitSuggestion[] @relation("suggestionExercise")
 }
 
 model Muscle {
@@ -288,6 +292,8 @@ model AppSettings {
   bugReportingEnabled     Boolean  @default(true)
   helpRequestsEnabled     Boolean  @default(true)
   exerciseRequestsEnabled Boolean  @default(true)
+  aiSuggestionsEnabled    Boolean  @default(true)
+  aiSuggestionScheduleCron String  @default("0 9 * * 0")
   updatedAt               DateTime @updatedAt
 }
 
@@ -319,5 +325,24 @@ model CheckIn {
   session          WorkoutSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
   user             User           @relation(fields: [userId], references: [id], onDelete: Cascade)
   affectedExercise Exercise?      @relation(fields: [affectedExerciseId], references: [id])
+}
+
+model SplitSuggestion {
+  id                              String    @id @default(cuid())
+  userId                          String
+  splitDayId                      String
+  exerciseId                      String?
+  suggestionType                  String
+  suggestedAlternativeExerciseId  String?
+  reasoning                       String
+  basedOnCheckInIds               String[]  @default([])
+  status                          String    @default("PENDING")
+  createdAt                       DateTime  @default(now())
+  resolvedAt                      DateTime?
+
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  splitDay          SplitDay  @relation(fields: [splitDayId], references: [id])
+  exercise          Exercise? @relation("suggestionExercise", fields: [exerciseId], references: [id])
+  suggestedAlternative Exercise? @relation("suggestedAlternative", fields: [suggestedAlternativeExerciseId], references: [id])
 }
 

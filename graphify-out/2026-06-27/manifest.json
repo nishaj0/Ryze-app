@@ -40,8 +40,8 @@
     "semantic_hash": ""
   },
   "api/package.json": {
-    "mtime": 1781957376.3401036,
-    "ast_hash": "c1db28ceaf6a1f52b4f0d676b688546a",
+    "mtime": 1782510659.3150012,
+    "ast_hash": "d0965d0c64c1b13b14c95e091cb893f1",
     "semantic_hash": ""
   },
   "api/src/controllers/authController.ts": {
@@ -95,8 +95,8 @@
     "semantic_hash": ""
   },
   "api/src/index.ts": {
-    "mtime": 1782036973.590052,
-    "ast_hash": "413f9a8ec2dfcf44d1987c969e759e68",
+    "mtime": 1782510952.2319899,
+    "ast_hash": "6f1e0d1faf40da6fb789b51b0a51b575",
     "semantic_hash": ""
   },
   "api/src/middleware/auth.ts": {
@@ -405,8 +405,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/screens/workout/WorkoutSummaryScreen.tsx": {
-    "mtime": 1782028907.863423,
-    "ast_hash": "a404c08eb120ef2d15ac25dd507c3a05",
+    "mtime": 1782511196.883219,
+    "ast_hash": "8627c7c21e07a469d7d0239292b754ea",
     "semantic_hash": ""
   },
   "expo-app/src/store/authStore.ts": {
@@ -14327,6 +14327,31 @@
   "expo-app/src/screens/onboarding/OnboardingCustomSplitScreen.tsx": {
     "mtime": 1782251456.0685084,
     "ast_hash": "66a55225b02f6b22555f7f6444e67899",
+    "semantic_hash": ""
+  },
+  "api/src/controllers/checkinController.ts": {
+    "mtime": 1782511146.7951264,
+    "ast_hash": "6074f688833584763a634ed8621f6f10",
+    "semantic_hash": ""
+  },
+  "api/src/routes/checkins.ts": {
+    "mtime": 1782510935.0546858,
+    "ast_hash": "cec235b22e858400e7fedd661cbad0f4",
+    "semantic_hash": ""
+  },
+  "api/src/utils/gemini.ts": {
+    "mtime": 1782511096.6628516,
+    "ast_hash": "e2cd9ddf3e2dc5452c15575b78cc5e68",
+    "semantic_hash": ""
+  },
+  "api/src/utils/scheduler.ts": {
+    "mtime": 1782511109.6180005,
+    "ast_hash": "02e18e5b6efe6173d870af1687c9647c",
+    "semantic_hash": ""
+  },
+  "expo-app/src/api/checkins.ts": {
+    "mtime": 1782510976.9356694,
+    "ast_hash": "d7adf6a46b3ebc58ba8a169a7e52fc0b",
     "semantic_hash": ""
   }
 }

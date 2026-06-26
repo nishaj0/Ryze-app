@@ -3,6 +3,7 @@ import { Response } from "express";
 import { AuthRequest } from "../middleware/auth";
 import { AppError } from "../middleware/errorHandler";
 import { callGemini } from "../utils/gemini";
+import { evaluateForUser } from "./splitSuggestionController";
 
 const prisma = new PrismaClient();
 
@@ -106,6 +107,23 @@ Respond with the exact schema provided. If no exercise is clearly associated wit
       aiProcessed: true,
     },
   });
+
+  if (result.sentiment === "STRUGGLED") {
+    const threeWeeksAgo = new Date(Date.now() - 21 * 24 * 60 * 60 * 1000);
+    const struggledCount = await prisma.checkIn.count({
+      where: {
+        userId: checkIn.userId,
+        sentiment: "STRUGGLED",
+        createdAt: { gte: threeWeeksAgo },
+      },
+    });
+
+    if (struggledCount >= 3) {
+      void evaluateForUser(checkIn.userId).catch((err) => {
+        console.error("[CheckIn] Background suggestion evaluation error:", err);
+      });
+    }
+  }
 }
 
 export const createCheckIn = async (req: AuthRequest, res: Response) => {
