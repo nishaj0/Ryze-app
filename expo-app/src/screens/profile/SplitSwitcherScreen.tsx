@@ -84,23 +84,42 @@ export default function SplitSwitcherScreen({ navigation }: Props) {
               Choose or create a program
             </Typography>
           </View>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("CustomSplit")}
-            style={{
-              backgroundColor: theme.primary,
-              paddingHorizontal: space.md,
-              paddingVertical: space.sm,
-              borderRadius: radius.md,
-              flexDirection: "row",
-              alignItems: "center",
-              gap: space.xs,
-            }}
-          >
-            <Icon name="Plus" size={14} color={theme.primaryText} />
-            <Typography variant="bodySmall" color={theme.primaryText} weight="700">
-              CREATE
-            </Typography>
-          </TouchableOpacity>
+          <View style={{ flexDirection: "row", gap: space.sm }}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("AISplitBuilder")}
+              style={{
+                backgroundColor: theme.warning,
+                paddingHorizontal: space.md,
+                paddingVertical: space.sm,
+                borderRadius: radius.md,
+                flexDirection: "row",
+                alignItems: "center",
+                gap: space.xs,
+              }}
+            >
+              <Icon name="Sparkles" size={14} color={theme.primaryText} />
+              <Typography variant="bodySmall" color={theme.primaryText} weight="700">
+                AI
+              </Typography>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("CustomSplit")}
+              style={{
+                backgroundColor: theme.primary,
+                paddingHorizontal: space.md,
+                paddingVertical: space.sm,
+                borderRadius: radius.md,
+                flexDirection: "row",
+                alignItems: "center",
+                gap: space.xs,
+              }}
+            >
+              <Icon name="Plus" size={14} color={theme.primaryText} />
+              <Typography variant="bodySmall" color={theme.primaryText} weight="700">
+                CREATE
+              </Typography>
+            </TouchableOpacity>
+          </View>
         </View>
 
         {splits.length === 0 ? (

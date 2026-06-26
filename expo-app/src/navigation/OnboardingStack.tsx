@@ -10,6 +10,7 @@ import BodyStatsScreen from "../screens/onboarding/BodyStatsScreen";
 import SleepScreen from "../screens/onboarding/SleepScreen";
 import SplitSelectionScreen from "../screens/onboarding/SplitSelectionScreen";
 import OnboardingCustomSplitScreen from "../screens/onboarding/OnboardingCustomSplitScreen";
+import AISplitBuilderScreen from "../screens/onboarding/AISplitBuilderScreen";
 
 import { OnboardingProvider } from "../screens/onboarding/OnboardingContext";
 import { useTheme } from "../theme/themeStore";
@@ -37,6 +38,7 @@ export default function OnboardingStack() {
         <Stack.Screen name="Sleep" component={SleepScreen} options={{ title: "Sleep Hours" }} />
         <Stack.Screen name="SplitSelection" component={SplitSelectionScreen} options={{ title: "Choose Your Split" }} />
         <Stack.Screen name="OnboardingCustomSplit" component={OnboardingCustomSplitScreen} options={{ title: "Create Your Plan" }} />
+        <Stack.Screen name="AISplitBuilder" component={AISplitBuilderScreen} options={{ title: "Build with AI" }} />
       </Stack.Navigator>
     </OnboardingProvider>
   );

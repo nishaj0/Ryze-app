@@ -35,3 +35,29 @@ export const updateSplitExercise = async (id: string, exerciseId: string) => {
   const { data } = await client.patch(`/splits/exercises/${id}`, { exerciseId });
   return data;
 };
+
+export const generateAISplit = async (description: string, equipmentFilter?: string[]) => {
+  const { data } = await client.post("/splits/ai-generate", { description, equipmentFilter });
+  return data as {
+    split: {
+      name: string;
+      description: string;
+      type: string;
+      daysPerWeek: number;
+      days: Array<{
+        dayNumber: number;
+        name: string;
+        muscleGroups: string[];
+        isRest: boolean;
+        exercises: Array<{
+          exerciseId: string;
+          exerciseName: string;
+          targetSets: number;
+          targetRepsMin: number;
+          targetRepsMax: number;
+        }>;
+      }>;
+    };
+    warnings: string[];
+  };
+};

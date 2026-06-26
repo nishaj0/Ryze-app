@@ -175,6 +175,34 @@ function SplitSelectionContent({ navigation }: Props) {
           </Card>
         </TouchableOpacity>
 
+        {/* Build with AI Option */}
+        <TouchableOpacity
+          onPress={() => navigation.navigate("AISplitBuilder")}
+          disabled={submitting}
+          style={{ marginBottom: space.md }}
+          activeOpacity={0.8}
+        >
+          <Card
+            padding="lg"
+            border={true}
+            style={{
+              borderStyle: "dashed",
+              borderColor: theme.warning,
+              borderWidth: 2,
+              backgroundColor: theme.bg,
+              alignItems: "center",
+            }}
+          >
+            <Icon name="Sparkles" size={32} color={theme.warning} />
+            <Typography variant="heading3" color={theme.warning} style={{ marginTop: space.sm }}>
+              Build with AI
+            </Typography>
+            <Typography variant="bodySmall" color={theme.textSecondary} style={{ marginTop: space.xs, textAlign: "center" }}>
+              Describe your goals and let AI create a personalized split for you
+            </Typography>
+          </Card>
+        </TouchableOpacity>
+
         <View style={{ marginTop: space.lg }}>
           <Button
             title="Start Training"

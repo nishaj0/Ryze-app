@@ -2,6 +2,7 @@ import { Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import { AuthRequest } from "../middleware/auth";
 import { AppError } from "../middleware/errorHandler";
+import { callGemini } from "../utils/gemini";
 
 const prisma = new PrismaClient();
 
@@ -326,4 +327,164 @@ export const updateSplitExercise = async (req: AuthRequest, res: Response) => {
   });
 
   res.json({ splitDayExercise: updated });
+};
+
+export const generateAISplit = async (req: AuthRequest, res: Response) => {
+  const { description, equipmentFilter } = req.body;
+
+  if (!description || typeof description !== "string") {
+    throw new AppError("Description is required", 400);
+  }
+
+  // Fetch exercises, optionally filtered by equipment
+  const exerciseWhere: any = {};
+  if (equipmentFilter && Array.isArray(equipmentFilter) && equipmentFilter.length > 0) {
+    exerciseWhere.equipment = { in: equipmentFilter };
+  }
+
+  const exercises = await prisma.exercise.findMany({
+    where: exerciseWhere,
+    include: {
+      muscles: {
+        where: { isPrimary: true },
+        include: { muscle: true },
+      },
+    },
+    orderBy: { name: "asc" },
+  });
+
+  if (exercises.length === 0) {
+    throw new AppError("No exercises found matching your criteria", 400);
+  }
+
+  // Build exercise list for prompt
+  const exerciseList = exercises
+    .map((ex) => {
+      const primaryMuscle = ex.muscles[0]?.muscle.name || "unknown";
+      return `${ex.name} (${primaryMuscle}, ${ex.equipment || "any"})`;
+    })
+    .join("\n");
+
+  const systemPrompt = `You are a fitness coach creating a personalized workout split. The user will describe their situation (days available, equipment access, injuries, goals).
+
+Available exercises (ONLY use these exact names):
+${exerciseList}
+
+Common split archetypes:
+- PPL (Push/Pull/Legs): 3-6 days/week
+- Upper/Lower: 4 days/week
+- Full Body: 3 days/week
+- Bro Split: 5 days/week (one muscle group per day)
+
+Instructions:
+1. Design a split that matches the user's constraints
+2. Use ONLY exercises from the provided list
+3. Assign appropriate sets/reps based on goals (strength: 3-5 sets, 3-6 reps; hypertrophy: 3-4 sets, 8-12 reps; endurance: 2-3 sets, 15-20 reps)
+4. Include rest days if daysPerWeek < 7
+5. Return the complete split structure
+
+If the user's description is vague, make reasonable assumptions (full gym access, 3-4 days, general fitness).`;
+
+  const responseSchema = {
+    type: "object",
+    properties: {
+      name: { type: "string" },
+      description: { type: "string" },
+      daysPerWeek: { type: "number" },
+      days: {
+        type: "array",
+        items: {
+          type: "object",
+          properties: {
+            dayNumber: { type: "number" },
+            name: { type: "string" },
+            muscleGroups: { type: "array", items: { type: "string" } },
+            isRest: { type: "boolean" },
+            exercises: {
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  exerciseName: { type: "string" },
+                  targetSets: { type: "number" },
+                  targetRepsMin: { type: "number" },
+                  targetRepsMax: { type: "number" },
+                },
+                required: ["exerciseName", "targetSets", "targetRepsMin", "targetRepsMax"],
+              },
+            },
+          },
+          required: ["dayNumber", "name", "muscleGroups", "isRest", "exercises"],
+        },
+      },
+    },
+    required: ["name", "description", "daysPerWeek", "days"],
+  };
+
+  const result = await callGemini<any>({
+    systemPrompt,
+    userPrompt: description,
+    responseSchema,
+  });
+
+  if (!result) {
+    throw new AppError("Failed to generate split. Please try again.", 500);
+  }
+
+  // Validate and resolve exercise names to IDs
+  const warnings: string[] = [];
+  const exerciseMap = new Map(exercises.map((ex) => [ex.name.toLowerCase(), ex]));
+
+  const validatedDays = result.days.map((day: any) => {
+    const validatedExercises = [];
+
+    for (const ex of day.exercises) {
+      const matched = exerciseMap.get(ex.exerciseName.toLowerCase());
+      if (matched) {
+        validatedExercises.push({
+          exerciseId: matched.id,
+          exerciseName: matched.name,
+          targetSets: ex.targetSets,
+          targetRepsMin: ex.targetRepsMin,
+          targetRepsMax: ex.targetRepsMax,
+        });
+      } else {
+        warnings.push(`Dropped exercise: "${ex.exerciseName}" (not found in database)`);
+      }
+    }
+
+    return {
+      dayNumber: day.dayNumber,
+      name: day.name,
+      muscleGroups: day.muscleGroups,
+      isRest: day.isRest,
+      exercises: validatedExercises,
+    };
+  });
+
+  // Filter out empty days
+  const nonEmptyDays = validatedDays.filter(
+    (day: any) => day.isRest || day.exercises.length > 0
+  );
+
+  if (nonEmptyDays.length === 0) {
+    throw new AppError("Generated split has no valid exercises. Please try again.", 400);
+  }
+
+  if (nonEmptyDays.length < validatedDays.length) {
+    warnings.push(
+      `Dropped ${validatedDays.length - nonEmptyDays.length} empty day(s)`
+    );
+  }
+
+  res.json({
+    split: {
+      name: result.name,
+      description: result.description,
+      type: "CUSTOM",
+      daysPerWeek: result.daysPerWeek,
+      days: nonEmptyDays,
+    },
+    warnings,
+  });
 };

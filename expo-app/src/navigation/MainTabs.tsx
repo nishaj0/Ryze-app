@@ -20,6 +20,7 @@ import EditProfileScreen from "../screens/profile/EditProfileScreen";
 import SplitSwitcherScreen from "../screens/profile/SplitSwitcherScreen";
 import SplitDetailsScreen from "../screens/profile/SplitDetailsScreen";
 import CustomSplitScreen from "../screens/profile/CustomSplitScreen";
+import AISplitBuilderScreen from "../screens/onboarding/AISplitBuilderScreen";
 import SettingsScreen from "../screens/profile/SettingsScreen";
 import MetricsScreen from "../screens/metrics/MetricsScreen";
 import AllExercisesScreen from "../screens/exercises/AllExercisesScreen";
@@ -121,6 +122,7 @@ function ProfileStack() {
       <ProfileStackNav.Screen name="SplitSwitcher" component={SplitSwitcherScreen} options={{ title: "Switch Split" }} />
       <ProfileStackNav.Screen name="SplitDetails" component={SplitDetailsScreen} options={{ title: "Split Details" }} />
       <ProfileStackNav.Screen name="CustomSplit" component={CustomSplitScreen} options={{ title: "Create Custom Split" }} />
+      <ProfileStackNav.Screen name="AISplitBuilder" component={AISplitBuilderScreen} options={{ title: "Build with AI" }} />
       <ProfileStackNav.Screen name="Settings" component={SettingsScreen} options={{ title: "Settings" }} />
       <ProfileStackNav.Screen name="Metrics" component={MetricsScreen} options={{ title: "Body Metrics" }} />
       <ProfileStackNav.Screen name="AllExercises" component={AllExercisesScreen} options={{ title: "All Exercises" }} />

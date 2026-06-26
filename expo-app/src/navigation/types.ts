@@ -17,6 +17,7 @@ export type OnboardingStackParamList = {
   Sleep: undefined;
   SplitSelection: undefined;
   OnboardingCustomSplit: undefined;
+  AISplitBuilder: undefined;
 };
 
 export type HomeStackParamList = {
@@ -49,7 +50,8 @@ export type ProfileStackParamList = {
   EditProfile: undefined;
   SplitSwitcher: undefined;
   SplitDetails: { splitId: string; splitName: string };
-CustomSplit: { splitId?: string; fromPrebuilt?: boolean } | undefined;
+  CustomSplit: { splitId?: string; fromPrebuilt?: boolean } | undefined;
+  AISplitBuilder: undefined;
   Settings: undefined;
   Metrics: undefined;
   AllExercises: undefined;

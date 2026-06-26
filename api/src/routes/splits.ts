@@ -13,6 +13,7 @@ const wrap = (fn: (req: any, res: Response, next: NextFunction) => Promise<any>)
 };
 
 router.get("/", authMiddleware, wrap(splitController.listSplits));
+router.post("/ai-generate", authMiddleware, wrap(splitController.generateAISplit));
 router.get("/:id", authMiddleware, wrap(splitController.getSplit));
 router.get("/user/active", authMiddleware, wrap(splitController.getActiveSplit));
 router.put("/user/active", authMiddleware, wrap(splitController.setActiveSplit));
