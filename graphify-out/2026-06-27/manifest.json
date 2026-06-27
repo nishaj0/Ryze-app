@@ -90,8 +90,8 @@
     "semantic_hash": ""
   },
   "api/src/controllers/splitController.ts": {
-    "mtime": 1782279522.6682854,
-    "ast_hash": "139d9d95712c475b5d71ad8874903138",
+    "mtime": 1782514203.2087097,
+    "ast_hash": "7e8eaaad488c2dc4935752c4fdec2a06",
     "semantic_hash": ""
   },
   "api/src/index.ts": {
@@ -160,8 +160,8 @@
     "semantic_hash": ""
   },
   "api/src/routes/splits.ts": {
-    "mtime": 1782279533.327112,
-    "ast_hash": "1888accc090e9d57bba1644e377b8298",
+    "mtime": 1782514218.4255035,
+    "ast_hash": "3eebaa4d2e2ec6a34db70062d555448a",
     "semantic_hash": ""
   },
   "api/tsconfig.json": {
@@ -250,8 +250,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/api/splits.ts": {
-    "mtime": 1782279544.8150554,
-    "ast_hash": "8d38db7359a8fd0cbd7f7d9bc1593eeb",
+    "mtime": 1782514237.5935664,
+    "ast_hash": "c6169c3358ffd8aeb06b21fc683dd1fc",
     "semantic_hash": ""
   },
   "expo-app/src/constants/config.ts": {
@@ -265,13 +265,13 @@
     "semantic_hash": ""
   },
   "expo-app/src/navigation/MainTabs.tsx": {
-    "mtime": 1782037975.8620515,
-    "ast_hash": "3d6abef4748ef79b4dfebdeb50c15464",
+    "mtime": 1782514325.4677055,
+    "ast_hash": "6528ee05a6072bda01b9b44f76fabc75",
     "semantic_hash": ""
   },
   "expo-app/src/navigation/OnboardingStack.tsx": {
-    "mtime": 1782251633.109593,
-    "ast_hash": "c2ecfb014b17b24cc9ef4202796381ae",
+    "mtime": 1782514286.4311874,
+    "ast_hash": "d18346db04d9f2b8524899344bafef5a",
     "semantic_hash": ""
   },
   "expo-app/src/navigation/RootNavigator.tsx": {
@@ -280,8 +280,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/navigation/types.ts": {
-    "mtime": 1782281855.93032,
-    "ast_hash": "3f9aba5ca4658b56163b0185de177b8d",
+    "mtime": 1782514260.6796768,
+    "ast_hash": "3eb40a7abadac9b42463c410751fa79d",
     "semantic_hash": ""
   },
   "expo-app/src/screens/auth/LoginScreen.tsx": {
@@ -345,8 +345,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/screens/onboarding/SplitSelectionScreen.tsx": {
-    "mtime": 1782251701.0524702,
-    "ast_hash": "2198c6b49e53dfed62b6b4a45cc7d3f9",
+    "mtime": 1782514421.400097,
+    "ast_hash": "ec0d327cc9470f02eb1060e05c27252f",
     "semantic_hash": ""
   },
   "expo-app/src/screens/photos/PhotoCaptureScreen.tsx": {
@@ -380,8 +380,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/screens/profile/SplitSwitcherScreen.tsx": {
-    "mtime": 1782282022.1743827,
-    "ast_hash": "f52c973483da6f8bea09ccf9fe4c42c2",
+    "mtime": 1782514442.6497798,
+    "ast_hash": "2bb69998daa56e7561ce0c0e366c79b9",
     "semantic_hash": ""
   },
   "expo-app/src/screens/progress/DashboardScreen.tsx": {
@@ -14367,6 +14367,11 @@
   "expo-app/src/api/suggestions.ts": {
     "mtime": 1782513671.7783496,
     "ast_hash": "76085f33200d2cb4bf738112f1af8856",
+    "semantic_hash": ""
+  },
+  "expo-app/src/screens/onboarding/AISplitBuilderScreen.tsx": {
+    "mtime": 1782514401.0226285,
+    "ast_hash": "6032fc6434888f5df48234a43e9d0a38",
     "semantic_hash": ""
   }
 }
