@@ -18,7 +18,11 @@
       "adaptiveIcon": {
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.ryze.app"
+      "package": "com.ryze.app",
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "bundler": "metro",
@@ -45,6 +49,12 @@
           "color": "#DC2626"
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "17f10e7a-0460-4606-ab65-2719c02b2e2f"
+      }
+    },
+    "owner": "nishaj0"
   }
 }

@@ -170,8 +170,8 @@
     "semantic_hash": ""
   },
   "expo-app/app.json": {
-    "mtime": 1781125839.7903836,
-    "ast_hash": "7d1457d89d9b4b09900dfdb325050efb",
+    "mtime": 1782636980.0899606,
+    "ast_hash": "fb688d0e43294f17091e0a48ad89cc0b",
     "semantic_hash": ""
   },
   "expo-app/babel.config.js": {
@@ -14480,8 +14480,8 @@
     "semantic_hash": ""
   },
   ".github/workflows/release.yml": {
-    "mtime": 1782575888.2415128,
-    "ast_hash": "8e91f1cf4895d24763d2cb4104535368",
+    "mtime": 1782636083.2186937,
+    "ast_hash": "3beac3e4e818101864e93b340b2f17fc",
     "semantic_hash": ""
   }
 }
