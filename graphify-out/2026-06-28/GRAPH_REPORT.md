@@ -1,16 +1,16 @@
 # Graph Report - Ryze  (2026-06-28)
 
 ## Corpus Check
-- 1078 files · ~3,594,217 words
+- 1078 files · ~3,594,232 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 11656 nodes · 11912 edges · 942 communities (935 shown, 7 thin omitted)
+- 11661 nodes · 11917 edges · 942 communities (935 shown, 7 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 2 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `30d05efc`
+- Built from commit: `a45e203e`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -1004,8 +1004,8 @@ Cohesion: 0.10
 Nodes (11): prisma, validate(), loginSchema, registerSchema, router, bodyMetricSchema, router, onboardingSchema (+3 more)
 
 ### Community 8 - "API TypeScript Config"
-Cohesion: 0.10
-Nodes (21): backgroundColor, adaptiveIcon, package, expo, android, icon, ios, name (+13 more)
+Cohesion: 0.08
+Nodes (26): backgroundColor, adaptiveIcon, package, permissions, projectId, expo, android, extra (+18 more)
 
 ### Community 9 - "Middleware & Route Setup"
 Cohesion: 0.15
@@ -4648,7 +4648,7 @@ Cohesion: 0.20
 Nodes (9): buildType, distribution, build, release, cli, version, android, submit (+1 more)
 
 ## Knowledge Gaps
-- **10098 isolated node(s):** `name`, `version`, `main`, `start`, `android` (+10093 more)
+- **10101 isolated node(s):** `name`, `slug`, `version`, `orientation`, `icon` (+10096 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -4656,13 +4656,13 @@ Nodes (9): buildType, distribution, build, release, cli, version, android, submi
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `setActiveSplit()` connect `Community 928` to `Community 908`?**
-  _High betweenness centrality (0.002) - this node is a cross-community bridge._
-- **Why does `AuthRequest` connect `Community 23` to `Expo App Dependencies`, `Expo App Configuration`, `Community 939`, `Community 940`, `Community 908`, `Skills Lock Registry`, `Community 15`, `Photo Controller & Cloudinary`, `Progress Analytics Controller`, `Database Seed Data`?**
-  _High betweenness centrality (0.001) - this node is a cross-community bridge._
+  _High betweenness centrality (0.003) - this node is a cross-community bridge._
 - **Why does `useTheme()` connect `Community 924` to `Frontend API Client`, `Auth & Splits Routes`, `Community 928`, `API Server Dependencies`, `Community 932`, `Community 39`, `Middleware & Route Setup`, `Photos Feature`, `Community 29`?**
+  _High betweenness centrality (0.002) - this node is a cross-community bridge._
+- **Why does `dependencies` connect `Backend Controllers Core` to `Community 939`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
-- **What connects `name`, `version`, `main` to the rest of the system?**
-  _10098 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `name`, `slug`, `version` to the rest of the system?**
+  _10101 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Frontend API Client` be split into smaller, more focused modules?**
   _Cohesion score 0.0505175983436853 - nodes in this community are weakly interconnected._
 - **Should `Auth & Splits Routes` be split into smaller, more focused modules?**
