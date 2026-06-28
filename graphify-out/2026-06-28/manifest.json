@@ -14473,15 +14473,5 @@
     "mtime": 1782559512.7001739,
     "ast_hash": "279b12e2d47b4e35d89091606f4adc08",
     "semantic_hash": ""
-  },
-  "expo-app/eas.json": {
-    "mtime": 1782575872.5960732,
-    "ast_hash": "88237cc7ec5af375aec37ee0eeea55f2",
-    "semantic_hash": ""
-  },
-  ".github/workflows/release.yml": {
-    "mtime": 1782575888.2415128,
-    "ast_hash": "8e91f1cf4895d24763d2cb4104535368",
-    "semantic_hash": ""
   }
 }

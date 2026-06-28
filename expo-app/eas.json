@@ -1,0 +1,16 @@
+{
+  "cli": {
+    "version": ">= 12.0.0"
+  },
+  "build": {
+    "release": {
+      "android": {
+        "buildType": "apk",
+        "distribution": "internal"
+      }
+    }
+  },
+  "submit": {
+    "release": {}
+  }
+}
