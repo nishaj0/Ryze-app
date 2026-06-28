@@ -32,14 +32,12 @@ jobs:
         run: npm ci
 
       - name: Build APK
-        run: eas build --platform android --profile release --non-interactive --no-wait
-
-      - name: Wait for build & download
         id: build
         run: |
-          echo "Waiting for EAS build to complete..."
-          BUILD_ID=$(eas build:list --platform android --status finished --limit 1 --json | jq -r '.[0].id')
-          ARTIFACT_URL=$(eas build:view $BUILD_ID --json | jq -r '.artifacts.buildUrl')
+          BUILD_OUTPUT=$(eas build --platform android --profile release --non-interactive --json)
+          BUILD_ID=$(echo "$BUILD_OUTPUT" | jq -r '.[0].id')
+          ARTIFACT_URL=$(echo "$BUILD_OUTPUT" | jq -r '.[0].artifacts.buildUrl')
+          echo "build_id=$BUILD_ID" >> $GITHUB_OUTPUT
           echo "artifact_url=$ARTIFACT_URL" >> $GITHUB_OUTPUT
 
       - name: Download APK
