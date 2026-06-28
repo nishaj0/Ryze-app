@@ -1,16 +1,16 @@
 # Graph Report - Ryze  (2026-06-28)
 
 ## Corpus Check
-- 1078 files · ~3,594,232 words
+- 1078 files · ~3,594,234 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 11661 nodes · 11917 edges · 942 communities (935 shown, 7 thin omitted)
+- 11662 nodes · 11918 edges · 945 communities (938 shown, 7 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 2 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `a45e203e`
+- Built from commit: `2dd5c629`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -940,7 +940,10 @@
 - [[_COMMUNITY_Community 937|Community 937]]
 - [[_COMMUNITY_Community 939|Community 939]]
 - [[_COMMUNITY_Community 940|Community 940]]
+- [[_COMMUNITY_Community 941|Community 941]]
 - [[_COMMUNITY_Community 942|Community 942]]
+- [[_COMMUNITY_Community 943|Community 943]]
+- [[_COMMUNITY_Community 944|Community 944]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `useTheme()` - 139 edges
@@ -969,7 +972,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (942 total, 7 thin omitted)
+## Communities (945 total, 7 thin omitted)
 
 ### Community 0 - "Frontend API Client"
 Cohesion: 0.05
@@ -980,8 +983,8 @@ Cohesion: 0.06
 Nodes (54): RingChartProps, Button(), ButtonProps, Size, Variant, CardProps, ExerciseImageCarouselProps, styles (+46 more)
 
 ### Community 2 - "Onboarding Flow"
-Cohesion: 0.04
-Nodes (48): dependencies, axios, expo, expo-camera, expo-font, @expo-google-fonts/inter, expo-image-manipulator, expo-image-picker (+40 more)
+Cohesion: 0.07
+Nodes (30): dependencies, axios, expo, expo-asset, expo-camera, expo-font, @expo-google-fonts/inter, expo-image-manipulator (+22 more)
 
 ### Community 3 - "Expo App Dependencies"
 Cohesion: 0.11
@@ -4643,12 +4646,24 @@ Nodes (14): prisma, uploadExerciseImage(), prisma, prisma, deletePhoto(), prisma
 Cohesion: 0.20
 Nodes (3): prisma, router, upload
 
+### Community 941 - "Community 941"
+Cohesion: 0.25
+Nodes (8): scripts, android, ios, lint, start, test, test:watch, web
+
 ### Community 942 - "Community 942"
 Cohesion: 0.20
 Nodes (9): buildType, distribution, build, release, cli, version, android, submit (+1 more)
 
+### Community 943 - "Community 943"
+Cohesion: 0.29
+Nodes (7): devDependencies, @babel/core, @emnapi/core, @emnapi/runtime, @types/react, typescript, vitest
+
+### Community 944 - "Community 944"
+Cohesion: 0.40
+Nodes (4): main, name, private, version
+
 ## Knowledge Gaps
-- **10101 isolated node(s):** `name`, `slug`, `version`, `orientation`, `icon` (+10096 more)
+- **10102 isolated node(s):** `name`, `version`, `main`, `start`, `android` (+10097 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -4658,14 +4673,14 @@ _Questions this graph is uniquely positioned to answer:_
 - **Why does `setActiveSplit()` connect `Community 928` to `Community 908`?**
   _High betweenness centrality (0.003) - this node is a cross-community bridge._
 - **Why does `useTheme()` connect `Community 924` to `Frontend API Client`, `Auth & Splits Routes`, `Community 928`, `API Server Dependencies`, `Community 932`, `Community 39`, `Middleware & Route Setup`, `Photos Feature`, `Community 29`?**
-  _High betweenness centrality (0.002) - this node is a cross-community bridge._
+  _High betweenness centrality (0.001) - this node is a cross-community bridge._
 - **Why does `dependencies` connect `Backend Controllers Core` to `Community 939`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
-- **What connects `name`, `slug`, `version` to the rest of the system?**
-  _10101 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `name`, `version`, `main` to the rest of the system?**
+  _10102 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Frontend API Client` be split into smaller, more focused modules?**
   _Cohesion score 0.0505175983436853 - nodes in this community are weakly interconnected._
 - **Should `Auth & Splits Routes` be split into smaller, more focused modules?**
   _Cohesion score 0.06260406260406261 - nodes in this community are weakly interconnected._
 - **Should `Onboarding Flow` be split into smaller, more focused modules?**
-  _Cohesion score 0.04081632653061224 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06666666666666667 - nodes in this community are weakly interconnected._

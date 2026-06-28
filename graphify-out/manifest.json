@@ -170,8 +170,8 @@
     "semantic_hash": ""
   },
   "expo-app/app.json": {
-    "mtime": 1782636980.0899606,
-    "ast_hash": "fb688d0e43294f17091e0a48ad89cc0b",
+    "mtime": 1782642039.1693466,
+    "ast_hash": "d2caad6f45692a526efc97dc82e09bce",
     "semantic_hash": ""
   },
   "expo-app/babel.config.js": {
@@ -190,8 +190,8 @@
     "semantic_hash": "b02bcf4fde15f746f6e5248537d0b156"
   },
   "expo-app/package.json": {
-    "mtime": 1782639300.9951954,
-    "ast_hash": "a65f2e9758ba096c8a0d35eb509274ba",
+    "mtime": 1782642021.6831021,
+    "ast_hash": "d049032280fe6eabf0e96d7ac14383b0",
     "semantic_hash": ""
   },
   "expo-app/src/App.tsx": {
