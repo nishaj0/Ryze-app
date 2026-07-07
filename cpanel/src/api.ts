@@ -1,9 +1,10 @@
 import axios from 'axios'
 
 const ADMIN_KEY = localStorage.getItem('ryze_admin_key') || ''
+const API_ROOT = import.meta.env.VITE_API_URL || ''
 
 const api = axios.create({
-  baseURL: '/api/admin',
+  baseURL: API_ROOT ? `${API_ROOT}/api/admin` : '/api/admin',
   headers: { 'x-admin-key': ADMIN_KEY },
 })
 

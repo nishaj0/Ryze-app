@@ -51,9 +51,8 @@ export default function SettingsPage() {
     }
   }
 
-  const apiBase = window.location.origin.includes('5173')
-    ? 'http://localhost:3000/api'
-    : '/api'
+  const apiBase = import.meta.env.VITE_API_URL
+    || (window.location.origin.includes('5173') ? 'http://localhost:3000/api' : '/api')
 
   return (
     <div>

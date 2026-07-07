@@ -7,6 +7,9 @@
       "android": {
         "buildType": "apk",
         "distribution": "internal"
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://ryze-app-7ixz.onrender.com/api"
       }
     }
   },
