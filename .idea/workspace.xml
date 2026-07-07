@@ -5,17 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e19c3f9d-e96e-4d34-9749-0a76372ee78f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/expo-app/src/components/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/components/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/navigation/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/navigation/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/home/HomeScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/home/HomeScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/profile/CustomSplitScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/profile/CustomSplitScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/progress/DashboardScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/progress/DashboardScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/progress/RecordsScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/progress/RecordsScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/workout/WorkoutLoggerScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/workout/WorkoutLoggerScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/screens/workout/WorkoutSummaryScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/screens/workout/WorkoutSummaryScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/store/workoutStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/store/workoutStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/types/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/types/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/expo-app/src/utils/progression.ts" beforeDir="false" afterPath="$PROJECT_DIR$/expo-app/src/utils/progression.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
