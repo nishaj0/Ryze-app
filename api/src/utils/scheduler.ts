@@ -20,11 +20,17 @@ export async function initScheduler(): Promise<void> {
     }
   });
 
-  const settings = await prisma.appSettings.findUnique({
-    where: { id: "default" },
-  });
-
-  const cronExpression = settings?.aiSuggestionScheduleCron || "0 9 * * 0";
+  let cronExpression = "0 9 * * 0";
+  try {
+    const settings = await prisma.appSettings.findUnique({
+      where: { id: "default" },
+    });
+    if (settings?.aiSuggestionScheduleCron) {
+      cronExpression = settings.aiSuggestionScheduleCron;
+    }
+  } catch (error) {
+    console.error("[Scheduler] Failed to load settings from DB, using default cron:", error);
+  }
 
   cron.schedule(cronExpression, async () => {
     try {
