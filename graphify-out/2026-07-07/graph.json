@@ -4,319 +4,265 @@
   "graph": {},
   "nodes": [
     {
-      "label": "index.ts",
-      "file_type": "code",
-      "source_file": "api/src/index.ts",
-      "source_location": "L1",
-      "id": "src_index",
-      "community": 7,
-      "norm_label": "index.ts"
-    },
-    {
-      "label": "app",
-      "file_type": "code",
-      "source_file": "api/src/index.ts",
-      "source_location": "L25",
-      "id": "src_index_app",
-      "community": 7,
-      "norm_label": "app"
-    },
-    {
-      "label": "health.ts",
-      "file_type": "code",
-      "source_file": "api/src/routes/health.ts",
-      "source_location": "L1",
-      "id": "routes_health",
-      "community": 7,
-      "norm_label": "health.ts"
-    },
-    {
-      "label": "router",
-      "file_type": "code",
-      "source_file": "api/src/routes/health.ts",
-      "source_location": "L4",
-      "id": "routes_health_router",
-      "community": 7,
-      "norm_label": "router"
-    },
-    {
-      "label": "prisma",
-      "file_type": "code",
-      "source_file": "api/src/routes/health.ts",
-      "source_location": "L5",
-      "id": "routes_health_prisma",
-      "community": 7,
-      "norm_label": "prisma"
-    },
-    {
-      "label": "startTime",
-      "file_type": "code",
-      "source_file": "api/src/routes/health.ts",
-      "source_location": "L6",
-      "id": "routes_health_starttime",
-      "community": 7,
-      "norm_label": "starttime"
-    },
-    {
       "label": "app.json",
       "file_type": "code",
       "source_file": "expo-app/app.json",
       "source_location": "L1",
+      "id": "expo_app_app",
       "community": 8,
-      "norm_label": "app.json",
-      "id": "expo_app_app"
+      "norm_label": "app.json"
     },
     {
       "label": "expo",
       "file_type": "code",
       "source_file": "expo-app/app.json",
       "source_location": "L2",
+      "id": "expo_app_app_expo",
       "community": 8,
-      "norm_label": "expo",
-      "id": "expo_app_app_expo"
+      "norm_label": "expo"
     },
     {
       "label": "name",
       "file_type": "code",
       "source_file": "expo-app/app.json",
       "source_location": "L3",
+      "id": "expo_app_app_expo_name",
       "community": 8,
-      "norm_label": "name",
-      "id": "expo_app_app_expo_name"
+      "norm_label": "name"
     },
     {
       "label": "slug",
       "file_type": "code",
       "source_file": "expo-app/app.json",
       "source_location": "L4",
+      "id": "expo_app_app_expo_slug",
       "community": 8,
-      "norm_label": "slug",
-      "id": "expo_app_app_expo_slug"
+      "norm_label": "slug"
     },
     {
       "label": "version",
       "file_type": "code",
       "source_file": "expo-app/app.json",
       "source_location": "L5",
+      "id": "expo_app_app_expo_version",
       "community": 8,
-      "norm_label": "version",
-      "id": "expo_app_app_expo_version"
+      "norm_label": "version"
     },
     {
       "label": "orientation",
       "file_type": "code",
       "source_file": "expo-app/app.json",
       "source_location": "L6",
+      "id": "expo_app_app_expo_orientation",
       "community": 8,
-      "norm_label": "orientation",
-      "id": "expo_app_app_expo_orientation"
+      "norm_label": "orientation"
     },
     {
       "label": "icon",
       "file_type": "code",
       "source_file": "expo-app/app.json",
       "source_location": "L7",
+      "id": "expo_app_app_expo_icon",
       "community": 8,
-      "norm_label": "icon",
-      "id": "expo_app_app_expo_icon"
+      "norm_label": "icon"
     },
     {
       "label": "userInterfaceStyle",
       "file_type": "code",
       "source_file": "expo-app/app.json",
       "source_location": "L8",
+      "id": "expo_app_app_expo_userinterfacestyle",
       "community": 8,
-      "norm_label": "userinterfacestyle",
-      "id": "expo_app_app_expo_userinterfacestyle"
+      "norm_label": "userinterfacestyle"
     },
     {
       "label": "newArchEnabled",
       "file_type": "code",
       "source_file": "expo-app/app.json",
       "source_location": "L9",
+      "id": "expo_app_app_expo_newarchenabled",
       "community": 8,
-      "norm_label": "newarchenabled",
-      "id": "expo_app_app_expo_newarchenabled"
+      "norm_label": "newarchenabled"
     },
     {
       "label": "splash",
       "file_type": "code",
       "source_file": "expo-app/app.json",
       "source_location": "L10",
+      "id": "expo_app_app_expo_splash",
       "community": 8,
-      "norm_label": "splash",
-      "id": "expo_app_app_expo_splash"
+      "norm_label": "splash"
     },
     {
       "label": "image",
       "file_type": "code",
       "source_file": "expo-app/app.json",
       "source_location": "L11",
+      "id": "expo_app_app_splash_image",
       "community": 8,
-      "norm_label": "image",
-      "id": "expo_app_app_splash_image"
+      "norm_label": "image"
     },
     {
       "label": "backgroundColor",
       "file_type": "code",
       "source_file": "expo-app/app.json",
       "source_location": "L12",
+      "id": "expo_app_app_splash_backgroundcolor",
       "community": 8,
-      "norm_label": "backgroundcolor",
-      "id": "expo_app_app_splash_backgroundcolor"
+      "norm_label": "backgroundcolor"
     },
     {
       "label": "resizeMode",
       "file_type": "code",
       "source_file": "expo-app/app.json",
       "source_location": "L13",
+      "id": "expo_app_app_splash_resizemode",
       "community": 8,
-      "norm_label": "resizemode",
-      "id": "expo_app_app_splash_resizemode"
+      "norm_label": "resizemode"
     },
     {
       "label": "ios",
       "file_type": "code",
       "source_file": "expo-app/app.json",
       "source_location": "L15",
+      "id": "expo_app_app_expo_ios",
       "community": 8,
-      "norm_label": "ios",
-      "id": "expo_app_app_expo_ios"
+      "norm_label": "ios"
     },
     {
       "label": "supportsTablet",
       "file_type": "code",
       "source_file": "expo-app/app.json",
       "source_location": "L16",
+      "id": "expo_app_app_ios_supportstablet",
       "community": 8,
-      "norm_label": "supportstablet",
-      "id": "expo_app_app_ios_supportstablet"
+      "norm_label": "supportstablet"
     },
     {
       "label": "bundleIdentifier",
       "file_type": "code",
       "source_file": "expo-app/app.json",
       "source_location": "L17",
+      "id": "expo_app_app_ios_bundleidentifier",
       "community": 8,
-      "norm_label": "bundleidentifier",
-      "id": "expo_app_app_ios_bundleidentifier"
+      "norm_label": "bundleidentifier"
     },
     {
       "label": "android",
       "file_type": "code",
       "source_file": "expo-app/app.json",
       "source_location": "L19",
+      "id": "expo_app_app_expo_android",
       "community": 8,
-      "norm_label": "android",
-      "id": "expo_app_app_expo_android"
+      "norm_label": "android"
     },
     {
       "label": "adaptiveIcon",
       "file_type": "code",
       "source_file": "expo-app/app.json",
       "source_location": "L20",
+      "id": "expo_app_app_android_adaptiveicon",
       "community": 8,
-      "norm_label": "adaptiveicon",
-      "id": "expo_app_app_android_adaptiveicon"
+      "norm_label": "adaptiveicon"
     },
     {
       "label": "backgroundColor",
       "file_type": "code",
       "source_file": "expo-app/app.json",
       "source_location": "L21",
+      "id": "expo_app_app_adaptiveicon_backgroundcolor",
       "community": 8,
-      "norm_label": "backgroundcolor",
-      "id": "expo_app_app_adaptiveicon_backgroundcolor"
+      "norm_label": "backgroundcolor"
     },
     {
       "label": "package",
       "file_type": "code",
       "source_file": "expo-app/app.json",
       "source_location": "L23",
+      "id": "expo_app_app_android_package",
       "community": 8,
-      "norm_label": "package",
-      "id": "expo_app_app_android_package"
+      "norm_label": "package"
     },
     {
       "label": "permissions",
       "file_type": "code",
       "source_file": "expo-app/app.json",
       "source_location": "L24",
+      "id": "expo_app_app_android_permissions",
       "community": 8,
-      "norm_label": "permissions",
-      "id": "expo_app_app_android_permissions"
+      "norm_label": "permissions"
     },
     {
       "label": "web",
       "file_type": "code",
       "source_file": "expo-app/app.json",
       "source_location": "L29",
+      "id": "expo_app_app_expo_web",
       "community": 8,
-      "norm_label": "web",
-      "id": "expo_app_app_expo_web"
+      "norm_label": "web"
     },
     {
       "label": "bundler",
       "file_type": "code",
       "source_file": "expo-app/app.json",
       "source_location": "L30",
+      "id": "expo_app_app_web_bundler",
       "community": 8,
-      "norm_label": "bundler",
-      "id": "expo_app_app_web_bundler"
+      "norm_label": "bundler"
     },
     {
       "label": "output",
       "file_type": "code",
       "source_file": "expo-app/app.json",
       "source_location": "L31",
+      "id": "expo_app_app_web_output",
       "community": 8,
-      "norm_label": "output",
-      "id": "expo_app_app_web_output"
+      "norm_label": "output"
     },
     {
       "label": "plugins",
       "file_type": "code",
       "source_file": "expo-app/app.json",
       "source_location": "L33",
+      "id": "expo_app_app_expo_plugins",
       "community": 8,
-      "norm_label": "plugins",
-      "id": "expo_app_app_expo_plugins"
+      "norm_label": "plugins"
     },
     {
       "label": "extra",
       "file_type": "code",
       "source_file": "expo-app/app.json",
       "source_location": "L56",
+      "id": "expo_app_app_expo_extra",
       "community": 8,
-      "norm_label": "extra",
-      "id": "expo_app_app_expo_extra"
+      "norm_label": "extra"
     },
     {
       "label": "eas",
       "file_type": "code",
       "source_file": "expo-app/app.json",
       "source_location": "L57",
+      "id": "expo_app_app_extra_eas",
       "community": 8,
-      "norm_label": "eas",
-      "id": "expo_app_app_extra_eas"
+      "norm_label": "eas"
     },
     {
       "label": "projectId",
       "file_type": "code",
       "source_file": "expo-app/app.json",
       "source_location": "L58",
+      "id": "expo_app_app_eas_projectid",
       "community": 8,
-      "norm_label": "projectid",
-      "id": "expo_app_app_eas_projectid"
+      "norm_label": "projectid"
     },
     {
       "label": "owner",
       "file_type": "code",
       "source_file": "expo-app/app.json",
       "source_location": "L61",
+      "id": "expo_app_app_expo_owner",
       "community": 8,
-      "norm_label": "owner",
-      "id": "expo_app_app_expo_owner"
+      "norm_label": "owner"
     },
     {
       "label": "package.json",
@@ -1727,7 +1673,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/splitController.ts",
       "source_location": "L1",
-      "community": 939,
+      "community": 908,
       "norm_label": "splitcontroller.ts",
       "id": "controllers_splitcontroller"
     },
@@ -1736,7 +1682,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/splitController.ts",
       "source_location": "L7",
-      "community": 939,
+      "community": 908,
       "norm_label": "prisma",
       "id": "controllers_splitcontroller_prisma"
     },
@@ -1745,7 +1691,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/splitController.ts",
       "source_location": "L9",
-      "community": 939,
+      "community": 908,
       "norm_label": "listsplits()",
       "id": "controllers_splitcontroller_listsplits"
     },
@@ -1754,7 +1700,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/splitController.ts",
       "source_location": "L28",
-      "community": 939,
+      "community": 908,
       "norm_label": "getsplit()",
       "id": "controllers_splitcontroller_getsplit"
     },
@@ -1763,7 +1709,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/splitController.ts",
       "source_location": "L61",
-      "community": 939,
+      "community": 908,
       "norm_label": "createsplit()",
       "id": "controllers_splitcontroller_createsplit"
     },
@@ -1772,7 +1718,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/splitController.ts",
       "source_location": "L113",
-      "community": 939,
+      "community": 908,
       "norm_label": "setactivesplit()",
       "id": "controllers_splitcontroller_setactivesplit"
     },
@@ -1781,7 +1727,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/splitController.ts",
       "source_location": "L141",
-      "community": 939,
+      "community": 908,
       "norm_label": "getactivesplit()",
       "id": "controllers_splitcontroller_getactivesplit"
     },
@@ -1790,7 +1736,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/splitController.ts",
       "source_location": "L180",
-      "community": 939,
+      "community": 908,
       "norm_label": "updatesplit()",
       "id": "controllers_splitcontroller_updatesplit"
     },
@@ -1799,7 +1745,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/splitController.ts",
       "source_location": "L312",
-      "community": 939,
+      "community": 908,
       "norm_label": "updatesplitexercise()",
       "id": "controllers_splitcontroller_updatesplitexercise"
     },
@@ -1808,7 +1754,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/splitController.ts",
       "source_location": "L332",
-      "community": 939,
+      "community": 908,
       "norm_label": "generateaisplit()",
       "id": "controllers_splitcontroller_generateaisplit"
     },
@@ -2578,11 +2524,29 @@
       "id": "controllers_splitsuggestioncontroller_dismisssuggestion"
     },
     {
+      "label": "index.ts",
+      "file_type": "code",
+      "source_file": "api/src/index.ts",
+      "source_location": "L1",
+      "community": 21,
+      "norm_label": "index.ts",
+      "id": "src_index"
+    },
+    {
+      "label": "app",
+      "file_type": "code",
+      "source_file": "api/src/index.ts",
+      "source_location": "L24",
+      "community": 21,
+      "norm_label": "app",
+      "id": "src_index_app"
+    },
+    {
       "label": "suggestions.ts",
       "file_type": "code",
       "source_file": "api/src/routes/suggestions.ts",
       "source_location": "L1",
-      "community": 7,
+      "community": 21,
       "norm_label": "suggestions.ts",
       "id": "routes_suggestions"
     },
@@ -2591,7 +2555,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/suggestions.ts",
       "source_location": "L5",
-      "community": 7,
+      "community": 21,
       "norm_label": "router",
       "id": "routes_suggestions_router"
     },
@@ -2600,7 +2564,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/suggestions.ts",
       "source_location": "L7",
-      "community": 7,
+      "community": 21,
       "norm_label": "wrap()",
       "id": "routes_suggestions_wrap"
     },
@@ -2609,7 +2573,7 @@
       "file_type": "code",
       "source_file": "api/src/utils/scheduler.ts",
       "source_location": "L1",
-      "community": 7,
+      "community": 21,
       "norm_label": "scheduler.ts",
       "id": "utils_scheduler"
     },
@@ -2618,7 +2582,7 @@
       "file_type": "code",
       "source_file": "api/src/utils/scheduler.ts",
       "source_location": "L6",
-      "community": 7,
+      "community": 21,
       "norm_label": "prisma",
       "id": "utils_scheduler_prisma"
     },
@@ -2627,7 +2591,7 @@
       "file_type": "code",
       "source_file": "api/src/utils/scheduler.ts",
       "source_location": "L8",
-      "community": 7,
+      "community": 21,
       "norm_label": "initscheduler()",
       "id": "utils_scheduler_initscheduler"
     },
@@ -2735,7 +2699,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/checkins.ts",
       "source_location": "L1",
-      "community": 7,
+      "community": 21,
       "norm_label": "checkins.ts",
       "id": "routes_checkins"
     },
@@ -2744,7 +2708,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/checkins.ts",
       "source_location": "L7",
-      "community": 7,
+      "community": 21,
       "norm_label": "router",
       "id": "routes_checkins_router"
     },
@@ -2753,7 +2717,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/checkins.ts",
       "source_location": "L9",
-      "community": 7,
+      "community": 21,
       "norm_label": "wrap()",
       "id": "routes_checkins_wrap"
     },
@@ -2762,7 +2726,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/checkins.ts",
       "source_location": "L17",
-      "community": 7,
+      "community": 21,
       "norm_label": "checkinschema",
       "id": "routes_checkins_checkinschema"
     },
@@ -98639,7 +98603,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/exerciseRequestController.ts",
       "source_location": "L1",
-      "community": 21,
+      "community": 939,
       "norm_label": "exerciserequestcontroller.ts",
       "id": "controllers_exerciserequestcontroller"
     },
@@ -98648,7 +98612,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/exerciseRequestController.ts",
       "source_location": "L7",
-      "community": 21,
+      "community": 939,
       "norm_label": "prisma",
       "id": "controllers_exerciserequestcontroller_prisma"
     },
@@ -98657,7 +98621,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/exerciseRequestController.ts",
       "source_location": "L9",
-      "community": 21,
+      "community": 939,
       "norm_label": "requestexercise()",
       "id": "controllers_exerciserequestcontroller_requestexercise"
     },
@@ -98666,7 +98630,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/exerciseRequestController.ts",
       "source_location": "L49",
-      "community": 21,
+      "community": 939,
       "norm_label": "uploadexerciseimage()",
       "id": "controllers_exerciserequestcontroller_uploadexerciseimage"
     },
@@ -98783,7 +98747,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/nutritionController.ts",
       "source_location": "L1",
-      "community": 945,
+      "community": 7,
       "norm_label": "nutritioncontroller.ts",
       "id": "controllers_nutritioncontroller"
     },
@@ -98792,7 +98756,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/nutritionController.ts",
       "source_location": "L5",
-      "community": 945,
+      "community": 7,
       "norm_label": "prisma",
       "id": "controllers_nutritioncontroller_prisma"
     },
@@ -98801,7 +98765,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/nutritionController.ts",
       "source_location": "L7",
-      "community": 945,
+      "community": 7,
       "norm_label": "lognutrition()",
       "id": "controllers_nutritioncontroller_lognutrition"
     },
@@ -98810,7 +98774,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/nutritionController.ts",
       "source_location": "L39",
-      "community": 945,
+      "community": 7,
       "norm_label": "getnutritionlogs()",
       "id": "controllers_nutritioncontroller_getnutritionlogs"
     },
@@ -98855,7 +98819,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/photoController.ts",
       "source_location": "L1",
-      "community": 21,
+      "community": 939,
       "norm_label": "photocontroller.ts",
       "id": "controllers_photocontroller"
     },
@@ -98864,7 +98828,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/photoController.ts",
       "source_location": "L7",
-      "community": 21,
+      "community": 939,
       "norm_label": "prisma",
       "id": "controllers_photocontroller_prisma"
     },
@@ -98873,7 +98837,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/photoController.ts",
       "source_location": "L9",
-      "community": 21,
+      "community": 939,
       "norm_label": "uploadphoto()",
       "id": "controllers_photocontroller_uploadphoto"
     },
@@ -98882,7 +98846,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/photoController.ts",
       "source_location": "L36",
-      "community": 21,
+      "community": 939,
       "norm_label": "getphotos()",
       "id": "controllers_photocontroller_getphotos"
     },
@@ -98891,7 +98855,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/photoController.ts",
       "source_location": "L51",
-      "community": 21,
+      "community": 939,
       "norm_label": "deletephoto()",
       "id": "controllers_photocontroller_deletephoto"
     },
@@ -98981,7 +98945,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/recordController.ts",
       "source_location": "L1",
-      "community": 908,
+      "community": 939,
       "norm_label": "recordcontroller.ts",
       "id": "controllers_recordcontroller"
     },
@@ -98990,7 +98954,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/recordController.ts",
       "source_location": "L5",
-      "community": 908,
+      "community": 939,
       "norm_label": "prisma",
       "id": "controllers_recordcontroller_prisma"
     },
@@ -98999,7 +98963,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/recordController.ts",
       "source_location": "L7",
-      "community": 908,
+      "community": 939,
       "norm_label": "getrecords()",
       "id": "controllers_recordcontroller_getrecords"
     },
@@ -99008,7 +98972,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/recordController.ts",
       "source_location": "L31",
-      "community": 908,
+      "community": 939,
       "norm_label": "getexerciserecords()",
       "id": "controllers_recordcontroller_getexerciserecords"
     },
@@ -99197,7 +99161,7 @@
       "file_type": "code",
       "source_file": "api/src/middleware/auth.ts",
       "source_location": "L12",
-      "community": 7,
+      "community": 21,
       "norm_label": "authmiddleware()",
       "id": "middleware_auth_authmiddleware"
     },
@@ -99431,7 +99395,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/notifications.ts",
       "source_location": "L1",
-      "community": 18,
+      "community": 21,
       "norm_label": "notifications.ts",
       "id": "routes_notifications"
     },
@@ -99440,7 +99404,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/notifications.ts",
       "source_location": "L5",
-      "community": 18,
+      "community": 21,
       "norm_label": "router",
       "id": "routes_notifications_router"
     },
@@ -99449,7 +99413,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/notifications.ts",
       "source_location": "L7",
-      "community": 18,
+      "community": 21,
       "norm_label": "wrap()",
       "id": "routes_notifications_wrap"
     },
@@ -99539,7 +99503,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/progress.ts",
       "source_location": "L1",
-      "community": 19,
+      "community": 21,
       "norm_label": "progress.ts",
       "id": "routes_progress"
     },
@@ -99548,7 +99512,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/progress.ts",
       "source_location": "L5",
-      "community": 19,
+      "community": 21,
       "norm_label": "router",
       "id": "routes_progress_router"
     },
@@ -99557,7 +99521,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/progress.ts",
       "source_location": "L7",
-      "community": 19,
+      "community": 21,
       "norm_label": "wrap()",
       "id": "routes_progress_wrap"
     },
@@ -99566,7 +99530,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/records.ts",
       "source_location": "L1",
-      "community": 908,
+      "community": 939,
       "norm_label": "records.ts",
       "id": "routes_records"
     },
@@ -99575,7 +99539,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/records.ts",
       "source_location": "L5",
-      "community": 908,
+      "community": 939,
       "norm_label": "router",
       "id": "routes_records_router"
     },
@@ -99584,7 +99548,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/records.ts",
       "source_location": "L7",
-      "community": 908,
+      "community": 939,
       "norm_label": "wrap()",
       "id": "routes_records_wrap"
     },
@@ -99593,7 +99557,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/sessions.ts",
       "source_location": "L1",
-      "community": 7,
+      "community": 21,
       "norm_label": "sessions.ts",
       "id": "routes_sessions"
     },
@@ -99602,7 +99566,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/sessions.ts",
       "source_location": "L5",
-      "community": 7,
+      "community": 21,
       "norm_label": "router",
       "id": "routes_sessions_router"
     },
@@ -99611,7 +99575,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/sessions.ts",
       "source_location": "L7",
-      "community": 7,
+      "community": 21,
       "norm_label": "wrap()",
       "id": "routes_sessions_wrap"
     },
@@ -99638,7 +99602,7 @@
       "file_type": "code",
       "source_file": "api/src/utils/cloudinary.ts",
       "source_location": "L1",
-      "community": 21,
+      "community": 939,
       "norm_label": "cloudinary.ts",
       "id": "utils_cloudinary"
     },
@@ -99647,7 +99611,7 @@
       "file_type": "code",
       "source_file": "api/src/utils/cloudinary.ts",
       "source_location": "L9",
-      "community": 21,
+      "community": 939,
       "norm_label": "uploadtocloudinary()",
       "id": "utils_cloudinary_uploadtocloudinary"
     },
@@ -99656,7 +99620,7 @@
       "file_type": "code",
       "source_file": "api/src/utils/cloudinary.ts",
       "source_location": "L35",
-      "community": 21,
+      "community": 939,
       "norm_label": "deletefromcloudinary()",
       "id": "utils_cloudinary_deletefromcloudinary"
     },
@@ -105018,266 +104982,6 @@
   ],
   "links": [
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "middleware_errorhandler"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "middleware_errorhandler_errorhandler"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L17",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_admin"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L18",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_app"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_auth"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L20",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_checkins"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L10",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_exercises"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L22",
-      "weight": 1.0,
-      "source": "src_index",
-      "target": "routes_health",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L12",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_metrics"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L16",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_notifications"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_onboarding"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L13",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_photos"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L14",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_progress"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_records"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L11",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_sessions"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_splits"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_suggestions"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L19",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_support"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L18",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "src_index_app"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "utils_scheduler"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "utils_scheduler_initscheduler"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/routes/health.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "routes_health",
-      "target": "routes_health_prisma",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/routes/health.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "source": "routes_health",
-      "target": "routes_health_router",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/routes/health.ts",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "routes_health",
-      "target": "routes_health_starttime",
-      "confidence_score": 1.0
-    },
-    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "expo-app/app.json",
@@ -105443,9 +105147,9 @@
       "source_file": "expo-app/app.json",
       "source_location": "L11",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "expo_app_app_expo_splash",
-      "target": "expo_app_app_splash_image"
+      "target": "expo_app_app_splash_image",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -105453,9 +105157,9 @@
       "source_file": "expo-app/app.json",
       "source_location": "L13",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "expo_app_app_expo_splash",
-      "target": "expo_app_app_splash_resizemode"
+      "target": "expo_app_app_splash_resizemode",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -107939,6 +107643,17 @@
       "confidence_score": 1.0,
       "source": "routes_splits",
       "target": "routes_splits_wrap"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "routes_splits"
     },
     {
       "relation": "imports_from",
@@ -111113,6 +110828,214 @@
       "confidence_score": 1.0,
       "source": "controllers_splitsuggestioncontroller_generatesuggestions",
       "target": "controllers_splitsuggestioncontroller_evaluateforuser"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "middleware_errorhandler"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "middleware_errorhandler_errorhandler"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "routes_admin"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "routes_app"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "routes_auth"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L20",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "routes_checkins"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "routes_exercises"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "routes_metrics"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "routes_notifications"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "routes_onboarding"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "routes_photos"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "routes_progress"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "routes_records"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "routes_sessions"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "routes_suggestions"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "routes_support"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "src_index_app"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "utils_scheduler"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "utils_scheduler_initscheduler"
     },
     {
       "relation": "imports",
@@ -225577,5 +225500,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "daaa2af298c57a0c33e932d5f602194dc3ae8ff4"
+  "built_at_commit": "236b9122d2a523b3b931b29e017c361b1fd36aa2"
 }
