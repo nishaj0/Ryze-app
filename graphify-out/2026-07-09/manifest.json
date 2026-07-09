@@ -85,8 +85,8 @@
     "semantic_hash": ""
   },
   "api/src/controllers/sessionController.ts": {
-    "mtime": 1782025114.8089402,
-    "ast_hash": "8b0fc85deec7021d1c0e66eb03ab2ccc",
+    "mtime": 1783605628.3568752,
+    "ast_hash": "7994641063f2927e0ad2b70747581bf6",
     "semantic_hash": ""
   },
   "api/src/controllers/splitController.ts": {
@@ -420,8 +420,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/types/index.ts": {
-    "mtime": 1781972027.9129894,
-    "ast_hash": "7a1270841d61c1f278dae9818fe4e789",
+    "mtime": 1783605638.2319224,
+    "ast_hash": "63159ddd8aa9456aa4d286cebf524417",
     "semantic_hash": ""
   },
   "expo-app/src/utils/storage.ts": {
@@ -795,8 +795,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/screens/profile/SplitDetailsScreen.tsx": {
-    "mtime": 1782281988.401364,
-    "ast_hash": "b0abb93c8c594e533096cd36a8b765a0",
+    "mtime": 1783605706.0424843,
+    "ast_hash": "1bb79278c30622a135181243e2d7743c",
     "semantic_hash": ""
   },
   "expo-app/src/utils/mmkv.ts": {
@@ -815,8 +815,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/screens/workout/WorkoutHistoryScreen.tsx": {
-    "mtime": 1782038438.3540874,
-    "ast_hash": "b7a2fda885e0b5231f186785e839d45a",
+    "mtime": 1783605662.123031,
+    "ast_hash": "ae81ed2bfa506bf1140cc92263e4d293",
     "semantic_hash": ""
   },
   "api/free-exercise-db/exercises/3_4_Sit-Up.json": {
@@ -14270,8 +14270,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/screens/exercises/AllExercisesScreen.tsx": {
-    "mtime": 1783603224.4638436,
-    "ast_hash": "07b43154d6b1d43453ed8c4e41b803f0",
+    "mtime": 1783605685.980553,
+    "ast_hash": "85f97e5109c0f16b0b9f28c252acdb67",
     "semantic_hash": ""
   },
   "expo-app/src/screens/exercises/RequestExerciseScreen.tsx": {

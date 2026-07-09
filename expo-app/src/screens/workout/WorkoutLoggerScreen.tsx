@@ -36,6 +36,103 @@ import { useAuthStore } from "../../store/authStore";
 type Props = NativeStackScreenProps<HomeStackParamList, "WorkoutLogger">;
 const { width: screenW, height: screenH } = Dimensions.get("window");
 
+const ScrollPicker = ({
+  data,
+  selectedValue,
+  onValueChange,
+  theme,
+  itemHeight = 40,
+}: {
+  data: number[];
+  selectedValue: number;
+  onValueChange: (value: number) => void;
+  theme: any;
+  itemHeight?: number;
+}) => {
+  const flatListRef = React.useRef<FlatList>(null);
+  
+  const selectedIndex = data.indexOf(selectedValue);
+  const safeSelectedIndex = selectedIndex !== -1 ? selectedIndex : 0;
+
+  React.useEffect(() => {
+    if (flatListRef.current && safeSelectedIndex >= 0) {
+      const timer = setTimeout(() => {
+        flatListRef.current?.scrollToOffset({
+          offset: safeSelectedIndex * itemHeight,
+          animated: false,
+        });
+      }, 50);
+      return () => clearTimeout(timer);
+    }
+  }, [safeSelectedIndex]);
+
+  const displayData = [null, ...data, null];
+
+  const handleScroll = (e: any) => {
+    const yOffset = e.nativeEvent.contentOffset.y;
+    const index = Math.round(yOffset / itemHeight);
+    const actualIndex = Math.max(0, Math.min(data.length - 1, index));
+    const newVal = data[actualIndex];
+    if (newVal !== selectedValue) {
+      onValueChange(newVal);
+    }
+  };
+
+  return (
+    <View style={{ height: itemHeight * 3, width: "100%", overflow: "hidden" }}>
+      <View
+        style={{
+          position: "absolute",
+          top: itemHeight,
+          left: 0,
+          right: 0,
+          height: itemHeight,
+          backgroundColor: theme.surfaceTertiary,
+          borderTopWidth: 1,
+          borderBottomWidth: 1,
+          borderColor: theme.border,
+        }}
+      />
+      <FlatList
+        ref={flatListRef}
+        data={displayData}
+        keyExtractor={(_, i) => String(i)}
+        snapToInterval={itemHeight}
+        decelerationRate="fast"
+        showsVerticalScrollIndicator={false}
+        onMomentumScrollEnd={handleScroll}
+        renderItem={({ item }) => {
+          if (item === null) {
+            return <View style={{ height: itemHeight }} />;
+          }
+          const isSelected = item === selectedValue;
+          return (
+            <TouchableOpacity
+              activeOpacity={0.7}
+              onPress={() => {
+                onValueChange(item);
+              }}
+              style={{
+                height: itemHeight,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Typography
+                variant={isSelected ? "heading3" : "body"}
+                color={isSelected ? theme.primary : theme.textSecondary}
+                weight={isSelected ? "700" : "400"}
+              >
+                {item}
+              </Typography>
+            </TouchableOpacity>
+          );
+        }}
+      />
+    </View>
+  );
+};
+
 export default function WorkoutLoggerScreen({ navigation }: Props) {
   const theme = useTheme();
   const { user } = useAuthStore();
@@ -79,9 +176,29 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
   const [detectedPR, setDetectedPR] = useState<string | null>(null);
   const [completeTimeoutId, setCompleteTimeoutId] = useState<NodeJS.Timeout | null>(null);
 
-  // Recommendations history
   const [history, setHistory] = useState<any[]>([]);
   const [loadingHistory, setLoadingHistory] = useState(false);
+  const [isPickerMode, setIsPickerMode] = useState(true);
+
+  const instructionsMinHeight = React.useMemo(() => {
+    if (!activeSession) return 80;
+    let maxLen = 0;
+    activeSession.exerciseQueue.forEach((item) => {
+      const steps = item.exercise.instructions
+        ? item.exercise.instructions.split("\n").filter((s) => s.trim().length > 0)
+        : [];
+      steps.forEach((step) => {
+        if (step.length > maxLen) {
+          maxLen = step.length;
+        }
+      });
+    });
+    if (maxLen === 0) return 80;
+    return Math.min(180, Math.max(80, Math.round(maxLen * 0.45)));
+  }, [activeSession?.sessionId]);
+
+  const weightsData = Array.from({ length: 250 }, (_, i) => i);
+  const repsData = Array.from({ length: 50 }, (_, i) => i + 1);
 
   const currentItem = activeSession?.exerciseQueue[activeSession.currentExerciseIndex];
 
@@ -157,6 +274,11 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
       } else {
         setWeightStr("");
       }
+      if (recommendation.recommendedReps !== null) {
+        setRepsStr(String(recommendation.recommendedReps));
+      } else {
+        setRepsStr(String(currentItem.targetRepsMin));
+      }
     } else {
       const prevSet = currentItem.loggedSets[setNum - 2];
       if (prevSet && prevSet.weightKg !== null) {
@@ -164,10 +286,14 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
       } else {
         setWeightStr("");
       }
+      if (prevSet && prevSet.reps !== null) {
+        setRepsStr(String(prevSet.reps));
+      } else {
+        setRepsStr(String(currentItem.targetRepsMin));
+      }
     }
-    setRepsStr("");
     setDurationStr("");
-  }, [activeSession?.currentExerciseIndex, activeSession?.currentSetNumber, recommendation.recommendedWeight]);
+  }, [activeSession?.currentExerciseIndex, activeSession?.currentSetNumber, recommendation.recommendedWeight, recommendation.recommendedReps]);
 
   // Timers
   useEffect(() => {
@@ -456,43 +582,9 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: theme.bg }} edges={["top", "bottom"]}>
-      {/* Sticky Header */}
-      <View style={{ backgroundColor: theme.surface, borderBottomWidth: 1, borderBottomColor: theme.border }}>
-        <View style={{ paddingHorizontal: space.lg, paddingTop: space.md, paddingBottom: space.sm }}>
-          {/* Split name - small, muted */}
-          {activeSession.splitName ? (
-            <Typography variant="caption" color={theme.textMuted} weight="600">
-              {activeSession.splitName.toUpperCase()}
-            </Typography>
-          ) : null}
-
-          {/* Day name + exercise counter */}
-          <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 2 }}>
-            <Typography variant="heading3" color={theme.textPrimary} weight="700">
-              {activeSession.splitDayName}
-            </Typography>
-            <Typography variant="caption" color={theme.textSecondary} weight="600">
-              Exercise {activeSession.currentExerciseIndex + 1} of {activeSession.exerciseQueue.length}
-            </Typography>
-          </View>
-
-          {/* Workout name */}
-          <Typography variant="display" color={theme.textPrimary} weight="800" style={{ marginTop: space.sm, fontSize: 24 }}>
-            {currentItem?.exercise.name || ""}
-          </Typography>
-
-          {/* Day number */}
-          {activeSession.dayNumber > 0 && activeSession.totalDays > 0 && (
-            <Typography variant="caption" color={theme.textSecondary} style={{ marginTop: 2 }}>
-              Day {activeSession.dayNumber} of {activeSession.totalDays}
-            </Typography>
-          )}
-        </View>
-
-        {/* Progress Bar */}
-        <View style={{ height: 4, backgroundColor: theme.surfaceTertiary, width: "100%" }}>
-          <View style={{ height: "100%", backgroundColor: theme.primary, width: `${progressPercent}%` }} />
-        </View>
+      {/* Progress Bar (Always Sticky at the top) */}
+      <View style={{ height: 4, backgroundColor: theme.surfaceTertiary, width: "100%" }}>
+        <View style={{ height: "100%", backgroundColor: theme.primary, width: `${progressPercent}%` }} />
       </View>
 
       {/* Main Content Area */}
@@ -576,6 +668,38 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
             style={{ flex: 1 }}
             keyboardShouldPersistTaps="handled"
           >
+            {/* Header (Scrolls with content) */}
+            <View style={{ marginBottom: space.md }}>
+              {/* Split name - small, muted */}
+              {activeSession.splitName ? (
+                <Typography variant="caption" color={theme.textMuted} weight="600" style={{ marginBottom: 2 }}>
+                  {activeSession.splitName.toUpperCase()}
+                </Typography>
+              ) : null}
+
+              {/* Day name + exercise counter */}
+              <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+                <Typography variant="heading3" color={theme.textPrimary} weight="700">
+                  {activeSession.splitDayName}
+                </Typography>
+                <Typography variant="caption" color={theme.textSecondary} weight="600">
+                  Exercise {activeSession.currentExerciseIndex + 1} of {activeSession.exerciseQueue.length}
+                </Typography>
+              </View>
+
+              {/* Workout name */}
+              <Typography variant="display" color={theme.textPrimary} weight="800" style={{ marginTop: space.xs, fontSize: 24 }}>
+                {currentItem?.exercise.name || ""}
+              </Typography>
+
+              {/* Day number */}
+              {activeSession.dayNumber > 0 && activeSession.totalDays > 0 && (
+                <Typography variant="caption" color={theme.textSecondary} style={{ marginTop: 2 }}>
+                  Day {activeSession.dayNumber} of {activeSession.totalDays}
+                </Typography>
+              )}
+            </View>
+
             {/* Exercise Image Carousel */}
             {currentItem.exercise.images && currentItem.exercise.images.length > 0 && (
               <View style={{ marginBottom: space.md }}>
@@ -592,7 +716,7 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
             />
 
             {/* Instruction Stepper */}
-            <InstructionStepper instructions={currentItem.exercise.instructions} autoRotateMs={5000} />
+            <InstructionStepper instructions={currentItem.exercise.instructions} autoRotateMs={5000} minHeight={instructionsMinHeight} />
 
             {/* Set Tracker Strip */}
             <SetTrackerStrip
@@ -663,48 +787,103 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
                 </TouchableOpacity>
               </Card>
             ) : (
-              /* Active Set Input */
+               /* Active Set Input */
               <Card style={{ padding: space.lg, marginBottom: space.lg }} shadow="sm">
-                <Typography variant="caption" color={theme.primary} weight="800" style={{ marginBottom: space.md }}>
-                  LOG SET {activeSession.currentSetNumber} OF {currentItem.targetSets}
-                </Typography>
-
-                {/* Input row: weight + reps */}
-                <View style={{ flexDirection: "row", gap: space.sm, marginBottom: space.md }}>
-                  {!isCardBodyweight && (
-                    <View style={{ flex: 1 }}>
-                      <Input
-                        value={weightStr}
-                        onChangeText={setWeightStr}
-                        placeholder={recommendation.recommendedWeight !== null ? `${recommendation.recommendedWeight} kg` : "Weight kg"}
-                        keyboardType="decimal-pad"
-                        containerStyle={{ marginBottom: 0 }}
-                      />
-                    </View>
-                  )}
-
-                  {isCardTimed ? (
-                    <View style={{ flex: 1 }}>
-                      <Input
-                        value={durationStr}
-                        onChangeText={setDurationStr}
-                        placeholder="Seconds"
-                        keyboardType="number-pad"
-                        containerStyle={{ marginBottom: 0 }}
-                      />
-                    </View>
-                  ) : (
-                    <View style={{ flex: 1 }}>
-                      <Input
-                        value={repsStr}
-                        onChangeText={setRepsStr}
-                        placeholder={recommendation.recommendedReps !== null ? `${recommendation.recommendedReps} reps` : `${currentItem.targetRepsMin}-${currentItem.targetRepsMax} reps`}
-                        keyboardType="number-pad"
-                        containerStyle={{ marginBottom: 0 }}
-                      />
-                    </View>
-                  )}
+                <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: space.md }}>
+                  <Typography variant="caption" color={theme.primary} weight="800">
+                    LOG SET {activeSession.currentSetNumber} OF {currentItem.targetSets}
+                  </Typography>
+                  <TouchableOpacity
+                    onPress={() => setIsPickerMode(!isPickerMode)}
+                    style={{ flexDirection: "row", alignItems: "center", gap: 4 }}
+                  >
+                    <Icon name={isPickerMode ? "Keyboard" : "Sliders"} size={14} color={theme.primary} />
+                    <Typography variant="caption" color={theme.primary} weight="600">
+                      {isPickerMode ? "Keyboard" : "Wheel Picker"}
+                    </Typography>
+                  </TouchableOpacity>
                 </View>
+
+                {isPickerMode ? (
+                  <View style={{ flexDirection: "row", gap: space.md, marginBottom: space.md, justifyContent: "center", alignItems: "center" }}>
+                    {!isCardBodyweight && (
+                      <View style={{ flex: 1, alignItems: "center" }}>
+                        <Typography variant="caption" color={theme.textMuted} weight="600" style={{ marginBottom: space.xs }}>
+                          WEIGHT (KG)
+                        </Typography>
+                        <ScrollPicker
+                          data={weightsData}
+                          selectedValue={parseFloat(weightStr) || 0}
+                          onValueChange={(val) => setWeightStr(String(val))}
+                          theme={theme}
+                        />
+                      </View>
+                    )}
+
+                    {isCardTimed ? (
+                      <View style={{ flex: 1, alignItems: "center" }}>
+                        <Typography variant="caption" color={theme.textMuted} weight="600" style={{ marginBottom: space.xs }}>
+                          DURATION (SEC)
+                        </Typography>
+                        <ScrollPicker
+                          data={Array.from({ length: 300 }, (_, i) => i + 1)}
+                          selectedValue={parseInt(durationStr) || 30}
+                          onValueChange={(val) => setDurationStr(String(val))}
+                          theme={theme}
+                        />
+                      </View>
+                    ) : (
+                      <View style={{ flex: 1, alignItems: "center" }}>
+                        <Typography variant="caption" color={theme.textMuted} weight="600" style={{ marginBottom: space.xs }}>
+                          REPS
+                        </Typography>
+                        <ScrollPicker
+                          data={repsData}
+                          selectedValue={parseInt(repsStr) || currentItem.targetRepsMin}
+                          onValueChange={(val) => setRepsStr(String(val))}
+                          theme={theme}
+                        />
+                      </View>
+                    )}
+                  </View>
+                ) : (
+                  /* Input row: weight + reps */
+                  <View style={{ flexDirection: "row", gap: space.sm, marginBottom: space.md }}>
+                    {!isCardBodyweight && (
+                      <View style={{ flex: 1 }}>
+                        <Input
+                          value={weightStr}
+                          onChangeText={setWeightStr}
+                          placeholder={recommendation.recommendedWeight !== null ? `${recommendation.recommendedWeight} kg` : "Weight kg"}
+                          keyboardType="decimal-pad"
+                          containerStyle={{ marginBottom: 0 }}
+                        />
+                      </View>
+                    )}
+
+                    {isCardTimed ? (
+                      <View style={{ flex: 1 }}>
+                        <Input
+                          value={durationStr}
+                          onChangeText={setDurationStr}
+                          placeholder="Seconds"
+                          keyboardType="number-pad"
+                          containerStyle={{ marginBottom: 0 }}
+                        />
+                      </View>
+                    ) : (
+                      <View style={{ flex: 1 }}>
+                        <Input
+                          value={repsStr}
+                          onChangeText={setRepsStr}
+                          placeholder={recommendation.recommendedReps !== null ? `${recommendation.recommendedReps} reps` : `${currentItem.targetRepsMin}-${currentItem.targetRepsMax} reps`}
+                          keyboardType="number-pad"
+                          containerStyle={{ marginBottom: 0 }}
+                        />
+                      </View>
+                    )}
+                  </View>
+                )}
 
                 {/* Progressive recommendation */}
                 {(!isCardBodyweight || recommendation.lastReps !== null) && (

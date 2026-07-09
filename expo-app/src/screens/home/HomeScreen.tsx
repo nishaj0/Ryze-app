@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { View, TouchableOpacity, Alert, Modal, ScrollView } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { HomeStackParamList } from "../../navigation/types";
 import { getActiveSplit } from "../../api/splits";
 import { getOverview } from "../../api/progress";
-import { markRestDay } from "../../api/sessions";
+import { markRestDay, getCalendarSessions } from "../../api/sessions";
 import { getPhotos } from "../../api/photos";
 import { getSuggestions, acceptSuggestion, dismissSuggestion, SplitSuggestion } from "../../api/suggestions";
 import { useAuthStore } from "../../store/authStore";
@@ -30,9 +31,9 @@ export default function HomeScreen({ navigation }: Props) {
   const [showPhotoPrompt, setShowPhotoPrompt] = useState(false);
   const [workoutModalVisible, setWorkoutModalVisible] = useState(false);
   const [suggestions, setSuggestions] = useState<SplitSuggestion[]>([]);
+  const [todaySession, setTodaySession] = useState<any>(null);
 
   useEffect(() => {
-    loadData();
     // Auto-sync offline logs when app mounts
     syncOfflineSessions()
       .then(() => {
@@ -41,6 +42,12 @@ export default function HomeScreen({ navigation }: Props) {
       })
       .catch((err) => console.log("[HomeScreen] offline sync error:", err));
   }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      loadData();
+    }, [])
+  );
 
   // Check for unfinished session in MMKV
   useEffect(() => {
@@ -142,6 +149,11 @@ export default function HomeScreen({ navigation }: Props) {
         const adjustedIndex = dayIndex % days.length;
         setTodaySplitDay(days[adjustedIndex] || days[0]);
       }
+
+      const todayStr = new Date().toISOString().split("T")[0];
+      const calendarRes = await getCalendarSessions(todayStr, todayStr).catch(() => ({ sessions: [] }));
+      const todaySess = calendarRes.sessions && calendarRes.sessions.length > 0 ? calendarRes.sessions[0] : null;
+      setTodaySession(todaySess);
     } catch (err) {
       console.error("Failed to load data:", err);
     } finally {
@@ -355,7 +367,63 @@ export default function HomeScreen({ navigation }: Props) {
             </View>
           )}
 
-          {todaySplitDay.isRest ? (
+          {todaySession && todaySession.status === "COMPLETED" ? (
+            <View style={{ gap: space.md, marginTop: space.md }}>
+              <Card
+                padding="md"
+                border={false}
+                shadow="none"
+                style={{ backgroundColor: theme.successBg }}
+              >
+                <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
+                  <Icon name="CheckCircle" size={24} color={theme.success} />
+                  <View style={{ flex: 1 }}>
+                    <Typography variant="heading3" color={theme.success}>
+                      Workout Completed!
+                    </Typography>
+                    <Typography variant="bodySmall" color={theme.successText}>
+                      Awesome job hitting your targets today.
+                    </Typography>
+                  </View>
+                </View>
+              </Card>
+              <Button
+                title="View Today's Summary"
+                onPress={() => navigation.navigate("WorkoutSummary", { sessionId: todaySession.id })}
+                variant="primary"
+                size="lg"
+                icon={<Icon name="Trophy" size={20} color={theme.primaryText} />}
+              />
+            </View>
+          ) : todaySession && todaySession.status === "SKIPPED" ? (
+            <View style={{ gap: space.md, marginTop: space.md }}>
+              <Card
+                padding="md"
+                border={false}
+                shadow="none"
+                style={{ backgroundColor: theme.successBg }}
+              >
+                <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
+                  <Icon name="Moon" size={24} color={theme.success} />
+                  <View style={{ flex: 1 }}>
+                    <Typography variant="heading3" color={theme.success}>
+                      Rest Day Logged
+                    </Typography>
+                    <Typography variant="bodySmall" color={theme.successText}>
+                      Reason: {todaySession.restReason ? todaySession.restReason.charAt(0).toUpperCase() + todaySession.restReason.slice(1) : "Not specified"}
+                    </Typography>
+                  </View>
+                </View>
+              </Card>
+              <Button
+                title="Work Out Anyway"
+                onPress={() => setWorkoutModalVisible(true)}
+                variant="primary"
+                size="lg"
+                icon={<Icon name="Play" size={20} color={theme.primaryText} />}
+              />
+            </View>
+          ) : todaySplitDay.isRest ? (
             <View style={{ gap: space.md, marginTop: space.md }}>
               <Card
                 padding="md"

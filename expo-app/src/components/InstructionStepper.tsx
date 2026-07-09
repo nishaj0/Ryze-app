@@ -8,6 +8,7 @@ import { radius, space } from "../theme/spacing";
 interface InstructionStepperProps {
   instructions: string | null;
   autoRotateMs?: number;
+  minHeight?: number;
 }
 
 export default function InstructionStepper({
@@ -60,7 +61,7 @@ export default function InstructionStepper({
           />
         </TouchableOpacity>
 
-        <View style={styles.stepContent}>
+        <View style={[styles.stepContent, minHeight ? { minHeight } : null]}>
           <Typography variant="bodySmall" color={theme.textPrimary} style={styles.stepText}>
             {steps[currentStep]}
           </Typography>

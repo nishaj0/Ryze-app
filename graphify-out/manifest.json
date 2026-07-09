@@ -295,8 +295,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/screens/home/HomeScreen.tsx": {
-    "mtime": 1782513736.4467847,
-    "ast_hash": "b42c324b3469bb095aebc6d512f2bb50",
+    "mtime": 1783606294.1771362,
+    "ast_hash": "47a04eb78a9ac14d10d7e2ca79741c84",
     "semantic_hash": ""
   },
   "expo-app/src/screens/metrics/MetricsScreen.tsx": {
@@ -385,8 +385,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/screens/progress/DashboardScreen.tsx": {
-    "mtime": 1782028809.801208,
-    "ast_hash": "e5a38792d2b1b58a402f3f229463d9fb",
+    "mtime": 1783606258.1422315,
+    "ast_hash": "c2118f55d311fff6192b76bc49b83b4b",
     "semantic_hash": ""
   },
   "expo-app/src/screens/progress/ExerciseProgressScreen.tsx": {
@@ -400,13 +400,13 @@
     "semantic_hash": ""
   },
   "expo-app/src/screens/workout/WorkoutLoggerScreen.tsx": {
-    "mtime": 1782038412.2237952,
-    "ast_hash": "61967779350e346c6b15730e372263d0",
+    "mtime": 1783606221.4153833,
+    "ast_hash": "9e944e6948972d4bdfd954dfb66d3b81",
     "semantic_hash": ""
   },
   "expo-app/src/screens/workout/WorkoutSummaryScreen.tsx": {
-    "mtime": 1782511196.883219,
-    "ast_hash": "8627c7c21e07a469d7d0239292b754ea",
+    "mtime": 1783606246.7526462,
+    "ast_hash": "11f93a1b849d6e256d9926dbcf62e835",
     "semantic_hash": ""
   },
   "expo-app/src/store/authStore.ts": {
@@ -735,8 +735,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/components/charts/BarChart.tsx": {
-    "mtime": 1782027231.7745802,
-    "ast_hash": "d07211fb8a0a118ada5ea5273dffef5d",
+    "mtime": 1783606132.9293368,
+    "ast_hash": "ffb672f854a21ecffadca9d09f16c2fc",
     "semantic_hash": ""
   },
   "expo-app/src/components/charts/Heatmap.tsx": {
@@ -805,8 +805,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/utils/progression.ts": {
-    "mtime": 1781972652.274856,
-    "ast_hash": "2c473b33d09670dfd3a5fd8ee391d365",
+    "mtime": 1783606138.6726735,
+    "ast_hash": "ddbc5591fb074a162491acf8ef715815",
     "semantic_hash": ""
   },
   "expo-app/src/components/Skeleton.tsx": {
@@ -14095,8 +14095,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/components/InstructionStepper.tsx": {
-    "mtime": 1782026498.9982598,
-    "ast_hash": "637fa94ee50ddb671c5a0e646c70b005",
+    "mtime": 1783606141.4035118,
+    "ast_hash": "93435a76344169fbdd7680c2634ef190",
     "semantic_hash": ""
   },
   "expo-app/src/components/SetTrackerStrip.tsx": {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, ScrollView, Dimensions, Alert } from "react-native";
+import { View, ScrollView, Dimensions, Alert, ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { HomeStackParamList } from "../../navigation/types";
@@ -9,33 +9,92 @@ import { BarChart } from "../../components/charts";
 import { useTheme } from "../../theme/themeStore";
 import { space, radius } from "../../theme/spacing";
 import { createCheckIn, getCheckIn, updateCheckIn } from "../../api/checkins";
+import { useQueryClient } from "@tanstack/react-query";
 
 type Props = NativeStackScreenProps<HomeStackParamList, "WorkoutSummary">;
 const { width: screenW } = Dimensions.get("window");
 
-export default function WorkoutSummaryScreen({ navigation }: Props) {
+const abbreviateExerciseName = (name: string): string => {
+  if (!name) return "";
+  let abbr = name;
+  abbr = abbr.replace(/barbell/i, "BB");
+  abbr = abbr.replace(/dumbbell/i, "DB");
+  abbr = abbr.replace(/incline/i, "Inc");
+  abbr = abbr.replace(/decline/i, "Dec");
+  abbr = abbr.replace(/standing/i, "Std");
+  abbr = abbr.replace(/seated/i, "Seat");
+  abbr = abbr.replace(/lying/i, "Lying");
+  abbr = abbr.replace(/alternate/i, "Alt");
+  abbr = abbr.replace(/extension/i, "Ext");
+  abbr = abbr.replace(/crossover/i, "Cross");
+  abbr = abbr.replace(/straight/i, "St.");
+  if (abbr.length > 15) {
+    abbr = abbr.substring(0, 14) + "..";
+  }
+  return abbr;
+};
+
+export default function WorkoutSummaryScreen({ route, navigation }: Props) {
+  const { sessionId } = route.params || {};
   const theme = useTheme();
+  const queryClient = useQueryClient();
   const { activeSession, completeSession, updateSessionNotes } = useWorkoutStore();
   const [saving, setSaving] = useState(false);
   const [checkInText, setCheckInText] = useState("");
   const [existingCheckInId, setExistingCheckInId] = useState<string | null>(null);
 
+  // For viewing past/completed summary
+  const [loadingPastSession, setLoadingPastSession] = useState(false);
+  const [pastSession, setPastSession] = useState<any>(null);
+  const [pastPrs, setPastPrs] = useState<any[]>([]);
+
   useEffect(() => {
     if (!activeSession) {
-      navigation.getParent()?.getParent()?.navigate("Home", { screen: "HomeMain" });
-      return;
+      if (sessionId) {
+        // Load session from server
+        setLoadingPastSession(true);
+        const { getSession } = require("../../api/sessions");
+        getSession(sessionId)
+          .then((res: any) => {
+            setPastSession(res.session);
+            setPastPrs(res.prs || []);
+            // Also try to load check-in for this completed session
+            getCheckIn(sessionId)
+              .then((ciRes) => {
+                if (ciRes?.checkIn) {
+                  setCheckInText(ciRes.checkIn.rawText);
+                  setExistingCheckInId(ciRes.checkIn.id);
+                }
+              })
+              .catch(() => {});
+          })
+          .catch((err: any) => {
+            console.error("Failed to load completed session summary:", err);
+            Alert.alert("Error", "Failed to load session details.");
+            navigation.getParent()?.getParent()?.navigate("Home", { screen: "HomeMain" });
+          })
+          .finally(() => {
+            setLoadingPastSession(false);
+          });
+      } else {
+        navigation.getParent()?.getParent()?.navigate("Home", { screen: "HomeMain" });
+      }
+    } else {
+      getCheckIn(activeSession.sessionId)
+        .then((res) => {
+          if (res?.checkIn) {
+            setCheckInText(res.checkIn.rawText);
+            setExistingCheckInId(res.checkIn.id);
+          }
+        })
+        .catch(() => {});
     }
-    getCheckIn(activeSession.sessionId)
-      .then((res) => {
-        if (res?.checkIn) {
-          setCheckInText(res.checkIn.rawText);
-          setExistingCheckInId(res.checkIn.id);
-        }
-      })
-      .catch(() => {});
-  }, [activeSession]);
+  }, [activeSession, sessionId]);
 
-  if (!activeSession) {
+  const isPast = !activeSession;
+  const session = activeSession || pastSession;
+
+  if (loadingPastSession || !session) {
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: theme.bg }} edges={["top"]}>
         <WorkoutSummaryScreenSkeleton />
@@ -43,9 +102,10 @@ export default function WorkoutSummaryScreen({ navigation }: Props) {
     );
   }
 
-  // Calculate statistics from active session
-  const elapsedSeconds = Math.floor((Date.now() - activeSession.startedAt) / 1000);
-  const durationMinutes = Math.max(1, Math.floor(elapsedSeconds / 60));
+  // Duration
+  const durationMinutes = isPast
+    ? (session.durationMinutes || 0)
+    : Math.max(1, Math.floor(Math.floor((Date.now() - session.startedAt) / 1000) / 60));
 
   let totalSets = 0;
   let totalVolume = 0;
@@ -53,45 +113,76 @@ export default function WorkoutSummaryScreen({ navigation }: Props) {
   const incompleteExercisesList: any[] = [];
   const prsList: any[] = [];
 
-  activeSession.exerciseQueue.forEach((item) => {
-    const isCompleted = item.status === "complete" || item.status === "skipped";
-    
-    // Calculate exercise volume and completed sets
-    const completedSets = item.loggedSets.filter(s => !s.wasSkipped);
-    const exerciseVolume = completedSets.reduce((sum, s) => sum + (s.weightKg || 0) * (s.reps || 0), 0);
-    
-    totalSets += completedSets.length;
-    totalVolume += exerciseVolume;
-
-    // Collect PRs
-    item.loggedSets.forEach((set) => {
-      if ((set as any).isPR) {
-        prsList.push({
-          id: set.id,
-          exerciseName: item.exercise.name,
-          weightKg: set.weightKg,
-          reps: set.reps,
-          estimated1rm: (set.weightKg || 0) * (1 + (set.reps || 0) / 30),
-        });
-      }
+  if (isPast) {
+    // Map PRs from pastPrs
+    pastPrs.forEach((pr) => {
+      prsList.push({
+        id: pr.id,
+        exerciseName: pr.exercise?.name || "Exercise",
+        weightKg: pr.weightKg,
+        reps: pr.reps,
+        estimated1rm: pr.estimated1rm,
+      });
     });
 
-    const breakdownItem = {
-      name: item.exercise.name,
-      muscle: item.exercise.muscles?.find(m => m.isPrimary)?.muscle.name || "",
-      volume: exerciseVolume,
-      sets: completedSets.length,
-      targetSets: item.targetSets,
-      status: item.status,
-      hasPR: item.loggedSets.some(s => (s as any).isPR),
-    };
+    const logs = session.exerciseLogs || [];
+    logs.forEach((item: any) => {
+      const completedSets = item.setLogs?.filter((s: any) => !s.wasSkipped) || [];
+      const exerciseVolume = completedSets.reduce((sum: number, s: any) => sum + (s.weightKg || 0) * (s.reps || 0), 0);
+      totalSets += completedSets.length;
+      totalVolume += exerciseVolume;
 
-    if (isCompleted) {
+      const breakdownItem = {
+        name: item.exercise?.name || "Exercise",
+        muscle: item.exercise?.muscles?.find((m: any) => m.isPrimary)?.muscle?.name || "",
+        volume: exerciseVolume,
+        sets: completedSets.length,
+        targetSets: completedSets.length,
+        status: "complete",
+        hasPR: pastPrs.some(pr => pr.exerciseId === item.exerciseId),
+      };
+
       completedExercisesList.push(breakdownItem);
-    } else {
-      incompleteExercisesList.push(breakdownItem);
-    }
-  });
+    });
+  } else {
+    activeSession.exerciseQueue.forEach((item) => {
+      const isCompleted = item.status === "complete" || item.status === "skipped";
+      
+      const completedSets = item.loggedSets.filter(s => !s.wasSkipped);
+      const exerciseVolume = completedSets.reduce((sum, s) => sum + (s.weightKg || 0) * (s.reps || 0), 0);
+      
+      totalSets += completedSets.length;
+      totalVolume += exerciseVolume;
+
+      item.loggedSets.forEach((set) => {
+        if ((set as any).isPR) {
+          prsList.push({
+            id: set.id,
+            exerciseName: item.exercise.name,
+            weightKg: set.weightKg,
+            reps: set.reps,
+            estimated1rm: (set.weightKg || 0) * (1 + (set.reps || 0) / 30),
+          });
+        }
+      });
+
+      const breakdownItem = {
+        name: item.exercise.name,
+        muscle: item.exercise.muscles?.find(m => m.isPrimary)?.muscle.name || "",
+        volume: exerciseVolume,
+        sets: completedSets.length,
+        targetSets: item.targetSets,
+        status: item.status,
+        hasPR: item.loggedSets.some(s => (s as any).isPR),
+      };
+
+      if (isCompleted) {
+        completedExercisesList.push(breakdownItem);
+      } else {
+        incompleteExercisesList.push(breakdownItem);
+      }
+    });
+  }
 
   const handleSave = async () => {
     setSaving(true);
@@ -109,6 +200,14 @@ export default function WorkoutSummaryScreen({ navigation }: Props) {
       }
 
       const res = await completeSession();
+      
+      // Invalidate the cache to refresh charts/metrics immediately
+      try {
+        queryClient.invalidateQueries();
+      } catch (cacheErr) {
+        console.error("Query cache invalidation failed:", cacheErr);
+      }
+
       if (res && res.isOffline) {
         Alert.alert(
           "Workout Saved Offline",
@@ -144,96 +243,46 @@ export default function WorkoutSummaryScreen({ navigation }: Props) {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: theme.bg }} edges={["top", "bottom"]}>
-      <ScrollView
-        style={{ flex: 1 }}
-        contentContainerStyle={{ paddingBottom: space.xl }}
-        showsVerticalScrollIndicator={false}
-      >
-        {/* Hero Header */}
-        <View style={{ alignItems: "center", paddingTop: space.xl, paddingHorizontal: space.lg, paddingBottom: space.lg }}>
-          <View
-            style={{
-              width: 80,
-              height: 80,
-              borderRadius: 40,
-              backgroundColor: theme.successBg,
-              alignItems: "center",
-              justifyContent: "center",
-              marginBottom: space.lg,
-            }}
-          >
-            <Icon name="Trophy" size={40} color={theme.success} />
+    <SafeAreaView style={{ flex: 1, backgroundColor: theme.bg }} edges={["top"]}>
+      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ paddingBottom: space.xl }}>
+        {/* Header */}
+        <View style={{ paddingHorizontal: space.lg, paddingVertical: space.md, flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+          <View>
+            <Typography variant="heading1" color={theme.textPrimary}>
+              {isPast ? "Workout Summary" : "Workout Complete!"}
+            </Typography>
+            <Typography variant="body" color={theme.textSecondary}>
+              {isPast ? new Date(session.date).toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : "Awesome job. Here is your summary:"}
+            </Typography>
           </View>
-          <Typography variant="display" color={theme.textPrimary} align="center">
-            Workout Summary
-          </Typography>
-          <Typography variant="body" color={theme.textSecondary} align="center" style={{ marginTop: space.sm }}>
-            Review your workout and save it below.
-          </Typography>
         </View>
 
-        {/* PR Achievements list */}
+        {/* PR Trophy Banner */}
         {prsList.length > 0 && (
           <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
-            <Card
-              style={{
-                backgroundColor: theme.warningBg,
-                borderColor: theme.warning,
-                borderWidth: 1.5,
-                padding: space.lg,
-              }}
-            >
-              <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.md }}>
+            <Card style={{ backgroundColor: theme.warningBg, borderColor: theme.warning, borderWidth: 1, padding: space.md }} shadow="sm">
+              <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.xs }}>
                 <Icon name="Trophy" size={24} color={theme.warning} />
-                <Typography variant="heading2" color={theme.warningText} weight="800">
-                  New PRs Achieved!
+                <Typography variant="heading3" color={theme.warningText} weight="700">
+                  {prsList.length} Personal Record{prsList.length > 1 ? "s" : ""} Achieved!
                 </Typography>
               </View>
-              {prsList.map((pr) => (
-                <View
-                  key={pr.id}
-                  style={{
-                    backgroundColor: theme.surfaceSecondary,
-                    borderRadius: radius.md,
-                    padding: space.md,
-                    marginBottom: space.xs,
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <View style={{ flex: 1 }}>
-                    <Typography variant="body" color={theme.textPrimary} weight="700">
-                      {pr.exerciseName}
-                    </Typography>
-                    <Typography variant="caption" color={theme.textSecondary}>
-                      1RM Est: {Math.round(pr.estimated1rm)}kg
-                    </Typography>
-                  </View>
-                  <Typography variant="heading3" color={theme.warning} weight="800">
-                    {pr.weightKg}kg × {pr.reps}
-                  </Typography>
-                </View>
+              {prsList.map((pr, idx) => (
+                <Typography key={pr.id || idx} variant="bodySmall" color={theme.warningText} style={{ marginLeft: 32 }}>
+                  • {pr.exerciseName}: {pr.weightKg}kg × {pr.reps} reps (Est. 1RM: {Math.round(pr.estimated1rm)}kg)
+                </Typography>
               ))}
             </Card>
           </View>
         )}
 
-        {/* Incomplete Exercises Warnings */}
-        {incompleteExercisesList.length > 0 && (
+        {/* Incomplete Workout Warning */}
+        {!isPast && incompleteExercisesList.length > 0 && (
           <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
-            <Card
-              style={{
-                backgroundColor: theme.errorBg,
-                borderColor: theme.error,
-                borderWidth: 1.5,
-                padding: space.lg,
-              }}
-            >
-              <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.sm }}>
-                <Icon name="AlertTriangle" size={24} color={theme.error} />
-                <Typography variant="heading3" color={theme.error} weight="800">
+            <Card style={{ borderColor: theme.error, borderWidth: 1, padding: space.md }} shadow="sm">
+              <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.xs }}>
+                <Icon name="AlertTriangle" size={20} color={theme.error} />
+                <Typography variant="heading3" color={theme.error} weight="700">
                   Incomplete Exercises
                 </Typography>
               </View>
@@ -265,7 +314,7 @@ export default function WorkoutSummaryScreen({ navigation }: Props) {
                 {totalVolume.toLocaleString()}
               </Typography>
               <Typography variant="caption" color={theme.textMuted}>
-                VOLUME (KG)
+                Vol (kg)
               </Typography>
             </View>
             <View style={{ flex: 1, backgroundColor: theme.surface, borderRadius: radius.lg, padding: space.lg, borderWidth: 1, borderColor: theme.border, alignItems: "center" }}>
@@ -283,7 +332,7 @@ export default function WorkoutSummaryScreen({ navigation }: Props) {
                 {durationMinutes}
               </Typography>
               <Typography variant="caption" color={theme.textMuted}>
-                MINUTES
+                Min
               </Typography>
             </View>
           </View>
@@ -300,7 +349,7 @@ export default function WorkoutSummaryScreen({ navigation }: Props) {
                 </Typography>
               </View>
               <BarChart
-                data={completedExercisesList.map((e) => ({ label: e.name.substring(0, 8), value: e.volume }))}
+                data={completedExercisesList.map((e) => ({ label: abbreviateExerciseName(e.name), value: e.volume }))}
                 width={screenW - 80}
                 height={180}
                 color={theme.primary}
@@ -313,44 +362,62 @@ export default function WorkoutSummaryScreen({ navigation }: Props) {
         )}
 
         {/* Notes Card */}
-        <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
-          <Card shadow="sm" style={{ padding: space.lg }}>
-            <Typography variant="heading3" color={theme.textPrimary} style={{ marginBottom: space.sm }}>
-              Session Notes
-            </Typography>
-            <Input
-              value={activeSession.notes}
-              onChangeText={(val) => updateSessionNotes(val)}
-              placeholder="How did you feel? Energy level, fatigue, general notes..."
-              multiline
-              numberOfLines={3}
-              containerStyle={{ marginBottom: 0 }}
-            />
-          </Card>
-        </View>
+        {(!isPast || session.notes) && (
+          <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
+            <Card shadow="sm" style={{ padding: space.lg }}>
+              <Typography variant="heading3" color={theme.textPrimary} style={{ marginBottom: space.sm }}>
+                Session Notes
+              </Typography>
+              {isPast ? (
+                <Typography variant="body" color={theme.textSecondary}>
+                  {session.notes}
+                </Typography>
+              ) : (
+                <Input
+                  value={session.notes || ""}
+                  onChangeText={(val) => updateSessionNotes(val)}
+                  placeholder="How did you feel? Energy level, fatigue, general notes..."
+                  multiline
+                  numberOfLines={3}
+                  containerStyle={{ marginBottom: 0 }}
+                />
+              )}
+            </Card>
+          </View>
+        )}
 
         {/* Check-In Card */}
-        <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
-          <Card shadow="sm" style={{ padding: space.lg }}>
-            <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.sm }}>
-              <Icon name="MessageCircle" size={16} color={theme.primary} />
-              <Typography variant="heading3" color={theme.textPrimary}>
-                How did today feel?
-              </Typography>
-            </View>
-            <Typography variant="bodySmall" color={theme.textSecondary} style={{ marginBottom: space.sm }}>
-              Anything uncomfortable? Your feedback helps us adapt your training.
-            </Typography>
-            <Input
-              value={checkInText}
-              onChangeText={setCheckInText}
-              placeholder="e.g. Shoulder felt a bit tight on press, but overall good energy..."
-              multiline
-              numberOfLines={3}
-              containerStyle={{ marginBottom: 0 }}
-            />
-          </Card>
-        </View>
+        {(!isPast || checkInText.trim().length > 0) && (
+          <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
+            <Card shadow="sm" style={{ padding: space.lg }}>
+              <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.sm }}>
+                <Icon name="MessageCircle" size={16} color={theme.primary} />
+                <Typography variant="heading3" color={theme.textPrimary}>
+                  How did today feel?
+                </Typography>
+              </View>
+              {!isPast && (
+                <Typography variant="bodySmall" color={theme.textSecondary} style={{ marginBottom: space.sm }}>
+                  Anything uncomfortable? Your feedback helps us adapt your training.
+                </Typography>
+              )}
+              {isPast ? (
+                <Typography variant="body" color={theme.textSecondary}>
+                  {checkInText}
+                </Typography>
+              ) : (
+                <Input
+                  value={checkInText}
+                  onChangeText={setCheckInText}
+                  placeholder="e.g. Shoulder felt a bit tight on press, but overall good energy..."
+                  multiline
+                  numberOfLines={3}
+                  containerStyle={{ marginBottom: 0 }}
+                />
+              )}
+            </Card>
+          </View>
+        )}
 
         {/* Exercise breakdown */}
         <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
@@ -396,17 +463,27 @@ export default function WorkoutSummaryScreen({ navigation }: Props) {
           ))}
         </View>
 
-        {/* Save button */}
+        {/* Save button / Back button */}
         <View style={{ paddingHorizontal: space.lg }}>
-          <Button
-            title={saving ? "Saving Workout..." : "Save Workout"}
-            onPress={handleSave}
-            disabled={saving}
-            loading={saving}
-            variant="primary"
-            size="lg"
-            icon={<Icon name="CheckCircle2" size={20} color={theme.primaryText} />}
-          />
+          {isPast ? (
+            <Button
+              title="Back to Home"
+              onPress={() => navigation.getParent()?.getParent()?.navigate("Home", { screen: "HomeMain" })}
+              variant="primary"
+              size="lg"
+              icon={<Icon name="Home" size={20} color={theme.primaryText} />}
+            />
+          ) : (
+            <Button
+              title={saving ? "Saving Workout..." : "Save Workout"}
+              onPress={handleSave}
+              disabled={saving}
+              loading={saving}
+              variant="primary"
+              size="lg"
+              icon={<Icon name="CheckCircle2" size={20} color={theme.primaryText} />}
+            />
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>

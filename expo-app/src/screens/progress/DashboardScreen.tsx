@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { View, TouchableOpacity, ScrollView, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ProgressStackParamList } from "../../navigation/types";
+import { useFocusEffect } from "@react-navigation/native";
 import {
   getOverview,
   getHeatmap,
@@ -35,11 +36,7 @@ export default function DashboardScreen({ navigation }: Props) {
   const [dailyActivity, setDailyActivity] = useState<{ day: string; count: number }[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    loadData();
-  }, []);
-
-  const loadData = async () => {
+  const loadData = useCallback(async () => {
     try {
       const [overRes, heatRes, muscRes, recRes, volRes] = await Promise.all([
         getOverview(),
@@ -59,7 +56,14 @@ export default function DashboardScreen({ navigation }: Props) {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      loadData();
+    }, [loadData])
+  );
+
 
   if (loading) {
     return (

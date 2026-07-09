@@ -56,7 +56,7 @@ export function getSetRecommendation(
 
   // Filter out skipped/invalid sets
   const validHistory = flatSets.filter(
-    (h) => !h.was_skipped && h.weightKg !== null && h.reps !== null
+    (h) => !h.was_skipped && !h.wasSkipped && h.weightKg !== null && h.reps !== null
   );
 
   if (validHistory.length === 0) {

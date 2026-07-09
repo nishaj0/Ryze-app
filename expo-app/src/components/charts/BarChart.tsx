@@ -35,7 +35,12 @@ export default function BarChart({
     return <View style={{ height, width }} />;
   }
 
-  const padding = { top: 20, right: 16, bottom: 36, left: 44 };
+  const padding = {
+    top: 20,
+    right: 16,
+    bottom: 36,
+    left: horizontal ? 80 : 44,
+  };
   const chartW = width - padding.left - padding.right;
   const chartH = height - padding.top - padding.bottom;
 
