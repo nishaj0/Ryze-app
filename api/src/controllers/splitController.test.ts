@@ -4,9 +4,16 @@ import * as splitController from "../controllers/splitController";
 import { AuthRequest } from "../middleware/auth";
 import { mockPrismaClient } from "../__tests__/prisma-mock";
 import { TEST_USER, resetAllMocks } from "../__tests__/helpers";
+import { GeminiError, callGemini } from "../utils/gemini";
 
 vi.mock("../utils/gemini", () => ({
   callGemini: vi.fn(),
+  GeminiError: class GeminiError extends Error {
+    constructor(message: string) {
+      super(message);
+      this.name = "GeminiError";
+    }
+  },
 }));
 
 describe("splitController", () => {
@@ -232,6 +239,167 @@ describe("splitController", () => {
 
       expect(mockPrismaClient.$transaction).toHaveBeenCalled();
       expect(res.json).toHaveBeenCalled();
+    });
+  });
+
+  describe("generateAISplit", () => {
+    beforeEach(() => {
+      vi.mocked(callGemini).mockReset();
+    });
+
+    const mockExercises = [
+      {
+        id: "ex-1",
+        name: "Bench Press",
+        equipment: "barbell",
+        muscles: [{ isPrimary: true, muscle: { name: "Chest" } }],
+      },
+      {
+        id: "ex-2",
+        name: "Squat",
+        equipment: "barbell",
+        muscles: [{ isPrimary: true, muscle: { name: "Quads" } }],
+      },
+    ];
+
+    it("should return 400 if description is missing", async () => {
+      req.body = { equipmentFilter: [] };
+
+      await expect(splitController.generateAISplit(req as AuthRequest, res as Response))
+        .rejects.toThrow("Description is required");
+    });
+
+    it("should return 400 if no exercises found", async () => {
+      req.body = { description: "Build muscle" };
+      mockPrismaClient.exercise.findMany.mockResolvedValue([]);
+
+      await expect(splitController.generateAISplit(req as AuthRequest, res as Response))
+        .rejects.toThrow("No exercises found matching your criteria");
+    });
+
+    it("should generate split successfully with valid Gemini response", async () => {
+      req.body = { description: "Build muscle, 4 days per week" };
+      mockPrismaClient.exercise.findMany.mockResolvedValue(mockExercises);
+
+      const aiResponse = {
+        name: "4-Day Muscle Builder",
+        description: "A 4-day split for muscle gain",
+        daysPerWeek: 4,
+        days: [
+          {
+            dayNumber: 1,
+            name: "Push Day",
+            muscleGroups: ["Chest", "Shoulders"],
+            isRest: false,
+            exercises: [
+              { exerciseName: "Bench Press", targetSets: 4, targetRepsMin: 8, targetRepsMax: 12 },
+            ],
+          },
+          {
+            dayNumber: 2,
+            name: "Rest Day",
+            muscleGroups: [],
+            isRest: true,
+            exercises: [],
+          },
+        ],
+      };
+
+      vi.mocked(callGemini).mockResolvedValue(aiResponse);
+
+      await splitController.generateAISplit(req as AuthRequest, res as Response);
+
+      expect(res.json).toHaveBeenCalledWith(
+        expect.objectContaining({
+          split: expect.objectContaining({
+            name: "4-Day Muscle Builder",
+            daysPerWeek: 4,
+          }),
+          warnings: [],
+        })
+      );
+    });
+
+    it("should throw AppError with message when GeminiError occurs", async () => {
+      req.body = { description: "Build muscle" };
+      mockPrismaClient.exercise.findMany.mockResolvedValue(mockExercises);
+
+      vi.mocked(callGemini).mockRejectedValue(new GeminiError("AI service timeout. Please try again."));
+
+      await expect(splitController.generateAISplit(req as AuthRequest, res as Response))
+        .rejects.toThrow("AI service timeout. Please try again.");
+    });
+
+    it("should throw AppError when Gemini returns unknown error", async () => {
+      req.body = { description: "Build muscle" };
+      mockPrismaClient.exercise.findMany.mockResolvedValue(mockExercises);
+
+      vi.mocked(callGemini).mockRejectedValue(new Error("Unknown failure"));
+
+      await expect(splitController.generateAISplit(req as AuthRequest, res as Response))
+        .rejects.toThrow("Failed to generate split. Please try again.");
+    });
+
+    it("should add warnings for exercises not found in database", async () => {
+      req.body = { description: "Build muscle" };
+      mockPrismaClient.exercise.findMany.mockResolvedValue(mockExercises);
+
+      const aiResponse = {
+        name: "Test Split",
+        description: "Test",
+        daysPerWeek: 3,
+        days: [
+          {
+            dayNumber: 1,
+            name: "Day 1",
+            muscleGroups: ["Chest"],
+            isRest: false,
+            exercises: [
+              { exerciseName: "Bench Press", targetSets: 3, targetRepsMin: 8, targetRepsMax: 12 },
+              { exerciseName: "Nonexistent Exercise", targetSets: 3, targetRepsMin: 8, targetRepsMax: 12 },
+            ],
+          },
+        ],
+      };
+
+      vi.mocked(callGemini).mockResolvedValue(aiResponse);
+
+      await splitController.generateAISplit(req as AuthRequest, res as Response);
+
+      expect(res.json).toHaveBeenCalledWith(
+        expect.objectContaining({
+          warnings: expect.arrayContaining([
+            expect.stringContaining("Nonexistent Exercise"),
+          ]),
+        })
+      );
+    });
+
+    it("should throw error when all days are empty after validation", async () => {
+      req.body = { description: "Build muscle" };
+      mockPrismaClient.exercise.findMany.mockResolvedValue(mockExercises);
+
+      const aiResponse = {
+        name: "Bad Split",
+        description: "All invalid exercises",
+        daysPerWeek: 3,
+        days: [
+          {
+            dayNumber: 1,
+            name: "Day 1",
+            muscleGroups: ["Chest"],
+            isRest: false,
+            exercises: [
+              { exerciseName: "Fake Exercise 1", targetSets: 3, targetRepsMin: 8, targetRepsMax: 12 },
+            ],
+          },
+        ],
+      };
+
+      vi.mocked(callGemini).mockResolvedValue(aiResponse);
+
+      await expect(splitController.generateAISplit(req as AuthRequest, res as Response))
+        .rejects.toThrow("Generated split has no valid exercises. Please try again.");
     });
   });
 });

@@ -40,7 +40,7 @@
     "semantic_hash": ""
   },
   "api/package.json": {
-    "mtime": 1783444227.8592765,
+    "mtime": 1783600401.7741623,
     "ast_hash": "47d00f186ece176b34def06f4fe321d2",
     "semantic_hash": ""
   },
@@ -90,8 +90,8 @@
     "semantic_hash": ""
   },
   "api/src/controllers/splitController.ts": {
-    "mtime": 1782514203.2087097,
-    "ast_hash": "7e8eaaad488c2dc4935752c4fdec2a06",
+    "mtime": 1783593700.7100482,
+    "ast_hash": "bd546314cdc858c5103e8337a1d73c73",
     "semantic_hash": ""
   },
   "api/src/index.ts": {
@@ -160,8 +160,8 @@
     "semantic_hash": ""
   },
   "api/src/routes/splits.ts": {
-    "mtime": 1782514218.4255035,
-    "ast_hash": "3eebaa4d2e2ec6a34db70062d555448a",
+    "mtime": 1783596995.489533,
+    "ast_hash": "8bb740e90e83296276f15e3670fd9187",
     "semantic_hash": ""
   },
   "api/tsconfig.json": {
@@ -14330,8 +14330,8 @@
     "semantic_hash": ""
   },
   "api/src/controllers/checkinController.ts": {
-    "mtime": 1782513536.931149,
-    "ast_hash": "be9f2daa09f3827ed27577f374322efd",
+    "mtime": 1783597061.730131,
+    "ast_hash": "4908d32dc7cc1de0aef9914fdf63716c",
     "semantic_hash": ""
   },
   "api/src/routes/checkins.ts": {
@@ -14340,8 +14340,8 @@
     "semantic_hash": ""
   },
   "api/src/utils/gemini.ts": {
-    "mtime": 1782511096.6628516,
-    "ast_hash": "e2cd9ddf3e2dc5452c15575b78cc5e68",
+    "mtime": 1783599988.0445294,
+    "ast_hash": "a80733b3be56f0f663ea7d0d253c0ba1",
     "semantic_hash": ""
   },
   "api/src/utils/scheduler.ts": {
@@ -14355,8 +14355,8 @@
     "semantic_hash": ""
   },
   "api/src/controllers/splitSuggestionController.ts": {
-    "mtime": 1782513875.3743742,
-    "ast_hash": "b219ffa80be1f464533bc11e23525a31",
+    "mtime": 1783597069.1499352,
+    "ast_hash": "5307515de79cf6335bb556ec900d5dd8",
     "semantic_hash": ""
   },
   "api/src/routes/suggestions.ts": {
@@ -14370,8 +14370,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/screens/onboarding/AISplitBuilderScreen.tsx": {
-    "mtime": 1782514401.0226285,
-    "ast_hash": "6032fc6434888f5df48234a43e9d0a38",
+    "mtime": 1783593727.429237,
+    "ast_hash": "09b846c54ab666bd5f38421b1d51f53f",
     "semantic_hash": ""
   },
   "api/src/__tests__/helpers.ts": {
@@ -14380,8 +14380,8 @@
     "semantic_hash": ""
   },
   "api/src/__tests__/prisma-mock.ts": {
-    "mtime": 1782559079.1824255,
-    "ast_hash": "4a9175cfac661d07e3250b7bbe028186",
+    "mtime": 1783594221.804134,
+    "ast_hash": "e28b8c3a8c26249c31940cd09126b894",
     "semantic_hash": ""
   },
   "api/src/__tests__/setup.ts": {
@@ -14400,8 +14400,8 @@
     "semantic_hash": ""
   },
   "api/src/controllers/checkinController.test.ts": {
-    "mtime": 1782559402.3462458,
-    "ast_hash": "35c82a30ce2bb17061aae5c77fc2c3ab",
+    "mtime": 1783594114.0704305,
+    "ast_hash": "ac51ae99cf660a4e5e97d6ebe00114cc",
     "semantic_hash": ""
   },
   "api/src/controllers/exerciseController.test.ts": {
@@ -14425,8 +14425,8 @@
     "semantic_hash": ""
   },
   "api/src/controllers/splitController.test.ts": {
-    "mtime": 1782559174.5099547,
-    "ast_hash": "dd354630af679507f1f278dbbc673d36",
+    "mtime": 1783593832.459969,
+    "ast_hash": "00d13e7fab4936114d2c9207eb87def9",
     "semantic_hash": ""
   },
   "api/src/middleware/auth.test.ts": {
@@ -14445,7 +14445,7 @@
     "semantic_hash": ""
   },
   "api/vitest.config.ts": {
-    "mtime": 1782558943.4056268,
+    "mtime": 1783600413.6011205,
     "ast_hash": "b8c1ca075e5b01b7f81d9e12a3fa8cbf",
     "semantic_hash": ""
   },
@@ -14522,6 +14522,11 @@
   "expo-app/src/utils/apiErrors.ts": {
     "mtime": 1783592732.7744198,
     "ast_hash": "a71107c85996eb6aa61b3900c028dea0",
+    "semantic_hash": ""
+  },
+  "api/src/controllers/splitSuggestionController.test.ts": {
+    "mtime": 1783594193.8732417,
+    "ast_hash": "9e9213b10b907abf615dde5c04964cef",
     "semantic_hash": ""
   }
 }

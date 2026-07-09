@@ -2,7 +2,7 @@ import { Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import { AuthRequest } from "../middleware/auth";
 import { AppError } from "../middleware/errorHandler";
-import { callGemini } from "../utils/gemini";
+import { callGemini, GeminiError } from "../utils/gemini";
 
 const prisma = new PrismaClient();
 
@@ -421,13 +421,17 @@ If the user's description is vague, make reasonable assumptions (full gym access
     required: ["name", "description", "daysPerWeek", "days"],
   };
 
-  const result = await callGemini<any>({
-    systemPrompt,
-    userPrompt: description,
-    responseSchema,
-  });
-
-  if (!result) {
+  let result: any;
+  try {
+    result = await callGemini<any>({
+      systemPrompt,
+      userPrompt: description,
+      responseSchema,
+    });
+  } catch (error) {
+    if (error instanceof GeminiError) {
+      throw new AppError(error.message, 502);
+    }
     throw new AppError("Failed to generate split. Please try again.", 500);
   }
 

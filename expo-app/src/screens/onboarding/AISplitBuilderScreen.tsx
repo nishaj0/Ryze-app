@@ -14,6 +14,7 @@ import { OnboardingStackParamList } from "../../navigation/types";
 import { generateAISplit } from "../../api/splits";
 import { createSplit, setActiveSplit } from "../../api/splits";
 import { completeOnboarding } from "../../api/onboarding";
+import { getApiErrorMessage } from "../../utils/apiErrors";
 import { useOnboarding } from "./OnboardingContext";
 import { useAuthStore } from "../../store/authStore";
 import { Typography, Card, Button, Input, Icon } from "../../components";
@@ -90,8 +91,7 @@ export default function AISplitBuilderScreen({ navigation }: Props) {
       setGeneratedSplit(result.split);
       setWarnings(result.warnings);
     } catch (err: any) {
-      const message = err.response?.data?.error || "Failed to generate split. Please try again.";
-      setError(message);
+      setError(getApiErrorMessage(err));
     } finally {
       setLoading(false);
     }
@@ -133,8 +133,7 @@ export default function AISplitBuilderScreen({ navigation }: Props) {
 
       await setAuth(token!, onboardingRes.user);
     } catch (err: any) {
-      const message = err.response?.data?.error || "Failed to save split. Please try again.";
-      Alert.alert("Error", message);
+      Alert.alert("Error", getApiErrorMessage(err));
     } finally {
       setSaving(false);
     }

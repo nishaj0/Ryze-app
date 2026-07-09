@@ -14,11 +14,11 @@ const wrap = (fn: (req: any, res: Response, next: NextFunction) => Promise<any>)
 
 router.get("/", authMiddleware, wrap(splitController.listSplits));
 router.post("/ai-generate", authMiddleware, wrap(splitController.generateAISplit));
-router.get("/:id", authMiddleware, wrap(splitController.getSplit));
 router.get("/user/active", authMiddleware, wrap(splitController.getActiveSplit));
 router.put("/user/active", authMiddleware, wrap(splitController.setActiveSplit));
 router.post("/", authMiddleware, wrap(splitController.createSplit));
 router.patch("/exercises/:id", authMiddleware, wrap(splitController.updateSplitExercise));
+router.get("/:id", authMiddleware, wrap(splitController.getSplit));
 
 const updateSplitSchema = z.object({
   name: z.string().min(1),

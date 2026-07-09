@@ -95229,7 +95229,7 @@
       "source_file": "api/free-exercise-db/site/src/main.js",
       "source_location": "L1",
       "id": "api_free_exercise_db_site_src_main_js_src_main",
-      "community": 9,
+      "community": 932,
       "norm_label": "main.js"
     },
     {
@@ -95958,7 +95958,7 @@
       "source_file": "api/src/controllers/authController.ts",
       "source_location": "L1",
       "id": "controllers_authcontroller",
-      "community": 939,
+      "community": 17,
       "norm_label": "authcontroller.ts"
     },
     {
@@ -95967,7 +95967,7 @@
       "source_file": "api/src/controllers/authController.ts",
       "source_location": "L8",
       "id": "controllers_authcontroller_prisma",
-      "community": 939,
+      "community": 17,
       "norm_label": "prisma"
     },
     {
@@ -95976,7 +95976,7 @@
       "source_file": "api/src/controllers/authController.ts",
       "source_location": "L10",
       "id": "controllers_authcontroller_generatetoken",
-      "community": 939,
+      "community": 17,
       "norm_label": "generatetoken()"
     },
     {
@@ -95985,7 +95985,7 @@
       "source_file": "api/src/controllers/authController.ts",
       "source_location": "L16",
       "id": "controllers_authcontroller_register",
-      "community": 939,
+      "community": 17,
       "norm_label": "register()"
     },
     {
@@ -95994,7 +95994,7 @@
       "source_file": "api/src/controllers/authController.ts",
       "source_location": "L41",
       "id": "controllers_authcontroller_login",
-      "community": 939,
+      "community": 17,
       "norm_label": "login()"
     },
     {
@@ -96003,7 +96003,7 @@
       "source_file": "api/src/controllers/authController.ts",
       "source_location": "L66",
       "id": "controllers_authcontroller_me",
-      "community": 939,
+      "community": 17,
       "norm_label": "me()"
     },
     {
@@ -96012,7 +96012,7 @@
       "source_file": "api/src/controllers/authController.ts",
       "source_location": "L96",
       "id": "controllers_authcontroller_updateprofile",
-      "community": 939,
+      "community": 17,
       "norm_label": "updateprofile()"
     },
     {
@@ -96021,7 +96021,7 @@
       "source_file": "api/src/controllers/authController.ts",
       "source_location": "L117",
       "id": "controllers_authcontroller_deleteaccount",
-      "community": 939,
+      "community": 17,
       "norm_label": "deleteaccount()"
     },
     {
@@ -96032,6 +96032,15 @@
       "id": "controllers_checkincontroller_test",
       "community": 23,
       "norm_label": "checkincontroller.test.ts"
+    },
+    {
+      "label": "constructor()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/checkinController.test.ts",
+      "source_location": "L12",
+      "id": "controllers_checkincontroller_test_constructor",
+      "community": 23,
+      "norm_label": "constructor()"
     },
     {
       "label": "checkinController.ts",
@@ -96082,7 +96091,7 @@
       "label": "createCheckIn()",
       "file_type": "code",
       "source_file": "api/src/controllers/checkinController.ts",
-      "source_location": "L129",
+      "source_location": "L134",
       "id": "controllers_checkincontroller_createcheckin",
       "community": 3,
       "norm_label": "createcheckin()"
@@ -96091,7 +96100,7 @@
       "label": "getCheckIn()",
       "file_type": "code",
       "source_file": "api/src/controllers/checkinController.ts",
-      "source_location": "L171",
+      "source_location": "L176",
       "id": "controllers_checkincontroller_getcheckin",
       "community": 3,
       "norm_label": "getcheckin()"
@@ -96100,7 +96109,7 @@
       "label": "retryUnprocessed()",
       "file_type": "code",
       "source_file": "api/src/controllers/checkinController.ts",
-      "source_location": "L198",
+      "source_location": "L203",
       "id": "controllers_checkincontroller_retryunprocessed",
       "community": 3,
       "norm_label": "retryunprocessed()"
@@ -96318,7 +96327,7 @@
       "source_file": "api/src/controllers/nutritionController.ts",
       "source_location": "L1",
       "id": "controllers_nutritioncontroller",
-      "community": 23,
+      "community": 946,
       "norm_label": "nutritioncontroller.ts"
     },
     {
@@ -96327,7 +96336,7 @@
       "source_file": "api/src/controllers/nutritionController.ts",
       "source_location": "L5",
       "id": "controllers_nutritioncontroller_prisma",
-      "community": 23,
+      "community": 946,
       "norm_label": "prisma"
     },
     {
@@ -96336,7 +96345,7 @@
       "source_file": "api/src/controllers/nutritionController.ts",
       "source_location": "L7",
       "id": "controllers_nutritioncontroller_lognutrition",
-      "community": 23,
+      "community": 946,
       "norm_label": "lognutrition()"
     },
     {
@@ -96345,7 +96354,7 @@
       "source_file": "api/src/controllers/nutritionController.ts",
       "source_location": "L39",
       "id": "controllers_nutritioncontroller_getnutritionlogs",
-      "community": 23,
+      "community": 946,
       "norm_label": "getnutritionlogs()"
     },
     {
@@ -96808,12 +96817,21 @@
       "norm_label": "splitcontroller.test.ts"
     },
     {
+      "label": "constructor()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/splitController.test.ts",
+      "source_location": "L12",
+      "id": "controllers_splitcontroller_test_constructor",
+      "community": 23,
+      "norm_label": "constructor()"
+    },
+    {
       "label": "splitController.ts",
       "file_type": "code",
       "source_file": "api/src/controllers/splitController.ts",
       "source_location": "L1",
       "id": "controllers_splitcontroller",
-      "community": 3,
+      "community": 939,
       "norm_label": "splitcontroller.ts"
     },
     {
@@ -96822,7 +96840,7 @@
       "source_file": "api/src/controllers/splitController.ts",
       "source_location": "L7",
       "id": "controllers_splitcontroller_prisma",
-      "community": 3,
+      "community": 939,
       "norm_label": "prisma"
     },
     {
@@ -96831,7 +96849,7 @@
       "source_file": "api/src/controllers/splitController.ts",
       "source_location": "L9",
       "id": "controllers_splitcontroller_listsplits",
-      "community": 3,
+      "community": 939,
       "norm_label": "listsplits()"
     },
     {
@@ -96840,7 +96858,7 @@
       "source_file": "api/src/controllers/splitController.ts",
       "source_location": "L28",
       "id": "controllers_splitcontroller_getsplit",
-      "community": 3,
+      "community": 939,
       "norm_label": "getsplit()"
     },
     {
@@ -96849,7 +96867,7 @@
       "source_file": "api/src/controllers/splitController.ts",
       "source_location": "L61",
       "id": "controllers_splitcontroller_createsplit",
-      "community": 3,
+      "community": 939,
       "norm_label": "createsplit()"
     },
     {
@@ -96858,7 +96876,7 @@
       "source_file": "api/src/controllers/splitController.ts",
       "source_location": "L113",
       "id": "controllers_splitcontroller_setactivesplit",
-      "community": 3,
+      "community": 939,
       "norm_label": "setactivesplit()"
     },
     {
@@ -96867,7 +96885,7 @@
       "source_file": "api/src/controllers/splitController.ts",
       "source_location": "L141",
       "id": "controllers_splitcontroller_getactivesplit",
-      "community": 3,
+      "community": 939,
       "norm_label": "getactivesplit()"
     },
     {
@@ -96876,7 +96894,7 @@
       "source_file": "api/src/controllers/splitController.ts",
       "source_location": "L180",
       "id": "controllers_splitcontroller_updatesplit",
-      "community": 3,
+      "community": 939,
       "norm_label": "updatesplit()"
     },
     {
@@ -96885,7 +96903,7 @@
       "source_file": "api/src/controllers/splitController.ts",
       "source_location": "L312",
       "id": "controllers_splitcontroller_updatesplitexercise",
-      "community": 3,
+      "community": 939,
       "norm_label": "updatesplitexercise()"
     },
     {
@@ -96894,8 +96912,26 @@
       "source_file": "api/src/controllers/splitController.ts",
       "source_location": "L332",
       "id": "controllers_splitcontroller_generateaisplit",
-      "community": 3,
+      "community": 939,
       "norm_label": "generateaisplit()"
+    },
+    {
+      "label": "splitSuggestionController.test.ts",
+      "file_type": "code",
+      "source_file": "api/src/controllers/splitSuggestionController.test.ts",
+      "source_location": "L1",
+      "id": "controllers_splitsuggestioncontroller_test",
+      "community": 23,
+      "norm_label": "splitsuggestioncontroller.test.ts"
+    },
+    {
+      "label": "constructor()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/splitSuggestionController.test.ts",
+      "source_location": "L10",
+      "id": "controllers_splitsuggestioncontroller_test_constructor",
+      "community": 23,
+      "norm_label": "constructor()"
     },
     {
       "label": "splitSuggestionController.ts",
@@ -96955,7 +96991,7 @@
       "label": "extractBodyPartKeywords()",
       "file_type": "code",
       "source_file": "api/src/controllers/splitSuggestionController.ts",
-      "source_location": "L313",
+      "source_location": "L323",
       "id": "controllers_splitsuggestioncontroller_extractbodypartkeywords",
       "community": 3,
       "norm_label": "extractbodypartkeywords()"
@@ -96964,7 +97000,7 @@
       "label": "buildSuggestionPrompt()",
       "file_type": "code",
       "source_file": "api/src/controllers/splitSuggestionController.ts",
-      "source_location": "L329",
+      "source_location": "L339",
       "id": "controllers_splitsuggestioncontroller_buildsuggestionprompt",
       "community": 3,
       "norm_label": "buildsuggestionprompt()"
@@ -96973,7 +97009,7 @@
       "label": "buildGeneralSuggestionPrompt()",
       "file_type": "code",
       "source_file": "api/src/controllers/splitSuggestionController.ts",
-      "source_location": "L360",
+      "source_location": "L370",
       "id": "controllers_splitsuggestioncontroller_buildgeneralsuggestionprompt",
       "community": 3,
       "norm_label": "buildgeneralsuggestionprompt()"
@@ -96982,7 +97018,7 @@
       "label": "createNotificationAndPush()",
       "file_type": "code",
       "source_file": "api/src/controllers/splitSuggestionController.ts",
-      "source_location": "L376",
+      "source_location": "L386",
       "id": "controllers_splitsuggestioncontroller_createnotificationandpush",
       "community": 3,
       "norm_label": "createnotificationandpush()"
@@ -96991,7 +97027,7 @@
       "label": "generateSuggestions()",
       "file_type": "code",
       "source_file": "api/src/controllers/splitSuggestionController.ts",
-      "source_location": "L391",
+      "source_location": "L401",
       "id": "controllers_splitsuggestioncontroller_generatesuggestions",
       "community": 3,
       "norm_label": "generatesuggestions()"
@@ -97000,7 +97036,7 @@
       "label": "getSuggestions()",
       "file_type": "code",
       "source_file": "api/src/controllers/splitSuggestionController.ts",
-      "source_location": "L425",
+      "source_location": "L435",
       "id": "controllers_splitsuggestioncontroller_getsuggestions",
       "community": 3,
       "norm_label": "getsuggestions()"
@@ -97009,7 +97045,7 @@
       "label": "acceptSuggestion()",
       "file_type": "code",
       "source_file": "api/src/controllers/splitSuggestionController.ts",
-      "source_location": "L441",
+      "source_location": "L451",
       "id": "controllers_splitsuggestioncontroller_acceptsuggestion",
       "community": 3,
       "norm_label": "acceptsuggestion()"
@@ -97018,7 +97054,7 @@
       "label": "dismissSuggestion()",
       "file_type": "code",
       "source_file": "api/src/controllers/splitSuggestionController.ts",
-      "source_location": "L530",
+      "source_location": "L540",
       "id": "controllers_splitsuggestioncontroller_dismisssuggestion",
       "community": 3,
       "norm_label": "dismisssuggestion()"
@@ -97056,7 +97092,7 @@
       "source_file": "api/src/middleware/auth.ts",
       "source_location": "L1",
       "id": "middleware_auth",
-      "community": 23,
+      "community": 939,
       "norm_label": "auth.ts"
     },
     {
@@ -97065,7 +97101,7 @@
       "source_file": "api/src/middleware/auth.ts",
       "source_location": "L6",
       "id": "middleware_auth_prisma",
-      "community": 23,
+      "community": 939,
       "norm_label": "prisma"
     },
     {
@@ -97335,7 +97371,7 @@
       "source_file": "api/src/routes/health.ts",
       "source_location": "L1",
       "id": "routes_health",
-      "community": 17,
+      "community": 7,
       "norm_label": "health.ts"
     },
     {
@@ -97344,7 +97380,7 @@
       "source_file": "api/src/routes/health.ts",
       "source_location": "L4",
       "id": "routes_health_router",
-      "community": 17,
+      "community": 7,
       "norm_label": "router"
     },
     {
@@ -97353,7 +97389,7 @@
       "source_file": "api/src/routes/health.ts",
       "source_location": "L5",
       "id": "routes_health_prisma",
-      "community": 17,
+      "community": 7,
       "norm_label": "prisma"
     },
     {
@@ -97362,7 +97398,7 @@
       "source_file": "api/src/routes/health.ts",
       "source_location": "L6",
       "id": "routes_health_starttime",
-      "community": 17,
+      "community": 7,
       "norm_label": "starttime"
     },
     {
@@ -97533,7 +97569,7 @@
       "source_file": "api/src/routes/progress.ts",
       "source_location": "L1",
       "id": "routes_progress",
-      "community": 19,
+      "community": 7,
       "norm_label": "progress.ts"
     },
     {
@@ -97542,7 +97578,7 @@
       "source_file": "api/src/routes/progress.ts",
       "source_location": "L5",
       "id": "routes_progress_router",
-      "community": 19,
+      "community": 7,
       "norm_label": "router"
     },
     {
@@ -97551,7 +97587,7 @@
       "source_file": "api/src/routes/progress.ts",
       "source_location": "L7",
       "id": "routes_progress_wrap",
-      "community": 19,
+      "community": 7,
       "norm_label": "wrap()"
     },
     {
@@ -97722,34 +97758,52 @@
       "source_file": "api/src/utils/gemini.ts",
       "source_location": "L1",
       "id": "utils_gemini",
-      "community": 3,
+      "community": 23,
       "norm_label": "gemini.ts"
+    },
+    {
+      "label": "GeminiError",
+      "file_type": "code",
+      "source_file": "api/src/utils/gemini.ts",
+      "source_location": "L5",
+      "id": "utils_gemini_geminierror",
+      "community": 23,
+      "norm_label": "geminierror"
+    },
+    {
+      "label": ".constructor()",
+      "file_type": "code",
+      "source_file": "api/src/utils/gemini.ts",
+      "source_location": "L6",
+      "id": "utils_gemini_geminierror_constructor",
+      "community": 23,
+      "norm_label": ".constructor()"
     },
     {
       "label": "getClient()",
       "file_type": "code",
       "source_file": "api/src/utils/gemini.ts",
-      "source_location": "L5",
+      "source_location": "L12",
       "id": "utils_gemini_getclient",
-      "community": 3,
+      "community": 23,
       "norm_label": "getclient()"
     },
     {
       "label": "CallGeminiOptions",
       "file_type": "code",
       "source_file": "api/src/utils/gemini.ts",
-      "source_location": "L13",
+      "source_location": "L24",
       "id": "utils_gemini_callgeminioptions",
-      "community": 3,
+      "community": 23,
       "norm_label": "callgeminioptions"
     },
     {
       "label": "callGemini()",
       "file_type": "code",
       "source_file": "api/src/utils/gemini.ts",
-      "source_location": "L19",
+      "source_location": "L30",
       "id": "utils_gemini_callgemini",
-      "community": 3,
+      "community": 23,
       "norm_label": "callgemini()"
     },
     {
@@ -98577,7 +98631,7 @@
       "source_file": "cpanel/src/api.ts",
       "source_location": "L53",
       "id": "src_api_getonboardingstats",
-      "community": 31,
+      "community": 934,
       "norm_label": "getonboardingstats()"
     },
     {
@@ -98811,7 +98865,7 @@
       "source_file": "cpanel/src/main.tsx",
       "source_location": "L1",
       "id": "cpanel_src_main_tsx_src_main",
-      "community": 9,
+      "community": 932,
       "norm_label": "main.tsx"
     },
     {
@@ -99063,7 +99117,7 @@
       "source_file": "cpanel/src/pages/OnboardingPage.tsx",
       "source_location": "L1",
       "id": "pages_onboardingpage",
-      "community": 31,
+      "community": 934,
       "norm_label": "onboardingpage.tsx"
     },
     {
@@ -99072,7 +99126,7 @@
       "source_file": "cpanel/src/pages/OnboardingPage.tsx",
       "source_location": "L9",
       "id": "pages_onboardingpage_onboardingstats",
-      "community": 31,
+      "community": 934,
       "norm_label": "onboardingstats"
     },
     {
@@ -99081,7 +99135,7 @@
       "source_file": "cpanel/src/pages/OnboardingPage.tsx",
       "source_location": "L24",
       "id": "pages_onboardingpage_colors",
-      "community": 31,
+      "community": 934,
       "norm_label": "colors"
     },
     {
@@ -99090,7 +99144,7 @@
       "source_file": "cpanel/src/pages/OnboardingPage.tsx",
       "source_location": "L26",
       "id": "pages_onboardingpage_onboardingpage",
-      "community": 31,
+      "community": 934,
       "norm_label": "onboardingpage()"
     },
     {
@@ -100053,7 +100107,7 @@
       "source_file": "expo-app/index.js",
       "source_location": "L1",
       "id": "expo_app_index",
-      "community": 9,
+      "community": 932,
       "norm_label": "index.js"
     },
     {
@@ -100575,7 +100629,7 @@
       "source_file": "expo-app/src/__tests__/setup.ts",
       "source_location": "L1",
       "id": "expo_app_src_tests_setup_ts_tests_setup",
-      "community": 11,
+      "community": 4,
       "norm_label": "setup.ts"
     },
     {
@@ -100584,7 +100638,7 @@
       "source_file": "expo-app/src/__tests__/setup.ts",
       "source_location": "L3",
       "id": "tests_setup_mockmmkv",
-      "community": 11,
+      "community": 4,
       "norm_label": "mockmmkv"
     },
     {
@@ -100593,7 +100647,7 @@
       "source_file": "expo-app/src/api/app.ts",
       "source_location": "L1",
       "id": "api_app",
-      "community": 928,
+      "community": 29,
       "norm_label": "app.ts"
     },
     {
@@ -100602,7 +100656,7 @@
       "source_file": "expo-app/src/api/app.ts",
       "source_location": "L3",
       "id": "api_app_appsettings",
-      "community": 928,
+      "community": 29,
       "norm_label": "appsettings"
     },
     {
@@ -100611,7 +100665,7 @@
       "source_file": "expo-app/src/api/app.ts",
       "source_location": "L10",
       "id": "api_app_getappsettings",
-      "community": 928,
+      "community": 29,
       "norm_label": "getappsettings()"
     },
     {
@@ -100782,7 +100836,7 @@
       "source_file": "expo-app/src/api/exercises.ts",
       "source_location": "L24",
       "id": "api_exercises_requestexercise",
-      "community": 928,
+      "community": 924,
       "norm_label": "requestexercise()"
     },
     {
@@ -100791,7 +100845,7 @@
       "source_file": "expo-app/src/api/metrics.ts",
       "source_location": "L1",
       "id": "api_metrics",
-      "community": 0,
+      "community": 39,
       "norm_label": "metrics.ts"
     },
     {
@@ -100800,7 +100854,7 @@
       "source_file": "expo-app/src/api/metrics.ts",
       "source_location": "L4",
       "id": "api_metrics_logbodymetric",
-      "community": 0,
+      "community": 39,
       "norm_label": "logbodymetric()"
     },
     {
@@ -100809,7 +100863,7 @@
       "source_file": "expo-app/src/api/metrics.ts",
       "source_location": "L9",
       "id": "api_metrics_getbodymetrics",
-      "community": 0,
+      "community": 39,
       "norm_label": "getbodymetrics()"
     },
     {
@@ -100818,7 +100872,7 @@
       "source_file": "expo-app/src/api/metrics.ts",
       "source_location": "L14",
       "id": "api_metrics_deletebodymetric",
-      "community": 0,
+      "community": 39,
       "norm_label": "deletebodymetric()"
     },
     {
@@ -100827,7 +100881,7 @@
       "source_file": "expo-app/src/api/metrics.ts",
       "source_location": "L18",
       "id": "api_metrics_lognutrition",
-      "community": 0,
+      "community": 39,
       "norm_label": "lognutrition()"
     },
     {
@@ -100836,7 +100890,7 @@
       "source_file": "expo-app/src/api/metrics.ts",
       "source_location": "L23",
       "id": "api_metrics_getnutritionlogs",
-      "community": 0,
+      "community": 39,
       "norm_label": "getnutritionlogs()"
     },
     {
@@ -100908,7 +100962,7 @@
       "source_file": "expo-app/src/api/photos.ts",
       "source_location": "L1",
       "id": "api_photos",
-      "community": 29,
+      "community": 924,
       "norm_label": "photos.ts"
     },
     {
@@ -100917,7 +100971,7 @@
       "source_file": "expo-app/src/api/photos.ts",
       "source_location": "L4",
       "id": "api_photos_uploadphoto",
-      "community": 29,
+      "community": 924,
       "norm_label": "uploadphoto()"
     },
     {
@@ -100926,7 +100980,7 @@
       "source_file": "expo-app/src/api/photos.ts",
       "source_location": "L25",
       "id": "api_photos_getphotos",
-      "community": 29,
+      "community": 924,
       "norm_label": "getphotos()"
     },
     {
@@ -100935,7 +100989,7 @@
       "source_file": "expo-app/src/api/photos.ts",
       "source_location": "L30",
       "id": "api_photos_deletephoto",
-      "community": 29,
+      "community": 924,
       "norm_label": "deletephoto()"
     },
     {
@@ -101034,7 +101088,7 @@
       "source_file": "expo-app/src/api/sessions.ts",
       "source_location": "L4",
       "id": "api_sessions_createsession",
-      "community": 4,
+      "community": 9,
       "norm_label": "createsession()"
     },
     {
@@ -101070,7 +101124,7 @@
       "source_file": "expo-app/src/api/sessions.ts",
       "source_location": "L24",
       "id": "api_sessions_markrestday",
-      "community": 4,
+      "community": 9,
       "norm_label": "markrestday()"
     },
     {
@@ -101178,7 +101232,7 @@
       "source_file": "expo-app/src/api/splits.ts",
       "source_location": "L14",
       "id": "api_splits_getactivesplit",
-      "community": 928,
+      "community": 9,
       "norm_label": "getactivesplit()"
     },
     {
@@ -101196,7 +101250,7 @@
       "source_file": "expo-app/src/api/splits.ts",
       "source_location": "L24",
       "id": "api_splits_createsplit",
-      "community": 1,
+      "community": 928,
       "norm_label": "createsplit()"
     },
     {
@@ -101223,7 +101277,7 @@
       "source_file": "expo-app/src/api/splits.ts",
       "source_location": "L39",
       "id": "api_splits_generateaisplit",
-      "community": 928,
+      "community": 1,
       "norm_label": "generateaisplit()"
     },
     {
@@ -101232,7 +101286,7 @@
       "source_file": "expo-app/src/api/suggestions.ts",
       "source_location": "L1",
       "id": "api_suggestions",
-      "community": 4,
+      "community": 9,
       "norm_label": "suggestions.ts"
     },
     {
@@ -101241,7 +101295,7 @@
       "source_file": "expo-app/src/api/suggestions.ts",
       "source_location": "L3",
       "id": "api_suggestions_splitsuggestion",
-      "community": 4,
+      "community": 9,
       "norm_label": "splitsuggestion"
     },
     {
@@ -101250,7 +101304,7 @@
       "source_file": "expo-app/src/api/suggestions.ts",
       "source_location": "L20",
       "id": "api_suggestions_getsuggestions",
-      "community": 4,
+      "community": 9,
       "norm_label": "getsuggestions()"
     },
     {
@@ -101259,7 +101313,7 @@
       "source_file": "expo-app/src/api/suggestions.ts",
       "source_location": "L25",
       "id": "api_suggestions_acceptsuggestion",
-      "community": 4,
+      "community": 9,
       "norm_label": "acceptsuggestion()"
     },
     {
@@ -101268,7 +101322,7 @@
       "source_file": "expo-app/src/api/suggestions.ts",
       "source_location": "L30",
       "id": "api_suggestions_dismisssuggestion",
-      "community": 4,
+      "community": 9,
       "norm_label": "dismisssuggestion()"
     },
     {
@@ -101277,7 +101331,7 @@
       "source_file": "expo-app/src/api/support.ts",
       "source_location": "L1",
       "id": "api_support",
-      "community": 924,
+      "community": 29,
       "norm_label": "support.ts"
     },
     {
@@ -101286,7 +101340,7 @@
       "source_file": "expo-app/src/api/support.ts",
       "source_location": "L3",
       "id": "api_support_supportticket",
-      "community": 924,
+      "community": 29,
       "norm_label": "supportticket"
     },
     {
@@ -101295,7 +101349,7 @@
       "source_file": "expo-app/src/api/support.ts",
       "source_location": "L14",
       "id": "api_support_submitsupportticket",
-      "community": 924,
+      "community": 29,
       "norm_label": "submitsupportticket()"
     },
     {
@@ -101304,7 +101358,7 @@
       "source_file": "expo-app/src/api/support.ts",
       "source_location": "L23",
       "id": "api_support_getmytickets",
-      "community": 924,
+      "community": 29,
       "norm_label": "getmytickets()"
     },
     {
@@ -101313,7 +101367,7 @@
       "source_file": "expo-app/src/components/Button.tsx",
       "source_location": "L1",
       "id": "components_button",
-      "community": 39,
+      "community": 924,
       "norm_label": "button.tsx"
     },
     {
@@ -101322,7 +101376,7 @@
       "source_file": "expo-app/src/components/Button.tsx",
       "source_location": "L14",
       "id": "components_button_variant",
-      "community": 39,
+      "community": 924,
       "norm_label": "variant"
     },
     {
@@ -101331,7 +101385,7 @@
       "source_file": "expo-app/src/components/Button.tsx",
       "source_location": "L15",
       "id": "components_button_size",
-      "community": 39,
+      "community": 924,
       "norm_label": "size"
     },
     {
@@ -101340,7 +101394,7 @@
       "source_file": "expo-app/src/components/Button.tsx",
       "source_location": "L17",
       "id": "components_button_buttonprops",
-      "community": 39,
+      "community": 924,
       "norm_label": "buttonprops"
     },
     {
@@ -101349,7 +101403,7 @@
       "source_file": "expo-app/src/components/Button.tsx",
       "source_location": "L30",
       "id": "components_button_button",
-      "community": 39,
+      "community": 924,
       "norm_label": "button()"
     },
     {
@@ -101493,7 +101547,7 @@
       "source_file": "expo-app/src/components/Input.tsx",
       "source_location": "L1",
       "id": "components_input",
-      "community": 39,
+      "community": 924,
       "norm_label": "input.tsx"
     },
     {
@@ -101502,7 +101556,7 @@
       "source_file": "expo-app/src/components/Input.tsx",
       "source_location": "L7",
       "id": "components_input_inputprops",
-      "community": 39,
+      "community": 924,
       "norm_label": "inputprops"
     },
     {
@@ -101511,7 +101565,7 @@
       "source_file": "expo-app/src/components/Input.tsx",
       "source_location": "L14",
       "id": "components_input_input",
-      "community": 39,
+      "community": 924,
       "norm_label": "input()"
     },
     {
@@ -101583,7 +101637,7 @@
       "source_file": "expo-app/src/components/SetTrackerStrip.tsx",
       "source_location": "L1",
       "id": "components_settrackerstrip",
-      "community": 11,
+      "community": 4,
       "norm_label": "settrackerstrip.tsx"
     },
     {
@@ -101592,7 +101646,7 @@
       "source_file": "expo-app/src/components/SetTrackerStrip.tsx",
       "source_location": "L8",
       "id": "components_settrackerstrip_settrackerstripprops",
-      "community": 11,
+      "community": 4,
       "norm_label": "settrackerstripprops"
     },
     {
@@ -101601,7 +101655,7 @@
       "source_file": "expo-app/src/components/SetTrackerStrip.tsx",
       "source_location": "L15",
       "id": "components_settrackerstrip_settrackerstrip",
-      "community": 11,
+      "community": 4,
       "norm_label": "settrackerstrip()"
     },
     {
@@ -101610,7 +101664,7 @@
       "source_file": "expo-app/src/components/SetTrackerStrip.tsx",
       "source_location": "L97",
       "id": "components_settrackerstrip_styles",
-      "community": 11,
+      "community": 4,
       "norm_label": "styles"
     },
     {
@@ -102168,7 +102222,7 @@
       "source_file": "expo-app/src/navigation/RootNavigator.tsx",
       "source_location": "L1",
       "id": "navigation_rootnavigator",
-      "community": 0,
+      "community": 1,
       "norm_label": "rootnavigator.tsx"
     },
     {
@@ -102177,7 +102231,7 @@
       "source_file": "expo-app/src/navigation/RootNavigator.tsx",
       "source_location": "L12",
       "id": "navigation_rootnavigator_stack",
-      "community": 0,
+      "community": 1,
       "norm_label": "stack"
     },
     {
@@ -102186,7 +102240,7 @@
       "source_file": "expo-app/src/navigation/RootNavigator.tsx",
       "source_location": "L14",
       "id": "navigation_rootnavigator_rootnavigator",
-      "community": 0,
+      "community": 1,
       "norm_label": "rootnavigator()"
     },
     {
@@ -102249,7 +102303,7 @@
       "source_file": "expo-app/src/navigation/types.ts",
       "source_location": "L42",
       "id": "navigation_types_photosstackparamlist",
-      "community": 29,
+      "community": 924,
       "norm_label": "photosstackparamlist"
     },
     {
@@ -102258,7 +102312,7 @@
       "source_file": "expo-app/src/navigation/types.ts",
       "source_location": "L48",
       "id": "navigation_types_profilestackparamlist",
-      "community": 928,
+      "community": 29,
       "norm_label": "profilestackparamlist"
     },
     {
@@ -102276,7 +102330,7 @@
       "source_file": "expo-app/src/navigation/types.ts",
       "source_location": "L73",
       "id": "navigation_types_rootstackparamlist",
-      "community": 0,
+      "community": 1,
       "norm_label": "rootstackparamlist"
     },
     {
@@ -102348,7 +102402,7 @@
       "source_file": "expo-app/src/screens/exercises/AllExercisesScreen.tsx",
       "source_location": "L1",
       "id": "exercises_allexercisesscreen",
-      "community": 928,
+      "community": 29,
       "norm_label": "allexercisesscreen.tsx"
     },
     {
@@ -102357,7 +102411,7 @@
       "source_file": "expo-app/src/screens/exercises/AllExercisesScreen.tsx",
       "source_location": "L13",
       "id": "exercises_allexercisesscreen_props",
-      "community": 928,
+      "community": 29,
       "norm_label": "props"
     },
     {
@@ -102366,7 +102420,7 @@
       "source_file": "expo-app/src/screens/exercises/AllExercisesScreen.tsx",
       "source_location": "L15",
       "id": "exercises_allexercisesscreen_allexercisesscreen",
-      "community": 928,
+      "community": 29,
       "norm_label": "allexercisesscreen()"
     },
     {
@@ -102375,7 +102429,7 @@
       "source_file": "expo-app/src/screens/exercises/RequestExerciseScreen.tsx",
       "source_location": "L1",
       "id": "exercises_requestexercisescreen",
-      "community": 928,
+      "community": 924,
       "norm_label": "requestexercisescreen.tsx"
     },
     {
@@ -102384,7 +102438,7 @@
       "source_file": "expo-app/src/screens/exercises/RequestExerciseScreen.tsx",
       "source_location": "L11",
       "id": "exercises_requestexercisescreen_props",
-      "community": 928,
+      "community": 924,
       "norm_label": "props"
     },
     {
@@ -102393,7 +102447,7 @@
       "source_file": "expo-app/src/screens/exercises/RequestExerciseScreen.tsx",
       "source_location": "L13",
       "id": "exercises_requestexercisescreen_muscles",
-      "community": 928,
+      "community": 924,
       "norm_label": "muscles"
     },
     {
@@ -102402,7 +102456,7 @@
       "source_file": "expo-app/src/screens/exercises/RequestExerciseScreen.tsx",
       "source_location": "L19",
       "id": "exercises_requestexercisescreen_forces",
-      "community": 928,
+      "community": 924,
       "norm_label": "forces"
     },
     {
@@ -102411,7 +102465,7 @@
       "source_file": "expo-app/src/screens/exercises/RequestExerciseScreen.tsx",
       "source_location": "L20",
       "id": "exercises_requestexercisescreen_levels",
-      "community": 928,
+      "community": 924,
       "norm_label": "levels"
     },
     {
@@ -102420,7 +102474,7 @@
       "source_file": "expo-app/src/screens/exercises/RequestExerciseScreen.tsx",
       "source_location": "L21",
       "id": "exercises_requestexercisescreen_mechanics",
-      "community": 928,
+      "community": 924,
       "norm_label": "mechanics"
     },
     {
@@ -102429,7 +102483,7 @@
       "source_file": "expo-app/src/screens/exercises/RequestExerciseScreen.tsx",
       "source_location": "L22",
       "id": "exercises_requestexercisescreen_categories",
-      "community": 928,
+      "community": 924,
       "norm_label": "categories"
     },
     {
@@ -102438,7 +102492,7 @@
       "source_file": "expo-app/src/screens/exercises/RequestExerciseScreen.tsx",
       "source_location": "L24",
       "id": "exercises_requestexercisescreen_requestexercisescreen",
-      "community": 928,
+      "community": 924,
       "norm_label": "requestexercisescreen()"
     },
     {
@@ -102447,7 +102501,7 @@
       "source_file": "expo-app/src/screens/home/HomeScreen.tsx",
       "source_location": "L1",
       "id": "home_homescreen",
-      "community": 4,
+      "community": 9,
       "norm_label": "homescreen.tsx"
     },
     {
@@ -102456,7 +102510,7 @@
       "source_file": "expo-app/src/screens/home/HomeScreen.tsx",
       "source_location": "L18",
       "id": "home_homescreen_props",
-      "community": 4,
+      "community": 9,
       "norm_label": "props"
     },
     {
@@ -102474,7 +102528,7 @@
       "source_file": "expo-app/src/screens/metrics/MetricsScreen.tsx",
       "source_location": "L1",
       "id": "metrics_metricsscreen",
-      "community": 0,
+      "community": 39,
       "norm_label": "metricsscreen.tsx"
     },
     {
@@ -102483,7 +102537,7 @@
       "source_file": "expo-app/src/screens/metrics/MetricsScreen.tsx",
       "source_location": "L14",
       "id": "metrics_metricsscreen_props",
-      "community": 0,
+      "community": 39,
       "norm_label": "props"
     },
     {
@@ -102492,7 +102546,7 @@
       "source_file": "expo-app/src/screens/metrics/MetricsScreen.tsx",
       "source_location": "L16",
       "id": "metrics_metricsscreen_width_screenw",
-      "community": 0,
+      "community": 39,
       "norm_label": "{ width: screenw }"
     },
     {
@@ -102501,7 +102555,7 @@
       "source_file": "expo-app/src/screens/metrics/MetricsScreen.tsx",
       "source_location": "L18",
       "id": "metrics_metricsscreen_metricsscreen",
-      "community": 0,
+      "community": 39,
       "norm_label": "metricsscreen()"
     },
     {
@@ -102517,7 +102571,7 @@
       "label": "Props",
       "file_type": "code",
       "source_file": "expo-app/src/screens/onboarding/AISplitBuilderScreen.tsx",
-      "source_location": "L23",
+      "source_location": "L24",
       "id": "onboarding_aisplitbuilderscreen_props",
       "community": 1,
       "norm_label": "props"
@@ -102526,7 +102580,7 @@
       "label": "EQUIPMENT_OPTIONS",
       "file_type": "code",
       "source_file": "expo-app/src/screens/onboarding/AISplitBuilderScreen.tsx",
-      "source_location": "L25",
+      "source_location": "L26",
       "id": "onboarding_aisplitbuilderscreen_equipment_options",
       "community": 1,
       "norm_label": "equipment_options"
@@ -102535,7 +102589,7 @@
       "label": "GeneratedExercise",
       "file_type": "code",
       "source_file": "expo-app/src/screens/onboarding/AISplitBuilderScreen.tsx",
-      "source_location": "L31",
+      "source_location": "L32",
       "id": "onboarding_aisplitbuilderscreen_generatedexercise",
       "community": 1,
       "norm_label": "generatedexercise"
@@ -102544,7 +102598,7 @@
       "label": "GeneratedDay",
       "file_type": "code",
       "source_file": "expo-app/src/screens/onboarding/AISplitBuilderScreen.tsx",
-      "source_location": "L39",
+      "source_location": "L40",
       "id": "onboarding_aisplitbuilderscreen_generatedday",
       "community": 1,
       "norm_label": "generatedday"
@@ -102553,7 +102607,7 @@
       "label": "GeneratedSplit",
       "file_type": "code",
       "source_file": "expo-app/src/screens/onboarding/AISplitBuilderScreen.tsx",
-      "source_location": "L47",
+      "source_location": "L48",
       "id": "onboarding_aisplitbuilderscreen_generatedsplit",
       "community": 1,
       "norm_label": "generatedsplit"
@@ -102562,7 +102616,7 @@
       "label": "AISplitBuilderScreen()",
       "file_type": "code",
       "source_file": "expo-app/src/screens/onboarding/AISplitBuilderScreen.tsx",
-      "source_location": "L55",
+      "source_location": "L56",
       "id": "onboarding_aisplitbuilderscreen_aisplitbuilderscreen",
       "community": 1,
       "norm_label": "aisplitbuilderscreen()"
@@ -102879,7 +102933,7 @@
       "source_file": "expo-app/src/screens/onboarding/OnboardingCustomSplitScreen.tsx",
       "source_location": "L1",
       "id": "onboarding_onboardingcustomsplitscreen",
-      "community": 1,
+      "community": 928,
       "norm_label": "onboardingcustomsplitscreen.tsx"
     },
     {
@@ -102888,7 +102942,7 @@
       "source_file": "expo-app/src/screens/onboarding/OnboardingCustomSplitScreen.tsx",
       "source_location": "L15",
       "id": "onboarding_onboardingcustomsplitscreen_props",
-      "community": 1,
+      "community": 928,
       "norm_label": "props"
     },
     {
@@ -102897,7 +102951,7 @@
       "source_file": "expo-app/src/screens/onboarding/OnboardingCustomSplitScreen.tsx",
       "source_location": "L17",
       "id": "onboarding_onboardingcustomsplitscreen_dayconfig",
-      "community": 1,
+      "community": 928,
       "norm_label": "dayconfig"
     },
     {
@@ -102906,7 +102960,7 @@
       "source_file": "expo-app/src/screens/onboarding/OnboardingCustomSplitScreen.tsx",
       "source_location": "L31",
       "id": "onboarding_onboardingcustomsplitscreen_available_muscle_groups",
-      "community": 1,
+      "community": 928,
       "norm_label": "available_muscle_groups"
     },
     {
@@ -102996,7 +103050,7 @@
       "source_file": "expo-app/src/screens/photos/PhotoCaptureScreen.tsx",
       "source_location": "L1",
       "id": "photos_photocapturescreen",
-      "community": 29,
+      "community": 924,
       "norm_label": "photocapturescreen.tsx"
     },
     {
@@ -103005,7 +103059,7 @@
       "source_file": "expo-app/src/screens/photos/PhotoCaptureScreen.tsx",
       "source_location": "L13",
       "id": "photos_photocapturescreen_props",
-      "community": 29,
+      "community": 924,
       "norm_label": "props"
     },
     {
@@ -103014,7 +103068,7 @@
       "source_file": "expo-app/src/screens/photos/PhotoCaptureScreen.tsx",
       "source_location": "L15",
       "id": "photos_photocapturescreen_photocapturescreen",
-      "community": 29,
+      "community": 924,
       "norm_label": "photocapturescreen()"
     },
     {
@@ -103023,7 +103077,7 @@
       "source_file": "expo-app/src/screens/photos/PhotoCompareScreen.tsx",
       "source_location": "L1",
       "id": "photos_photocomparescreen",
-      "community": 29,
+      "community": 924,
       "norm_label": "photocomparescreen.tsx"
     },
     {
@@ -103032,7 +103086,7 @@
       "source_file": "expo-app/src/screens/photos/PhotoCompareScreen.tsx",
       "source_location": "L12",
       "id": "photos_photocomparescreen_props",
-      "community": 29,
+      "community": 924,
       "norm_label": "props"
     },
     {
@@ -103041,7 +103095,7 @@
       "source_file": "expo-app/src/screens/photos/PhotoCompareScreen.tsx",
       "source_location": "L14",
       "id": "photos_photocomparescreen_width_screenw",
-      "community": 29,
+      "community": 924,
       "norm_label": "{ width: screenw }"
     },
     {
@@ -103050,7 +103104,7 @@
       "source_file": "expo-app/src/screens/photos/PhotoCompareScreen.tsx",
       "source_location": "L16",
       "id": "photos_photocomparescreen_photocomparescreen",
-      "community": 29,
+      "community": 924,
       "norm_label": "photocomparescreen()"
     },
     {
@@ -103059,7 +103113,7 @@
       "source_file": "expo-app/src/screens/photos/PhotosTimelineScreen.tsx",
       "source_location": "L1",
       "id": "photos_photostimelinescreen",
-      "community": 29,
+      "community": 924,
       "norm_label": "photostimelinescreen.tsx"
     },
     {
@@ -103068,7 +103122,7 @@
       "source_file": "expo-app/src/screens/photos/PhotosTimelineScreen.tsx",
       "source_location": "L12",
       "id": "photos_photostimelinescreen_props",
-      "community": 29,
+      "community": 924,
       "norm_label": "props"
     },
     {
@@ -103077,7 +103131,7 @@
       "source_file": "expo-app/src/screens/photos/PhotosTimelineScreen.tsx",
       "source_location": "L14",
       "id": "photos_photostimelinescreen_width_screenw",
-      "community": 29,
+      "community": 924,
       "norm_label": "{ width: screenw }"
     },
     {
@@ -103086,7 +103140,7 @@
       "source_file": "expo-app/src/screens/photos/PhotosTimelineScreen.tsx",
       "source_location": "L16",
       "id": "photos_photostimelinescreen_photostimelinescreen",
-      "community": 29,
+      "community": 924,
       "norm_label": "photostimelinescreen()"
     },
     {
@@ -103203,7 +103257,7 @@
       "source_file": "expo-app/src/screens/profile/ProfileScreen.tsx",
       "source_location": "L1",
       "id": "profile_profilescreen",
-      "community": 928,
+      "community": 29,
       "norm_label": "profilescreen.tsx"
     },
     {
@@ -103212,7 +103266,7 @@
       "source_file": "expo-app/src/screens/profile/ProfileScreen.tsx",
       "source_location": "L15",
       "id": "profile_profilescreen_props",
-      "community": 928,
+      "community": 29,
       "norm_label": "props"
     },
     {
@@ -103221,7 +103275,7 @@
       "source_file": "expo-app/src/screens/profile/ProfileScreen.tsx",
       "source_location": "L17",
       "id": "profile_profilescreen_profilescreen",
-      "community": 0,
+      "community": 1,
       "norm_label": "profilescreen()"
     },
     {
@@ -103419,7 +103473,7 @@
       "source_file": "expo-app/src/screens/support/MyTicketsScreen.tsx",
       "source_location": "L1",
       "id": "support_myticketsscreen",
-      "community": 924,
+      "community": 29,
       "norm_label": "myticketsscreen.tsx"
     },
     {
@@ -103428,7 +103482,7 @@
       "source_file": "expo-app/src/screens/support/MyTicketsScreen.tsx",
       "source_location": "L11",
       "id": "support_myticketsscreen_props",
-      "community": 924,
+      "community": 29,
       "norm_label": "props"
     },
     {
@@ -103437,7 +103491,7 @@
       "source_file": "expo-app/src/screens/support/MyTicketsScreen.tsx",
       "source_location": "L13",
       "id": "support_myticketsscreen_myticketsscreen",
-      "community": 924,
+      "community": 29,
       "norm_label": "myticketsscreen()"
     },
     {
@@ -103446,7 +103500,7 @@
       "source_file": "expo-app/src/screens/support/ReportBugScreen.tsx",
       "source_location": "L1",
       "id": "support_reportbugscreen",
-      "community": 924,
+      "community": 29,
       "norm_label": "reportbugscreen.tsx"
     },
     {
@@ -103455,7 +103509,7 @@
       "source_file": "expo-app/src/screens/support/ReportBugScreen.tsx",
       "source_location": "L11",
       "id": "support_reportbugscreen_props",
-      "community": 924,
+      "community": 29,
       "norm_label": "props"
     },
     {
@@ -103464,7 +103518,7 @@
       "source_file": "expo-app/src/screens/support/ReportBugScreen.tsx",
       "source_location": "L13",
       "id": "support_reportbugscreen_reportbugscreen",
-      "community": 924,
+      "community": 29,
       "norm_label": "reportbugscreen()"
     },
     {
@@ -103473,7 +103527,7 @@
       "source_file": "expo-app/src/screens/support/RequestHelpScreen.tsx",
       "source_location": "L1",
       "id": "support_requesthelpscreen",
-      "community": 924,
+      "community": 29,
       "norm_label": "requesthelpscreen.tsx"
     },
     {
@@ -103482,7 +103536,7 @@
       "source_file": "expo-app/src/screens/support/RequestHelpScreen.tsx",
       "source_location": "L11",
       "id": "support_requesthelpscreen_props",
-      "community": 924,
+      "community": 29,
       "norm_label": "props"
     },
     {
@@ -103491,7 +103545,7 @@
       "source_file": "expo-app/src/screens/support/RequestHelpScreen.tsx",
       "source_location": "L13",
       "id": "support_requesthelpscreen_requesthelpscreen",
-      "community": 924,
+      "community": 29,
       "norm_label": "requesthelpscreen()"
     },
     {
@@ -103590,7 +103644,7 @@
       "source_file": "expo-app/src/screens/workout/WorkoutLoggerScreen.tsx",
       "source_location": "L39",
       "id": "workout_workoutloggerscreen_workoutloggerscreen",
-      "community": 11,
+      "community": 4,
       "norm_label": "workoutloggerscreen()"
     },
     {
@@ -103671,7 +103725,7 @@
       "source_file": "expo-app/src/store/authStore.ts",
       "source_location": "L16",
       "id": "store_authstore_useauthstore",
-      "community": 0,
+      "community": 1,
       "norm_label": "useauthstore"
     },
     {
@@ -103680,7 +103734,7 @@
       "source_file": "expo-app/src/store/workoutStore.test.ts",
       "source_location": "L1",
       "id": "store_workoutstore_test",
-      "community": 11,
+      "community": 4,
       "norm_label": "workoutstore.test.ts"
     },
     {
@@ -103689,7 +103743,7 @@
       "source_file": "expo-app/src/store/workoutStore.test.ts",
       "source_location": "L6",
       "id": "store_workoutstore_test_test_exercise",
-      "community": 11,
+      "community": 4,
       "norm_label": "test_exercise"
     },
     {
@@ -103698,7 +103752,7 @@
       "source_file": "expo-app/src/store/workoutStore.test.ts",
       "source_location": "L17",
       "id": "store_workoutstore_test_test_exercise_2",
-      "community": 11,
+      "community": 4,
       "norm_label": "test_exercise_2"
     },
     {
@@ -103707,7 +103761,7 @@
       "source_file": "expo-app/src/store/workoutStore.test.ts",
       "source_location": "L28",
       "id": "store_workoutstore_test_test_split_day",
-      "community": 11,
+      "community": 4,
       "norm_label": "test_split_day"
     },
     {
@@ -103716,7 +103770,7 @@
       "source_file": "expo-app/src/store/workoutStore.ts",
       "source_location": "L1",
       "id": "store_workoutstore",
-      "community": 11,
+      "community": 4,
       "norm_label": "workoutstore.ts"
     },
     {
@@ -103725,7 +103779,7 @@
       "source_file": "expo-app/src/store/workoutStore.ts",
       "source_location": "L5",
       "id": "store_workoutstore_workoutstate",
-      "community": 11,
+      "community": 4,
       "norm_label": "workoutstate"
     },
     {
@@ -104058,7 +104112,7 @@
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L30",
       "id": "types_index_splitday",
-      "community": 4,
+      "community": 9,
       "norm_label": "splitday"
     },
     {
@@ -104076,7 +104130,7 @@
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L52",
       "id": "types_index_exercise",
-      "community": 11,
+      "community": 4,
       "norm_label": "exercise"
     },
     {
@@ -104121,7 +104175,7 @@
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L95",
       "id": "types_index_usersplit",
-      "community": 928,
+      "community": 9,
       "norm_label": "usersplit"
     },
     {
@@ -104130,7 +104184,7 @@
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L105",
       "id": "types_index_workoutsession",
-      "community": 11,
+      "community": 4,
       "norm_label": "workoutsession"
     },
     {
@@ -104139,7 +104193,7 @@
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L118",
       "id": "types_index_exerciselog",
-      "community": 11,
+      "community": 4,
       "norm_label": "exerciselog"
     },
     {
@@ -104148,7 +104202,7 @@
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L127",
       "id": "types_index_setlog",
-      "community": 11,
+      "community": 4,
       "norm_label": "setlog"
     },
     {
@@ -104157,7 +104211,7 @@
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L142",
       "id": "types_index_bodymetric",
-      "community": 0,
+      "community": 39,
       "norm_label": "bodymetric"
     },
     {
@@ -104166,7 +104220,7 @@
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L150",
       "id": "types_index_progressphoto",
-      "community": 29,
+      "community": 924,
       "norm_label": "progressphoto"
     },
     {
@@ -104238,7 +104292,7 @@
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L218",
       "id": "types_index_exercisequeueitem",
-      "community": 11,
+      "community": 4,
       "norm_label": "exercisequeueitem"
     },
     {
@@ -104247,7 +104301,7 @@
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L231",
       "id": "types_index_activesession",
-      "community": 11,
+      "community": 4,
       "norm_label": "activesession"
     },
     {
@@ -104319,7 +104373,7 @@
       "source_file": "expo-app/src/utils/progression.test.ts",
       "source_location": "L1",
       "id": "utils_progression_test",
-      "community": 11,
+      "community": 4,
       "norm_label": "progression.test.ts"
     },
     {
@@ -104328,7 +104382,7 @@
       "source_file": "expo-app/src/utils/progression.test.ts",
       "source_location": "L5",
       "id": "utils_progression_test_makeexercise",
-      "community": 11,
+      "community": 4,
       "norm_label": "makeexercise()"
     },
     {
@@ -104337,7 +104391,7 @@
       "source_file": "expo-app/src/utils/progression.ts",
       "source_location": "L1",
       "id": "utils_progression",
-      "community": 11,
+      "community": 4,
       "norm_label": "progression.ts"
     },
     {
@@ -104346,7 +104400,7 @@
       "source_file": "expo-app/src/utils/progression.ts",
       "source_location": "L3",
       "id": "utils_progression_getweightincrement",
-      "community": 11,
+      "community": 4,
       "norm_label": "getweightincrement()"
     },
     {
@@ -104355,7 +104409,7 @@
       "source_file": "expo-app/src/utils/progression.ts",
       "source_location": "L18",
       "id": "utils_progression_recommendationresult",
-      "community": 11,
+      "community": 4,
       "norm_label": "recommendationresult"
     },
     {
@@ -104364,7 +104418,7 @@
       "source_file": "expo-app/src/utils/progression.ts",
       "source_location": "L25",
       "id": "utils_progression_getsetrecommendation",
-      "community": 11,
+      "community": 4,
       "norm_label": "getsetrecommendation()"
     },
     {
@@ -105191,7 +105245,7 @@
       "file_type": "code",
       "source_file": "cpanel/src/App.tsx",
       "source_location": "L1",
-      "community": 9,
+      "community": 932,
       "norm_label": "app.tsx",
       "id": "src_app"
     },
@@ -105209,7 +105263,7 @@
       "file_type": "code",
       "source_file": "cpanel/src/main.tsx",
       "source_location": "L1",
-      "community": 9,
+      "community": 932,
       "norm_label": "main.tsx",
       "id": "src_main"
     },
@@ -202753,6 +202807,17 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/splitSuggestionController.test.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "controllers_splitsuggestioncontroller_test",
+      "target": "tests_helpers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "api/src/middleware/auth.test.ts",
       "source_location": "L6",
       "weight": 1.0,
@@ -202903,6 +202968,17 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/splitSuggestionController.test.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "controllers_splitsuggestioncontroller_test",
+      "target": "tests_helpers_test_user",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "api/src/middleware/auth.test.ts",
       "source_location": "L6",
       "weight": 1.0,
@@ -203008,6 +203084,17 @@
       "confidence_score": 1.0,
       "source": "controllers_splitcontroller_test",
       "target": "tests_helpers_resetallmocks"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/splitSuggestionController.test.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "controllers_splitsuggestioncontroller_test",
+      "target": "tests_helpers_resetallmocks",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -203123,6 +203210,17 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/splitSuggestionController.test.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "controllers_splitsuggestioncontroller_test",
+      "target": "tests_prisma_mock",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "api/src/middleware/auth.test.ts",
       "source_location": "L5",
       "weight": 1.0,
@@ -203227,6 +203325,17 @@
       "confidence_score": 1.0,
       "source": "controllers_splitcontroller_test",
       "target": "tests_prisma_mock_mockprismaclient"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/splitSuggestionController.test.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "controllers_splitsuggestioncontroller_test",
+      "target": "tests_prisma_mock_mockprismaclient",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -203633,6 +203742,16 @@
       "target": "controllers_checkincontroller"
     },
     {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/checkinController.test.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "controllers_checkincontroller_test",
+      "target": "controllers_checkincontroller_test_constructor",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -203653,6 +203772,39 @@
       "confidence_score": 1.0,
       "source": "controllers_checkincontroller_test",
       "target": "middleware_auth_authrequest"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/checkinController.test.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "controllers_checkincontroller_test",
+      "target": "utils_gemini",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/checkinController.test.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "controllers_checkincontroller_test",
+      "target": "utils_gemini_callgemini",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/checkinController.test.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "controllers_checkincontroller_test",
+      "target": "utils_gemini_geminierror",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -203813,6 +203965,17 @@
       "target": "utils_gemini_callgemini"
     },
     {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/checkinController.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "controllers_checkincontroller",
+      "target": "utils_gemini_geminierror",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -203838,10 +204001,10 @@
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
       "source_file": "api/src/controllers/checkinController.ts",
       "source_location": "L122",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "controllers_checkincontroller_processcheckin",
       "target": "controllers_splitsuggestioncontroller_evaluateforuser"
     },
@@ -205280,6 +205443,16 @@
       "target": "controllers_splitcontroller"
     },
     {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/splitController.test.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_splitcontroller_test",
+      "target": "controllers_splitcontroller_test_constructor"
+    },
+    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -205300,6 +205473,39 @@
       "confidence_score": 1.0,
       "source": "controllers_splitcontroller_test",
       "target": "middleware_auth_authrequest"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/splitController.test.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_splitcontroller_test",
+      "target": "utils_gemini"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/splitController.test.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_splitcontroller_test",
+      "target": "utils_gemini_callgemini"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/splitController.test.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_splitcontroller_test",
+      "target": "utils_gemini_geminierror"
     },
     {
       "relation": "contains",
@@ -205468,6 +205674,17 @@
       "target": "utils_gemini_callgemini"
     },
     {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/splitController.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_splitcontroller",
+      "target": "utils_gemini_geminierror"
+    },
+    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -205477,6 +205694,60 @@
       "confidence_score": 1.0,
       "source": "routes_splits",
       "target": "controllers_splitcontroller"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/splitSuggestionController.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "controllers_splitsuggestioncontroller_test",
+      "target": "controllers_splitsuggestioncontroller",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/splitSuggestionController.test.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "controllers_splitsuggestioncontroller_test",
+      "target": "controllers_splitsuggestioncontroller_test_constructor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/splitSuggestionController.test.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "controllers_splitsuggestioncontroller_test",
+      "target": "utils_gemini",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/splitSuggestionController.test.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "controllers_splitsuggestioncontroller_test",
+      "target": "utils_gemini_callgemini",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/splitSuggestionController.test.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "controllers_splitsuggestioncontroller_test",
+      "target": "utils_gemini_geminierror",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -205673,6 +205944,17 @@
       "confidence_score": 1.0,
       "source": "controllers_splitsuggestioncontroller",
       "target": "utils_gemini_callgemini"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/splitSuggestionController.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "controllers_splitsuggestioncontroller",
+      "target": "utils_gemini_geminierror",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -207036,7 +207318,27 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "utils_gemini",
+      "target": "utils_gemini_geminierror"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/utils/gemini.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "utils_gemini",
       "target": "utils_gemini_getclient"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/utils/gemini.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "utils_gemini_geminierror",
+      "target": "utils_gemini_geminierror_constructor"
     },
     {
       "relation": "calls",
@@ -218588,9 +218890,9 @@
       "source_file": "expo-app/src/screens/auth/LoginScreen.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "auth_loginscreen",
-      "target": "utils_apierrors",
-      "confidence_score": 1.0
+      "target": "utils_apierrors"
     },
     {
       "relation": "imports",
@@ -218599,9 +218901,9 @@
       "source_file": "expo-app/src/screens/auth/LoginScreen.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "auth_loginscreen",
-      "target": "utils_apierrors_getapierrormessage",
-      "confidence_score": 1.0
+      "target": "utils_apierrors_getapierrormessage"
     },
     {
       "relation": "calls",
@@ -218740,9 +219042,9 @@
       "source_file": "expo-app/src/screens/auth/RegisterScreen.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "auth_registerscreen",
-      "target": "utils_apierrors",
-      "confidence_score": 1.0
+      "target": "utils_apierrors"
     },
     {
       "relation": "imports",
@@ -218751,9 +219053,9 @@
       "source_file": "expo-app/src/screens/auth/RegisterScreen.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "auth_registerscreen",
-      "target": "utils_apierrors_getapierrormessage",
-      "confidence_score": 1.0
+      "target": "utils_apierrors_getapierrormessage"
     },
     {
       "relation": "calls",
@@ -219592,6 +219894,28 @@
       "confidence_score": 1.0,
       "source": "onboarding_aisplitbuilderscreen",
       "target": "theme_themestore_usetheme"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/screens/onboarding/AISplitBuilderScreen.tsx",
+      "source_location": "L17",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "onboarding_aisplitbuilderscreen",
+      "target": "utils_apierrors"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/screens/onboarding/AISplitBuilderScreen.tsx",
+      "source_location": "L17",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "onboarding_aisplitbuilderscreen",
+      "target": "utils_apierrors_getapierrormessage"
     },
     {
       "relation": "calls",
@@ -225400,9 +225724,9 @@
       "source_file": "expo-app/src/utils/apiErrors.ts",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "utils_apierrors",
-      "target": "utils_apierrors_getapierrormessage",
-      "confidence_score": 1.0
+      "target": "utils_apierrors_getapierrormessage"
     },
     {
       "relation": "imports_from",
@@ -226523,5 +226847,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "b5a04c7cce0d97bbf91a49d495931c98dee2e5d2"
+  "built_at_commit": "049bcbff3af9a810cd3f27269722ff961037a10f"
 }

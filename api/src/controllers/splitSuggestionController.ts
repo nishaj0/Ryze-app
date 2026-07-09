@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { Response } from "express";
 import { AuthRequest } from "../middleware/auth";
 import { AppError } from "../middleware/errorHandler";
-import { callGemini } from "../utils/gemini";
+import { callGemini, GeminiError } from "../utils/gemini";
 import axios from "axios";
 
 const prisma = new PrismaClient();
@@ -24,7 +24,7 @@ const SUGGESTION_SCHEMA = {
       description: "The type of suggestion to make",
     },
     alternativeExerciseName: {
-      type: ["string", "null"],
+      anyOf: [{ type: "string" }, { type: "null" }],
       description:
         "If suggestionType is SWAP_EXERCISE, the name of the alternative exercise from the provided list. Otherwise null.",
     },
@@ -205,14 +205,19 @@ export async function evaluateForUser(userId: string): Promise<{
       .map((c) => c.extractedIssues.join(", "))
       .join("; ")}`;
 
-    const result = await callGemini<GeminiSuggestionResponse>({
-      systemPrompt,
-      userPrompt,
-      responseSchema: SUGGESTION_SCHEMA,
-    });
-
-    if (!result) {
-      console.error(`[Suggestion] AI call failed for user ${userId}, exercise ${exerciseId}`);
+    let result: GeminiSuggestionResponse;
+    try {
+      result = await callGemini<GeminiSuggestionResponse>({
+        systemPrompt,
+        userPrompt,
+        responseSchema: SUGGESTION_SCHEMA,
+      });
+    } catch (error) {
+      if (error instanceof GeminiError) {
+        console.error(`[Suggestion] AI call failed for user ${userId}, exercise ${exerciseId}: ${error.message}`);
+      } else {
+        console.error(`[Suggestion] Unexpected error for user ${userId}, exercise ${exerciseId}:`, error);
+      }
       continue;
     }
 
@@ -274,14 +279,19 @@ export async function evaluateForUser(userId: string): Promise<{
       .map((c) => c.extractedIssues.join(", "))
       .join("; ")}`;
 
-    const result = await callGemini<GeminiSuggestionResponse>({
-      systemPrompt,
-      userPrompt,
-      responseSchema: SUGGESTION_SCHEMA,
-    });
-
-    if (!result) {
-      console.error(`[Suggestion] AI call failed for user ${userId}, keyword ${keyword}`);
+    let result: GeminiSuggestionResponse;
+    try {
+      result = await callGemini<GeminiSuggestionResponse>({
+        systemPrompt,
+        userPrompt,
+        responseSchema: SUGGESTION_SCHEMA,
+      });
+    } catch (error) {
+      if (error instanceof GeminiError) {
+        console.error(`[Suggestion] AI call failed for user ${userId}, keyword ${keyword}: ${error.message}`);
+      } else {
+        console.error(`[Suggestion] Unexpected error for user ${userId}, keyword ${keyword}:`, error);
+      }
       continue;
     }
 

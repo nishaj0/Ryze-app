@@ -90,8 +90,8 @@
     "semantic_hash": ""
   },
   "api/src/controllers/splitController.ts": {
-    "mtime": 1782514203.2087097,
-    "ast_hash": "7e8eaaad488c2dc4935752c4fdec2a06",
+    "mtime": 1783593700.7100482,
+    "ast_hash": "bd546314cdc858c5103e8337a1d73c73",
     "semantic_hash": ""
   },
   "api/src/index.ts": {
@@ -285,13 +285,13 @@
     "semantic_hash": ""
   },
   "expo-app/src/screens/auth/LoginScreen.tsx": {
-    "mtime": 1783590961.581315,
-    "ast_hash": "b8aac221c1abae52c721211f9172c9e9",
+    "mtime": 1783592746.3451028,
+    "ast_hash": "0cc89d8574b340cb54daa728cf98f1ac",
     "semantic_hash": ""
   },
   "expo-app/src/screens/auth/RegisterScreen.tsx": {
-    "mtime": 1782027002.936172,
-    "ast_hash": "bd3bc818ddd98e1810388f75d4a12d07",
+    "mtime": 1783592761.2517507,
+    "ast_hash": "50abe59a05c4b996a5daf891b9218f4f",
     "semantic_hash": ""
   },
   "expo-app/src/screens/home/HomeScreen.tsx": {
@@ -14340,8 +14340,8 @@
     "semantic_hash": ""
   },
   "api/src/utils/gemini.ts": {
-    "mtime": 1782511096.6628516,
-    "ast_hash": "e2cd9ddf3e2dc5452c15575b78cc5e68",
+    "mtime": 1783593676.6035469,
+    "ast_hash": "203cce09d882ff915f213fca078e155d",
     "semantic_hash": ""
   },
   "api/src/utils/scheduler.ts": {
@@ -14370,8 +14370,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/screens/onboarding/AISplitBuilderScreen.tsx": {
-    "mtime": 1782514401.0226285,
-    "ast_hash": "6032fc6434888f5df48234a43e9d0a38",
+    "mtime": 1783593727.429237,
+    "ast_hash": "09b846c54ab666bd5f38421b1d51f53f",
     "semantic_hash": ""
   },
   "api/src/__tests__/helpers.ts": {
@@ -14425,8 +14425,8 @@
     "semantic_hash": ""
   },
   "api/src/controllers/splitController.test.ts": {
-    "mtime": 1782559174.5099547,
-    "ast_hash": "dd354630af679507f1f278dbbc673d36",
+    "mtime": 1783593832.459969,
+    "ast_hash": "00d13e7fab4936114d2c9207eb87def9",
     "semantic_hash": ""
   },
   "api/src/middleware/auth.test.ts": {
@@ -14517,6 +14517,11 @@
   "cpanel/public/logo.png": {
     "mtime": 1783590434.7435846,
     "ast_hash": "0a4c6b2aecddc9dcefa5cd2ea2549c59",
+    "semantic_hash": ""
+  },
+  "expo-app/src/utils/apiErrors.ts": {
+    "mtime": 1783592732.7744198,
+    "ast_hash": "a71107c85996eb6aa61b3900c028dea0",
     "semantic_hash": ""
   }
 }

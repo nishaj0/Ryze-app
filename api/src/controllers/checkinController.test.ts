@@ -4,9 +4,16 @@ import * as checkinController from "../controllers/checkinController";
 import { AuthRequest } from "../middleware/auth";
 import { mockPrismaClient } from "../__tests__/prisma-mock";
 import { TEST_USER, resetAllMocks } from "../__tests__/helpers";
+import { GeminiError, callGemini } from "../utils/gemini";
 
 vi.mock("../utils/gemini", () => ({
   callGemini: vi.fn(),
+  GeminiError: class GeminiError extends Error {
+    constructor(message: string) {
+      super(message);
+      this.name = "GeminiError";
+    }
+  },
 }));
 
 vi.mock("./splitSuggestionController", () => ({
@@ -135,6 +142,57 @@ describe("checkinController", () => {
         processed: expect.any(Number),
         failed: expect.any(Number),
       });
+    });
+  });
+
+  describe("processCheckIn AI error handling", () => {
+    it("should handle GeminiError gracefully in background processing", async () => {
+      const checkIn = {
+        id: "checkin-1",
+        sessionId: "session-1",
+        userId: TEST_USER.id,
+        rawText: "Felt terrible, knee pain",
+      };
+      mockPrismaClient.checkIn.findUnique.mockResolvedValue(checkIn);
+      mockPrismaClient.exerciseLog.findMany.mockResolvedValue([
+        { exercise: { id: "ex-1", name: "Squat" } },
+      ]);
+
+      vi.mocked(callGemini).mockRejectedValue(new GeminiError("AI service timeout. Please try again."));
+
+      await checkinController.processCheckIn("checkin-1");
+
+      expect(mockPrismaClient.checkIn.update).not.toHaveBeenCalled();
+    });
+
+    it("should process check-in successfully when AI returns valid response", async () => {
+      const checkIn = {
+        id: "checkin-1",
+        sessionId: "session-1",
+        userId: TEST_USER.id,
+        rawText: "Felt great today",
+      };
+      mockPrismaClient.checkIn.findUnique.mockResolvedValue(checkIn);
+      mockPrismaClient.exerciseLog.findMany.mockResolvedValue([
+        { exercise: { id: "ex-1", name: "Bench Press" } },
+      ]);
+
+      vi.mocked(callGemini).mockResolvedValue({
+        sentiment: "GOOD",
+        extractedIssues: [],
+        affectedExerciseName: null,
+      });
+
+      await checkinController.processCheckIn("checkin-1");
+
+      expect(mockPrismaClient.checkIn.update).toHaveBeenCalledWith(
+        expect.objectContaining({
+          data: expect.objectContaining({
+            sentiment: "GOOD",
+            aiProcessed: true,
+          }),
+        })
+      );
     });
   });
 });

@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { Response } from "express";
 import { AuthRequest } from "../middleware/auth";
 import { AppError } from "../middleware/errorHandler";
-import { callGemini } from "../utils/gemini";
+import { callGemini, GeminiError } from "../utils/gemini";
 import { evaluateForUser } from "./splitSuggestionController";
 
 const prisma = new PrismaClient();
@@ -27,7 +27,7 @@ const CHECKIN_SCHEMA = {
       description: "Short phrases describing any discomfort, pain, or notable issues",
     },
     affectedExerciseName: {
-      type: ["string", "null"],
+      anyOf: [{ type: "string" }, { type: "null" }],
       description:
         "The name of the exercise from the provided list that is most associated with the issue, or null if none",
     },
@@ -36,7 +36,7 @@ const CHECKIN_SCHEMA = {
   additionalProperties: false,
 };
 
-async function processCheckIn(checkInId: string): Promise<void> {
+export async function processCheckIn(checkInId: string): Promise<void> {
   const checkIn = await prisma.checkIn.findUnique({
     where: { id: checkInId },
   });
@@ -75,14 +75,19 @@ Respond with the exact schema provided. If no exercise is clearly associated wit
 
   const userPrompt = checkIn.rawText;
 
-  const result = await callGemini<GeminiCheckInResponse>({
-    systemPrompt,
-    userPrompt,
-    responseSchema: CHECKIN_SCHEMA,
-  });
-
-  if (!result) {
-    console.error(`[CheckIn] AI call failed for checkIn ${checkInId}`);
+  let result: GeminiCheckInResponse;
+  try {
+    result = await callGemini<GeminiCheckInResponse>({
+      systemPrompt,
+      userPrompt,
+      responseSchema: CHECKIN_SCHEMA,
+    });
+  } catch (error) {
+    if (error instanceof GeminiError) {
+      console.error(`[CheckIn] AI call failed for checkIn ${checkInId}: ${error.message}`);
+    } else {
+      console.error(`[CheckIn] Unexpected error for checkIn ${checkInId}:`, error);
+    }
     return;
   }
 
