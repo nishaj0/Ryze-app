@@ -256,4 +256,14 @@ export interface CalendarSession {
   exerciseCount: number;
   totalVolume: number;
   notes: string | null;
+  exerciseLogs?: {
+    id: string;
+    exerciseName: string;
+    sets: {
+      id: string;
+      setNumber: number;
+      weightKg: number | null;
+      reps: number | null;
+    }[];
+  }[];
 }

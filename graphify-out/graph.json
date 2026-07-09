@@ -96739,7 +96739,7 @@
       "label": "updateSession()",
       "file_type": "code",
       "source_file": "api/src/controllers/sessionController.ts",
-      "source_location": "L668",
+      "source_location": "L678",
       "id": "controllers_sessioncontroller_updatesession",
       "community": 14,
       "norm_label": "updatesession()"
@@ -98640,7 +98640,7 @@
       "source_file": "cpanel/src/api.ts",
       "source_location": "L53",
       "id": "src_api_getonboardingstats",
-      "community": 934,
+      "community": 31,
       "norm_label": "getonboardingstats()"
     },
     {
@@ -99126,7 +99126,7 @@
       "source_file": "cpanel/src/pages/OnboardingPage.tsx",
       "source_location": "L1",
       "id": "pages_onboardingpage",
-      "community": 934,
+      "community": 31,
       "norm_label": "onboardingpage.tsx"
     },
     {
@@ -99135,7 +99135,7 @@
       "source_file": "cpanel/src/pages/OnboardingPage.tsx",
       "source_location": "L9",
       "id": "pages_onboardingpage_onboardingstats",
-      "community": 934,
+      "community": 31,
       "norm_label": "onboardingstats"
     },
     {
@@ -99144,7 +99144,7 @@
       "source_file": "cpanel/src/pages/OnboardingPage.tsx",
       "source_location": "L24",
       "id": "pages_onboardingpage_colors",
-      "community": 934,
+      "community": 31,
       "norm_label": "colors"
     },
     {
@@ -99153,7 +99153,7 @@
       "source_file": "cpanel/src/pages/OnboardingPage.tsx",
       "source_location": "L26",
       "id": "pages_onboardingpage_onboardingpage",
-      "community": 934,
+      "community": 31,
       "norm_label": "onboardingpage()"
     },
     {
@@ -100629,7 +100629,7 @@
       "source_file": "expo-app/src/App.tsx",
       "source_location": "L1",
       "id": "expo_app_src_app_tsx_src_app",
-      "community": 4,
+      "community": 21,
       "norm_label": "app.tsx"
     },
     {
@@ -100638,7 +100638,7 @@
       "source_file": "expo-app/src/App.tsx",
       "source_location": "L14",
       "id": "src_app_queryclient",
-      "community": 4,
+      "community": 21,
       "norm_label": "queryclient"
     },
     {
@@ -100647,7 +100647,7 @@
       "source_file": "expo-app/src/App.tsx",
       "source_location": "L23",
       "id": "expo_app_src_app_tsx_src_app_app",
-      "community": 4,
+      "community": 21,
       "norm_label": "app()"
     },
     {
@@ -100881,7 +100881,7 @@
       "source_file": "expo-app/src/api/metrics.ts",
       "source_location": "L1",
       "id": "api_metrics",
-      "community": 0,
+      "community": 4,
       "norm_label": "metrics.ts"
     },
     {
@@ -100890,7 +100890,7 @@
       "source_file": "expo-app/src/api/metrics.ts",
       "source_location": "L4",
       "id": "api_metrics_logbodymetric",
-      "community": 0,
+      "community": 4,
       "norm_label": "logbodymetric()"
     },
     {
@@ -100899,7 +100899,7 @@
       "source_file": "expo-app/src/api/metrics.ts",
       "source_location": "L9",
       "id": "api_metrics_getbodymetrics",
-      "community": 0,
+      "community": 4,
       "norm_label": "getbodymetrics()"
     },
     {
@@ -100908,7 +100908,7 @@
       "source_file": "expo-app/src/api/metrics.ts",
       "source_location": "L14",
       "id": "api_metrics_deletebodymetric",
-      "community": 0,
+      "community": 4,
       "norm_label": "deletebodymetric()"
     },
     {
@@ -100917,7 +100917,7 @@
       "source_file": "expo-app/src/api/metrics.ts",
       "source_location": "L18",
       "id": "api_metrics_lognutrition",
-      "community": 0,
+      "community": 4,
       "norm_label": "lognutrition()"
     },
     {
@@ -100926,7 +100926,7 @@
       "source_file": "expo-app/src/api/metrics.ts",
       "source_location": "L23",
       "id": "api_metrics_getnutritionlogs",
-      "community": 0,
+      "community": 4,
       "norm_label": "getnutritionlogs()"
     },
     {
@@ -101448,7 +101448,7 @@
       "source_file": "expo-app/src/components/Card.tsx",
       "source_location": "L1",
       "id": "components_card",
-      "community": 928,
+      "community": 924,
       "norm_label": "card.tsx"
     },
     {
@@ -101457,7 +101457,7 @@
       "source_file": "expo-app/src/components/Card.tsx",
       "source_location": "L6",
       "id": "components_card_cardprops",
-      "community": 928,
+      "community": 924,
       "norm_label": "cardprops"
     },
     {
@@ -101466,7 +101466,7 @@
       "source_file": "expo-app/src/components/Card.tsx",
       "source_location": "L14",
       "id": "components_card_card",
-      "community": 928,
+      "community": 924,
       "norm_label": "card()"
     },
     {
@@ -101493,7 +101493,7 @@
       "source_file": "expo-app/src/components/ExerciseDetailSheet.tsx",
       "source_location": "L14",
       "id": "components_exercisedetailsheet_exercisedetailsheet",
-      "community": 928,
+      "community": 924,
       "norm_label": "exercisedetailsheet()"
     },
     {
@@ -101538,7 +101538,7 @@
       "source_file": "expo-app/src/components/ExerciseMetaBadges.tsx",
       "source_location": "L1",
       "id": "components_exercisemetabadges",
-      "community": 11,
+      "community": 4,
       "norm_label": "exercisemetabadges.tsx"
     },
     {
@@ -101547,7 +101547,7 @@
       "source_file": "expo-app/src/components/ExerciseMetaBadges.tsx",
       "source_location": "L8",
       "id": "components_exercisemetabadges_exercisemetabadgesprops",
-      "community": 11,
+      "community": 4,
       "norm_label": "exercisemetabadgesprops"
     },
     {
@@ -101556,7 +101556,7 @@
       "source_file": "expo-app/src/components/ExerciseMetaBadges.tsx",
       "source_location": "L15",
       "id": "components_exercisemetabadges_exercisemetabadges",
-      "community": 11,
+      "community": 4,
       "norm_label": "exercisemetabadges()"
     },
     {
@@ -101565,7 +101565,7 @@
       "source_file": "expo-app/src/components/ExerciseMetaBadges.tsx",
       "source_location": "L77",
       "id": "components_exercisemetabadges_styles",
-      "community": 11,
+      "community": 4,
       "norm_label": "styles"
     },
     {
@@ -102285,7 +102285,7 @@
       "source_file": "expo-app/src/navigation/RootNavigator.tsx",
       "source_location": "L1",
       "id": "navigation_rootnavigator",
-      "community": 1,
+      "community": 9,
       "norm_label": "rootnavigator.tsx"
     },
     {
@@ -102294,7 +102294,7 @@
       "source_file": "expo-app/src/navigation/RootNavigator.tsx",
       "source_location": "L12",
       "id": "navigation_rootnavigator_stack",
-      "community": 1,
+      "community": 9,
       "norm_label": "stack"
     },
     {
@@ -102303,7 +102303,7 @@
       "source_file": "expo-app/src/navigation/RootNavigator.tsx",
       "source_location": "L14",
       "id": "navigation_rootnavigator_rootnavigator",
-      "community": 1,
+      "community": 9,
       "norm_label": "rootnavigator()"
     },
     {
@@ -102312,7 +102312,7 @@
       "source_file": "expo-app/src/navigation/types.ts",
       "source_location": "L1",
       "id": "navigation_types",
-      "community": 1,
+      "community": 9,
       "norm_label": "types.ts"
     },
     {
@@ -102348,7 +102348,7 @@
       "source_file": "expo-app/src/navigation/types.ts",
       "source_location": "L30",
       "id": "navigation_types_workoutstackparamlist",
-      "community": 1,
+      "community": 29,
       "norm_label": "workoutstackparamlist"
     },
     {
@@ -102384,7 +102384,7 @@
       "source_file": "expo-app/src/navigation/types.ts",
       "source_location": "L65",
       "id": "navigation_types_maintabparamlist",
-      "community": 1,
+      "community": 29,
       "norm_label": "maintabparamlist"
     },
     {
@@ -102393,7 +102393,7 @@
       "source_file": "expo-app/src/navigation/types.ts",
       "source_location": "L73",
       "id": "navigation_types_rootstackparamlist",
-      "community": 1,
+      "community": 9,
       "norm_label": "rootstackparamlist"
     },
     {
@@ -102402,7 +102402,7 @@
       "source_file": "expo-app/src/navigation/types.ts",
       "source_location": "L79",
       "id": "navigation_types_screenprops",
-      "community": 1,
+      "community": 9,
       "norm_label": "screenprops"
     },
     {
@@ -102478,12 +102478,21 @@
       "norm_label": "props"
     },
     {
-      "label": "AllExercisesScreen()",
+      "label": "getThumbnailUrl()",
       "file_type": "code",
       "source_file": "expo-app/src/screens/exercises/AllExercisesScreen.tsx",
       "source_location": "L15",
-      "id": "exercises_allexercisesscreen_allexercisesscreen",
+      "id": "exercises_allexercisesscreen_getthumbnailurl",
       "community": 928,
+      "norm_label": "getthumbnailurl()"
+    },
+    {
+      "label": "AllExercisesScreen()",
+      "file_type": "code",
+      "source_file": "expo-app/src/screens/exercises/AllExercisesScreen.tsx",
+      "source_location": "L23",
+      "id": "exercises_allexercisesscreen_allexercisesscreen",
+      "community": 924,
       "norm_label": "allexercisesscreen()"
     },
     {
@@ -102591,7 +102600,7 @@
       "source_file": "expo-app/src/screens/metrics/MetricsScreen.tsx",
       "source_location": "L1",
       "id": "metrics_metricsscreen",
-      "community": 0,
+      "community": 4,
       "norm_label": "metricsscreen.tsx"
     },
     {
@@ -102600,7 +102609,7 @@
       "source_file": "expo-app/src/screens/metrics/MetricsScreen.tsx",
       "source_location": "L14",
       "id": "metrics_metricsscreen_props",
-      "community": 0,
+      "community": 4,
       "norm_label": "props"
     },
     {
@@ -102609,7 +102618,7 @@
       "source_file": "expo-app/src/screens/metrics/MetricsScreen.tsx",
       "source_location": "L16",
       "id": "metrics_metricsscreen_width_screenw",
-      "community": 0,
+      "community": 4,
       "norm_label": "{ width: screenw }"
     },
     {
@@ -102618,7 +102627,7 @@
       "source_file": "expo-app/src/screens/metrics/MetricsScreen.tsx",
       "source_location": "L18",
       "id": "metrics_metricsscreen_metricsscreen",
-      "community": 0,
+      "community": 9,
       "norm_label": "metricsscreen()"
     },
     {
@@ -102627,7 +102636,7 @@
       "source_file": "expo-app/src/screens/onboarding/AISplitBuilderScreen.tsx",
       "source_location": "L1",
       "id": "onboarding_aisplitbuilderscreen",
-      "community": 1,
+      "community": 9,
       "norm_label": "aisplitbuilderscreen.tsx"
     },
     {
@@ -102636,7 +102645,7 @@
       "source_file": "expo-app/src/screens/onboarding/AISplitBuilderScreen.tsx",
       "source_location": "L24",
       "id": "onboarding_aisplitbuilderscreen_props",
-      "community": 1,
+      "community": 9,
       "norm_label": "props"
     },
     {
@@ -102645,7 +102654,7 @@
       "source_file": "expo-app/src/screens/onboarding/AISplitBuilderScreen.tsx",
       "source_location": "L26",
       "id": "onboarding_aisplitbuilderscreen_equipment_options",
-      "community": 1,
+      "community": 9,
       "norm_label": "equipment_options"
     },
     {
@@ -102654,7 +102663,7 @@
       "source_file": "expo-app/src/screens/onboarding/AISplitBuilderScreen.tsx",
       "source_location": "L32",
       "id": "onboarding_aisplitbuilderscreen_generatedexercise",
-      "community": 1,
+      "community": 9,
       "norm_label": "generatedexercise"
     },
     {
@@ -102663,7 +102672,7 @@
       "source_file": "expo-app/src/screens/onboarding/AISplitBuilderScreen.tsx",
       "source_location": "L40",
       "id": "onboarding_aisplitbuilderscreen_generatedday",
-      "community": 1,
+      "community": 9,
       "norm_label": "generatedday"
     },
     {
@@ -102672,7 +102681,7 @@
       "source_file": "expo-app/src/screens/onboarding/AISplitBuilderScreen.tsx",
       "source_location": "L48",
       "id": "onboarding_aisplitbuilderscreen_generatedsplit",
-      "community": 1,
+      "community": 9,
       "norm_label": "generatedsplit"
     },
     {
@@ -102681,7 +102690,7 @@
       "source_file": "expo-app/src/screens/onboarding/AISplitBuilderScreen.tsx",
       "source_location": "L56",
       "id": "onboarding_aisplitbuilderscreen_aisplitbuilderscreen",
-      "community": 1,
+      "community": 9,
       "norm_label": "aisplitbuilderscreen()"
     },
     {
@@ -103023,7 +103032,7 @@
       "source_file": "expo-app/src/screens/onboarding/OnboardingCustomSplitScreen.tsx",
       "source_location": "L36",
       "id": "onboarding_onboardingcustomsplitscreen_onboardingcustomsplitscreen",
-      "community": 1,
+      "community": 9,
       "norm_label": "onboardingcustomsplitscreen()"
     },
     {
@@ -103086,7 +103095,7 @@
       "source_file": "expo-app/src/screens/onboarding/SplitSelectionScreen.tsx",
       "source_location": "L15",
       "id": "onboarding_splitselectionscreen_splitselectioncontent",
-      "community": 1,
+      "community": 9,
       "norm_label": "splitselectioncontent()"
     },
     {
@@ -103239,7 +103248,7 @@
       "source_file": "expo-app/src/screens/profile/CustomSplitScreen.tsx",
       "source_location": "L36",
       "id": "profile_customsplitscreen_customsplitscreen",
-      "community": 928,
+      "community": 924,
       "norm_label": "customsplitscreen()"
     },
     {
@@ -103363,7 +103372,7 @@
       "label": "Props",
       "file_type": "code",
       "source_file": "expo-app/src/screens/profile/SplitDetailsScreen.tsx",
-      "source_location": "L12",
+      "source_location": "L13",
       "id": "profile_splitdetailsscreen_props",
       "community": 928,
       "norm_label": "props"
@@ -103372,9 +103381,9 @@
       "label": "SplitDetailsScreen()",
       "file_type": "code",
       "source_file": "expo-app/src/screens/profile/SplitDetailsScreen.tsx",
-      "source_location": "L14",
+      "source_location": "L15",
       "id": "profile_splitdetailsscreen_splitdetailsscreen",
-      "community": 928,
+      "community": 924,
       "norm_label": "splitdetailsscreen()"
     },
     {
@@ -103779,7 +103788,7 @@
       "source_file": "expo-app/src/store/authStore.ts",
       "source_location": "L16",
       "id": "store_authstore_useauthstore",
-      "community": 1,
+      "community": 9,
       "norm_label": "useauthstore"
     },
     {
@@ -103950,7 +103959,7 @@
       "source_file": "expo-app/src/theme/spacing.ts",
       "source_location": "L6",
       "id": "theme_spacing_spacing",
-      "community": 928,
+      "community": 39,
       "norm_label": "spacing"
     },
     {
@@ -104139,7 +104148,7 @@
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L1",
       "id": "types_index",
-      "community": 11,
+      "community": 4,
       "norm_label": "index.ts"
     },
     {
@@ -104175,7 +104184,7 @@
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L40",
       "id": "types_index_splitdayexercise",
-      "community": 11,
+      "community": 4,
       "norm_label": "splitdayexercise"
     },
     {
@@ -104193,7 +104202,7 @@
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L66",
       "id": "types_index_exercisemuscle",
-      "community": 11,
+      "community": 4,
       "norm_label": "exercisemuscle"
     },
     {
@@ -104202,7 +104211,7 @@
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L74",
       "id": "types_index_muscle",
-      "community": 11,
+      "community": 4,
       "norm_label": "muscle"
     },
     {
@@ -104211,7 +104220,7 @@
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L79",
       "id": "types_index_exerciseimage",
-      "community": 11,
+      "community": 4,
       "norm_label": "exerciseimage"
     },
     {
@@ -104220,7 +104229,7 @@
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L87",
       "id": "types_index_exercisealternative",
-      "community": 11,
+      "community": 4,
       "norm_label": "exercisealternative"
     },
     {
@@ -104265,7 +104274,7 @@
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L142",
       "id": "types_index_bodymetric",
-      "community": 0,
+      "community": 4,
       "norm_label": "bodymetric"
     },
     {
@@ -104391,7 +104400,7 @@
       "source_file": "expo-app/src/utils/mmkv.ts",
       "source_location": "L1",
       "id": "utils_mmkv",
-      "community": 4,
+      "community": 21,
       "norm_label": "mmkv.ts"
     },
     {
@@ -104400,7 +104409,7 @@
       "source_file": "expo-app/src/utils/mmkv.ts",
       "source_location": "L4",
       "id": "utils_mmkv_cache",
-      "community": 4,
+      "community": 21,
       "norm_label": "cache"
     },
     {
@@ -104409,7 +104418,7 @@
       "source_file": "expo-app/src/utils/mmkv.ts",
       "source_location": "L7",
       "id": "utils_mmkv_initmmkv",
-      "community": 4,
+      "community": 21,
       "norm_label": "initmmkv()"
     },
     {
@@ -104418,7 +104427,7 @@
       "source_file": "expo-app/src/utils/mmkv.ts",
       "source_location": "L30",
       "id": "utils_mmkv_mmkv",
-      "community": 4,
+      "community": 21,
       "norm_label": "mmkv"
     },
     {
@@ -105308,7 +105317,7 @@
       "file_type": "code",
       "source_file": "cpanel/src/App.tsx",
       "source_location": "L74",
-      "community": 4,
+      "community": 21,
       "norm_label": "app()",
       "id": "src_app_app"
     },
@@ -211222,9 +211231,9 @@
       "source_file": "expo-app/package.json",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "expo_app_package_dependencies",
-      "target": "expo_app_package_dependencies_expo_file_system",
-      "confidence_score": 1.0
+      "target": "expo_app_package_dependencies_expo_file_system"
     },
     {
       "relation": "contains",
@@ -211282,9 +211291,9 @@
       "source_file": "expo-app/package.json",
       "source_location": "L30",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "expo_app_package_dependencies",
-      "target": "expo_app_package_dependencies_expo_media_library",
-      "confidence_score": 1.0
+      "target": "expo_app_package_dependencies_expo_media_library"
     },
     {
       "relation": "contains",
@@ -212385,6 +212394,17 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/screens/profile/SplitDetailsScreen.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "profile_splitdetailsscreen",
+      "target": "api_exercises",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "expo-app/src/screens/workout/WorkoutLoggerScreen.tsx",
       "source_location": "L7",
       "weight": 1.0,
@@ -212490,6 +212510,17 @@
       "confidence_score": 1.0,
       "source": "profile_customsplitscreen",
       "target": "api_exercises_getexercise"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/screens/profile/SplitDetailsScreen.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "profile_splitdetailsscreen",
+      "target": "api_exercises_getexercise",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -219372,6 +219403,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "expo-app/src/screens/exercises/AllExercisesScreen.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "exercises_allexercisesscreen",
+      "target": "exercises_allexercisesscreen_getthumbnailurl",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/screens/exercises/AllExercisesScreen.tsx",
       "source_location": "L12",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -221902,9 +221943,9 @@
       "source_file": "expo-app/src/screens/photos/PhotoCaptureScreen.tsx",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "photos_photocapturescreen",
-      "target": "photos_photocapturescreen_uploadstatus",
-      "confidence_score": 1.0
+      "target": "photos_photocapturescreen_uploadstatus"
     },
     {
       "relation": "imports_from",
@@ -223007,6 +223048,17 @@
       "confidence_score": 1.0,
       "source": "profile_splitdetailsscreen",
       "target": "types_index"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/src/screens/profile/SplitDetailsScreen.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "profile_splitdetailsscreen",
+      "target": "types_index_exercise",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -227116,5 +227168,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "78d0b4767e43e0000ef36b46be048ac0240df4e9"
+  "built_at_commit": "dab035ea465362bc857e7e0f1d6b46cc8fb5ecac"
 }

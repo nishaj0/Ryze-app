@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { View, FlatList, TouchableOpacity, TextInput, ActivityIndicator } from "react-native";
+import { View, FlatList, TouchableOpacity, TextInput, ActivityIndicator, ScrollView, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ProfileStackParamList } from "../../navigation/types";
@@ -11,6 +11,14 @@ import { useTheme } from "../../theme/themeStore";
 import { space, radius } from "../../theme/spacing";
 
 type Props = NativeStackScreenProps<ProfileStackParamList, "AllExercises">;
+
+const getThumbnailUrl = (url: string) => {
+  if (!url) return "";
+  if (url.includes("/upload/")) {
+    return url.replace("/upload/", "/upload/w_80,h_80,c_fill,q_auto,f_auto/");
+  }
+  return url;
+};
 
 export default function AllExercisesScreen({ navigation }: Props) {
   const theme = useTheme();
@@ -105,20 +113,28 @@ export default function AllExercisesScreen({ navigation }: Props) {
       >
         <Card shadow="sm" style={{ padding: space.md }}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            {item.images && item.images.length > 0 && (
-              <View
-                style={{
-                  width: 60,
-                  height: 60,
-                  borderRadius: radius.md,
-                  overflow: "hidden",
-                  marginRight: space.md,
-                  backgroundColor: theme.surfaceSecondary,
-                }}
-              >
-                {/* Image will be loaded here */}
-              </View>
-            )}
+            <View
+              style={{
+                width: 60,
+                height: 60,
+                borderRadius: radius.md,
+                overflow: "hidden",
+                marginRight: space.md,
+                backgroundColor: theme.surfaceSecondary,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              {item.images && item.images.length > 0 ? (
+                <Image
+                  source={{ uri: getThumbnailUrl(item.images[0].url) }}
+                  style={{ width: "100%", height: "100%" }}
+                  resizeMode="cover"
+                />
+              ) : (
+                <Icon name="Dumbbell" size={24} color={theme.textMuted} />
+              )}
+            </View>
             <View style={{ flex: 1 }}>
               <Typography variant="heading3" color={theme.textPrimary} style={{ marginBottom: 4 }}>
                 {item.name}
@@ -175,7 +191,12 @@ export default function AllExercisesScreen({ navigation }: Props) {
         </View>
 
         {/* Muscle Filter */}
-        <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space.sm }}>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{ flexDirection: "row", gap: space.sm, paddingRight: space.lg }}
+          style={{ flexGrow: 0 }}
+        >
           <TouchableOpacity
             onPress={() => setSelectedMuscle(null)}
             style={{
@@ -185,6 +206,7 @@ export default function AllExercisesScreen({ navigation }: Props) {
               backgroundColor: !selectedMuscle ? theme.primary : theme.surfaceSecondary,
               borderWidth: 1,
               borderColor: !selectedMuscle ? theme.primary : theme.border,
+              alignSelf: "flex-start",
             }}
           >
             <Typography
@@ -206,6 +228,7 @@ export default function AllExercisesScreen({ navigation }: Props) {
                 backgroundColor: selectedMuscle === muscle ? theme.primary : theme.surfaceSecondary,
                 borderWidth: 1,
                 borderColor: selectedMuscle === muscle ? theme.primary : theme.border,
+                alignSelf: "flex-start",
               }}
             >
               <Typography
@@ -218,7 +241,7 @@ export default function AllExercisesScreen({ navigation }: Props) {
               </Typography>
             </TouchableOpacity>
           ))}
-        </View>
+        </ScrollView>
       </View>
 
       {/* Exercise List */}

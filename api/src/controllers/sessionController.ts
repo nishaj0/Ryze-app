@@ -659,6 +659,16 @@ export const getCalendarSessions = async (req: AuthRequest, res: Response) => {
       exerciseCount: s.exerciseLogs.length,
       totalVolume: Math.round(totalVolume),
       notes: s.notes,
+      exerciseLogs: s.exerciseLogs.map((log: any) => ({
+        id: log.id,
+        exerciseName: log.exercise.name,
+        sets: log.setLogs.map((set: any) => ({
+          id: set.id,
+          setNumber: set.setNumber,
+          weightKg: set.weightKg,
+          reps: set.reps,
+        })),
+      })),
     };
   });
 

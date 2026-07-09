@@ -4,8 +4,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ProfileStackParamList } from "../../navigation/types";
 import { getSplit, setActiveSplit } from "../../api/splits";
-import { Split } from "../../types";
-import { Typography, Card, Icon, Button, Input, SplitDetailsScreenSkeleton } from "../../components";
+import { getExercise } from "../../api/exercises";
+import { Split, Exercise } from "../../types";
+import { Typography, Card, Icon, Button, Input, SplitDetailsScreenSkeleton, ExerciseDetailSheet } from "../../components";
 import { useTheme } from "../../theme/themeStore";
 import { space, radius } from "../../theme/spacing";
 
@@ -19,6 +20,24 @@ export default function SplitDetailsScreen({ route, navigation }: Props) {
   const [switching, setSwitching] = useState(false);
   const [phaseModalVisible, setPhaseModalVisible] = useState(false);
   const [phase, setPhase] = useState("");
+  const [exerciseDetailVisible, setExerciseDetailVisible] = useState(false);
+  const [selectedExerciseDetail, setSelectedExerciseDetail] = useState<Exercise | null>(null);
+  const [loadingExercise, setLoadingExercise] = useState(false);
+
+  const handleExerciseTap = async (exerciseId: string) => {
+    if (loadingExercise) return;
+    setLoadingExercise(true);
+    try {
+      const res = await getExercise(exerciseId);
+      setSelectedExerciseDetail(res.exercise);
+      setExerciseDetailVisible(true);
+    } catch (err) {
+      console.error("[SplitDetails] failed to load exercise details:", err);
+      Alert.alert("Error", "Failed to load exercise details");
+    } finally {
+      setLoadingExercise(false);
+    }
+  };
 
   useEffect(() => {
     loadSplitDetails();
@@ -140,14 +159,19 @@ export default function SplitDetailsScreen({ route, navigation }: Props) {
                 {!day.isRest && day.exercises && day.exercises.length > 0 ? (
                   <View style={{ marginTop: space.sm, borderTopWidth: 1, borderTopColor: theme.border, paddingTop: space.sm, gap: space.xs }}>
                     {day.exercises.map((dayEx, idx) => (
-                      <View key={dayEx.id} style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-                        <Typography variant="bodySmall" color={theme.textPrimary} weight="500">
+                      <TouchableOpacity
+                        key={dayEx.id}
+                        onPress={() => handleExerciseTap(dayEx.exercise.id)}
+                        activeOpacity={0.7}
+                        style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingVertical: space.xs }}
+                      >
+                        <Typography variant="bodySmall" color={theme.primary} weight="600">
                           {idx + 1}. {dayEx.exercise.name}
                         </Typography>
                         <Typography variant="caption" color={theme.textMuted}>
                           {dayEx.targetSets} sets × {dayEx.targetRepsMin}-{dayEx.targetRepsMax} reps
                         </Typography>
-                      </View>
+                      </TouchableOpacity>
                     ))}
                   </View>
                 ) : !day.isRest ? (
@@ -255,6 +279,13 @@ export default function SplitDetailsScreen({ route, navigation }: Props) {
           </View>
         </View>
       </Modal>
+
+      {/* Exercise Detail Sheet */}
+      <ExerciseDetailSheet
+        exercise={selectedExerciseDetail}
+        visible={exerciseDetailVisible}
+        onClose={() => setExerciseDetailVisible(false)}
+      />
     </SafeAreaView>
   );
 }

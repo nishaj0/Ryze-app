@@ -1,16 +1,16 @@
 # Graph Report - Ryze  (2026-07-09)
 
 ## Corpus Check
-- 1084 files · ~3,601,217 words
+- 1084 files · ~3,601,503 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 11703 nodes · 12038 edges · 947 communities (939 shown, 8 thin omitted)
+- 11704 nodes · 12042 edges · 948 communities (940 shown, 8 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 2 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `78d0b476`
+- Built from commit: `dab035ea`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -36,6 +36,7 @@
 - [[_COMMUNITY_Progress Analytics Controller|Progress Analytics Controller]]
 - [[_COMMUNITY_Database Seed Data|Database Seed Data]]
 - [[_COMMUNITY_Personal Records Feature|Personal Records Feature]]
+- [[_COMMUNITY_Community 21|Community 21]]
 - [[_COMMUNITY_Exercise Controller|Exercise Controller]]
 - [[_COMMUNITY_Community 23|Community 23]]
 - [[_COMMUNITY_Metro Bundler Config|Metro Bundler Config]]
@@ -966,23 +967,23 @@
   cpanel/src/App.tsx → expo-app/src/theme/themeStore.ts
 - `Button()` --calls--> `useTheme()`  [EXTRACTED]
   expo-app/src/components/Button.tsx → expo-app/src/theme/themeStore.ts
-- `Card()` --calls--> `useTheme()`  [EXTRACTED]
-  expo-app/src/components/Card.tsx → expo-app/src/theme/themeStore.ts
-- `ExerciseDetailSheet()` --calls--> `useTheme()`  [EXTRACTED]
-  expo-app/src/components/ExerciseDetailSheet.tsx → expo-app/src/theme/themeStore.ts
+- `ExerciseMetaBadges()` --calls--> `useTheme()`  [EXTRACTED]
+  expo-app/src/components/ExerciseMetaBadges.tsx → expo-app/src/theme/themeStore.ts
+- `Input()` --calls--> `useTheme()`  [EXTRACTED]
+  expo-app/src/components/Input.tsx → expo-app/src/theme/themeStore.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (947 total, 8 thin omitted)
+## Communities (948 total, 8 thin omitted)
 
 ### Community 0 - "Frontend API Client"
-Cohesion: 0.09
-Nodes (17): client, deleteBodyMetric(), getBodyMetrics(), logBodyMetric(), MetricsScreen(), Props, { width: screenW }, AuthState (+9 more)
+Cohesion: 0.13
+Nodes (10): client, AuthState, TEST_USER, User, clearAuth(), getToken(), getUser(), saveToken() (+2 more)
 
 ### Community 1 - "Auth & Splits Routes"
-Cohesion: 0.06
-Nodes (53): completeOnboarding(), getRecommendedSplits(), OnboardingStack(), Stack, RootNavigator(), Stack, MainTabParamList, OnboardingStackParamList (+45 more)
+Cohesion: 0.08
+Nodes (38): completeOnboarding(), getRecommendedSplits(), OnboardingStack(), Stack, OnboardingStackParamList, BodyStatsContent(), BodyStatsScreen(), Props (+30 more)
 
 ### Community 2 - "Onboarding Flow"
 Cohesion: 0.06
@@ -994,7 +995,7 @@ Nodes (15): CHECKIN_SCHEMA, createCheckIn(), GeminiCheckInResponse, prisma, proc
 
 ### Community 4 - "API Server Dependencies"
 Cohesion: 0.04
-Nodes (59): CheckIn, createCheckIn(), getCheckIn(), updateCheckIn(), addExercise(), completeSession(), createSession(), deleteSet() (+51 more)
+Nodes (67): CheckIn, createCheckIn(), getCheckIn(), updateCheckIn(), deleteBodyMetric(), getBodyMetrics(), logBodyMetric(), addExercise() (+59 more)
 
 ### Community 5 - "Community 5"
 Cohesion: 0.05
@@ -1013,16 +1014,16 @@ Cohesion: 0.07
 Nodes (28): backgroundColor, adaptiveIcon, package, permissions, projectId, expo, android, extra (+20 more)
 
 ### Community 9 - "Community 9"
-Cohesion: 0.11
-Nodes (18): deleteAccount(), login(), register(), updateProfile(), LoginScreen(), Props, Props, RegisterScreen() (+10 more)
+Cohesion: 0.08
+Nodes (32): deleteAccount(), login(), register(), updateProfile(), LoginScreen(), Props, Props, RegisterScreen() (+24 more)
 
 ### Community 10 - "Root Package Scripts"
 Cohesion: 0.11
 Nodes (17): compilerOptions, declaration, declarationMap, esModuleInterop, forceConsistentCasingInFileNames, lib, module, moduleResolution (+9 more)
 
 ### Community 11 - "Photos Feature"
-Cohesion: 0.09
-Nodes (30): getExerciseProgress(), getHeatmap(), getMuscleVolume(), getOverview(), getVolumeHistory(), getRecords(), ExerciseMetaBadges(), ExerciseMetaBadgesProps (+22 more)
+Cohesion: 0.11
+Nodes (22): getExerciseProgress(), getHeatmap(), getMuscleVolume(), getOverview(), getVolumeHistory(), getRecords(), ProgressStackParamList, DashboardScreen() (+14 more)
 
 ### Community 12 - "Workout Session Controller"
 Cohesion: 0.09
@@ -1060,6 +1061,10 @@ Nodes (5): calculateStreak(), getOverview(), getThisWeekWorkouts(), prisma, rout
 Cohesion: 0.06
 Nodes (33): dependencies, fuse.js, @heroicons/vue, vue, devDependencies, autoprefixer, cypress, eslint (+25 more)
 
+### Community 21 - "Community 21"
+Cohesion: 0.29
+Nodes (6): App(), App(), queryClient, cache, initMMKV(), mmkv
+
 ### Community 22 - "Exercise Controller"
 Cohesion: 0.29
 Nodes (6): compilerOptions, moduleResolution, paths, strict, extends, @/*
@@ -1070,15 +1075,15 @@ Nodes (9): AuthRequest, resetAllMocks(), TEST_TOKEN, TEST_USER, mockPrismaClient
 
 ### Community 29 - "Community 29"
 Cohesion: 0.08
-Nodes (27): deletePhoto(), getPhotos(), uploadPhoto(), HomeStack(), HomeStackNav, MainTabs(), PhotosStack(), PhotosStackNav (+19 more)
+Nodes (29): deletePhoto(), getPhotos(), uploadPhoto(), HomeStack(), HomeStackNav, MainTabs(), PhotosStack(), PhotosStackNav (+21 more)
 
 ### Community 30 - "Community 30"
 Cohesion: 0.22
 Nodes (7): DayForm, MUSCLE_GROUPS, Split, createSplit(), deleteSplit(), getSplits(), togglePrebuilt()
 
 ### Community 31 - "Community 31"
-Cohesion: 0.13
-Nodes (13): AvatarProps, Badge(), badgeColors, BadgeProps, ConfirmDialog(), ConfirmProps, PageLoader(), Pagination() (+5 more)
+Cohesion: 0.11
+Nodes (16): AvatarProps, Badge(), badgeColors, BadgeProps, ConfirmDialog(), ConfirmProps, PageLoader(), Pagination() (+8 more)
 
 ### Community 32 - "Community 32"
 Cohesion: 0.17
@@ -1110,7 +1115,7 @@ Nodes (11): category, equipment, force, id, images, instructions, level, mechani
 
 ### Community 39 - "Community 39"
 Cohesion: 0.07
-Nodes (40): BarChart(), BarChartProps, BarItem, Heatmap(), HeatmapDay, HeatmapProps, ChartPoint, LineChart() (+32 more)
+Nodes (41): BarChart(), BarChartProps, BarItem, Heatmap(), HeatmapDay, HeatmapProps, ChartPoint, LineChart() (+33 more)
 
 ### Community 40 - "Community 40"
 Cohesion: 0.17
@@ -4601,8 +4606,8 @@ Cohesion: 0.06
 Nodes (30): dependencies, axios, date-fns, lucide-react, react, react-dom, react-router-dom, recharts (+22 more)
 
 ### Community 924 - "Community 924"
-Cohesion: 0.12
-Nodes (30): ExerciseImageCarousel(), ExerciseImageCarouselProps, styles, Icon(), IconName, IconProps, InstructionStepper(), InstructionStepperProps (+22 more)
+Cohesion: 0.09
+Nodes (36): Card(), CardProps, ExerciseDetailSheet(), ExerciseImageCarousel(), ExerciseImageCarouselProps, styles, Icon(), IconName (+28 more)
 
 ### Community 926 - "Community 926"
 Cohesion: 0.11
@@ -4613,8 +4618,8 @@ Cohesion: 0.11
 Nodes (17): compilerOptions, allowImportingTsExtensions, erasableSyntaxOnly, lib, module, moduleDetection, moduleResolution, noEmit (+9 more)
 
 ### Community 928 - "Community 928"
-Cohesion: 0.06
-Nodes (52): AppSettings, getAppSettings(), getDistinctMuscles(), getExercise(), listExercises(), requestExercise(), createSplit(), generateAISplit() (+44 more)
+Cohesion: 0.07
+Nodes (45): AppSettings, getAppSettings(), getDistinctMuscles(), getExercise(), listExercises(), requestExercise(), createSplit(), generateAISplit() (+37 more)
 
 ### Community 932 - "Community 932"
 Cohesion: 0.15
@@ -4625,8 +4630,8 @@ Cohesion: 0.14
 Nodes (15): Toast, ToastContext, ToastCtx, ToastProvider(), useToast(), LoginPage(), NotificationsPage(), SplitsPage() (+7 more)
 
 ### Community 934 - "Community 934"
-Cohesion: 0.14
-Nodes (10): COLORS, OnboardingStats, EditForm, User, api, deleteUser(), getOnboardingStats(), getUsers() (+2 more)
+Cohesion: 0.21
+Nodes (7): EditForm, User, api, deleteUser(), getUsers(), resetOnboarding(), updateUser()
 
 ### Community 935 - "Community 935"
 Cohesion: 0.18
@@ -4676,17 +4681,17 @@ Nodes (3): prisma, router, startTime
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `setActiveSplit()` connect `Community 928` to `Auth & Splits Routes`, `Community 946`?**
+- **Why does `setActiveSplit()` connect `Community 928` to `Community 9`, `Community 946`?**
   _High betweenness centrality (0.003) - this node is a cross-community bridge._
-- **Why does `useTheme()` connect `Community 924` to `Community 928`, `Frontend API Client`, `Auth & Splits Routes`, `API Server Dependencies`, `Community 932`, `Community 39`, `Community 9`, `Photos Feature`, `Community 29`?**
-  _High betweenness centrality (0.002) - this node is a cross-community bridge._
+- **Why does `useTheme()` connect `Community 924` to `Community 928`, `Auth & Splits Routes`, `API Server Dependencies`, `Community 932`, `Community 39`, `Community 9`, `Photos Feature`, `Community 21`, `Community 29`?**
+  _High betweenness centrality (0.001) - this node is a cross-community bridge._
 - **Why does `dependencies` connect `Backend Controllers Core` to `Community 939`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
 - **What connects `name`, `force`, `level` to the rest of the system?**
   _10126 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Frontend API Client` be split into smaller, more focused modules?**
-  _Cohesion score 0.0873015873015873 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.13 - nodes in this community are weakly interconnected._
 - **Should `Auth & Splits Routes` be split into smaller, more focused modules?**
-  _Cohesion score 0.0601404741000878 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07673469387755102 - nodes in this community are weakly interconnected._
 - **Should `Onboarding Flow` be split into smaller, more focused modules?**
   _Cohesion score 0.0625 - nodes in this community are weakly interconnected._

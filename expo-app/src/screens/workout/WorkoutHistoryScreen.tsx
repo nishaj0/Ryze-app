@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { View, TouchableOpacity, Modal, Dimensions, Alert } from "react-native";
+import { View, TouchableOpacity, Modal, Dimensions, Alert, ScrollView } from "react-native";
 import { getCalendarSessions, updateSession } from "../../api/sessions";
 import { CalendarSession } from "../../types";
 import { Screen, Card, Typography, Button, Icon } from "../../components";
@@ -252,7 +252,7 @@ export default function WorkoutHistoryScreen() {
         )}
     </Screen>
 
-      <Modal visible={detailVisible} transparent animationType="slide">
+      <Modal visible={detailVisible} transparent animationType="slide" onRequestClose={() => setDetailVisible(false)}>
         <View style={{ flex: 1, justifyContent: "flex-end", backgroundColor: theme.bgOverlay }}>
           <Card
             shadow="none"
@@ -261,154 +261,190 @@ export default function WorkoutHistoryScreen() {
               borderTopLeftRadius: radius["2xl"],
               borderTopRightRadius: radius["2xl"],
               padding: space.lg,
+              maxHeight: "85%",
             }}
           >
             <View style={{ width: 40, height: 4, borderRadius: 2, backgroundColor: theme.border, alignSelf: "center", marginBottom: space.md }} />
 
-            {!selectedSession ? null : selectedSession.status === "COMPLETED" ? (
-              <>
-                <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.md }}>
-                  <View
-                    style={{
-                      width: 40,
-                      height: 40,
-                      borderRadius: 20,
-                      backgroundColor: theme.successBg,
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Icon name="Dumbbell" size={20} color={theme.success} />
-                  </View>
-                  <View style={{ flex: 1 }}>
-                    <Typography variant="heading2" color={theme.textPrimary}>
-                      {selectedSession.splitDayName}
-                    </Typography>
-                    <Typography variant="caption" color={theme.textMuted}>
-                      {new Date(selectedSession.date).toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}
-                    </Typography>
-                  </View>
-                </View>
-
-                {parseMuscleGroups(selectedSession.muscleGroups).length > 0 && (
-                  <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space.sm, marginBottom: space.md }}>
-                    {parseMuscleGroups(selectedSession.muscleGroups).map((mg: string) => (
-                      <View
-                        key={mg}
-                        style={{
-                          backgroundColor: theme.primaryLight,
-                          borderRadius: radius.sm,
-                          paddingHorizontal: space.md,
-                          paddingVertical: space.xs,
-                        }}
-                      >
-                        <Typography variant="caption" color={theme.primary} weight="600">
-                          {mg.charAt(0).toUpperCase() + mg.slice(1)}
-                        </Typography>
-                      </View>
-                    ))}
-                  </View>
-                )}
-
-                <View style={{ flexDirection: "row", gap: space.md, marginBottom: space.md }}>
-                  {selectedSession.durationMinutes && (
-                    <Card shadow="none" style={{ flex: 1, alignItems: "center", backgroundColor: theme.surfaceSecondary }}>
-                      <Icon name="Clock" size={16} color={theme.textMuted} />
-                      <Typography variant="heading3" color={theme.textPrimary} style={{ marginTop: space.xs }}>
-                        {selectedSession.durationMinutes}m
-                      </Typography>
-                      <Typography variant="caption" color={theme.textMuted}>Duration</Typography>
-                    </Card>
-                  )}
-                  <Card shadow="none" style={{ flex: 1, alignItems: "center", backgroundColor: theme.surfaceSecondary }}>
-                    <Icon name="ListChecks" size={16} color={theme.textMuted} />
-                    <Typography variant="heading3" color={theme.textPrimary} style={{ marginTop: space.xs }}>
-                      {selectedSession.exerciseCount}
-                    </Typography>
-                    <Typography variant="caption" color={theme.textMuted}>Exercises</Typography>
-                  </Card>
-                  {selectedSession.totalVolume > 0 && (
-                    <Card shadow="none" style={{ flex: 1, alignItems: "center", backgroundColor: theme.surfaceSecondary }}>
-                      <Icon name="TrendingUp" size={16} color={theme.textMuted} />
-                      <Typography variant="heading3" color={theme.textPrimary} style={{ marginTop: space.xs }}>
-                        {selectedSession.totalVolume.toLocaleString()}
-                      </Typography>
-                      <Typography variant="caption" color={theme.textMuted}>Volume (kg)</Typography>
-                    </Card>
-                  )}
-                </View>
-
-                {selectedSession.notes && (
-                  <Card shadow="none" style={{ backgroundColor: theme.surfaceSecondary, marginBottom: space.md }}>
-                    <Typography variant="caption" color={theme.textMuted} weight="600">NOTES</Typography>
-                    <Typography variant="body" color={theme.textPrimary} style={{ marginTop: space.xs }}>
-                      {selectedSession.notes}
-                    </Typography>
-                  </Card>
-                )}
-              </>
-            ) : (
-              <>
-                <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.md }}>
-                  <View
-                    style={{
-                      width: 40,
-                      height: 40,
-                      borderRadius: 20,
-                      backgroundColor: theme.primaryLight,
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Icon name="Moon" size={20} color={theme.primary} />
-                  </View>
-                  <View style={{ flex: 1 }}>
-                    <Typography variant="heading2" color={theme.textPrimary}>
-                      Rest Day
-                    </Typography>
-                    <Typography variant="caption" color={theme.textMuted}>
-                      {new Date(selectedSession!.date).toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}
-                    </Typography>
-                  </View>
-                </View>
-
-                <Card
-                  shadow="none"
-                  padding="md"
-                  border={false}
-                  style={{ backgroundColor: theme.successBg, marginBottom: space.md }}
-                >
-                  <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
-                    <Icon name="Heart" size={20} color={theme.success} />
+            <ScrollView showsVerticalScrollIndicator={false} style={{ flexGrow: 1, marginBottom: space.md }}>
+              {!selectedSession ? null : selectedSession.status === "COMPLETED" ? (
+                <>
+                  <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.md }}>
+                    <View
+                      style={{
+                        width: 40,
+                        height: 40,
+                        borderRadius: 20,
+                        backgroundColor: theme.successBg,
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Icon name="Dumbbell" size={20} color={theme.success} />
+                    </View>
                     <View style={{ flex: 1 }}>
-                      <Typography variant="body" color={theme.successText} weight="600">
-                        Reason: {selectedSession?.restReason ? selectedSession.restReason.charAt(0).toUpperCase() + selectedSession.restReason.slice(1) : "Not specified"}
+                      <Typography variant="heading2" color={theme.textPrimary}>
+                        {selectedSession.splitDayName}
                       </Typography>
-                      <Typography variant="caption" color={theme.successText}>
-                        Recovery is part of the plan
+                      <Typography variant="caption" color={theme.textMuted}>
+                        {new Date(selectedSession.date).toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}
                       </Typography>
                     </View>
                   </View>
-                </Card>
 
-                <Button
-                  title="Edit Reason"
-                  onPress={openEditReason}
-                  variant="secondary"
-                  size="md"
-                  icon={<Icon name="Pencil" size={16} color={theme.secondaryText} />}
-                />
-              </>
-            )}
+                  {parseMuscleGroups(selectedSession.muscleGroups).length > 0 && (
+                    <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space.sm, marginBottom: space.md }}>
+                      {parseMuscleGroups(selectedSession.muscleGroups).map((mg: string) => (
+                        <View
+                          key={mg}
+                          style={{
+                            backgroundColor: theme.primaryLight,
+                            borderRadius: radius.sm,
+                            paddingHorizontal: space.md,
+                            paddingVertical: space.xs,
+                          }}
+                        >
+                          <Typography variant="caption" color={theme.primary} weight="600">
+                            {mg.charAt(0).toUpperCase() + mg.slice(1)}
+                          </Typography>
+                        </View>
+                      ))}
+                    </View>
+                  )}
 
-            <View style={{ marginTop: space.md }}>
-              <Button
-                title="Close"
-                onPress={() => setDetailVisible(false)}
-                variant="secondary"
-                size="md"
-              />
-            </View>
+                  <View style={{ flexDirection: "row", gap: space.md, marginBottom: space.md }}>
+                    {selectedSession.durationMinutes && (
+                      <Card shadow="none" style={{ flex: 1, alignItems: "center", backgroundColor: theme.surfaceSecondary }}>
+                        <Icon name="Clock" size={16} color={theme.textMuted} />
+                        <Typography variant="heading3" color={theme.textPrimary} style={{ marginTop: space.xs }}>
+                          {selectedSession.durationMinutes}m
+                        </Typography>
+                        <Typography variant="caption" color={theme.textMuted}>Duration</Typography>
+                      </Card>
+                    )}
+                    <Card shadow="none" style={{ flex: 1, alignItems: "center", backgroundColor: theme.surfaceSecondary }}>
+                      <Icon name="ListChecks" size={16} color={theme.textMuted} />
+                      <Typography variant="heading3" color={theme.textPrimary} style={{ marginTop: space.xs }}>
+                        {selectedSession.exerciseCount}
+                      </Typography>
+                      <Typography variant="caption" color={theme.textMuted}>Exercises</Typography>
+                    </Card>
+                    {selectedSession.totalVolume > 0 && (
+                      <Card shadow="none" style={{ flex: 1, alignItems: "center", backgroundColor: theme.surfaceSecondary }}>
+                        <Icon name="TrendingUp" size={16} color={theme.textMuted} />
+                        <Typography variant="heading3" color={theme.textPrimary} style={{ marginTop: space.xs }}>
+                          {selectedSession.totalVolume.toLocaleString()}
+                        </Typography>
+                        <Typography variant="caption" color={theme.textMuted}>Volume (kg)</Typography>
+                      </Card>
+                    )}
+                  </View>
+
+                  {selectedSession.notes && (
+                    <Card shadow="none" style={{ backgroundColor: theme.surfaceSecondary, marginBottom: space.md }}>
+                      <Typography variant="caption" color={theme.textMuted} weight="600">NOTES</Typography>
+                      <Typography variant="body" color={theme.textPrimary} style={{ marginTop: space.xs }}>
+                        {selectedSession.notes}
+                      </Typography>
+                    </Card>
+                  )}
+
+                  {/* Exercises Details */}
+                  {selectedSession.exerciseLogs && selectedSession.exerciseLogs.length > 0 && (
+                    <View style={{ marginTop: space.sm }}>
+                      <Typography variant="label" color={theme.textSecondary} style={{ marginBottom: space.sm }}>
+                        EXERCISES
+                      </Typography>
+                      <View style={{ gap: space.sm }}>
+                        {selectedSession.exerciseLogs.map((log) => (
+                          <Card key={log.id} shadow="none" padding="md" style={{ backgroundColor: theme.surfaceSecondary }}>
+                            <Typography variant="body" color={theme.textPrimary} weight="600">
+                              {log.exerciseName}
+                            </Typography>
+                            <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space.xs, marginTop: space.xs }}>
+                              {log.sets.map((set) => (
+                                <View
+                                  key={set.id}
+                                  style={{
+                                    backgroundColor: theme.surfaceTertiary,
+                                    paddingHorizontal: space.sm,
+                                    paddingVertical: 4,
+                                    borderRadius: radius.sm,
+                                  }}
+                                >
+                                  <Typography variant="caption" color={theme.textSecondary}>
+                                    S{set.setNumber}: {set.reps} × {set.weightKg} kg
+                                  </Typography>
+                                </View>
+                              ))}
+                            </View>
+                          </Card>
+                        ))}
+                      </View>
+                    </View>
+                  )}
+                </>
+              ) : (
+                <>
+                  <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.md }}>
+                    <View
+                      style={{
+                        width: 40,
+                        height: 40,
+                        borderRadius: 20,
+                        backgroundColor: theme.primaryLight,
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Icon name="Moon" size={20} color={theme.primary} />
+                    </View>
+                    <View style={{ flex: 1 }}>
+                      <Typography variant="heading2" color={theme.textPrimary}>
+                        Rest Day
+                      </Typography>
+                      <Typography variant="caption" color={theme.textMuted}>
+                        {new Date(selectedSession!.date).toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}
+                      </Typography>
+                    </View>
+                  </View>
+
+                  <Card
+                    shadow="none"
+                    padding="md"
+                    border={false}
+                    style={{ backgroundColor: theme.successBg, marginBottom: space.md }}
+                  >
+                    <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
+                      <Icon name="Heart" size={20} color={theme.success} />
+                      <View style={{ flex: 1 }}>
+                        <Typography variant="body" color={theme.successText} weight="600">
+                          Reason: {selectedSession?.restReason ? selectedSession.restReason.charAt(0).toUpperCase() + selectedSession.restReason.slice(1) : "Not specified"}
+                        </Typography>
+                        <Typography variant="caption" color={theme.successText}>
+                          Recovery is part of the plan
+                        </Typography>
+                      </View>
+                    </View>
+                  </Card>
+
+                  <Button
+                    title="Edit Reason"
+                    onPress={openEditReason}
+                    variant="secondary"
+                    size="md"
+                    icon={<Icon name="Pencil" size={16} color={theme.secondaryText} />}
+                  />
+                </>
+              )}
+            </ScrollView>
+
+            <Button
+              title="Close"
+              onPress={() => setDetailVisible(false)}
+              variant="secondary"
+              size="md"
+            />
           </Card>
         </View>
       </Modal>
