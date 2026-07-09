@@ -1,16 +1,16 @@
-# Graph Report - Ryze  (2026-07-09)
+# Graph Report - Ryze  (2026-07-07)
 
 ## Corpus Check
-- 1080 files · ~3,594,401 words
+- 1079 files · ~3,594,367 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 11672 nodes · 11928 edges · 945 communities (938 shown, 7 thin omitted)
+- 11670 nodes · 11926 edges · 946 communities (938 shown, 8 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 2 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `5d88ad87`
+- Built from commit: `ce707222`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -944,6 +944,7 @@
 - [[_COMMUNITY_Community 942|Community 942]]
 - [[_COMMUNITY_Community 943|Community 943]]
 - [[_COMMUNITY_Community 944|Community 944]]
+- [[_COMMUNITY_Community 945|Community 945]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `useTheme()` - 139 edges
@@ -972,7 +973,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (945 total, 7 thin omitted)
+## Communities (946 total, 8 thin omitted)
 
 ### Community 0 - "Frontend API Client"
 Cohesion: 0.05
@@ -1003,8 +1004,8 @@ Cohesion: 0.05
 Nodes (41): dependencies, axios, bcryptjs, cloudinary, cors, dotenv, express, @google/genai (+33 more)
 
 ### Community 7 - "Expo App Configuration"
-Cohesion: 0.05
-Nodes (25): prisma, authMiddleware(), validate(), loginSchema, registerSchema, router, checkInSchema, router (+17 more)
+Cohesion: 0.07
+Nodes (21): authMiddleware(), validate(), loginSchema, registerSchema, router, checkInSchema, router, prisma (+13 more)
 
 ### Community 8 - "API TypeScript Config"
 Cohesion: 0.07
@@ -1031,8 +1032,8 @@ Cohesion: 0.09
 Nodes (22): computedHash, skillPath, source, sourceType, computedHash, skillPath, source, sourceType (+14 more)
 
 ### Community 14 - "Skills Lock Registry"
-Cohesion: 0.11
-Nodes (6): calculate1RM(), completeSession(), createSession(), getLastSessionLogs(), prisma, router
+Cohesion: 0.13
+Nodes (5): calculate1RM(), completeSession(), createSession(), getLastSessionLogs(), prisma
 
 ### Community 15 - "Community 15"
 Cohesion: 0.15
@@ -1059,8 +1060,8 @@ Cohesion: 0.06
 Nodes (33): dependencies, fuse.js, @heroicons/vue, vue, devDependencies, autoprefixer, cypress, eslint (+25 more)
 
 ### Community 21 - "Expo TypeScript Config"
-Cohesion: 0.26
-Nodes (7): prisma, uploadExerciseImage(), deletePhoto(), prisma, uploadPhoto(), deleteFromCloudinary(), uploadToCloudinary()
+Cohesion: 0.16
+Nodes (10): prisma, uploadExerciseImage(), deletePhoto(), prisma, uploadPhoto(), router, storage, upload (+2 more)
 
 ### Community 22 - "Exercise Controller"
 Cohesion: 0.29
@@ -4663,9 +4664,9 @@ Cohesion: 0.40
 Nodes (4): main, name, private, version
 
 ## Knowledge Gaps
-- **10109 isolated node(s):** `app`, `router`, `api`, `version`, `buildType` (+10104 more)
+- **10108 isolated node(s):** `api`, `version`, `buildType`, `distribution`, `EXPO_PUBLIC_API_URL` (+10103 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
@@ -4673,11 +4674,11 @@ _Questions this graph is uniquely positioned to answer:_
 - **Why does `setActiveSplit()` connect `Community 928` to `Community 939`?**
   _High betweenness centrality (0.002) - this node is a cross-community bridge._
 - **Why does `useTheme()` connect `Community 924` to `Frontend API Client`, `Auth & Splits Routes`, `Community 928`, `API Server Dependencies`, `Community 932`, `Community 39`, `Middleware & Route Setup`, `Photos Feature`, `Community 29`?**
-  _High betweenness centrality (0.002) - this node is a cross-community bridge._
-- **Why does `AuthRequest` connect `Community 23` to `Expo App Dependencies`, `Expo App Configuration`, `Community 939`, `Community 940`, `Community 908`, `Skills Lock Registry`, `Community 15`, `Photo Controller & Cloudinary`, `Progress Analytics Controller`, `Database Seed Data`, `Expo TypeScript Config`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
-- **What connects `app`, `router`, `api` to the rest of the system?**
-  _10109 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Why does `AuthRequest` connect `Community 23` to `Expo App Dependencies`, `Community 939`, `Community 940`, `Community 908`, `Skills Lock Registry`, `Community 15`, `Photo Controller & Cloudinary`, `Progress Analytics Controller`, `Community 945`, `Database Seed Data`, `Expo TypeScript Config`?**
+  _High betweenness centrality (0.001) - this node is a cross-community bridge._
+- **What connects `api`, `version`, `buildType` to the rest of the system?**
+  _10108 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Frontend API Client` be split into smaller, more focused modules?**
   _Cohesion score 0.0505175983436853 - nodes in this community are weakly interconnected._
 - **Should `Auth & Splits Routes` be split into smaller, more focused modules?**

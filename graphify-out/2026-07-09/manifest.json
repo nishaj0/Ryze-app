@@ -95,8 +95,8 @@
     "semantic_hash": ""
   },
   "api/src/index.ts": {
-    "mtime": 1783572749.2484703,
-    "ast_hash": "59c5c5b2a06ff1011c2e242ccce7574a",
+    "mtime": 1783444223.0595984,
+    "ast_hash": "fcfff9a11acb9730ab70d3c05e16661d",
     "semantic_hash": ""
   },
   "api/src/middleware/auth.ts": {
@@ -14492,11 +14492,6 @@
   "api/src/routes/health.ts": {
     "mtime": 1783443349.7903273,
     "ast_hash": "08eb61a21bbe95f8b5c7033e193eb16e",
-    "semantic_hash": ""
-  },
-  "api/src/routes/ping.ts": {
-    "mtime": 1783572733.1866355,
-    "ast_hash": "2aaee87f5845825b63083a20a22460f8",
     "semantic_hash": ""
   }
 }
