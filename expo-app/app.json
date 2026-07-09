@@ -9,7 +9,7 @@
     "newArchEnabled": true,
     "splash": {
       "image": "./assets/splash.png",
-      "backgroundColor": "#FFFFFF",
+      "backgroundColor": "#c24914",
       "resizeMode": "contain"
     },
     "ios": {
@@ -18,7 +18,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#c24914"
       },
       "package": "com.ryze.app",
       "permissions": [

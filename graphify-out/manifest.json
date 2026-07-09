@@ -170,8 +170,8 @@
     "semantic_hash": ""
   },
   "expo-app/app.json": {
-    "mtime": 1782726476.9925,
-    "ast_hash": "a4fabec300953c16e2b5fda50cf4d620",
+    "mtime": 1783590950.7693987,
+    "ast_hash": "b5122dd0e884749a86f2d7149735a24c",
     "semantic_hash": ""
   },
   "expo-app/babel.config.js": {
@@ -180,8 +180,8 @@
     "semantic_hash": ""
   },
   "expo-app/metro.config.js": {
-    "mtime": 1781949471.719839,
-    "ast_hash": "25e5a9b1cd67a2214f99223aaf1ede55",
+    "mtime": 1783587243.7880483,
+    "ast_hash": "436137208cc5c6e8124010392faef5cc",
     "semantic_hash": ""
   },
   "expo-app/nativewind-env.d.ts": {
@@ -285,8 +285,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/screens/auth/LoginScreen.tsx": {
-    "mtime": 1782027002.9351723,
-    "ast_hash": "c0bc0dae08d15c531b9908bd04b64b15",
+    "mtime": 1783590961.581315,
+    "ast_hash": "b8aac221c1abae52c721211f9172c9e9",
     "semantic_hash": ""
   },
   "expo-app/src/screens/auth/RegisterScreen.tsx": {
@@ -435,12 +435,12 @@
     "semantic_hash": ""
   },
   "expo-app/tsconfig.json": {
-    "mtime": 1781954860.2543876,
-    "ast_hash": "e9344ea1381b3f84559922623b526c2b",
+    "mtime": 1783587243.790925,
+    "ast_hash": "5de9ccada819db9b58e8823c6acbd519",
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1783443062.917498,
+    "mtime": 1783587243.792016,
     "ast_hash": "e883a7900138446759fb2d8726eacff2",
     "semantic_hash": ""
   },
@@ -695,12 +695,12 @@
     "semantic_hash": ""
   },
   "expo-app/assets/icon.png": {
-    "mtime": 1781121688.5108545,
-    "ast_hash": "f829b914fc47cfc9c0747c119c27cf1b",
+    "mtime": 1783590434.7435846,
+    "ast_hash": "0a4c6b2aecddc9dcefa5cd2ea2549c59",
     "semantic_hash": ""
   },
   "expo-app/assets/notification-icon.png": {
-    "mtime": 1781121688.5108545,
+    "mtime": 1783587243.786418,
     "ast_hash": "f829b914fc47cfc9c0747c119c27cf1b",
     "semantic_hash": ""
   },
@@ -14140,8 +14140,8 @@
     "semantic_hash": ""
   },
   "cpanel/src/components/Sidebar.tsx": {
-    "mtime": 1782037147.3458626,
-    "ast_hash": "15f33631478e23cd7d1083d6f321b57e",
+    "mtime": 1783591268.573267,
+    "ast_hash": "32cea9b57c127742a3e7c043e1e2479d",
     "semantic_hash": ""
   },
   "cpanel/src/components/Toast.tsx": {
@@ -14175,8 +14175,8 @@
     "semantic_hash": ""
   },
   "cpanel/src/pages/LoginPage.tsx": {
-    "mtime": 1782030340.112593,
-    "ast_hash": "a9543c74f8ba9f6d241e14990801f93c",
+    "mtime": 1783591271.0200713,
+    "ast_hash": "4505a43b565f9640dcc212eba170444c",
     "semantic_hash": ""
   },
   "cpanel/src/pages/NotificationsPage.tsx": {
@@ -14200,8 +14200,8 @@
     "semantic_hash": ""
   },
   "cpanel/tsconfig.app.json": {
-    "mtime": 1780132608.282979,
-    "ast_hash": "136630b5accce1ca50663df229534a26",
+    "mtime": 1783587243.782601,
+    "ast_hash": "4cd9dda3b62ff2a571c2419a75074a39",
     "semantic_hash": ""
   },
   "cpanel/tsconfig.json": {
@@ -14215,13 +14215,13 @@
     "semantic_hash": ""
   },
   "cpanel/vite.config.ts": {
-    "mtime": 1782029848.9692116,
-    "ast_hash": "ee1db7b84555fd1b259804cc93b45691",
+    "mtime": 1783587243.7832034,
+    "ast_hash": "2771255b705a5ef2ccc4922adfc0d4b8",
     "semantic_hash": ""
   },
   "cpanel/index.html": {
-    "mtime": 1782030227.3222988,
-    "ast_hash": "d2bb3e05e8fccdce3203d067ebe4bf48",
+    "mtime": 1783587243.7803986,
+    "ast_hash": "e6187de8cb6769f15ff7a59a1329bda2",
     "semantic_hash": ""
   },
   "cpanel/public/favicon.svg": {
@@ -14485,8 +14485,8 @@
     "semantic_hash": ""
   },
   "expo-app/assets/splash.png": {
-    "mtime": 1781121688.5108545,
-    "ast_hash": "f829b914fc47cfc9c0747c119c27cf1b",
+    "mtime": 1783590434.7435846,
+    "ast_hash": "0a4c6b2aecddc9dcefa5cd2ea2549c59",
     "semantic_hash": ""
   },
   "api/src/routes/health.ts": {
@@ -14502,6 +14502,21 @@
   "cpanel/vercel.json": {
     "mtime": 1783574841.9187193,
     "ast_hash": "a2a13c1a4e3579fd9acc7e9345160d8b",
+    "semantic_hash": ""
+  },
+  "expo-app/assets/logo.png": {
+    "mtime": 1783590434.7435846,
+    "ast_hash": "0a4c6b2aecddc9dcefa5cd2ea2549c59",
+    "semantic_hash": ""
+  },
+  "shared/assets/logo.svg": {
+    "mtime": 1783585170.0163324,
+    "ast_hash": "cd4a599bc796799a9dff4ad5e44d3e73",
+    "semantic_hash": ""
+  },
+  "cpanel/public/logo.png": {
+    "mtime": 1783590434.7435846,
+    "ast_hash": "0a4c6b2aecddc9dcefa5cd2ea2549c59",
     "semantic_hash": ""
   }
 }

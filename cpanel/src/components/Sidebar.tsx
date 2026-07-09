@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import {
-  LayoutDashboard, Users, Dumbbell, Layers, Activity,
-  Bell, Settings, Zap, LogOut, ClipboardList, PlusCircle, MessageSquare, LifeBuoy
+  LayoutDashboard, Users, Layers, Activity,
+  Bell, Settings, LogOut, ClipboardList, PlusCircle, MessageSquare, LifeBuoy
 } from 'lucide-react'
 import { setAdminKey } from '../api'
 
@@ -34,9 +34,7 @@ export default function Sidebar() {
   return (
     <aside className="sidebar">
       <div className="sidebar-logo">
-        <div className="sidebar-logo-icon">
-          <Zap size={20} color="white" fill="white" />
-        </div>
+        <img src="/logo.png" alt="Ryze" style={{ width: 36, height: 36, borderRadius: 8 }} />
         <div>
           <div className="sidebar-logo-text">Ryze</div>
           <div className="sidebar-logo-sub">Admin Panel</div>

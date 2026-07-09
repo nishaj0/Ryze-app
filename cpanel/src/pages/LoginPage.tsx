@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Zap, Key, Eye, EyeOff } from 'lucide-react'
+import { Key, Eye, EyeOff } from 'lucide-react'
 import { setAdminKey } from '../api'
 import { getDashboard } from '../api'
 import { useToast } from '../components/Toast'
@@ -33,9 +33,7 @@ export default function LoginPage() {
     <div className="login-page">
       <div className="login-card">
         <div className="login-logo">
-          <div className="login-logo-icon">
-            <Zap size={26} color="white" fill="white" />
-          </div>
+          <img src="/logo.png" alt="Ryze" style={{ width: 44, height: 44, borderRadius: 10 }} />
           <div>
             <div style={{ fontSize: 22, fontWeight: 800, color: 'var(--text-primary)' }}>Ryze</div>
             <div style={{ fontSize: 13, color: 'var(--text-muted)', marginTop: 1 }}>Admin Control Panel</div>

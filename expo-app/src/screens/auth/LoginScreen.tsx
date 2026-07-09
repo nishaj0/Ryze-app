@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity, Image } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AuthStackParamList } from "../../navigation/types";
 import { login } from "../../api/auth";
@@ -49,19 +49,16 @@ export default function LoginScreen({ navigation }: Props) {
       <View style={{ flex: 1, justifyContent: "center" }}>
         {/* Brand Header */}
         <View style={{ alignItems: "center", marginBottom: space.xl }}>
-          <View
+          <Image
+            source={require("../../../assets/logo.png")}
             style={{
               width: 64,
               height: 64,
               borderRadius: 16,
-              backgroundColor: theme.primary,
-              alignItems: "center",
-              justifyContent: "center",
               marginBottom: space.md,
             }}
-          >
-            <Icon name="Dumbbell" size={32} color={theme.primaryText} />
-          </View>
+            resizeMode="cover"
+          />
           <Typography variant="display" color={theme.textPrimary} align="center">
             Ryze
           </Typography>

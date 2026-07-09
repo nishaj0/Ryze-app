@@ -4,40 +4,85 @@
   "graph": {},
   "nodes": [
     {
+      "label": "vercel.json",
+      "file_type": "code",
+      "source_file": "cpanel/vercel.json",
+      "source_location": "L1",
+      "id": "cpanel_vercel",
+      "community": 945,
+      "norm_label": "vercel.json"
+    },
+    {
+      "label": "buildCommand",
+      "file_type": "code",
+      "source_file": "cpanel/vercel.json",
+      "source_location": "L2",
+      "id": "cpanel_vercel_buildcommand",
+      "community": 945,
+      "norm_label": "buildcommand"
+    },
+    {
+      "label": "outputDirectory",
+      "file_type": "code",
+      "source_file": "cpanel/vercel.json",
+      "source_location": "L3",
+      "id": "cpanel_vercel_outputdirectory",
+      "community": 945,
+      "norm_label": "outputdirectory"
+    },
+    {
+      "label": "framework",
+      "file_type": "code",
+      "source_file": "cpanel/vercel.json",
+      "source_location": "L4",
+      "id": "cpanel_vercel_framework",
+      "community": 945,
+      "norm_label": "framework"
+    },
+    {
+      "label": "rewrites",
+      "file_type": "code",
+      "source_file": "cpanel/vercel.json",
+      "source_location": "L5",
+      "id": "cpanel_vercel_rewrites",
+      "community": 945,
+      "norm_label": "rewrites"
+    },
+    {
       "label": "index.ts",
       "file_type": "code",
       "source_file": "api/src/index.ts",
       "source_location": "L1",
-      "id": "src_index",
       "community": 7,
-      "norm_label": "index.ts"
+      "norm_label": "index.ts",
+      "id": "src_index"
     },
     {
       "label": "app",
       "file_type": "code",
       "source_file": "api/src/index.ts",
       "source_location": "L26",
-      "id": "src_index_app",
       "community": 7,
-      "norm_label": "app"
+      "norm_label": "app",
+      "id": "src_index_app"
     },
     {
       "label": "ping.ts",
       "file_type": "code",
       "source_file": "api/src/routes/ping.ts",
       "source_location": "L1",
-      "id": "routes_ping",
       "community": 7,
-      "norm_label": "ping.ts"
+      "norm_label": "ping.ts",
+      "id": "routes_ping"
     },
     {
       "label": "router",
       "file_type": "code",
       "source_file": "api/src/routes/ping.ts",
       "source_location": "L2",
-      "id": "routes_ping_router",
       "community": 7,
-      "norm_label": "router"
+      "norm_label": "router",
+      "id": "routes_ping_router"
     },
     {
       "label": "api.ts",
@@ -105054,6 +105099,46 @@
   ],
   "links": [
     {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/vercel.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "cpanel_vercel",
+      "target": "cpanel_vercel_buildcommand",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/vercel.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "cpanel_vercel",
+      "target": "cpanel_vercel_framework",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/vercel.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "cpanel_vercel",
+      "target": "cpanel_vercel_outputdirectory",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/vercel.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "cpanel_vercel",
+      "target": "cpanel_vercel_rewrites",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -105192,9 +105277,9 @@
       "source_file": "api/src/index.ts",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_index",
-      "target": "routes_ping",
-      "confidence_score": 1.0
+      "target": "routes_ping"
     },
     {
       "relation": "imports_from",
@@ -105300,9 +105385,9 @@
       "source_file": "api/src/routes/ping.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "routes_ping",
-      "target": "routes_ping_router",
-      "confidence_score": 1.0
+      "target": "routes_ping_router"
     },
     {
       "relation": "imports_from",
@@ -225654,5 +225739,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "5d88ad87fb9371f4f18c8c35fe8b286768a2141f"
+  "built_at_commit": "790cafd81bb2499c7061db477847aabad54a7f8f"
 }
