@@ -5,7 +5,7 @@ import { AuthRequest } from "../middleware/auth";
 const prisma = new PrismaClient();
 
 export const listExercises = async (req: AuthRequest, res: Response) => {
-  const { muscle, search, equipment, category, level, mechanic } = req.query;
+  const { muscle, search, equipment, category, level, mechanic, page, limit } = req.query;
 
   const where: any = {};
   if (muscle) {
@@ -19,19 +19,39 @@ export const listExercises = async (req: AuthRequest, res: Response) => {
     where.name = { contains: String(search), mode: "insensitive" };
   }
 
-  const exercises = await prisma.exercise.findMany({
-    where,
-    include: {
-      muscles: { include: { muscle: true } },
-      images: { orderBy: { order: "asc" } },
-      alternativesFrom: {
-        include: { alternative: true },
+  const pageNum = Math.max(1, parseInt(String(page)) || 1);
+  const limitNum = Math.min(100, Math.max(1, parseInt(String(limit)) || 50));
+  const skip = (pageNum - 1) * limitNum;
+
+  const [exercises, total] = await Promise.all([
+    prisma.exercise.findMany({
+      where,
+      include: {
+        muscles: { include: { muscle: true } },
+        images: { orderBy: { order: "asc" } },
+        alternativesFrom: {
+          include: { alternative: true },
+        },
       },
-    },
-    orderBy: { name: "asc" },
+      orderBy: { name: "asc" },
+      skip,
+      take: limitNum,
+    }),
+    prisma.exercise.count({ where }),
+  ]);
+
+  res.json({ exercises, total, page: pageNum, totalPages: Math.ceil(total / limitNum) });
+};
+
+export const getDistinctMuscles = async (_req: AuthRequest, res: Response) => {
+  const muscles = await prisma.exerciseMuscle.findMany({
+    where: { isPrimary: true },
+    select: { muscle: { select: { name: true } } },
+    distinct: ["muscleId"],
+    orderBy: { muscle: { name: "asc" } },
   });
 
-  res.json({ exercises });
+  res.json({ muscles: muscles.map((m) => m.muscle.name) });
 };
 
 export const getExercise = async (req: AuthRequest, res: Response) => {

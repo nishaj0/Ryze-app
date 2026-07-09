@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { View, ScrollView, TouchableOpacity, Switch, Modal, Alert, ActivityIndicator } from "react-native";
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { View, ScrollView, TouchableOpacity, Switch, Modal, Alert, ActivityIndicator, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ProfileStackParamList } from "../../navigation/types";
 import { createSplit, setActiveSplit, getSplit, updateSplit } from "../../api/splits";
-import { listExercises } from "../../api/exercises";
+import { listExercises, getDistinctMuscles, getExercise } from "../../api/exercises";
 import { Exercise } from "../../types";
-import { Typography, Card, Icon, Button, Input, InlineListSkeleton } from "../../components";
+import { Typography, Card, Icon, Button, Input, InlineListSkeleton, ExerciseDetailSheet } from "../../components";
 import { useTheme } from "../../theme/themeStore";
 import { space, radius } from "../../theme/spacing";
 
@@ -28,9 +28,10 @@ interface DayConfig {
   }[];
 }
 
-const AVAILABLE_MUSCLE_GROUPS = ["chest", "back", "shoulders", "legs", "arms", "core"];
 const MIN_DAYS = 1;
 const MAX_DAYS = 14;
+const EXERCISES_PER_PAGE = 20;
+const SEARCH_DEBOUNCE_MS = 300;
 
 export default function CustomSplitScreen({ route, navigation }: Props) {
   const theme = useTheme();
@@ -46,12 +47,21 @@ export default function CustomSplitScreen({ route, navigation }: Props) {
   const [loadingSplit, setLoadingSplit] = useState(isEditMode);
   const [saving, setSaving] = useState(false);
 
-  // Exercise library state
+  // Exercise library state (paginated)
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [loadingExercises, setLoadingExercises] = useState(false);
+  const [hasMoreExercises, setHasMoreExercises] = useState(true);
+  const [exercisePage, setExercisePage] = useState(1);
   const [exerciseModalVisible, setExerciseModalVisible] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedMuscleFilter, setSelectedMuscleFilter] = useState<string | null>(null);
+  const [muscleGroups, setMuscleGroups] = useState<string[]>([]);
+  const [loadingMuscles, setLoadingMuscles] = useState(false);
+  const searchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Exercise detail sheet state
+  const [exerciseDetailVisible, setExerciseDetailVisible] = useState(false);
+  const [selectedExerciseDetail, setSelectedExerciseDetail] = useState<Exercise | null>(null);
 
   // Load existing split in edit mode
   useEffect(() => {
@@ -118,18 +128,59 @@ export default function CustomSplitScreen({ route, navigation }: Props) {
   }, [daysPerWeek, isEditMode]);
 
   useEffect(() => {
-    loadExerciseLibrary();
+    loadMuscleGroups();
   }, []);
 
-  const loadExerciseLibrary = async () => {
+  const loadMuscleGroups = async () => {
+    setLoadingMuscles(true);
+    try {
+      const res = await getDistinctMuscles();
+      setMuscleGroups(res.muscles);
+    } catch (err) {
+      console.error("[CustomSplit] failed to load muscle groups:", err);
+    } finally {
+      setLoadingMuscles(false);
+    }
+  };
+
+  const loadExercises = useCallback(async (page: number, reset: boolean = false) => {
     setLoadingExercises(true);
     try {
-      const res = await listExercises();
-      setExercises(res.exercises);
+      const params: any = { page, limit: EXERCISES_PER_PAGE };
+      if (searchQuery) params.search = searchQuery;
+      if (selectedMuscleFilter) params.muscle = selectedMuscleFilter;
+
+      const res = await listExercises(params);
+      if (reset) {
+        setExercises(res.exercises);
+      } else {
+        setExercises((prev) => [...prev, ...res.exercises]);
+      }
+      setHasMoreExercises(res.exercises.length === EXERCISES_PER_PAGE);
+      setExercisePage(page);
     } catch (err) {
       console.error("[CustomSplit] failed to load exercises:", err);
     } finally {
       setLoadingExercises(false);
+    }
+  }, [searchQuery, selectedMuscleFilter]);
+
+  const handleSearchChange = (text: string) => {
+    setSearchQuery(text);
+    if (searchTimerRef.current) clearTimeout(searchTimerRef.current);
+    searchTimerRef.current = setTimeout(() => {
+      loadExercises(1, true);
+    }, SEARCH_DEBOUNCE_MS);
+  };
+
+  const handleMuscleFilterChange = (muscle: string | null) => {
+    setSelectedMuscleFilter(muscle);
+    loadExercises(1, true);
+  };
+
+  const loadMoreExercises = () => {
+    if (hasMoreExercises && !loadingExercises) {
+      loadExercises(exercisePage + 1);
     }
   };
 
@@ -251,6 +302,17 @@ export default function CustomSplitScreen({ route, navigation }: Props) {
     setExerciseModalVisible(false);
   };
 
+  const handleExerciseTap = async (ex: { exerciseId: string; name: string }) => {
+    try {
+      const res = await getExercise(ex.exerciseId);
+      setSelectedExerciseDetail(res.exercise);
+      setExerciseDetailVisible(true);
+    } catch (err) {
+      console.error("[CustomSplit] failed to load exercise details:", err);
+      Alert.alert("Error", "Failed to load exercise details");
+    }
+  };
+
   const handleRemoveExercise = (dayIdx: number, exId: string) => {
     const updated = [...days];
     updated[dayIdx].exercises = updated[dayIdx].exercises.filter((e) => e.exerciseId !== exId);
@@ -342,12 +404,12 @@ export default function CustomSplitScreen({ route, navigation }: Props) {
     }
   };
 
-  const filteredExercises = exercises.filter((ex) => {
-    const matchesSearch = ex.name.toLowerCase().includes(searchQuery.toLowerCase());
-    const primaryMuscle = ex.muscles?.find(m => m.isPrimary)?.muscle.name;
-    const matchesMuscle = selectedMuscleFilter ? primaryMuscle === selectedMuscleFilter : true;
-    return matchesSearch && matchesMuscle;
-  });
+  // Load exercises when modal opens
+  useEffect(() => {
+    if (exerciseModalVisible) {
+      loadExercises(1, true);
+    }
+  }, [exerciseModalVisible]);
 
   if (loadingSplit) {
     return (
@@ -395,6 +457,8 @@ export default function CustomSplitScreen({ route, navigation }: Props) {
             onChangeText={setDescription}
             placeholder="e.g. Focused on upper body width"
             icon={<Icon name="AlignLeft" size={20} color={theme.textMuted} />}
+            multiline
+            numberOfLines={4}
             containerStyle={{ marginBottom: 0 }}
           />
         </Card>
@@ -547,7 +611,7 @@ export default function CustomSplitScreen({ route, navigation }: Props) {
                   TARGET MUSCLE GROUPS
                 </Typography>
                 <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space.xs, marginBottom: space.lg }}>
-                  {AVAILABLE_MUSCLE_GROUPS.map((mg) => {
+                  {muscleGroups.map((mg) => {
                     const isSelected = days[activeDayIdx].muscleGroups.includes(mg);
                     return (
                       <TouchableOpacity
@@ -601,9 +665,14 @@ export default function CustomSplitScreen({ route, navigation }: Props) {
                     {days[activeDayIdx].exercises.map((ex) => (
                       <Card key={ex.exerciseId} style={{ backgroundColor: theme.surfaceSecondary, padding: space.md }}>
                         <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: space.md }}>
-                          <Typography variant="body" color={theme.textPrimary} weight="700">
-                            {ex.name}
-                          </Typography>
+                          <TouchableOpacity
+                            onPress={() => handleExerciseTap(ex)}
+                            style={{ flex: 1, marginRight: space.sm }}
+                          >
+                            <Typography variant="body" color={theme.primary} weight="700">
+                              {ex.name}
+                            </Typography>
+                          </TouchableOpacity>
                           <TouchableOpacity onPress={() => handleRemoveExercise(activeDayIdx, ex.exerciseId)}>
                             <Icon name="X" size={16} color={theme.danger} />
                           </TouchableOpacity>
@@ -688,7 +757,7 @@ export default function CustomSplitScreen({ route, navigation }: Props) {
 
             <Input
               value={searchQuery}
-              onChangeText={setSearchQuery}
+              onChangeText={handleSearchChange}
               placeholder="Search exercise library..."
               icon={<Icon name="Search" size={18} color={theme.textMuted} />}
             />
@@ -697,7 +766,7 @@ export default function CustomSplitScreen({ route, navigation }: Props) {
             <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginBottom: space.md, flexGrow: 0 }}>
               <View style={{ flexDirection: "row", gap: space.xs }}>
                 <TouchableOpacity
-                  onPress={() => setSelectedMuscleFilter(null)}
+                  onPress={() => handleMuscleFilterChange(null)}
                   style={{
                     backgroundColor: selectedMuscleFilter === null ? theme.primaryLight : theme.surfaceSecondary,
                     paddingHorizontal: space.md,
@@ -709,10 +778,10 @@ export default function CustomSplitScreen({ route, navigation }: Props) {
                     All
                   </Typography>
                 </TouchableOpacity>
-                {AVAILABLE_MUSCLE_GROUPS.map((mg) => (
+                {muscleGroups.map((mg) => (
                   <TouchableOpacity
                     key={mg}
-                    onPress={() => setSelectedMuscleFilter(mg)}
+                    onPress={() => handleMuscleFilterChange(mg)}
                     style={{
                       backgroundColor: selectedMuscleFilter === mg ? theme.primaryLight : theme.surfaceSecondary,
                       paddingHorizontal: space.md,
@@ -728,40 +797,58 @@ export default function CustomSplitScreen({ route, navigation }: Props) {
               </View>
             </ScrollView>
 
-            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: space.xl }}>
-              {loadingExercises ? (
-                <InlineListSkeleton rows={4} />
-              ) : filteredExercises.length === 0 ? (
-                <Typography variant="body" color={theme.textMuted} align="center" style={{ padding: space.xl }}>
-                  No exercises found matching filters.
-                </Typography>
-              ) : (
-                filteredExercises.map((ex) => (
-                  <TouchableOpacity
-                    key={ex.id}
-                    onPress={() => handleAddExerciseToDay(ex)}
-                    style={{
-                      backgroundColor: theme.surfaceSecondary,
-                      borderRadius: radius.md,
-                      padding: space.md,
-                      marginBottom: space.sm,
-                      borderWidth: 1,
-                      borderColor: theme.border,
-                    }}
-                  >
-                    <Typography variant="body" color={theme.textPrimary} weight="600">
-                      {ex.name}
-                    </Typography>
-                    <Typography variant="caption" color={theme.textMuted} style={{ textTransform: "capitalize", marginTop: 2 }}>
-                      {ex.muscles?.find(m => m.isPrimary)?.muscle.name || ""}
-                    </Typography>
-                  </TouchableOpacity>
-                ))
+            <FlatList
+              data={exercises}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  onPress={() => handleExerciseTap(item)}
+                  onLongPress={() => handleAddExerciseToDay(item)}
+                  style={{
+                    backgroundColor: theme.surfaceSecondary,
+                    borderRadius: radius.md,
+                    padding: space.md,
+                    marginBottom: space.sm,
+                    borderWidth: 1,
+                    borderColor: theme.border,
+                  }}
+                >
+                  <Typography variant="body" color={theme.textPrimary} weight="600">
+                    {item.name}
+                  </Typography>
+                  <Typography variant="caption" color={theme.textMuted} style={{ textTransform: "capitalize", marginTop: 2 }}>
+                    {item.muscles?.find(m => m.isPrimary)?.muscle.name || ""}
+                  </Typography>
+                </TouchableOpacity>
               )}
-            </ScrollView>
+              onEndReached={loadMoreExercises}
+              onEndReachedThreshold={0.5}
+              ListEmptyComponent={
+                !loadingExercises ? (
+                  <Typography variant="body" color={theme.textMuted} align="center" style={{ padding: space.xl }}>
+                    No exercises found matching filters.
+                  </Typography>
+                ) : (
+                  <InlineListSkeleton rows={4} />
+                )
+              }
+              ListFooterComponent={
+                loadingExercises ? <ActivityIndicator size="small" color={theme.primary} style={{ marginTop: space.md }} /> : null
+              }
+              showsVerticalScrollIndicator={false}
+              style={{ maxHeight: "100%" }}
+              contentContainerStyle={{ paddingBottom: space.xl }}
+            />
           </View>
         </View>
       </Modal>
+
+      {/* Exercise Detail Sheet */}
+      <ExerciseDetailSheet
+        exercise={selectedExerciseDetail}
+        visible={exerciseDetailVisible}
+        onClose={() => setExerciseDetailVisible(false)}
+      />
     </SafeAreaView>
   );
 }

@@ -19,9 +19,10 @@ describe("exerciseController", () => {
   });
 
   describe("listExercises", () => {
-    it("should return all exercises without filters", async () => {
+    it("should return paginated exercises without filters", async () => {
       const exercises = [{ id: "ex-1", name: "Bench Press" }];
       mockPrismaClient.exercise.findMany.mockResolvedValue(exercises);
+      mockPrismaClient.exercise.count.mockResolvedValue(1);
 
       await exerciseController.listExercises(req as AuthRequest, res as Response);
 
@@ -33,8 +34,10 @@ describe("exerciseController", () => {
           alternativesFrom: { include: { alternative: true } },
         },
         orderBy: { name: "asc" },
+        skip: 0,
+        take: 50,
       });
-      expect(res.json).toHaveBeenCalledWith({ exercises });
+      expect(res.json).toHaveBeenCalledWith({ exercises, total: 1, page: 1, totalPages: 1 });
     });
 
     it("should filter by muscle", async () => {

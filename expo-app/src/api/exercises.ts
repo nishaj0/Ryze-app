@@ -6,6 +6,11 @@ export const listExercises = async (params?: { muscle?: string; search?: string;
   return data as { exercises: Exercise[]; total: number; page: number; totalPages: number };
 };
 
+export const getDistinctMuscles = async () => {
+  const { data } = await client.get("/exercises/muscles");
+  return data as { muscles: string[] };
+};
+
 export const getExercise = async (id: string) => {
   const { data } = await client.get(`/exercises/${id}`);
   return data as { exercise: Exercise };

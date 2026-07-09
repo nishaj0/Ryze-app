@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { View, ScrollView, TouchableOpacity, Switch, Modal, Alert } from "react-native";
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { View, ScrollView, TouchableOpacity, Switch, Modal, Alert, FlatList, ActivityIndicator } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { OnboardingStackParamList } from "../../navigation/types";
 import { useOnboarding } from "./OnboardingContext";
 import { completeOnboarding } from "../../api/onboarding";
 import { createSplit, setActiveSplit } from "../../api/splits";
-import { listExercises } from "../../api/exercises";
+import { listExercises, getDistinctMuscles, getExercise } from "../../api/exercises";
 import { useAuthStore } from "../../store/authStore";
 import { Exercise } from "../../types";
-import { Typography, Card, Icon, Button, Input, Screen, InlineListSkeleton } from "../../components";
+import { Typography, Card, Icon, Button, Input, Screen, InlineListSkeleton, ExerciseDetailSheet } from "../../components";
 import { useTheme } from "../../theme/themeStore";
 import { space, radius } from "../../theme/spacing";
 
@@ -28,7 +28,10 @@ interface DayConfig {
   }[];
 }
 
-const AVAILABLE_MUSCLE_GROUPS = ["chest", "back", "shoulders", "legs", "arms", "core"];
+const EXERCISES_PER_PAGE = 20;
+const SEARCH_DEBOUNCE_MS = 300;
+const MIN_DAYS = 1;
+const MAX_DAYS = 14;
 
 export default function OnboardingCustomSplitScreen({ navigation }: Props) {
   const theme = useTheme();
@@ -42,12 +45,21 @@ export default function OnboardingCustomSplitScreen({ navigation }: Props) {
   const [days, setDays] = useState<DayConfig[]>([]);
   const [activeDayIdx, setActiveDayIdx] = useState(0);
 
-  // Exercise library state
+  // Exercise library state (paginated)
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [loadingExercises, setLoadingExercises] = useState(false);
+  const [hasMoreExercises, setHasMoreExercises] = useState(true);
+  const [exercisePage, setExercisePage] = useState(1);
   const [exerciseModalVisible, setExerciseModalVisible] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedMuscleFilter, setSelectedMuscleFilter] = useState<string | null>(null);
+  const [muscleGroups, setMuscleGroups] = useState<string[]>([]);
+  const [loadingMuscles, setLoadingMuscles] = useState(false);
+  const searchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Exercise detail sheet state
+  const [exerciseDetailVisible, setExerciseDetailVisible] = useState(false);
+  const [selectedExerciseDetail, setSelectedExerciseDetail] = useState<Exercise | null>(null);
 
   // Initialize days when daysPerWeek changes
   useEffect(() => {
@@ -66,18 +78,59 @@ export default function OnboardingCustomSplitScreen({ navigation }: Props) {
   }, [daysPerWeek]);
 
   useEffect(() => {
-    loadExerciseLibrary();
+    loadMuscleGroups();
   }, []);
 
-  const loadExerciseLibrary = async () => {
+  const loadMuscleGroups = async () => {
+    setLoadingMuscles(true);
+    try {
+      const res = await getDistinctMuscles();
+      setMuscleGroups(res.muscles);
+    } catch (err) {
+      console.error("[OnboardingCustomSplit] failed to load muscle groups:", err);
+    } finally {
+      setLoadingMuscles(false);
+    }
+  };
+
+  const loadExercises = useCallback(async (page: number, reset: boolean = false) => {
     setLoadingExercises(true);
     try {
-      const res = await listExercises();
-      setExercises(res.exercises);
+      const params: any = { page, limit: EXERCISES_PER_PAGE };
+      if (searchQuery) params.search = searchQuery;
+      if (selectedMuscleFilter) params.muscle = selectedMuscleFilter;
+
+      const res = await listExercises(params);
+      if (reset) {
+        setExercises(res.exercises);
+      } else {
+        setExercises((prev) => [...prev, ...res.exercises]);
+      }
+      setHasMoreExercises(res.exercises.length === EXERCISES_PER_PAGE);
+      setExercisePage(page);
     } catch (err) {
       console.error("[OnboardingCustomSplit] failed to load exercises:", err);
     } finally {
       setLoadingExercises(false);
+    }
+  }, [searchQuery, selectedMuscleFilter]);
+
+  const handleSearchChange = (text: string) => {
+    setSearchQuery(text);
+    if (searchTimerRef.current) clearTimeout(searchTimerRef.current);
+    searchTimerRef.current = setTimeout(() => {
+      loadExercises(1, true);
+    }, SEARCH_DEBOUNCE_MS);
+  };
+
+  const handleMuscleFilterChange = (muscle: string | null) => {
+    setSelectedMuscleFilter(muscle);
+    loadExercises(1, true);
+  };
+
+  const loadMoreExercises = () => {
+    if (hasMoreExercises && !loadingExercises) {
+      loadExercises(exercisePage + 1);
     }
   };
 
@@ -118,6 +171,17 @@ export default function OnboardingCustomSplitScreen({ navigation }: Props) {
     });
     setDays(updated);
     setExerciseModalVisible(false);
+  };
+
+  const handleExerciseTap = async (ex: { exerciseId: string; name: string }) => {
+    try {
+      const res = await getExercise(ex.exerciseId);
+      setSelectedExerciseDetail(res.exercise);
+      setExerciseDetailVisible(true);
+    } catch (err) {
+      console.error("[OnboardingCustomSplit] failed to load exercise details:", err);
+      Alert.alert("Error", "Failed to load exercise details");
+    }
   };
 
   const handleRemoveExercise = (dayIdx: number, exId: string) => {
@@ -195,12 +259,12 @@ export default function OnboardingCustomSplitScreen({ navigation }: Props) {
     }
   };
 
-  const filteredExercises = exercises.filter((ex) => {
-    const matchesSearch = ex.name.toLowerCase().includes(searchQuery.toLowerCase());
-    const primaryMuscle = ex.muscles?.find(m => m.isPrimary)?.muscle.name;
-    const matchesMuscle = selectedMuscleFilter ? primaryMuscle === selectedMuscleFilter : true;
-    return matchesSearch && matchesMuscle;
-  });
+  // Load exercises when modal opens
+  useEffect(() => {
+    if (exerciseModalVisible) {
+      loadExercises(1, true);
+    }
+  }, [exerciseModalVisible]);
 
   return (
     <Screen scroll padding="lg">
@@ -229,6 +293,8 @@ export default function OnboardingCustomSplitScreen({ navigation }: Props) {
           onChangeText={setDescription}
           placeholder="e.g. Focused on upper body width"
           icon={<Icon name="AlignLeft" size={20} color={theme.textMuted} />}
+          multiline
+          numberOfLines={4}
           containerStyle={{ marginBottom: 0 }}
         />
       </Card>
@@ -238,30 +304,45 @@ export default function OnboardingCustomSplitScreen({ navigation }: Props) {
         <Typography variant="label" color={theme.textSecondary} style={{ marginBottom: space.sm }}>
           DAYS PER WEEK
         </Typography>
-        <View style={{ flexDirection: "row", gap: space.xs }}>
-          {[3, 4, 5, 6, 7].map((num) => {
-            const isSelected = daysPerWeek === num;
-            return (
-              <TouchableOpacity
-                key={num}
-                onPress={() => setDaysPerWeek(num)}
-                style={{
-                  flex: 1,
-                  height: 40,
-                  borderRadius: radius.md,
-                  backgroundColor: isSelected ? theme.primary : theme.surfaceSecondary,
-                  borderWidth: 1,
-                  borderColor: isSelected ? theme.primary : theme.border,
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Typography variant="body" color={isSelected ? theme.primaryText : theme.textPrimary} weight="600">
-                  {num}
-                </Typography>
-              </TouchableOpacity>
-            );
-          })}
+        <View style={{ flexDirection: "row", alignItems: "center", gap: space.md }}>
+          <TouchableOpacity
+            onPress={() => setDaysPerWeek(Math.max(MIN_DAYS, daysPerWeek - 1))}
+            disabled={daysPerWeek <= MIN_DAYS}
+            style={{
+              width: 40,
+              height: 40,
+              borderRadius: radius.md,
+              backgroundColor: daysPerWeek <= MIN_DAYS ? theme.surfaceTertiary : theme.primary,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Typography variant="heading2" color={daysPerWeek <= MIN_DAYS ? theme.textMuted : theme.primaryText}>
+              -
+            </Typography>
+          </TouchableOpacity>
+          <Typography variant="heading1" color={theme.textPrimary} style={{ minWidth: 50, textAlign: "center" }}>
+            {daysPerWeek}
+          </Typography>
+          <TouchableOpacity
+            onPress={() => setDaysPerWeek(Math.min(MAX_DAYS, daysPerWeek + 1))}
+            disabled={daysPerWeek >= MAX_DAYS}
+            style={{
+              width: 40,
+              height: 40,
+              borderRadius: radius.md,
+              backgroundColor: daysPerWeek >= MAX_DAYS ? theme.surfaceTertiary : theme.primary,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Typography variant="heading2" color={daysPerWeek >= MAX_DAYS ? theme.textMuted : theme.primaryText}>
+              +
+            </Typography>
+          </TouchableOpacity>
+          <Typography variant="caption" color={theme.textMuted} style={{ marginLeft: space.xs }}>
+            ({MIN_DAYS}-{MAX_DAYS} days)
+          </Typography>
         </View>
       </Card>
 
@@ -333,7 +414,7 @@ export default function OnboardingCustomSplitScreen({ navigation }: Props) {
                 TARGET MUSCLE GROUPS
               </Typography>
               <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space.xs, marginBottom: space.lg }}>
-                {AVAILABLE_MUSCLE_GROUPS.map((mg) => {
+                {muscleGroups.map((mg) => {
                   const isSelected = days[activeDayIdx].muscleGroups.includes(mg);
                   return (
                     <TouchableOpacity
@@ -387,9 +468,14 @@ export default function OnboardingCustomSplitScreen({ navigation }: Props) {
                   {days[activeDayIdx].exercises.map((ex) => (
                     <Card key={ex.exerciseId} style={{ backgroundColor: theme.surfaceSecondary, padding: space.md }}>
                       <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: space.md }}>
-                        <Typography variant="body" color={theme.textPrimary} weight="700">
-                          {ex.name}
-                        </Typography>
+                        <TouchableOpacity
+                          onPress={() => handleExerciseTap(ex)}
+                          style={{ flex: 1, marginRight: space.sm }}
+                        >
+                          <Typography variant="body" color={theme.primary} weight="700">
+                            {ex.name}
+                          </Typography>
+                        </TouchableOpacity>
                         <TouchableOpacity onPress={() => handleRemoveExercise(activeDayIdx, ex.exerciseId)}>
                           <Icon name="X" size={16} color={theme.danger} />
                         </TouchableOpacity>
@@ -477,7 +563,7 @@ export default function OnboardingCustomSplitScreen({ navigation }: Props) {
 
             <Input
               value={searchQuery}
-              onChangeText={setSearchQuery}
+              onChangeText={handleSearchChange}
               placeholder="Search exercise library..."
               icon={<Icon name="Search" size={18} color={theme.textMuted} />}
             />
@@ -486,7 +572,7 @@ export default function OnboardingCustomSplitScreen({ navigation }: Props) {
             <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginBottom: space.md, flexGrow: 0 }}>
               <View style={{ flexDirection: "row", gap: space.xs }}>
                 <TouchableOpacity
-                  onPress={() => setSelectedMuscleFilter(null)}
+                  onPress={() => handleMuscleFilterChange(null)}
                   style={{
                     backgroundColor: selectedMuscleFilter === null ? theme.primaryLight : theme.surfaceSecondary,
                     paddingHorizontal: space.md,
@@ -498,10 +584,10 @@ export default function OnboardingCustomSplitScreen({ navigation }: Props) {
                     All
                   </Typography>
                 </TouchableOpacity>
-                {AVAILABLE_MUSCLE_GROUPS.map((mg) => (
+                {muscleGroups.map((mg) => (
                   <TouchableOpacity
                     key={mg}
-                    onPress={() => setSelectedMuscleFilter(mg)}
+                    onPress={() => handleMuscleFilterChange(mg)}
                     style={{
                       backgroundColor: selectedMuscleFilter === mg ? theme.primaryLight : theme.surfaceSecondary,
                       paddingHorizontal: space.md,
@@ -517,40 +603,58 @@ export default function OnboardingCustomSplitScreen({ navigation }: Props) {
               </View>
             </ScrollView>
 
-            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: space.xl }}>
-              {loadingExercises ? (
-                <InlineListSkeleton rows={4} />
-              ) : filteredExercises.length === 0 ? (
-                <Typography variant="body" color={theme.textMuted} align="center" style={{ padding: space.xl }}>
-                  No exercises found matching filters.
-                </Typography>
-              ) : (
-                filteredExercises.map((ex) => (
-                  <TouchableOpacity
-                    key={ex.id}
-                    onPress={() => handleAddExerciseToDay(ex)}
-                    style={{
-                      backgroundColor: theme.surfaceSecondary,
-                      borderRadius: radius.md,
-                      padding: space.md,
-                      marginBottom: space.sm,
-                      borderWidth: 1,
-                      borderColor: theme.border,
-                    }}
-                  >
-                    <Typography variant="body" color={theme.textPrimary} weight="600">
-                      {ex.name}
-                    </Typography>
-                    <Typography variant="caption" color={theme.textMuted} style={{ textTransform: "capitalize", marginTop: 2 }}>
-                      {ex.muscles?.find(m => m.isPrimary)?.muscle.name || ""}
-                    </Typography>
-                  </TouchableOpacity>
-                ))
+            <FlatList
+              data={exercises}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  onPress={() => handleExerciseTap(item)}
+                  onLongPress={() => handleAddExerciseToDay(item)}
+                  style={{
+                    backgroundColor: theme.surfaceSecondary,
+                    borderRadius: radius.md,
+                    padding: space.md,
+                    marginBottom: space.sm,
+                    borderWidth: 1,
+                    borderColor: theme.border,
+                  }}
+                >
+                  <Typography variant="body" color={theme.textPrimary} weight="600">
+                    {item.name}
+                  </Typography>
+                  <Typography variant="caption" color={theme.textMuted} style={{ textTransform: "capitalize", marginTop: 2 }}>
+                    {item.muscles?.find(m => m.isPrimary)?.muscle.name || ""}
+                  </Typography>
+                </TouchableOpacity>
               )}
-            </ScrollView>
+              onEndReached={loadMoreExercises}
+              onEndReachedThreshold={0.5}
+              ListEmptyComponent={
+                !loadingExercises ? (
+                  <Typography variant="body" color={theme.textMuted} align="center" style={{ padding: space.xl }}>
+                    No exercises found matching filters.
+                  </Typography>
+                ) : (
+                  <InlineListSkeleton rows={4} />
+                )
+              }
+              ListFooterComponent={
+                loadingExercises ? <ActivityIndicator size="small" color={theme.primary} style={{ marginTop: space.md }} /> : null
+              }
+              showsVerticalScrollIndicator={false}
+              style={{ maxHeight: "100%" }}
+              contentContainerStyle={{ paddingBottom: space.xl }}
+            />
           </View>
         </View>
       </Modal>
+
+      {/* Exercise Detail Sheet */}
+      <ExerciseDetailSheet
+        exercise={selectedExerciseDetail}
+        visible={exerciseDetailVisible}
+        onClose={() => setExerciseDetailVisible(false)}
+      />
     </Screen>
   );
 }

@@ -18,9 +18,14 @@ export default function Input({
   icon,
   style,
   placeholderTextColor,
+  multiline,
+  numberOfLines,
   ...props
 }: InputProps) {
   const theme = useTheme();
+
+  const isMultiline = multiline === true;
+  const minHeight = isMultiline ? (numberOfLines ? numberOfLines * 24 + 24 : 100) : 48;
 
   return (
     <View style={[{ width: "100%" }, containerStyle]}>
@@ -32,20 +37,23 @@ export default function Input({
       <View
         style={[
           {
-            flexDirection: "row",
-            alignItems: "center",
+            flexDirection: isMultiline ? "column" : "row",
+            alignItems: isMultiline ? "flex-start" : "center",
             backgroundColor: theme.inputBg,
             borderWidth: 1.5,
             borderColor: error ? theme.borderError : theme.inputBorder,
             borderRadius: radius.lg,
             paddingHorizontal: space.md,
-            minHeight: 48,
+            minHeight,
+            paddingVertical: isMultiline ? space.md : 0,
           },
           error && { backgroundColor: theme.errorBg },
         ]}
       >
-        {icon && <View style={{ marginRight: space.sm }}>{icon}</View>}
+        {icon && <View style={{ marginRight: space.sm, marginTop: isMultiline ? 4 : 0 }}>{icon}</View>}
         <TextInput
+          multiline={isMultiline}
+          numberOfLines={isMultiline ? numberOfLines : undefined}
           placeholderTextColor={placeholderTextColor || theme.inputPlaceholder}
           style={[
             {
@@ -54,6 +62,7 @@ export default function Input({
               color: theme.inputText,
               paddingVertical: 12,
               fontFamily: "Inter",
+              textAlignVertical: isMultiline ? "top" : "center",
             },
             style,
           ]}

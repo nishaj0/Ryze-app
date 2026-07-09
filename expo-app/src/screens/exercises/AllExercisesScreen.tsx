@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { View, FlatList, TouchableOpacity, TextInput } from "react-native";
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { View, FlatList, TouchableOpacity, TextInput, ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ProfileStackParamList } from "../../navigation/types";
-import { listExercises } from "../../api/exercises";
+import { listExercises, getDistinctMuscles } from "../../api/exercises";
 import { Exercise } from "../../types";
 import { getAppSettings, AppSettings } from "../../api/app";
-import { Typography, Card, Icon } from "../../components";
+import { Typography, Card, Icon, ExerciseDetailSheet } from "../../components";
 import { useTheme } from "../../theme/themeStore";
 import { space, radius } from "../../theme/spacing";
 
@@ -21,21 +21,42 @@ export default function AllExercisesScreen({ navigation }: Props) {
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
   const [settings, setSettings] = useState<AppSettings | null>(null);
+  const [muscleGroups, setMuscleGroups] = useState<string[]>([]);
+  const [loadingMuscles, setLoadingMuscles] = useState(false);
+  const searchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Exercise detail sheet state
+  const [exerciseDetailVisible, setExerciseDetailVisible] = useState(false);
+  const [selectedExerciseDetail, setSelectedExerciseDetail] = useState<Exercise | null>(null);
 
   useEffect(() => {
     getAppSettings()
       .then(setSettings)
       .catch(console.error);
+    loadMuscleGroups();
   }, []);
 
-  const muscles = [
-    "abdominals", "abductors", "adductors", "biceps", "calves", "chest",
-    "forearms", "glutes", "hamstrings", "lats", "lower back", "middle back",
-    "neck", "quadriceps", "shoulders", "traps", "triceps"
-  ];
+  const loadMuscleGroups = async () => {
+    setLoadingMuscles(true);
+    try {
+      const res = await getDistinctMuscles();
+      setMuscleGroups(res.muscles);
+    } catch (err) {
+      console.error("[AllExercises] failed to load muscle groups:", err);
+    } finally {
+      setLoadingMuscles(false);
+    }
+  };
+
+  const debouncedFetchExercises = useCallback((pageNum: number, reset: boolean = false) => {
+    if (searchTimerRef.current) clearTimeout(searchTimerRef.current);
+    searchTimerRef.current = setTimeout(() => {
+      fetchExercises(pageNum, reset);
+    }, 300);
+  }, [searchQuery, selectedMuscle]);
 
   useEffect(() => {
-    fetchExercises(1, true);
+    debouncedFetchExercises(1, true);
   }, [searchQuery, selectedMuscle]);
 
   const fetchExercises = async (pageNum: number, reset: boolean = false) => {
@@ -76,7 +97,10 @@ export default function AllExercisesScreen({ navigation }: Props) {
 
     return (
       <TouchableOpacity
-        onPress={() => navigation.navigate("ExerciseDetail", { exerciseId: item.id })}
+        onPress={() => {
+          setSelectedExerciseDetail(item);
+          setExerciseDetailVisible(true);
+        }}
         style={{ marginBottom: space.md }}
       >
         <Card shadow="sm" style={{ padding: space.md }}>
@@ -171,7 +195,7 @@ export default function AllExercisesScreen({ navigation }: Props) {
               All
             </Typography>
           </TouchableOpacity>
-          {muscles.map((muscle) => (
+          {muscleGroups.map((muscle) => (
             <TouchableOpacity
               key={muscle}
               onPress={() => setSelectedMuscle(muscle)}
@@ -238,6 +262,13 @@ export default function AllExercisesScreen({ navigation }: Props) {
           <Icon name="Plus" size={24} color={theme.primaryText} />
         </TouchableOpacity>
       )}
+
+      {/* Exercise Detail Sheet */}
+      <ExerciseDetailSheet
+        exercise={selectedExerciseDetail}
+        visible={exerciseDetailVisible}
+        onClose={() => setExerciseDetailVisible(false)}
+      />
     </SafeAreaView>
   );
 }
