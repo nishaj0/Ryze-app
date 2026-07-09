@@ -14498,5 +14498,10 @@
     "mtime": 1783572733.1866355,
     "ast_hash": "2aaee87f5845825b63083a20a22460f8",
     "semantic_hash": ""
+  },
+  "cpanel/vercel.json": {
+    "mtime": 1783574841.9187193,
+    "ast_hash": "a2a13c1a4e3579fd9acc7e9345160d8b",
+    "semantic_hash": ""
   }
 }

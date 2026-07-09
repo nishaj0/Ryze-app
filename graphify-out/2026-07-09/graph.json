@@ -4,382 +4,400 @@
   "graph": {},
   "nodes": [
     {
+      "label": "index.ts",
+      "file_type": "code",
+      "source_file": "api/src/index.ts",
+      "source_location": "L1",
+      "id": "src_index",
+      "community": 7,
+      "norm_label": "index.ts"
+    },
+    {
+      "label": "app",
+      "file_type": "code",
+      "source_file": "api/src/index.ts",
+      "source_location": "L26",
+      "id": "src_index_app",
+      "community": 7,
+      "norm_label": "app"
+    },
+    {
+      "label": "ping.ts",
+      "file_type": "code",
+      "source_file": "api/src/routes/ping.ts",
+      "source_location": "L1",
+      "id": "routes_ping",
+      "community": 7,
+      "norm_label": "ping.ts"
+    },
+    {
+      "label": "router",
+      "file_type": "code",
+      "source_file": "api/src/routes/ping.ts",
+      "source_location": "L2",
+      "id": "routes_ping_router",
+      "community": 7,
+      "norm_label": "router"
+    },
+    {
       "label": "api.ts",
       "file_type": "code",
       "source_file": "cpanel/src/api.ts",
       "source_location": "L1",
-      "id": "src_api",
       "community": 934,
-      "norm_label": "api.ts"
+      "norm_label": "api.ts",
+      "id": "src_api"
     },
     {
       "label": "api",
       "file_type": "code",
       "source_file": "cpanel/src/api.ts",
       "source_location": "L6",
-      "id": "src_api_api",
       "community": 934,
-      "norm_label": "api"
+      "norm_label": "api",
+      "id": "src_api_api"
     },
     {
       "label": "setAdminKey()",
       "file_type": "code",
       "source_file": "cpanel/src/api.ts",
       "source_location": "L12",
-      "id": "src_api_setadminkey",
       "community": 932,
-      "norm_label": "setadminkey()"
+      "norm_label": "setadminkey()",
+      "id": "src_api_setadminkey"
     },
     {
       "label": "getAdminKey()",
       "file_type": "code",
       "source_file": "cpanel/src/api.ts",
       "source_location": "L17",
-      "id": "src_api_getadminkey",
       "community": 932,
-      "norm_label": "getadminkey()"
+      "norm_label": "getadminkey()",
+      "id": "src_api_getadminkey"
     },
     {
       "label": "getDashboard()",
       "file_type": "code",
       "source_file": "cpanel/src/api.ts",
       "source_location": "L22",
-      "id": "src_api_getdashboard",
       "community": 933,
-      "norm_label": "getdashboard()"
+      "norm_label": "getdashboard()",
+      "id": "src_api_getdashboard"
     },
     {
       "label": "getUsers()",
       "file_type": "code",
       "source_file": "cpanel/src/api.ts",
       "source_location": "L25",
-      "id": "src_api_getusers",
       "community": 934,
-      "norm_label": "getusers()"
+      "norm_label": "getusers()",
+      "id": "src_api_getusers"
     },
     {
       "label": "getUser()",
       "file_type": "code",
       "source_file": "cpanel/src/api.ts",
       "source_location": "L26",
-      "id": "src_api_getuser",
       "community": 934,
-      "norm_label": "getuser()"
+      "norm_label": "getuser()",
+      "id": "src_api_getuser"
     },
     {
       "label": "updateUser()",
       "file_type": "code",
       "source_file": "cpanel/src/api.ts",
       "source_location": "L27",
-      "id": "src_api_updateuser",
       "community": 934,
-      "norm_label": "updateuser()"
+      "norm_label": "updateuser()",
+      "id": "src_api_updateuser"
     },
     {
       "label": "deleteUser()",
       "file_type": "code",
       "source_file": "cpanel/src/api.ts",
       "source_location": "L28",
-      "id": "src_api_deleteuser",
       "community": 934,
-      "norm_label": "deleteuser()"
+      "norm_label": "deleteuser()",
+      "id": "src_api_deleteuser"
     },
     {
       "label": "resetOnboarding()",
       "file_type": "code",
       "source_file": "cpanel/src/api.ts",
       "source_location": "L29",
-      "id": "src_api_resetonboarding",
       "community": 934,
-      "norm_label": "resetonboarding()"
+      "norm_label": "resetonboarding()",
+      "id": "src_api_resetonboarding"
     },
     {
       "label": "getSplits()",
       "file_type": "code",
       "source_file": "cpanel/src/api.ts",
       "source_location": "L32",
-      "id": "src_api_getsplits",
       "community": 30,
-      "norm_label": "getsplits()"
+      "norm_label": "getsplits()",
+      "id": "src_api_getsplits"
     },
     {
       "label": "createSplit()",
       "file_type": "code",
       "source_file": "cpanel/src/api.ts",
       "source_location": "L33",
-      "id": "src_api_createsplit",
       "community": 30,
-      "norm_label": "createsplit()"
+      "norm_label": "createsplit()",
+      "id": "src_api_createsplit"
     },
     {
       "label": "deleteSplit()",
       "file_type": "code",
       "source_file": "cpanel/src/api.ts",
       "source_location": "L34",
-      "id": "src_api_deletesplit",
       "community": 30,
-      "norm_label": "deletesplit()"
+      "norm_label": "deletesplit()",
+      "id": "src_api_deletesplit"
     },
     {
       "label": "togglePrebuilt()",
       "file_type": "code",
       "source_file": "cpanel/src/api.ts",
       "source_location": "L35",
-      "id": "src_api_toggleprebuilt",
       "community": 30,
-      "norm_label": "toggleprebuilt()"
+      "norm_label": "toggleprebuilt()",
+      "id": "src_api_toggleprebuilt"
     },
     {
       "label": "getExercises()",
       "file_type": "code",
       "source_file": "cpanel/src/api.ts",
       "source_location": "L38",
-      "id": "src_api_getexercises",
       "community": 31,
-      "norm_label": "getexercises()"
+      "norm_label": "getexercises()",
+      "id": "src_api_getexercises"
     },
     {
       "label": "createExercise()",
       "file_type": "code",
       "source_file": "cpanel/src/api.ts",
       "source_location": "L39",
-      "id": "src_api_createexercise",
       "community": 934,
-      "norm_label": "createexercise()"
+      "norm_label": "createexercise()",
+      "id": "src_api_createexercise"
     },
     {
       "label": "getExerciseRequests()",
       "file_type": "code",
       "source_file": "cpanel/src/api.ts",
       "source_location": "L42",
-      "id": "src_api_getexerciserequests",
       "community": 934,
-      "norm_label": "getexerciserequests()"
+      "norm_label": "getexerciserequests()",
+      "id": "src_api_getexerciserequests"
     },
     {
       "label": "updateExerciseRequest()",
       "file_type": "code",
       "source_file": "cpanel/src/api.ts",
       "source_location": "L43",
-      "id": "src_api_updateexerciserequest",
       "community": 934,
-      "norm_label": "updateexerciserequest()"
+      "norm_label": "updateexerciserequest()",
+      "id": "src_api_updateexerciserequest"
     },
     {
       "label": "getSessions()",
       "file_type": "code",
       "source_file": "cpanel/src/api.ts",
       "source_location": "L46",
-      "id": "src_api_getsessions",
       "community": 935,
-      "norm_label": "getsessions()"
+      "norm_label": "getsessions()",
+      "id": "src_api_getsessions"
     },
     {
       "label": "sendBroadcast()",
       "file_type": "code",
       "source_file": "cpanel/src/api.ts",
       "source_location": "L49",
-      "id": "src_api_sendbroadcast",
       "community": 933,
-      "norm_label": "sendbroadcast()"
+      "norm_label": "sendbroadcast()",
+      "id": "src_api_sendbroadcast"
     },
     {
       "label": "getOnboardingStats()",
       "file_type": "code",
       "source_file": "cpanel/src/api.ts",
       "source_location": "L53",
-      "id": "src_api_getonboardingstats",
       "community": 934,
-      "norm_label": "getonboardingstats()"
+      "norm_label": "getonboardingstats()",
+      "id": "src_api_getonboardingstats"
     },
     {
       "label": "getAppSettings()",
       "file_type": "code",
       "source_file": "cpanel/src/api.ts",
       "source_location": "L56",
-      "id": "src_api_getappsettings",
       "community": 932,
-      "norm_label": "getappsettings()"
+      "norm_label": "getappsettings()",
+      "id": "src_api_getappsettings"
     },
     {
       "label": "updateAppSettings()",
       "file_type": "code",
       "source_file": "cpanel/src/api.ts",
       "source_location": "L57",
-      "id": "src_api_updateappsettings",
       "community": 932,
-      "norm_label": "updateappsettings()"
+      "norm_label": "updateappsettings()",
+      "id": "src_api_updateappsettings"
     },
     {
       "label": "getSupportTickets()",
       "file_type": "code",
       "source_file": "cpanel/src/api.ts",
       "source_location": "L58",
-      "id": "src_api_getsupporttickets",
       "community": 933,
-      "norm_label": "getsupporttickets()"
+      "norm_label": "getsupporttickets()",
+      "id": "src_api_getsupporttickets"
     },
     {
       "label": "respondToSupportTicket()",
       "file_type": "code",
       "source_file": "cpanel/src/api.ts",
       "source_location": "L59",
-      "id": "src_api_respondtosupportticket",
       "community": 933,
-      "norm_label": "respondtosupportticket()"
+      "norm_label": "respondtosupportticket()",
+      "id": "src_api_respondtosupportticket"
     },
     {
       "label": "SettingsPage.tsx",
       "file_type": "code",
       "source_file": "cpanel/src/pages/SettingsPage.tsx",
       "source_location": "L1",
-      "id": "pages_settingspage",
       "community": 932,
-      "norm_label": "settingspage.tsx"
+      "norm_label": "settingspage.tsx",
+      "id": "pages_settingspage"
     },
     {
       "label": "SettingsPage()",
       "file_type": "code",
       "source_file": "cpanel/src/pages/SettingsPage.tsx",
       "source_location": "L6",
-      "id": "pages_settingspage_settingspage",
       "community": 932,
-      "norm_label": "settingspage()"
+      "norm_label": "settingspage()",
+      "id": "pages_settingspage_settingspage"
     },
     {
       "label": "InfoRow()",
       "file_type": "code",
       "source_file": "cpanel/src/pages/SettingsPage.tsx",
       "source_location": "L246",
-      "id": "pages_settingspage_inforow",
       "community": 932,
-      "norm_label": "inforow()"
+      "norm_label": "inforow()",
+      "id": "pages_settingspage_inforow"
     },
     {
       "label": "eas.json",
       "file_type": "code",
       "source_file": "expo-app/eas.json",
       "source_location": "L1",
-      "id": "expo_app_eas",
       "community": 942,
-      "norm_label": "eas.json"
+      "norm_label": "eas.json",
+      "id": "expo_app_eas"
     },
     {
       "label": "cli",
       "file_type": "code",
       "source_file": "expo-app/eas.json",
       "source_location": "L2",
-      "id": "expo_app_eas_cli",
       "community": 942,
-      "norm_label": "cli"
+      "norm_label": "cli",
+      "id": "expo_app_eas_cli"
     },
     {
       "label": "version",
       "file_type": "code",
       "source_file": "expo-app/eas.json",
       "source_location": "L3",
-      "id": "expo_app_eas_cli_version",
       "community": 942,
-      "norm_label": "version"
+      "norm_label": "version",
+      "id": "expo_app_eas_cli_version"
     },
     {
       "label": "build",
       "file_type": "code",
       "source_file": "expo-app/eas.json",
       "source_location": "L5",
-      "id": "expo_app_eas_build",
       "community": 942,
-      "norm_label": "build"
+      "norm_label": "build",
+      "id": "expo_app_eas_build"
     },
     {
       "label": "release",
       "file_type": "code",
       "source_file": "expo-app/eas.json",
       "source_location": "L6",
-      "id": "expo_app_eas_build_release",
       "community": 942,
-      "norm_label": "release"
+      "norm_label": "release",
+      "id": "expo_app_eas_build_release"
     },
     {
       "label": "android",
       "file_type": "code",
       "source_file": "expo-app/eas.json",
       "source_location": "L7",
-      "id": "expo_app_eas_release_android",
       "community": 942,
-      "norm_label": "android"
+      "norm_label": "android",
+      "id": "expo_app_eas_release_android"
     },
     {
       "label": "buildType",
       "file_type": "code",
       "source_file": "expo-app/eas.json",
       "source_location": "L8",
-      "id": "expo_app_eas_android_buildtype",
       "community": 942,
-      "norm_label": "buildtype"
+      "norm_label": "buildtype",
+      "id": "expo_app_eas_android_buildtype"
     },
     {
       "label": "distribution",
       "file_type": "code",
       "source_file": "expo-app/eas.json",
       "source_location": "L9",
-      "id": "expo_app_eas_android_distribution",
       "community": 942,
-      "norm_label": "distribution"
+      "norm_label": "distribution",
+      "id": "expo_app_eas_android_distribution"
     },
     {
       "label": "env",
       "file_type": "code",
       "source_file": "expo-app/eas.json",
       "source_location": "L11",
-      "id": "expo_app_eas_release_env",
       "community": 942,
-      "norm_label": "env"
+      "norm_label": "env",
+      "id": "expo_app_eas_release_env"
     },
     {
       "label": "EXPO_PUBLIC_API_URL",
       "file_type": "code",
       "source_file": "expo-app/eas.json",
       "source_location": "L12",
-      "id": "expo_app_eas_env_expo_public_api_url",
       "community": 942,
-      "norm_label": "expo_public_api_url"
+      "norm_label": "expo_public_api_url",
+      "id": "expo_app_eas_env_expo_public_api_url"
     },
     {
       "label": "submit",
       "file_type": "code",
       "source_file": "expo-app/eas.json",
       "source_location": "L16",
-      "id": "expo_app_eas_submit",
       "community": 942,
-      "norm_label": "submit"
+      "norm_label": "submit",
+      "id": "expo_app_eas_submit"
     },
     {
       "label": "release",
       "file_type": "code",
       "source_file": "expo-app/eas.json",
       "source_location": "L17",
-      "id": "expo_app_eas_submit_release",
       "community": 942,
-      "norm_label": "release"
-    },
-    {
-      "label": "index.ts",
-      "file_type": "code",
-      "source_file": "api/src/index.ts",
-      "source_location": "L1",
-      "community": 7,
-      "norm_label": "index.ts",
-      "id": "src_index"
-    },
-    {
-      "label": "app",
-      "file_type": "code",
-      "source_file": "api/src/index.ts",
-      "source_location": "L25",
-      "community": 7,
-      "norm_label": "app",
-      "id": "src_index_app"
+      "norm_label": "release",
+      "id": "expo_app_eas_submit_release"
     },
     {
       "label": "health.ts",
@@ -99026,7 +99044,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/nutritionController.ts",
       "source_location": "L1",
-      "community": 945,
+      "community": 7,
       "norm_label": "nutritioncontroller.ts",
       "id": "controllers_nutritioncontroller"
     },
@@ -99035,7 +99053,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/nutritionController.ts",
       "source_location": "L5",
-      "community": 945,
+      "community": 7,
       "norm_label": "prisma",
       "id": "controllers_nutritioncontroller_prisma"
     },
@@ -99044,7 +99062,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/nutritionController.ts",
       "source_location": "L7",
-      "community": 945,
+      "community": 7,
       "norm_label": "lognutrition()",
       "id": "controllers_nutritioncontroller_lognutrition"
     },
@@ -99053,7 +99071,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/nutritionController.ts",
       "source_location": "L39",
-      "community": 945,
+      "community": 7,
       "norm_label": "getnutritionlogs()",
       "id": "controllers_nutritioncontroller_getnutritionlogs"
     },
@@ -99737,7 +99755,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/photos.ts",
       "source_location": "L1",
-      "community": 21,
+      "community": 7,
       "norm_label": "photos.ts",
       "id": "routes_photos"
     },
@@ -99746,7 +99764,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/photos.ts",
       "source_location": "L6",
-      "community": 21,
+      "community": 7,
       "norm_label": "router",
       "id": "routes_photos_router"
     },
@@ -99755,7 +99773,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/photos.ts",
       "source_location": "L8",
-      "community": 21,
+      "community": 7,
       "norm_label": "storage",
       "id": "routes_photos_storage"
     },
@@ -99764,7 +99782,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/photos.ts",
       "source_location": "L9",
-      "community": 21,
+      "community": 7,
       "norm_label": "upload",
       "id": "routes_photos_upload"
     },
@@ -99773,7 +99791,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/photos.ts",
       "source_location": "L21",
-      "community": 21,
+      "community": 7,
       "norm_label": "wrap()",
       "id": "routes_photos_wrap"
     },
@@ -99836,7 +99854,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/sessions.ts",
       "source_location": "L1",
-      "community": 7,
+      "community": 14,
       "norm_label": "sessions.ts",
       "id": "routes_sessions"
     },
@@ -99845,7 +99863,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/sessions.ts",
       "source_location": "L5",
-      "community": 7,
+      "community": 14,
       "norm_label": "router",
       "id": "routes_sessions_router"
     },
@@ -99854,7 +99872,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/sessions.ts",
       "source_location": "L7",
-      "community": 7,
+      "community": 14,
       "norm_label": "wrap()",
       "id": "routes_sessions_wrap"
     },
@@ -105039,6 +105057,257 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "middleware_errorhandler"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "middleware_errorhandler_errorhandler"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "routes_admin"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "routes_app"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "routes_auth"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L20",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "routes_checkins"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "routes_exercises"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L22",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "routes_health"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "routes_metrics"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "routes_notifications"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "routes_onboarding"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "routes_photos"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L23",
+      "weight": 1.0,
+      "source": "src_index",
+      "target": "routes_ping",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "routes_progress"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "routes_records"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "routes_sessions"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "routes_splits"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "routes_suggestions"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "routes_support"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "src_index_app"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "utils_scheduler"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/index.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index",
+      "target": "utils_scheduler_initscheduler"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/routes/ping.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "routes_ping",
+      "target": "routes_ping_router",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "cpanel/src/components/Sidebar.tsx",
       "source_location": "L6",
       "weight": 1.0,
@@ -105878,9 +106147,9 @@
       "source_file": "expo-app/eas.json",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "expo_app_eas_build_release",
-      "target": "expo_app_eas_release_env",
-      "confidence_score": 1.0
+      "target": "expo_app_eas_release_env"
     },
     {
       "relation": "contains",
@@ -105908,9 +106177,9 @@
       "source_file": "expo-app/eas.json",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "expo_app_eas_release_env",
-      "target": "expo_app_eas_env_expo_public_api_url",
-      "confidence_score": 1.0
+      "target": "expo_app_eas_env_expo_public_api_url"
     },
     {
       "relation": "contains",
@@ -105921,236 +106190,6 @@
       "confidence_score": 1.0,
       "source": "expo_app_eas_submit",
       "target": "expo_app_eas_submit_release"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "middleware_errorhandler"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "middleware_errorhandler_errorhandler"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L17",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_admin"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L18",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_app"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_auth"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L20",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_checkins"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L10",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_exercises"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L22",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_health"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L12",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_metrics"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L16",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_notifications"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_onboarding"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L13",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_photos"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L14",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_progress"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_records"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L11",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_sessions"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_splits"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_suggestions"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L19",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_support"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L18",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "src_index_app"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "utils_scheduler"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "utils_scheduler_initscheduler"
     },
     {
       "relation": "contains",
@@ -225615,5 +225654,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "ce707222afa1195306f50ee8d3093f243c626b97"
+  "built_at_commit": "5d88ad87fb9371f4f18c8c35fe8b286768a2141f"
 }
