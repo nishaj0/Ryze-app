@@ -3,6 +3,7 @@ import { View, TouchableOpacity } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AuthStackParamList } from "../../navigation/types";
 import { register } from "../../api/auth";
+import { getApiErrorMessage } from "../../utils/apiErrors";
 import { useAuthStore } from "../../store/authStore";
 import { Screen, Button, Input, Typography, Card, Icon } from "../../components";
 import { useTheme } from "../../theme/themeStore";
@@ -34,15 +35,7 @@ export default function RegisterScreen({ navigation }: Props) {
       const res = await register(email, password, name || undefined);
       await setAuth(res.token, res.user);
     } catch (err: any) {
-      let message = "Something went wrong";
-      if (!err.response) {
-        message = "Cannot connect to server. Make sure the backend is running and your device is on the same network.";
-      } else if (err.response?.data?.error) {
-        message = err.response.data.error;
-      } else if (err.response?.status) {
-        message = `Server error (${err.response.status}). Please try again.`;
-      }
-      setErrorMsg(message);
+      setErrorMsg(getApiErrorMessage(err));
       console.error("[RegisterScreen] register error:", err);
     } finally {
       setLoading(false);
