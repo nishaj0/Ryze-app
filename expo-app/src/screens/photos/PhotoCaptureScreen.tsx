@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, TouchableOpacity, Image, Alert, ScrollView } from "react-native";
+import {
+  View,
+  TouchableOpacity,
+  Image,
+  Alert,
+  ScrollView,
+  ActivityIndicator,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { PhotosStackParamList } from "../../navigation/types";
@@ -12,29 +19,49 @@ import { space, radius } from "../../theme/spacing";
 
 type Props = NativeStackScreenProps<PhotosStackParamList, "PhotoCapture">;
 
+type UploadStatus = "idle" | "uploading" | "success" | "failed";
+
 export default function PhotoCaptureScreen({ navigation }: Props) {
   const [imageUri, setImageUri] = useState<string | null>(null);
   const theme = useTheme();
   const [type, setType] = useState<"FRONT" | "BACK" | "SIDE">("FRONT");
   const [notes, setNotes] = useState("");
-  const [uploading, setUploading] = useState(false);
+  const [uploadStatus, setUploadStatus] = useState<UploadStatus>("idle");
+  const [uploadError, setUploadError] = useState<string | null>(null);
+  const [uploadedPhotoUri, setUploadedPhotoUri] = useState<string | null>(null);
 
   const pickImage = async (useCamera: boolean) => {
     let result;
     if (useCamera) {
       const { status } = await ImagePicker.requestCameraPermissionsAsync();
       if (status !== "granted") {
-        Alert.alert("Permission needed", "Camera permission is required");
+        Alert.alert(
+          "Permission needed",
+          "Camera permission is required to take photos. Please enable it in Settings.",
+          [{ text: "OK" }]
+        );
         return;
       }
-      result = await ImagePicker.launchCameraAsync({ quality: 0.8 });
+      result = await ImagePicker.launchCameraAsync({
+        mediaTypes: ["images"],
+        quality: 0.8,
+        allowsEditing: false,
+      });
     } else {
       const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
       if (status !== "granted") {
-        Alert.alert("Permission needed", "Photo library permission is required");
+        Alert.alert(
+          "Permission needed",
+          "Photo library permission is required to select photos. Please enable it in Settings.",
+          [{ text: "OK" }]
+        );
         return;
       }
-      result = await ImagePicker.launchImageLibraryAsync({ quality: 0.8 });
+      result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ["images"],
+        quality: 0.8,
+        allowsEditing: false,
+      });
     }
 
     if (!result.canceled && result.assets[0]) {
@@ -45,6 +72,10 @@ export default function PhotoCaptureScreen({ navigation }: Props) {
         { compress: 0.7, format: ImageManipulator.SaveFormat.JPEG }
       );
       setImageUri(manipulated.uri);
+      // Reset upload state when a new image is picked
+      setUploadStatus("idle");
+      setUploadError(null);
+      setUploadedPhotoUri(null);
     }
   };
 
@@ -54,16 +85,121 @@ export default function PhotoCaptureScreen({ navigation }: Props) {
       return;
     }
 
-    setUploading(true);
+    setUploadStatus("uploading");
+    setUploadError(null);
+
     try {
-      await uploadPhoto(imageUri, type, new Date().toISOString(), notes || undefined);
-      Alert.alert("Success", "Photo uploaded!", [{ text: "OK", onPress: () => navigation.goBack() }]);
-    } catch (err) {
-      Alert.alert("Error", "Failed to upload photo");
-    } finally {
-      setUploading(false);
+      const res = await uploadPhoto(imageUri, type, new Date().toISOString(), notes || undefined);
+      setUploadedPhotoUri(res.photo.cloudinaryUrl);
+      setUploadStatus("success");
+    } catch (err: any) {
+      const message =
+        err?.response?.data?.message ||
+        err?.message ||
+        "Something went wrong. Please check your connection and try again.";
+      setUploadError(message);
+      setUploadStatus("failed");
     }
   };
+
+  const handleRetry = () => {
+    setUploadStatus("idle");
+    setUploadError(null);
+  };
+
+  const handleDone = () => {
+    navigation.goBack();
+  };
+
+  // --- Success screen ---
+  if (uploadStatus === "success") {
+    return (
+      <SafeAreaView style={{ flex: 1, backgroundColor: theme.bg }} edges={["top"]}>
+        <ScrollView
+          style={{ flex: 1 }}
+          contentContainerStyle={{ padding: space.lg, paddingBottom: space.xl, alignItems: "center" }}
+          showsVerticalScrollIndicator={false}
+        >
+          <View
+            style={{
+              width: 72,
+              height: 72,
+              borderRadius: 36,
+              backgroundColor: theme.successBg,
+              alignItems: "center",
+              justifyContent: "center",
+              marginTop: space.xl,
+              marginBottom: space.lg,
+            }}
+          >
+            <Icon name="CheckCircle" size={40} color={theme.success} />
+          </View>
+
+          <Typography variant="heading2" color={theme.textPrimary} align="center">
+            Photo Uploaded!
+          </Typography>
+          <Typography
+            variant="body"
+            color={theme.textSecondary}
+            align="center"
+            style={{ marginTop: space.sm, marginBottom: space.xl }}
+          >
+            Your progress photo has been saved successfully.
+          </Typography>
+
+          {uploadedPhotoUri && (
+            <Card shadow="sm" style={{ padding: 0, overflow: "hidden", width: "100%", marginBottom: space.xl }}>
+              <Image
+                source={{ uri: uploadedPhotoUri }}
+                style={{ width: "100%", height: 320 }}
+                resizeMode="cover"
+              />
+              <View style={{ padding: space.md, flexDirection: "row", alignItems: "center", gap: space.sm }}>
+                <View
+                  style={{
+                    backgroundColor: theme.primaryLight,
+                    paddingHorizontal: space.sm,
+                    paddingVertical: 2,
+                    borderRadius: 6,
+                  }}
+                >
+                  <Typography variant="caption" color={theme.primary} weight="700">
+                    {type}
+                  </Typography>
+                </View>
+                <Typography variant="bodySmall" color={theme.textMuted}>
+                  {new Date().toLocaleDateString(undefined, { month: "long", day: "numeric", year: "numeric" })}
+                </Typography>
+              </View>
+            </Card>
+          )}
+
+          <View style={{ width: "100%", gap: space.md }}>
+            <Button
+              title="Take Another Photo"
+              onPress={() => {
+                setImageUri(null);
+                setUploadStatus("idle");
+                setUploadError(null);
+                setUploadedPhotoUri(null);
+                setNotes("");
+              }}
+              variant="secondary"
+              size="lg"
+              icon={<Icon name="Camera" size={20} color={theme.secondaryText} />}
+            />
+            <Button
+              title="View Timeline"
+              onPress={handleDone}
+              variant="primary"
+              size="lg"
+              icon={<Icon name="Images" size={20} color={theme.primaryText} />}
+            />
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: theme.bg }} edges={["top"]}>
@@ -141,7 +277,11 @@ export default function PhotoCaptureScreen({ navigation }: Props) {
               <Image source={{ uri: imageUri }} style={{ width: "100%", height: 400 }} resizeMode="cover" />
             </Card>
             <TouchableOpacity
-              onPress={() => setImageUri(null)}
+              onPress={() => {
+                setImageUri(null);
+                setUploadStatus("idle");
+                setUploadError(null);
+              }}
               style={{
                 marginTop: space.md,
                 padding: space.md,
@@ -207,11 +347,74 @@ export default function PhotoCaptureScreen({ navigation }: Props) {
               />
             </View>
 
+            {/* Upload progress indicator */}
+            {uploadStatus === "uploading" && (
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: space.md,
+                  padding: space.lg,
+                  backgroundColor: theme.primaryLight,
+                  borderRadius: radius.md,
+                  marginBottom: space.md,
+                }}
+              >
+                <ActivityIndicator size="small" color={theme.primary} />
+                <Typography variant="body" color={theme.primary} weight="600">
+                  Uploading photo…
+                </Typography>
+              </View>
+            )}
+
+            {/* Error banner with retry */}
+            {uploadStatus === "failed" && uploadError && (
+              <View
+                style={{
+                  padding: space.md,
+                  backgroundColor: theme.errorBg,
+                  borderRadius: radius.md,
+                  marginBottom: space.md,
+                  gap: space.sm,
+                }}
+              >
+                <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
+                  <Icon name="AlertCircle" size={16} color={theme.danger} />
+                  <Typography variant="body" color={theme.danger} weight="600">
+                    Upload failed
+                  </Typography>
+                </View>
+                <Typography variant="bodySmall" color={theme.danger}>
+                  {uploadError}
+                </Typography>
+                <TouchableOpacity
+                  onPress={handleRetry}
+                  style={{
+                    marginTop: space.xs,
+                    paddingVertical: space.sm,
+                    paddingHorizontal: space.md,
+                    backgroundColor: theme.danger,
+                    borderRadius: radius.sm,
+                    alignSelf: "flex-start",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    gap: space.xs,
+                  }}
+                >
+                  <Icon name="RefreshCw" size={14} color="#fff" />
+                  <Typography variant="bodySmall" color="#fff" weight="700">
+                    Retry Upload
+                  </Typography>
+                </TouchableOpacity>
+              </View>
+            )}
+
             <Button
-              title="Upload Photo"
+              title={uploadStatus === "uploading" ? "Uploading…" : "Upload Photo"}
               onPress={handleUpload}
-              loading={uploading}
-              disabled={uploading}
+              loading={uploadStatus === "uploading"}
+              disabled={uploadStatus === "uploading"}
               variant="primary"
               size="lg"
               icon={<Icon name="Upload" size={20} color={theme.primaryText} />}

@@ -170,8 +170,8 @@
     "semantic_hash": ""
   },
   "expo-app/app.json": {
-    "mtime": 1783590950.7693987,
-    "ast_hash": "b5122dd0e884749a86f2d7149735a24c",
+    "mtime": 1783604801.2600737,
+    "ast_hash": "60ecea9551ce127c2ed2b15da782c8b6",
     "semantic_hash": ""
   },
   "expo-app/babel.config.js": {
@@ -190,8 +190,8 @@
     "semantic_hash": "b02bcf4fde15f746f6e5248537d0b156"
   },
   "expo-app/package.json": {
-    "mtime": 1782642021.6831021,
-    "ast_hash": "d049032280fe6eabf0e96d7ac14383b0",
+    "mtime": 1783604784.006936,
+    "ast_hash": "50c3e87fa6adbe6ef416df5d8ba9e009",
     "semantic_hash": ""
   },
   "expo-app/src/App.tsx": {
@@ -350,8 +350,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/screens/photos/PhotoCaptureScreen.tsx": {
-    "mtime": 1782027002.9507372,
-    "ast_hash": "d85477d8ad7698f0ab7394f832292227",
+    "mtime": 1783605153.5374758,
+    "ast_hash": "53c0552cd2f92eeea9088a0af9c19e00",
     "semantic_hash": ""
   },
   "expo-app/src/screens/photos/PhotoCompareScreen.tsx": {
@@ -360,8 +360,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/screens/photos/PhotosTimelineScreen.tsx": {
-    "mtime": 1782038424.6367273,
-    "ast_hash": "808ba75eaa96e97ffc79491d2db8d6d2",
+    "mtime": 1783604759.0370731,
+    "ast_hash": "3a0e409cd93e92910836ed92275229c6",
     "semantic_hash": ""
   },
   "expo-app/src/screens/profile/EditProfileScreen.tsx": {

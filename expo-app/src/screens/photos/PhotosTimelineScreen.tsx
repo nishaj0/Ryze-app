@@ -8,6 +8,8 @@ import { ProgressPhoto } from "../../types";
 import { Typography, Card, Button, Icon, PhotosTimelineScreenSkeleton } from "../../components";
 import { useTheme } from "../../theme/themeStore";
 import { space, radius } from "../../theme/spacing";
+import * as MediaLibrary from "expo-media-library";
+import * as FileSystem from "expo-file-system";
 
 type Props = NativeStackScreenProps<PhotosStackParamList, "PhotosTimeline">;
 
@@ -17,6 +19,7 @@ export default function PhotosTimelineScreen({ navigation }: Props) {
   const theme = useTheme();
   const [photos, setPhotos] = useState<ProgressPhoto[]>([]);
   const [loading, setLoading] = useState(true);
+  const [downloadingId, setDownloadingId] = useState<string | null>(null);
 
   useEffect(() => {
     loadPhotos();
@@ -49,6 +52,41 @@ export default function PhotosTimelineScreen({ navigation }: Props) {
         },
       },
     ]);
+  };
+
+  const handleDownload = async (photo: ProgressPhoto) => {
+    try {
+      // Request media library permission
+      const { status } = await MediaLibrary.requestPermissionsAsync();
+      if (status !== "granted") {
+        Alert.alert(
+          "Permission needed",
+          "Photo library permission is required to save photos. Please enable it in Settings."
+        );
+        return;
+      }
+
+      setDownloadingId(photo.id);
+
+      // Download the image to a temp file
+      const filename = `ryze-progress-${photo.type.toLowerCase()}-${photo.id}.jpg`;
+      const localUri = `${FileSystem.cacheDirectory}${filename}`;
+      const downloadResult = await FileSystem.downloadAsync(photo.cloudinaryUrl, localUri);
+
+      if (downloadResult.status !== 200) {
+        throw new Error("Download failed");
+      }
+
+      // Save to device camera roll
+      await MediaLibrary.saveToLibraryAsync(downloadResult.uri);
+
+      Alert.alert("Saved!", "Photo saved to your gallery.");
+    } catch (err: any) {
+      console.error("[PhotosTimeline] download error:", err);
+      Alert.alert("Download failed", "Could not save the photo. Please try again.");
+    } finally {
+      setDownloadingId(null);
+    }
   };
 
   if (loading) {
@@ -133,72 +171,96 @@ export default function PhotosTimelineScreen({ navigation }: Props) {
           </View>
         ) : (
           <View style={{ paddingHorizontal: space.lg, gap: space.lg }}>
-            {photos.map((photo) => (
-              <Card key={photo.id} shadow="sm" style={{ padding: 0, overflow: "hidden" }}>
-                <Image
-                  source={{ uri: photo.cloudinaryUrl }}
-                  style={{ width: "100%", height: 320 }}
-                  resizeMode="cover"
-                />
-                <View style={{ padding: space.lg }}>
-                  <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-                    <View>
-                      <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: 4 }}>
-                        <View
+            {photos.map((photo) => {
+              const isDownloading = downloadingId === photo.id;
+              return (
+                <Card key={photo.id} shadow="sm" style={{ padding: 0, overflow: "hidden" }}>
+                  <Image
+                    source={{ uri: photo.cloudinaryUrl }}
+                    style={{ width: "100%", height: 320 }}
+                    resizeMode="cover"
+                  />
+                  <View style={{ padding: space.lg }}>
+                    <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+                      <View>
+                        <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: 4 }}>
+                          <View
+                            style={{
+                              backgroundColor: theme.primaryLight,
+                              paddingHorizontal: space.sm,
+                              paddingVertical: 2,
+                              borderRadius: 6,
+                            }}
+                          >
+                            <Typography variant="caption" color={theme.primary} weight="700" style={{ textTransform: "uppercase" }}>
+                              {photo.type}
+                            </Typography>
+                          </View>
+                        </View>
+                        <Typography variant="body" color={theme.textPrimary} weight="600">
+                          {new Date(photo.date).toLocaleDateString(undefined, {
+                            month: "long",
+                            day: "numeric",
+                            year: "numeric",
+                          })}
+                        </Typography>
+                      </View>
+
+                      {/* Action buttons: download + delete */}
+                      <View style={{ flexDirection: "row", gap: space.sm }}>
+                        <TouchableOpacity
+                          onPress={() => handleDownload(photo)}
+                          disabled={isDownloading}
                           style={{
+                            width: 36,
+                            height: 36,
+                            borderRadius: 18,
                             backgroundColor: theme.primaryLight,
-                            paddingHorizontal: space.sm,
-                            paddingVertical: 2,
-                            borderRadius: 6,
+                            alignItems: "center",
+                            justifyContent: "center",
+                            opacity: isDownloading ? 0.5 : 1,
                           }}
                         >
-                          <Typography variant="caption" color={theme.primary} weight="700" style={{ textTransform: "uppercase" }}>
-                            {photo.type}
-                          </Typography>
-                        </View>
+                          <Icon name={isDownloading ? "Loader" : "Download"} size={16} color={theme.primary} />
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                          onPress={() => handleDelete(photo.id)}
+                          style={{
+                            width: 36,
+                            height: 36,
+                            borderRadius: 18,
+                            backgroundColor: theme.errorBg,
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <Icon name="Trash2" size={16} color={theme.danger} />
+                        </TouchableOpacity>
                       </View>
-                      <Typography variant="body" color={theme.textPrimary} weight="600">
-                        {new Date(photo.date).toLocaleDateString(undefined, {
-                          month: "long",
-                          day: "numeric",
-                          year: "numeric",
-                        })}
-                      </Typography>
                     </View>
-                    <TouchableOpacity
-                      onPress={() => handleDelete(photo.id)}
-                      style={{
-                        width: 36,
-                        height: 36,
-                        borderRadius: 18,
-                        backgroundColor: theme.errorBg,
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <Icon name="Trash2" size={16} color={theme.danger} />
-                    </TouchableOpacity>
+
+                    {photo.notes && (
+                      <View
+                        style={{
+                          marginTop: space.md,
+                          padding: space.md,
+                          backgroundColor: theme.surfaceSecondary,
+                          borderRadius: radius.md,
+                          flexDirection: "row",
+                          gap: space.sm,
+                        }}
+                      >
+                        <Icon name="MessageSquare" size={14} color={theme.textMuted} />
+                        <Typography variant="bodySmall" color={theme.textSecondary} style={{ flex: 1 }}>
+                          {photo.notes}
+                        </Typography>
+                      </View>
+                    )}
                   </View>
-                  {photo.notes && (
-                    <View
-                      style={{
-                        marginTop: space.md,
-                        padding: space.md,
-                        backgroundColor: theme.surfaceSecondary,
-                        borderRadius: radius.md,
-                        flexDirection: "row",
-                        gap: space.sm,
-                      }}
-                    >
-                      <Icon name="MessageSquare" size={14} color={theme.textMuted} />
-                      <Typography variant="bodySmall" color={theme.textSecondary} style={{ flex: 1 }}>
-                        {photo.notes}
-                      </Typography>
-                    </View>
-                  )}
-                </View>
-              </Card>
-            ))}
+                </Card>
+              );
+            })}
           </View>
         )}
 
