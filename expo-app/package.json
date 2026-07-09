@@ -1,6 +1,6 @@
 {
   "name": "ryze-app",
-  "version": "1.0.0",
+  "version": "0.1.2",
   "main": "index.js",
   "scripts": {
     "start": "expo start",
