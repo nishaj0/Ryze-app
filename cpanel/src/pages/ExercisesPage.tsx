@@ -1,7 +1,8 @@
 import { useEffect, useState, useCallback } from 'react'
-import { Search, Dumbbell } from 'lucide-react'
+import { Search, Dumbbell, Eye } from 'lucide-react'
 import { getExercises } from '../api'
 import { PageLoader, Pagination } from '../components/UI'
+import ExercisePreviewModal from '../components/ExercisePreviewModal'
 
 interface Exercise {
   id: string; name: string; category?: string; equipment?: string;
@@ -17,6 +18,7 @@ export default function ExercisesPage() {
   const [searchInput, setSearchInput] = useState('')
   const [search, setSearch] = useState('')
   const [loading, setLoading] = useState(true)
+  const [previewExId, setPreviewExId] = useState<string | null>(null)
 
   const load = useCallback(() => {
     setLoading(true)
@@ -74,6 +76,7 @@ export default function ExercisesPage() {
                   <th>Level</th>
                   <th>Force</th>
                   <th>Mechanic</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -103,6 +106,15 @@ export default function ExercisesPage() {
                       </td>
                       <td style={{ fontSize: 13, color: 'var(--text-muted)', textTransform: 'capitalize' }}>{ex.force || '—'}</td>
                       <td style={{ fontSize: 13, color: 'var(--text-muted)', textTransform: 'capitalize' }}>{ex.mechanic || '—'}</td>
+                      <td>
+                        <button
+                          className="btn btn-sm btn-icon btn-secondary"
+                          title="Preview exercise"
+                          onClick={() => setPreviewExId(ex.id)}
+                        >
+                          <Eye size={13} />
+                        </button>
+                      </td>
                     </tr>
                   )
                 })}
@@ -119,6 +131,11 @@ export default function ExercisesPage() {
           <Pagination page={page} totalPages={totalPages} total={total} limit={30} onPage={setPage} />
         </>
       )}
+
+      <ExercisePreviewModal
+        exerciseId={previewExId}
+        onClose={() => setPreviewExId(null)}
+      />
     </div>
   )
 }

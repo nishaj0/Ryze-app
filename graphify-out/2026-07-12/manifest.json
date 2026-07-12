@@ -440,8 +440,8 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1783606677.1720006,
-    "ast_hash": "0405d7be14c52da0cb8a1189b6bef307",
+    "mtime": 1783690036.7693498,
+    "ast_hash": "ddbeb6f6782c70e47fb5e841c4ccc979",
     "semantic_hash": ""
   },
   ".agents/skills/dashboard/SKILL.md": {
@@ -14110,13 +14110,13 @@
     "semantic_hash": ""
   },
   "api/src/controllers/adminController.ts": {
-    "mtime": 1782033909.3701403,
-    "ast_hash": "270b717caed793965af824d26a1c1332",
+    "mtime": 1783847072.1351755,
+    "ast_hash": "e78b81eee519feac72e735d041740d60",
     "semantic_hash": ""
   },
   "api/src/routes/admin.ts": {
-    "mtime": 1782037090.2557309,
-    "ast_hash": "1c496bcbfc211f5ce7e3912f04248f47",
+    "mtime": 1783847082.3588748,
+    "ast_hash": "ebb98fd064b21d5f4a30ad87540d9195",
     "semantic_hash": ""
   },
   "cpanel/eslint.config.js": {
@@ -14135,13 +14135,13 @@
     "semantic_hash": ""
   },
   "cpanel/src/api.ts": {
-    "mtime": 1783444239.2954242,
-    "ast_hash": "9203fbe1d7d3cfd73a858c208d093df2",
+    "mtime": 1783847094.0387373,
+    "ast_hash": "ce9e09cb2b8fda50a206fd4d322c6078",
     "semantic_hash": ""
   },
   "cpanel/src/components/Sidebar.tsx": {
-    "mtime": 1783591268.573267,
-    "ast_hash": "32cea9b57c127742a3e7c043e1e2479d",
+    "mtime": 1783845651.3610916,
+    "ast_hash": "1afd883fc5e66079cde93fff99f3fb82",
     "semantic_hash": ""
   },
   "cpanel/src/components/Toast.tsx": {
@@ -14170,8 +14170,8 @@
     "semantic_hash": ""
   },
   "cpanel/src/pages/ExercisesPage.tsx": {
-    "mtime": 1782030328.737675,
-    "ast_hash": "38a09d752d942dfbeea8a6ea0e43b551",
+    "mtime": 1783847496.0610332,
+    "ast_hash": "f49a8b07d2d34dac501113f47d3fa1ce",
     "semantic_hash": ""
   },
   "cpanel/src/pages/LoginPage.tsx": {
@@ -14190,8 +14190,8 @@
     "semantic_hash": ""
   },
   "cpanel/src/pages/SplitsPage.tsx": {
-    "mtime": 1782030315.4399004,
-    "ast_hash": "372828fdb6261a5b2a5749cd3ce890c6",
+    "mtime": 1783847539.6644354,
+    "ast_hash": "55746742484a0a1226979d4e0bc4db5d",
     "semantic_hash": ""
   },
   "cpanel/src/pages/UsersPage.tsx": {
@@ -14532,6 +14532,16 @@
   "expo-app/src/components/ExerciseDetailSheet.tsx": {
     "mtime": 1783602253.8234043,
     "ast_hash": "2581fdc2a3dd4dabc5a229dbabc03096",
+    "semantic_hash": ""
+  },
+  "expo-app/.expo/settings.json": {
+    "mtime": 1783690767.1412752,
+    "ast_hash": "17a02b5796847c5b114c00a3f433cf2d",
+    "semantic_hash": ""
+  },
+  "cpanel/src/components/ExercisePreviewModal.tsx": {
+    "mtime": 1783846453.142967,
+    "ast_hash": "328636084f08f1f66c64548291ddc558",
     "semantic_hash": ""
   }
 }

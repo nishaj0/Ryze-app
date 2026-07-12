@@ -223,9 +223,22 @@ export const listExercises = async (req: Request, res: Response, next: NextFunct
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 30;
     const search = (req.query.search as string) || "";
+    const muscle = req.query.muscle as string | undefined;
+    const equipment = req.query.equipment as string | undefined;
+    const category = req.query.category as string | undefined;
+    const level = req.query.level as string | undefined;
+    const mechanic = req.query.mechanic as string | undefined;
+    const force = req.query.force as string | undefined;
     const skip = (page - 1) * limit;
 
-    const where = search ? { name: { contains: search, mode: "insensitive" as const } } : {};
+    const where: any = {};
+    if (search) where.name = { contains: search, mode: "insensitive" };
+    if (muscle) where.muscles = { some: { muscle: { name: muscle } } };
+    if (equipment) where.equipment = equipment;
+    if (category) where.category = category;
+    if (level) where.level = level;
+    if (mechanic) where.mechanic = mechanic;
+    if (force) where.force = force;
 
     const [exercises, total] = await Promise.all([
       prisma.exercise.findMany({
@@ -239,6 +252,52 @@ export const listExercises = async (req: Request, res: Response, next: NextFunct
     ]);
 
     res.json({ exercises, total, page, totalPages: Math.ceil(total / limit) });
+  } catch (err) { next(err); }
+};
+
+export const getExercise = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const exercise = await prisma.exercise.findUnique({
+      where: { id: req.params.id as string },
+      include: {
+        muscles: { include: { muscle: true } },
+        images: { orderBy: { order: "asc" } },
+        alternativesFrom: { include: { alternative: true } },
+      },
+    });
+
+    if (!exercise) {
+      return res.status(404).json({ error: "Exercise not found" });
+    }
+
+    res.json({ exercise });
+  } catch (err) { next(err); }
+};
+
+export const getExerciseFilters = async (_req: Request, res: Response, next: NextFunction) => {
+  try {
+    const [muscles, equipment, categories, levels, mechanics, forces] = await Promise.all([
+      prisma.exerciseMuscle.findMany({
+        where: { isPrimary: true },
+        select: { muscle: { select: { name: true } } },
+        distinct: ["muscleId"],
+        orderBy: { muscle: { name: "asc" } },
+      }),
+      prisma.exercise.findMany({ where: { equipment: { not: null } }, select: { equipment: true }, distinct: ["equipment"] }),
+      prisma.exercise.findMany({ where: { category: { not: null } }, select: { category: true }, distinct: ["category"] }),
+      prisma.exercise.findMany({ where: { level: { not: null } }, select: { level: true }, distinct: ["level"] }),
+      prisma.exercise.findMany({ where: { mechanic: { not: null } }, select: { mechanic: true }, distinct: ["mechanic"] }),
+      prisma.exercise.findMany({ where: { force: { not: null } }, select: { force: true }, distinct: ["force"] }),
+    ]);
+
+    res.json({
+      muscles: muscles.map(m => m.muscle.name),
+      equipment: equipment.map(e => e.equipment).filter(Boolean).sort(),
+      categories: categories.map(c => c.category).filter(Boolean).sort(),
+      levels: levels.map(l => l.level).filter(Boolean).sort(),
+      mechanics: mechanics.map(m => m.mechanic).filter(Boolean).sort(),
+      forces: forces.map(f => f.force).filter(Boolean).sort(),
+    });
   } catch (err) { next(err); }
 };
 

@@ -36,6 +36,8 @@ export const togglePrebuilt = (id: string) => api.patch(`/splits/${id}/toggle-pr
 
 // Exercises
 export const getExercises = (params: Record<string, any>) => api.get('/exercises', { params }).then(r => r.data)
+export const getExercise = (id: string) => api.get(`/exercises/${id}`).then(r => r.data)
+export const getExerciseFilters = () => api.get('/exercises/filters').then(r => r.data)
 export const createExercise = (data: Record<string, any>) => api.post('/exercises', data).then(r => r.data)
 
 // Exercise Requests

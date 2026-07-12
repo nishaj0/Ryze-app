@@ -1,8 +1,9 @@
 import { useEffect, useState, useCallback } from 'react'
-import { Plus, Trash2, RefreshCw, Star, StarOff, ChevronUp, X } from 'lucide-react'
-import { getSplits, deleteSplit, togglePrebuilt, createSplit, getExercises } from '../api'
+import { Plus, Trash2, RefreshCw, Star, StarOff, ChevronUp, ChevronDown, X, Eye, SlidersHorizontal } from 'lucide-react'
+import { getSplits, deleteSplit, togglePrebuilt, createSplit, getExercises, getExerciseFilters } from '../api'
 import { useToast } from '../components/Toast'
 import { PageLoader, Pagination, ConfirmDialog } from '../components/UI'
+import ExercisePreviewModal from '../components/ExercisePreviewModal'
 import { format, parseISO } from 'date-fns'
 
 interface Split {
@@ -23,7 +24,7 @@ export default function SplitsPage() {
   const [total, setTotal] = useState(0)
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
-  const [filter, setFilter] = useState<'all' | 'prebuilt' | 'user'>('all')
+  const [filter, setFilter] = useState<'all' | 'prebuilt' | 'draft'>('all')
   const [loading, setLoading] = useState(true)
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null)
   const [createOpen, setCreateOpen] = useState(false)
@@ -37,12 +38,16 @@ export default function SplitsPage() {
   const [exPage, setExPage] = useState(1)
   const [activeDayIdx, setActiveDayIdx] = useState<number | null>(null)
   const [creating, setCreating] = useState(false)
+  const [previewExId, setPreviewExId] = useState<string | null>(null)
+  const [exFilters, setExFilters] = useState({ muscle: '', level: '', equipment: '', category: '', mechanic: '', force: '' })
+  const [filterOptions, setFilterOptions] = useState<{ muscles: string[]; equipment: string[]; categories: string[]; levels: string[]; mechanics: string[]; forces: string[] }>({ muscles: [], equipment: [], categories: [], levels: [], mechanics: [], forces: [] })
+  const [showExFilters, setShowExFilters] = useState(false)
 
   const loadSplits = useCallback(() => {
     setLoading(true)
     const params: any = { page, limit: 20 }
     if (filter === 'prebuilt') params.isPrebuilt = 'true'
-    if (filter === 'user') params.isPrebuilt = 'false'
+    if (filter === 'draft') params.isPrebuilt = 'false'
     getSplits(params)
       .then(d => { setSplits(d.splits); setTotal(d.total); setTotalPages(d.totalPages) })
       .catch(() => toast('Failed to load splits', 'error'))
@@ -52,12 +57,27 @@ export default function SplitsPage() {
   useEffect(() => { loadSplits() }, [loadSplits])
 
   const loadExercises = useCallback(() => {
-    getExercises({ page: exPage, limit: 20, search: exSearch })
+    const params: Record<string, any> = { page: exPage, limit: 20, search: exSearch }
+    if (exFilters.muscle) params.muscle = exFilters.muscle
+    if (exFilters.level) params.level = exFilters.level
+    if (exFilters.equipment) params.equipment = exFilters.equipment
+    if (exFilters.category) params.category = exFilters.category
+    if (exFilters.mechanic) params.mechanic = exFilters.mechanic
+    if (exFilters.force) params.force = exFilters.force
+    getExercises(params)
       .then((d: any) => { setExercises(d.exercises) })
       .catch(console.error)
-  }, [exPage, exSearch])
+  }, [exPage, exSearch, exFilters])
 
   useEffect(() => { if (createOpen) loadExercises() }, [createOpen, loadExercises])
+
+  useEffect(() => {
+    if (createOpen) {
+      getExerciseFilters()
+        .then((d: any) => setFilterOptions(d))
+        .catch(console.error)
+    }
+  }, [createOpen])
 
   const handleDelete = async () => {
     if (!deleteConfirm) return
@@ -99,18 +119,35 @@ export default function SplitsPage() {
     } : d))
   }
 
-  const handleCreate = async () => {
+  const handleCreate = async (isPrebuilt: boolean) => {
     if (!form.name.trim()) { toast('Split name is required', 'error'); return }
     setCreating(true)
     try {
-      await createSplit({ ...form, days })
-      toast('Split created successfully!', 'success')
+      await createSplit({ ...form, days, isPrebuilt })
+      toast(isPrebuilt ? 'Split published!' : 'Draft saved!', 'success')
       setCreateOpen(false)
       setForm({ name: '', description: '', type: 'push_pull_legs', daysPerWeek: 3 })
       setDays([])
       loadSplits()
     } catch { toast('Failed to create split', 'error') }
     finally { setCreating(false) }
+  }
+
+  const clearExFilters = () => {
+    setExFilters({ muscle: '', level: '', equipment: '', category: '', mechanic: '', force: '' })
+    setExPage(1)
+  }
+
+  const activeFilterCount = [exFilters.muscle, exFilters.level, exFilters.equipment, exFilters.category, exFilters.mechanic, exFilters.force].filter(Boolean).length
+
+  const updateExFilter = (key: string, value: string) => {
+    setExFilters(f => ({ ...f, [key]: value }))
+    setExPage(1)
+  }
+
+  const clearSingleFilter = (key: string) => {
+    setExFilters(f => ({ ...f, [key]: '' }))
+    setExPage(1)
   }
 
   return (
@@ -122,14 +159,14 @@ export default function SplitsPage() {
         </div>
         <div className="row">
           <div className="row" style={{ gap: 4 }}>
-            {(['all', 'prebuilt', 'user'] as const).map(f => (
+            {(['all', 'prebuilt', 'draft'] as const).map(f => (
               <button
                 key={f}
                 className={`btn btn-sm ${filter === f ? 'btn-primary' : 'btn-secondary'}`}
                 onClick={() => { setFilter(f); setPage(1) }}
                 style={{ textTransform: 'capitalize' }}
               >
-                {f === 'all' ? 'All' : f === 'prebuilt' ? '⭐ Prebuilt' : '👤 User'}
+                {f === 'all' ? 'All' : f === 'prebuilt' ? '⭐ Prebuilt' : '📝 Draft'}
               </button>
             ))}
           </div>
@@ -167,7 +204,7 @@ export default function SplitsPage() {
                     <td style={{ fontWeight: 600, color: 'var(--primary)' }}>{s._count.days} days</td>
                     <td>
                       <span className={`badge ${s.isPrebuilt ? 'badge-warning' : 'badge-muted'}`}>
-                        {s.isPrebuilt ? '⭐ Prebuilt' : 'User'}
+                        {s.isPrebuilt ? '⭐ Prebuilt' : '📝 Draft'}
                       </span>
                     </td>
                     <td style={{ fontWeight: 600 }}>{s._count.userSplits}</td>
@@ -325,12 +362,115 @@ export default function SplitsPage() {
 
                   {activeDayIdx === i && (
                     <div style={{ marginTop: 12, padding: 12, background: 'var(--surface)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)' }}>
+                      {/* Search + Filters toggle */}
                       <div className="row" style={{ gap: 8, marginBottom: 10 }}>
                         <div className="search-wrap" style={{ flex: 1, maxWidth: '100%' }}>
                           <Search size={14} />
                           <input value={exSearch} onChange={e => { setExSearch(e.target.value); setExPage(1) }} placeholder="Search exercises..." />
                         </div>
+                        <button
+                          className={`btn btn-sm ${showExFilters || activeFilterCount > 0 ? 'btn-primary' : 'btn-secondary'}`}
+                          onClick={() => setShowExFilters(s => !s)}
+                          style={{ whiteSpace: 'nowrap' }}
+                        >
+                          <SlidersHorizontal size={13} />
+                          Filters
+                          {activeFilterCount > 0 && (
+                            <span style={{
+                              background: showExFilters ? 'white' : 'var(--primary)',
+                              color: showExFilters ? 'var(--primary)' : 'white',
+                              borderRadius: 10, padding: '0 6px', fontSize: 10,
+                              minWidth: 18, height: 18, display: 'inline-flex',
+                              alignItems: 'center', justifyContent: 'center', fontWeight: 700,
+                            }}>{activeFilterCount}</span>
+                          )}
+                          {showExFilters ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
+                        </button>
                       </div>
+
+                      {/* Collapsible filter panel */}
+                      {showExFilters && (
+                        <div style={{
+                          marginBottom: 10, padding: 12,
+                          background: 'var(--surface-secondary)',
+                          borderRadius: 'var(--radius-md)',
+                          border: '1px solid var(--border)',
+                        }}>
+                          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10 }}>
+                            <div className="input-group">
+                              <label className="input-label">Muscle</label>
+                              <select value={exFilters.muscle} onChange={e => updateExFilter('muscle', e.target.value)}>
+                                <option value="">All muscles</option>
+                                {filterOptions.muscles.map(m => <option key={m} value={m}>{m}</option>)}
+                              </select>
+                            </div>
+                            <div className="input-group">
+                              <label className="input-label">Level</label>
+                              <select value={exFilters.level} onChange={e => updateExFilter('level', e.target.value)}>
+                                <option value="">All levels</option>
+                                {filterOptions.levels.map(l => <option key={l} value={l}>{l}</option>)}
+                              </select>
+                            </div>
+                            <div className="input-group">
+                              <label className="input-label">Equipment</label>
+                              <select value={exFilters.equipment} onChange={e => updateExFilter('equipment', e.target.value)}>
+                                <option value="">All equipment</option>
+                                {filterOptions.equipment.map(e => <option key={e} value={e}>{e}</option>)}
+                              </select>
+                            </div>
+                            <div className="input-group">
+                              <label className="input-label">Category</label>
+                              <select value={exFilters.category} onChange={e => updateExFilter('category', e.target.value)}>
+                                <option value="">All categories</option>
+                                {filterOptions.categories.map(c => <option key={c} value={c}>{c}</option>)}
+                              </select>
+                            </div>
+                            <div className="input-group">
+                              <label className="input-label">Mechanic</label>
+                              <select value={exFilters.mechanic} onChange={e => updateExFilter('mechanic', e.target.value)}>
+                                <option value="">All mechanics</option>
+                                {filterOptions.mechanics.map(m => <option key={m} value={m}>{m}</option>)}
+                              </select>
+                            </div>
+                            <div className="input-group">
+                              <label className="input-label">Force</label>
+                              <select value={exFilters.force} onChange={e => updateExFilter('force', e.target.value)}>
+                                <option value="">All force types</option>
+                                {filterOptions.forces.map(f => <option key={f} value={f}>{f}</option>)}
+                              </select>
+                            </div>
+                          </div>
+                          {activeFilterCount > 0 && (
+                            <button className="btn btn-sm btn-secondary" onClick={clearExFilters} style={{ marginTop: 10, fontSize: 12 }}>
+                              <X size={12} /> Clear all filters
+                            </button>
+                          )}
+                        </div>
+                      )}
+
+                      {/* Active filter chips */}
+                      {activeFilterCount > 0 && !showExFilters && (
+                        <div className="tag-wrap" style={{ marginBottom: 10 }}>
+                          {(['muscle', 'level', 'equipment', 'category', 'mechanic', 'force'] as const).map(k => {
+                            const v = exFilters[k]
+                            if (!v) return null
+                            return (
+                              <span key={k} className="tag tag-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: 4, textTransform: 'capitalize' }}>
+                                {v}
+                                <button
+                                  onClick={() => clearSingleFilter(k)}
+                                  style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'inline-flex', color: 'var(--primary)', lineHeight: 1 }}
+                                  title="Remove filter"
+                                >
+                                  <X size={11} />
+                                </button>
+                              </span>
+                            )
+                          })}
+                        </div>
+                      )}
+
+                      {/* Exercise results */}
                       <div style={{ maxHeight: 200, overflowY: 'auto' }}>
                         {exercises.map((ex: any) => (
                           <div key={ex.id}
@@ -344,6 +484,13 @@ export default function SplitsPage() {
                                 <span key={m.id} className="tag">{m.muscle.name}</span>
                               ))}
                             </div>
+                            <button
+                              className="btn btn-sm btn-icon btn-secondary"
+                              title="Preview exercise"
+                              onClick={(e) => { e.stopPropagation(); setPreviewExId(ex.id) }}
+                            >
+                              <Eye size={13} />
+                            </button>
                             <Plus size={14} color="var(--primary)" />
                           </div>
                         ))}
@@ -356,8 +503,11 @@ export default function SplitsPage() {
 
             <div className="modal-footer">
               <button className="btn btn-secondary" onClick={() => setCreateOpen(false)}>Cancel</button>
-              <button className="btn btn-primary" onClick={handleCreate} disabled={creating}>
-                {creating ? 'Creating...' : '✓ Create Split'}
+              <button className="btn btn-secondary" onClick={() => handleCreate(false)} disabled={creating}>
+                Save as Draft
+              </button>
+              <button className="btn btn-primary" onClick={() => handleCreate(true)} disabled={creating}>
+                {creating ? 'Publishing...' : '✓ Publish Split'}
               </button>
             </div>
           </div>
@@ -372,6 +522,11 @@ export default function SplitsPage() {
         onConfirm={handleDelete}
         onCancel={() => setDeleteConfirm(null)}
         danger
+      />
+
+      <ExercisePreviewModal
+        exerciseId={previewExId}
+        onClose={() => setPreviewExId(null)}
       />
     </div>
   )

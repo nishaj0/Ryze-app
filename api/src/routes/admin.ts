@@ -37,6 +37,8 @@ router.patch("/splits/:id/toggle-prebuilt", wrap(admin.toggleSplitPrebuilt));
 
 // Exercises
 router.get("/exercises", wrap(admin.listExercises));
+router.get("/exercises/filters", wrap(admin.getExerciseFilters));
+router.get("/exercises/:id", wrap(admin.getExercise));
 router.post("/exercises", wrap(admin.createExercise));
 
 // Exercise Requests

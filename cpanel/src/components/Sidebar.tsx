@@ -1,7 +1,8 @@
 import { NavLink } from 'react-router-dom'
 import {
   LayoutDashboard, Users, Layers, Activity,
-  Bell, Settings, LogOut, ClipboardList, PlusCircle, MessageSquare, LifeBuoy
+  Bell, Settings, LogOut, ClipboardList, PlusCircle, MessageSquare, LifeBuoy,
+  Dumbbell
 } from 'lucide-react'
 import { setAdminKey } from '../api'
 

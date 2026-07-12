@@ -4,220 +4,661 @@
   "graph": {},
   "nodes": [
     {
-      "label": "package.json",
+      "label": "adminController.ts",
       "file_type": "code",
-      "source_file": "package.json",
+      "source_file": "api/src/controllers/adminController.ts",
       "source_location": "L1",
-      "id": "package",
-      "community": 12,
-      "norm_label": "package.json"
+      "id": "controllers_admincontroller",
+      "community": 925,
+      "norm_label": "admincontroller.ts"
     },
     {
-      "label": "name",
+      "label": "prisma",
       "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L2",
-      "id": "package_name",
-      "community": 12,
-      "norm_label": "name"
-    },
-    {
-      "label": "version",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L3",
-      "id": "package_version",
-      "community": 12,
-      "norm_label": "version"
-    },
-    {
-      "label": "private",
-      "file_type": "code",
-      "source_file": "package.json",
+      "source_file": "api/src/controllers/adminController.ts",
       "source_location": "L4",
-      "id": "package_private",
-      "community": 12,
-      "norm_label": "private"
+      "id": "controllers_admincontroller_prisma",
+      "community": 925,
+      "norm_label": "prisma"
     },
     {
-      "label": "scripts",
+      "label": "getDashboardStats()",
       "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L5",
-      "id": "package_scripts",
-      "community": 12,
-      "norm_label": "scripts"
-    },
-    {
-      "label": "api:dev",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L6",
-      "id": "package_scripts_api_dev",
-      "community": 12,
-      "norm_label": "api:dev"
-    },
-    {
-      "label": "api:build",
-      "file_type": "code",
-      "source_file": "package.json",
+      "source_file": "api/src/controllers/adminController.ts",
       "source_location": "L7",
-      "id": "package_scripts_api_build",
-      "community": 12,
-      "norm_label": "api:build"
+      "id": "controllers_admincontroller_getdashboardstats",
+      "community": 925,
+      "norm_label": "getdashboardstats()"
     },
     {
-      "label": "api:db:migrate",
+      "label": "listUsers()",
       "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L8",
-      "id": "package_scripts_api_db_migrate",
-      "community": 12,
-      "norm_label": "api:db:migrate"
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L60",
+      "id": "controllers_admincontroller_listusers",
+      "community": 925,
+      "norm_label": "listusers()"
     },
     {
-      "label": "api:db:seed",
+      "label": "getUser()",
       "file_type": "code",
-      "source_file": "package.json",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L90",
+      "id": "controllers_admincontroller_getuser",
+      "community": 925,
+      "norm_label": "getuser()"
+    },
+    {
+      "label": "updateUser()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L105",
+      "id": "controllers_admincontroller_updateuser",
+      "community": 925,
+      "norm_label": "updateuser()"
+    },
+    {
+      "label": "deleteUser()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L117",
+      "id": "controllers_admincontroller_deleteuser",
+      "community": 925,
+      "norm_label": "deleteuser()"
+    },
+    {
+      "label": "resetOnboarding()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L124",
+      "id": "controllers_admincontroller_resetonboarding",
+      "community": 925,
+      "norm_label": "resetonboarding()"
+    },
+    {
+      "label": "listAllSplits()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L140",
+      "id": "controllers_admincontroller_listallsplits",
+      "community": 925,
+      "norm_label": "listallsplits()"
+    },
+    {
+      "label": "createPrebuiltSplit()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L167",
+      "id": "controllers_admincontroller_createprebuiltsplit",
+      "community": 925,
+      "norm_label": "createprebuiltsplit()"
+    },
+    {
+      "label": "deleteSplit()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L201",
+      "id": "controllers_admincontroller_deletesplit",
+      "community": 925,
+      "norm_label": "deletesplit()"
+    },
+    {
+      "label": "toggleSplitPrebuilt()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L208",
+      "id": "controllers_admincontroller_togglesplitprebuilt",
+      "community": 925,
+      "norm_label": "togglesplitprebuilt()"
+    },
+    {
+      "label": "listExercises()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L221",
+      "id": "controllers_admincontroller_listexercises",
+      "community": 925,
+      "norm_label": "listexercises()"
+    },
+    {
+      "label": "getExercise()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L258",
+      "id": "controllers_admincontroller_getexercise",
+      "community": 925,
+      "norm_label": "getexercise()"
+    },
+    {
+      "label": "getExerciseFilters()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L277",
+      "id": "controllers_admincontroller_getexercisefilters",
+      "community": 925,
+      "norm_label": "getexercisefilters()"
+    },
+    {
+      "label": "listSessions()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L305",
+      "id": "controllers_admincontroller_listsessions",
+      "community": 925,
+      "norm_label": "listsessions()"
+    },
+    {
+      "label": "sendBroadcast()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L330",
+      "id": "controllers_admincontroller_sendbroadcast",
+      "community": 925,
+      "norm_label": "sendbroadcast()"
+    },
+    {
+      "label": "getOnboardingStats()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L342",
+      "id": "controllers_admincontroller_getonboardingstats",
+      "community": 925,
+      "norm_label": "getonboardingstats()"
+    },
+    {
+      "label": "listExerciseRequests()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L381",
+      "id": "controllers_admincontroller_listexerciserequests",
+      "community": 925,
+      "norm_label": "listexerciserequests()"
+    },
+    {
+      "label": "updateExerciseRequest()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L407",
+      "id": "controllers_admincontroller_updateexerciserequest",
+      "community": 925,
+      "norm_label": "updateexerciserequest()"
+    },
+    {
+      "label": "createExercise()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L426",
+      "id": "controllers_admincontroller_createexercise",
+      "community": 925,
+      "norm_label": "createexercise()"
+    },
+    {
+      "label": "admin.ts",
+      "file_type": "code",
+      "source_file": "api/src/routes/admin.ts",
+      "source_location": "L1",
+      "id": "routes_admin",
+      "community": 15,
+      "norm_label": "admin.ts"
+    },
+    {
+      "label": "router",
+      "file_type": "code",
+      "source_file": "api/src/routes/admin.ts",
+      "source_location": "L6",
+      "id": "routes_admin_router",
+      "community": 15,
+      "norm_label": "router"
+    },
+    {
+      "label": "adminAuth()",
+      "file_type": "code",
+      "source_file": "api/src/routes/admin.ts",
       "source_location": "L9",
-      "id": "package_scripts_api_db_seed",
-      "community": 12,
-      "norm_label": "api:db:seed"
+      "id": "routes_admin_adminauth",
+      "community": 15,
+      "norm_label": "adminauth()"
     },
     {
-      "label": "api:db:studio",
+      "label": "wrap()",
       "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L10",
-      "id": "package_scripts_api_db_studio",
-      "community": 12,
-      "norm_label": "api:db:studio"
-    },
-    {
-      "label": "api:test",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L11",
-      "id": "package_scripts_api_test",
-      "community": 12,
-      "norm_label": "api:test"
-    },
-    {
-      "label": "app:start",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L12",
-      "id": "package_scripts_app_start",
-      "community": 12,
-      "norm_label": "app:start"
-    },
-    {
-      "label": "app:tunnel",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L13",
-      "id": "package_scripts_app_tunnel",
-      "community": 12,
-      "norm_label": "app:tunnel"
-    },
-    {
-      "label": "app:android",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L14",
-      "id": "package_scripts_app_android",
-      "community": 12,
-      "norm_label": "app:android"
-    },
-    {
-      "label": "app:ios",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L15",
-      "id": "package_scripts_app_ios",
-      "community": 12,
-      "norm_label": "app:ios"
-    },
-    {
-      "label": "app:test",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L16",
-      "id": "package_scripts_app_test",
-      "community": 12,
-      "norm_label": "app:test"
-    },
-    {
-      "label": "cpanel:dev",
-      "file_type": "code",
-      "source_file": "package.json",
+      "source_file": "api/src/routes/admin.ts",
       "source_location": "L17",
-      "id": "package_scripts_cpanel_dev",
-      "community": 12,
-      "norm_label": "cpanel:dev"
+      "id": "routes_admin_wrap",
+      "community": 15,
+      "norm_label": "wrap()"
     },
     {
-      "label": "cpanel:build",
+      "label": "api.ts",
       "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L18",
-      "id": "package_scripts_cpanel_build",
-      "community": 12,
-      "norm_label": "cpanel:build"
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L1",
+      "id": "src_api",
+      "community": 934,
+      "norm_label": "api.ts"
     },
     {
-      "label": "test",
+      "label": "api",
       "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L19",
-      "id": "package_scripts_test",
-      "community": 12,
-      "norm_label": "test"
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L6",
+      "id": "src_api_api",
+      "community": 934,
+      "norm_label": "api"
     },
     {
-      "label": "dev",
+      "label": "setAdminKey()",
       "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L20",
-      "id": "package_scripts_dev",
-      "community": 12,
-      "norm_label": "dev"
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L12",
+      "id": "src_api_setadminkey",
+      "community": 932,
+      "norm_label": "setadminkey()"
     },
     {
-      "label": "dev:all",
+      "label": "getAdminKey()",
       "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L21",
-      "id": "package_scripts_dev_all",
-      "community": 12,
-      "norm_label": "dev:all"
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L17",
+      "id": "src_api_getadminkey",
+      "community": 932,
+      "norm_label": "getadminkey()"
     },
     {
-      "label": "setup",
+      "label": "getDashboard()",
       "file_type": "code",
-      "source_file": "package.json",
+      "source_file": "cpanel/src/api.ts",
       "source_location": "L22",
-      "id": "package_scripts_setup",
-      "community": 12,
-      "norm_label": "setup"
+      "id": "src_api_getdashboard",
+      "community": 935,
+      "norm_label": "getdashboard()"
     },
     {
-      "label": "devDependencies",
+      "label": "getUsers()",
       "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L24",
-      "id": "package_devdependencies",
-      "community": 12,
-      "norm_label": "devdependencies"
-    },
-    {
-      "label": "concurrently",
-      "file_type": "code",
-      "source_file": "package.json",
+      "source_file": "cpanel/src/api.ts",
       "source_location": "L25",
-      "id": "package_devdependencies_concurrently",
-      "community": 12,
-      "norm_label": "concurrently"
+      "id": "src_api_getusers",
+      "community": 934,
+      "norm_label": "getusers()"
+    },
+    {
+      "label": "getUser()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L26",
+      "id": "src_api_getuser",
+      "community": 934,
+      "norm_label": "getuser()"
+    },
+    {
+      "label": "updateUser()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L27",
+      "id": "src_api_updateuser",
+      "community": 934,
+      "norm_label": "updateuser()"
+    },
+    {
+      "label": "deleteUser()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L28",
+      "id": "src_api_deleteuser",
+      "community": 934,
+      "norm_label": "deleteuser()"
+    },
+    {
+      "label": "resetOnboarding()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L29",
+      "id": "src_api_resetonboarding",
+      "community": 934,
+      "norm_label": "resetonboarding()"
+    },
+    {
+      "label": "getSplits()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L32",
+      "id": "src_api_getsplits",
+      "community": 934,
+      "norm_label": "getsplits()"
+    },
+    {
+      "label": "createSplit()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L33",
+      "id": "src_api_createsplit",
+      "community": 934,
+      "norm_label": "createsplit()"
+    },
+    {
+      "label": "deleteSplit()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L34",
+      "id": "src_api_deletesplit",
+      "community": 934,
+      "norm_label": "deletesplit()"
+    },
+    {
+      "label": "togglePrebuilt()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L35",
+      "id": "src_api_toggleprebuilt",
+      "community": 934,
+      "norm_label": "toggleprebuilt()"
+    },
+    {
+      "label": "getExercises()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L38",
+      "id": "src_api_getexercises",
+      "community": 947,
+      "norm_label": "getexercises()"
+    },
+    {
+      "label": "getExercise()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L39",
+      "id": "src_api_getexercise",
+      "community": 30,
+      "norm_label": "getexercise()"
+    },
+    {
+      "label": "getExerciseFilters()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L40",
+      "id": "src_api_getexercisefilters",
+      "community": 934,
+      "norm_label": "getexercisefilters()"
+    },
+    {
+      "label": "createExercise()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L41",
+      "id": "src_api_createexercise",
+      "community": 934,
+      "norm_label": "createexercise()"
+    },
+    {
+      "label": "getExerciseRequests()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L44",
+      "id": "src_api_getexerciserequests",
+      "community": 934,
+      "norm_label": "getexerciserequests()"
+    },
+    {
+      "label": "updateExerciseRequest()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L45",
+      "id": "src_api_updateexerciserequest",
+      "community": 934,
+      "norm_label": "updateexerciserequest()"
+    },
+    {
+      "label": "getSessions()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L48",
+      "id": "src_api_getsessions",
+      "community": 31,
+      "norm_label": "getsessions()"
+    },
+    {
+      "label": "sendBroadcast()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L51",
+      "id": "src_api_sendbroadcast",
+      "community": 933,
+      "norm_label": "sendbroadcast()"
+    },
+    {
+      "label": "getOnboardingStats()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L55",
+      "id": "src_api_getonboardingstats",
+      "community": 947,
+      "norm_label": "getonboardingstats()"
+    },
+    {
+      "label": "getAppSettings()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L58",
+      "id": "src_api_getappsettings",
+      "community": 932,
+      "norm_label": "getappsettings()"
+    },
+    {
+      "label": "updateAppSettings()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L59",
+      "id": "src_api_updateappsettings",
+      "community": 932,
+      "norm_label": "updateappsettings()"
+    },
+    {
+      "label": "getSupportTickets()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L60",
+      "id": "src_api_getsupporttickets",
+      "community": 933,
+      "norm_label": "getsupporttickets()"
+    },
+    {
+      "label": "respondToSupportTicket()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L61",
+      "id": "src_api_respondtosupportticket",
+      "community": 933,
+      "norm_label": "respondtosupportticket()"
+    },
+    {
+      "label": "ExercisePreviewModal.tsx",
+      "file_type": "code",
+      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
+      "source_location": "L1",
+      "id": "components_exercisepreviewmodal",
+      "community": 30,
+      "norm_label": "exercisepreviewmodal.tsx"
+    },
+    {
+      "label": "ExerciseImage",
+      "file_type": "code",
+      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
+      "source_location": "L6",
+      "id": "components_exercisepreviewmodal_exerciseimage",
+      "community": 30,
+      "norm_label": "exerciseimage"
+    },
+    {
+      "label": "ExerciseMuscle",
+      "file_type": "code",
+      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
+      "source_location": "L7",
+      "id": "components_exercisepreviewmodal_exercisemuscle",
+      "community": 30,
+      "norm_label": "exercisemuscle"
+    },
+    {
+      "label": "ExerciseAlternative",
+      "file_type": "code",
+      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
+      "source_location": "L8",
+      "id": "components_exercisepreviewmodal_exercisealternative",
+      "community": 30,
+      "norm_label": "exercisealternative"
+    },
+    {
+      "label": "ExerciseDetail",
+      "file_type": "code",
+      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
+      "source_location": "L10",
+      "id": "components_exercisepreviewmodal_exercisedetail",
+      "community": 30,
+      "norm_label": "exercisedetail"
+    },
+    {
+      "label": "Props",
+      "file_type": "code",
+      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
+      "source_location": "L19",
+      "id": "components_exercisepreviewmodal_props",
+      "community": 30,
+      "norm_label": "props"
+    },
+    {
+      "label": "ExerciseImageCrossfade()",
+      "file_type": "code",
+      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
+      "source_location": "L24",
+      "id": "components_exercisepreviewmodal_exerciseimagecrossfade",
+      "community": 30,
+      "norm_label": "exerciseimagecrossfade()"
+    },
+    {
+      "label": "levelBadge()",
+      "file_type": "code",
+      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
+      "source_location": "L86",
+      "id": "components_exercisepreviewmodal_levelbadge",
+      "community": 30,
+      "norm_label": "levelbadge()"
+    },
+    {
+      "label": "ExercisePreviewModal()",
+      "file_type": "code",
+      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
+      "source_location": "L94",
+      "id": "components_exercisepreviewmodal_exercisepreviewmodal",
+      "community": 30,
+      "norm_label": "exercisepreviewmodal()"
+    },
+    {
+      "label": "Sidebar.tsx",
+      "file_type": "code",
+      "source_file": "cpanel/src/components/Sidebar.tsx",
+      "source_location": "L1",
+      "id": "components_sidebar",
+      "community": 932,
+      "norm_label": "sidebar.tsx"
+    },
+    {
+      "label": "nav",
+      "file_type": "code",
+      "source_file": "cpanel/src/components/Sidebar.tsx",
+      "source_location": "L9",
+      "id": "components_sidebar_nav",
+      "community": 932,
+      "norm_label": "nav"
+    },
+    {
+      "label": "Sidebar()",
+      "file_type": "code",
+      "source_file": "cpanel/src/components/Sidebar.tsx",
+      "source_location": "L29",
+      "id": "components_sidebar_sidebar",
+      "community": 932,
+      "norm_label": "sidebar()"
+    },
+    {
+      "label": "ExercisesPage.tsx",
+      "file_type": "code",
+      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
+      "source_location": "L1",
+      "id": "pages_exercisespage",
+      "community": 947,
+      "norm_label": "exercisespage.tsx"
+    },
+    {
+      "label": "Exercise",
+      "file_type": "code",
+      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
+      "source_location": "L7",
+      "id": "pages_exercisespage_exercise",
+      "community": 947,
+      "norm_label": "exercise"
+    },
+    {
+      "label": "ExercisesPage()",
+      "file_type": "code",
+      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
+      "source_location": "L13",
+      "id": "pages_exercisespage_exercisespage",
+      "community": 947,
+      "norm_label": "exercisespage()"
+    },
+    {
+      "label": "SplitsPage.tsx",
+      "file_type": "code",
+      "source_file": "cpanel/src/pages/SplitsPage.tsx",
+      "source_location": "L1",
+      "id": "pages_splitspage",
+      "community": 934,
+      "norm_label": "splitspage.tsx"
+    },
+    {
+      "label": "Split",
+      "file_type": "code",
+      "source_file": "cpanel/src/pages/SplitsPage.tsx",
+      "source_location": "L9",
+      "id": "pages_splitspage_split",
+      "community": 934,
+      "norm_label": "split"
+    },
+    {
+      "label": "DayForm",
+      "file_type": "code",
+      "source_file": "cpanel/src/pages/SplitsPage.tsx",
+      "source_location": "L15",
+      "id": "pages_splitspage_dayform",
+      "community": 934,
+      "norm_label": "dayform"
+    },
+    {
+      "label": "MUSCLE_GROUPS",
+      "file_type": "code",
+      "source_file": "cpanel/src/pages/SplitsPage.tsx",
+      "source_location": "L20",
+      "id": "pages_splitspage_muscle_groups",
+      "community": 934,
+      "norm_label": "muscle_groups"
+    },
+    {
+      "label": "SplitsPage()",
+      "file_type": "code",
+      "source_file": "cpanel/src/pages/SplitsPage.tsx",
+      "source_location": "L22",
+      "id": "pages_splitspage_splitspage",
+      "community": 933,
+      "norm_label": "splitspage()"
+    },
+    {
+      "label": "Search()",
+      "file_type": "code",
+      "source_file": "cpanel/src/pages/SplitsPage.tsx",
+      "source_location": "L535",
+      "id": "pages_splitspage_search",
+      "community": 934,
+      "norm_label": "search()"
     },
     {
       "label": "3_4_Sit-Up.json",
@@ -95989,177 +96430,6 @@
       "id": "controllers_admincontroller_test"
     },
     {
-      "label": "adminController.ts",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L1",
-      "community": 925,
-      "norm_label": "admincontroller.ts",
-      "id": "controllers_admincontroller"
-    },
-    {
-      "label": "prisma",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L4",
-      "community": 925,
-      "norm_label": "prisma",
-      "id": "controllers_admincontroller_prisma"
-    },
-    {
-      "label": "getDashboardStats()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L7",
-      "community": 925,
-      "norm_label": "getdashboardstats()",
-      "id": "controllers_admincontroller_getdashboardstats"
-    },
-    {
-      "label": "listUsers()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L60",
-      "community": 925,
-      "norm_label": "listusers()",
-      "id": "controllers_admincontroller_listusers"
-    },
-    {
-      "label": "getUser()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L90",
-      "community": 925,
-      "norm_label": "getuser()",
-      "id": "controllers_admincontroller_getuser"
-    },
-    {
-      "label": "updateUser()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L105",
-      "community": 925,
-      "norm_label": "updateuser()",
-      "id": "controllers_admincontroller_updateuser"
-    },
-    {
-      "label": "deleteUser()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L117",
-      "community": 925,
-      "norm_label": "deleteuser()",
-      "id": "controllers_admincontroller_deleteuser"
-    },
-    {
-      "label": "resetOnboarding()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L124",
-      "community": 925,
-      "norm_label": "resetonboarding()",
-      "id": "controllers_admincontroller_resetonboarding"
-    },
-    {
-      "label": "listAllSplits()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L140",
-      "community": 925,
-      "norm_label": "listallsplits()",
-      "id": "controllers_admincontroller_listallsplits"
-    },
-    {
-      "label": "createPrebuiltSplit()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L167",
-      "community": 925,
-      "norm_label": "createprebuiltsplit()",
-      "id": "controllers_admincontroller_createprebuiltsplit"
-    },
-    {
-      "label": "deleteSplit()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L201",
-      "community": 925,
-      "norm_label": "deletesplit()",
-      "id": "controllers_admincontroller_deletesplit"
-    },
-    {
-      "label": "toggleSplitPrebuilt()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L208",
-      "community": 925,
-      "norm_label": "togglesplitprebuilt()",
-      "id": "controllers_admincontroller_togglesplitprebuilt"
-    },
-    {
-      "label": "listExercises()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L221",
-      "community": 925,
-      "norm_label": "listexercises()",
-      "id": "controllers_admincontroller_listexercises"
-    },
-    {
-      "label": "listSessions()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L246",
-      "community": 925,
-      "norm_label": "listsessions()",
-      "id": "controllers_admincontroller_listsessions"
-    },
-    {
-      "label": "sendBroadcast()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L271",
-      "community": 925,
-      "norm_label": "sendbroadcast()",
-      "id": "controllers_admincontroller_sendbroadcast"
-    },
-    {
-      "label": "getOnboardingStats()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L283",
-      "community": 925,
-      "norm_label": "getonboardingstats()",
-      "id": "controllers_admincontroller_getonboardingstats"
-    },
-    {
-      "label": "listExerciseRequests()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L322",
-      "community": 925,
-      "norm_label": "listexerciserequests()",
-      "id": "controllers_admincontroller_listexerciserequests"
-    },
-    {
-      "label": "updateExerciseRequest()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L348",
-      "community": 925,
-      "norm_label": "updateexerciserequest()",
-      "id": "controllers_admincontroller_updateexerciserequest"
-    },
-    {
-      "label": "createExercise()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L367",
-      "community": 925,
-      "norm_label": "createexercise()",
-      "id": "controllers_admincontroller_createexercise"
-    },
-    {
       "label": "authController.test.ts",
       "file_type": "code",
       "source_file": "api/src/controllers/authController.test.ts",
@@ -96551,7 +96821,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/nutritionController.ts",
       "source_location": "L1",
-      "community": 939,
+      "community": 950,
       "norm_label": "nutritioncontroller.ts",
       "id": "controllers_nutritioncontroller"
     },
@@ -96560,7 +96830,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/nutritionController.ts",
       "source_location": "L5",
-      "community": 939,
+      "community": 950,
       "norm_label": "prisma",
       "id": "controllers_nutritioncontroller_prisma"
     },
@@ -96569,7 +96839,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/nutritionController.ts",
       "source_location": "L7",
-      "community": 939,
+      "community": 950,
       "norm_label": "lognutrition()",
       "id": "controllers_nutritioncontroller_lognutrition"
     },
@@ -96578,7 +96848,7 @@
       "file_type": "code",
       "source_file": "api/src/controllers/nutritionController.ts",
       "source_location": "L39",
-      "community": 939,
+      "community": 950,
       "norm_label": "getnutritionlogs()",
       "id": "controllers_nutritioncontroller_getnutritionlogs"
     },
@@ -97420,42 +97690,6 @@
       "id": "middleware_validate_validate"
     },
     {
-      "label": "admin.ts",
-      "file_type": "code",
-      "source_file": "api/src/routes/admin.ts",
-      "source_location": "L1",
-      "community": 15,
-      "norm_label": "admin.ts",
-      "id": "routes_admin"
-    },
-    {
-      "label": "router",
-      "file_type": "code",
-      "source_file": "api/src/routes/admin.ts",
-      "source_location": "L6",
-      "community": 15,
-      "norm_label": "router",
-      "id": "routes_admin_router"
-    },
-    {
-      "label": "adminAuth()",
-      "file_type": "code",
-      "source_file": "api/src/routes/admin.ts",
-      "source_location": "L9",
-      "community": 15,
-      "norm_label": "adminauth()",
-      "id": "routes_admin_adminauth"
-    },
-    {
-      "label": "wrap()",
-      "file_type": "code",
-      "source_file": "api/src/routes/admin.ts",
-      "source_location": "L17",
-      "community": 15,
-      "norm_label": "wrap()",
-      "id": "routes_admin_wrap"
-    },
-    {
       "label": "app.ts",
       "file_type": "code",
       "source_file": "api/src/routes/app.ts",
@@ -97730,7 +97964,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/photos.ts",
       "source_location": "L1",
-      "community": 7,
+      "community": 939,
       "norm_label": "photos.ts",
       "id": "routes_photos"
     },
@@ -97739,7 +97973,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/photos.ts",
       "source_location": "L6",
-      "community": 7,
+      "community": 939,
       "norm_label": "router",
       "id": "routes_photos_router"
     },
@@ -97748,7 +97982,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/photos.ts",
       "source_location": "L8",
-      "community": 7,
+      "community": 939,
       "norm_label": "storage",
       "id": "routes_photos_storage"
     },
@@ -97757,7 +97991,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/photos.ts",
       "source_location": "L9",
-      "community": 7,
+      "community": 939,
       "norm_label": "upload",
       "id": "routes_photos_upload"
     },
@@ -97766,7 +98000,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/photos.ts",
       "source_location": "L21",
-      "community": 7,
+      "community": 939,
       "norm_label": "wrap()",
       "id": "routes_photos_wrap"
     },
@@ -97847,7 +98081,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/sessions.ts",
       "source_location": "L1",
-      "community": 14,
+      "community": 7,
       "norm_label": "sessions.ts",
       "id": "routes_sessions"
     },
@@ -97856,7 +98090,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/sessions.ts",
       "source_location": "L5",
-      "community": 14,
+      "community": 7,
       "norm_label": "router",
       "id": "routes_sessions_router"
     },
@@ -97865,7 +98099,7 @@
       "file_type": "code",
       "source_file": "api/src/routes/sessions.ts",
       "source_location": "L7",
-      "community": 14,
+      "community": 7,
       "norm_label": "wrap()",
       "id": "routes_sessions_wrap"
     },
@@ -98671,263 +98905,11 @@
       "id": "cpanel_src_app_tsx_src_app_app"
     },
     {
-      "label": "api.ts",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L1",
-      "community": 934,
-      "norm_label": "api.ts",
-      "id": "src_api"
-    },
-    {
-      "label": "api",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L6",
-      "community": 934,
-      "norm_label": "api",
-      "id": "src_api_api"
-    },
-    {
-      "label": "setAdminKey()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L12",
-      "community": 30,
-      "norm_label": "setadminkey()",
-      "id": "src_api_setadminkey"
-    },
-    {
-      "label": "getAdminKey()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L17",
-      "community": 932,
-      "norm_label": "getadminkey()",
-      "id": "src_api_getadminkey"
-    },
-    {
-      "label": "getDashboard()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L22",
-      "community": 30,
-      "norm_label": "getdashboard()",
-      "id": "src_api_getdashboard"
-    },
-    {
-      "label": "getUsers()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L25",
-      "community": 934,
-      "norm_label": "getusers()",
-      "id": "src_api_getusers"
-    },
-    {
-      "label": "getUser()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L26",
-      "community": 934,
-      "norm_label": "getuser()",
-      "id": "src_api_getuser"
-    },
-    {
-      "label": "updateUser()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L27",
-      "community": 934,
-      "norm_label": "updateuser()",
-      "id": "src_api_updateuser"
-    },
-    {
-      "label": "deleteUser()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L28",
-      "community": 934,
-      "norm_label": "deleteuser()",
-      "id": "src_api_deleteuser"
-    },
-    {
-      "label": "resetOnboarding()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L29",
-      "community": 934,
-      "norm_label": "resetonboarding()",
-      "id": "src_api_resetonboarding"
-    },
-    {
-      "label": "getSplits()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L32",
-      "community": 934,
-      "norm_label": "getsplits()",
-      "id": "src_api_getsplits"
-    },
-    {
-      "label": "createSplit()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L33",
-      "community": 934,
-      "norm_label": "createsplit()",
-      "id": "src_api_createsplit"
-    },
-    {
-      "label": "deleteSplit()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L34",
-      "community": 934,
-      "norm_label": "deletesplit()",
-      "id": "src_api_deletesplit"
-    },
-    {
-      "label": "togglePrebuilt()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L35",
-      "community": 934,
-      "norm_label": "toggleprebuilt()",
-      "id": "src_api_toggleprebuilt"
-    },
-    {
-      "label": "getExercises()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L38",
-      "community": 31,
-      "norm_label": "getexercises()",
-      "id": "src_api_getexercises"
-    },
-    {
-      "label": "createExercise()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L39",
-      "community": 934,
-      "norm_label": "createexercise()",
-      "id": "src_api_createexercise"
-    },
-    {
-      "label": "getExerciseRequests()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L42",
-      "community": 934,
-      "norm_label": "getexerciserequests()",
-      "id": "src_api_getexerciserequests"
-    },
-    {
-      "label": "updateExerciseRequest()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L43",
-      "community": 934,
-      "norm_label": "updateexerciserequest()",
-      "id": "src_api_updateexerciserequest"
-    },
-    {
-      "label": "getSessions()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L46",
-      "community": 935,
-      "norm_label": "getsessions()",
-      "id": "src_api_getsessions"
-    },
-    {
-      "label": "sendBroadcast()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L49",
-      "community": 933,
-      "norm_label": "sendbroadcast()",
-      "id": "src_api_sendbroadcast"
-    },
-    {
-      "label": "getOnboardingStats()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L53",
-      "community": 31,
-      "norm_label": "getonboardingstats()",
-      "id": "src_api_getonboardingstats"
-    },
-    {
-      "label": "getAppSettings()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L56",
-      "community": 932,
-      "norm_label": "getappsettings()",
-      "id": "src_api_getappsettings"
-    },
-    {
-      "label": "updateAppSettings()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L57",
-      "community": 932,
-      "norm_label": "updateappsettings()",
-      "id": "src_api_updateappsettings"
-    },
-    {
-      "label": "getSupportTickets()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L58",
-      "community": 933,
-      "norm_label": "getsupporttickets()",
-      "id": "src_api_getsupporttickets"
-    },
-    {
-      "label": "respondToSupportTicket()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L59",
-      "community": 933,
-      "norm_label": "respondtosupportticket()",
-      "id": "src_api_respondtosupportticket"
-    },
-    {
-      "label": "Sidebar.tsx",
-      "file_type": "code",
-      "source_file": "cpanel/src/components/Sidebar.tsx",
-      "source_location": "L1",
-      "community": 30,
-      "norm_label": "sidebar.tsx",
-      "id": "components_sidebar"
-    },
-    {
-      "label": "nav",
-      "file_type": "code",
-      "source_file": "cpanel/src/components/Sidebar.tsx",
-      "source_location": "L8",
-      "community": 30,
-      "norm_label": "nav",
-      "id": "components_sidebar_nav"
-    },
-    {
-      "label": "Sidebar()",
-      "file_type": "code",
-      "source_file": "cpanel/src/components/Sidebar.tsx",
-      "source_location": "L28",
-      "community": 30,
-      "norm_label": "sidebar()",
-      "id": "components_sidebar_sidebar"
-    },
-    {
       "label": "Toast.tsx",
       "file_type": "code",
       "source_file": "cpanel/src/components/Toast.tsx",
       "source_location": "L1",
-      "community": 932,
+      "community": 933,
       "norm_label": "toast.tsx",
       "id": "components_toast"
     },
@@ -98936,7 +98918,7 @@
       "file_type": "code",
       "source_file": "cpanel/src/components/Toast.tsx",
       "source_location": "L4",
-      "community": 932,
+      "community": 933,
       "norm_label": "toast",
       "id": "components_toast_toast"
     },
@@ -98945,7 +98927,7 @@
       "file_type": "code",
       "source_file": "cpanel/src/components/Toast.tsx",
       "source_location": "L5",
-      "community": 932,
+      "community": 933,
       "norm_label": "toastctx",
       "id": "components_toast_toastctx"
     },
@@ -98954,7 +98936,7 @@
       "file_type": "code",
       "source_file": "cpanel/src/components/Toast.tsx",
       "source_location": "L7",
-      "community": 932,
+      "community": 933,
       "norm_label": "toastcontext",
       "id": "components_toast_toastcontext"
     },
@@ -98972,7 +98954,7 @@
       "file_type": "code",
       "source_file": "cpanel/src/components/Toast.tsx",
       "source_location": "L10",
-      "community": 932,
+      "community": 933,
       "norm_label": "toastprovider()",
       "id": "components_toast_toastprovider"
     },
@@ -99035,7 +99017,7 @@
       "file_type": "code",
       "source_file": "cpanel/src/components/UI.tsx",
       "source_location": "L58",
-      "community": 31,
+      "community": 947,
       "norm_label": "pageloader()",
       "id": "components_ui_pageloader"
     },
@@ -99053,7 +99035,7 @@
       "file_type": "code",
       "source_file": "cpanel/src/components/UI.tsx",
       "source_location": "L67",
-      "community": 935,
+      "community": 31,
       "norm_label": "avatar()",
       "id": "components_ui_avatar"
     },
@@ -99098,7 +99080,7 @@
       "file_type": "code",
       "source_file": "cpanel/src/pages/ActivityPage.tsx",
       "source_location": "L1",
-      "community": 935,
+      "community": 31,
       "norm_label": "activitypage.tsx",
       "id": "pages_activitypage"
     },
@@ -99107,7 +99089,7 @@
       "file_type": "code",
       "source_file": "cpanel/src/pages/ActivityPage.tsx",
       "source_location": "L7",
-      "community": 935,
+      "community": 31,
       "norm_label": "session",
       "id": "pages_activitypage_session"
     },
@@ -99116,7 +99098,7 @@
       "file_type": "code",
       "source_file": "cpanel/src/pages/ActivityPage.tsx",
       "source_location": "L14",
-      "community": 935,
+      "community": 31,
       "norm_label": "statusbadge()",
       "id": "pages_activitypage_statusbadge"
     },
@@ -99125,7 +99107,7 @@
       "file_type": "code",
       "source_file": "cpanel/src/pages/ActivityPage.tsx",
       "source_location": "L20",
-      "community": 935,
+      "community": 31,
       "norm_label": "activitypage()",
       "id": "pages_activitypage_activitypage"
     },
@@ -99274,38 +99256,11 @@
       "id": "pages_exerciserequestspage_exerciserequestspage"
     },
     {
-      "label": "ExercisesPage.tsx",
-      "file_type": "code",
-      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
-      "source_location": "L1",
-      "community": 31,
-      "norm_label": "exercisespage.tsx",
-      "id": "pages_exercisespage"
-    },
-    {
-      "label": "Exercise",
-      "file_type": "code",
-      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
-      "source_location": "L6",
-      "community": 31,
-      "norm_label": "exercise",
-      "id": "pages_exercisespage_exercise"
-    },
-    {
-      "label": "ExercisesPage()",
-      "file_type": "code",
-      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
-      "source_location": "L12",
-      "community": 31,
-      "norm_label": "exercisespage()",
-      "id": "pages_exercisespage_exercisespage"
-    },
-    {
       "label": "LoginPage.tsx",
       "file_type": "code",
       "source_file": "cpanel/src/pages/LoginPage.tsx",
       "source_location": "L1",
-      "community": 30,
+      "community": 933,
       "norm_label": "loginpage.tsx",
       "id": "pages_loginpage"
     },
@@ -99314,7 +99269,7 @@
       "file_type": "code",
       "source_file": "cpanel/src/pages/LoginPage.tsx",
       "source_location": "L8",
-      "community": 30,
+      "community": 933,
       "norm_label": "loginpage()",
       "id": "pages_loginpage_loginpage"
     },
@@ -99341,7 +99296,7 @@
       "file_type": "code",
       "source_file": "cpanel/src/pages/OnboardingPage.tsx",
       "source_location": "L1",
-      "community": 31,
+      "community": 947,
       "norm_label": "onboardingpage.tsx",
       "id": "pages_onboardingpage"
     },
@@ -99350,7 +99305,7 @@
       "file_type": "code",
       "source_file": "cpanel/src/pages/OnboardingPage.tsx",
       "source_location": "L9",
-      "community": 31,
+      "community": 947,
       "norm_label": "onboardingstats",
       "id": "pages_onboardingpage_onboardingstats"
     },
@@ -99359,7 +99314,7 @@
       "file_type": "code",
       "source_file": "cpanel/src/pages/OnboardingPage.tsx",
       "source_location": "L24",
-      "community": 31,
+      "community": 947,
       "norm_label": "colors",
       "id": "pages_onboardingpage_colors"
     },
@@ -99368,7 +99323,7 @@
       "file_type": "code",
       "source_file": "cpanel/src/pages/OnboardingPage.tsx",
       "source_location": "L26",
-      "community": 31,
+      "community": 947,
       "norm_label": "onboardingpage()",
       "id": "pages_onboardingpage_onboardingpage"
     },
@@ -99398,60 +99353,6 @@
       "community": 932,
       "norm_label": "inforow()",
       "id": "pages_settingspage_inforow"
-    },
-    {
-      "label": "SplitsPage.tsx",
-      "file_type": "code",
-      "source_file": "cpanel/src/pages/SplitsPage.tsx",
-      "source_location": "L1",
-      "community": 934,
-      "norm_label": "splitspage.tsx",
-      "id": "pages_splitspage"
-    },
-    {
-      "label": "Split",
-      "file_type": "code",
-      "source_file": "cpanel/src/pages/SplitsPage.tsx",
-      "source_location": "L8",
-      "community": 934,
-      "norm_label": "split",
-      "id": "pages_splitspage_split"
-    },
-    {
-      "label": "DayForm",
-      "file_type": "code",
-      "source_file": "cpanel/src/pages/SplitsPage.tsx",
-      "source_location": "L14",
-      "community": 934,
-      "norm_label": "dayform",
-      "id": "pages_splitspage_dayform"
-    },
-    {
-      "label": "MUSCLE_GROUPS",
-      "file_type": "code",
-      "source_file": "cpanel/src/pages/SplitsPage.tsx",
-      "source_location": "L19",
-      "community": 934,
-      "norm_label": "muscle_groups",
-      "id": "pages_splitspage_muscle_groups"
-    },
-    {
-      "label": "SplitsPage()",
-      "file_type": "code",
-      "source_file": "cpanel/src/pages/SplitsPage.tsx",
-      "source_location": "L21",
-      "community": 933,
-      "norm_label": "splitspage()",
-      "id": "pages_splitspage_splitspage"
-    },
-    {
-      "label": "Search()",
-      "file_type": "code",
-      "source_file": "cpanel/src/pages/SplitsPage.tsx",
-      "source_location": "L380",
-      "community": 934,
-      "norm_label": "search()",
-      "id": "pages_splitspage_search"
     },
     {
       "label": "SupportTicketsPage.tsx",
@@ -99947,6 +99848,24 @@
       "community": 25,
       "norm_label": "devices",
       "id": "expo_devices_devices"
+    },
+    {
+      "label": "settings.json",
+      "file_type": "code",
+      "source_file": "expo-app/.expo/settings.json",
+      "source_location": "L1",
+      "community": 951,
+      "norm_label": "settings.json",
+      "id": "expo_settings"
+    },
+    {
+      "label": "urlRandomness",
+      "file_type": "code",
+      "source_file": "expo-app/.expo/settings.json",
+      "source_location": "L2",
+      "community": 951,
+      "norm_label": "urlrandomness",
+      "id": "expo_settings_urlrandomness"
     },
     {
       "label": "app.json",
@@ -101213,7 +101132,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/api/photos.ts",
       "source_location": "L1",
-      "community": 29,
+      "community": 949,
       "norm_label": "photos.ts",
       "id": "api_photos"
     },
@@ -101222,7 +101141,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/api/photos.ts",
       "source_location": "L4",
-      "community": 29,
+      "community": 949,
       "norm_label": "uploadphoto()",
       "id": "api_photos_uploadphoto"
     },
@@ -101231,7 +101150,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/api/photos.ts",
       "source_location": "L25",
-      "community": 29,
+      "community": 949,
       "norm_label": "getphotos()",
       "id": "api_photos_getphotos"
     },
@@ -101240,7 +101159,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/api/photos.ts",
       "source_location": "L30",
-      "community": 29,
+      "community": 949,
       "norm_label": "deletephoto()",
       "id": "api_photos_deletephoto"
     },
@@ -101663,7 +101582,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/components/Card.tsx",
       "source_location": "L1",
-      "community": 29,
+      "community": 949,
       "norm_label": "card.tsx",
       "id": "components_card"
     },
@@ -101672,7 +101591,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/components/Card.tsx",
       "source_location": "L6",
-      "community": 29,
+      "community": 949,
       "norm_label": "cardprops",
       "id": "components_card_cardprops"
     },
@@ -101681,7 +101600,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/components/Card.tsx",
       "source_location": "L14",
-      "community": 29,
+      "community": 949,
       "norm_label": "card()",
       "id": "components_card_card"
     },
@@ -101690,7 +101609,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/components/ExerciseDetailSheet.tsx",
       "source_location": "L1",
-      "community": 29,
+      "community": 949,
       "norm_label": "exercisedetailsheet.tsx",
       "id": "components_exercisedetailsheet"
     },
@@ -101708,7 +101627,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/components/ExerciseDetailSheet.tsx",
       "source_location": "L14",
-      "community": 29,
+      "community": 949,
       "norm_label": "exercisedetailsheet()",
       "id": "components_exercisedetailsheet_exercisedetailsheet"
     },
@@ -101717,7 +101636,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/components/ExerciseImageCarousel.tsx",
       "source_location": "L1",
-      "community": 29,
+      "community": 949,
       "norm_label": "exerciseimagecarousel.tsx",
       "id": "components_exerciseimagecarousel"
     },
@@ -101726,7 +101645,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/components/ExerciseImageCarousel.tsx",
       "source_location": "L6",
-      "community": 29,
+      "community": 949,
       "norm_label": "exerciseimagecarouselprops",
       "id": "components_exerciseimagecarousel_exerciseimagecarouselprops"
     },
@@ -101735,7 +101654,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/components/ExerciseImageCarousel.tsx",
       "source_location": "L11",
-      "community": 29,
+      "community": 949,
       "norm_label": "exerciseimagecarousel()",
       "id": "components_exerciseimagecarousel_exerciseimagecarousel"
     },
@@ -101744,7 +101663,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/components/ExerciseImageCarousel.tsx",
       "source_location": "L58",
-      "community": 29,
+      "community": 949,
       "norm_label": "styles",
       "id": "components_exerciseimagecarousel_styles"
     },
@@ -101753,7 +101672,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/components/ExerciseMetaBadges.tsx",
       "source_location": "L1",
-      "community": 29,
+      "community": 949,
       "norm_label": "exercisemetabadges.tsx",
       "id": "components_exercisemetabadges"
     },
@@ -101762,7 +101681,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/components/ExerciseMetaBadges.tsx",
       "source_location": "L8",
-      "community": 29,
+      "community": 949,
       "norm_label": "exercisemetabadgesprops",
       "id": "components_exercisemetabadges_exercisemetabadgesprops"
     },
@@ -101771,7 +101690,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/components/ExerciseMetaBadges.tsx",
       "source_location": "L15",
-      "community": 29,
+      "community": 949,
       "norm_label": "exercisemetabadges()",
       "id": "components_exercisemetabadges_exercisemetabadges"
     },
@@ -101780,7 +101699,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/components/ExerciseMetaBadges.tsx",
       "source_location": "L77",
-      "community": 29,
+      "community": 949,
       "norm_label": "styles",
       "id": "components_exercisemetabadges_styles"
     },
@@ -101825,7 +101744,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/components/Input.tsx",
       "source_location": "L1",
-      "community": 29,
+      "community": 949,
       "norm_label": "input.tsx",
       "id": "components_input"
     },
@@ -101834,7 +101753,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/components/Input.tsx",
       "source_location": "L7",
-      "community": 29,
+      "community": 949,
       "norm_label": "inputprops",
       "id": "components_input_inputprops"
     },
@@ -101843,7 +101762,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/components/Input.tsx",
       "source_location": "L14",
-      "community": 29,
+      "community": 949,
       "norm_label": "input()",
       "id": "components_input_input"
     },
@@ -101852,7 +101771,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/components/InstructionStepper.tsx",
       "source_location": "L1",
-      "community": 29,
+      "community": 949,
       "norm_label": "instructionstepper.tsx",
       "id": "components_instructionstepper"
     },
@@ -101861,7 +101780,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/components/InstructionStepper.tsx",
       "source_location": "L8",
-      "community": 29,
+      "community": 949,
       "norm_label": "instructionstepperprops",
       "id": "components_instructionstepper_instructionstepperprops"
     },
@@ -101870,7 +101789,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/components/InstructionStepper.tsx",
       "source_location": "L14",
-      "community": 29,
+      "community": 949,
       "norm_label": "instructionstepper()",
       "id": "components_instructionstepper_instructionstepper"
     },
@@ -101879,7 +101798,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/components/InstructionStepper.tsx",
       "source_location": "L96",
-      "community": 29,
+      "community": 949,
       "norm_label": "styles",
       "id": "components_instructionstepper_styles"
     },
@@ -102581,7 +102500,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/navigation/types.ts",
       "source_location": "L42",
-      "community": 29,
+      "community": 949,
       "norm_label": "photosstackparamlist",
       "id": "navigation_types_photosstackparamlist"
     },
@@ -103328,7 +103247,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/photos/PhotoCaptureScreen.tsx",
       "source_location": "L1",
-      "community": 29,
+      "community": 949,
       "norm_label": "photocapturescreen.tsx",
       "id": "photos_photocapturescreen"
     },
@@ -103337,7 +103256,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/photos/PhotoCaptureScreen.tsx",
       "source_location": "L20",
-      "community": 29,
+      "community": 949,
       "norm_label": "props",
       "id": "photos_photocapturescreen_props"
     },
@@ -103346,7 +103265,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/photos/PhotoCaptureScreen.tsx",
       "source_location": "L22",
-      "community": 29,
+      "community": 949,
       "norm_label": "uploadstatus",
       "id": "photos_photocapturescreen_uploadstatus"
     },
@@ -103355,7 +103274,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/photos/PhotoCaptureScreen.tsx",
       "source_location": "L24",
-      "community": 29,
+      "community": 949,
       "norm_label": "photocapturescreen()",
       "id": "photos_photocapturescreen_photocapturescreen"
     },
@@ -103364,7 +103283,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/photos/PhotoCompareScreen.tsx",
       "source_location": "L1",
-      "community": 29,
+      "community": 949,
       "norm_label": "photocomparescreen.tsx",
       "id": "photos_photocomparescreen"
     },
@@ -103373,7 +103292,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/photos/PhotoCompareScreen.tsx",
       "source_location": "L12",
-      "community": 29,
+      "community": 949,
       "norm_label": "props",
       "id": "photos_photocomparescreen_props"
     },
@@ -103382,7 +103301,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/photos/PhotoCompareScreen.tsx",
       "source_location": "L14",
-      "community": 29,
+      "community": 949,
       "norm_label": "{ width: screenw }",
       "id": "photos_photocomparescreen_width_screenw"
     },
@@ -103391,7 +103310,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/photos/PhotoCompareScreen.tsx",
       "source_location": "L16",
-      "community": 29,
+      "community": 949,
       "norm_label": "photocomparescreen()",
       "id": "photos_photocomparescreen_photocomparescreen"
     },
@@ -103400,7 +103319,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/photos/PhotosTimelineScreen.tsx",
       "source_location": "L1",
-      "community": 29,
+      "community": 949,
       "norm_label": "photostimelinescreen.tsx",
       "id": "photos_photostimelinescreen"
     },
@@ -103409,7 +103328,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/photos/PhotosTimelineScreen.tsx",
       "source_location": "L14",
-      "community": 29,
+      "community": 949,
       "norm_label": "props",
       "id": "photos_photostimelinescreen_props"
     },
@@ -103418,7 +103337,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/photos/PhotosTimelineScreen.tsx",
       "source_location": "L16",
-      "community": 29,
+      "community": 949,
       "norm_label": "{ width: screenw }",
       "id": "photos_photostimelinescreen_width_screenw"
     },
@@ -103427,7 +103346,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/photos/PhotosTimelineScreen.tsx",
       "source_location": "L18",
-      "community": 29,
+      "community": 949,
       "norm_label": "photostimelinescreen()",
       "id": "photos_photostimelinescreen_photostimelinescreen"
     },
@@ -103562,7 +103481,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/screens/profile/SettingsScreen.tsx",
       "source_location": "L1",
-      "community": 29,
+      "community": 949,
       "norm_label": "settingsscreen.tsx",
       "id": "profile_settingsscreen"
     },
@@ -104183,7 +104102,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/theme/spacing.ts",
       "source_location": "L1",
-      "community": 29,
+      "community": 949,
       "norm_label": "spacing.ts",
       "id": "theme_spacing"
     },
@@ -104201,7 +104120,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/theme/spacing.ts",
       "source_location": "L28",
-      "community": 29,
+      "community": 949,
       "norm_label": "space",
       "id": "theme_spacing_space"
     },
@@ -104210,7 +104129,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/theme/spacing.ts",
       "source_location": "L40",
-      "community": 29,
+      "community": 949,
       "norm_label": "radius",
       "id": "theme_spacing_radius"
     },
@@ -104435,7 +104354,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L66",
-      "community": 29,
+      "community": 949,
       "norm_label": "exercisemuscle",
       "id": "types_index_exercisemuscle"
     },
@@ -104516,7 +104435,7 @@
       "file_type": "code",
       "source_file": "expo-app/src/types/index.ts",
       "source_location": "L150",
-      "community": 29,
+      "community": 949,
       "norm_label": "progressphoto",
       "id": "types_index_progressphoto"
     },
@@ -104915,6 +104834,222 @@
       "community": 938,
       "norm_label": "vitest.config.ts",
       "id": "expo_app_vitest_config"
+    },
+    {
+      "label": "package.json",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L1",
+      "community": 12,
+      "norm_label": "package.json",
+      "id": "package"
+    },
+    {
+      "label": "name",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L2",
+      "community": 12,
+      "norm_label": "name",
+      "id": "package_name"
+    },
+    {
+      "label": "version",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L3",
+      "community": 12,
+      "norm_label": "version",
+      "id": "package_version"
+    },
+    {
+      "label": "private",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L4",
+      "community": 12,
+      "norm_label": "private",
+      "id": "package_private"
+    },
+    {
+      "label": "scripts",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L5",
+      "community": 12,
+      "norm_label": "scripts",
+      "id": "package_scripts"
+    },
+    {
+      "label": "api:dev",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L6",
+      "community": 12,
+      "norm_label": "api:dev",
+      "id": "package_scripts_api_dev"
+    },
+    {
+      "label": "api:build",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L7",
+      "community": 12,
+      "norm_label": "api:build",
+      "id": "package_scripts_api_build"
+    },
+    {
+      "label": "api:db:migrate",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L8",
+      "community": 12,
+      "norm_label": "api:db:migrate",
+      "id": "package_scripts_api_db_migrate"
+    },
+    {
+      "label": "api:db:seed",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L9",
+      "community": 12,
+      "norm_label": "api:db:seed",
+      "id": "package_scripts_api_db_seed"
+    },
+    {
+      "label": "api:db:studio",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L10",
+      "community": 12,
+      "norm_label": "api:db:studio",
+      "id": "package_scripts_api_db_studio"
+    },
+    {
+      "label": "api:test",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L11",
+      "community": 12,
+      "norm_label": "api:test",
+      "id": "package_scripts_api_test"
+    },
+    {
+      "label": "app:start",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L12",
+      "community": 12,
+      "norm_label": "app:start",
+      "id": "package_scripts_app_start"
+    },
+    {
+      "label": "app:tunnel",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L13",
+      "community": 12,
+      "norm_label": "app:tunnel",
+      "id": "package_scripts_app_tunnel"
+    },
+    {
+      "label": "app:android",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L14",
+      "community": 12,
+      "norm_label": "app:android",
+      "id": "package_scripts_app_android"
+    },
+    {
+      "label": "app:ios",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L15",
+      "community": 12,
+      "norm_label": "app:ios",
+      "id": "package_scripts_app_ios"
+    },
+    {
+      "label": "app:test",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L16",
+      "community": 12,
+      "norm_label": "app:test",
+      "id": "package_scripts_app_test"
+    },
+    {
+      "label": "cpanel:dev",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L17",
+      "community": 12,
+      "norm_label": "cpanel:dev",
+      "id": "package_scripts_cpanel_dev"
+    },
+    {
+      "label": "cpanel:build",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L18",
+      "community": 12,
+      "norm_label": "cpanel:build",
+      "id": "package_scripts_cpanel_build"
+    },
+    {
+      "label": "test",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L19",
+      "community": 12,
+      "norm_label": "test",
+      "id": "package_scripts_test"
+    },
+    {
+      "label": "dev",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L20",
+      "community": 12,
+      "norm_label": "dev",
+      "id": "package_scripts_dev"
+    },
+    {
+      "label": "dev:all",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L21",
+      "community": 12,
+      "norm_label": "dev:all",
+      "id": "package_scripts_dev_all"
+    },
+    {
+      "label": "setup",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L22",
+      "community": 12,
+      "norm_label": "setup",
+      "id": "package_scripts_setup"
+    },
+    {
+      "label": "devDependencies",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L24",
+      "community": 12,
+      "norm_label": "devdependencies",
+      "id": "package_devdependencies"
+    },
+    {
+      "label": "concurrently",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L25",
+      "community": 12,
+      "norm_label": "concurrently",
+      "id": "package_devdependencies_concurrently"
     },
     {
       "label": "skills-lock.json",
@@ -105371,232 +105506,1432 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "package.json",
-      "source_location": "L17",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L367",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "package",
-      "target": "package_devdependencies"
+      "source": "controllers_admincontroller",
+      "target": "controllers_admincontroller_createexercise"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "package.json",
-      "source_location": "L2",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L167",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "package",
-      "target": "package_name"
+      "source": "controllers_admincontroller",
+      "target": "controllers_admincontroller_createprebuiltsplit"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "package.json",
-      "source_location": "L4",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L201",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "package",
-      "target": "package_private"
+      "source": "controllers_admincontroller",
+      "target": "controllers_admincontroller_deletesplit"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "package.json",
-      "source_location": "L5",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L117",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "package",
-      "target": "package_scripts"
+      "source": "controllers_admincontroller",
+      "target": "controllers_admincontroller_deleteuser"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "package.json",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "package",
-      "target": "package_version"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "package.json",
+      "source_file": "api/src/controllers/adminController.ts",
       "source_location": "L7",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "package_scripts",
-      "target": "package_scripts_api_build"
+      "source": "controllers_admincontroller",
+      "target": "controllers_admincontroller_getdashboardstats"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "package.json",
-      "source_location": "L8",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L245",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "package_scripts",
-      "target": "package_scripts_api_db_migrate"
+      "source": "controllers_admincontroller",
+      "target": "controllers_admincontroller_getexercise"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "package.json",
-      "source_location": "L9",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L277",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "package_scripts",
-      "target": "package_scripts_api_db_seed"
+      "source": "controllers_admincontroller",
+      "target": "controllers_admincontroller_getexercisefilters"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "package.json",
-      "source_location": "L10",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L283",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "package_scripts",
-      "target": "package_scripts_api_db_studio"
+      "source": "controllers_admincontroller",
+      "target": "controllers_admincontroller_getonboardingstats"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "package.json",
-      "source_location": "L6",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L90",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "package_scripts",
-      "target": "package_scripts_api_dev"
+      "source": "controllers_admincontroller",
+      "target": "controllers_admincontroller_getuser"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "package.json",
-      "source_location": "L11",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L140",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "package_scripts",
-      "target": "package_scripts_api_test"
+      "source": "controllers_admincontroller",
+      "target": "controllers_admincontroller_listallsplits"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "package.json",
-      "source_location": "L12",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L322",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "package_scripts",
-      "target": "package_scripts_app_android"
+      "source": "controllers_admincontroller",
+      "target": "controllers_admincontroller_listexerciserequests"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "package.json",
-      "source_location": "L13",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L221",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "package_scripts",
-      "target": "package_scripts_app_ios"
+      "source": "controllers_admincontroller",
+      "target": "controllers_admincontroller_listexercises"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "package.json",
-      "source_location": "L11",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L246",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "package_scripts",
-      "target": "package_scripts_app_start"
+      "source": "controllers_admincontroller",
+      "target": "controllers_admincontroller_listsessions"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "package.json",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L60",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_admincontroller",
+      "target": "controllers_admincontroller_listusers"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_admincontroller",
+      "target": "controllers_admincontroller_prisma"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L124",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_admincontroller",
+      "target": "controllers_admincontroller_resetonboarding"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L271",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_admincontroller",
+      "target": "controllers_admincontroller_sendbroadcast"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L208",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_admincontroller",
+      "target": "controllers_admincontroller_togglesplitprebuilt"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L348",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_admincontroller",
+      "target": "controllers_admincontroller_updateexerciserequest"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L105",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_admincontroller",
+      "target": "controllers_admincontroller_updateuser"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/controllers/adminController.test.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "controllers_admincontroller_test",
+      "target": "controllers_admincontroller"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/routes/admin.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_admin",
+      "target": "controllers_admincontroller"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/routes/admin.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_admin",
+      "target": "controllers_settingscontroller"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/routes/admin.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_admin",
+      "target": "routes_admin_adminauth"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/routes/admin.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "routes_admin",
+      "target": "routes_admin_router"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/src/routes/admin.ts",
       "source_location": "L15",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "package_scripts",
-      "target": "package_scripts_app_test"
+      "source": "routes_admin",
+      "target": "routes_admin_wrap"
     },
     {
-      "relation": "contains",
+      "relation": "imports_from",
+      "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "package.json",
-      "source_location": "L13",
-      "weight": 1.0,
-      "source": "package_scripts",
-      "target": "package_scripts_app_tunnel",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "package.json",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "package_scripts",
-      "target": "package_scripts_cpanel_build"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "package.json",
-      "source_location": "L14",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "package_scripts",
-      "target": "package_scripts_cpanel_dev"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "package.json",
-      "source_location": "L14",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "package_scripts",
-      "target": "package_scripts_dev"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "package.json",
+      "source_file": "api/src/index.ts",
       "source_location": "L17",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "package_scripts",
-      "target": "package_scripts_dev_all"
+      "source": "src_index",
+      "target": "routes_admin"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_exercisepreviewmodal",
+      "target": "src_api"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/components/Sidebar.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_sidebar",
+      "target": "src_api"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/App.tsx",
+      "source_location": "L17",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "cpanel_src_app_tsx_src_app",
+      "target": "src_api"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/ActivityPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_activitypage",
+      "target": "src_api"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/CreateExercisePage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_createexercisepage",
+      "target": "src_api"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/DashboardPage.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_dashboardpage",
+      "target": "src_api"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/ExerciseRequestsPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_exerciserequestspage",
+      "target": "src_api"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_exercisespage",
+      "target": "src_api"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/LoginPage.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_loginpage",
+      "target": "src_api"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/NotificationsPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_notificationspage",
+      "target": "src_api"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/OnboardingPage.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_onboardingpage",
+      "target": "src_api"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/SettingsPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_settingspage",
+      "target": "src_api"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/SplitsPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_splitspage",
+      "target": "src_api"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/SupportTicketsPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_supportticketspage",
+      "target": "src_api"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/UsersPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_userspage",
+      "target": "src_api"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "package.json",
-      "source_location": "L15",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L5",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "package_scripts",
-      "target": "package_scripts_setup"
+      "source": "src_api",
+      "target": "src_api_api"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "package.json",
-      "source_location": "L18",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L38",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "package_scripts",
-      "target": "package_scripts_test"
+      "source": "src_api",
+      "target": "src_api_createexercise"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "package.json",
-      "source_location": "L18",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L32",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "package_devdependencies",
-      "target": "package_devdependencies_concurrently"
+      "source": "src_api",
+      "target": "src_api_createsplit"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L33",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_api",
+      "target": "src_api_deletesplit"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L27",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_api",
+      "target": "src_api_deleteuser"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_api",
+      "target": "src_api_getadminkey"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L55",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_api",
+      "target": "src_api_getappsettings"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_api",
+      "target": "src_api_getdashboard"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L39",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_api",
+      "target": "src_api_getexercise"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L40",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_api",
+      "target": "src_api_getexercisefilters"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L41",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_api",
+      "target": "src_api_getexerciserequests"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L37",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_api",
+      "target": "src_api_getexercises"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L47",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_api",
+      "target": "src_api_getonboardingstats"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L40",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_api",
+      "target": "src_api_getsessions"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L31",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_api",
+      "target": "src_api_getsplits"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L57",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_api",
+      "target": "src_api_getsupporttickets"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L25",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_api",
+      "target": "src_api_getuser"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L24",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_api",
+      "target": "src_api_getusers"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L28",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_api",
+      "target": "src_api_resetonboarding"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L58",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_api",
+      "target": "src_api_respondtosupportticket"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L43",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_api",
+      "target": "src_api_sendbroadcast"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_api",
+      "target": "src_api_setadminkey"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L34",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_api",
+      "target": "src_api_toggleprebuilt"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L56",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_api",
+      "target": "src_api_updateappsettings"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L42",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_api",
+      "target": "src_api_updateexerciserequest"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L26",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_api",
+      "target": "src_api_updateuser"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/App.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app",
+      "target": "src_api"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/components/Sidebar.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_sidebar",
+      "target": "src_api_setadminkey"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/LoginPage.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_loginpage",
+      "target": "src_api_setadminkey"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/SettingsPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_settingspage",
+      "target": "src_api_setadminkey"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/App.tsx",
+      "source_location": "L17",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "cpanel_src_app_tsx_src_app",
+      "target": "src_api_getadminkey"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/SettingsPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_settingspage",
+      "target": "src_api_getadminkey"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "cpanel/src/pages/SettingsPage.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "pages_settingspage_settingspage",
+      "target": "src_api_getadminkey"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/App.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app",
+      "target": "src_api_getadminkey"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "cpanel/src/App.tsx",
+      "source_location": "L58",
+      "weight": 1.0,
+      "source": "src_app_authguard",
+      "target": "src_api_getadminkey"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/DashboardPage.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_dashboardpage",
+      "target": "src_api_getdashboard"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/LoginPage.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_loginpage",
+      "target": "src_api_getdashboard"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/UsersPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_userspage",
+      "target": "src_api_getusers"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/UsersPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_userspage",
+      "target": "src_api_updateuser"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/UsersPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_userspage",
+      "target": "src_api_deleteuser"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/UsersPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_userspage",
+      "target": "src_api_resetonboarding"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/SplitsPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_splitspage",
+      "target": "src_api_getsplits"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/SplitsPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_splitspage",
+      "target": "src_api_createsplit"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/SplitsPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_splitspage",
+      "target": "src_api_deletesplit"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/SplitsPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_splitspage",
+      "target": "src_api_toggleprebuilt"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_exercisespage",
+      "target": "src_api_getexercises"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/SplitsPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_splitspage",
+      "target": "src_api_getexercises"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_exercisepreviewmodal",
+      "target": "src_api_getexercise"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/SplitsPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_splitspage",
+      "target": "src_api_getexercisefilters"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/ActivityPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_activitypage",
+      "target": "src_api_getsessions"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/NotificationsPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_notificationspage",
+      "target": "src_api_sendbroadcast"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/OnboardingPage.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_onboardingpage",
+      "target": "src_api_getonboardingstats"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/SettingsPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_settingspage",
+      "target": "src_api_getappsettings"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/SettingsPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_settingspage",
+      "target": "src_api_updateappsettings"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/SupportTicketsPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_supportticketspage",
+      "target": "src_api_getsupporttickets"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/SupportTicketsPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_supportticketspage",
+      "target": "src_api_respondtosupportticket"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_exercisepreviewmodal",
+      "target": "components_exercisepreviewmodal_exercisealternative"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_exercisepreviewmodal",
+      "target": "components_exercisepreviewmodal_exercisedetail"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_exercisepreviewmodal",
+      "target": "components_exercisepreviewmodal_exerciseimage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
+      "source_location": "L24",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_exercisepreviewmodal",
+      "target": "components_exercisepreviewmodal_exerciseimagecrossfade"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_exercisepreviewmodal",
+      "target": "components_exercisepreviewmodal_exercisemuscle"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
+      "source_location": "L94",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_exercisepreviewmodal",
+      "target": "components_exercisepreviewmodal_exercisepreviewmodal"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
+      "source_location": "L86",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_exercisepreviewmodal",
+      "target": "components_exercisepreviewmodal_levelbadge"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_exercisepreviewmodal",
+      "target": "components_exercisepreviewmodal_props"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_exercisepreviewmodal",
+      "target": "components_ui"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_exercisepreviewmodal",
+      "target": "components_ui_pageloader"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_exercisespage",
+      "target": "components_exercisepreviewmodal"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/SplitsPage.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_splitspage",
+      "target": "components_exercisepreviewmodal"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
+      "source_location": "L150",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_exercisepreviewmodal_exercisepreviewmodal",
+      "target": "components_exercisepreviewmodal_levelbadge"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/components/Sidebar.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_sidebar",
+      "target": "components_sidebar_nav"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/components/Sidebar.tsx",
+      "source_location": "L24",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_sidebar",
+      "target": "components_sidebar_sidebar"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/App.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "cpanel_src_app_tsx_src_app",
+      "target": "components_sidebar"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/App.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app",
+      "target": "components_sidebar"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/App.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "cpanel_src_app_tsx_src_app",
+      "target": "pages_exercisespage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_exercisespage",
+      "target": "components_ui"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_exercisespage",
+      "target": "components_ui_pageloader"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_exercisespage",
+      "target": "components_ui_pagination"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_exercisespage",
+      "target": "pages_exercisespage_exercise"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_exercisespage",
+      "target": "pages_exercisespage_exercisespage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/App.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app",
+      "target": "pages_exercisespage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/App.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "cpanel_src_app_tsx_src_app",
+      "target": "pages_splitspage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/SplitsPage.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_splitspage",
+      "target": "components_toast"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/SplitsPage.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_splitspage",
+      "target": "components_toast_usetoast"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/SplitsPage.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_splitspage",
+      "target": "components_ui"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/SplitsPage.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_splitspage",
+      "target": "components_ui_confirmdialog"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/SplitsPage.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_splitspage",
+      "target": "components_ui_pageloader"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/SplitsPage.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_splitspage",
+      "target": "components_ui_pagination"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/SplitsPage.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_splitspage",
+      "target": "pages_splitspage_dayform"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/SplitsPage.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_splitspage",
+      "target": "pages_splitspage_muscle_groups"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/SplitsPage.tsx",
+      "source_location": "L380",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_splitspage",
+      "target": "pages_splitspage_search"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/SplitsPage.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_splitspage",
+      "target": "pages_splitspage_split"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/SplitsPage.tsx",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_splitspage",
+      "target": "pages_splitspage_splitspage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/App.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app",
+      "target": "pages_splitspage"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "cpanel/src/pages/SplitsPage.tsx",
+      "source_location": "L30",
+      "weight": 1.0,
+      "source": "pages_splitspage_splitspage",
+      "target": "components_toast_usetoast"
     },
     {
       "relation": "contains",
@@ -203672,208 +205007,6 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/adminController.test.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_admincontroller_test",
-      "target": "controllers_admincontroller"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L367",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_createexercise"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L167",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_createprebuiltsplit"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L201",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_deletesplit"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L117",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_deleteuser"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_getdashboardstats"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L283",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_getonboardingstats"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L90",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_getuser"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L140",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_listallsplits"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L322",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_listexerciserequests"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L221",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_listexercises"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L246",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_listsessions"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L60",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_listusers"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_prisma"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L124",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_resetonboarding"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L271",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_sendbroadcast"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L208",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_togglesplitprebuilt"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L348",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_updateexerciserequest"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L105",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "controllers_admincontroller",
-      "target": "controllers_admincontroller_updateuser"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/routes/admin.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "routes_admin",
-      "target": "controllers_admincontroller"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "api/src/controllers/authController.test.ts",
       "source_location": "L4",
       "weight": 1.0,
@@ -205699,17 +206832,6 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "api/src/routes/admin.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "routes_admin",
-      "target": "controllers_settingscontroller"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "api/src/routes/app.ts",
       "source_location": "L2",
       "weight": 1.0,
@@ -206384,17 +207506,6 @@
       "confidence_score": 1.0,
       "source": "src_index",
       "target": "middleware_errorhandler_errorhandler"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/index.ts",
-      "source_location": "L17",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_index",
-      "target": "routes_admin"
     },
     {
       "relation": "imports_from",
@@ -207179,36 +208290,6 @@
       "confidence_score": 1.0,
       "source": "routes_splits",
       "target": "middleware_validate_validate"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/routes/admin.ts",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "routes_admin",
-      "target": "routes_admin_adminauth"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/routes/admin.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "routes_admin",
-      "target": "routes_admin_router"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/src/routes/admin.ts",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "routes_admin",
-      "target": "routes_admin_wrap"
     },
     {
       "relation": "contains",
@@ -208286,17 +209367,6 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "cpanel/src/App.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "cpanel_src_app_tsx_src_app",
-      "target": "components_sidebar"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/App.tsx",
       "source_location": "L4",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -208373,17 +209443,6 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "cpanel/src/App.tsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "cpanel_src_app_tsx_src_app",
-      "target": "pages_exercisespage"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/App.tsx",
       "source_location": "L5",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -208428,17 +209487,6 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "cpanel/src/App.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "cpanel_src_app_tsx_src_app",
-      "target": "pages_splitspage"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/App.tsx",
       "source_location": "L16",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -208455,28 +209503,6 @@
       "confidence_score": 1.0,
       "source": "cpanel_src_app_tsx_src_app",
       "target": "pages_userspage"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/App.tsx",
-      "source_location": "L17",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "cpanel_src_app_tsx_src_app",
-      "target": "src_api"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/App.tsx",
-      "source_location": "L17",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "cpanel_src_app_tsx_src_app",
-      "target": "src_api_getadminkey"
     },
     {
       "relation": "contains",
@@ -208537,717 +209563,6 @@
       "confidence_score": 1.0,
       "source": "src_app",
       "target": "src_app_authguard"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "cpanel/src/App.tsx",
-      "source_location": "L58",
-      "weight": 1.0,
-      "source": "src_app_authguard",
-      "target": "src_api_getadminkey"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/components/Sidebar.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_sidebar",
-      "target": "src_api"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/ActivityPage.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_activitypage",
-      "target": "src_api"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/CreateExercisePage.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_createexercisepage",
-      "target": "src_api"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/DashboardPage.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_dashboardpage",
-      "target": "src_api"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/ExerciseRequestsPage.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_exerciserequestspage",
-      "target": "src_api"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_exercisespage",
-      "target": "src_api"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/LoginPage.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_loginpage",
-      "target": "src_api"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/NotificationsPage.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_notificationspage",
-      "target": "src_api"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/OnboardingPage.tsx",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_onboardingpage",
-      "target": "src_api"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/SettingsPage.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_settingspage",
-      "target": "src_api"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/SplitsPage.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_splitspage",
-      "target": "src_api"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/SupportTicketsPage.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_supportticketspage",
-      "target": "src_api"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/UsersPage.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_userspage",
-      "target": "src_api"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_api",
-      "target": "src_api_api"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L38",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_api",
-      "target": "src_api_createexercise"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L32",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_api",
-      "target": "src_api_createsplit"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L33",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_api",
-      "target": "src_api_deletesplit"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L27",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_api",
-      "target": "src_api_deleteuser"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L16",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_api",
-      "target": "src_api_getadminkey"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L55",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_api",
-      "target": "src_api_getappsettings"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_api",
-      "target": "src_api_getdashboard"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L41",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_api",
-      "target": "src_api_getexerciserequests"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L37",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_api",
-      "target": "src_api_getexercises"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L47",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_api",
-      "target": "src_api_getonboardingstats"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L40",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_api",
-      "target": "src_api_getsessions"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L31",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_api",
-      "target": "src_api_getsplits"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L57",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_api",
-      "target": "src_api_getsupporttickets"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L25",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_api",
-      "target": "src_api_getuser"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L24",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_api",
-      "target": "src_api_getusers"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L28",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_api",
-      "target": "src_api_resetonboarding"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L58",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_api",
-      "target": "src_api_respondtosupportticket"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L43",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_api",
-      "target": "src_api_sendbroadcast"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L11",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_api",
-      "target": "src_api_setadminkey"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L34",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_api",
-      "target": "src_api_toggleprebuilt"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L56",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_api",
-      "target": "src_api_updateappsettings"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L42",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_api",
-      "target": "src_api_updateexerciserequest"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L26",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_api",
-      "target": "src_api_updateuser"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/App.tsx",
-      "source_location": "L14",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_app",
-      "target": "src_api"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/components/Sidebar.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_sidebar",
-      "target": "src_api_setadminkey"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/LoginPage.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_loginpage",
-      "target": "src_api_setadminkey"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/SettingsPage.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_settingspage",
-      "target": "src_api_setadminkey"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/SettingsPage.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_settingspage",
-      "target": "src_api_getadminkey"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "cpanel/src/pages/SettingsPage.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "pages_settingspage_settingspage",
-      "target": "src_api_getadminkey"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/App.tsx",
-      "source_location": "L14",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_app",
-      "target": "src_api_getadminkey"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/DashboardPage.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_dashboardpage",
-      "target": "src_api_getdashboard"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/LoginPage.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_loginpage",
-      "target": "src_api_getdashboard"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/UsersPage.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_userspage",
-      "target": "src_api_getusers"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/UsersPage.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_userspage",
-      "target": "src_api_updateuser"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/UsersPage.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_userspage",
-      "target": "src_api_deleteuser"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/UsersPage.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_userspage",
-      "target": "src_api_resetonboarding"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/SplitsPage.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_splitspage",
-      "target": "src_api_getsplits"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/SplitsPage.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_splitspage",
-      "target": "src_api_createsplit"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/SplitsPage.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_splitspage",
-      "target": "src_api_deletesplit"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/SplitsPage.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_splitspage",
-      "target": "src_api_toggleprebuilt"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_exercisespage",
-      "target": "src_api_getexercises"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/SplitsPage.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_splitspage",
-      "target": "src_api_getexercises"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/ActivityPage.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_activitypage",
-      "target": "src_api_getsessions"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/NotificationsPage.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_notificationspage",
-      "target": "src_api_sendbroadcast"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/OnboardingPage.tsx",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_onboardingpage",
-      "target": "src_api_getonboardingstats"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/SettingsPage.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_settingspage",
-      "target": "src_api_getappsettings"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/SettingsPage.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_settingspage",
-      "target": "src_api_updateappsettings"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/SupportTicketsPage.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_supportticketspage",
-      "target": "src_api_getsupporttickets"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/SupportTicketsPage.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_supportticketspage",
-      "target": "src_api_respondtosupportticket"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/components/Sidebar.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_sidebar",
-      "target": "components_sidebar_nav"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/components/Sidebar.tsx",
-      "source_location": "L24",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_sidebar",
-      "target": "components_sidebar_sidebar"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/App.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_app",
-      "target": "components_sidebar"
     },
     {
       "relation": "contains",
@@ -209330,17 +209645,6 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "pages_settingspage",
-      "target": "components_toast"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/SplitsPage.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_splitspage",
       "target": "components_toast"
     },
     {
@@ -209440,28 +209744,6 @@
       "source_location": "L9",
       "weight": 1.0,
       "source": "pages_settingspage_settingspage",
-      "target": "components_toast_usetoast"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/SplitsPage.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_splitspage",
-      "target": "components_toast_usetoast"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "cpanel/src/pages/SplitsPage.tsx",
-      "source_location": "L30",
-      "weight": 1.0,
-      "source": "pages_splitspage_splitspage",
       "target": "components_toast_usetoast"
     },
     {
@@ -209666,33 +209948,11 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_exercisespage",
-      "target": "components_ui"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "cpanel/src/pages/OnboardingPage.tsx",
       "source_location": "L3",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "pages_onboardingpage",
-      "target": "components_ui"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/SplitsPage.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_splitspage",
       "target": "components_ui"
     },
     {
@@ -209716,17 +209976,6 @@
       "confidence_score": 1.0,
       "source": "pages_userspage",
       "target": "components_ui"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/SplitsPage.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_splitspage",
-      "target": "components_ui_confirmdialog"
     },
     {
       "relation": "imports",
@@ -209759,28 +210008,6 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "pages_exerciserequestspage",
-      "target": "components_ui_pagination"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_exercisespage",
-      "target": "components_ui_pagination"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/SplitsPage.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_splitspage",
       "target": "components_ui_pagination"
     },
     {
@@ -209842,33 +210069,11 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_exercisespage",
-      "target": "components_ui_pageloader"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "cpanel/src/pages/OnboardingPage.tsx",
       "source_location": "L3",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "pages_onboardingpage",
-      "target": "components_ui_pageloader"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/SplitsPage.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_splitspage",
       "target": "components_ui_pageloader"
     },
     {
@@ -210166,37 +210371,6 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_exercisespage",
-      "target": "pages_exercisespage_exercise"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
-      "source_location": "L12",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_exercisespage",
-      "target": "pages_exercisespage_exercisespage"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/App.tsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_app",
-      "target": "pages_exercisespage"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "cpanel/src/pages/LoginPage.tsx",
       "source_location": "L8",
       "weight": 1.0,
@@ -210307,67 +210481,6 @@
       "confidence_score": 1.0,
       "source": "src_app",
       "target": "pages_settingspage"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/SplitsPage.tsx",
-      "source_location": "L14",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_splitspage",
-      "target": "pages_splitspage_dayform"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/SplitsPage.tsx",
-      "source_location": "L19",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_splitspage",
-      "target": "pages_splitspage_muscle_groups"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/SplitsPage.tsx",
-      "source_location": "L380",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_splitspage",
-      "target": "pages_splitspage_search"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/SplitsPage.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_splitspage",
-      "target": "pages_splitspage_split"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/SplitsPage.tsx",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_splitspage",
-      "target": "pages_splitspage_splitspage"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/App.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_app",
-      "target": "pages_splitspage"
     },
     {
       "relation": "contains",
@@ -210870,6 +210983,16 @@
       "confidence_score": 1.0,
       "source": "expo_devices",
       "target": "expo_devices_devices"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "expo-app/.expo/settings.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "expo_settings",
+      "target": "expo_settings_urlrandomness"
     },
     {
       "relation": "contains",
@@ -226656,6 +226779,236 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L17",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package",
+      "target": "package_devdependencies"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package",
+      "target": "package_name"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package",
+      "target": "package_private"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package",
+      "target": "package_scripts"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package",
+      "target": "package_version"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_scripts",
+      "target": "package_scripts_api_build"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_scripts",
+      "target": "package_scripts_api_db_migrate"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_scripts",
+      "target": "package_scripts_api_db_seed"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_scripts",
+      "target": "package_scripts_api_db_studio"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_scripts",
+      "target": "package_scripts_api_dev"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_scripts",
+      "target": "package_scripts_api_test"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_scripts",
+      "target": "package_scripts_app_android"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_scripts",
+      "target": "package_scripts_app_ios"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_scripts",
+      "target": "package_scripts_app_start"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_scripts",
+      "target": "package_scripts_app_test"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_scripts",
+      "target": "package_scripts_app_tunnel"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_scripts",
+      "target": "package_scripts_cpanel_build"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_scripts",
+      "target": "package_scripts_cpanel_dev"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_scripts",
+      "target": "package_scripts_dev"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L17",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_scripts",
+      "target": "package_scripts_dev_all"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_scripts",
+      "target": "package_scripts_setup"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_scripts",
+      "target": "package_scripts_test"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "package_devdependencies",
+      "target": "package_devdependencies_concurrently"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "skills-lock.json",
       "source_location": "L3",
       "weight": 1.0,
@@ -227236,5 +227589,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "fa3da378cfd21e0b29c6c065f2cd9ed2589bd622"
+  "built_at_commit": "37fcc22cacfea0520cbfbb267440805d1abaf4ac"
 }
