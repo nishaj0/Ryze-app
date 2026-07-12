@@ -1,8 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "../utils/db";
 import { AuthRequest } from "../middleware/auth";
 
-const prisma = new PrismaClient();
 
 // ─── App Settings ───────────────────────────────────────────────────────────
 

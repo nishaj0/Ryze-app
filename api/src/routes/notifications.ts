@@ -1,14 +1,9 @@
-import { Router, Response, NextFunction } from "express";
+import { Router } from "express";
 import { authMiddleware } from "../middleware/auth";
+import { wrap } from "../utils/asyncHandler";
 import * as notificationController from "../controllers/notificationController";
 
 const router = Router();
-
-const wrap = (fn: (req: any, res: Response, next: NextFunction) => Promise<any>) => {
-  return (req: any, res: Response, next: NextFunction) => {
-    fn(req, res, next).catch(next);
-  };
-};
 
 router.post("/token", authMiddleware, wrap(notificationController.saveToken));
 router.put("/preferences", authMiddleware, wrap(notificationController.updatePreferences));

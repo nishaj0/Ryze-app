@@ -84,7 +84,12 @@ NODE_ENV="development"
 CLOUDINARY_CLOUD_NAME="your-cloud-name"
 CLOUDINARY_API_KEY="your-api-key"
 CLOUDINARY_API_SECRET="your-api-secret"
+LOG_LEVEL="debug"
+LOG_DIR="logs"
+LOG_FILE_MAX_SIZE="10m"
+LOG_FILE_MAX_FILES="7"
 ```
+check `api/.env.example` for more info
 
 3. **Setup database:**
 ```bash
@@ -230,8 +235,19 @@ PORT=3000
 NODE_ENV="development"
 CLOUDINARY_CLOUD_NAME="your-cloud-name"
 CLOUDINARY_API_KEY="your-api-key"
-CLOUDINARY_API_SECRET="your-api-secret"
+CLOUDINARY_API_SECRET="your-cloud-secret"
+
+# Logging
+LOG_LEVEL="debug"          # trace | debug | info | warn | error | silent
+LOG_DIR="logs"             # Directory for rotated logs (prod only)
+LOG_FILE_MAX_SIZE="10m"    # Max size before rotation
+LOG_FILE_MAX_FILES="7"     # Number of rotated files to keep
 ```
+
+#### Logging
+The API uses [pino](https://getpino.io/) for structured logging:
+- **Development**: pretty-printed logs at `debug` level, including HTTP requests (with redacted bodies), controller handlers, Prisma queries, and AI call traces.
+- **Production**: JSON logs to stdout and rotating files in `LOG_DIR` at `info` level. Set `LOG_LEVEL` to adjust verbosity.
 
 ### Mobile (expo-app/.env)
 ```

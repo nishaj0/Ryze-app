@@ -1,7 +1,8 @@
-import { Router, Response, NextFunction } from "express";
+import { Router } from "express";
 import { z } from "zod";
 import { validate } from "../middleware/validate";
 import { authMiddleware } from "../middleware/auth";
+import { wrap } from "../utils/asyncHandler";
 import * as onboardingController from "../controllers/onboardingController";
 
 const router = Router();
@@ -18,12 +19,6 @@ const onboardingSchema = z.object({
   dateOfBirth: z.string().optional(),
   splitId: z.string().optional(),
 });
-
-const wrap = (fn: (req: any, res: Response, next: NextFunction) => Promise<any>) => {
-  return (req: any, res: Response, next: NextFunction) => {
-    fn(req, res, next).catch(next);
-  };
-};
 
 router.post(
   "/complete",

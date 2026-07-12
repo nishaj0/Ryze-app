@@ -1,18 +1,11 @@
-import { Router, Response, NextFunction } from "express";
+import { Router } from "express";
 import { z } from "zod";
 import { authMiddleware } from "../middleware/auth";
 import { validate } from "../middleware/validate";
+import { wrap } from "../utils/asyncHandler";
 import * as checkinController from "../controllers/checkinController";
 
 const router = Router();
-
-const wrap = (
-  fn: (req: any, res: Response, next: NextFunction) => Promise<any>
-) => {
-  return (req: any, res: Response, next: NextFunction) => {
-    fn(req, res, next).catch(next);
-  };
-};
 
 const checkInSchema = z.object({
   sessionId: z.string().min(1),

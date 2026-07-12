@@ -1,6 +1,7 @@
-import { Router, Response, NextFunction } from "express";
+import { Router } from "express";
 import multer from "multer";
 import { authMiddleware } from "../middleware/auth";
+import { wrap } from "../utils/asyncHandler";
 import * as photoController from "../controllers/photoController";
 
 const router = Router();
@@ -17,12 +18,6 @@ const upload = multer({
     }
   },
 });
-
-const wrap = (fn: (req: any, res: Response, next: NextFunction) => Promise<any>) => {
-  return (req: any, res: Response, next: NextFunction) => {
-    fn(req, res, next).catch(next);
-  };
-};
 
 router.post("/", authMiddleware, upload.single("photo"), wrap(photoController.uploadPhoto));
 router.get("/", authMiddleware, wrap(photoController.getPhotos));

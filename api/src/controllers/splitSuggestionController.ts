@@ -1,11 +1,12 @@
-import { PrismaClient } from "@prisma/client";
 import { Response } from "express";
 import { AuthRequest } from "../middleware/auth";
 import { AppError } from "../middleware/errorHandler";
+import { prisma } from "../utils/db";
 import { callGemini, GeminiError } from "../utils/gemini";
+import { createLogger } from "../utils/logger";
 import axios from "axios";
 
-const prisma = new PrismaClient();
+const log = createLogger("suggestion");
 
 const ADMIN_KEY = process.env.ADMIN_KEY || "ryze-admin-2024";
 
@@ -44,8 +45,10 @@ async function sendPushNotification(
   data?: any
 ) {
   if (!expoPushToken || !expoPushToken.startsWith("ExponentPushToken")) {
+    log.debug({ reason: "invalid-token" }, "push:skip");
     return;
   }
+  log.debug({ title }, "push:start");
   try {
     await axios.post("https://exp.host/--/api/v2/push/send", {
       to: expoPushToken,
@@ -54,8 +57,9 @@ async function sendPushNotification(
       body,
       data,
     });
+    log.debug({ title }, "push:ok");
   } catch (err) {
-    console.error(`[Push Notification] Error sending to ${expoPushToken}:`, err);
+    log.error({ err, title }, "push:fail");
   }
 }
 
@@ -64,11 +68,15 @@ export async function evaluateForUser(userId: string): Promise<{
   skipped: boolean;
   reason?: string;
 }> {
+  log.debug({ userId }, "evaluateForUser:start");
+  const start = Date.now();
+
   const settings = await prisma.appSettings.findUnique({
     where: { id: "default" },
   });
 
   if (settings && !settings.aiSuggestionsEnabled) {
+    log.debug({ userId, reason: "AI suggestions disabled" }, "evaluateForUser:skip");
     return { suggestionsCreated: 0, skipped: true, reason: "AI suggestions disabled" };
   }
 
@@ -90,11 +98,13 @@ export async function evaluateForUser(userId: string): Promise<{
   });
 
   if (!activeSplit) {
+    log.debug({ userId, reason: "No active split" }, "evaluateForUser:skip");
     return { suggestionsCreated: 0, skipped: true, reason: "No active split" };
   }
 
   const twoWeeksAgo = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000);
   if (activeSplit.startDate > twoWeeksAgo) {
+    log.debug({ userId, reason: "Split too new (< 2 weeks)" }, "evaluateForUser:skip");
     return { suggestionsCreated: 0, skipped: true, reason: "Split too new (< 2 weeks)" };
   }
 
@@ -108,10 +118,12 @@ export async function evaluateForUser(userId: string): Promise<{
   });
 
   if (struggledCheckIns.length < 3) {
+    const reason = `Only ${struggledCheckIns.length} STRUGGLED check-ins (need 3+)`;
+    log.debug({ userId, reason, count: struggledCheckIns.length }, "evaluateForUser:skip");
     return {
       suggestionsCreated: 0,
       skipped: true,
-      reason: `Only ${struggledCheckIns.length} STRUGGLED check-ins (need 3+)`,
+      reason,
     };
   }
 
@@ -158,7 +170,10 @@ export async function evaluateForUser(userId: string): Promise<{
   let suggestionsCreated = 0;
 
   for (const [exerciseId, group] of exerciseGroups) {
-    if (group.checkIns.length < 2) continue;
+    if (group.checkIns.length < 2) {
+      log.debug({ userId, exerciseId, count: group.checkIns.length }, "evaluateForUser:exercise-too-few");
+      continue;
+    }
 
     const existingPending = await prisma.splitSuggestion.findFirst({
       where: {
@@ -167,12 +182,18 @@ export async function evaluateForUser(userId: string): Promise<{
         status: "PENDING",
       },
     });
-    if (existingPending) continue;
+    if (existingPending) {
+      log.debug({ userId, exerciseId }, "evaluateForUser:existing-pending");
+      continue;
+    }
 
     const exercise = await prisma.exercise.findUnique({
       where: { id: exerciseId },
     });
-    if (!exercise) continue;
+    if (!exercise) {
+      log.warn({ userId, exerciseId }, "evaluateForUser:exercise-not-found");
+      continue;
+    }
 
     const alternatives = await prisma.exerciseAlternative.findMany({
       where: { exerciseId },
@@ -214,9 +235,9 @@ export async function evaluateForUser(userId: string): Promise<{
       });
     } catch (error) {
       if (error instanceof GeminiError) {
-        console.error(`[Suggestion] AI call failed for user ${userId}, exercise ${exerciseId}: ${error.message}`);
+        log.error({ userId, exerciseId, error: error.message }, "evaluateForUser:ai-fail");
       } else {
-        console.error(`[Suggestion] Unexpected error for user ${userId}, exercise ${exerciseId}:`, error);
+        log.error({ userId, exerciseId, err: error }, "evaluateForUser:ai-unexpected");
       }
       continue;
     }
@@ -227,12 +248,14 @@ export async function evaluateForUser(userId: string): Promise<{
         (a) => a.alternative.name.toLowerCase() === result.alternativeExerciseName!.toLowerCase()
       );
       if (!matched) {
-        console.error(
-          `[Suggestion] AI returned non-matching alternative: ${result.alternativeExerciseName}`
+        log.warn(
+          { userId, exerciseId, alternative: result.alternativeExerciseName },
+          "evaluateForUser:alternative-not-matched"
         );
         continue;
       }
       suggestedAlternativeExerciseId = matched.alternativeId;
+      log.debug({ userId, exerciseId, alternativeId: suggestedAlternativeExerciseId }, "evaluateForUser:alternative-matched");
     }
 
     await prisma.splitSuggestion.create({
@@ -247,13 +270,18 @@ export async function evaluateForUser(userId: string): Promise<{
       },
     });
 
+    log.debug({ userId, exerciseId, suggestionType: result.suggestionType }, "evaluateForUser:suggestion-created");
+
     await createNotificationAndPush(userId, "AI Suggestion Available", "We noticed a pattern in your recent workouts — check out a suggestion.");
 
     suggestionsCreated++;
   }
 
   for (const [keyword, group] of issueGroups) {
-    if (group.checkIns.length < 2) continue;
+    if (group.checkIns.length < 2) {
+      log.debug({ userId, keyword, count: group.checkIns.length }, "evaluateForUser:keyword-too-few");
+      continue;
+    }
 
     const existingPending = await prisma.splitSuggestion.findFirst({
       where: {
@@ -263,7 +291,10 @@ export async function evaluateForUser(userId: string): Promise<{
         status: "PENDING",
       },
     });
-    if (existingPending) continue;
+    if (existingPending) {
+      log.debug({ userId, keyword }, "evaluateForUser:keyword-existing-pending");
+      continue;
+    }
 
     const splitDayExercise = await prisma.splitDayExercise.findFirst({
       where: { splitDayId: group.splitDayId },
@@ -288,15 +319,15 @@ export async function evaluateForUser(userId: string): Promise<{
       });
     } catch (error) {
       if (error instanceof GeminiError) {
-        console.error(`[Suggestion] AI call failed for user ${userId}, keyword ${keyword}: ${error.message}`);
+        log.error({ userId, keyword, error: error.message }, "evaluateForUser:keyword-ai-fail");
       } else {
-        console.error(`[Suggestion] Unexpected error for user ${userId}, keyword ${keyword}:`, error);
+        log.error({ userId, keyword, err: error }, "evaluateForUser:keyword-ai-unexpected");
       }
       continue;
     }
 
     if (result.suggestionType === "SWAP_EXERCISE") {
-      console.error(`[Suggestion] AI incorrectly suggested SWAP for general issue`);
+      log.warn({ userId, keyword }, "evaluateForUser:keyword-invalid-swap");
       continue;
     }
 
@@ -312,10 +343,14 @@ export async function evaluateForUser(userId: string): Promise<{
       },
     });
 
+    log.debug({ userId, keyword, suggestionType: result.suggestionType }, "evaluateForUser:keyword-suggestion-created");
+
     await createNotificationAndPush(userId, "AI Suggestion Available", "We noticed a pattern in your recent workouts — check out a suggestion.");
 
     suggestionsCreated++;
   }
+
+  log.debug({ userId, suggestionsCreated, durationMs: Date.now() - start }, "evaluateForUser:ok");
 
   return { suggestionsCreated, skipped: false };
 }
@@ -387,6 +422,7 @@ async function createNotificationAndPush(userId: string, title: string, body: st
   await prisma.notification.create({
     data: { userId, type: "AI_SUGGESTION", title, body },
   });
+  log.debug({ userId, title }, "notification:created");
 
   const user = await prisma.user.findUnique({
     where: { id: userId },
@@ -394,7 +430,10 @@ async function createNotificationAndPush(userId: string, title: string, body: st
   });
 
   if (user?.pushToken) {
+    log.debug({ userId, hasPushToken: true }, "notification:has-push-token");
     await sendPushNotification(user.pushToken, title, body, { screen: "Home" });
+  } else {
+    log.debug({ userId }, "notification:no-push-token");
   }
 }
 
@@ -417,6 +456,8 @@ export const generateSuggestions = async (req: AuthRequest, res: Response) => {
   let suggestionsCreated = 0;
   let skipped = 0;
 
+  log.debug({ userCount: users.length }, "generateSuggestions:start");
+
   for (const user of users) {
     try {
       const result = await evaluateForUser(user.id);
@@ -424,10 +465,12 @@ export const generateSuggestions = async (req: AuthRequest, res: Response) => {
       suggestionsCreated += result.suggestionsCreated;
       if (result.skipped) skipped++;
     } catch (err) {
-      console.error(`[Suggestion] Error evaluating user ${user.id}:`, err);
+      log.error({ userId: user.id, err }, "generateSuggestions:user-error");
       skipped++;
     }
   }
+
+  log.debug({ evaluated, suggestionsCreated, skipped }, "generateSuggestions:done");
 
   return res.json({ evaluated, suggestionsCreated, skipped });
 };

@@ -1,16 +1,16 @@
 # Graph Report - Ryze  (2026-07-12)
 
 ## Corpus Check
-- 1086 files · ~3,604,475 words
+- 1086 files · ~3,604,986 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 11722 nodes · 12067 edges · 951 communities (940 shown, 11 thin omitted)
+- 11722 nodes · 12068 edges · 951 communities (940 shown, 11 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 2 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `37fcc22c`
+- Built from commit: `8f30393c`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -41,6 +41,7 @@
 - [[_COMMUNITY_Community 23|Community 23]]
 - [[_COMMUNITY_Metro Bundler Config|Metro Bundler Config]]
 - [[_COMMUNITY_Device Detection|Device Detection]]
+- [[_COMMUNITY_Community 29|Community 29]]
 - [[_COMMUNITY_Community 30|Community 30]]
 - [[_COMMUNITY_Community 31|Community 31]]
 - [[_COMMUNITY_Community 32|Community 32]]
@@ -945,7 +946,6 @@
 - [[_COMMUNITY_Community 944|Community 944]]
 - [[_COMMUNITY_Community 945|Community 945]]
 - [[_COMMUNITY_Community 946|Community 946]]
-- [[_COMMUNITY_Community 947|Community 947]]
 - [[_COMMUNITY_Community 948|Community 948]]
 - [[_COMMUNITY_Community 949|Community 949]]
 - [[_COMMUNITY_Community 950|Community 950]]
@@ -1076,13 +1076,17 @@ Nodes (6): compilerOptions, moduleResolution, paths, strict, extends, @/*
 Cohesion: 0.22
 Nodes (9): AuthRequest, resetAllMocks(), TEST_TOKEN, TEST_USER, mockPrismaClient, callGemini(), CallGeminiOptions, GeminiError (+1 more)
 
+### Community 29 - "Community 29"
+Cohesion: 0.29
+Nodes (6): EditForm, User, deleteUser(), getUsers(), resetOnboarding(), updateUser()
+
 ### Community 30 - "Community 30"
 Cohesion: 0.22
 Nodes (8): ExerciseAlternative, ExerciseDetail, ExerciseImage, ExerciseMuscle, ExercisePreviewModal(), levelBadge(), Props, getExercise()
 
 ### Community 31 - "Community 31"
-Cohesion: 0.12
-Nodes (13): Avatar(), AvatarProps, Badge(), badgeColors, BadgeProps, ConfirmDialog(), ConfirmProps, Pagination() (+5 more)
+Cohesion: 0.10
+Nodes (17): Avatar(), AvatarProps, Badge(), badgeColors, BadgeProps, ConfirmDialog(), ConfirmProps, PageLoader() (+9 more)
 
 ### Community 32 - "Community 32"
 Cohesion: 0.17
@@ -4629,8 +4633,8 @@ Cohesion: 0.15
 Nodes (14): Toast, ToastContext, ToastCtx, ToastProvider(), useToast(), LoginPage(), NotificationsPage(), SplitsPage() (+6 more)
 
 ### Community 934 - "Community 934"
-Cohesion: 0.12
-Nodes (15): DayForm, MUSCLE_GROUPS, Split, EditForm, User, api, createSplit(), deleteSplit() (+7 more)
+Cohesion: 0.14
+Nodes (11): Exercise, DayForm, MUSCLE_GROUPS, Split, api, createSplit(), deleteSplit(), getExerciseFilters() (+3 more)
 
 ### Community 937 - "Community 937"
 Cohesion: 0.29
@@ -4664,10 +4668,6 @@ Nodes (4): main, name, private, version
 Cohesion: 0.40
 Nodes (4): buildCommand, framework, outputDirectory, rewrites
 
-### Community 947 - "Community 947"
-Cohesion: 0.20
-Nodes (6): PageLoader(), Exercise, COLORS, OnboardingStats, getExercises(), getOnboardingStats()
-
 ### Community 948 - "Community 948"
 Cohesion: 0.50
 Nodes (3): prisma, router, startTime
@@ -4677,7 +4677,7 @@ Cohesion: 0.08
 Nodes (31): deletePhoto(), getPhotos(), uploadPhoto(), Card(), CardProps, ExerciseDetailSheet(), ExerciseImageCarousel(), ExerciseImageCarouselProps (+23 more)
 
 ## Knowledge Gaps
-- **10133 isolated node(s):** `prisma`, `router`, `api`, `ExerciseImage`, `ExerciseMuscle` (+10128 more)
+- **10133 isolated node(s):** `Exercise`, `prisma`, `router`, `api`, `ExerciseImage` (+10128 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **11 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -4690,7 +4690,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.002) - this node is a cross-community bridge._
 - **Why does `AuthRequest` connect `Community 23` to `Expo App Dependencies`, `Community 939`, `Community 940`, `Community 908`, `Skills Lock Registry`, `Community 15`, `Photo Controller & Cloudinary`, `Progress Analytics Controller`, `Database Seed Data`, `Community 946`, `Community 950`?**
   _High betweenness centrality (0.000) - this node is a cross-community bridge._
-- **What connects `prisma`, `router`, `api` to the rest of the system?**
+- **What connects `Exercise`, `prisma`, `router` to the rest of the system?**
   _10133 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Frontend API Client` be split into smaller, more focused modules?**
   _Cohesion score 0.0873015873015873 - nodes in this community are weakly interconnected._

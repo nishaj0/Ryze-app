@@ -1,8 +1,7 @@
 import { Response } from "express";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "../utils/db";
 import { AuthRequest } from "../middleware/auth";
 
-const prisma = new PrismaClient();
 
 export const listExercises = async (req: AuthRequest, res: Response) => {
   const { muscle, search, equipment, category, level, mechanic, page, limit } = req.query;

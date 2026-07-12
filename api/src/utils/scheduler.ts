@@ -1,23 +1,35 @@
 import axios from "axios";
-import { PrismaClient } from "@prisma/client";
+import { randomUUID } from "node:crypto";
+import { prisma } from "./db";
+import { createLogger, runWithContext } from "./logger";
+
+const log = createLogger("scheduler");
 
 const ADMIN_KEY = process.env.ADMIN_KEY || "ryze-admin-2024";
 const BASE_URL = process.env.API_BASE_URL || "http://localhost:3000";
-const prisma = new PrismaClient();
 
 export async function initScheduler(): Promise<void> {
   const cron = (await import("node-cron")).default;
 
+  log.info({ baseUrl: BASE_URL, retryCron: "*/10 * * * *" }, "scheduler:init");
+
   cron.schedule("*/10 * * * *", async () => {
-    try {
-      await axios.post(
-        `${BASE_URL}/api/checkins/retry-unprocessed`,
-        {},
-        { headers: { "x-admin-key": ADMIN_KEY } }
-      );
-    } catch (error) {
-      console.error("[Scheduler] Check-in retry failed:", error);
-    }
+    await runWithContext(
+      { runId: randomUUID(), job: "retry-unprocessed" },
+      async () => {
+        log.debug("job:start");
+        try {
+          await axios.post(
+            `${BASE_URL}/api/checkins/retry-unprocessed`,
+            {},
+            { headers: { "x-admin-key": ADMIN_KEY } }
+          );
+          log.debug("job:ok");
+        } catch (error) {
+          log.error({ err: error }, "job:fail");
+        }
+      }
+    );
   });
 
   let cronExpression = "0 9 * * 0";
@@ -29,20 +41,27 @@ export async function initScheduler(): Promise<void> {
       cronExpression = settings.aiSuggestionScheduleCron;
     }
   } catch (error) {
-    console.error("[Scheduler] Failed to load settings from DB, using default cron:", error);
+    log.error({ err: error }, "scheduler:settings-load-fail");
   }
 
   cron.schedule(cronExpression, async () => {
-    try {
-      await axios.post(
-        `${BASE_URL}/api/suggestions/generate`,
-        {},
-        { headers: { "x-admin-key": ADMIN_KEY } }
-      );
-    } catch (error) {
-      console.error("[Scheduler] AI suggestion generation failed:", error);
-    }
+    await runWithContext(
+      { runId: randomUUID(), job: "generate-suggestions" },
+      async () => {
+        log.debug("job:start");
+        try {
+          await axios.post(
+            `${BASE_URL}/api/suggestions/generate`,
+            {},
+            { headers: { "x-admin-key": ADMIN_KEY } }
+          );
+          log.debug("job:ok");
+        } catch (error) {
+          log.error({ err: error }, "job:fail");
+        }
+      }
+    );
   });
 
-  console.log(`[Scheduler] Initialized (AI suggestions: ${cronExpression})`);
+  log.info({ aiSuggestionCron: cronExpression }, "scheduler:ready");
 }

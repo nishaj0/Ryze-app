@@ -1,7 +1,8 @@
-import { Router, Request, Response, NextFunction } from "express";
+import { Router } from "express";
 import { z } from "zod";
 import { validate } from "../middleware/validate";
 import { authMiddleware } from "../middleware/auth";
+import { wrap } from "../utils/asyncHandler";
 import * as authController from "../controllers/authController";
 
 const router = Router();
@@ -16,12 +17,6 @@ const loginSchema = z.object({
   email: z.string().email(),
   password: z.string(),
 });
-
-const wrap = (fn: (req: any, res: Response, next: NextFunction) => Promise<any>) => {
-  return (req: Request, res: Response, next: NextFunction) => {
-    fn(req, res, next).catch(next);
-  };
-};
 
 router.post("/register", validate(registerSchema), wrap(authController.register));
 router.post("/login", validate(loginSchema), wrap(authController.login));

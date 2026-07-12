@@ -1,3 +1,7 @@
+import { createLogger, getLogContext } from "./logger";
+
+const log = createLogger("gemini");
+
 const TIMEOUT_MS = 100_000; // 100s — AI split generation can take 30s+ for large exercise lists
 
 let client: any = null;
@@ -27,10 +31,25 @@ interface CallGeminiOptions {
   responseSchema: Record<string, unknown>;
 }
 
+function buildCallMeta(options: CallGeminiOptions) {
+  const context = getLogContext();
+  return {
+    model: "gemini-2.5-flash",
+    systemPromptLen: options.systemPrompt.length,
+    userPromptLen: options.userPrompt.length,
+    schemaKeys: Object.keys(options.responseSchema),
+    reqId: context?.reqId,
+    runId: context?.runId,
+  };
+}
+
 export async function callGemini<T>(
   options: CallGeminiOptions
 ): Promise<T> {
-  const { systemPrompt, userPrompt, responseSchema } = options;
+  const start = Date.now();
+  const meta = buildCallMeta(options);
+
+  log.debug(meta, "gemini:start");
 
   const abortController = new AbortController();
   const timeoutId = setTimeout(() => abortController.abort(), TIMEOUT_MS);
@@ -39,11 +58,11 @@ export async function callGemini<T>(
     const ai = await getClient();
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash",
-      contents: userPrompt,
+      contents: options.userPrompt,
       config: {
-        systemInstruction: systemPrompt,
+        systemInstruction: options.systemPrompt,
         responseMimeType: "application/json",
-        responseJsonSchema: responseSchema,
+        responseJsonSchema: options.responseSchema,
         abortSignal: abortController.signal,
       },
     });
@@ -52,8 +71,14 @@ export async function callGemini<T>(
 
     const text = response.text;
     if (!text) {
-      // Log the full response to help diagnose issues
-      console.error("[Gemini] Empty response. Full response:", JSON.stringify(response, null, 2));
+      log.warn(
+        {
+          ...meta,
+          responseKeys: Object.keys(response || {}),
+          responseText: response?.text,
+        },
+        "gemini:empty"
+      );
       throw new GeminiError("AI returned empty response. Please try again.");
     }
 
@@ -61,9 +86,22 @@ export async function callGemini<T>(
     try {
       parsed = JSON.parse(text) as T;
     } catch {
-      console.error("[Gemini] Failed to parse response:", text);
+      log.error(
+        { ...meta, text: text.slice(0, 1000) },
+        "gemini:parse-fail"
+      );
       throw new GeminiError("Invalid AI response format. Please try again.");
     }
+
+    log.debug(
+      {
+        ...meta,
+        durationMs: Date.now() - start,
+        responseTextLen: text.length,
+        parsedKeys: Object.keys(parsed as object),
+      },
+      "gemini:ok"
+    );
 
     return parsed;
   } catch (error) {
@@ -75,13 +113,14 @@ export async function callGemini<T>(
 
     if (error instanceof Error) {
       if (error.name === "AbortError") {
+        log.error({ ...meta, timeoutMs: TIMEOUT_MS }, "gemini:timeout");
         throw new GeminiError("AI service timeout. Please try again.");
       }
-      console.error("[Gemini] Error:", error.message, error.stack);
+      log.error({ ...meta, err: error }, "gemini:error");
       throw new GeminiError(`AI service error: ${error.message}`);
     }
 
-    console.error("[Gemini] Unknown error:", error);
+    log.error({ ...meta, err: error }, "gemini:unknown-error");
     throw new GeminiError("Unknown AI service error. Please try again.");
   }
 }

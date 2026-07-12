@@ -1,10 +1,9 @@
 import { Response } from "express";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "../utils/db";
 import { AuthRequest } from "../middleware/auth";
 import { AppError } from "../middleware/errorHandler";
 import { uploadToCloudinary } from "../utils/cloudinary";
 
-const prisma = new PrismaClient();
 
 export const requestExercise = async (req: AuthRequest, res: Response) => {
   const userId = req.userId!;

@@ -1,9 +1,8 @@
 import { Response } from "express";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "../utils/db";
 import { AuthRequest } from "../middleware/auth";
 import { AppError } from "../middleware/errorHandler";
 
-const prisma = new PrismaClient();
 
 const calculate1RM = (weight: number, reps: number): number => {
   return Math.round(weight * (1 + reps / 30) * 100) / 100;

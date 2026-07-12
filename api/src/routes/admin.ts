@@ -1,4 +1,5 @@
 import { Router, Request, Response, NextFunction } from "express";
+import { wrap } from "../utils/asyncHandler";
 import * as admin from "../controllers/adminController";
 import * as settings from "../controllers/settingsController";
 
@@ -13,9 +14,6 @@ const adminAuth = (req: Request, res: Response, next: NextFunction) => {
   }
   next();
 };
-
-const wrap = (fn: (req: any, res: Response, next: NextFunction) => Promise<any>) =>
-  (req: Request, res: Response, next: NextFunction) => fn(req, res, next).catch(next);
 
 router.use(adminAuth);
 

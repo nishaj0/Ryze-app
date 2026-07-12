@@ -3,7 +3,9 @@ dotenv.config();
 
 import express from "express";
 import cors from "cors";
+import { requestLogger } from "./middleware/requestLogger";
 import { errorHandler } from "./middleware/errorHandler";
+import { logger } from "./utils/logger";
 import authRoutes from "./routes/auth";
 import onboardingRoutes from "./routes/onboarding";
 import splitRoutes from "./routes/splits";
@@ -28,6 +30,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json({ limit: "10mb" }));
+app.use(requestLogger);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/onboarding", onboardingRoutes);
@@ -50,7 +53,10 @@ app.use("/api/ping", pingRoutes);
 app.use(errorHandler);
 
 app.listen(PORT, () => {
-  console.log(`Ryze API running on port ${PORT}`);
+  logger.info(
+    { port: PORT, env: process.env.NODE_ENV, logLevel: logger.level },
+    "server:ready"
+  );
   initScheduler();
 });
 

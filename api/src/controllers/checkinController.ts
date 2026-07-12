@@ -1,11 +1,12 @@
-import { PrismaClient } from "@prisma/client";
 import { Response } from "express";
 import { AuthRequest } from "../middleware/auth";
 import { AppError } from "../middleware/errorHandler";
+import { prisma } from "../utils/db";
 import { callGemini, GeminiError } from "../utils/gemini";
+import { createLogger } from "../utils/logger";
 import { evaluateForUser } from "./splitSuggestionController";
 
-const prisma = new PrismaClient();
+const log = createLogger("checkin");
 
 interface GeminiCheckInResponse {
   sentiment: "GOOD" | "NEUTRAL" | "STRUGGLED";
@@ -24,7 +25,8 @@ const CHECKIN_SCHEMA = {
     extractedIssues: {
       type: "array",
       items: { type: "string" },
-      description: "Short phrases describing any discomfort, pain, or notable issues",
+      description:
+        "Short phrases describing any discomfort, pain, or notable issues",
     },
     affectedExerciseName: {
       anyOf: [{ type: "string" }, { type: "null" }],
@@ -37,12 +39,15 @@ const CHECKIN_SCHEMA = {
 };
 
 export async function processCheckIn(checkInId: string): Promise<void> {
+  log.debug({ checkInId }, "processCheckIn:start");
+  const start = Date.now();
+
   const checkIn = await prisma.checkIn.findUnique({
     where: { id: checkInId },
   });
 
   if (!checkIn) {
-    console.error(`[CheckIn] CheckIn ${checkInId} not found`);
+    log.warn({ checkInId }, "processCheckIn:not-found");
     return;
   }
 
@@ -61,7 +66,7 @@ export async function processCheckIn(checkInId: string): Promise<void> {
   }));
 
   if (sessionExercises.length === 0) {
-    console.error(`[CheckIn] Session ${checkIn.sessionId} has no exercises`);
+    log.warn({ checkInId, sessionId: checkIn.sessionId }, "processCheckIn:no-exercises");
     return;
   }
 
@@ -84,9 +89,9 @@ Respond with the exact schema provided. If no exercise is clearly associated wit
     });
   } catch (error) {
     if (error instanceof GeminiError) {
-      console.error(`[CheckIn] AI call failed for checkIn ${checkInId}: ${error.message}`);
+      log.error({ checkInId, error: error.message }, "processCheckIn:ai-fail");
     } else {
-      console.error(`[CheckIn] Unexpected error for checkIn ${checkInId}:`, error);
+      log.error({ checkInId, err: error }, "processCheckIn:ai-unexpected");
     }
     return;
   }
@@ -100,6 +105,9 @@ Respond with the exact schema provided. If no exercise is clearly associated wit
     );
     if (matched) {
       affectedExerciseId = matched.id;
+      log.debug({ checkInId, affectedExerciseId, name: matched.name }, "processCheckIn:matched-exercise");
+    } else {
+      log.warn({ checkInId, affectedExerciseName: result.affectedExerciseName }, "processCheckIn:exercise-not-matched");
     }
   }
 
@@ -113,6 +121,17 @@ Respond with the exact schema provided. If no exercise is clearly associated wit
     },
   });
 
+  log.debug(
+    {
+      checkInId,
+      sentiment: result.sentiment,
+      issuesCount: result.extractedIssues.length,
+      affectedExerciseId,
+      durationMs: Date.now() - start,
+    },
+    "processCheckIn:updated"
+  );
+
   if (result.sentiment === "STRUGGLED") {
     const threeWeeksAgo = new Date(Date.now() - 21 * 24 * 60 * 60 * 1000);
     const struggledCount = await prisma.checkIn.count({
@@ -123,12 +142,17 @@ Respond with the exact schema provided. If no exercise is clearly associated wit
       },
     });
 
+    log.debug({ checkInId, struggledCount }, "processCheckIn:struggled-count");
+
     if (struggledCount >= 3) {
+      log.debug({ checkInId, userId: checkIn.userId }, "processCheckIn:trigger-suggestion-eval");
       void evaluateForUser(checkIn.userId).catch((err) => {
-        console.error("[CheckIn] Background suggestion evaluation error:", err);
+        log.error({ checkInId, userId: checkIn.userId, err }, "processCheckIn:suggestion-eval-error");
       });
     }
   }
+
+  log.debug({ checkInId, durationMs: Date.now() - start }, "processCheckIn:ok");
 }
 
 export const createCheckIn = async (req: AuthRequest, res: Response) => {
@@ -166,8 +190,10 @@ export const createCheckIn = async (req: AuthRequest, res: Response) => {
     },
   });
 
+  log.debug({ checkInId: checkIn.id, sessionId, userId }, "createCheckIn:trigger-background");
+
   void processCheckIn(checkIn.id).catch((err) => {
-    console.error("[CheckIn] Background processing error:", err);
+    log.error({ checkInId: checkIn.id, err }, "createCheckIn:background-error");
   });
 
   return res.status(201).json({ checkIn });
@@ -216,12 +242,16 @@ export const retryUnprocessed = async (req: AuthRequest, res: Response) => {
     select: { id: true },
   });
 
+  log.debug({ count: unprocessed.length }, "retryUnprocessed:start");
+
   const results = await Promise.allSettled(
     unprocessed.map((c) => processCheckIn(c.id))
   );
 
   const succeeded = results.filter((r) => r.status === "fulfilled").length;
   const failed = results.filter((r) => r.status === "rejected").length;
+
+  log.debug({ succeeded, failed }, "retryUnprocessed:done");
 
   return res.json({ processed: succeeded, failed });
 };

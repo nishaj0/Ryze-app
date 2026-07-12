@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "../utils/db";
 
-const prisma = new PrismaClient();
 
 // ─── Dashboard ────────────────────────────────────────────────────────────────
 export const getDashboardStats = async (_req: Request, res: Response, next: NextFunction) => {

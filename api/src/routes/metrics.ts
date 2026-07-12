@@ -1,17 +1,12 @@
-import { Router, Response, NextFunction } from "express";
+import { Router } from "express";
 import { z } from "zod";
 import { validate } from "../middleware/validate";
 import { authMiddleware } from "../middleware/auth";
+import { wrap } from "../utils/asyncHandler";
 import * as metricsController from "../controllers/metricsController";
 import * as nutritionController from "../controllers/nutritionController";
 
 const router = Router();
-
-const wrap = (fn: (req: any, res: Response, next: NextFunction) => Promise<any>) => {
-  return (req: any, res: Response, next: NextFunction) => {
-    fn(req, res, next).catch(next);
-  };
-};
 
 const bodyMetricSchema = z.object({
   date: z.string().optional(),

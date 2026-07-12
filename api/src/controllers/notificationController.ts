@@ -1,14 +1,22 @@
 import { Response } from "express";
-import { PrismaClient } from "@prisma/client";
 import { AuthRequest } from "../middleware/auth";
+import { prisma } from "../utils/db";
+import { createLogger } from "../utils/logger";
 import axios from "axios";
 
-const prisma = new PrismaClient();
+const log = createLogger("notification");
 
-const sendPushNotification = async (expoPushToken: string, title: string, body: string, data?: any) => {
+const sendPushNotification = async (
+  expoPushToken: string,
+  title: string,
+  body: string,
+  data?: any
+) => {
   if (!expoPushToken || !expoPushToken.startsWith("ExponentPushToken")) {
+    log.debug({ reason: "invalid-token" }, "push:skip");
     return;
   }
+  log.debug({ title }, "push:start");
   try {
     await axios.post("https://exp.host/--/api/v2/push/send", {
       to: expoPushToken,
@@ -17,8 +25,9 @@ const sendPushNotification = async (expoPushToken: string, title: string, body: 
       body,
       data,
     });
+    log.debug({ title }, "push:ok");
   } catch (err) {
-    console.error(`[Push Notification] Error sending to ${expoPushToken}:`, err);
+    log.error({ err, title }, "push:fail");
   }
 };
 
@@ -30,6 +39,7 @@ export const saveToken = async (req: AuthRequest, res: Response) => {
     data: { pushToken: token },
   });
 
+  log.debug({ userId: req.userId }, "saveToken:ok");
   res.json({ message: "Token saved" });
 };
 
@@ -44,7 +54,12 @@ export const updatePreferences = async (req: AuthRequest, res: Response) => {
     },
   });
 
-  res.json({ preferences: { reminderTime: user.reminderTime, weeklyCheckin: user.weeklyCheckin } });
+  res.json({
+    preferences: {
+      reminderTime: user.reminderTime,
+      weeklyCheckin: user.weeklyCheckin,
+    },
+  });
 };
 
 export const getPreferences = async (req: AuthRequest, res: Response) => {
@@ -73,6 +88,8 @@ export const triggerReminders = async (req: AuthRequest, res: Response) => {
     },
   });
 
+  log.debug({ userCount: users.length }, "triggerReminders:start");
+
   const sentCount = { workout: 0, checkin: 0 };
   const today = new Date();
 
@@ -85,8 +102,12 @@ export const triggerReminders = async (req: AuthRequest, res: Response) => {
       const split = activeSplitRelation.split;
       const days = split.days;
       const startDate = new Date(activeSplitRelation.startDate);
-      const diffDays = Math.floor((today.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
-      const dayIndex = ((today.getDay() - startDate.getDay() + 7) % 7 + diffDays) % 7;
+      const diffDays = Math.floor(
+        (today.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)
+      );
+      const dayIndex =
+        (((today.getDay() - startDate.getDay() + 7) % 7) + diffDays) %
+        days.length;
       const adjustedIndex = dayIndex % days.length;
       const todaySplitDay = days[adjustedIndex] || days[0];
 
@@ -95,7 +116,11 @@ export const triggerReminders = async (req: AuthRequest, res: Response) => {
           token,
           `Today is ${todaySplitDay.name} Day 💪`,
           `Time to hit your workout: ${todaySplitDay.name}. Tap to log sets!`,
-          { screen: "WorkoutLogger", splitDayId: todaySplitDay.id, splitDayName: todaySplitDay.name }
+          {
+            screen: "WorkoutLogger",
+            splitDayId: todaySplitDay.id,
+            splitDayName: todaySplitDay.name,
+          }
         );
         sentCount.workout++;
       }
@@ -112,6 +137,8 @@ export const triggerReminders = async (req: AuthRequest, res: Response) => {
       sentCount.checkin++;
     }
   }
+
+  log.debug({ sentCount }, "triggerReminders:done");
 
   res.json({ message: "Reminders triggered successfully", sentCount });
 };

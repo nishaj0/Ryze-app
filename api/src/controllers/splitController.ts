@@ -1,10 +1,11 @@
 import { Response } from "express";
-import { PrismaClient } from "@prisma/client";
 import { AuthRequest } from "../middleware/auth";
 import { AppError } from "../middleware/errorHandler";
+import { prisma } from "../utils/db";
 import { callGemini, GeminiError } from "../utils/gemini";
+import { createLogger } from "../utils/logger";
 
-const prisma = new PrismaClient();
+const log = createLogger("split");
 
 export const listSplits = async (req: AuthRequest, res: Response) => {
   const userId = req.userId!;
@@ -453,6 +454,7 @@ If the user's description is vague, make reasonable assumptions (full gym access
           targetRepsMax: ex.targetRepsMax,
         });
       } else {
+        log.warn({ exerciseName: ex.exerciseName }, "generateAISplit:dropped-exercise");
         warnings.push(`Dropped exercise: "${ex.exerciseName}" (not found in database)`);
       }
     }
@@ -472,14 +474,28 @@ If the user's description is vague, make reasonable assumptions (full gym access
   );
 
   if (nonEmptyDays.length === 0) {
+    log.warn({ warnings }, "generateAISplit:no-valid-exercises");
     throw new AppError("Generated split has no valid exercises. Please try again.", 400);
   }
 
   if (nonEmptyDays.length < validatedDays.length) {
+    log.debug({ droppedDays: validatedDays.length - nonEmptyDays.length }, "generateAISplit:dropped-empty-days");
     warnings.push(
       `Dropped ${validatedDays.length - nonEmptyDays.length} empty day(s)`
     );
   }
+
+  log.debug(
+    {
+      dayCount: nonEmptyDays.length,
+      exerciseCount: nonEmptyDays.reduce(
+        (sum: number, day: any) => sum + day.exercises.length,
+        0
+      ),
+      warningCount: warnings.length,
+    },
+    "generateAISplit:resolved"
+  );
 
   res.json({
     split: {
