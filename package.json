@@ -10,6 +10,7 @@
     "api:db:studio": "npm run prisma:studio --prefix api",
     "api:test": "npm run test --prefix api",
     "app:start": "npm start --prefix expo-app",
+    "app:tunnel": "npm run start --prefix expo-app -- --tunnel",
     "app:android": "npm run android --prefix expo-app",
     "app:ios": "npm run ios --prefix expo-app",
     "app:test": "npm run test --prefix expo-app",

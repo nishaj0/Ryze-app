@@ -440,8 +440,8 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1783690036.7693498,
-    "ast_hash": "ddbeb6f6782c70e47fb5e841c4ccc979",
+    "mtime": 1783606677.1720006,
+    "ast_hash": "0405d7be14c52da0cb8a1189b6bef307",
     "semantic_hash": ""
   },
   ".agents/skills/dashboard/SKILL.md": {
@@ -14532,11 +14532,6 @@
   "expo-app/src/components/ExerciseDetailSheet.tsx": {
     "mtime": 1783602253.8234043,
     "ast_hash": "2581fdc2a3dd4dabc5a229dbabc03096",
-    "semantic_hash": ""
-  },
-  "expo-app/.expo/settings.json": {
-    "mtime": 1783690767.1412752,
-    "ast_hash": "17a02b5796847c5b114c00a3f433cf2d",
     "semantic_hash": ""
   }
 }
