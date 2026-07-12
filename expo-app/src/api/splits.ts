@@ -36,8 +36,21 @@ export const updateSplitExercise = async (id: string, exerciseId: string) => {
   return data;
 };
 
-export const generateAISplit = async (description: string, equipmentFilter?: string[]) => {
-  const { data } = await client.post("/splits/ai-generate", { description, equipmentFilter });
+export const generateAISplit = async (
+  description: string,
+  onboardingContext: {
+    goal: string;
+    experienceLevel: string;
+    daysAvailable: number;
+    equipmentAccess: string;
+    gender: string;
+  }
+) => {
+  const { data } = await client.post(
+    "/splits/ai-generate",
+    { description, onboardingContext },
+    { timeout: 60_000 }
+  );
   return data as {
     split: {
       name: string;

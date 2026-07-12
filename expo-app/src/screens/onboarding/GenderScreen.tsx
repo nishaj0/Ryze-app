@@ -17,7 +17,7 @@ const options = [
 
 function GenderContent({ navigation }: Props) {
   const theme = useTheme();
-  const { data, update } = useOnboarding();
+  const { data, update, setLastScreen } = useOnboarding();
 
   return (
     <Screen scroll padding="lg">
@@ -36,6 +36,7 @@ function GenderContent({ navigation }: Props) {
               key={opt.value}
               onPress={() => {
                 update({ gender: opt.value as any });
+                setLastScreen("Goal");
                 navigation.navigate("Goal");
               }}
               style={{ marginBottom: space.md }}

@@ -11,7 +11,7 @@ type Props = NativeStackScreenProps<OnboardingStackParamList, "Sleep">;
 
 function SleepContent({ navigation }: Props) {
   const theme = useTheme();
-  const { data, update } = useOnboarding();
+  const { data, update, setLastScreen } = useOnboarding();
     const [hours, setHours] = useState(data.sleepHours);
 
   return (
@@ -70,6 +70,7 @@ function SleepContent({ navigation }: Props) {
           title="Continue"
           onPress={() => {
             update({ sleepHours: hours });
+            setLastScreen("SplitSelection");
             navigation.navigate("SplitSelection");
           }}
           variant="primary"

@@ -11,7 +11,7 @@ type Props = NativeStackScreenProps<OnboardingStackParamList, "BodyStats">;
 
 function BodyStatsContent({ navigation }: Props) {
   const theme = useTheme();
-  const { data, update } = useOnboarding();
+  const { data, update, setLastScreen } = useOnboarding();
     const [weight, setWeight] = useState(String(data.currentWeight));
   const [height, setHeight] = useState(String(data.height));
 
@@ -48,6 +48,7 @@ function BodyStatsContent({ navigation }: Props) {
             title="Continue"
             onPress={() => {
               update({ currentWeight: parseFloat(weight) || 70, height: parseFloat(height) || 175 });
+              setLastScreen("Sleep");
               navigation.navigate("Sleep");
             }}
             variant="primary"

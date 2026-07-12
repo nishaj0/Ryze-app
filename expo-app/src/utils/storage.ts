@@ -5,6 +5,7 @@ export const TOKEN_KEY = "auth_token";
 export const USER_KEY = "user_profile";
 export const ACTIVE_SPLIT_KEY = "active_split";
 export const PENDING_SESSIONS_KEY = "pending_sessions";
+export const ONBOARDING_PROGRESS_KEY = "onboarding_progress";
 
 export const saveToken = async (token: string) => {
   if (Platform.OS === "web") {
@@ -116,6 +117,48 @@ export const clearAll = async () => {
     await SecureStore.deleteItemAsync(USER_KEY);
     await SecureStore.deleteItemAsync(ACTIVE_SPLIT_KEY);
     await SecureStore.deleteItemAsync(PENDING_SESSIONS_KEY);
+  }
+};
+
+// Onboarding progress persistence
+interface OnboardingProgress {
+  data: Record<string, any>;
+  lastScreen: string;
+}
+
+export const saveOnboardingProgress = async (
+  userId: string,
+  data: Record<string, any>,
+  lastScreen: string
+) => {
+  const key = `${ONBOARDING_PROGRESS_KEY}_${userId}`;
+  const value = JSON.stringify({ data, lastScreen } satisfies OnboardingProgress);
+  if (Platform.OS === "web") {
+    localStorage.setItem(key, value);
+  } else {
+    await SecureStore.setItemAsync(key, value);
+  }
+};
+
+export const getOnboardingProgress = async (
+  userId: string
+): Promise<OnboardingProgress | null> => {
+  const key = `${ONBOARDING_PROGRESS_KEY}_${userId}`;
+  let raw: string | null = null;
+  if (Platform.OS === "web") {
+    raw = localStorage.getItem(key);
+  } else {
+    raw = await SecureStore.getItemAsync(key);
+  }
+  return raw ? JSON.parse(raw) : null;
+};
+
+export const clearOnboardingProgress = async (userId: string) => {
+  const key = `${ONBOARDING_PROGRESS_KEY}_${userId}`;
+  if (Platform.OS === "web") {
+    localStorage.removeItem(key);
+  } else {
+    await SecureStore.deleteItemAsync(key);
   }
 };
 

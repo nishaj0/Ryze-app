@@ -17,7 +17,7 @@ const options = [
 
 function EquipmentContent({ navigation }: Props) {
   const theme = useTheme();
-  const { data, update } = useOnboarding();
+  const { data, update, setLastScreen } = useOnboarding();
 
   return (
     <Screen scroll padding="lg">
@@ -36,6 +36,7 @@ function EquipmentContent({ navigation }: Props) {
               key={opt.value}
               onPress={() => {
                 update({ equipmentAccess: opt.value as any });
+                setLastScreen("BodyStats");
                 navigation.navigate("BodyStats");
               }}
               style={{ marginBottom: space.md }}

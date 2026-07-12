@@ -18,7 +18,7 @@ const options = [
 
 function GoalContent({ navigation }: Props) {
   const theme = useTheme();
-  const { data, update } = useOnboarding();
+  const { data, update, setLastScreen } = useOnboarding();
 
   return (
     <Screen scroll padding="lg">
@@ -37,6 +37,7 @@ function GoalContent({ navigation }: Props) {
               key={opt.value}
               onPress={() => {
                 update({ goal: opt.value as any });
+                setLastScreen("Experience");
                 navigation.navigate("Experience");
               }}
               style={{ marginBottom: space.md }}

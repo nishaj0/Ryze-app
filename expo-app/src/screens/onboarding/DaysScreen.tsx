@@ -11,7 +11,7 @@ type Props = NativeStackScreenProps<OnboardingStackParamList, "Days">;
 
 function DaysContent({ navigation }: Props) {
   const theme = useTheme();
-  const { data, update } = useOnboarding();
+  const { data, update, setLastScreen } = useOnboarding();
     const [days, setDays] = useState(data.daysAvailable);
 
   return (
@@ -67,6 +67,7 @@ function DaysContent({ navigation }: Props) {
           title="Continue"
           onPress={() => {
             update({ daysAvailable: days });
+            setLastScreen("Equipment");
             navigation.navigate("Equipment");
           }}
           variant="primary"

@@ -331,16 +331,23 @@ export const updateSplitExercise = async (req: AuthRequest, res: Response) => {
 };
 
 export const generateAISplit = async (req: AuthRequest, res: Response) => {
-  const { description, equipmentFilter } = req.body;
+  const { description, onboardingContext } = req.body;
 
   if (!description || typeof description !== "string") {
     throw new AppError("Description is required", 400);
   }
 
-  // Fetch exercises, optionally filtered by equipment
+  // Map equipmentAccess enum → exercise equipment filter
+  const EQUIPMENT_MAP: Record<string, string[]> = {
+    FULL_GYM: ["barbell", "dumbbell", "cable", "machine", "kettlebell", "bands", "e-z curl bar", "other"],
+    HOME: ["dumbbell", "kettlebell", "bands", "body only"],
+    LIMITED: ["body only", "bands"],
+  };
+
   const exerciseWhere: any = {};
-  if (equipmentFilter && Array.isArray(equipmentFilter) && equipmentFilter.length > 0) {
-    exerciseWhere.equipment = { in: equipmentFilter };
+  const equipmentAccess = onboardingContext?.equipmentAccess as string | undefined;
+  if (equipmentAccess && EQUIPMENT_MAP[equipmentAccess]) {
+    exerciseWhere.equipment = { in: EQUIPMENT_MAP[equipmentAccess] };
   }
 
   const exercises = await prisma.exercise.findMany({
@@ -366,8 +373,43 @@ export const generateAISplit = async (req: AuthRequest, res: Response) => {
     })
     .join("\n");
 
-  const systemPrompt = `You are a fitness coach creating a personalized workout split. The user will describe their situation (days available, equipment access, injuries, goals).
+  // Build structured user profile block from onboarding data
+  const GOAL_LABELS: Record<string, string> = {
+    MUSCLE_GAIN: "Build Muscle (hypertrophy focus)",
+    WEIGHT_LOSS: "Lose Weight (fat loss, higher reps)",
+    GET_FIT: "General Fitness",
+    MAINTAIN: "Maintain current physique",
+  };
+  const EXPERIENCE_LABELS: Record<string, string> = {
+    BEGINNER: "Beginner (less than 6 months)",
+    INTERMEDIATE: "Intermediate (6 months–2 years)",
+    ADVANCED: "Advanced (2+ years)",
+  };
+  const EQUIPMENT_LABELS: Record<string, string> = {
+    FULL_GYM: "Full gym (barbells, machines, cables, dumbbells)",
+    HOME: "Home gym (dumbbells, kettlebells, resistance bands)",
+    LIMITED: "Limited / bodyweight only",
+  };
+  const GENDER_LABELS: Record<string, string> = {
+    MALE: "Male",
+    FEMALE: "Female",
+    OTHER: "Other",
+  };
 
+  let profileBlock = "";
+  if (onboardingContext) {
+    const ctx = onboardingContext as Record<string, any>;
+    profileBlock = `
+User profile (already collected — use this as ground truth, do NOT ask the user to re-confirm):
+- Goal: ${GOAL_LABELS[ctx.goal] ?? ctx.goal ?? "Not specified"}
+- Experience: ${EXPERIENCE_LABELS[ctx.experienceLevel] ?? ctx.experienceLevel ?? "Not specified"}
+- Days available: ${ctx.daysAvailable ?? "Not specified"} per week
+- Equipment: ${EQUIPMENT_LABELS[ctx.equipmentAccess] ?? ctx.equipmentAccess ?? "Not specified"}
+- Gender: ${GENDER_LABELS[ctx.gender] ?? ctx.gender ?? "Not specified"}
+`;
+  }
+
+  const systemPrompt = `You are a fitness coach creating a personalized workout split.${profileBlock}
 Available exercises (ONLY use these exact names):
 ${exerciseList}
 
@@ -378,13 +420,15 @@ Common split archetypes:
 - Bro Split: 5 days/week (one muscle group per day)
 
 Instructions:
-1. Design a split that matches the user's constraints
+1. Design a split that precisely matches the user profile above — respect days available and equipment
 2. Use ONLY exercises from the provided list
-3. Assign appropriate sets/reps based on goals (strength: 3-5 sets, 3-6 reps; hypertrophy: 3-4 sets, 8-12 reps; endurance: 2-3 sets, 15-20 reps)
+3. Assign sets/reps matching the goal (strength: 3-5 sets 3-6 reps; hypertrophy: 3-4 sets 8-12 reps; endurance: 2-3 sets 15-20 reps)
 4. Include rest days if daysPerWeek < 7
 5. Return the complete split structure
+6. The user's additional notes (if any) refine the profile — do not contradict it unless the note explicitly overrides a field
 
-If the user's description is vague, make reasonable assumptions (full gym access, 3-4 days, general fitness).`;
+If the user provides no additional notes, rely entirely on the profile above.`;
+
 
   const responseSchema = {
     type: "object",

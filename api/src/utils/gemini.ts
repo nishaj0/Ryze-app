@@ -43,6 +43,25 @@ function buildCallMeta(options: CallGeminiOptions) {
   };
 }
 
+const RETRY_MAX = 3;
+const RETRY_BASE_DELAY_MS = 2_000; // 2s, 4s, 8s
+
+/** Returns true if the error is a transient Gemini 503 / UNAVAILABLE */
+function isRetryable(error: unknown): boolean {
+  if (!(error instanceof Error)) return false;
+  const msg = error.message;
+  return (
+    msg.includes("503") ||
+    msg.includes("UNAVAILABLE") ||
+    msg.includes("high demand") ||
+    msg.includes("overloaded")
+  );
+}
+
+async function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 export async function callGemini<T>(
   options: CallGeminiOptions
 ): Promise<T> {
@@ -51,76 +70,96 @@ export async function callGemini<T>(
 
   log.debug(meta, "gemini:start");
 
-  const abortController = new AbortController();
-  const timeoutId = setTimeout(() => abortController.abort(), TIMEOUT_MS);
+  for (let attempt = 1; attempt <= RETRY_MAX; attempt++) {
+    const abortController = new AbortController();
+    const timeoutId = setTimeout(() => abortController.abort(), TIMEOUT_MS);
 
-  try {
-    const ai = await getClient();
-    const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
-      contents: options.userPrompt,
-      config: {
-        systemInstruction: options.systemPrompt,
-        responseMimeType: "application/json",
-        responseJsonSchema: options.responseSchema,
-        abortSignal: abortController.signal,
-      },
-    });
+    try {
+      const ai = await getClient();
+      const response = await ai.models.generateContent({
+        model: "gemini-2.5-flash",
+        contents: options.userPrompt,
+        config: {
+          systemInstruction: options.systemPrompt,
+          responseMimeType: "application/json",
+          responseJsonSchema: options.responseSchema,
+          abortSignal: abortController.signal,
+        },
+      });
 
-    clearTimeout(timeoutId);
+      clearTimeout(timeoutId);
 
-    const text = response.text;
-    if (!text) {
-      log.warn(
+      const text = response.text;
+      if (!text) {
+        log.warn(
+          {
+            ...meta,
+            responseKeys: Object.keys(response || {}),
+            responseText: response?.text,
+          },
+          "gemini:empty"
+        );
+        throw new GeminiError("AI returned empty response. Please try again.");
+      }
+
+      let parsed: T;
+      try {
+        parsed = JSON.parse(text) as T;
+      } catch {
+        log.error(
+          { ...meta, text: text.slice(0, 1000) },
+          "gemini:parse-fail"
+        );
+        throw new GeminiError("Invalid AI response format. Please try again.");
+      }
+
+      log.debug(
         {
           ...meta,
-          responseKeys: Object.keys(response || {}),
-          responseText: response?.text,
+          attempt,
+          durationMs: Date.now() - start,
+          responseTextLen: text.length,
+          parsedKeys: Object.keys(parsed as object),
         },
-        "gemini:empty"
+        "gemini:ok"
       );
-      throw new GeminiError("AI returned empty response. Please try again.");
-    }
 
-    let parsed: T;
-    try {
-      parsed = JSON.parse(text) as T;
-    } catch {
-      log.error(
-        { ...meta, text: text.slice(0, 1000) },
-        "gemini:parse-fail"
-      );
-      throw new GeminiError("Invalid AI response format. Please try again.");
-    }
+      return parsed;
+    } catch (error) {
+      clearTimeout(timeoutId);
 
-    log.debug(
-      {
-        ...meta,
-        durationMs: Date.now() - start,
-        responseTextLen: text.length,
-        parsedKeys: Object.keys(parsed as object),
-      },
-      "gemini:ok"
-    );
-
-    return parsed;
-  } catch (error) {
-    clearTimeout(timeoutId);
-
-    if (error instanceof GeminiError) {
-      throw error;
-    }
-
-    if (error instanceof Error) {
-      if (error.name === "AbortError") {
-        log.error({ ...meta, timeoutMs: TIMEOUT_MS }, "gemini:timeout");
-        throw new GeminiError("AI service timeout. Please try again.");
+      // Never retry on errors we explicitly threw
+      if (error instanceof GeminiError) {
+        throw error;
       }
-      log.error({ ...meta, err: error }, "gemini:error");
-      throw new GeminiError(`AI service error: ${error.message}`);
-    }
 
-    log.error({ ...meta, err: error }, "gemini:unknown-error");
-    throw new GeminiError("Unknown AI service error. Please try again.");
+      if (error instanceof Error) {
+        if (error.name === "AbortError") {
+          log.error({ ...meta, timeoutMs: TIMEOUT_MS }, "gemini:timeout");
+          throw new GeminiError("AI service timeout. Please try again.");
+        }
+
+        // 503 / UNAVAILABLE — retry with exponential backoff
+        if (isRetryable(error) && attempt < RETRY_MAX) {
+          const delayMs = RETRY_BASE_DELAY_MS * Math.pow(2, attempt - 1);
+          log.warn(
+            { ...meta, attempt, retryInMs: delayMs, err: error.message },
+            "gemini:retry"
+          );
+          await sleep(delayMs);
+          continue;
+        }
+
+        // Final attempt or non-retryable error
+        log.error({ ...meta, attempt, err: error }, "gemini:error");
+        throw new GeminiError(`AI service error: ${error.message}`);
+      }
+
+      log.error({ ...meta, attempt, err: error }, "gemini:unknown-error");
+      throw new GeminiError("Unknown AI service error. Please try again.");
+    }
   }
+
+  // TypeScript exhaustiveness — loop above always returns or throws
+  throw new GeminiError("AI service unavailable after retries. Please try again later.");
 }

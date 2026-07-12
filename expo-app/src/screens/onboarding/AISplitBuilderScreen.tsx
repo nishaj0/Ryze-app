@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   View,
   ScrollView,
-  TouchableOpacity,
   Alert,
-  ActivityIndicator,
+  Animated,
+  Easing,
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
@@ -17,17 +17,156 @@ import { completeOnboarding } from "../../api/onboarding";
 import { getApiErrorMessage } from "../../utils/apiErrors";
 import { useOnboarding } from "./OnboardingContext";
 import { useAuthStore } from "../../store/authStore";
+import { clearOnboardingProgress } from "../../utils/storage";
 import { Typography, Card, Button, Input, Icon } from "../../components";
 import { useTheme } from "../../theme/themeStore";
 import { space, radius } from "../../theme/spacing";
 
 type Props = NativeStackScreenProps<OnboardingStackParamList, "AISplitBuilder">;
 
-const EQUIPMENT_OPTIONS = [
-  { label: "Full Gym", value: "barbell" },
-  { label: "Home Gym", value: "dumbbell" },
-  { label: "Bodyweight", value: "body only" },
+// ─── AI Generating Progress Screen ───────────────────────────────────────────
+
+const STEPS = [
+  { label: "Reading your profile",       doneAt: 2  },
+  { label: "Selecting exercises",        doneAt: 7  },
+  { label: "Structuring your split",     doneAt: 14 },
+  { label: "Finalising & validating",    doneAt: 20 },
 ];
+
+// Total estimate we animate toward (Gemini usually finishes in 15-25s)
+const ESTIMATED_SECONDS = 25;
+
+function AIGeneratingScreen({ theme }: { theme: any }) {
+  const progress = useRef(new Animated.Value(0)).current;
+  const pulse    = useRef(new Animated.Value(1)).current;
+  const [elapsed, setElapsed] = useState(0);
+  const [doneSteps, setDoneSteps] = useState<number>(0);
+
+  // Smooth progress bar: 0 → 85% in ESTIMATED_SECONDS, then stalls
+  useEffect(() => {
+    Animated.timing(progress, {
+      toValue: 0.85,
+      duration: ESTIMATED_SECONDS * 1000,
+      easing: Easing.out(Easing.quad),
+      useNativeDriver: false,
+    }).start();
+  }, []);
+
+  // Pulsing glow on the icon
+  useEffect(() => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(pulse, { toValue: 1.15, duration: 900, easing: Easing.inOut(Easing.ease), useNativeDriver: false }),
+        Animated.timing(pulse, { toValue: 1,    duration: 900, easing: Easing.inOut(Easing.ease), useNativeDriver: false }),
+      ])
+    ).start();
+  }, []);
+
+  // Elapsed-second ticker + step advancement
+  useEffect(() => {
+    const id = setInterval(() => {
+      setElapsed((s) => {
+        const next = s + 1;
+        const done = STEPS.filter((st) => st.doneAt <= next).length;
+        setDoneSteps(done);
+        return next;
+      });
+    }, 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const barWidth = progress.interpolate({
+    inputRange: [0, 1],
+    outputRange: ["0%", "100%"],
+  });
+
+  const currentStepLabel =
+    doneSteps < STEPS.length ? STEPS[doneSteps].label : "Almost done...";
+
+  const remaining = Math.max(0, ESTIMATED_SECONDS - elapsed);
+  const timerLabel =
+    elapsed < ESTIMATED_SECONDS
+      ? `~${remaining}s remaining`
+      : "Wrapping up...";
+
+  return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: theme.bg }} edges={["top"]}>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", paddingHorizontal: space.xl }}>
+
+        {/* Pulsing icon */}
+        <Animated.View style={{ transform: [{ scale: pulse }], marginBottom: space.xl }}>
+          <View style={{
+            width: 80, height: 80, borderRadius: 40,
+            backgroundColor: theme.primaryLight,
+            alignItems: "center", justifyContent: "center",
+          }}>
+            <Icon name="Sparkles" size={36} color={theme.primary} />
+          </View>
+        </Animated.View>
+
+        {/* Heading */}
+        <Typography variant="heading2" color={theme.textPrimary} style={{ textAlign: "center", marginBottom: space.xs }}>
+          Building your split
+        </Typography>
+        <Typography variant="body" color={theme.textSecondary} style={{ textAlign: "center", marginBottom: space.xl }}>
+          {currentStepLabel}
+        </Typography>
+
+        {/* Progress bar */}
+        <View style={{ width: "100%", marginBottom: space.sm }}>
+          <View style={{
+            width: "100%", height: 8, borderRadius: 999,
+            backgroundColor: theme.surfaceSecondary,
+            overflow: "hidden",
+          }}>
+            <Animated.View style={{
+              height: "100%", borderRadius: 999,
+              backgroundColor: theme.primary,
+              width: barWidth,
+            }} />
+          </View>
+        </View>
+
+        {/* Timer */}
+        <Typography variant="bodySmall" color={theme.textMuted} style={{ textAlign: "center", marginBottom: space.xl }}>
+          {timerLabel}
+        </Typography>
+
+        {/* Step checklist */}
+        <View style={{ width: "100%", gap: space.sm }}>
+          {STEPS.map((step, i) => {
+            const done    = i < doneSteps;
+            const active  = i === doneSteps;
+            return (
+              <View key={step.label} style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
+                <View style={{
+                  width: 24, height: 24, borderRadius: 12,
+                  backgroundColor: done ? theme.primary : active ? theme.primaryLight : theme.surfaceSecondary,
+                  borderWidth: active ? 2 : 0,
+                  borderColor: theme.primary,
+                  alignItems: "center", justifyContent: "center",
+                }}>
+                  {done && <Icon name="Check" size={13} color={theme.primaryText} />}
+                </View>
+                <Typography
+                  variant="bodySmall"
+                  color={done ? theme.primary : active ? theme.textPrimary : theme.textMuted}
+                  weight={active ? "600" : "400"}
+                >
+                  {step.label}
+                </Typography>
+              </View>
+            );
+          })}
+        </View>
+
+      </View>
+    </SafeAreaView>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+
 
 interface GeneratedExercise {
   exerciseId: string;
@@ -56,25 +195,19 @@ interface GeneratedSplit {
 export default function AISplitBuilderScreen({ navigation }: Props) {
   const theme = useTheme();
   const { data: onboardingData } = useOnboarding();
-  const { setAuth, token } = useAuthStore();
+  const { setAuth, token, user } = useAuthStore();
 
   const [description, setDescription] = useState("");
-  const [equipmentFilter, setEquipmentFilter] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [generatedSplit, setGeneratedSplit] = useState<GeneratedSplit | null>(null);
   const [warnings, setWarnings] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
 
-  const toggleEquipment = (value: string) => {
-    setEquipmentFilter((prev) =>
-      prev.includes(value) ? prev.filter((e) => e !== value) : [...prev, value]
-    );
-  };
 
   const handleGenerate = async () => {
-    if (!description.trim()) {
-      Alert.alert("Description Required", "Please describe your situation and goals.");
+    if (!description.trim() && !onboardingData) {
+      Alert.alert("Description Required", "Please describe your goals or any specific requirements.");
       return;
     }
 
@@ -84,10 +217,13 @@ export default function AISplitBuilderScreen({ navigation }: Props) {
     setWarnings([]);
 
     try {
-      const result = await generateAISplit(
-        description,
-        equipmentFilter.length > 0 ? equipmentFilter : undefined
-      );
+      const result = await generateAISplit(description, {
+        goal: onboardingData.goal,
+        experienceLevel: onboardingData.experienceLevel,
+        daysAvailable: onboardingData.daysAvailable,
+        equipmentAccess: onboardingData.equipmentAccess,
+        gender: onboardingData.gender,
+      });
       setGeneratedSplit(result.split);
       setWarnings(result.warnings);
     } catch (err: any) {
@@ -131,6 +267,11 @@ export default function AISplitBuilderScreen({ navigation }: Props) {
         splitId: splitRes.split.id,
       });
 
+      // Clear saved progress now that onboarding is complete
+      if (user?.id) {
+        await clearOnboardingProgress(user.id);
+      }
+
       await setAuth(token!, onboardingRes.user);
     } catch (err: any) {
       Alert.alert("Error", getApiErrorMessage(err));
@@ -152,27 +293,7 @@ export default function AISplitBuilderScreen({ navigation }: Props) {
   };
 
   if (loading) {
-    return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: theme.bg }} edges={["top"]}>
-        <View style={{ flex: 1, justifyContent: "center", alignItems: "center", padding: space.xl }}>
-          <ActivityIndicator size="large" color={theme.primary} />
-          <Typography
-            variant="heading3"
-            color={theme.textPrimary}
-            style={{ marginTop: space.lg }}
-          >
-            Building your split...
-          </Typography>
-          <Typography
-            variant="body"
-            color={theme.textSecondary}
-            style={{ marginTop: space.sm, textAlign: "center" }}
-          >
-            AI is analyzing your requirements and creating a personalized workout plan.
-          </Typography>
-        </View>
-      </SafeAreaView>
-    );
+    return <AIGeneratingScreen theme={theme} />;
   }
 
   if (generatedSplit) {
@@ -410,57 +531,16 @@ export default function AISplitBuilderScreen({ navigation }: Props) {
           {/* Description Input */}
           <Card shadow="sm" style={{ padding: space.lg, marginBottom: space.lg }}>
             <Typography variant="label" color={theme.textSecondary} style={{ marginBottom: space.sm }}>
-              DESCRIBE YOUR SITUATION
+              ADDITIONAL NOTES (OPTIONAL)
             </Typography>
             <Input
               value={description}
               onChangeText={setDescription}
-              placeholder="e.g., I have 4 days per week, full gym access, want to build muscle, no injuries..."
+              placeholder="Injuries, exercise preferences, or anything not captured above..."
               multiline
               numberOfLines={6}
               containerStyle={{ marginBottom: 0 }}
             />
-          </Card>
-
-          {/* Equipment Filter */}
-          <Card shadow="sm" style={{ padding: space.lg, marginBottom: space.lg }}>
-            <Typography variant="label" color={theme.textSecondary} style={{ marginBottom: space.sm }}>
-              EQUIPMENT ACCESS (OPTIONAL)
-            </Typography>
-            <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space.sm }}>
-              {EQUIPMENT_OPTIONS.map((option) => {
-                const isSelected = equipmentFilter.includes(option.value);
-                return (
-                  <TouchableOpacity
-                    key={option.value}
-                    onPress={() => toggleEquipment(option.value)}
-                    style={{
-                      backgroundColor: isSelected ? theme.primary : theme.surfaceSecondary,
-                      paddingHorizontal: space.md,
-                      paddingVertical: space.sm,
-                      borderRadius: radius.full,
-                      borderWidth: 1,
-                      borderColor: isSelected ? theme.primary : theme.border,
-                    }}
-                  >
-                    <Typography
-                      variant="bodySmall"
-                      color={isSelected ? theme.primaryText : theme.textPrimary}
-                      weight="600"
-                    >
-                      {option.label}
-                    </Typography>
-                  </TouchableOpacity>
-                );
-              })}
-            </View>
-            <Typography
-              variant="bodySmall"
-              color={theme.textMuted}
-              style={{ marginTop: space.sm }}
-            >
-              Select equipment types to filter the exercise library
-            </Typography>
           </Card>
 
           {/* Error Message */}

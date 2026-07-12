@@ -90,8 +90,8 @@
     "semantic_hash": ""
   },
   "api/src/controllers/splitController.ts": {
-    "mtime": 1783860721.2125273,
-    "ast_hash": "45268578fcc2c7a71365644d2043f77d",
+    "mtime": 1783864606.6557343,
+    "ast_hash": "e890637ddeeff0a8f4aa8d5895b3b689",
     "semantic_hash": ""
   },
   "api/src/index.ts": {
@@ -250,8 +250,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/api/splits.ts": {
-    "mtime": 1782514237.5935664,
-    "ast_hash": "c6169c3358ffd8aeb06b21fc683dd1fc",
+    "mtime": 1783864621.703035,
+    "ast_hash": "24d11a5dda80141d47bfb46af0c6eb8e",
     "semantic_hash": ""
   },
   "expo-app/src/constants/config.ts": {
@@ -270,8 +270,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/navigation/OnboardingStack.tsx": {
-    "mtime": 1782514286.4311874,
-    "ast_hash": "d18346db04d9f2b8524899344bafef5a",
+    "mtime": 1783864497.8585587,
+    "ast_hash": "8992c9881bfd6ae7c8ec5e22615d337d",
     "semantic_hash": ""
   },
   "expo-app/src/navigation/RootNavigator.tsx": {
@@ -305,43 +305,43 @@
     "semantic_hash": ""
   },
   "expo-app/src/screens/onboarding/BodyStatsScreen.tsx": {
-    "mtime": 1782027002.9415152,
-    "ast_hash": "1e7c2a36fd4e8b2352b7d3654f7d38b8",
+    "mtime": 1783864555.4680927,
+    "ast_hash": "50c3aa867714309d89ddaf6727ef2431",
     "semantic_hash": ""
   },
   "expo-app/src/screens/onboarding/DaysScreen.tsx": {
-    "mtime": 1782027002.9425201,
-    "ast_hash": "f40ac66dcd830cb3dc1cd00d1e5802cd",
+    "mtime": 1783864536.7314143,
+    "ast_hash": "363af6b513d280c872d9053807f9d391",
     "semantic_hash": ""
   },
   "expo-app/src/screens/onboarding/EquipmentScreen.tsx": {
-    "mtime": 1782027002.9435203,
-    "ast_hash": "b616ccf9fe6b46bddd6c56c27e16cd05",
+    "mtime": 1783864549.1188312,
+    "ast_hash": "678638dffe35354fe4fbcec7efda0cf0",
     "semantic_hash": ""
   },
   "expo-app/src/screens/onboarding/ExperienceScreen.tsx": {
-    "mtime": 1782027002.9447324,
-    "ast_hash": "b672fff0c35adff3e835e933142f34ce",
+    "mtime": 1783864531.2966795,
+    "ast_hash": "723f8d0e8203435326a5aa6e6fde68b5",
     "semantic_hash": ""
   },
   "expo-app/src/screens/onboarding/GenderScreen.tsx": {
-    "mtime": 1782027002.9457378,
-    "ast_hash": "f93a7e7db5c48f777c3325dec110dc6a",
+    "mtime": 1783864516.1861165,
+    "ast_hash": "15a70574e792eefc29d7b507288dca72",
     "semantic_hash": ""
   },
   "expo-app/src/screens/onboarding/GoalScreen.tsx": {
-    "mtime": 1782027002.9467373,
-    "ast_hash": "7a20a84d3c2d9cc0aa2a11b198a766fd",
+    "mtime": 1783864524.3606238,
+    "ast_hash": "9fbc21498adee2f1683f982d107015e7",
     "semantic_hash": ""
   },
   "expo-app/src/screens/onboarding/OnboardingContext.tsx": {
-    "mtime": 1781024192.7719896,
-    "ast_hash": "96668d6421f80e8f72417fa0b7416952",
-    "semantic_hash": "96668d6421f80e8f72417fa0b7416952"
+    "mtime": 1783864477.849008,
+    "ast_hash": "e3f5a97c3c5813720d45a6a293b5b2a8",
+    "semantic_hash": ""
   },
   "expo-app/src/screens/onboarding/SleepScreen.tsx": {
-    "mtime": 1782027002.948738,
-    "ast_hash": "3235796f8e3c8adb9a571894780dc961",
+    "mtime": 1783864561.558481,
+    "ast_hash": "81390e0a0b45c5865790acd494833a03",
     "semantic_hash": ""
   },
   "expo-app/src/screens/onboarding/SplitSelectionScreen.tsx": {
@@ -425,8 +425,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/utils/storage.ts": {
-    "mtime": 1781124315.174164,
-    "ast_hash": "7dccc5f95afb75d228b8d213d3573ec1",
+    "mtime": 1783864460.5445652,
+    "ast_hash": "21fcf5ac464dbb18c57a5b3fea46d062",
     "semantic_hash": ""
   },
   "expo-app/tailwind.config.js": {
@@ -14340,8 +14340,8 @@
     "semantic_hash": ""
   },
   "api/src/utils/gemini.ts": {
-    "mtime": 1783860348.182587,
-    "ast_hash": "d8cb262d87ceaa18bf5f60cd860f8cc4",
+    "mtime": 1783872764.1745138,
+    "ast_hash": "1c00e6208a65e7b493394ecde781e0a9",
     "semantic_hash": ""
   },
   "api/src/utils/scheduler.ts": {
@@ -14370,8 +14370,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/screens/onboarding/AISplitBuilderScreen.tsx": {
-    "mtime": 1783593727.429237,
-    "ast_hash": "09b846c54ab666bd5f38421b1d51f53f",
+    "mtime": 1783872621.0032845,
+    "ast_hash": "92b3b28c2155b87e2094337109c6b36c",
     "semantic_hash": ""
   },
   "api/src/__tests__/helpers.ts": {

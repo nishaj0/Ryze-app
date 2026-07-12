@@ -17,7 +17,7 @@ const options = [
 
 function ExperienceContent({ navigation }: Props) {
   const theme = useTheme();
-  const { data, update } = useOnboarding();
+  const { data, update, setLastScreen } = useOnboarding();
 
   return (
     <Screen scroll padding="lg">
@@ -36,6 +36,7 @@ function ExperienceContent({ navigation }: Props) {
               key={opt.value}
               onPress={() => {
                 update({ experienceLevel: opt.value as any });
+                setLastScreen("Days");
                 navigation.navigate("Days");
               }}
               style={{ marginBottom: space.md }}
