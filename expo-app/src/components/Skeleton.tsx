@@ -102,6 +102,7 @@ export function HomeScreenSkeleton() {
   return (
     <View style={{ flex: 1, padding: space.lg, backgroundColor: theme.bg }}>
       {/* Greeting */}
+      <Skeleton width="40%" height={12} borderRadius={4} style={{ marginBottom: space.xs }} />
       <Skeleton width="60%" height={28} borderRadius={8} style={{ marginBottom: space.sm }} />
       <Skeleton width="40%" height={16} borderRadius={6} style={{ marginBottom: space.xl }} />
 
@@ -119,12 +120,28 @@ export function HomeScreenSkeleton() {
       {/* Stats row */}
       <View style={{ flexDirection: "row", gap: space.md, marginBottom: space.lg }}>
         {[0, 1, 2].map((i) => (
-          <SkeletonCard key={i} style={{ flex: 1, alignItems: "center", gap: space.sm }}>
-            <Skeleton width={40} height={40} borderRadius={20} />
+          <SkeletonCard key={i} style={{ flex: 1, alignItems: "center", padding: space.md, gap: space.sm }}>
+            <Skeleton width={32} height={32} borderRadius={16} />
+            <Skeleton width="50%" height={24} borderRadius={6} />
             <Skeleton width="60%" height={12} borderRadius={4} />
           </SkeletonCard>
         ))}
       </View>
+
+      {/* Reminders */}
+      {[0, 1].map((i) => (
+        <SkeletonCard
+          key={`reminder-${i}`}
+          style={{ marginBottom: space.lg, padding: space.md, flexDirection: "row", alignItems: "center", gap: space.sm }}
+        >
+          <Skeleton width={22} height={22} borderRadius={11} />
+          <View style={{ flex: 1, gap: space.xs }}>
+            <Skeleton width="45%" height={16} borderRadius={4} />
+            <Skeleton width="80%" height={12} borderRadius={4} />
+          </View>
+          <Skeleton width={70} height={32} borderRadius={8} />
+        </SkeletonCard>
+      ))}
     </View>
   );
 }

@@ -37,6 +37,7 @@ export default function CustomSplitScreen({ route, navigation }: Props) {
   const theme = useTheme();
   const splitId = route.params?.splitId;
   const fromPrebuilt = route.params?.fromPrebuilt;
+  const afterSaveGoHome = route.params?.afterSaveGoHome;
   const isEditMode = !!splitId;
 
   const [name, setName] = useState("");
@@ -388,7 +389,16 @@ export default function CustomSplitScreen({ route, navigation }: Props) {
           type: "CUSTOM",
         });
         Alert.alert("Success", "Split updated successfully!", [
-          { text: "OK", onPress: () => navigation.goBack() },
+          {
+            text: "OK",
+            onPress: () => {
+              if (afterSaveGoHome) {
+                navigation.getParent()?.getParent()?.navigate("Home", { screen: "HomeMain" });
+              } else {
+                navigation.goBack();
+              }
+            },
+          },
         ]);
       } else {
         const res = await createSplit({ ...payload, type: "CUSTOM" });

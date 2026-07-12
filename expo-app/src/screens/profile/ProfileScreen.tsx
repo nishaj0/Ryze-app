@@ -49,18 +49,18 @@ export default function ProfileScreen({ navigation }: Props) {
   const handleDeleteAccount = () => {
     Alert.alert(
       "Delete Account",
-      "This action cannot be undone. All your data will be permanently deleted.",
+      "This will permanently delete your account and ALL associated data, including:\n\n\u2022 Workout history & session logs\n\u2022 Custom splits & programs\n\u2022 Body metrics & progress photos\n\u2022 Personal records\n\u2022 Check-ins & AI suggestions\n\u2022 Nutrition logs & notifications\n\nThis action cannot be undone.",
       [
         { text: "Cancel", style: "cancel" },
         {
-          text: "Delete",
+          text: "Delete Forever",
           style: "destructive",
           onPress: async () => {
             try {
               await deleteAccount();
               await logout();
             } catch (err) {
-              Alert.alert("Error", "Failed to delete account");
+              Alert.alert("Error", "Failed to delete account. Please try again.");
             }
           },
         },

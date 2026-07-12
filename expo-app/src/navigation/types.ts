@@ -50,7 +50,7 @@ export type ProfileStackParamList = {
   EditProfile: undefined;
   SplitSwitcher: undefined;
   SplitDetails: { splitId: string; splitName: string };
-  CustomSplit: { splitId?: string; fromPrebuilt?: boolean } | undefined;
+  CustomSplit: { splitId?: string; fromPrebuilt?: boolean; afterSaveGoHome?: boolean } | undefined;
   AISplitBuilder: undefined;
   Settings: undefined;
   Metrics: undefined;

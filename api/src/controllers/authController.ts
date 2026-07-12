@@ -114,6 +114,18 @@ export const updateProfile = async (req: AuthRequest, res: Response) => {
 };
 
 export const deleteAccount = async (req: AuthRequest, res: Response) => {
-  await prisma.user.delete({ where: { id: req.userId } });
+  const userId = req.userId!;
+
+  // Delete user-created splits first — the Split.createdBy relation does not
+  // cascade-delete (it only nullifies createdById), so we must do this manually.
+  // Deleting the Split cascades to SplitDay → SplitDayExercise automatically.
+  await prisma.split.deleteMany({ where: { createdById: userId } });
+
+  // Deleting the user cascades to all other owned data:
+  // UserSplit, WorkoutSession (→ ExerciseLog → SetLog, CheckIn),
+  // BodyMetric, ProgressPhoto, PersonalRecord, Notification,
+  // DailyNutrition, SupportTicket, CheckIn, SplitSuggestion.
+  await prisma.user.delete({ where: { id: userId } });
+
   res.json({ message: "Account deleted" });
 };

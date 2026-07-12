@@ -204,6 +204,25 @@ export default function AISplitBuilderScreen({ navigation }: Props) {
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
 
+  // Holds the splitId to navigate to after onboarding completes (Accept & Edit flow)
+  const pendingSplitIdRef = useRef<string | null>(null);
+
+  // After setAuth flips onboardingDone → true, the root navigator switches to Main.
+  // At that point navigate to the CustomSplit editor for the pending split.
+  useEffect(() => {
+    if (user?.onboardingDone && pendingSplitIdRef.current) {
+      const splitId = pendingSplitIdRef.current;
+      pendingSplitIdRef.current = null;
+      // Small timeout lets the Main navigator fully mount before navigating into it
+      setTimeout(() => {
+        (navigation as any).navigate("Profile", {
+          screen: "CustomSplit",
+          params: { splitId, afterSaveGoHome: true },
+        });
+      }, 100);
+    }
+  }, [user?.onboardingDone]);
+
 
   const handleGenerate = async () => {
     if (!description.trim() && !onboardingData) {
@@ -286,10 +305,58 @@ export default function AISplitBuilderScreen({ navigation }: Props) {
     setError(null);
   };
 
-  const handleEditManually = () => {
-    // Navigate to custom split builder with pre-filled data
-    // For now, just navigate to the custom split screen
-    navigation.navigate("OnboardingCustomSplit");
+  const handleAcceptAndEdit = async () => {
+    if (!generatedSplit) return;
+
+    setSaving(true);
+    try {
+      // Save the split as-is first so we have a real splitId to edit
+      const splitRes = await createSplit({
+        name: generatedSplit.name,
+        description: generatedSplit.description,
+        type: generatedSplit.type,
+        daysPerWeek: generatedSplit.daysPerWeek,
+        days: generatedSplit.days.map((day) => ({
+          dayNumber: day.dayNumber,
+          name: day.name,
+          isRest: day.isRest,
+          muscleGroups: day.muscleGroups,
+          exercises: day.exercises.map((ex) => ({
+            exerciseId: ex.exerciseId,
+            targetSets: ex.targetSets,
+            targetRepsMin: ex.targetRepsMin,
+            targetRepsMax: ex.targetRepsMax,
+          })),
+        })),
+      });
+
+      // Set as active split
+      await setActiveSplit(splitRes.split.id);
+
+      if (user?.onboardingDone) {
+        // Already onboarded (Profile stack) — navigate directly to editor
+        (navigation as any).navigate("CustomSplit", {
+          splitId: splitRes.split.id,
+          afterSaveGoHome: true,
+        });
+      } else {
+        // Onboarding flow — complete onboarding, then useEffect navigates after
+        // the root navigator switches from Onboarding to Main
+        const onboardingRes = await completeOnboarding({
+          ...onboardingData,
+          splitId: splitRes.split.id,
+        });
+        if (user?.id) {
+          await clearOnboardingProgress(user.id);
+        }
+        pendingSplitIdRef.current = splitRes.split.id;
+        await setAuth(token!, onboardingRes.user);
+      }
+    } catch (err: any) {
+      Alert.alert("Error", getApiErrorMessage(err));
+    } finally {
+      setSaving(false);
+    }
   };
 
   if (loading) {
@@ -476,6 +543,7 @@ export default function AISplitBuilderScreen({ navigation }: Props) {
                 title={saving ? "Saving..." : "Accept & Save"}
                 onPress={handleAccept}
                 loading={saving}
+                disabled={saving}
                 variant="primary"
                 size="lg"
                 icon={<Icon name="Check" size={20} color={theme.primaryText} />}
@@ -483,13 +551,15 @@ export default function AISplitBuilderScreen({ navigation }: Props) {
               <Button
                 title="Regenerate"
                 onPress={handleRegenerate}
+                disabled={saving}
                 variant="secondary"
                 size="lg"
                 icon={<Icon name="RefreshCw" size={20} color={theme.primary} />}
               />
               <Button
-                title="Edit Manually"
-                onPress={handleEditManually}
+                title={saving ? "Saving..." : "Accept & Edit"}
+                onPress={handleAcceptAndEdit}
+                loading={saving}
                 variant="outline"
                 size="lg"
                 icon={<Icon name="Edit" size={20} color={theme.primary} />}

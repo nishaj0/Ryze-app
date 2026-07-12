@@ -22,6 +22,7 @@ export const mockPrismaClient = {
     create: vi.fn(),
     update: vi.fn(),
     delete: vi.fn(),
+    deleteMany: vi.fn(),
     count: vi.fn(),
   },
   splitDay: {
