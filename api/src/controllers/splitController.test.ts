@@ -362,14 +362,24 @@ describe("splitController", () => {
         ],
       };
 
-      vi.mocked(callGemini).mockResolvedValue(aiResponse);
+      // The retry logic triggers (1 valid + 1 invalid). Mock the retry to also return an invalid
+      // replacement so the warning falls through to the final response.
+      const retryResponse = {
+        replacements: [
+          { exerciseName: "Still Nonexistent", targetSets: 3, targetRepsMin: 8, targetRepsMax: 12 },
+        ],
+      };
+
+      vi.mocked(callGemini)
+        .mockResolvedValueOnce(aiResponse)
+        .mockResolvedValueOnce(retryResponse);
 
       await splitController.generateAISplit(req as AuthRequest, res as Response);
 
       expect(res.json).toHaveBeenCalledWith(
         expect.objectContaining({
           warnings: expect.arrayContaining([
-            expect.stringContaining("Nonexistent Exercise"),
+            expect.stringContaining("Still Nonexistent"),
           ]),
         })
       );
@@ -401,5 +411,325 @@ describe("splitController", () => {
       await expect(splitController.generateAISplit(req as AuthRequest, res as Response))
         .rejects.toThrow("Generated split has no valid exercises. Please try again.");
     });
+
+    // -------------------------------------------------------------------------
+    // New tests: buildSplitGenerationPrompt — prompt structure
+    // -------------------------------------------------------------------------
+
+    describe("buildSplitGenerationPrompt", () => {
+      const candidateExercises = [
+        {
+          id: "ex-1",
+          name: "Bench Press",
+          equipment: "barbell",
+          level: "beginner",
+          muscles: [{ isPrimary: true, muscle: { name: "Chest" } }],
+        },
+        {
+          id: "ex-2",
+          name: "Squat",
+          equipment: "barbell",
+          level: "beginner",
+          muscles: [{ isPrimary: true, muscle: { name: "Quads" } }],
+        },
+      ];
+
+      it("should include the exercise-constraint instruction in systemPrompt", () => {
+        const { systemPrompt } = splitController.buildSplitGenerationPrompt(
+          "Build muscle",
+          undefined,
+          candidateExercises
+        );
+
+        expect(systemPrompt).toContain(
+          "You MUST ONLY select exercise names from the provided list below"
+        );
+        expect(systemPrompt).toContain("Do not invent, rename, or rephrase any exercise name.");
+      });
+
+      it("should include all candidate exercise names in systemPrompt", () => {
+        const { systemPrompt } = splitController.buildSplitGenerationPrompt(
+          "Build muscle",
+          undefined,
+          candidateExercises
+        );
+
+        expect(systemPrompt).toContain("Bench Press");
+        expect(systemPrompt).toContain("Squat");
+      });
+
+      it("should include conflict-resolution instruction in systemPrompt", () => {
+        const { systemPrompt } = splitController.buildSplitGenerationPrompt(
+          "i like to do intensive workout",
+          { goal: "GET_FIT", experienceLevel: "BEGINNER", daysAvailable: 3, equipmentAccess: "FULL_GYM", gender: "MALE" },
+          candidateExercises
+        );
+
+        expect(systemPrompt).toContain("CONFLICT RESOLUTION");
+        expect(systemPrompt).toContain("HARD CONSTRAINTS");
+        expect(systemPrompt).toContain("BEGINNER");
+        expect(systemPrompt).toContain("intensive");
+      });
+
+      it("should include both onboarding profile and description context", () => {
+        const description = "i like to do intensive workout";
+        const onboardingContext = {
+          goal: "GET_FIT",
+          experienceLevel: "BEGINNER",
+          daysAvailable: 3,
+          equipmentAccess: "FULL_GYM",
+          gender: "MALE",
+        };
+
+        const { systemPrompt, userPrompt } = splitController.buildSplitGenerationPrompt(
+          description,
+          onboardingContext,
+          candidateExercises
+        );
+
+        // Profile fields appear in system prompt
+        expect(systemPrompt).toContain("Beginner (less than 6 months)");
+        expect(systemPrompt).toContain("General Fitness");
+        expect(systemPrompt).toContain("3");
+        expect(systemPrompt).toContain("Full gym");
+
+        // Description is the user prompt
+        expect(userPrompt).toBe(description);
+      });
+    });
+
+    // -------------------------------------------------------------------------
+    // New tests: exercise name matching fallbacks
+    // -------------------------------------------------------------------------
+
+    describe("exercise name matching fallbacks", () => {
+      it("should match exercises case-insensitively (no warning)", async () => {
+        req.body = { description: "Build muscle" };
+
+        const exercises = [
+          {
+            id: "ex-1",
+            name: "Bench Press",
+            equipment: "barbell",
+            level: "beginner",
+            muscles: [{ isPrimary: true, muscle: { name: "Chest" } }],
+          },
+        ];
+        mockPrismaClient.exercise.findMany.mockResolvedValue(exercises);
+
+        // Gemini returns lowercase name
+        const aiResponse = {
+          name: "Test Split",
+          description: "A test split",
+          daysPerWeek: 1,
+          days: [
+            {
+              dayNumber: 1,
+              name: "Day 1",
+              muscleGroups: ["Chest"],
+              isRest: false,
+              exercises: [
+                { exerciseName: "bench press", targetSets: 3, targetRepsMin: 8, targetRepsMax: 12 },
+              ],
+            },
+          ],
+        };
+        vi.mocked(callGemini).mockResolvedValue(aiResponse);
+
+        await splitController.generateAISplit(req as AuthRequest, res as Response);
+
+        expect(res.json).toHaveBeenCalledWith(
+          expect.objectContaining({ warnings: [] })
+        );
+      });
+
+      it("should match exercises with normalized dash differences (no warning)", async () => {
+        req.body = { description: "Build muscle" };
+
+        const exercises = [
+          {
+            id: "ex-1",
+            name: "Bench Press - Barbell",
+            equipment: "barbell",
+            level: "beginner",
+            muscles: [{ isPrimary: true, muscle: { name: "Chest" } }],
+          },
+        ];
+        mockPrismaClient.exercise.findMany.mockResolvedValue(exercises);
+
+        // Gemini returns name without spaces around dash
+        const aiResponse = {
+          name: "Test Split",
+          description: "A test split",
+          daysPerWeek: 1,
+          days: [
+            {
+              dayNumber: 1,
+              name: "Day 1",
+              muscleGroups: ["Chest"],
+              isRest: false,
+              exercises: [
+                { exerciseName: "Bench Press-Barbell", targetSets: 3, targetRepsMin: 8, targetRepsMax: 12 },
+              ],
+            },
+          ],
+        };
+        vi.mocked(callGemini).mockResolvedValue(aiResponse);
+
+        await splitController.generateAISplit(req as AuthRequest, res as Response);
+
+        expect(res.json).toHaveBeenCalledWith(
+          expect.objectContaining({ warnings: [] })
+        );
+      });
+    });
+
+    // -------------------------------------------------------------------------
+    // New tests: single-retry on partial exercise-match failure
+    // -------------------------------------------------------------------------
+
+    describe("partial exercise-match retry", () => {
+      const exercises = [
+        {
+          id: "ex-1",
+          name: "Bench Press",
+          equipment: "barbell",
+          level: "beginner",
+          muscles: [{ isPrimary: true, muscle: { name: "Chest" } }],
+        },
+        {
+          id: "ex-2",
+          name: "Squat",
+          equipment: "barbell",
+          level: "beginner",
+          muscles: [{ isPrimary: true, muscle: { name: "Quads" } }],
+        },
+        {
+          id: "ex-3",
+          name: "Deadlift",
+          equipment: "barbell",
+          level: "intermediate",
+          muscles: [{ isPrimary: true, muscle: { name: "Back" } }],
+        },
+        {
+          id: "ex-4",
+          name: "Pull-Up",
+          equipment: "body only",
+          level: "intermediate",
+          muscles: [{ isPrimary: true, muscle: { name: "Back" } }],
+        },
+      ];
+
+      it("should retry once and resolve the replacement when retry succeeds", async () => {
+        req.body = { description: "Build muscle" };
+        mockPrismaClient.exercise.findMany.mockResolvedValue(exercises);
+
+        // First call: 3 valid + 1 invalid exercise
+        const initialResponse = {
+          name: "Test Split",
+          description: "A test split",
+          daysPerWeek: 1,
+          days: [
+            {
+              dayNumber: 1,
+              name: "Day 1",
+              muscleGroups: ["Chest", "Quads", "Back"],
+              isRest: false,
+              exercises: [
+                { exerciseName: "Bench Press", targetSets: 3, targetRepsMin: 8, targetRepsMax: 12 },
+                { exerciseName: "Squat", targetSets: 3, targetRepsMin: 8, targetRepsMax: 12 },
+                { exerciseName: "Deadlift", targetSets: 3, targetRepsMin: 5, targetRepsMax: 8 },
+                { exerciseName: "Fake Overhead Press", targetSets: 3, targetRepsMin: 8, targetRepsMax: 12 },
+              ],
+            },
+          ],
+        };
+
+        // Retry call: returns a valid replacement
+        const retryResponse = {
+          replacements: [
+            { exerciseName: "Pull-Up", targetSets: 3, targetRepsMin: 8, targetRepsMax: 12 },
+          ],
+        };
+
+        vi.mocked(callGemini)
+          .mockResolvedValueOnce(initialResponse)
+          .mockResolvedValueOnce(retryResponse);
+
+        await splitController.generateAISplit(req as AuthRequest, res as Response);
+
+        const jsonCall = vi.mocked(res.json).mock.calls[0][0] as any;
+
+        // All 4 exercises should be in the result
+        expect(jsonCall.split.days[0].exercises).toHaveLength(4);
+
+        // No warnings for the replaced exercise
+        const hasFakeWarning = jsonCall.warnings.some((w: string) =>
+          w.includes("Fake Overhead Press")
+        );
+        expect(hasFakeWarning).toBe(false);
+
+        // Pull-Up should appear in the exercises
+        const hasPullUp = jsonCall.split.days[0].exercises.some(
+          (e: any) => e.exerciseName === "Pull-Up"
+        );
+        expect(hasPullUp).toBe(true);
+
+        // callGemini should have been called twice (initial + retry)
+        expect(vi.mocked(callGemini)).toHaveBeenCalledTimes(2);
+      });
+
+      it("should preserve original warning when retry also fails to match", async () => {
+        req.body = { description: "Build muscle" };
+        mockPrismaClient.exercise.findMany.mockResolvedValue(exercises);
+
+        // First call: 3 valid + 1 invalid
+        const initialResponse = {
+          name: "Test Split",
+          description: "A test split",
+          daysPerWeek: 1,
+          days: [
+            {
+              dayNumber: 1,
+              name: "Day 1",
+              muscleGroups: ["Chest", "Quads", "Back"],
+              isRest: false,
+              exercises: [
+                { exerciseName: "Bench Press", targetSets: 3, targetRepsMin: 8, targetRepsMax: 12 },
+                { exerciseName: "Squat", targetSets: 3, targetRepsMin: 8, targetRepsMax: 12 },
+                { exerciseName: "Deadlift", targetSets: 3, targetRepsMin: 5, targetRepsMax: 8 },
+                { exerciseName: "Fake Overhead Press", targetSets: 3, targetRepsMin: 8, targetRepsMax: 12 },
+              ],
+            },
+          ],
+        };
+
+        // Retry call: also returns an invalid name
+        const retryResponse = {
+          replacements: [
+            { exerciseName: "Also Fake Exercise", targetSets: 3, targetRepsMin: 8, targetRepsMax: 12 },
+          ],
+        };
+
+        vi.mocked(callGemini)
+          .mockResolvedValueOnce(initialResponse)
+          .mockResolvedValueOnce(retryResponse);
+
+        await splitController.generateAISplit(req as AuthRequest, res as Response);
+
+        const jsonCall = vi.mocked(res.json).mock.calls[0][0] as any;
+
+        // Original 3 valid exercises remain
+        expect(jsonCall.split.days[0].exercises).toHaveLength(3);
+
+        // Warning should be present for the retry-failed exercise
+        expect(jsonCall.warnings).toEqual(
+          expect.arrayContaining([
+            expect.stringContaining("Also Fake Exercise"),
+          ])
+        );
+      });
+    });
   });
 });
+

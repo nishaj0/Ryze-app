@@ -1,16 +1,16 @@
-# Graph Report - Ryze  (2026-07-13)
+# Graph Report - Ryze  (2026-07-12)
 
 ## Corpus Check
-- 1090 files · ~3,609,413 words
+- 1090 files · ~3,607,344 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 11746 nodes · 12200 edges · 948 communities (941 shown, 7 thin omitted)
+- 11736 nodes · 12187 edges · 944 communities (937 shown, 7 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 2 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `4a6bdd46`
+- Built from commit: `067fe6de`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -32,11 +32,9 @@
 - [[_COMMUNITY_Skills Lock Registry|Skills Lock Registry]]
 - [[_COMMUNITY_Community 15|Community 15]]
 - [[_COMMUNITY_Notifications Feature|Notifications Feature]]
-- [[_COMMUNITY_Community 17|Community 17]]
 - [[_COMMUNITY_Progress Analytics Controller|Progress Analytics Controller]]
 - [[_COMMUNITY_Database Seed Data|Database Seed Data]]
 - [[_COMMUNITY_Personal Records Feature|Personal Records Feature]]
-- [[_COMMUNITY_Community 21|Community 21]]
 - [[_COMMUNITY_Exercise Controller|Exercise Controller]]
 - [[_COMMUNITY_Community 23|Community 23]]
 - [[_COMMUNITY_Metro Bundler Config|Metro Bundler Config]]
@@ -920,7 +918,6 @@
 - [[_COMMUNITY_Community 905|Community 905]]
 - [[_COMMUNITY_Community 906|Community 906]]
 - [[_COMMUNITY_Community 907|Community 907]]
-- [[_COMMUNITY_Community 908|Community 908]]
 - [[_COMMUNITY_Community 909|Community 909]]
 - [[_COMMUNITY_Community 910|Community 910]]
 - [[_COMMUNITY_Community 911|Community 911]]
@@ -938,7 +935,6 @@
 - [[_COMMUNITY_Community 935|Community 935]]
 - [[_COMMUNITY_Community 937|Community 937]]
 - [[_COMMUNITY_Community 939|Community 939]]
-- [[_COMMUNITY_Community 940|Community 940]]
 - [[_COMMUNITY_Community 941|Community 941]]
 - [[_COMMUNITY_Community 942|Community 942]]
 - [[_COMMUNITY_Community 943|Community 943]]
@@ -974,7 +970,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (948 total, 7 thin omitted)
+## Communities (944 total, 7 thin omitted)
 
 ### Community 0 - "Frontend API Client"
 Cohesion: 0.25
@@ -989,8 +985,8 @@ Cohesion: 0.06
 Nodes (32): dependencies, axios, expo, expo-asset, expo-camera, expo-file-system, expo-font, @expo-google-fonts/inter (+24 more)
 
 ### Community 3 - "Expo App Dependencies"
-Cohesion: 0.10
-Nodes (23): CHECKIN_SCHEMA, createCheckIn(), GeminiCheckInResponse, log, processCheckIn(), buildGeneralSuggestionPrompt(), buildSuggestionPrompt(), createNotificationAndPush() (+15 more)
+Cohesion: 0.13
+Nodes (15): CHECKIN_SCHEMA, createCheckIn(), GeminiCheckInResponse, log, processCheckIn(), buildGeneralSuggestionPrompt(), buildSuggestionPrompt(), createNotificationAndPush() (+7 more)
 
 ### Community 4 - "API Server Dependencies"
 Cohesion: 0.04
@@ -1005,8 +1001,8 @@ Cohesion: 0.04
 Nodes (45): dependencies, axios, bcryptjs, cloudinary, cors, dotenv, express, @google/genai (+37 more)
 
 ### Community 7 - "Expo App Configuration"
-Cohesion: 0.08
-Nodes (28): authMiddleware(), validate(), router, loginSchema, registerSchema, router, checkInSchema, router (+20 more)
+Cohesion: 0.07
+Nodes (36): getAppSettings(), getMyTickets(), submitSupportTicket(), authMiddleware(), log, validate(), router, router (+28 more)
 
 ### Community 8 - "API TypeScript Config"
 Cohesion: 0.07
@@ -1044,33 +1040,25 @@ Nodes (3): generateToken(), login(), register()
 Cohesion: 0.13
 Nodes (22): computedHash, skillPath, source, sourceType, computedHash, skillPath, source, sourceType (+14 more)
 
-### Community 17 - "Community 17"
-Cohesion: 0.12
-Nodes (12): buildSplitGenerationPrompt(), CandidateExercise, EQUIPMENT_LABELS, EXPERIENCE_LABELS, GENDER_LABELS, generateAISplit(), GOAL_LABELS, log (+4 more)
-
 ### Community 18 - "Progress Analytics Controller"
-Cohesion: 0.12
-Nodes (14): errorHandler(), requestLogger, SENSITIVE_KEYS, router, app, LOG_FILE_MAX_FILES, LogContext, logger (+6 more)
+Cohesion: 0.09
+Nodes (16): log, sendPushNotification(), triggerReminders(), requestLogger, SENSITIVE_KEYS, log, createLogger(), LOG_FILE_MAX_FILES (+8 more)
 
 ### Community 19 - "Database Seed Data"
-Cohesion: 0.11
-Nodes (3): router, startTime, prisma
+Cohesion: 0.10
+Nodes (6): calculateStreak(), getOverview(), getThisWeekWorkouts(), router, startTime, prisma
 
 ### Community 20 - "Personal Records Feature"
 Cohesion: 0.06
 Nodes (33): dependencies, fuse.js, @heroicons/vue, vue, devDependencies, autoprefixer, cypress, eslint (+25 more)
-
-### Community 21 - "Community 21"
-Cohesion: 0.24
-Nodes (5): getAppSettings(), getMyTickets(), submitSupportTicket(), router, router
 
 ### Community 22 - "Exercise Controller"
 Cohesion: 0.29
 Nodes (6): compilerOptions, moduleResolution, paths, strict, extends, @/*
 
 ### Community 23 - "Community 23"
-Cohesion: 0.26
-Nodes (7): AuthRequest, log, resetAllMocks(), TEST_TOKEN, TEST_USER, mockPrismaClient, GeminiError
+Cohesion: 0.18
+Nodes (14): AuthRequest, resetAllMocks(), TEST_TOKEN, TEST_USER, mockPrismaClient, buildCallMeta(), callGemini(), CallGeminiOptions (+6 more)
 
 ### Community 29 - "Community 29"
 Cohesion: 0.25
@@ -4588,10 +4576,6 @@ Nodes (11): category, equipment, force, id, images, instructions, level, mechani
 Cohesion: 0.17
 Nodes (11): category, equipment, force, id, images, instructions, level, mechanic (+3 more)
 
-### Community 908 - "Community 908"
-Cohesion: 0.32
-Nodes (3): calculateStreak(), getOverview(), getThisWeekWorkouts()
-
 ### Community 909 - "Community 909"
 Cohesion: 0.29
 Nodes (6): printWidth, $schema, semi, singleQuote, tabWidth, trailingComma
@@ -4641,12 +4625,8 @@ Cohesion: 0.29
 Nodes (5): CATEGORIES, FORCES, LEVELS, MECHANICS, MUSCLES
 
 ### Community 939 - "Community 939"
-Cohesion: 0.22
-Nodes (8): uploadExerciseImage(), deletePhoto(), uploadPhoto(), AppError, deleteFromCloudinary(), log, uploadToCloudinary(), createLogger()
-
-### Community 940 - "Community 940"
-Cohesion: 0.33
-Nodes (3): log, sendPushNotification(), triggerReminders()
+Cohesion: 0.09
+Nodes (8): uploadExerciseImage(), deletePhoto(), uploadPhoto(), log, AppError, errorHandler(), deleteFromCloudinary(), uploadToCloudinary()
 
 ### Community 941 - "Community 941"
 Cohesion: 0.25
@@ -4673,24 +4653,24 @@ Cohesion: 0.08
 Nodes (27): deletePhoto(), getPhotos(), uploadPhoto(), HomeStack(), HomeStackNav, MainTabs(), PhotosStack(), PhotosStackNav (+19 more)
 
 ## Knowledge Gaps
-- **10141 isolated node(s):** `log`, `CandidateExercise`, `GOAL_LABELS`, `EXPERIENCE_LABELS`, `EQUIPMENT_LABELS` (+10136 more)
+- **10135 isolated node(s):** `log`, `log`, `CallGeminiOptions`, `Stack`, `RESUMABLE_SCREENS` (+10130 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `setActiveSplit()` connect `Community 928` to `Community 17`, `Community 9`?**
+- **Why does `setActiveSplit()` connect `Community 928` to `Community 9`, `Community 939`?**
   _High betweenness centrality (0.002) - this node is a cross-community bridge._
+- **Why does `dependencies` connect `Backend Controllers Core` to `Progress Analytics Controller`?**
+  _High betweenness centrality (0.001) - this node is a cross-community bridge._
 - **Why does `useTheme()` connect `Auth & Splits Routes` to `Community 928`, `Frontend API Client`, `API Server Dependencies`, `Community 932`, `Community 39`, `Community 9`, `Photos Feature`, `Community 949`, `Community 924`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
-- **Why does `LightTheme` connect `Community 39` to `Frontend API Client`, `Auth & Splits Routes`, `Community 928`, `API Server Dependencies`, `Community 932`, `Community 9`, `Photos Feature`, `Community 949`, `Community 924`?**
-  _High betweenness centrality (0.000) - this node is a cross-community bridge._
-- **What connects `log`, `CandidateExercise`, `GOAL_LABELS` to the rest of the system?**
-  _10141 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `log`, `log`, `CallGeminiOptions` to the rest of the system?**
+  _10135 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Auth & Splits Routes` be split into smaller, more focused modules?**
   _Cohesion score 0.06516105146242132 - nodes in this community are weakly interconnected._
 - **Should `Onboarding Flow` be split into smaller, more focused modules?**
   _Cohesion score 0.0625 - nodes in this community are weakly interconnected._
 - **Should `Expo App Dependencies` be split into smaller, more focused modules?**
-  _Cohesion score 0.1010752688172043 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.12987012987012986 - nodes in this community are weakly interconnected._
