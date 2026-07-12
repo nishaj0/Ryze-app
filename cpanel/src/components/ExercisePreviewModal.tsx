@@ -130,14 +130,9 @@ export default function ExercisePreviewModal({ exerciseId, onClose }: Props) {
 
         {exercise && (
           <>
-            {/* Name + equipment */}
+            {/* Name */}
             <div style={{ marginBottom: 16 }}>
               <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--text-primary)' }}>{exercise.name}</div>
-              {exercise.equipment && (
-                <div style={{ fontSize: 13, color: 'var(--text-secondary)', marginTop: 4, textTransform: 'capitalize' }}>
-                  {exercise.equipment}
-                </div>
-              )}
             </div>
 
             {/* Images */}
@@ -145,30 +140,46 @@ export default function ExercisePreviewModal({ exerciseId, onClose }: Props) {
               <ExerciseImageCrossfade images={exercise.images} />
             </div>
 
-            {/* Meta badges */}
-            <div className="tag-wrap" style={{ marginBottom: 16, gap: 6 }}>
-              {exercise.level && <span className={`badge ${levelBadge(exercise.level)}`}>{exercise.level}</span>}
-              {exercise.mechanic && <span className="badge badge-muted">{exercise.mechanic}</span>}
-              {exercise.force && <span className="badge badge-muted">{exercise.force}</span>}
-              {exercise.category && <span className="badge badge-muted">{exercise.category}</span>}
+            {/* Key-value attribute grid */}
+            <div style={{ marginBottom: 16, display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '8px 12px', alignItems: 'center' }}>
+              <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-secondary)', letterSpacing: '0.02em' }}>Level</span>
+              <div>{exercise.level ? <span className={`badge ${levelBadge(exercise.level)}`}>{exercise.level}</span> : <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>—</span>}</div>
+
+              <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-secondary)' }}>Mechanic</span>
+              <div>{exercise.mechanic ? <span className="badge badge-muted">{exercise.mechanic}</span> : <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>—</span>}</div>
+
+              <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-secondary)' }}>Force</span>
+              <div>{exercise.force ? <span className="badge badge-muted">{exercise.force}</span> : <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>—</span>}</div>
+
+              <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-secondary)' }}>Category</span>
+              <div>{exercise.category ? <span className="badge badge-muted">{exercise.category}</span> : <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>—</span>}</div>
+
+              <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-secondary)' }}>Equipment</span>
+              <div style={{ fontSize: 13, color: 'var(--text-primary)', textTransform: 'capitalize' }}>{exercise.equipment || '—'}</div>
             </div>
 
             {/* Muscles */}
             {(primaryMuscles.length > 0 || secondaryMuscles.length > 0) && (
               <div style={{ marginBottom: 16 }}>
                 <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-secondary)', marginBottom: 8, letterSpacing: '0.04em' }}>MUSCLES WORKED</div>
-                {primaryMuscles.length > 0 && (
-                  <div className="tag-wrap" style={{ marginBottom: 6 }}>
-                    <span style={{ fontSize: 11, color: 'var(--primary)', fontWeight: 700, marginRight: 4 }}>Primary:</span>
-                    {primaryMuscles.map(m => <span key={m} className="tag tag-primary" style={{ textTransform: 'capitalize' }}>{m}</span>)}
-                  </div>
-                )}
-                {secondaryMuscles.length > 0 && (
-                  <div className="tag-wrap">
-                    <span style={{ fontSize: 11, color: 'var(--text-secondary)', fontWeight: 700, marginRight: 4 }}>Secondary:</span>
-                    {secondaryMuscles.map(m => <span key={m} className="tag" style={{ textTransform: 'capitalize' }}>{m}</span>)}
-                  </div>
-                )}
+                <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '8px 12px', alignItems: 'start' }}>
+                  {primaryMuscles.length > 0 && (
+                    <>
+                      <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--primary)', paddingTop: 2 }}>Primary</span>
+                      <div className="tag-wrap">
+                        {primaryMuscles.map(m => <span key={m} className="tag tag-primary" style={{ textTransform: 'capitalize' }}>{m}</span>)}
+                      </div>
+                    </>
+                  )}
+                  {secondaryMuscles.length > 0 && (
+                    <>
+                      <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-secondary)', paddingTop: 2 }}>Secondary</span>
+                      <div className="tag-wrap">
+                        {secondaryMuscles.map(m => <span key={m} className="tag" style={{ textTransform: 'capitalize' }}>{m}</span>)}
+                      </div>
+                    </>
+                  )}
+                </div>
               </div>
             )}
 

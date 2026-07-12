@@ -4,588 +4,12 @@
   "graph": {},
   "nodes": [
     {
-      "label": "adminController.ts",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L1",
-      "id": "controllers_admincontroller",
-      "community": 925,
-      "norm_label": "admincontroller.ts"
-    },
-    {
-      "label": "prisma",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L4",
-      "id": "controllers_admincontroller_prisma",
-      "community": 925,
-      "norm_label": "prisma"
-    },
-    {
-      "label": "getDashboardStats()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L7",
-      "id": "controllers_admincontroller_getdashboardstats",
-      "community": 925,
-      "norm_label": "getdashboardstats()"
-    },
-    {
-      "label": "listUsers()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L60",
-      "id": "controllers_admincontroller_listusers",
-      "community": 925,
-      "norm_label": "listusers()"
-    },
-    {
-      "label": "getUser()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L90",
-      "id": "controllers_admincontroller_getuser",
-      "community": 925,
-      "norm_label": "getuser()"
-    },
-    {
-      "label": "updateUser()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L105",
-      "id": "controllers_admincontroller_updateuser",
-      "community": 925,
-      "norm_label": "updateuser()"
-    },
-    {
-      "label": "deleteUser()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L117",
-      "id": "controllers_admincontroller_deleteuser",
-      "community": 925,
-      "norm_label": "deleteuser()"
-    },
-    {
-      "label": "resetOnboarding()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L124",
-      "id": "controllers_admincontroller_resetonboarding",
-      "community": 925,
-      "norm_label": "resetonboarding()"
-    },
-    {
-      "label": "listAllSplits()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L140",
-      "id": "controllers_admincontroller_listallsplits",
-      "community": 925,
-      "norm_label": "listallsplits()"
-    },
-    {
-      "label": "createPrebuiltSplit()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L167",
-      "id": "controllers_admincontroller_createprebuiltsplit",
-      "community": 925,
-      "norm_label": "createprebuiltsplit()"
-    },
-    {
-      "label": "deleteSplit()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L201",
-      "id": "controllers_admincontroller_deletesplit",
-      "community": 925,
-      "norm_label": "deletesplit()"
-    },
-    {
-      "label": "toggleSplitPrebuilt()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L208",
-      "id": "controllers_admincontroller_togglesplitprebuilt",
-      "community": 925,
-      "norm_label": "togglesplitprebuilt()"
-    },
-    {
-      "label": "listExercises()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L221",
-      "id": "controllers_admincontroller_listexercises",
-      "community": 925,
-      "norm_label": "listexercises()"
-    },
-    {
-      "label": "getExercise()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L258",
-      "id": "controllers_admincontroller_getexercise",
-      "community": 925,
-      "norm_label": "getexercise()"
-    },
-    {
-      "label": "getExerciseFilters()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L277",
-      "id": "controllers_admincontroller_getexercisefilters",
-      "community": 925,
-      "norm_label": "getexercisefilters()"
-    },
-    {
-      "label": "listSessions()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L305",
-      "id": "controllers_admincontroller_listsessions",
-      "community": 925,
-      "norm_label": "listsessions()"
-    },
-    {
-      "label": "sendBroadcast()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L330",
-      "id": "controllers_admincontroller_sendbroadcast",
-      "community": 925,
-      "norm_label": "sendbroadcast()"
-    },
-    {
-      "label": "getOnboardingStats()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L342",
-      "id": "controllers_admincontroller_getonboardingstats",
-      "community": 925,
-      "norm_label": "getonboardingstats()"
-    },
-    {
-      "label": "listExerciseRequests()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L381",
-      "id": "controllers_admincontroller_listexerciserequests",
-      "community": 925,
-      "norm_label": "listexerciserequests()"
-    },
-    {
-      "label": "updateExerciseRequest()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L407",
-      "id": "controllers_admincontroller_updateexerciserequest",
-      "community": 925,
-      "norm_label": "updateexerciserequest()"
-    },
-    {
-      "label": "createExercise()",
-      "file_type": "code",
-      "source_file": "api/src/controllers/adminController.ts",
-      "source_location": "L426",
-      "id": "controllers_admincontroller_createexercise",
-      "community": 925,
-      "norm_label": "createexercise()"
-    },
-    {
-      "label": "admin.ts",
-      "file_type": "code",
-      "source_file": "api/src/routes/admin.ts",
-      "source_location": "L1",
-      "id": "routes_admin",
-      "community": 15,
-      "norm_label": "admin.ts"
-    },
-    {
-      "label": "router",
-      "file_type": "code",
-      "source_file": "api/src/routes/admin.ts",
-      "source_location": "L6",
-      "id": "routes_admin_router",
-      "community": 15,
-      "norm_label": "router"
-    },
-    {
-      "label": "adminAuth()",
-      "file_type": "code",
-      "source_file": "api/src/routes/admin.ts",
-      "source_location": "L9",
-      "id": "routes_admin_adminauth",
-      "community": 15,
-      "norm_label": "adminauth()"
-    },
-    {
-      "label": "wrap()",
-      "file_type": "code",
-      "source_file": "api/src/routes/admin.ts",
-      "source_location": "L17",
-      "id": "routes_admin_wrap",
-      "community": 15,
-      "norm_label": "wrap()"
-    },
-    {
-      "label": "api.ts",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L1",
-      "id": "src_api",
-      "community": 934,
-      "norm_label": "api.ts"
-    },
-    {
-      "label": "api",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L6",
-      "id": "src_api_api",
-      "community": 934,
-      "norm_label": "api"
-    },
-    {
-      "label": "setAdminKey()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L12",
-      "id": "src_api_setadminkey",
-      "community": 932,
-      "norm_label": "setadminkey()"
-    },
-    {
-      "label": "getAdminKey()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L17",
-      "id": "src_api_getadminkey",
-      "community": 932,
-      "norm_label": "getadminkey()"
-    },
-    {
-      "label": "getDashboard()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L22",
-      "id": "src_api_getdashboard",
-      "community": 935,
-      "norm_label": "getdashboard()"
-    },
-    {
-      "label": "getUsers()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L25",
-      "id": "src_api_getusers",
-      "community": 934,
-      "norm_label": "getusers()"
-    },
-    {
-      "label": "getUser()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L26",
-      "id": "src_api_getuser",
-      "community": 934,
-      "norm_label": "getuser()"
-    },
-    {
-      "label": "updateUser()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L27",
-      "id": "src_api_updateuser",
-      "community": 934,
-      "norm_label": "updateuser()"
-    },
-    {
-      "label": "deleteUser()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L28",
-      "id": "src_api_deleteuser",
-      "community": 934,
-      "norm_label": "deleteuser()"
-    },
-    {
-      "label": "resetOnboarding()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L29",
-      "id": "src_api_resetonboarding",
-      "community": 934,
-      "norm_label": "resetonboarding()"
-    },
-    {
-      "label": "getSplits()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L32",
-      "id": "src_api_getsplits",
-      "community": 934,
-      "norm_label": "getsplits()"
-    },
-    {
-      "label": "createSplit()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L33",
-      "id": "src_api_createsplit",
-      "community": 934,
-      "norm_label": "createsplit()"
-    },
-    {
-      "label": "deleteSplit()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L34",
-      "id": "src_api_deletesplit",
-      "community": 934,
-      "norm_label": "deletesplit()"
-    },
-    {
-      "label": "togglePrebuilt()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L35",
-      "id": "src_api_toggleprebuilt",
-      "community": 934,
-      "norm_label": "toggleprebuilt()"
-    },
-    {
-      "label": "getExercises()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L38",
-      "id": "src_api_getexercises",
-      "community": 947,
-      "norm_label": "getexercises()"
-    },
-    {
-      "label": "getExercise()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L39",
-      "id": "src_api_getexercise",
-      "community": 30,
-      "norm_label": "getexercise()"
-    },
-    {
-      "label": "getExerciseFilters()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L40",
-      "id": "src_api_getexercisefilters",
-      "community": 934,
-      "norm_label": "getexercisefilters()"
-    },
-    {
-      "label": "createExercise()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L41",
-      "id": "src_api_createexercise",
-      "community": 934,
-      "norm_label": "createexercise()"
-    },
-    {
-      "label": "getExerciseRequests()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L44",
-      "id": "src_api_getexerciserequests",
-      "community": 934,
-      "norm_label": "getexerciserequests()"
-    },
-    {
-      "label": "updateExerciseRequest()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L45",
-      "id": "src_api_updateexerciserequest",
-      "community": 934,
-      "norm_label": "updateexerciserequest()"
-    },
-    {
-      "label": "getSessions()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L48",
-      "id": "src_api_getsessions",
-      "community": 31,
-      "norm_label": "getsessions()"
-    },
-    {
-      "label": "sendBroadcast()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L51",
-      "id": "src_api_sendbroadcast",
-      "community": 933,
-      "norm_label": "sendbroadcast()"
-    },
-    {
-      "label": "getOnboardingStats()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L55",
-      "id": "src_api_getonboardingstats",
-      "community": 947,
-      "norm_label": "getonboardingstats()"
-    },
-    {
-      "label": "getAppSettings()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L58",
-      "id": "src_api_getappsettings",
-      "community": 932,
-      "norm_label": "getappsettings()"
-    },
-    {
-      "label": "updateAppSettings()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L59",
-      "id": "src_api_updateappsettings",
-      "community": 932,
-      "norm_label": "updateappsettings()"
-    },
-    {
-      "label": "getSupportTickets()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L60",
-      "id": "src_api_getsupporttickets",
-      "community": 933,
-      "norm_label": "getsupporttickets()"
-    },
-    {
-      "label": "respondToSupportTicket()",
-      "file_type": "code",
-      "source_file": "cpanel/src/api.ts",
-      "source_location": "L61",
-      "id": "src_api_respondtosupportticket",
-      "community": 933,
-      "norm_label": "respondtosupportticket()"
-    },
-    {
-      "label": "ExercisePreviewModal.tsx",
-      "file_type": "code",
-      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
-      "source_location": "L1",
-      "id": "components_exercisepreviewmodal",
-      "community": 30,
-      "norm_label": "exercisepreviewmodal.tsx"
-    },
-    {
-      "label": "ExerciseImage",
-      "file_type": "code",
-      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
-      "source_location": "L6",
-      "id": "components_exercisepreviewmodal_exerciseimage",
-      "community": 30,
-      "norm_label": "exerciseimage"
-    },
-    {
-      "label": "ExerciseMuscle",
-      "file_type": "code",
-      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
-      "source_location": "L7",
-      "id": "components_exercisepreviewmodal_exercisemuscle",
-      "community": 30,
-      "norm_label": "exercisemuscle"
-    },
-    {
-      "label": "ExerciseAlternative",
-      "file_type": "code",
-      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
-      "source_location": "L8",
-      "id": "components_exercisepreviewmodal_exercisealternative",
-      "community": 30,
-      "norm_label": "exercisealternative"
-    },
-    {
-      "label": "ExerciseDetail",
-      "file_type": "code",
-      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
-      "source_location": "L10",
-      "id": "components_exercisepreviewmodal_exercisedetail",
-      "community": 30,
-      "norm_label": "exercisedetail"
-    },
-    {
-      "label": "Props",
-      "file_type": "code",
-      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
-      "source_location": "L19",
-      "id": "components_exercisepreviewmodal_props",
-      "community": 30,
-      "norm_label": "props"
-    },
-    {
-      "label": "ExerciseImageCrossfade()",
-      "file_type": "code",
-      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
-      "source_location": "L24",
-      "id": "components_exercisepreviewmodal_exerciseimagecrossfade",
-      "community": 30,
-      "norm_label": "exerciseimagecrossfade()"
-    },
-    {
-      "label": "levelBadge()",
-      "file_type": "code",
-      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
-      "source_location": "L86",
-      "id": "components_exercisepreviewmodal_levelbadge",
-      "community": 30,
-      "norm_label": "levelbadge()"
-    },
-    {
-      "label": "ExercisePreviewModal()",
-      "file_type": "code",
-      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
-      "source_location": "L94",
-      "id": "components_exercisepreviewmodal_exercisepreviewmodal",
-      "community": 30,
-      "norm_label": "exercisepreviewmodal()"
-    },
-    {
-      "label": "Sidebar.tsx",
-      "file_type": "code",
-      "source_file": "cpanel/src/components/Sidebar.tsx",
-      "source_location": "L1",
-      "id": "components_sidebar",
-      "community": 932,
-      "norm_label": "sidebar.tsx"
-    },
-    {
-      "label": "nav",
-      "file_type": "code",
-      "source_file": "cpanel/src/components/Sidebar.tsx",
-      "source_location": "L9",
-      "id": "components_sidebar_nav",
-      "community": 932,
-      "norm_label": "nav"
-    },
-    {
-      "label": "Sidebar()",
-      "file_type": "code",
-      "source_file": "cpanel/src/components/Sidebar.tsx",
-      "source_location": "L29",
-      "id": "components_sidebar_sidebar",
-      "community": 932,
-      "norm_label": "sidebar()"
-    },
-    {
       "label": "ExercisesPage.tsx",
       "file_type": "code",
       "source_file": "cpanel/src/pages/ExercisesPage.tsx",
       "source_location": "L1",
       "id": "pages_exercisespage",
-      "community": 947,
+      "community": 934,
       "norm_label": "exercisespage.tsx"
     },
     {
@@ -594,7 +18,7 @@
       "source_file": "cpanel/src/pages/ExercisesPage.tsx",
       "source_location": "L7",
       "id": "pages_exercisespage_exercise",
-      "community": 947,
+      "community": 934,
       "norm_label": "exercise"
     },
     {
@@ -603,62 +27,638 @@
       "source_file": "cpanel/src/pages/ExercisesPage.tsx",
       "source_location": "L13",
       "id": "pages_exercisespage_exercisespage",
-      "community": 947,
+      "community": 934,
       "norm_label": "exercisespage()"
+    },
+    {
+      "label": "adminController.ts",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L1",
+      "community": 925,
+      "norm_label": "admincontroller.ts",
+      "id": "controllers_admincontroller"
+    },
+    {
+      "label": "prisma",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L4",
+      "community": 925,
+      "norm_label": "prisma",
+      "id": "controllers_admincontroller_prisma"
+    },
+    {
+      "label": "getDashboardStats()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L7",
+      "community": 925,
+      "norm_label": "getdashboardstats()",
+      "id": "controllers_admincontroller_getdashboardstats"
+    },
+    {
+      "label": "listUsers()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L60",
+      "community": 925,
+      "norm_label": "listusers()",
+      "id": "controllers_admincontroller_listusers"
+    },
+    {
+      "label": "getUser()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L90",
+      "community": 925,
+      "norm_label": "getuser()",
+      "id": "controllers_admincontroller_getuser"
+    },
+    {
+      "label": "updateUser()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L105",
+      "community": 925,
+      "norm_label": "updateuser()",
+      "id": "controllers_admincontroller_updateuser"
+    },
+    {
+      "label": "deleteUser()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L117",
+      "community": 925,
+      "norm_label": "deleteuser()",
+      "id": "controllers_admincontroller_deleteuser"
+    },
+    {
+      "label": "resetOnboarding()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L124",
+      "community": 925,
+      "norm_label": "resetonboarding()",
+      "id": "controllers_admincontroller_resetonboarding"
+    },
+    {
+      "label": "listAllSplits()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L140",
+      "community": 925,
+      "norm_label": "listallsplits()",
+      "id": "controllers_admincontroller_listallsplits"
+    },
+    {
+      "label": "createPrebuiltSplit()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L167",
+      "community": 925,
+      "norm_label": "createprebuiltsplit()",
+      "id": "controllers_admincontroller_createprebuiltsplit"
+    },
+    {
+      "label": "deleteSplit()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L201",
+      "community": 925,
+      "norm_label": "deletesplit()",
+      "id": "controllers_admincontroller_deletesplit"
+    },
+    {
+      "label": "toggleSplitPrebuilt()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L208",
+      "community": 925,
+      "norm_label": "togglesplitprebuilt()",
+      "id": "controllers_admincontroller_togglesplitprebuilt"
+    },
+    {
+      "label": "listExercises()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L221",
+      "community": 925,
+      "norm_label": "listexercises()",
+      "id": "controllers_admincontroller_listexercises"
+    },
+    {
+      "label": "getExercise()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L258",
+      "community": 925,
+      "norm_label": "getexercise()",
+      "id": "controllers_admincontroller_getexercise"
+    },
+    {
+      "label": "getExerciseFilters()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L277",
+      "community": 925,
+      "norm_label": "getexercisefilters()",
+      "id": "controllers_admincontroller_getexercisefilters"
+    },
+    {
+      "label": "listSessions()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L305",
+      "community": 925,
+      "norm_label": "listsessions()",
+      "id": "controllers_admincontroller_listsessions"
+    },
+    {
+      "label": "sendBroadcast()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L330",
+      "community": 925,
+      "norm_label": "sendbroadcast()",
+      "id": "controllers_admincontroller_sendbroadcast"
+    },
+    {
+      "label": "getOnboardingStats()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L342",
+      "community": 925,
+      "norm_label": "getonboardingstats()",
+      "id": "controllers_admincontroller_getonboardingstats"
+    },
+    {
+      "label": "listExerciseRequests()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L381",
+      "community": 925,
+      "norm_label": "listexerciserequests()",
+      "id": "controllers_admincontroller_listexerciserequests"
+    },
+    {
+      "label": "updateExerciseRequest()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L407",
+      "community": 925,
+      "norm_label": "updateexerciserequest()",
+      "id": "controllers_admincontroller_updateexerciserequest"
+    },
+    {
+      "label": "createExercise()",
+      "file_type": "code",
+      "source_file": "api/src/controllers/adminController.ts",
+      "source_location": "L426",
+      "community": 925,
+      "norm_label": "createexercise()",
+      "id": "controllers_admincontroller_createexercise"
+    },
+    {
+      "label": "admin.ts",
+      "file_type": "code",
+      "source_file": "api/src/routes/admin.ts",
+      "source_location": "L1",
+      "community": 15,
+      "norm_label": "admin.ts",
+      "id": "routes_admin"
+    },
+    {
+      "label": "router",
+      "file_type": "code",
+      "source_file": "api/src/routes/admin.ts",
+      "source_location": "L6",
+      "community": 15,
+      "norm_label": "router",
+      "id": "routes_admin_router"
+    },
+    {
+      "label": "adminAuth()",
+      "file_type": "code",
+      "source_file": "api/src/routes/admin.ts",
+      "source_location": "L9",
+      "community": 15,
+      "norm_label": "adminauth()",
+      "id": "routes_admin_adminauth"
+    },
+    {
+      "label": "wrap()",
+      "file_type": "code",
+      "source_file": "api/src/routes/admin.ts",
+      "source_location": "L17",
+      "community": 15,
+      "norm_label": "wrap()",
+      "id": "routes_admin_wrap"
+    },
+    {
+      "label": "api.ts",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L1",
+      "community": 934,
+      "norm_label": "api.ts",
+      "id": "src_api"
+    },
+    {
+      "label": "api",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L6",
+      "community": 934,
+      "norm_label": "api",
+      "id": "src_api_api"
+    },
+    {
+      "label": "setAdminKey()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L12",
+      "community": 932,
+      "norm_label": "setadminkey()",
+      "id": "src_api_setadminkey"
+    },
+    {
+      "label": "getAdminKey()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L17",
+      "community": 932,
+      "norm_label": "getadminkey()",
+      "id": "src_api_getadminkey"
+    },
+    {
+      "label": "getDashboard()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L22",
+      "community": 935,
+      "norm_label": "getdashboard()",
+      "id": "src_api_getdashboard"
+    },
+    {
+      "label": "getUsers()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L25",
+      "community": 29,
+      "norm_label": "getusers()",
+      "id": "src_api_getusers"
+    },
+    {
+      "label": "getUser()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L26",
+      "community": 934,
+      "norm_label": "getuser()",
+      "id": "src_api_getuser"
+    },
+    {
+      "label": "updateUser()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L27",
+      "community": 29,
+      "norm_label": "updateuser()",
+      "id": "src_api_updateuser"
+    },
+    {
+      "label": "deleteUser()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L28",
+      "community": 29,
+      "norm_label": "deleteuser()",
+      "id": "src_api_deleteuser"
+    },
+    {
+      "label": "resetOnboarding()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L29",
+      "community": 29,
+      "norm_label": "resetonboarding()",
+      "id": "src_api_resetonboarding"
+    },
+    {
+      "label": "getSplits()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L32",
+      "community": 934,
+      "norm_label": "getsplits()",
+      "id": "src_api_getsplits"
+    },
+    {
+      "label": "createSplit()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L33",
+      "community": 934,
+      "norm_label": "createsplit()",
+      "id": "src_api_createsplit"
+    },
+    {
+      "label": "deleteSplit()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L34",
+      "community": 934,
+      "norm_label": "deletesplit()",
+      "id": "src_api_deletesplit"
+    },
+    {
+      "label": "togglePrebuilt()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L35",
+      "community": 934,
+      "norm_label": "toggleprebuilt()",
+      "id": "src_api_toggleprebuilt"
+    },
+    {
+      "label": "getExercises()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L38",
+      "community": 934,
+      "norm_label": "getexercises()",
+      "id": "src_api_getexercises"
+    },
+    {
+      "label": "getExercise()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L39",
+      "community": 30,
+      "norm_label": "getexercise()",
+      "id": "src_api_getexercise"
+    },
+    {
+      "label": "getExerciseFilters()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L40",
+      "community": 934,
+      "norm_label": "getexercisefilters()",
+      "id": "src_api_getexercisefilters"
+    },
+    {
+      "label": "createExercise()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L41",
+      "community": 934,
+      "norm_label": "createexercise()",
+      "id": "src_api_createexercise"
+    },
+    {
+      "label": "getExerciseRequests()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L44",
+      "community": 934,
+      "norm_label": "getexerciserequests()",
+      "id": "src_api_getexerciserequests"
+    },
+    {
+      "label": "updateExerciseRequest()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L45",
+      "community": 934,
+      "norm_label": "updateexerciserequest()",
+      "id": "src_api_updateexerciserequest"
+    },
+    {
+      "label": "getSessions()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L48",
+      "community": 31,
+      "norm_label": "getsessions()",
+      "id": "src_api_getsessions"
+    },
+    {
+      "label": "sendBroadcast()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L51",
+      "community": 933,
+      "norm_label": "sendbroadcast()",
+      "id": "src_api_sendbroadcast"
+    },
+    {
+      "label": "getOnboardingStats()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L55",
+      "community": 31,
+      "norm_label": "getonboardingstats()",
+      "id": "src_api_getonboardingstats"
+    },
+    {
+      "label": "getAppSettings()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L58",
+      "community": 932,
+      "norm_label": "getappsettings()",
+      "id": "src_api_getappsettings"
+    },
+    {
+      "label": "updateAppSettings()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L59",
+      "community": 932,
+      "norm_label": "updateappsettings()",
+      "id": "src_api_updateappsettings"
+    },
+    {
+      "label": "getSupportTickets()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L60",
+      "community": 933,
+      "norm_label": "getsupporttickets()",
+      "id": "src_api_getsupporttickets"
+    },
+    {
+      "label": "respondToSupportTicket()",
+      "file_type": "code",
+      "source_file": "cpanel/src/api.ts",
+      "source_location": "L61",
+      "community": 933,
+      "norm_label": "respondtosupportticket()",
+      "id": "src_api_respondtosupportticket"
+    },
+    {
+      "label": "ExercisePreviewModal.tsx",
+      "file_type": "code",
+      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
+      "source_location": "L1",
+      "community": 30,
+      "norm_label": "exercisepreviewmodal.tsx",
+      "id": "components_exercisepreviewmodal"
+    },
+    {
+      "label": "ExerciseImage",
+      "file_type": "code",
+      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
+      "source_location": "L6",
+      "community": 30,
+      "norm_label": "exerciseimage",
+      "id": "components_exercisepreviewmodal_exerciseimage"
+    },
+    {
+      "label": "ExerciseMuscle",
+      "file_type": "code",
+      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
+      "source_location": "L7",
+      "community": 30,
+      "norm_label": "exercisemuscle",
+      "id": "components_exercisepreviewmodal_exercisemuscle"
+    },
+    {
+      "label": "ExerciseAlternative",
+      "file_type": "code",
+      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
+      "source_location": "L8",
+      "community": 30,
+      "norm_label": "exercisealternative",
+      "id": "components_exercisepreviewmodal_exercisealternative"
+    },
+    {
+      "label": "ExerciseDetail",
+      "file_type": "code",
+      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
+      "source_location": "L10",
+      "community": 30,
+      "norm_label": "exercisedetail",
+      "id": "components_exercisepreviewmodal_exercisedetail"
+    },
+    {
+      "label": "Props",
+      "file_type": "code",
+      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
+      "source_location": "L19",
+      "community": 30,
+      "norm_label": "props",
+      "id": "components_exercisepreviewmodal_props"
+    },
+    {
+      "label": "ExerciseImageCrossfade()",
+      "file_type": "code",
+      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
+      "source_location": "L24",
+      "community": 30,
+      "norm_label": "exerciseimagecrossfade()",
+      "id": "components_exercisepreviewmodal_exerciseimagecrossfade"
+    },
+    {
+      "label": "levelBadge()",
+      "file_type": "code",
+      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
+      "source_location": "L86",
+      "community": 30,
+      "norm_label": "levelbadge()",
+      "id": "components_exercisepreviewmodal_levelbadge"
+    },
+    {
+      "label": "ExercisePreviewModal()",
+      "file_type": "code",
+      "source_file": "cpanel/src/components/ExercisePreviewModal.tsx",
+      "source_location": "L94",
+      "community": 30,
+      "norm_label": "exercisepreviewmodal()",
+      "id": "components_exercisepreviewmodal_exercisepreviewmodal"
+    },
+    {
+      "label": "Sidebar.tsx",
+      "file_type": "code",
+      "source_file": "cpanel/src/components/Sidebar.tsx",
+      "source_location": "L1",
+      "community": 932,
+      "norm_label": "sidebar.tsx",
+      "id": "components_sidebar"
+    },
+    {
+      "label": "nav",
+      "file_type": "code",
+      "source_file": "cpanel/src/components/Sidebar.tsx",
+      "source_location": "L9",
+      "community": 932,
+      "norm_label": "nav",
+      "id": "components_sidebar_nav"
+    },
+    {
+      "label": "Sidebar()",
+      "file_type": "code",
+      "source_file": "cpanel/src/components/Sidebar.tsx",
+      "source_location": "L29",
+      "community": 932,
+      "norm_label": "sidebar()",
+      "id": "components_sidebar_sidebar"
     },
     {
       "label": "SplitsPage.tsx",
       "file_type": "code",
       "source_file": "cpanel/src/pages/SplitsPage.tsx",
       "source_location": "L1",
-      "id": "pages_splitspage",
       "community": 934,
-      "norm_label": "splitspage.tsx"
+      "norm_label": "splitspage.tsx",
+      "id": "pages_splitspage"
     },
     {
       "label": "Split",
       "file_type": "code",
       "source_file": "cpanel/src/pages/SplitsPage.tsx",
       "source_location": "L9",
-      "id": "pages_splitspage_split",
       "community": 934,
-      "norm_label": "split"
+      "norm_label": "split",
+      "id": "pages_splitspage_split"
     },
     {
       "label": "DayForm",
       "file_type": "code",
       "source_file": "cpanel/src/pages/SplitsPage.tsx",
       "source_location": "L15",
-      "id": "pages_splitspage_dayform",
       "community": 934,
-      "norm_label": "dayform"
+      "norm_label": "dayform",
+      "id": "pages_splitspage_dayform"
     },
     {
       "label": "MUSCLE_GROUPS",
       "file_type": "code",
       "source_file": "cpanel/src/pages/SplitsPage.tsx",
       "source_location": "L20",
-      "id": "pages_splitspage_muscle_groups",
       "community": 934,
-      "norm_label": "muscle_groups"
+      "norm_label": "muscle_groups",
+      "id": "pages_splitspage_muscle_groups"
     },
     {
       "label": "SplitsPage()",
       "file_type": "code",
       "source_file": "cpanel/src/pages/SplitsPage.tsx",
       "source_location": "L22",
-      "id": "pages_splitspage_splitspage",
       "community": 933,
-      "norm_label": "splitspage()"
+      "norm_label": "splitspage()",
+      "id": "pages_splitspage_splitspage"
     },
     {
       "label": "Search()",
       "file_type": "code",
       "source_file": "cpanel/src/pages/SplitsPage.tsx",
       "source_location": "L535",
-      "id": "pages_splitspage_search",
       "community": 934,
-      "norm_label": "search()"
+      "norm_label": "search()",
+      "id": "pages_splitspage_search"
     },
     {
       "label": "3_4_Sit-Up.json",
@@ -99017,7 +99017,7 @@
       "file_type": "code",
       "source_file": "cpanel/src/components/UI.tsx",
       "source_location": "L58",
-      "community": 947,
+      "community": 31,
       "norm_label": "pageloader()",
       "id": "components_ui_pageloader"
     },
@@ -99296,7 +99296,7 @@
       "file_type": "code",
       "source_file": "cpanel/src/pages/OnboardingPage.tsx",
       "source_location": "L1",
-      "community": 947,
+      "community": 31,
       "norm_label": "onboardingpage.tsx",
       "id": "pages_onboardingpage"
     },
@@ -99305,7 +99305,7 @@
       "file_type": "code",
       "source_file": "cpanel/src/pages/OnboardingPage.tsx",
       "source_location": "L9",
-      "community": 947,
+      "community": 31,
       "norm_label": "onboardingstats",
       "id": "pages_onboardingpage_onboardingstats"
     },
@@ -99314,7 +99314,7 @@
       "file_type": "code",
       "source_file": "cpanel/src/pages/OnboardingPage.tsx",
       "source_location": "L24",
-      "community": 947,
+      "community": 31,
       "norm_label": "colors",
       "id": "pages_onboardingpage_colors"
     },
@@ -99323,7 +99323,7 @@
       "file_type": "code",
       "source_file": "cpanel/src/pages/OnboardingPage.tsx",
       "source_location": "L26",
-      "community": 947,
+      "community": 31,
       "norm_label": "onboardingpage()",
       "id": "pages_onboardingpage_onboardingpage"
     },
@@ -99386,7 +99386,7 @@
       "file_type": "code",
       "source_file": "cpanel/src/pages/UsersPage.tsx",
       "source_location": "L1",
-      "community": 934,
+      "community": 29,
       "norm_label": "userspage.tsx",
       "id": "pages_userspage"
     },
@@ -99395,7 +99395,7 @@
       "file_type": "code",
       "source_file": "cpanel/src/pages/UsersPage.tsx",
       "source_location": "L8",
-      "community": 934,
+      "community": 29,
       "norm_label": "user",
       "id": "pages_userspage_user"
     },
@@ -99404,7 +99404,7 @@
       "file_type": "code",
       "source_file": "cpanel/src/pages/UsersPage.tsx",
       "source_location": "L14",
-      "community": 934,
+      "community": 29,
       "norm_label": "editform",
       "id": "pages_userspage_editform"
     },
@@ -105504,6 +105504,125 @@
   ],
   "links": [
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/App.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "cpanel_src_app_tsx_src_app",
+      "target": "pages_exercisespage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_exercisespage",
+      "target": "components_exercisepreviewmodal"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_exercisespage",
+      "target": "components_ui"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_exercisespage",
+      "target": "components_ui_pageloader"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_exercisespage",
+      "target": "components_ui_pagination"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_exercisespage",
+      "target": "pages_exercisespage_exercise"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_exercisespage",
+      "target": "pages_exercisespage_exercisespage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_exercisespage",
+      "target": "src_api"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "pages_exercisespage",
+      "target": "src_api_getexercisefilters",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_exercisespage",
+      "target": "src_api_getexercises"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "cpanel/src/App.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app",
+      "target": "pages_exercisespage"
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/src/controllers/adminController.ts",
@@ -105852,17 +105971,6 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "pages_exerciserequestspage",
-      "target": "src_api"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_exercisespage",
       "target": "src_api"
     },
     {
@@ -106415,17 +106523,6 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_exercisespage",
-      "target": "src_api_getexercises"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "cpanel/src/pages/SplitsPage.tsx",
       "source_location": "L3",
       "weight": 1.0,
@@ -106638,17 +106735,6 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_exercisespage",
-      "target": "components_exercisepreviewmodal"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "cpanel/src/pages/SplitsPage.tsx",
       "source_location": "L6",
       "weight": 1.0,
@@ -106708,81 +106794,6 @@
       "confidence_score": 1.0,
       "source": "src_app",
       "target": "components_sidebar"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/App.tsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "cpanel_src_app_tsx_src_app",
-      "target": "pages_exercisespage"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_exercisespage",
-      "target": "components_ui"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_exercisespage",
-      "target": "components_ui_pageloader"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_exercisespage",
-      "target": "components_ui_pagination"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_exercisespage",
-      "target": "pages_exercisespage_exercise"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/pages/ExercisesPage.tsx",
-      "source_location": "L12",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_exercisespage",
-      "target": "pages_exercisespage_exercisespage"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "cpanel/src/App.tsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "src_app",
-      "target": "pages_exercisespage"
     },
     {
       "relation": "imports_from",
@@ -227589,5 +227600,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "37fcc22cacfea0520cbfbb267440805d1abaf4ac"
+  "built_at_commit": "8f30393cbc5f7439ef5c2b667aead396ea1cbc23"
 }

@@ -14170,8 +14170,8 @@
     "semantic_hash": ""
   },
   "cpanel/src/pages/ExercisesPage.tsx": {
-    "mtime": 1783847496.0610332,
-    "ast_hash": "f49a8b07d2d34dac501113f47d3fa1ce",
+    "mtime": 1783848782.9181736,
+    "ast_hash": "b9833c6385b25f915e81c00ffbfb6c71",
     "semantic_hash": ""
   },
   "cpanel/src/pages/LoginPage.tsx": {
@@ -14540,8 +14540,8 @@
     "semantic_hash": ""
   },
   "cpanel/src/components/ExercisePreviewModal.tsx": {
-    "mtime": 1783846453.142967,
-    "ast_hash": "328636084f08f1f66c64548291ddc558",
+    "mtime": 1783851477.2614942,
+    "ast_hash": "73dd0fd43351024061370654a0259e63",
     "semantic_hash": ""
   }
 }
