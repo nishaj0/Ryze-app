@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from 'react'
-import { Search, Dumbbell, Eye } from 'lucide-react'
-import { getExercises } from '../api'
+import { Search, Dumbbell, Eye, SlidersHorizontal, ChevronDown, ChevronUp, X } from 'lucide-react'
+import { getExercises, getExerciseFilters } from '../api'
 import { PageLoader, Pagination } from '../components/UI'
 import ExercisePreviewModal from '../components/ExercisePreviewModal'
 
@@ -19,14 +19,47 @@ export default function ExercisesPage() {
   const [search, setSearch] = useState('')
   const [loading, setLoading] = useState(true)
   const [previewExId, setPreviewExId] = useState<string | null>(null)
+  const [filters, setFilters] = useState({ muscle: '', level: '', equipment: '', category: '', mechanic: '', force: '' })
+  const [filterOptions, setFilterOptions] = useState<{ muscles: string[]; equipment: string[]; categories: string[]; levels: string[]; mechanics: string[]; forces: string[] }>({ muscles: [], equipment: [], categories: [], levels: [], mechanics: [], forces: [] })
+  const [showFilters, setShowFilters] = useState(false)
+
+  useEffect(() => {
+    getExerciseFilters()
+      .then((d: any) => setFilterOptions(d))
+      .catch(console.error)
+  }, [])
+
+  const activeFilterCount = [filters.muscle, filters.level, filters.equipment, filters.category, filters.mechanic, filters.force].filter(Boolean).length
+
+  const updateFilter = (key: string, value: string) => {
+    setFilters(f => ({ ...f, [key]: value }))
+    setPage(1)
+  }
+
+  const clearFilters = () => {
+    setFilters({ muscle: '', level: '', equipment: '', category: '', mechanic: '', force: '' })
+    setPage(1)
+  }
+
+  const clearSingleFilter = (key: string) => {
+    setFilters(f => ({ ...f, [key]: '' }))
+    setPage(1)
+  }
 
   const load = useCallback(() => {
     setLoading(true)
-    getExercises({ page, limit: 30, search })
+    const params: Record<string, any> = { page, limit: 30, search }
+    if (filters.muscle) params.muscle = filters.muscle
+    if (filters.level) params.level = filters.level
+    if (filters.equipment) params.equipment = filters.equipment
+    if (filters.category) params.category = filters.category
+    if (filters.mechanic) params.mechanic = filters.mechanic
+    if (filters.force) params.force = filters.force
+    getExercises(params)
       .then((d: any) => { setExercises(d.exercises); setTotal(d.total); setTotalPages(d.totalPages) })
       .catch(console.error)
       .finally(() => setLoading(false))
-  }, [page, search])
+  }, [page, search, filters])
 
   useEffect(() => { load() }, [load])
 
@@ -50,18 +83,114 @@ export default function ExercisesPage() {
           <div className="section-title">Exercises</div>
           <div className="section-sub">{total.toLocaleString()} exercises in library</div>
         </div>
-        <form onSubmit={handleSearch} className="row" style={{ gap: 8 }}>
-          <div className="search-wrap">
-            <Search size={14} />
-            <input
-              value={searchInput}
-              onChange={e => setSearchInput(e.target.value)}
-              placeholder="Search exercises..."
-            />
-          </div>
-          <button type="submit" className="btn btn-primary btn-sm">Search</button>
-        </form>
+        <div className="row" style={{ gap: 8 }}>
+          <form onSubmit={handleSearch} className="row" style={{ gap: 8 }}>
+            <div className="search-wrap">
+              <Search size={14} />
+              <input
+                value={searchInput}
+                onChange={e => setSearchInput(e.target.value)}
+                placeholder="Search exercises..."
+              />
+            </div>
+            <button type="submit" className="btn btn-primary btn-sm">Search</button>
+          </form>
+          <button
+            className={`btn btn-sm ${showFilters || activeFilterCount > 0 ? 'btn-primary' : 'btn-secondary'}`}
+            onClick={() => setShowFilters(s => !s)}
+            style={{ whiteSpace: 'nowrap' }}
+          >
+            <SlidersHorizontal size={13} />
+            Filters
+            {activeFilterCount > 0 && (
+              <span style={{
+                background: showFilters ? 'white' : 'var(--primary)',
+                color: showFilters ? 'var(--primary)' : 'white',
+                borderRadius: 10, padding: '0 6px', fontSize: 10,
+                minWidth: 18, height: 18, display: 'inline-flex',
+                alignItems: 'center', justifyContent: 'center', fontWeight: 700,
+              }}>{activeFilterCount}</span>
+            )}
+            {showFilters ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
+          </button>
+        </div>
       </div>
+
+      {/* Active filter chips */}
+      {activeFilterCount > 0 && !showFilters && (
+        <div className="tag-wrap" style={{ marginBottom: 16 }}>
+          {(['muscle', 'level', 'equipment', 'category', 'mechanic', 'force'] as const).map(k => {
+            const v = filters[k]
+            if (!v) return null
+            return (
+              <span key={k} className="tag tag-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: 4, textTransform: 'capitalize' }}>
+                {v}
+                <button onClick={() => clearSingleFilter(k)}
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'inline-flex', color: 'var(--primary)', lineHeight: 1 }}
+                  title="Remove filter"
+                >
+                  <X size={11} />
+                </button>
+              </span>
+            )
+          })}
+        </div>
+      )}
+
+      {/* Collapsible filter panel */}
+      {showFilters && (
+        <div className="card" style={{ marginBottom: 16 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12 }}>
+            <div className="input-group">
+              <label className="input-label">Muscle</label>
+              <select value={filters.muscle} onChange={e => updateFilter('muscle', e.target.value)}>
+                <option value="">All muscles</option>
+                {filterOptions.muscles.map(m => <option key={m} value={m}>{m}</option>)}
+              </select>
+            </div>
+            <div className="input-group">
+              <label className="input-label">Level</label>
+              <select value={filters.level} onChange={e => updateFilter('level', e.target.value)}>
+                <option value="">All levels</option>
+                {filterOptions.levels.map(l => <option key={l} value={l}>{l}</option>)}
+              </select>
+            </div>
+            <div className="input-group">
+              <label className="input-label">Equipment</label>
+              <select value={filters.equipment} onChange={e => updateFilter('equipment', e.target.value)}>
+                <option value="">All equipment</option>
+                {filterOptions.equipment.map(e => <option key={e} value={e}>{e}</option>)}
+              </select>
+            </div>
+            <div className="input-group">
+              <label className="input-label">Category</label>
+              <select value={filters.category} onChange={e => updateFilter('category', e.target.value)}>
+                <option value="">All categories</option>
+                {filterOptions.categories.map(c => <option key={c} value={c}>{c}</option>)}
+              </select>
+            </div>
+            <div className="input-group">
+              <label className="input-label">Mechanic</label>
+              <select value={filters.mechanic} onChange={e => updateFilter('mechanic', e.target.value)}>
+                <option value="">All mechanics</option>
+                {filterOptions.mechanics.map(m => <option key={m} value={m}>{m}</option>)}
+              </select>
+            </div>
+            <div className="input-group">
+              <label className="input-label">Force</label>
+              <select value={filters.force} onChange={e => updateFilter('force', e.target.value)}>
+                <option value="">All force types</option>
+                {filterOptions.forces.map(f => <option key={f} value={f}>{f}</option>)}
+              </select>
+            </div>
+          </div>
+          {activeFilterCount > 0 && (
+            <button className="btn btn-sm btn-secondary" onClick={clearFilters} style={{ marginTop: 12 }}>
+              <X size={12} /> Clear all filters
+            </button>
+          )}
+        </div>
+      )}
 
       {loading ? <PageLoader /> : (
         <>
