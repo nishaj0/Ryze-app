@@ -5,30 +5,6 @@ import { MainTabParamList, HomeStackParamList, WorkoutStackParamList, ProgressSt
 import { Icon } from "../components";
 import { useTheme } from "../theme/themeStore";
 
-import HomeScreen from "../screens/home/HomeScreen";
-import WorkoutLoggerScreen from "../screens/workout/WorkoutLoggerScreen";
-import WorkoutSummaryScreen from "../screens/workout/WorkoutSummaryScreen";
-import WorkoutHistoryScreen from "../screens/workout/WorkoutHistoryScreen";
-import DashboardScreen from "../screens/progress/DashboardScreen";
-import ExerciseProgressScreen from "../screens/progress/ExerciseProgressScreen";
-import RecordsScreen from "../screens/progress/RecordsScreen";
-import PhotosTimelineScreen from "../screens/photos/PhotosTimelineScreen";
-import PhotoCaptureScreen from "../screens/photos/PhotoCaptureScreen";
-import PhotoCompareScreen from "../screens/photos/PhotoCompareScreen";
-import ProfileScreen from "../screens/profile/ProfileScreen";
-import EditProfileScreen from "../screens/profile/EditProfileScreen";
-import SplitSwitcherScreen from "../screens/profile/SplitSwitcherScreen";
-import SplitDetailsScreen from "../screens/profile/SplitDetailsScreen";
-import CustomSplitScreen from "../screens/profile/CustomSplitScreen";
-import AISplitBuilderScreen from "../screens/onboarding/AISplitBuilderScreen";
-import SettingsScreen from "../screens/profile/SettingsScreen";
-import MetricsScreen from "../screens/metrics/MetricsScreen";
-import AllExercisesScreen from "../screens/exercises/AllExercisesScreen";
-import RequestExerciseScreen from "../screens/exercises/RequestExerciseScreen";
-import ReportBugScreen from "../screens/support/ReportBugScreen";
-import RequestHelpScreen from "../screens/support/RequestHelpScreen";
-import MyTicketsScreen from "../screens/support/MyTicketsScreen";
-
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 const HomeStackNav = createNativeStackNavigator<HomeStackParamList>();
@@ -53,10 +29,10 @@ function HomeStack() {
   };
   return (
     <HomeStackNav.Navigator screenOptions={stackOpts}>
-      <HomeStackNav.Screen name="HomeMain" component={HomeScreen} options={{ title: "Home", headerShown: false }} />
-      <HomeStackNav.Screen name="WorkoutLogger" component={WorkoutLoggerScreen} options={{ title: "Workout" }} />
-      <HomeStackNav.Screen name="WorkoutSummary" component={WorkoutSummaryScreen} options={{ title: "Summary", headerLeft: () => null }} />
-      <HomeStackNav.Screen name="WorkoutHistory" component={WorkoutHistoryScreen} options={{ title: "Workout History" }} />
+      <HomeStackNav.Screen name="HomeMain" getComponent={() => require("../screens/home/HomeScreen").default} options={{ title: "Home", headerShown: false }} />
+      <HomeStackNav.Screen name="WorkoutLogger" getComponent={() => require("../screens/workout/WorkoutLoggerScreen").default} options={{ title: "Workout" }} />
+      <HomeStackNav.Screen name="WorkoutSummary" getComponent={() => require("../screens/workout/WorkoutSummaryScreen").default} options={{ title: "Summary", headerLeft: () => null }} />
+      <HomeStackNav.Screen name="WorkoutHistory" getComponent={() => require("../screens/workout/WorkoutHistoryScreen").default} options={{ title: "Workout History" }} />
     </HomeStackNav.Navigator>
   );
 }
@@ -70,8 +46,8 @@ function WorkoutStack() {
   };
   return (
     <WorkoutStackNav.Navigator screenOptions={stackOpts}>
-      <WorkoutStackNav.Screen name="WorkoutLogger" component={WorkoutLoggerScreen} options={{ title: "Workout" }} />
-      <WorkoutStackNav.Screen name="WorkoutSummary" component={WorkoutSummaryScreen} options={{ title: "Summary" }} />
+      <WorkoutStackNav.Screen name="WorkoutLogger" getComponent={() => require("../screens/workout/WorkoutLoggerScreen").default} options={{ title: "Workout" }} />
+      <WorkoutStackNav.Screen name="WorkoutSummary" getComponent={() => require("../screens/workout/WorkoutSummaryScreen").default} options={{ title: "Summary" }} />
     </WorkoutStackNav.Navigator>
   );
 }
@@ -85,9 +61,9 @@ function ProgressStack() {
   };
   return (
     <ProgressStackNav.Navigator screenOptions={stackOpts}>
-      <ProgressStackNav.Screen name="Dashboard" component={DashboardScreen} options={{ title: "Progress" }} />
-      <ProgressStackNav.Screen name="ExerciseProgress" component={ExerciseProgressScreen} options={{ title: "Exercise" }} />
-      <ProgressStackNav.Screen name="Records" component={RecordsScreen} options={{ title: "Personal Records" }} />
+      <ProgressStackNav.Screen name="Dashboard" getComponent={() => require("../screens/progress/DashboardScreen").default} options={{ title: "Progress" }} />
+      <ProgressStackNav.Screen name="ExerciseProgress" getComponent={() => require("../screens/progress/ExerciseProgressScreen").default} options={{ title: "Exercise" }} />
+      <ProgressStackNav.Screen name="Records" getComponent={() => require("../screens/progress/RecordsScreen").default} options={{ title: "Personal Records" }} />
     </ProgressStackNav.Navigator>
   );
 }
@@ -101,9 +77,9 @@ function PhotosStack() {
   };
   return (
     <PhotosStackNav.Navigator screenOptions={stackOpts}>
-      <PhotosStackNav.Screen name="PhotosTimeline" component={PhotosTimelineScreen} options={{ title: "Progress Photos" }} />
-      <PhotosStackNav.Screen name="PhotoCapture" component={PhotoCaptureScreen} options={{ title: "Take Photo" }} />
-      <PhotosStackNav.Screen name="PhotoCompare" component={PhotoCompareScreen} options={{ title: "Compare" }} />
+      <PhotosStackNav.Screen name="PhotosTimeline" getComponent={() => require("../screens/photos/PhotosTimelineScreen").default} options={{ title: "Progress Photos" }} />
+      <PhotosStackNav.Screen name="PhotoCapture" getComponent={() => require("../screens/photos/PhotoCaptureScreen").default} options={{ title: "Take Photo" }} />
+      <PhotosStackNav.Screen name="PhotoCompare" getComponent={() => require("../screens/photos/PhotoCompareScreen").default} options={{ title: "Compare" }} />
     </PhotosStackNav.Navigator>
   );
 }
@@ -117,19 +93,19 @@ function ProfileStack() {
   };
   return (
     <ProfileStackNav.Navigator screenOptions={stackOpts}>
-      <ProfileStackNav.Screen name="ProfileMain" component={ProfileScreen} options={{ title: "Profile" }} />
-      <ProfileStackNav.Screen name="EditProfile" component={EditProfileScreen} options={{ title: "Edit Profile" }} />
-      <ProfileStackNav.Screen name="SplitSwitcher" component={SplitSwitcherScreen} options={{ title: "Switch Split" }} />
-      <ProfileStackNav.Screen name="SplitDetails" component={SplitDetailsScreen} options={{ title: "Split Details" }} />
-      <ProfileStackNav.Screen name="CustomSplit" component={CustomSplitScreen} options={{ title: "Create Custom Split" }} />
-      <ProfileStackNav.Screen name="AISplitBuilder" component={AISplitBuilderScreen} options={{ title: "Build with AI" }} />
-      <ProfileStackNav.Screen name="Settings" component={SettingsScreen} options={{ title: "Settings" }} />
-      <ProfileStackNav.Screen name="Metrics" component={MetricsScreen} options={{ title: "Body Metrics" }} />
-      <ProfileStackNav.Screen name="AllExercises" component={AllExercisesScreen} options={{ title: "All Exercises" }} />
-      <ProfileStackNav.Screen name="RequestExercise" component={RequestExerciseScreen} options={{ title: "Request Exercise" }} />
-      <ProfileStackNav.Screen name="ReportBug" component={ReportBugScreen} options={{ title: "Report a Bug" }} />
-      <ProfileStackNav.Screen name="RequestHelp" component={RequestHelpScreen} options={{ title: "Request Help" }} />
-      <ProfileStackNav.Screen name="MyTickets" component={MyTicketsScreen} options={{ title: "My Support Tickets" }} />
+      <ProfileStackNav.Screen name="ProfileMain" getComponent={() => require("../screens/profile/ProfileScreen").default} options={{ title: "Profile" }} />
+      <ProfileStackNav.Screen name="EditProfile" getComponent={() => require("../screens/profile/EditProfileScreen").default} options={{ title: "Edit Profile" }} />
+      <ProfileStackNav.Screen name="SplitSwitcher" getComponent={() => require("../screens/profile/SplitSwitcherScreen").default} options={{ title: "Switch Split" }} />
+      <ProfileStackNav.Screen name="SplitDetails" getComponent={() => require("../screens/profile/SplitDetailsScreen").default} options={{ title: "Split Details" }} />
+      <ProfileStackNav.Screen name="CustomSplit" getComponent={() => require("../screens/profile/CustomSplitScreen").default} options={{ title: "Create Custom Split" }} />
+      <ProfileStackNav.Screen name="AISplitBuilder" getComponent={() => require("../screens/onboarding/AISplitBuilderScreen").default} options={{ title: "Build with AI" }} />
+      <ProfileStackNav.Screen name="Settings" getComponent={() => require("../screens/profile/SettingsScreen").default} options={{ title: "Settings" }} />
+      <ProfileStackNav.Screen name="Metrics" getComponent={() => require("../screens/metrics/MetricsScreen").default} options={{ title: "Body Metrics" }} />
+      <ProfileStackNav.Screen name="AllExercises" getComponent={() => require("../screens/exercises/AllExercisesScreen").default} options={{ title: "All Exercises" }} />
+      <ProfileStackNav.Screen name="RequestExercise" getComponent={() => require("../screens/exercises/RequestExerciseScreen").default} options={{ title: "Request Exercise" }} />
+      <ProfileStackNav.Screen name="ReportBug" getComponent={() => require("../screens/support/ReportBugScreen").default} options={{ title: "Report a Bug" }} />
+      <ProfileStackNav.Screen name="RequestHelp" getComponent={() => require("../screens/support/RequestHelpScreen").default} options={{ title: "Request Help" }} />
+      <ProfileStackNav.Screen name="MyTickets" getComponent={() => require("../screens/support/MyTicketsScreen").default} options={{ title: "My Support Tickets" }} />
     </ProfileStackNav.Navigator>
   );
 }
@@ -140,6 +116,8 @@ export default function MainTabs() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
+        lazy: true,
+        freezeOnBlur: true,
         tabBarStyle: {
           backgroundColor: theme.surface,
           borderTopColor: theme.border,

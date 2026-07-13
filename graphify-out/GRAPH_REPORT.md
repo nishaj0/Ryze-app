@@ -1,16 +1,16 @@
 # Graph Report - Ryze  (2026-07-13)
 
 ## Corpus Check
-- 1090 files · ~3,610,300 words
+- 1092 files · ~3,610,466 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 11746 nodes · 12202 edges · 948 communities (941 shown, 7 thin omitted)
+- 11755 nodes · 12209 edges · 950 communities (942 shown, 8 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 2 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `121c29e1`
+- Built from commit: `5792fe07`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -944,6 +944,8 @@
 - [[_COMMUNITY_Community 943|Community 943]]
 - [[_COMMUNITY_Community 944|Community 944]]
 - [[_COMMUNITY_Community 945|Community 945]]
+- [[_COMMUNITY_Community 946|Community 946]]
+- [[_COMMUNITY_Community 947|Community 947]]
 - [[_COMMUNITY_Community 949|Community 949]]
 - [[_COMMUNITY_Community 951|Community 951]]
 
@@ -964,17 +966,17 @@
   expo-app/src/App.tsx → expo-app/src/theme/themeStore.ts
 - `App()` --calls--> `useTheme()`  [EXTRACTED]
   cpanel/src/App.tsx → expo-app/src/theme/themeStore.ts
-- `CustomSplitScreen()` --calls--> `useTheme()`  [EXTRACTED]
-  expo-app/src/screens/profile/CustomSplitScreen.tsx → expo-app/src/theme/themeStore.ts
-- `SplitsPage()` --calls--> `useToast()`  [EXTRACTED]
-  cpanel/src/pages/SplitsPage.tsx → cpanel/src/components/Toast.tsx
-- `UsersPage()` --calls--> `useToast()`  [EXTRACTED]
-  cpanel/src/pages/UsersPage.tsx → cpanel/src/components/Toast.tsx
+- `HomeStack()` --calls--> `useTheme()`  [EXTRACTED]
+  expo-app/src/navigation/MainTabs.tsx → expo-app/src/theme/themeStore.ts
+- `WorkoutStack()` --calls--> `useTheme()`  [EXTRACTED]
+  expo-app/src/navigation/MainTabs.tsx → expo-app/src/theme/themeStore.ts
+- `ProgressStack()` --calls--> `useTheme()`  [EXTRACTED]
+  expo-app/src/navigation/MainTabs.tsx → expo-app/src/theme/themeStore.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (948 total, 7 thin omitted)
+## Communities (950 total, 8 thin omitted)
 
 ### Community 0 - "Frontend API Client"
 Cohesion: 0.25
@@ -4668,26 +4670,30 @@ Nodes (4): main, name, private, version
 Cohesion: 0.40
 Nodes (4): buildCommand, framework, outputDirectory, rewrites
 
+### Community 946 - "Community 946"
+Cohesion: 0.29
+Nodes (6): compilerOptions, baseUrl, paths, extends, @/*, lucide-react-native
+
 ### Community 949 - "Community 949"
 Cohesion: 0.08
 Nodes (27): deletePhoto(), getPhotos(), uploadPhoto(), HomeStack(), HomeStackNav, MainTabs(), PhotosStack(), PhotosStackNav (+19 more)
 
 ## Knowledge Gaps
-- **10141 isolated node(s):** `SkeletonProps`, `SkeletonCardProps`, `{ width: screenW }`, `ScreenProps`, `Props` (+10136 more)
+- **10146 isolated node(s):** `LucideProps`, `extends`, `baseUrl`, `@/*`, `lucide-react-native` (+10141 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `useTheme()` connect `Auth & Splits Routes` to `Community 928`, `Frontend API Client`, `API Server Dependencies`, `Community 932`, `Community 39`, `Community 9`, `Photos Feature`, `Community 949`, `Community 924`?**
-  _High betweenness centrality (0.003) - this node is a cross-community bridge._
 - **Why does `setActiveSplit()` connect `Community 928` to `Community 17`, `Community 9`?**
   _High betweenness centrality (0.002) - this node is a cross-community bridge._
-- **Why does `dependencies` connect `Backend Controllers Core` to `Community 939`?**
+- **Why does `useTheme()` connect `Auth & Splits Routes` to `Community 928`, `Frontend API Client`, `API Server Dependencies`, `Community 932`, `Community 39`, `Community 9`, `Photos Feature`, `Community 949`, `Community 924`?**
+  _High betweenness centrality (0.002) - this node is a cross-community bridge._
+- **Why does `LightTheme` connect `Community 39` to `Frontend API Client`, `Auth & Splits Routes`, `Community 928`, `API Server Dependencies`, `Community 932`, `Community 9`, `Photos Feature`, `Community 949`, `Community 924`?**
   _High betweenness centrality (0.000) - this node is a cross-community bridge._
-- **What connects `SkeletonProps`, `SkeletonCardProps`, `{ width: screenW }` to the rest of the system?**
-  _10141 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `LucideProps`, `extends`, `baseUrl` to the rest of the system?**
+  _10146 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Auth & Splits Routes` be split into smaller, more focused modules?**
   _Cohesion score 0.06516105146242132 - nodes in this community are weakly interconnected._
 - **Should `Onboarding Flow` be split into smaller, more focused modules?**

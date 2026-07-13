@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "..",
+    "paths": {
+      "@/*": ["./src/*"],
+      "lucide-react-native": ["./.codex-tscheck/lucide-react-native.d.ts"]
+    }
+  }
+}

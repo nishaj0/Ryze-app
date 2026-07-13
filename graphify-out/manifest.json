@@ -180,8 +180,8 @@
     "semantic_hash": ""
   },
   "expo-app/metro.config.js": {
-    "mtime": 1783587243.7880483,
-    "ast_hash": "436137208cc5c6e8124010392faef5cc",
+    "mtime": 1783926274.9072962,
+    "ast_hash": "63c4bbe681669de54766e441f64c2643",
     "semantic_hash": ""
   },
   "expo-app/nativewind-env.d.ts": {
@@ -265,8 +265,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/navigation/MainTabs.tsx": {
-    "mtime": 1782514325.4677055,
-    "ast_hash": "6528ee05a6072bda01b9b44f76fabc75",
+    "mtime": 1783926273.6742527,
+    "ast_hash": "2080fe2d743e41f94787305a0d06c830",
     "semantic_hash": ""
   },
   "expo-app/src/navigation/OnboardingStack.tsx": {
@@ -715,8 +715,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/components/Icon.tsx": {
-    "mtime": 1782026436.6337745,
-    "ast_hash": "46d46402418a4b6e2f85f2194eff58d2",
+    "mtime": 1783926387.0936742,
+    "ast_hash": "4037b323486440d77c9b66fc75f42335",
     "semantic_hash": ""
   },
   "expo-app/src/components/Input.tsx": {
@@ -14562,6 +14562,16 @@
   "api/src/utils/logger.ts": {
     "mtime": 1783861390.4174092,
     "ast_hash": "288d4ea4ba2397a1d77e6d70a655471e",
+    "semantic_hash": ""
+  },
+  "expo-app/expo-app/.codex-tscheck/lucide-react-native.d.ts": {
+    "mtime": 1783926671.1990514,
+    "ast_hash": "e6ff183f7ce07c6afb2ab94b7a668b44",
+    "semantic_hash": ""
+  },
+  "expo-app/expo-app/.codex-tscheck/tsconfig.json": {
+    "mtime": 1783926671.2005556,
+    "ast_hash": "835eac35ead61ac6f8244bd7603fedad",
     "semantic_hash": ""
   }
 }
