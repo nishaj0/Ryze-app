@@ -84,6 +84,7 @@ export default function ProfileScreen({ navigation }: Props) {
 
   const menuItems: MenuItem[] = [
     { label: "Edit Profile", icon: "User", onPress: () => navigation.navigate("EditProfile") },
+    { label: "Ryze Coach", icon: "Sparkles", onPress: () => navigation.navigate("CoachChat") },
     { label: "Browse Exercises", icon: "Dumbbell", onPress: () => navigation.navigate("AllExercises") },
     { label: "Workout History", icon: "Calendar", onPress: () => (navigation as any).navigate("Home", { screen: "WorkoutHistory" }) },
     { label: "Switch Split", icon: "Repeat", onPress: () => navigation.navigate("SplitSwitcher") },

@@ -23,6 +23,7 @@ import checkinRoutes from "./routes/checkins";
 import suggestionRoutes from "./routes/suggestions";
 import healthRoutes from "./routes/health";
 import pingRoutes from "./routes/ping";
+import chatRoutes from "./routes/chat";
 import { initScheduler } from "./utils/scheduler";
 
 const app = express();
@@ -49,6 +50,7 @@ app.use("/api/checkins", checkinRoutes);
 app.use("/api/suggestions", suggestionRoutes);
 app.use("/api/health", healthRoutes);
 app.use("/api/ping", pingRoutes);
+app.use("/api/chat", chatRoutes);
 
 app.use(errorHandler);
 

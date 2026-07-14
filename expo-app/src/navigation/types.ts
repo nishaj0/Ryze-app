@@ -60,6 +60,7 @@ export type ProfileStackParamList = {
   ReportBug: undefined;
   RequestHelp: undefined;
   MyTickets: undefined;
+  CoachChat: undefined;
 };
 
 export type MainTabParamList = {

@@ -14,6 +14,8 @@
     "app:android": "npm run android --prefix expo-app",
     "app:ios": "npm run ios --prefix expo-app",
     "app:test": "npm run test --prefix expo-app",
+    "site:dev": "npm run dev --prefix website",
+    "site:build": "npm run build --prefix website",
     "cpanel:dev": "npm run dev --prefix cpanel",
     "cpanel:build": "npm run build --prefix cpanel",
     "test": "npm run api:test && npm run app:test",

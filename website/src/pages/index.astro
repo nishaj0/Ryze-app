@@ -1,0 +1,78 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const features = [
+  ["01", "Guided splits, built in", "Choose PPL, Full Body, or Bro Split around your actual week. Swap an unavailable exercise without losing the intent of your session."],
+  ["02", "Progression you can trust", "Ryze remembers your best work and gives you a clear next target—more reps, more weight, or both."],
+  ["03", "Your progress, in view", "Track body weight, PRs, volume, and weekly photos in one calm timeline that makes the change visible."],
+];
+
+const plans = [
+  { name: "Free", price: "₹0", detail: "forever", items: ["Guided & custom splits", "Full workout logging", "Progressive overload tracking", "Weight and progress photos"], cta: "Start tracking", featured: false },
+  { name: "Ryze AI", price: "₹199", detail: "per month, billed monthly", items: ["Everything in Free", "Post-workout check-ins", "Adaptive split suggestions", "AI split builder by chat"], cta: "Try AI coaching", featured: true },
+];
+---
+
+<BaseLayout title="Ryze — Track every rep. Own every gain." description="Guided splits, progressive overload, and thoughtful AI coaching for people who want a better way to train.">
+  <header class="site-header">
+    <div class="container nav-shell">
+      <a class="brand" href="#top" aria-label="Ryze home"><span class="brand-mark">↗</span><strong>RYZE</strong></a>
+      <nav class="nav-links" aria-label="Primary"><a href="#features">Features</a><a href="#screens">App preview</a><a href="#coach">AI Coach</a><a href="#pricing">Pricing</a></nav>
+      <a class="button button-primary nav-cta" href="#cta">Get the app <span aria-hidden="true">→</span></a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero container">
+      <div class="hero-copy">
+        <span class="eyebrow reveal"><i></i> Now in early access</span>
+        <h1 class="reveal delay-1">Track every rep.<br />Own every <em>gain</em>.</h1>
+        <p class="lead reveal delay-2">Guided splits, real progressive overload, and an AI coach that listens to how training feels—not another spreadsheet with a login screen.</p>
+        <div class="hero-actions reveal delay-3"><a class="button button-primary" href="#cta">Download for iOS & Android <span aria-hidden="true">→</span></a><a class="button button-secondary" href="#features">See how it works</a></div>
+        <div class="hero-trust reveal delay-4"><span><b>800+</b> exercises</span><span><b>3</b> guided splits</span><span><b>Free</b> core tracking, always</span></div>
+      </div>
+      <div class="progression-card reveal delay-2" aria-label="Six week barbell bench press progression">
+        <div class="card-head"><div><small>Progression — 6 weeks</small><strong>Barbell Bench Press</strong></div><span class="pr-badge">↑ New PR</span></div>
+        <div class="plate-track">
+          {["40kg × 8", "40kg × 10", "40kg × 12", "50kg × 8", "50kg × 10", "50kg × 12"].map((value, index) => <div class:list={["plate-col", { latest: index === 5 }]}><div class="plates" style={`--height: ${(index + 2) * 26}px`}></div><b>{value}</b><small>Wk {index + 1}</small></div>)}
+        </div>
+      </div>
+    </section>
+
+    <div class="stat-strip"><div class="container"><span>Built for <b>beginners to intermediates</b> who want structure, not guesswork</span><span>Works fully <b>offline</b> when the gym signal disappears</span><span>AI coaching from <b>₹199/mo</b></span></div></div>
+
+    <section id="features" class="section container">
+      <div class="section-heading reveal"><span class="section-tag">What you get, free</span><h2>Everything you need to actually see progress.</h2><p>Full tracking, guided programs, and your whole fitness story in one place. No paywall on the basics—ever.</p></div>
+      <div class="feature-grid">{features.map(([number, title, copy], index) => <article class={`feature-card reveal delay-${index + 1}`}><span>{number}</span><h3>{title}</h3><p>{copy}</p><a href="#screens" aria-label={`Learn more about ${title}`}>Explore <b>→</b></a></article>)}</div>
+    </section>
+
+    <section id="screens" class="screens-section">
+      <div class="container screens-layout">
+        <div class="section-heading reveal"><span class="section-tag">Designed for the session</span><h2>Leave room for the work that matters.</h2><p>These framed spaces are ready for your real app screens: logging, plans, and your progress story.</p><div class="screen-tabs" role="tablist"><button class="active" type="button" data-screen="log">Workout log</button><button type="button" data-screen="progress">Progress</button><button type="button" data-screen="plan">Your plan</button></div></div>
+        <div class="app-frame reveal delay-2" data-screen-frame>
+          <div class="app-top"><span></span><b data-screen-title>Today's workout</b><span>•••</span></div>
+          <div class="app-screen" data-screen-content><small>UPPER · WEEK 3</small><h3>Push with intent.</h3><div class="exercise-row"><span>Barbell Bench Press</span><b>50kg × 10</b></div><div class="exercise-row"><span>Incline Dumbbell Press</span><b>22.5kg × 12</b></div><div class="exercise-row ghost-row"><span>+ Add exercise</span></div><button type="button">Complete workout</button></div>
+          <p class="screenshot-note">Replace this live product preview with an app screenshot when it’s ready.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="coach" class="coach-section"><div class="container coach-grid">
+      <div class="section-heading reveal"><span class="section-tag">The paid tier—small on purpose</span><h2>An AI that listens, not one that lectures.</h2><p>Everything above is free forever. The AI coach is there for the moments where a spreadsheet cannot read between the lines.</p><ol class="coach-list"><li><b>01</b><span><strong>Post-workout check-ins</strong>Tell Ryze how the session felt. It pays attention.</span></li><li><b>02</b><span><strong>Adaptive split changes</strong>Repeated discomfort or a hard week? Your plan can respond.</span></li><li><b>03</b><span><strong>Build your own split by chat</strong>Describe your schedule, equipment, and goal. Get a plan back.</span></li></ol></div>
+      <div class="chat-card reveal delay-2"><div class="chat-message coach">How did today feel? Anything uncomfortable?</div><div class="chat-message user">Shoulder felt a bit off on bench again. Third time this month.</div><div class="suggestion"><small>SUGGESTED CHANGE</small><p>You’ve mentioned shoulder discomfort on Bench Press 3 times this month. Try neutral-grip Dumbbell Press to keep the chest focus with less shoulder strain.</p><div><button class="accept" type="button">Accept</button><button class="dismiss" type="button">Dismiss</button></div></div></div>
+    </div></section>
+
+    <section id="pricing" class="section container pricing"><div class="section-heading centered reveal"><span class="section-tag">Simple pricing</span><h2>Start free. Upgrade if the AI earns it.</h2><p>No card to start tracking. Your data and history remain yours, either way.</p></div><div class="pricing-grid">{plans.map((plan) => <article class:list={["price-card", { featured: plan.featured }]}><span>{plan.name}</span><h3>{plan.price}</h3><small>{plan.detail}</small><ul>{plan.items.map((item) => <li>✓ {item}</li>)}</ul><a class:list={["button", plan.featured ? "button-primary" : "button-secondary"]} href="#cta">{plan.cta}</a></article>)}</div></section>
+
+    <section id="cta" class="final-cta"><div class="container reveal"><span class="eyebrow"><i></i> Free to start, no card needed</span><h2>Your next PR is a few<br />logged sessions away.</h2><p>Join the early access group building their split, one honest set at a time.</p><a class="button button-primary" href="mailto:hello@ryze.app">Download for iOS & Android <span aria-hidden="true">→</span></a></div></section>
+  </main>
+  <footer><div class="container footer-shell"><a class="brand" href="#top"><span class="brand-mark">↗</span><strong>RYZE</strong></a><nav><a href="#features">Features</a><a href="#coach">AI Coach</a><a href="#pricing">Pricing</a><a href="#top">Privacy</a></nav><span>© 2026 Ryze.</span></div></footer>
+
+  <script is:inline>
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const reveal = document.querySelectorAll(".reveal");
+    if (!reduced.matches) { const observer = new IntersectionObserver(entries => entries.forEach(entry => entry.isIntersecting && entry.target.classList.add("is-visible")), { threshold: .15 }); reveal.forEach(node => observer.observe(node)); } else reveal.forEach(node => node.classList.add("is-visible"));
+    const screens = { log: ["Today's workout", "UPPER · WEEK 3", "Push with intent.", ["Barbell Bench Press", "50kg × 10"], ["Incline Dumbbell Press", "22.5kg × 12"]], progress: ["Progress", "LAST 12 WEEKS", "The work is showing.", ["Bench Press", "+12.5kg"], ["Training streak", "4 weeks"]], plan: ["Your plan", "PUSH / PULL / LEGS", "Built around your week.", ["Monday", "Push A"], ["Wednesday", "Pull A"]] };
+    document.querySelectorAll("[data-screen]").forEach(button => button.addEventListener("click", () => { const [title, label, headline, first, second] = screens[button.dataset.screen]; document.querySelectorAll("[data-screen]").forEach(tab => tab.classList.toggle("active", tab === button)); document.querySelector("[data-screen-title]").textContent = title; const content = document.querySelector("[data-screen-content]"); content.innerHTML = `<small>${label}</small><h3>${headline}</h3><div class="exercise-row"><span>${first[0]}</span><b>${first[1]}</b></div><div class="exercise-row"><span>${second[0]}</span><b>${second[1]}</b></div><div class="exercise-row ghost-row"><span>+ Add exercise</span></div><button type="button">Open app</button>`; }));
+  </script>
+</BaseLayout>

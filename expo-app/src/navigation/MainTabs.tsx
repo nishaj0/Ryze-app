@@ -106,6 +106,7 @@ function ProfileStack() {
       <ProfileStackNav.Screen name="ReportBug" getComponent={() => require("../screens/support/ReportBugScreen").default} options={{ title: "Report a Bug" }} />
       <ProfileStackNav.Screen name="RequestHelp" getComponent={() => require("../screens/support/RequestHelpScreen").default} options={{ title: "Request Help" }} />
       <ProfileStackNav.Screen name="MyTickets" getComponent={() => require("../screens/support/MyTicketsScreen").default} options={{ title: "My Support Tickets" }} />
+      <ProfileStackNav.Screen name="CoachChat" getComponent={() => require("../screens/profile/CoachChatScreen").default} options={{ title: "Ryze Coach" }} />
     </ProfileStackNav.Navigator>
   );
 }

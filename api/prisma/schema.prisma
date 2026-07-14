@@ -42,6 +42,7 @@ model User {
   supportTickets   SupportTicket[]
   checkIns         CheckIn[]
   splitSuggestions SplitSuggestion[]
+  chatMessages     ChatMessage[]
 }
 
 model Split {
@@ -344,5 +345,20 @@ model SplitSuggestion {
   splitDay          SplitDay  @relation(fields: [splitDayId], references: [id])
   exercise          Exercise? @relation("suggestionExercise", fields: [exerciseId], references: [id])
   suggestedAlternative Exercise? @relation("suggestedAlternative", fields: [suggestedAlternativeExerciseId], references: [id])
+}
+
+model ChatMessage {
+  id        String   @id @default(cuid())
+  userId    String
+  role      String
+  content   String
+  toolCalls Json?
+  action    Json?
+  outcome   String?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
 }
 
