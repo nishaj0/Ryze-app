@@ -333,7 +333,7 @@ export async function resolveProposal(req: AuthRequest, res: Response) {
     const active = await prisma.userSplit.findFirst({ where: { userId, isActive: true }, include: { split: { include: { days: true } } } });
     const day = active?.split.days.find((splitDay) => !splitDay.isRest);
     if (!day) throw new AppError("No active training day found.", 409);
-    await prisma.workoutSession.create({ data: { userId, splitDayId: day.id, date: new Date(payload.date), status: "SKIPPED", restReason: payload.reason || null } });
+    await prisma.workoutSession.create({ data: { userId, splitDayId: day.id, splitDayName: day.name, date: new Date(payload.date), status: "SKIPPED", restReason: payload.reason || null } });
   }
   if (action.type === "SPLIT_REGENERATION") throw new AppError("Split previews must be reviewed in the split builder before switching.", 409);
   const resolved = await prisma.chatMessage.update({ where: { id: message.id }, data: { outcome: "CONFIRMED" } });

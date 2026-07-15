@@ -216,6 +216,31 @@ export function DashboardScreenSkeleton() {
         </View>
       </View>
 
+      {/* Progressive overload card */}
+      <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
+        <SkeletonCard>
+          <Skeleton width="48%" height={12} borderRadius={4} style={{ marginBottom: space.md }} />
+          <View style={{ flexDirection: "row", gap: 3, marginBottom: space.md }}>
+            <Skeleton width="50%" height={38} borderRadius={8} />
+            <Skeleton width="50%" height={38} borderRadius={8} />
+          </View>
+          <Skeleton height={46} borderRadius={8} style={{ marginBottom: space.sm }} />
+          <Skeleton height={46} borderRadius={8} style={{ marginBottom: space.lg }} />
+          <View style={{ flexDirection: "row", gap: space.md, marginBottom: space.lg }}>
+            <View style={{ flex: 1, gap: space.xs }}>
+              <Skeleton width="45%" height={12} borderRadius={4} />
+              <Skeleton width="75%" height={20} borderRadius={5} />
+            </View>
+            <View style={{ flex: 1, gap: space.xs }}>
+              <Skeleton width="40%" height={12} borderRadius={4} />
+              <Skeleton width="55%" height={20} borderRadius={5} />
+            </View>
+          </View>
+          <Skeleton height={38} borderRadius={8} style={{ marginBottom: space.md }} />
+          <Skeleton height={190} borderRadius={12} />
+        </SkeletonCard>
+      </View>
+
       {/* Chart card */}
       <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
         <SkeletonCard>

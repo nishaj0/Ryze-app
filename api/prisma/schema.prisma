@@ -166,6 +166,7 @@ model WorkoutSession {
   id              String   @id @default(cuid())
   userId          String
   splitDayId      String
+  splitDayName    String
   date            DateTime @default(now())
   status          String   @default("IN_PROGRESS")
   restReason      String?
@@ -177,6 +178,8 @@ model WorkoutSession {
   splitDay       SplitDay      @relation(fields: [splitDayId], references: [id])
   exerciseLogs   ExerciseLog[]
   checkIn        CheckIn?
+
+  @@index([userId, status, splitDayName, date])
 }
 
 model ExerciseLog {

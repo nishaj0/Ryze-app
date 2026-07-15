@@ -19,6 +19,7 @@ import {
 } from "../../types";
 import { Typography, Card, Icon, Button, DashboardScreenSkeleton } from "../../components";
 import { LineChart, BarChart, Heatmap, RingChart } from "../../components/charts";
+import ProgressiveOverloadCard from "./ProgressiveOverloadCard";
 import { useTheme } from "../../theme/themeStore";
 import { space, radius } from "../../theme/spacing";
 
@@ -132,6 +133,12 @@ export default function DashboardScreen({ navigation }: Props) {
             />
           </View>
         </View>
+
+        {overview && overview.totalWorkouts > 0 && (
+          <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
+            <ProgressiveOverloadCard />
+          </View>
+        )}
 
         {/* Volume Trend Chart */}
         <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>

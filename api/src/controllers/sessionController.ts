@@ -55,6 +55,7 @@ export const createSession = async (req: AuthRequest, res: Response) => {
     data: {
       userId,
       splitDayId,
+      splitDayName: splitDay.name,
       date: today,
       status: "IN_PROGRESS",
       exerciseLogs: {
@@ -308,10 +309,20 @@ export const markRestDay = async (req: AuthRequest, res: Response) => {
   const sessionDate = new Date(date || new Date());
   sessionDate.setHours(0, 0, 0, 0);
 
+  const splitDay = await prisma.splitDay.findUnique({
+    where: { id: splitDayId },
+    select: { name: true },
+  });
+
+  if (!splitDay) {
+    throw new AppError("Split day not found", 404);
+  }
+
   const session = await prisma.workoutSession.create({
     data: {
       userId,
       splitDayId,
+      splitDayName: splitDay.name,
       date: sessionDate,
       status: "SKIPPED",
       restReason: reason,
@@ -480,11 +491,21 @@ export const syncSession = async (req: AuthRequest, res: Response) => {
 
   const sessionDate = new Date(date || new Date());
 
+  const splitDay = await prisma.splitDay.findUnique({
+    where: { id: splitDayId },
+    select: { name: true },
+  });
+
+  if (!splitDay) {
+    throw new AppError("Split day not found", 404);
+  }
+
   const result = await prisma.$transaction(async (tx) => {
     const session = await tx.workoutSession.create({
       data: {
         userId,
         splitDayId,
+        splitDayName: splitDay.name,
         date: sessionDate,
         status: "COMPLETED",
         durationMinutes: durationMinutes ? Number(durationMinutes) : null,

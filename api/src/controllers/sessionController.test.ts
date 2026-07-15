@@ -42,6 +42,7 @@ describe("sessionController", () => {
       
       const splitDay = {
         id: "day-1",
+        name: "Push Day",
         exercises: [
           { id: "sde-1", exerciseId: "ex-1", order: 0, exercise: { name: "Bench Press" } },
         ],
@@ -213,6 +214,7 @@ describe("sessionController", () => {
     it("should create a SKIPPED session", async () => {
       req.body = { splitDayId: "day-1", date: "2024-01-15", reason: "Needed rest" };
       const session = { id: "session-1", status: "SKIPPED" };
+      mockPrismaClient.splitDay.findUnique.mockResolvedValue({ name: "Push Day" });
       mockPrismaClient.workoutSession.create.mockResolvedValue(session);
 
       await sessionController.markRestDay(req as AuthRequest, res as Response);
@@ -221,6 +223,7 @@ describe("sessionController", () => {
         expect.objectContaining({
           data: expect.objectContaining({
             status: "SKIPPED",
+            splitDayName: "Push Day",
             restReason: "Needed rest",
           }),
         })
@@ -249,6 +252,7 @@ describe("sessionController", () => {
       });
 
       const session = { id: "session-1", userId: TEST_USER.id };
+      mockPrismaClient.splitDay.findUnique.mockResolvedValue({ name: "Push Day" });
       mockPrismaClient.workoutSession.create.mockResolvedValue(session);
       mockPrismaClient.exerciseLog.create.mockResolvedValue({ id: "log-1" });
       mockPrismaClient.setLog.create.mockResolvedValue({});

@@ -1,5 +1,14 @@
 import client from "./client";
-import { ProgressOverview, ExerciseProgress, MuscleVolume, HeatmapEntry } from "../types";
+import {
+  ProgressOverview,
+  ExerciseProgress,
+  MuscleVolume,
+  HeatmapEntry,
+  OverloadFilterOption,
+  OverloadHistoryPoint,
+  OverloadPR,
+  OverloadTopSet,
+} from "../types";
 
 export const getOverview = async () => {
   const { data } = await client.get("/progress/overview");
@@ -26,5 +35,25 @@ export const getVolumeHistory = async (weeks: number = 8) => {
   return data as {
     weekly: { week: string; volume: number; workouts: number }[];
     daily: { day: string; count: number }[];
+  };
+};
+
+export const getOverloadFilters = async () => {
+  const { data } = await client.get("/progress/overload/filters");
+  return data as {
+    hasHistory: boolean;
+    muscles: OverloadFilterOption[];
+    splitDays: OverloadFilterOption[];
+  };
+};
+
+export const getOverloadHistory = async (exerciseId: string, splitDay?: { id: string; name: string }) => {
+  const { data } = await client.get(`/progress/overload/${exerciseId}`, {
+    params: splitDay ? { splitDayId: splitDay.id, splitDayName: splitDay.name } : undefined,
+  });
+  return data as {
+    latestTopSet: OverloadTopSet | null;
+    history: OverloadHistoryPoint[];
+    prs: OverloadPR[];
   };
 };

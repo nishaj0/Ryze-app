@@ -7,6 +7,8 @@ import { typography } from "../../theme/typography";
 export interface ChartPoint {
   label: string;
   value: number;
+  annotation?: string;
+  highlighted?: boolean;
 }
 
 interface LineChartProps {
@@ -122,9 +124,21 @@ export default function LineChart({
 
       {/* Dots */}
       {showDots &&
-        points.map((p, i) => (
-          <Circle key={`d-${i}`} cx={p.x} cy={p.y} r={4} fill="#fff" stroke={defaultColor} strokeWidth={2} />
-        ))}
+        points.map((p, i) => {
+          const point = data[i];
+          const pointColor = point.highlighted ? theme.warning : defaultColor;
+          return (
+            <React.Fragment key={`d-${i}`}>
+              {point.highlighted && <Circle cx={p.x} cy={p.y} r={8} fill={theme.warningBg} />}
+              <Circle cx={p.x} cy={p.y} r={point.highlighted ? 5 : 4} fill="#fff" stroke={pointColor} strokeWidth={2} />
+              {point.annotation && (
+                <SvgText x={p.x} y={Math.max(12, p.y - 12)} fontSize={10} fill={theme.textSecondary} textAnchor="middle">
+                  {point.annotation}
+                </SvgText>
+              )}
+            </React.Fragment>
+          );
+        })}
 
       {/* X labels */}
       {showLabels &&

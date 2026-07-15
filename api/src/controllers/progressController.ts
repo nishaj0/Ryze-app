@@ -133,6 +133,155 @@ export const getExerciseProgress = async (req: AuthRequest, res: Response) => {
   res.json({ progression });
 };
 
+type OverloadSet = { weightKg: number; reps: number };
+
+const getTopSet = (sets: OverloadSet[]) =>
+  sets.reduce<OverloadSet | null>((top, set) => {
+    if (!top || set.weightKg > top.weightKg || (set.weightKg === top.weightKg && set.reps > top.reps)) {
+      return set;
+    }
+    return top;
+  }, null);
+
+const estimate1RM = (weightKg: number, reps: number) => Math.round(weightKg * (1 + reps / 30));
+
+export const getOverloadFilters = async (req: AuthRequest, res: Response) => {
+  const userId = req.userId!;
+  const logs = await prisma.exerciseLog.findMany({
+    where: {
+      session: { userId, status: "COMPLETED" },
+      setLogs: { some: {} },
+    },
+    select: {
+      exercise: {
+        select: {
+          id: true,
+          name: true,
+          muscles: {
+            where: { isPrimary: true },
+            select: { muscle: { select: { name: true } } },
+          },
+        },
+      },
+      session: { select: { splitDayId: true, splitDayName: true } },
+    },
+  });
+
+  const byMuscle = new Map<string, Map<string, { id: string; name: string }>>();
+  const bySplitDay = new Map<string, { id: string; name: string; exercises: Map<string, { id: string; name: string }> }>();
+
+  for (const log of logs) {
+    const exercise = { id: log.exercise.id, name: log.exercise.name };
+    for (const muscle of log.exercise.muscles) {
+      const exercises = byMuscle.get(muscle.muscle.name) ?? new Map();
+      exercises.set(exercise.id, exercise);
+      byMuscle.set(muscle.muscle.name, exercises);
+    }
+    const splitDayKey = `${log.session.splitDayId}:${log.session.splitDayName}`;
+    const splitDay = bySplitDay.get(splitDayKey) ?? {
+      id: log.session.splitDayId,
+      name: log.session.splitDayName,
+      exercises: new Map(),
+    };
+    splitDay.exercises.set(exercise.id, exercise);
+    bySplitDay.set(splitDayKey, splitDay);
+  }
+
+  const toMuscleOptions = (filters: Map<string, Map<string, { id: string; name: string }>>) =>
+    [...filters.entries()]
+      .map(([name, exercises]) => ({
+        id: name,
+        name,
+        exercises: [...exercises.values()].sort((a, b) => a.name.localeCompare(b.name)),
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+
+  const splitDayOptions = [...bySplitDay.values()]
+    .map((splitDay) => ({
+      id: `${splitDay.id}:${splitDay.name}`,
+      splitDayId: splitDay.id,
+      name: splitDay.name,
+      exercises: [...splitDay.exercises.values()].sort((a, b) => a.name.localeCompare(b.name)),
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  res.json({
+    hasHistory: logs.length > 0,
+    muscles: toMuscleOptions(byMuscle),
+    splitDays: splitDayOptions,
+  });
+};
+
+export const getOverloadHistory = async (req: AuthRequest, res: Response) => {
+  const userId = req.userId!;
+  const exerciseId = req.params.id as string;
+  const splitDayId = typeof req.query.splitDayId === "string" ? req.query.splitDayId : undefined;
+  const splitDayName = typeof req.query.splitDayName === "string" ? req.query.splitDayName : undefined;
+  const sessionWhere = {
+    userId,
+    status: "COMPLETED",
+    ...(splitDayId ? { splitDayId } : {}),
+    ...(splitDayName ? { splitDayName } : {}),
+  };
+
+  const [logs, records] = await Promise.all([
+    prisma.exerciseLog.findMany({
+      where: { exerciseId, session: sessionWhere, setLogs: { some: {} } },
+      include: {
+        setLogs: { orderBy: { setNumber: "asc" } },
+        session: { select: { id: true, date: true } },
+      },
+      orderBy: { session: { date: "asc" } },
+    }),
+    prisma.personalRecord.findMany({
+      where: { userId, exerciseId },
+      orderBy: { achievedAt: "desc" },
+      select: { id: true, weightKg: true, reps: true, estimated1rm: true, achievedAt: true },
+    }),
+  ]);
+
+  const recordMatchesSession = (record: any, log: any) => {
+    const topSet = getTopSet(log.setLogs);
+    return topSet !== null
+      && new Date(record.achievedAt).getTime() === new Date(log.session.date).getTime()
+      && record.weightKg === topSet.weightKg
+      && record.reps === topSet.reps;
+  };
+  const relevantRecords = splitDayId || splitDayName
+    ? records.filter((record: any) => logs.some((log: any) => recordMatchesSession(record, log)))
+    : records;
+
+  const points = logs.map((log: any) => {
+    const topSet = getTopSet(log.setLogs);
+    const totalVolume = log.setLogs.reduce((sum: number, set: OverloadSet) => sum + set.weightKg * set.reps, 0);
+    const isPR = relevantRecords.some((record: any) => recordMatchesSession(record, log));
+
+    return {
+      sessionId: log.session.id,
+      date: log.session.date,
+      topSet: topSet && { weightKg: topSet.weightKg, reps: topSet.reps },
+      totalVolume: Math.round(totalVolume),
+      estimated1rm: topSet ? estimate1RM(topSet.weightKg, topSet.reps) : 0,
+      isPR,
+    };
+  });
+
+  const latest = points[points.length - 1];
+  res.json({
+    latestTopSet: latest?.topSet
+      ? { ...latest.topSet, estimated1rm: latest.estimated1rm }
+      : null,
+    history: points,
+    prs: relevantRecords.map((record: any) => ({
+      id: record.id,
+      weightKg: record.weightKg,
+      reps: record.reps,
+      estimated1rm: Math.round(record.estimated1rm),
+      achievedAt: record.achievedAt,
+    })),
+  });
+};
+
 export const getMuscleVolume = async (req: AuthRequest, res: Response) => {
   const userId = req.userId!;
 

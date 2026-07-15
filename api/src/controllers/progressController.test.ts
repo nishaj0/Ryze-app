@@ -111,6 +111,67 @@ describe("progressController", () => {
     });
   });
 
+  describe("getOverloadFilters", () => {
+    it("should return only historically logged primary muscles and split-day snapshots", async () => {
+      mockPrismaClient.exerciseLog.findMany.mockResolvedValue([
+        {
+          exercise: {
+            id: "bench",
+            name: "Bench Press",
+            muscles: [{ muscle: { name: "chest" } }],
+          },
+          session: { splitDayId: "push-1", splitDayName: "Push Day" },
+        },
+        {
+          exercise: {
+            id: "row",
+            name: "Barbell Row",
+            muscles: [{ muscle: { name: "back" } }],
+          },
+          session: { splitDayId: "pull-1", splitDayName: "Pull Day" },
+        },
+      ]);
+
+      await progressController.getOverloadFilters(req as AuthRequest, res as Response);
+
+      expect(res.json).toHaveBeenCalledWith({
+        hasHistory: true,
+        muscles: [
+          { id: "back", name: "back", exercises: [{ id: "row", name: "Barbell Row" }] },
+          { id: "chest", name: "chest", exercises: [{ id: "bench", name: "Bench Press" }] },
+        ],
+        splitDays: [
+          { id: "pull-1:Pull Day", splitDayId: "pull-1", name: "Pull Day", exercises: [{ id: "row", name: "Barbell Row" }] },
+          { id: "push-1:Push Day", splitDayId: "push-1", name: "Push Day", exercises: [{ id: "bench", name: "Bench Press" }] },
+        ],
+      });
+    });
+  });
+
+  describe("getOverloadHistory", () => {
+    it("should use the highest-rep top set and return all chart metrics together", async () => {
+      req.params = { id: "bench" };
+      req.query = { splitDayId: "push-1", splitDayName: "Push Day" };
+      mockPrismaClient.exerciseLog.findMany.mockResolvedValue([
+        {
+          session: { id: "session-1", date: new Date("2024-01-15") },
+          setLogs: [{ weightKg: 80, reps: 8 }, { weightKg: 80, reps: 10 }, { weightKg: 75, reps: 12 }],
+        },
+      ]);
+      mockPrismaClient.personalRecord.findMany.mockResolvedValue([
+        { id: "pr-1", weightKg: 80, reps: 10, estimated1rm: 106.67, achievedAt: new Date("2024-01-15") },
+      ]);
+
+      await progressController.getOverloadHistory(req as AuthRequest, res as Response);
+
+      expect(res.json).toHaveBeenCalledWith({
+        latestTopSet: { weightKg: 80, reps: 10, estimated1rm: 107 },
+        history: [expect.objectContaining({ totalVolume: 2340, estimated1rm: 107, isPR: true, topSet: { weightKg: 80, reps: 10 } })],
+        prs: [expect.objectContaining({ id: "pr-1", estimated1rm: 107 })],
+      });
+    });
+  });
+
   describe("getMuscleVolume", () => {
     it("should return muscle volume for current week", async () => {
       const sessions = [

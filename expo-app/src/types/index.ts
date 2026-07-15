@@ -106,6 +106,7 @@ export interface WorkoutSession {
   id: string;
   userId: string;
   splitDayId: string;
+  splitDayName: string;
   date: string;
   status: string;
   restReason: string | null;
@@ -203,6 +204,36 @@ export interface ExerciseProgress {
   maxWeight: number;
   totalReps: number;
   sets: number;
+}
+
+export interface OverloadFilterOption {
+  id: string;
+  splitDayId?: string;
+  name: string;
+  exercises: { id: string; name: string }[];
+}
+
+export interface OverloadTopSet {
+  weightKg: number;
+  reps: number;
+  estimated1rm: number;
+}
+
+export interface OverloadHistoryPoint {
+  sessionId: string;
+  date: string;
+  topSet: { weightKg: number; reps: number } | null;
+  totalVolume: number;
+  estimated1rm: number;
+  isPR: boolean;
+}
+
+export interface OverloadPR {
+  id: string;
+  weightKg: number;
+  reps: number;
+  estimated1rm: number;
+  achievedAt: string;
 }
 
 export interface MuscleVolume {
