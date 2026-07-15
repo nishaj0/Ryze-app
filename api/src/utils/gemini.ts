@@ -31,6 +31,26 @@ interface CallGeminiOptions {
   responseSchema: Record<string, unknown>;
 }
 
+export type GeminiFunctionDeclaration = {
+  name: string;
+  description: string;
+  parameters: Record<string, unknown>;
+};
+
+export type GeminiToolCall = {
+  id?: string;
+  name: string;
+  args: Record<string, unknown>;
+  result: unknown;
+};
+
+type CallGeminiWithToolsOptions = {
+  systemPrompt: string;
+  userPrompt: string;
+  tools: GeminiFunctionDeclaration[];
+  execute: (name: string, args: Record<string, unknown>) => Promise<unknown>;
+};
+
 function buildCallMeta(options: CallGeminiOptions) {
   const context = getLogContext();
   return {
@@ -162,4 +182,59 @@ export async function callGemini<T>(
 
   // TypeScript exhaustiveness — loop above always returns or throws
   throw new GeminiError("AI service unavailable after retries. Please try again later.");
+}
+
+/**
+ * Runs Gemini's native function-calling loop. Tool results are returned to the
+ * model as function responses, so the final text can be grounded in the data
+ * that was actually retrieved.
+ */
+export async function callGeminiWithTools(options: CallGeminiWithToolsOptions): Promise<{ reply: string; calls: GeminiToolCall[] }> {
+  const ai = await getClient();
+  const meta = {
+    ...buildCallMeta({ ...options, responseSchema: {} }),
+    toolNames: options.tools.map((tool) => tool.name),
+  };
+  const contents: any[] = [{ role: "user", parts: [{ text: options.userPrompt }] }];
+  const calls: GeminiToolCall[] = [];
+
+  for (let turn = 0; turn < 3; turn++) {
+    const response = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents,
+      config: {
+        systemInstruction: options.systemPrompt,
+        tools: [{ functionDeclarations: options.tools }],
+      },
+    });
+    const functionCalls = Array.isArray(response.functionCalls) ? response.functionCalls : [];
+
+    if (functionCalls.length === 0) {
+      const reply = String(response.text || "I couldn't prepare that response. Please try again.").trim();
+      log.debug({ ...meta, turn, callCount: calls.length, replyLength: reply.length }, "gemini:tool-loop-complete");
+      return { reply, calls };
+    }
+
+    const responses: any[] = [];
+    for (const functionCall of functionCalls) {
+      const name = String(functionCall.name || "");
+      const args = (functionCall.args && typeof functionCall.args === "object" ? functionCall.args : {}) as Record<string, unknown>;
+      let result: unknown;
+      try {
+        result = await options.execute(name, args);
+        log.debug({ ...meta, turn, name, args, result }, "gemini:function-call");
+      } catch (error) {
+        result = { error: error instanceof Error ? error.message : "Tool execution failed" };
+        log.warn({ ...meta, turn, name, args, result }, "gemini:function-call-failed");
+      }
+      calls.push({ id: functionCall.id, name, args, result });
+      responses.push({ functionResponse: { name, response: { result }, id: functionCall.id } });
+    }
+
+    contents.push(response.candidates?.[0]?.content);
+    contents.push({ role: "user", parts: responses });
+  }
+
+  log.warn({ ...meta, callCount: calls.length }, "gemini:tool-loop-limit");
+  return { reply: "I retrieved the relevant information below.", calls };
 }

@@ -10,6 +10,7 @@ export { default as InstructionStepper } from "./InstructionStepper";
 export { default as ExerciseMetaBadges } from "./ExerciseMetaBadges";
 export { default as SetTrackerStrip } from "./SetTrackerStrip";
 export { default as ExerciseDetailSheet } from "./ExerciseDetailSheet";
+export { default as CoachResponseBlocks } from "./CoachResponseBlocks";
 export {
   Skeleton,
   SkeletonCard,
