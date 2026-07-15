@@ -43,6 +43,7 @@ model User {
   checkIns         CheckIn[]
   splitSuggestions SplitSuggestion[]
   chatMessages     ChatMessage[]
+  conversations    Conversation[]
 }
 
 model Split {
@@ -347,18 +348,34 @@ model SplitSuggestion {
   suggestedAlternative Exercise? @relation("suggestedAlternative", fields: [suggestedAlternativeExerciseId], references: [id])
 }
 
-model ChatMessage {
-  id        String   @id @default(cuid())
-  userId    String
-  role      String
-  content   String
-  toolCalls Json?
-  action    Json?
-  outcome   String?
-  createdAt DateTime @default(now())
+model Conversation {
+  id           String   @id @default(cuid())
+  userId       String
+  title        String?
+  createdAt    DateTime @default(now())
+  lastActiveAt DateTime @default(now())
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages     ChatMessage[]
+
+  @@index([userId, lastActiveAt])
+}
+
+model ChatMessage {
+  id             String   @id @default(cuid())
+  userId         String
+  role           String
+  content        String
+  toolCalls      Json?
+  action         Json?
+  outcome        String?
+  createdAt      DateTime @default(now())
+  conversationId String?
+
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  conversation Conversation? @relation(fields: [conversationId], references: [id], onDelete: Cascade)
 
   @@index([userId, createdAt])
+  @@index([userId, conversationId, createdAt])
 }
 

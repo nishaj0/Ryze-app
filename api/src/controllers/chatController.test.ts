@@ -18,6 +18,7 @@ describe("chatController", () => {
       await options.execute("getRecentSessions", {});
       return { reply: "You trained twice.", calls: [] };
     });
+    mockPrismaClient.conversation.findFirst.mockResolvedValue({ id: "conv-1" });
     mockPrismaClient.chatMessage.findMany.mockResolvedValue([]);
     mockPrismaClient.chatMessage.create.mockResolvedValue({ id: "chat-1" });
     mockPrismaClient.workoutSession.findMany.mockResolvedValue([]);
@@ -32,6 +33,7 @@ describe("chatController", () => {
       await options.execute("proposeMarkRestDay", { date: new Date().toISOString() });
       return { reply: "I can mark that as rest.", calls: [] };
     });
+    mockPrismaClient.conversation.findFirst.mockResolvedValue({ id: "conv-1" });
     mockPrismaClient.chatMessage.findMany.mockResolvedValue([]);
     mockPrismaClient.chatMessage.create.mockResolvedValue({ id: "proposal-1" });
     const response = res(); await chat.sendMessage(req({ content: "Mark today as rest" }), response);
@@ -41,6 +43,7 @@ describe("chatController", () => {
 
   it("retrieves the active split when the user asks whether Coach can read it", async () => {
     vi.mocked(callGeminiWithTools).mockResolvedValue({ reply: "Here is your split.", calls: [] });
+    mockPrismaClient.conversation.findFirst.mockResolvedValue({ id: "conv-1" });
     mockPrismaClient.chatMessage.findMany.mockResolvedValue([]);
     mockPrismaClient.chatMessage.create.mockResolvedValue({ id: "chat-1" });
     mockPrismaClient.userSplit.findFirst.mockResolvedValue(null);
@@ -55,6 +58,7 @@ describe("chatController", () => {
       await options.execute("getRecentSessions", {});
       return { reply: "Here is your plan and latest session.", calls: [] };
     });
+    mockPrismaClient.conversation.findFirst.mockResolvedValue({ id: "conv-1" });
     mockPrismaClient.chatMessage.findMany.mockResolvedValue([]);
     mockPrismaClient.chatMessage.create.mockResolvedValue({ id: "chat-1" });
     mockPrismaClient.userSplit.findFirst.mockResolvedValue({ splitId: "split-1", split: { id: "split-1", name: "PPL", days: [] } });
@@ -72,6 +76,7 @@ describe("chatController", () => {
       await options.execute("getExerciseHistory", { exerciseName: "Bench Press" });
       return { reply: "I checked your log.", calls: [] };
     });
+    mockPrismaClient.conversation.findFirst.mockResolvedValue({ id: "conv-1" });
     mockPrismaClient.chatMessage.findMany.mockResolvedValue([]);
     mockPrismaClient.chatMessage.create.mockResolvedValue({ id: "chat-1" });
     mockPrismaClient.exercise.findUnique.mockResolvedValue({ id: "exercise-1", name: "Bench Press" });
@@ -88,6 +93,7 @@ describe("chatController", () => {
       await options.execute("openPhotosTab", {});
       return { reply: "", calls: [] };
     });
+    mockPrismaClient.conversation.findFirst.mockResolvedValue({ id: "conv-1" });
     mockPrismaClient.chatMessage.findMany.mockResolvedValue([]);
     mockPrismaClient.chatMessage.create.mockResolvedValue({ id: "chat-1" });
     const response = res(); await chat.sendMessage(req({ content: "How do I take a progress photo?" }), response);

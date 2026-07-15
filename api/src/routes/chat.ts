@@ -3,6 +3,8 @@ import { authMiddleware } from "../middleware/auth";
 import { wrap } from "../utils/asyncHandler";
 import * as chat from "../controllers/chatController";
 const router = Router();
+router.get("/conversations", authMiddleware, wrap(chat.listConversations));
+router.post("/conversations", authMiddleware, wrap(chat.createConversation));
 router.get("/messages", authMiddleware, wrap(chat.listMessages));
 router.post("/messages", authMiddleware, wrap(chat.sendMessage));
 router.post("/messages/:id/resolve", authMiddleware, wrap(chat.resolveProposal));

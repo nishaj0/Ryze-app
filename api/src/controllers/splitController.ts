@@ -4,6 +4,7 @@ import { AppError } from "../middleware/errorHandler";
 import { prisma } from "../utils/db";
 import { callGemini, GeminiError } from "../utils/gemini";
 import { createLogger } from "../utils/logger";
+import { CandidateExercise, buildExerciseMaps, resolveExercise } from "../utils/exerciseMatch";
 
 const log = createLogger("split");
 
@@ -334,59 +335,6 @@ export const updateSplitExercise = async (req: AuthRequest, res: Response) => {
 // Types and helpers for AI split generation
 // ---------------------------------------------------------------------------
 
-interface CandidateExercise {
-  id: string;
-  name: string;
-  equipment: string | null;
-  level: string | null;
-  muscles: { isPrimary: boolean; muscle: { name: string } }[];
-}
-
-/**
- * Normalize an exercise name for fuzzy-resistant comparison:
- * - lowercase
- * - collapse multiple spaces
- * - normalize hyphens/en-dashes/em-dashes to a single hyphen surrounded by spaces,
- *   then strip spaces adjacent to hyphens, making "Bench Press - Barbell" and
- *   "Bench Press-Barbell" compare equal.
- */
-function normalizeExerciseName(name: string): string {
-  return name
-    .toLowerCase()
-    .replace(/\s*[\u002D\u2013\u2014]\s*/g, "-") // normalize dash variants
-    .replace(/\s+/g, " ")                          // collapse spaces
-    .trim();
-}
-
-/**
- * Resolve a Gemini-returned exercise name to a DB exercise using a 3-step
- * match hierarchy:
- *   a. Exact (case-sensitive)
- *   b. Case-insensitive exact
- *   c. Normalized (whitespace + punctuation differences)
- * Returns undefined if no match found — caller should treat as a warning.
- */
-function resolveExercise(
-  exerciseName: string,
-  exactMap: Map<string, CandidateExercise>,
-  caseInsensitiveMap: Map<string, CandidateExercise>,
-  normalizedMap: Map<string, CandidateExercise>
-): CandidateExercise | undefined {
-  // a. Exact (case-sensitive)
-  const exact = exactMap.get(exerciseName);
-  if (exact) return exact;
-
-  // b. Case-insensitive
-  const ci = caseInsensitiveMap.get(exerciseName.toLowerCase());
-  if (ci) return ci;
-
-  // c. Normalized
-  const norm = normalizedMap.get(normalizeExerciseName(exerciseName));
-  if (norm) return norm;
-
-  return undefined;
-}
-
 /**
  * Shape the candidate exercise list for the AI prompt:
  * - For BEGINNER experience level, sort beginner-tagged exercises first
@@ -596,9 +544,7 @@ export const generateAISplit = async (req: AuthRequest, res: Response) => {
   );
 
   // Build lookup maps for 3-step exercise name resolution
-  const exactMap = new Map<string, CandidateExercise>(exercises.map((ex) => [ex.name, ex]));
-  const caseInsensitiveMap = new Map<string, CandidateExercise>(exercises.map((ex) => [ex.name.toLowerCase(), ex]));
-  const normalizedMap = new Map<string, CandidateExercise>(exercises.map((ex) => [normalizeExerciseName(ex.name), ex]));
+  const { exactMap, caseInsensitiveMap, normalizedMap } = buildExerciseMaps(exercises);
 
   // Build prompts
   const { systemPrompt, userPrompt } = buildSplitGenerationPrompt(

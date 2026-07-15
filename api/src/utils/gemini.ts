@@ -210,7 +210,7 @@ export async function callGeminiWithTools(options: CallGeminiWithToolsOptions): 
     const functionCalls = Array.isArray(response.functionCalls) ? response.functionCalls : [];
 
     if (functionCalls.length === 0) {
-      const reply = String(response.text || "I couldn't prepare that response. Please try again.").trim();
+      const reply = String(response.text || "").trim();
       log.debug({ ...meta, turn, callCount: calls.length, replyLength: reply.length }, "gemini:tool-loop-complete");
       return { reply, calls };
     }

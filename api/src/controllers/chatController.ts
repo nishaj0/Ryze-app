@@ -4,8 +4,9 @@ import { AppError } from "../middleware/errorHandler";
 import { prisma } from "../utils/db";
 import { callGeminiWithTools, GeminiFunctionDeclaration } from "../utils/gemini";
 import { createLogger } from "../utils/logger";
+import { buildExerciseMaps, findPartialMatches } from "../utils/exerciseMatch";
 
-type ReadToolName = "getRecentSessions" | "getExerciseHistory" | "getProgressSummary" | "getCurrentSplit" | "getCheckInHistory";
+type ReadToolName = "getRecentSessions" | "getExerciseHistory" | "getProgressSummary" | "getCurrentSplit" | "getCheckInHistory" | "getExerciseDetail";
 type WriteToolName = "proposeSwapExercise" | "proposeMarkRestDay" | "proposeSplitRegeneration";
 type NavigationToolName = "openSplitDetails" | "openExerciseDetail" | "openSessionSummary" | "openPhotosTab" | "openSplitSwitcher" | "openProgressDashboard" | "openBrowseExercises" | "openSettings";
 type ToolName = ReadToolName | WriteToolName | NavigationToolName;
@@ -13,13 +14,13 @@ type Proposal = { type: "SWAP_EXERCISE" | "REST_DAY" | "SPLIT_REGENERATION"; pay
 type DeepLink = { screen: string; params: Record<string, unknown> };
 type ChatResponseBlock =
   | { type: "text"; content: string }
-  | { type: "data_card"; cardType: "split" | "session" | "exercise" | "progress"; data: Record<string, unknown>; deepLink?: DeepLink }
+  | { type: "data_card"; cardType: "split" | "session" | "exercise" | "exercise_detail" | "progress"; data: Record<string, unknown>; deepLink?: DeepLink }
   | { type: "confirmation_card"; action: "swap_exercise" | "mark_rest_day" | "regenerate_split"; data: Record<string, unknown> }
   | { type: "navigation_action"; label: string; screen: string; params: Record<string, unknown> };
 type ChatResponse = { blocks: ChatResponseBlock[] };
 
 const log = createLogger("coach");
-const READ_TOOLS = new Set<ReadToolName>(["getRecentSessions", "getExerciseHistory", "getProgressSummary", "getCurrentSplit", "getCheckInHistory"]);
+const READ_TOOLS = new Set<ReadToolName>(["getRecentSessions", "getExerciseHistory", "getProgressSummary", "getCurrentSplit", "getCheckInHistory", "getExerciseDetail"]);
 const asJson = <T>(value: T): T => JSON.parse(JSON.stringify(value)) as T;
 
 const TOOLS: GeminiFunctionDeclaration[] = [
@@ -28,6 +29,7 @@ const TOOLS: GeminiFunctionDeclaration[] = [
   { name: "getProgressSummary", description: "Get a factual summary of the user's last 30 days of training progress.", parameters: { type: "object", properties: {} } },
   { name: "getCurrentSplit", description: "Get the user's active workout split and its days and exercises.", parameters: { type: "object", properties: {} } },
   { name: "getCheckInHistory", description: "Get the user's recent post-workout check-ins.", parameters: { type: "object", properties: {} } },
+  { name: "getExerciseDetail", description: "Get reference information about an exercise (images, muscles worked, equipment, instructions, level, mechanic). Use when the user asks what an exercise IS, how to perform it, what muscles it works, or wants to see an image. This is independent of whether the user has logged the exercise before.", parameters: { type: "object", properties: { exerciseName: { type: "string", description: "The exercise name." } }, required: ["exerciseName"] } },
   { name: "proposeSwapExercise", description: "Create a confirmation-only proposal to swap an exercise in the active split. Never performs the swap.", parameters: { type: "object", properties: { splitDayId: { type: "string" }, currentExerciseId: { type: "string" } }, required: ["splitDayId", "currentExerciseId"] } },
   { name: "proposeMarkRestDay", description: "Create a confirmation-only proposal to mark a date as a rest day. Never writes until confirmed.", parameters: { type: "object", properties: { date: { type: "string" }, reason: { type: "string" } }, required: ["date"] } },
   { name: "proposeSplitRegeneration", description: "Create a confirmation-only proposal to regenerate a split preview. Never writes until confirmed.", parameters: { type: "object", properties: { description: { type: "string" } } } },
@@ -60,6 +62,47 @@ async function runRead(userId: string, tool: ReadToolName, args: Record<string, 
     if (!exercise) return { error: "Exercise not found" };
     const history = await prisma.exerciseLog.findMany({ where: { exerciseId: exercise.id, session: { userId } }, include: { session: true, setLogs: true }, orderBy: { session: { date: "desc" } }, take: 10 });
     return { exercise, history };
+  }
+  if (tool === "getExerciseDetail") {
+    const exerciseName = String(args.exerciseName || "").trim();
+    if (!exerciseName) return { error: "Exercise name is required." };
+    
+    const allExercises = await prisma.exercise.findMany({
+      include: {
+        muscles: { include: { muscle: true } },
+        images: { orderBy: { order: "asc" } },
+      },
+    });
+    
+    const candidates = allExercises.map((ex) => ({
+      id: ex.id,
+      name: ex.name,
+      equipment: ex.equipment,
+      level: ex.level,
+      muscles: ex.muscles.map((m) => ({ isPrimary: m.isPrimary, muscle: { name: m.muscle.name } })),
+      images: ex.images,
+      instructions: ex.instructions,
+      force: ex.force,
+      mechanic: ex.mechanic,
+      category: ex.category,
+    }));
+    
+    const { exactMap, caseInsensitiveMap, normalizedMap } = buildExerciseMaps(candidates);
+    const matched = candidates.find((ex) => ex.name === exerciseName) ||
+      candidates.find((ex) => ex.name.toLowerCase() === exerciseName.toLowerCase()) ||
+      candidates.find((ex) => {
+        const normalized = exerciseName.toLowerCase().replace(/\s*[\u002D\u2013\u2014]\s*/g, "-").replace(/\s+/g, " ").trim();
+        return ex.name.toLowerCase().replace(/\s*[\u002D\u2013\u2014]\s*/g, "-").replace(/\s+/g, " ").trim() === normalized;
+      });
+    
+    if (matched) return { exercise: matched };
+    
+    const partialMatches = findPartialMatches(exerciseName, candidates);
+    if (partialMatches.length > 1) {
+      return { ambiguous: true, matches: partialMatches.slice(0, 5).map((m) => m.name) };
+    }
+    
+    return { error: `I couldn't find an exercise called "${exerciseName}".` };
   }
   const since = new Date(Date.now() - 30 * 86400000);
   const sessions = await prisma.workoutSession.findMany({ where: { userId, status: "COMPLETED", date: { gte: since } }, include: { exerciseLogs: { include: { setLogs: true } } } });
@@ -126,6 +169,18 @@ function readBlocks(tool: ReadToolName, result: any): ChatResponseBlock[] {
     if (!result?.history?.length) return [{ type: "text", content: `You haven't logged ${result?.exercise?.name || "that exercise"} yet.` }];
     return [{ type: "data_card", cardType: "exercise", data: asJson(result), deepLink: { screen: "Profile", params: { screen: "ExerciseDetail", params: { exerciseId: result.exercise.id } } } }];
   }
+  if (tool === "getExerciseDetail") {
+    if (result?.ambiguous) {
+      return [{ type: "text", content: `I found multiple exercises that might match: ${result.matches.join(", ")}. Could you be more specific?` }];
+    }
+    if (result?.error) {
+      return [
+        { type: "text", content: `${result.error} Try checking the spelling or browse the full list.` },
+        { type: "navigation_action", label: "Browse exercises", screen: "Profile", params: { screen: "AllExercises" } },
+      ];
+    }
+    return [{ type: "data_card", cardType: "exercise_detail", data: asJson({ exercise: result.exercise }) }];
+  }
   if (tool === "getCheckInHistory") {
     if (!result?.length) return [{ type: "text", content: "You don't have any post-workout check-ins yet." }];
     return [{ type: "data_card", cardType: "progress", data: asJson({ title: "Recent check-ins", checkIns: result }) }];
@@ -151,12 +206,24 @@ export async function sendMessage(req: AuthRequest, res: Response) {
   const content = String(req.body.content || "").trim();
   if (!content) throw new AppError("A message is required", 400);
 
-  await prisma.chatMessage.create({ data: { userId, role: "USER", content } });
+  let conversationId = String(req.body.conversationId || "").trim();
+  if (!conversationId) {
+    const existing = await prisma.conversation.findFirst({ where: { userId }, orderBy: { lastActiveAt: "desc" } });
+    if (existing) {
+      conversationId = existing.id;
+    } else {
+      const conv = await prisma.conversation.create({ data: { userId, title: content.slice(0, 50) } });
+      conversationId = conv.id;
+    }
+  } else {
+    await prisma.conversation.updateMany({ where: { id: conversationId, userId }, data: { lastActiveAt: new Date() } });
+  }
+
   const [history, profile] = await Promise.all([
-    prisma.chatMessage.findMany({ where: { userId }, orderBy: { createdAt: "desc" }, take: 10 }),
+    prisma.chatMessage.findMany({ where: { userId, conversationId }, orderBy: { createdAt: "desc" }, take: 10 }),
     prisma.user.findUnique({ where: { id: userId }, select: { goal: true, experienceLevel: true, daysAvailable: true, equipmentAccess: true } }),
   ]);
-  const systemPrompt = `You are Ryze Coach: encouraging, concise, and not clinical. You have real tools. When the user asks about workouts, split, progress, check-ins, exercises, or history, you MUST call the relevant read tool before responding. Never say you could show data or ask permission to show read-only information: retrieve it immediately. For fitness advice, first call getCurrentSplit or getExerciseHistory and reference the returned exercises. Use the supplied profile context to match the user's experience level. Only use proposal tools for writes, and explain that those changes require confirmation. When the user asks how to reach a dedicated app feature, call one fixed open* navigation tool and keep the text brief. Never invent data, tool results, raw routes, or navigation names.`;
+  const systemPrompt = `You are Ryze Coach: encouraging, concise, and not clinical. You have real tools. When the user asks about workouts, split, progress, check-ins, exercises, or history, you MUST call the relevant read tool before responding. Never say you could show data or ask permission to show read-only information: retrieve it immediately. For fitness advice, first call getCurrentSplit or getExerciseHistory and reference the returned exercises. Use the supplied profile context to match the user's experience level. Only use proposal tools for writes, and explain that those changes require confirmation. When the user asks how to reach a dedicated app feature, call one fixed open* navigation tool and keep the text brief. Never invent data, tool results, raw routes, or navigation names. IMPORTANT: If the user asks what an exercise IS, how to perform it, what muscles it works, or wants to see an image of it, call getExerciseDetail. If the user asks about THEIR performance, history, or logged sets for an exercise, call getExerciseHistory. These serve different intents — do not treat 'I haven't logged this exercise' as a blocker for showing exercise information, since the two are unrelated.`;
   let proposal: Proposal | undefined;
   const navigationBlocks: ChatResponseBlock[] = [];
   const toolResultBlocks: ChatResponseBlock[] = [];
@@ -197,20 +264,54 @@ export async function sendMessage(req: AuthRequest, res: Response) {
     }
   }
 
-  const blocks: ChatResponseBlock[] = model.reply ? [{ type: "text", content: model.reply }, ...toolResultBlocks] : [...toolResultBlocks];
+  const isFillerReply = !model.reply || model.reply === "I retrieved the relevant information below.";
+  const blocks: ChatResponseBlock[] = isFillerReply ? [...toolResultBlocks] : [{ type: "text", content: model.reply }, ...toolResultBlocks];
   if (proposal) {
     const action = proposal.type === "SWAP_EXERCISE" ? "swap_exercise" : proposal.type === "REST_DAY" ? "mark_rest_day" : "regenerate_split";
     blocks.push({ type: "confirmation_card", action, data: { summary: proposal.summary } });
   }
   blocks.push(...navigationBlocks);
+  
+  if (blocks.length === 0) {
+    blocks.push({ type: "text", content: "I couldn't prepare that response. Please try again." });
+  }
+  
   const response: ChatResponse = { blocks };
-  const message = await prisma.chatMessage.create({ data: { userId, role: "ASSISTANT", content: model.reply, toolCalls: asJson({ response, calls: model.calls }) as any, action: proposal as any } });
-  res.status(201).json({ message, response, proposal });
+  await prisma.chatMessage.create({ data: { userId, role: "USER", content, conversationId } });
+  const message = await prisma.chatMessage.create({ data: { userId, role: "ASSISTANT", content: model.reply, toolCalls: asJson({ response, calls: model.calls }) as any, action: proposal as any, conversationId } });
+  res.status(201).json({ message, response, proposal, conversationId });
+}
+
+export async function listConversations(req: AuthRequest, res: Response) {
+  const userId = req.userId!;
+  const conversations = await prisma.conversation.findMany({
+    where: { userId },
+    orderBy: { lastActiveAt: "desc" },
+    include: {
+      messages: {
+        where: { role: "USER" },
+        orderBy: { createdAt: "asc" },
+        take: 1,
+        select: { content: true },
+      },
+    },
+  });
+  res.json({ conversations: conversations.map((c) => ({ id: c.id, title: c.title || c.messages[0]?.content?.slice(0, 50) || "Chat", createdAt: c.createdAt, lastActiveAt: c.lastActiveAt })) });
+}
+
+export async function createConversation(req: AuthRequest, res: Response) {
+  const userId = req.userId!;
+  const title = String(req.body.title || "").trim() || null;
+  const conversation = await prisma.conversation.create({ data: { userId, title } });
+  res.status(201).json({ conversation });
 }
 
 export async function listMessages(req: AuthRequest, res: Response) {
-  const messages = await prisma.chatMessage.findMany({ where: { userId: req.userId! }, orderBy: { createdAt: "asc" } });
-  res.json({ messages });
+  const userId = req.userId!;
+  const conversationId = String(req.query.conversationId || "").trim();
+  const where = conversationId ? { userId, conversationId } : { userId };
+  const messages = await prisma.chatMessage.findMany({ where, orderBy: { createdAt: "asc" } });
+  res.json({ messages, conversationId: conversationId || null });
 }
 
 export async function resolveProposal(req: AuthRequest, res: Response) {

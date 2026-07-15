@@ -178,6 +178,13 @@ export const mockPrismaClient = {
     create: vi.fn(),
     update: vi.fn(),
   },
+  conversation: {
+    findFirst: vi.fn(),
+    findMany: vi.fn(),
+    create: vi.fn(),
+    update: vi.fn(),
+    updateMany: vi.fn(),
+  },
   $transaction: vi.fn((fn: any) => fn(mockPrismaClient)),
   $connect: vi.fn(),
   $disconnect: vi.fn(),
