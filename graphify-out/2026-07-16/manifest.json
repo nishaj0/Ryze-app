@@ -90,8 +90,8 @@
     "semantic_hash": ""
   },
   "api/src/controllers/splitController.ts": {
-    "mtime": 1783886962.4805646,
-    "ast_hash": "c71ce8589ec829f63a814e1506c42846",
+    "mtime": 1784151399.5452967,
+    "ast_hash": "8f6e14b21557d63f0f2c70a46964d53f",
     "semantic_hash": ""
   },
   "api/src/index.ts": {
@@ -190,8 +190,8 @@
     "semantic_hash": "b02bcf4fde15f746f6e5248537d0b156"
   },
   "expo-app/package.json": {
-    "mtime": 1784093343.1690514,
-    "ast_hash": "2573071147462e55a256ef4f52a9ef73",
+    "mtime": 1784151287.4987223,
+    "ast_hash": "d3b9004ccf0e476a83ace2812aab7169",
     "semantic_hash": ""
   },
   "expo-app/src/App.tsx": {
@@ -14340,8 +14340,8 @@
     "semantic_hash": ""
   },
   "api/src/utils/gemini.ts": {
-    "mtime": 1784105357.393183,
-    "ast_hash": "bd243e2cdcb4408a2e56f278d5fe21d4",
+    "mtime": 1784151239.4737964,
+    "ast_hash": "43a210ae7ec50032c13cd8c57ad4a571",
     "semantic_hash": ""
   },
   "api/src/utils/scheduler.ts": {
@@ -14380,8 +14380,8 @@
     "semantic_hash": ""
   },
   "api/src/__tests__/prisma-mock.ts": {
-    "mtime": 1784060484.6300156,
-    "ast_hash": "06f5d649c763705e3dcd62061f967bab",
+    "mtime": 1784152000.9292963,
+    "ast_hash": "b6331459c2ef8a56eb9ea79205152dfa",
     "semantic_hash": ""
   },
   "api/src/__tests__/setup.ts": {
@@ -14575,28 +14575,28 @@
     "semantic_hash": ""
   },
   "api/src/controllers/chatController.test.ts": {
-    "mtime": 1784105874.009359,
-    "ast_hash": "30d339548dac2a69fb6502304483e039",
+    "mtime": 1784152069.6877263,
+    "ast_hash": "cdd3dc34bf99b87bd4f00759685d8bb4",
     "semantic_hash": ""
   },
   "api/src/controllers/chatController.ts": {
-    "mtime": 1784106010.8688185,
-    "ast_hash": "fcf8f40f6526fb0462e5d399a5de586d",
+    "mtime": 1784151833.0410297,
+    "ast_hash": "65fabeeca1a49c76655e8fa9a6ec4a84",
     "semantic_hash": ""
   },
   "api/src/routes/chat.ts": {
-    "mtime": 1784060434.1987343,
-    "ast_hash": "c6185f717ea389185a993cac0134d891",
+    "mtime": 1784151759.1692894,
+    "ast_hash": "c8eda7265db12a656572c506210e8544",
     "semantic_hash": ""
   },
   "expo-app/src/api/chat.ts": {
-    "mtime": 1784105693.0674126,
-    "ast_hash": "2f3c57fa45798ac1e5e46ce0a155e78d",
+    "mtime": 1784151855.8765175,
+    "ast_hash": "2868f1892ac53bc91b2dd0bf48825ce1",
     "semantic_hash": ""
   },
   "expo-app/src/screens/profile/CoachChatScreen.tsx": {
-    "mtime": 1784105727.927002,
-    "ast_hash": "dbaf9a927910742f260008c3b5f786fb",
+    "mtime": 1784151932.038658,
+    "ast_hash": "d275ccc2c1158c66e95b783eec57b22e",
     "semantic_hash": ""
   },
   "website/.astro/content.d.ts": {
@@ -14655,8 +14655,13 @@
     "semantic_hash": ""
   },
   "expo-app/src/components/CoachResponseBlocks.tsx": {
-    "mtime": 1784105694.7822483,
-    "ast_hash": "48e68689e960dde0345574d7f0edeaef",
+    "mtime": 1784151630.5989876,
+    "ast_hash": "82f1945ec24eb04674309f502d55e093",
+    "semantic_hash": ""
+  },
+  "api/src/utils/exerciseMatch.ts": {
+    "mtime": 1784151368.500155,
+    "ast_hash": "b65570419b9f7071ce32112b95de31bd",
     "semantic_hash": ""
   }
 }

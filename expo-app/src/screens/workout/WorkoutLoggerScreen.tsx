@@ -9,6 +9,7 @@ import {
   FlatList,
   Linking,
   Dimensions,
+  Image,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
@@ -28,10 +29,12 @@ import {
   InstructionStepper,
   SetTrackerStrip,
   ExerciseMetaBadges,
+  ExerciseDetailSheet,
 } from "../../components";
 import { useTheme } from "../../theme/themeStore";
 import { space, radius } from "../../theme/spacing";
 import { useAuthStore } from "../../store/authStore";
+import { getThumbnailUrl } from "../../utils/cloudinary";
 
 type Props = NativeStackScreenProps<HomeStackParamList, "WorkoutLogger">;
 const { width: screenW, height: screenH } = Dimensions.get("window");
@@ -164,6 +167,8 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
   const [showQueueModal, setShowQueueModal] = useState(false);
   const [showReplaceModal, setShowReplaceModal] = useState(false);
   const [replaceMode, setReplaceMode] = useState<"today" | "permanent">("today");
+  const [exerciseDetailVisible, setExerciseDetailVisible] = useState(false);
+  const [selectedExerciseDetail, setSelectedExerciseDetail] = useState<Exercise | null>(null);
 
   // Alternatives / Fallbacks
   const [alternatives, setAlternatives] = useState<any[]>([]);
@@ -494,6 +499,13 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
 
   // PRE-START PHASE
   if (!activeSession.hasStarted) {
+    const primaryMuscles = Array.from(new Set(
+      activeSession.exerciseQueue.flatMap((item) =>
+        item.exercise.muscles?.filter((m) => m.isPrimary).map((m) => m.muscle.name) || []
+      )
+    ));
+    const summaryText = `${activeSession.exerciseQueue.length} exercise${activeSession.exerciseQueue.length === 1 ? "" : "s"}${primaryMuscles.length > 0 ? ` · ${primaryMuscles.join(", ")}` : ""}`;
+
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: theme.bg }} edges={["top", "bottom"]}>
         <View style={{ paddingHorizontal: space.lg, paddingVertical: space.md, borderBottomWidth: 1, borderBottomColor: theme.border }}>
@@ -506,71 +518,105 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
         </View>
 
         <ScrollView style={{ flex: 1 }} contentContainerStyle={{ padding: space.lg }}>
-          <Typography variant="body" color={theme.textSecondary} style={{ marginBottom: space.lg }}>
+          <Typography variant="body" color={theme.textSecondary} style={{ marginBottom: space.sm }}>
             Reorder the exercises below to change the order of your workout today:
           </Typography>
+          <Typography variant="caption" color={theme.textMuted} style={{ marginBottom: space.lg }}>
+            {summaryText}
+          </Typography>
 
-          {activeSession.exerciseQueue.map((item, idx) => (
-            <Card key={item.id} shadow="sm" style={{ marginBottom: space.md, padding: space.md }}>
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <View
-                  style={{
-                    width: 32,
-                    height: 32,
-                    borderRadius: radius.md,
-                    backgroundColor: theme.surfaceTertiary,
-                    alignItems: "center",
-                    justifyContent: "center",
-                    marginRight: space.md,
-                  }}
-                >
-                  <Typography variant="body" color={theme.textSecondary} weight="700">
-                    {idx + 1}
-                  </Typography>
-                </View>
+          {activeSession.exerciseQueue.map((item, idx) => {
+            const primaryMuscleNames = item.exercise.muscles?.filter((m) => m.isPrimary).map((m) => m.muscle.name) || [];
+            const contextParts = [...primaryMuscleNames];
+            if (item.exercise.equipment) contextParts.push(item.exercise.equipment);
+            const contextLine = contextParts.join(" · ");
 
-                <View style={{ flex: 1 }}>
-                  <Typography variant="heading3" color={theme.textPrimary}>
-                    {item.exercise.name}
-                  </Typography>
-                  <Typography variant="caption" color={theme.textMuted}>
-                    {item.targetSets} sets × {item.targetRepsMin}-{item.targetRepsMax} reps
-                  </Typography>
-                </View>
-
-                <View style={{ flexDirection: "row", gap: space.xs }}>
+            return (
+              <Card key={item.id} shadow="sm" style={{ marginBottom: space.md, padding: space.md }}>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
                   <TouchableOpacity
-                    onPress={() => reorderQueue(idx, idx - 1)}
-                    disabled={idx === 0}
-                    style={{
-                      padding: space.xs,
-                      backgroundColor: idx === 0 ? "transparent" : theme.surfaceSecondary,
-                      borderRadius: radius.sm,
-                    }}
+                    onPress={() => { setSelectedExerciseDetail(item.exercise); setExerciseDetailVisible(true); }}
+                    style={{ flexDirection: "row", alignItems: "center", flex: 1, marginRight: space.sm }}
+                    activeOpacity={0.7}
                   >
-                    <Icon name="ChevronUp" size={20} color={idx === 0 ? theme.disabledText : theme.textSecondary} />
+                    <View
+                      style={{
+                        width: 60,
+                        height: 60,
+                        borderRadius: radius.md,
+                        overflow: "hidden",
+                        marginRight: space.md,
+                        backgroundColor: theme.surfaceSecondary,
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      {item.exercise.images && item.exercise.images.length > 0 ? (
+                        <Image
+                          source={{ uri: getThumbnailUrl(item.exercise.images[0].url) }}
+                          style={{ width: "100%", height: "100%" }}
+                          resizeMode="cover"
+                        />
+                      ) : (
+                        <Icon name="Dumbbell" size={24} color={theme.textMuted} />
+                      )}
+                    </View>
+
+                    <View style={{ flex: 1 }}>
+                      <View style={{ flexDirection: "row", alignItems: "baseline" }}>
+                        <Typography variant="caption" color={theme.textMuted} weight="700" style={{ marginRight: space.xs }}>
+                          #{idx + 1}
+                        </Typography>
+                        <Typography variant="heading3" color={theme.textPrimary} style={{ flex: 1 }}>
+                          {item.exercise.name}
+                        </Typography>
+                      </View>
+                      {contextLine.length > 0 && (
+                        <Typography variant="caption" color={theme.textMuted} style={{ textTransform: "capitalize", marginTop: 2 }}>
+                          {contextLine}
+                        </Typography>
+                      )}
+                      <Typography variant="caption" color={theme.textMuted} style={{ marginTop: 2 }}>
+                        {item.targetSets} sets × {item.targetRepsMin}-{item.targetRepsMax} reps
+                      </Typography>
+                    </View>
                   </TouchableOpacity>
 
-                  <TouchableOpacity
-                    onPress={() => reorderQueue(idx, idx + 1)}
-                    disabled={idx === activeSession.exerciseQueue.length - 1}
-                    style={{
-                      padding: space.xs,
-                      backgroundColor: idx === activeSession.exerciseQueue.length - 1 ? "transparent" : theme.surfaceSecondary,
-                      borderRadius: radius.sm,
-                    }}
-                  >
-                    <Icon name="ChevronDown" size={20} color={idx === activeSession.exerciseQueue.length - 1 ? theme.disabledText : theme.textSecondary} />
-                  </TouchableOpacity>
+                  <View style={{ flexDirection: "row", gap: space.xs }}>
+                    <TouchableOpacity
+                      onPress={() => reorderQueue(idx, idx - 1)}
+                      disabled={idx === 0}
+                      style={{
+                        padding: space.xs,
+                        backgroundColor: idx === 0 ? "transparent" : theme.surfaceSecondary,
+                        borderRadius: radius.sm,
+                      }}
+                    >
+                      <Icon name="ChevronUp" size={20} color={idx === 0 ? theme.disabledText : theme.textSecondary} />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                      onPress={() => reorderQueue(idx, idx + 1)}
+                      disabled={idx === activeSession.exerciseQueue.length - 1}
+                      style={{
+                        padding: space.xs,
+                        backgroundColor: idx === activeSession.exerciseQueue.length - 1 ? "transparent" : theme.surfaceSecondary,
+                        borderRadius: radius.sm,
+                      }}
+                    >
+                      <Icon name="ChevronDown" size={20} color={idx === activeSession.exerciseQueue.length - 1 ? theme.disabledText : theme.textSecondary} />
+                    </TouchableOpacity>
+                  </View>
                 </View>
-              </View>
-            </Card>
-          ))}
+              </Card>
+            );
+          })}
         </ScrollView>
 
         <View style={{ padding: space.lg, borderTopWidth: 1, borderTopColor: theme.border }}>
           <Button title="Begin Session" onPress={beginSession} variant="primary" size="lg" icon={<Icon name="Play" color={theme.primaryText} size={20} />} />
         </View>
+        <ExerciseDetailSheet exercise={selectedExerciseDetail} visible={exerciseDetailVisible} onClose={() => setExerciseDetailVisible(false)} />
       </SafeAreaView>
     );
   }

@@ -9,16 +9,9 @@ import { getAppSettings, AppSettings } from "../../api/app";
 import { Typography, Card, Icon, ExerciseDetailSheet } from "../../components";
 import { useTheme } from "../../theme/themeStore";
 import { space, radius } from "../../theme/spacing";
+import { getThumbnailUrl } from "../../utils/cloudinary";
 
 type Props = NativeStackScreenProps<ProfileStackParamList, "AllExercises">;
-
-const getThumbnailUrl = (url: string) => {
-  if (!url) return "";
-  if (url.includes("/upload/")) {
-    return url.replace("/upload/", "/upload/w_80,h_80,c_fill,q_auto,f_auto/");
-  }
-  return url;
-};
 
 export default function AllExercisesScreen({ navigation }: Props) {
   const theme = useTheme();
