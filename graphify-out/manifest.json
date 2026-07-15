@@ -40,8 +40,8 @@
     "semantic_hash": ""
   },
   "api/package.json": {
-    "mtime": 1783859936.5836272,
-    "ast_hash": "3965e8ae6d7ae5670ea0251b18479a18",
+    "mtime": 1784093341.9284558,
+    "ast_hash": "efa00c6fa1d4eaa98a10f77036471884",
     "semantic_hash": ""
   },
   "api/src/controllers/authController.ts": {
@@ -190,8 +190,8 @@
     "semantic_hash": "b02bcf4fde15f746f6e5248537d0b156"
   },
   "expo-app/package.json": {
-    "mtime": 1783606681.4501288,
-    "ast_hash": "de1962e7e93521e733685cf9aa7274c1",
+    "mtime": 1784093343.1690514,
+    "ast_hash": "2573071147462e55a256ef4f52a9ef73",
     "semantic_hash": ""
   },
   "expo-app/src/App.tsx": {

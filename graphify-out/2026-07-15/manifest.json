@@ -95,8 +95,8 @@
     "semantic_hash": ""
   },
   "api/src/index.ts": {
-    "mtime": 1783860298.9083393,
-    "ast_hash": "326da9ea6336a751fad231a55a6355f0",
+    "mtime": 1784060435.1919239,
+    "ast_hash": "3295537a32dde8f8b569e385ffc0fa05",
     "semantic_hash": ""
   },
   "api/src/middleware/auth.ts": {
@@ -165,8 +165,8 @@
     "semantic_hash": ""
   },
   "api/tsconfig.json": {
-    "mtime": 1783443084.3189452,
-    "ast_hash": "387413f18babde8fc1063a86d5a5efee",
+    "mtime": 1784060787.8255296,
+    "ast_hash": "2ecf5641c5cb6d87113fad3d0ef2544d",
     "semantic_hash": ""
   },
   "expo-app/app.json": {
@@ -265,8 +265,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/navigation/MainTabs.tsx": {
-    "mtime": 1783926273.6742527,
-    "ast_hash": "2080fe2d743e41f94787305a0d06c830",
+    "mtime": 1784060489.8410494,
+    "ast_hash": "493644b619eea40d4ea86ef523824b4f",
     "semantic_hash": ""
   },
   "expo-app/src/navigation/OnboardingStack.tsx": {
@@ -280,8 +280,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/navigation/types.ts": {
-    "mtime": 1783888191.234535,
-    "ast_hash": "f8f4d554f061cfd066c50f41deeddd48",
+    "mtime": 1784060488.6766176,
+    "ast_hash": "9c16e32adcc04b5f22fa847d263e9501",
     "semantic_hash": ""
   },
   "expo-app/src/screens/auth/LoginScreen.tsx": {
@@ -370,8 +370,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/screens/profile/ProfileScreen.tsx": {
-    "mtime": 1783887566.8328106,
-    "ast_hash": "f0bdd12a0d1f701344fcc907e7d952b9",
+    "mtime": 1784060525.914636,
+    "ast_hash": "a7d9689f3595d9796b34a3643e2e9148",
     "semantic_hash": ""
   },
   "expo-app/src/screens/profile/SettingsScreen.tsx": {
@@ -440,8 +440,8 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1783690036.7693498,
-    "ast_hash": "ddbeb6f6782c70e47fb5e841c4ccc979",
+    "mtime": 1784038110.7582805,
+    "ast_hash": "ea2528088288377960b55bae427177a7",
     "semantic_hash": ""
   },
   ".agents/skills/dashboard/SKILL.md": {
@@ -14380,8 +14380,8 @@
     "semantic_hash": ""
   },
   "api/src/__tests__/prisma-mock.ts": {
-    "mtime": 1783887604.1907144,
-    "ast_hash": "5ad4c8a2c67d88fcdf82131b04757e7d",
+    "mtime": 1784060484.6300156,
+    "ast_hash": "06f5d649c763705e3dcd62061f967bab",
     "semantic_hash": ""
   },
   "api/src/__tests__/setup.ts": {
@@ -14572,6 +14572,81 @@
   "expo-app/expo-app/.codex-tscheck/tsconfig.json": {
     "mtime": 1783926671.2005556,
     "ast_hash": "835eac35ead61ac6f8244bd7603fedad",
+    "semantic_hash": ""
+  },
+  "api/src/controllers/chatController.test.ts": {
+    "mtime": 1784060485.686123,
+    "ast_hash": "9f587afd7256228f4ca3dde0e6886fe3",
+    "semantic_hash": ""
+  },
+  "api/src/controllers/chatController.ts": {
+    "mtime": 1784060740.672783,
+    "ast_hash": "3bd190cbf4bc5008288ed80b6abca583",
+    "semantic_hash": ""
+  },
+  "api/src/routes/chat.ts": {
+    "mtime": 1784060434.1987343,
+    "ast_hash": "c6185f717ea389185a993cac0134d891",
+    "semantic_hash": ""
+  },
+  "expo-app/src/api/chat.ts": {
+    "mtime": 1784060486.687033,
+    "ast_hash": "15659d65e33f647564357eabcddc7555",
+    "semantic_hash": ""
+  },
+  "expo-app/src/screens/profile/CoachChatScreen.tsx": {
+    "mtime": 1784060487.6957524,
+    "ast_hash": "473b07bbf6726973d77bb14ce5e2d61e",
+    "semantic_hash": ""
+  },
+  "website/.astro/content.d.ts": {
+    "mtime": 1784059736.0584476,
+    "ast_hash": "4aaaf7e07990466432e5a0fcf9b2e58c",
+    "semantic_hash": ""
+  },
+  "website/.astro/dev.json": {
+    "mtime": 1784059475.8796632,
+    "ast_hash": "838fab5af47be76248fe8684dca8f52e",
+    "semantic_hash": ""
+  },
+  "website/.astro/settings.json": {
+    "mtime": 1784048216.7334483,
+    "ast_hash": "48aa6be8043967658076a903252a8a61",
+    "semantic_hash": ""
+  },
+  "website/.astro/types.d.ts": {
+    "mtime": 1784059736.0584476,
+    "ast_hash": "f3d48b2aa569815a445d3509aa161559",
+    "semantic_hash": ""
+  },
+  "website/astro.config.mjs": {
+    "mtime": 1784037892.2108922,
+    "ast_hash": "0f023a4ad9ced2f0f68accc8978be797",
+    "semantic_hash": ""
+  },
+  "website/package.json": {
+    "mtime": 1784038102.5705867,
+    "ast_hash": "34fcdad5c6406d0c648931aaa6dbd2e6",
+    "semantic_hash": ""
+  },
+  "website/src/components/HeroIllustration.astro": {
+    "mtime": 1784037896.5557683,
+    "ast_hash": "c883f368525ef82a5bf3a8380e23d730",
+    "semantic_hash": ""
+  },
+  "website/src/layouts/BaseLayout.astro": {
+    "mtime": 1784037894.8686013,
+    "ast_hash": "47b1879c1486aa58cff0b283a2702a38",
+    "semantic_hash": ""
+  },
+  "website/src/pages/index.astro": {
+    "mtime": 1784059879.6575904,
+    "ast_hash": "5561ab3f0c8fe715e29d625852c8e22a",
+    "semantic_hash": ""
+  },
+  "website/tsconfig.json": {
+    "mtime": 1784037893.1764631,
+    "ast_hash": "2468ad4201072028f1f60c1591299ac9",
     "semantic_hash": ""
   }
 }
