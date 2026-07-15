@@ -173,9 +173,9 @@ export default function OnboardingCustomSplitScreen({ navigation }: Props) {
     setExerciseModalVisible(false);
   };
 
-  const handleExerciseTap = async (ex: { exerciseId: string; name: string }) => {
+  const handleExerciseTap = async (ex: Exercise | { exerciseId: string; name: string }) => {
     try {
-      const res = await getExercise(ex.exerciseId);
+      const res = await getExercise("exerciseId" in ex ? ex.exerciseId : ex.id);
       setSelectedExerciseDetail(res.exercise);
       setExerciseDetailVisible(true);
     } catch (err) {

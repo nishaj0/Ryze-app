@@ -8,6 +8,7 @@ export type { IconName } from "./Icon";
 export { default as ExerciseImageCarousel } from "./ExerciseImageCarousel";
 export { default as InstructionStepper } from "./InstructionStepper";
 export { default as ExerciseMetaBadges } from "./ExerciseMetaBadges";
+export { default as SetTrackerStrip } from "./SetTrackerStrip";
 export { default as ExerciseDetailSheet } from "./ExerciseDetailSheet";
 export {
   Skeleton,

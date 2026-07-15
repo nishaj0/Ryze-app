@@ -14,6 +14,7 @@ interface InstructionStepperProps {
 export default function InstructionStepper({
   instructions,
   autoRotateMs = 5000,
+  minHeight,
 }: InstructionStepperProps) {
   const theme = useTheme();
   const [currentStep, setCurrentStep] = useState(0);

@@ -226,6 +226,7 @@ export interface ExerciseQueueItem {
   status: 'pending' | 'in_progress' | 'complete' | 'skipped';
   wasReplaced: boolean;
   replacedWithExerciseId: string | null;
+  notes?: string;
 }
 
 export interface ActiveSession {

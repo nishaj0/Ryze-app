@@ -1,4 +1,5 @@
 import React from "react";
+import { View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { MainTabParamList, HomeStackParamList, WorkoutStackParamList, ProgressStackParamList, PhotosStackParamList, ProfileStackParamList } from "./types";
@@ -16,6 +17,7 @@ const ProfileStackNav = createNativeStackNavigator<ProfileStackParamList>();
 const tabIcons: Record<string, { active: any; inactive: any }> = {
   Home: { active: "Home", inactive: "Home" },
   Progress: { active: "BarChart3", inactive: "BarChart3" },
+  Coach: { active: "Sparkles", inactive: "Sparkles" },
   Photos: { active: "Camera", inactive: "Camera" },
   Profile: { active: "User", inactive: "User" },
 };
@@ -106,7 +108,6 @@ function ProfileStack() {
       <ProfileStackNav.Screen name="ReportBug" getComponent={() => require("../screens/support/ReportBugScreen").default} options={{ title: "Report a Bug" }} />
       <ProfileStackNav.Screen name="RequestHelp" getComponent={() => require("../screens/support/RequestHelpScreen").default} options={{ title: "Request Help" }} />
       <ProfileStackNav.Screen name="MyTickets" getComponent={() => require("../screens/support/MyTicketsScreen").default} options={{ title: "My Support Tickets" }} />
-      <ProfileStackNav.Screen name="CoachChat" getComponent={() => require("../screens/profile/CoachChatScreen").default} options={{ title: "Ryze Coach" }} />
     </ProfileStackNav.Navigator>
   );
 }
@@ -128,6 +129,7 @@ export default function MainTabs() {
           height: 64,
           paddingBottom: 8,
           paddingTop: 8,
+          overflow: "visible",
         },
         tabBarActiveTintColor: theme.primary,
         tabBarInactiveTintColor: theme.textMuted,
@@ -140,12 +142,16 @@ export default function MainTabs() {
         headerShown: false,
         tabBarIcon: ({ focused, color }: { focused: boolean; color: string }) => {
           const iconName = tabIcons[route.name]?.active || "Circle";
+          if (route.name === "Coach") {
+            return <View style={{ width: 56, height: 56, borderRadius: 28, marginTop: -30, alignItems: "center", justifyContent: "center", backgroundColor: theme.primary, borderWidth: 5, borderColor: theme.surface, shadowColor: theme.primary, shadowOpacity: 0.35, shadowRadius: 10, shadowOffset: { width: 0, height: 5 }, elevation: 8 }}><Icon name={iconName} size={25} color={theme.primaryText} strokeWidth={2.5} /></View>;
+          }
           return <Icon name={iconName} size={24} color={color} strokeWidth={focused ? 2.5 : 2} />;
         },
       })}
     >
       <Tab.Screen name="Home" component={HomeStack} options={{ tabBarLabel: "Home" }} />
       <Tab.Screen name="Progress" component={ProgressStack} options={{ tabBarLabel: "Progress" }} />
+      <Tab.Screen name="Coach" getComponent={() => require("../screens/profile/CoachChatScreen").default} options={{ tabBarLabel: "Coach", tabBarLabelStyle: { marginTop: 10 } }} />
       <Tab.Screen name="Photos" component={PhotosStack} options={{ tabBarLabel: "Photos" }} />
       <Tab.Screen name="Profile" component={ProfileStack} options={{ tabBarLabel: "Profile" }} />
     </Tab.Navigator>

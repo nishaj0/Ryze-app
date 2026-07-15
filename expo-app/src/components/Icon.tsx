@@ -70,6 +70,7 @@ import {
   Target,
   Timer,
   Trash2,
+  TrendingDown,
   TrendingUp,
   TreePine,
   Trophy,
@@ -154,6 +155,7 @@ const ICON_COMPONENTS = {
   Target,
   Timer,
   Trash2,
+  TrendingDown,
   TrendingUp,
   TreePine,
   Trophy,
@@ -164,11 +166,7 @@ const ICON_COMPONENTS = {
   Utensils,
   Weight,
   X,
-} satisfies Record<string, React.ComponentType<{
-  size?: number;
-  color?: string;
-  strokeWidth?: number;
-}>>;
+} satisfies Record<string, React.ElementType>;
 
 export type IconName = keyof typeof ICON_COMPONENTS;
 

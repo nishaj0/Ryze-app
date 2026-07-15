@@ -60,13 +60,13 @@ export type ProfileStackParamList = {
   ReportBug: undefined;
   RequestHelp: undefined;
   MyTickets: undefined;
-  CoachChat: undefined;
 };
 
 export type MainTabParamList = {
   Home: NavigatorScreenParams<HomeStackParamList>;
   Workout: NavigatorScreenParams<WorkoutStackParamList>;
   Progress: NavigatorScreenParams<ProgressStackParamList>;
+  Coach: undefined;
   Photos: NavigatorScreenParams<PhotosStackParamList>;
   Profile: NavigatorScreenParams<ProfileStackParamList>;
 };

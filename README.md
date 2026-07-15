@@ -12,6 +12,8 @@ A comprehensive gym progress tracking app built with Expo (React Native) and Nod
 - **Body Metrics**: Track body weight and view trends
 - **Offline Support**: MMKV storage for offline-first experience
 - **Push Notifications**: Workout reminders and weekly check-ins
+- **Ryze Coach**: A dedicated center-tab chat for questions about recent sessions, exercise history, progress, active splits, and check-in patterns
+- **Safe AI Actions**: Coach suggestions for approved exercise swaps and rest days appear as confirmation cards—nothing changes until the user confirms
 
 ## Tech Stack
 
@@ -29,6 +31,7 @@ A comprehensive gym progress tracking app built with Expo (React Native) and Nod
 - PostgreSQL
 - JWT authentication
 - Cloudinary (exercise images)
+- Google Gemini (coach responses and tool orchestration)
 
 ## Project Structure
 
@@ -55,6 +58,16 @@ gym-tracker-app/
 │   │   └── types/
 │   └── package.json
 └── package.json           # Root scripts
+```
+
+### Marketing Site
+
+`website/` contains the Astro landing page. It introduces the mobile app, the centered Ryze Coach tab, coach context from training history and check-ins, and the confirmation-first approach to plan changes.
+
+```bash
+cd website
+npm install
+npm run build
 ```
 
 ## Setup
@@ -84,6 +97,7 @@ NODE_ENV="development"
 CLOUDINARY_CLOUD_NAME="your-cloud-name"
 CLOUDINARY_API_KEY="your-api-key"
 CLOUDINARY_API_SECRET="your-api-secret"
+GEMINI_API_KEY="your-gemini-api-key"
 LOG_LEVEL="debug"
 LOG_DIR="logs"
 LOG_FILE_MAX_SIZE="10m"
@@ -172,6 +186,11 @@ npm run app:start  # Expo dev server
 - `GET /api/photos` - List photos
 - `DELETE /api/photos/:id` - Delete photo
 
+### Coach
+- `GET /api/chat/messages` - Get the signed-in user's coach conversation
+- `POST /api/chat/messages` - Send a coach message; the coach can use recent sessions, exercise history, progress, active-split, and check-in context
+- `POST /api/chat/messages/:id/resolve` - Confirm or decline a suggested coach action
+
 ## Database Schema
 
 The app uses Prisma with the following main entities:
@@ -185,6 +204,7 @@ The app uses Prisma with the following main entities:
 - BodyMetric
 - ProgressPhoto
 - PersonalRecord
+- ChatMessage (coach messages and confirmation state)
 
 ## Exercise Data
 
@@ -213,6 +233,8 @@ npm run migrate:exercises
 cd api
 npm run dev              # Start dev server
 npm run prisma:studio    # Open Prisma Studio
+npm run prisma:generate  # Generate Prisma Client after schema changes
+npm run typecheck        # Generate Prisma Client and check TypeScript
 npm run migrate:exercises # Re-run exercise migration
 ```
 
@@ -222,6 +244,8 @@ cd expo-app
 npm start              # Start Expo dev server
 npm run android        # Run on Android
 npm run ios            # Run on iOS
+npm run typecheck      # Check TypeScript
+npm test               # Run unit tests
 ```
 
 ## Environment Variables
@@ -236,6 +260,7 @@ NODE_ENV="development"
 CLOUDINARY_CLOUD_NAME="your-cloud-name"
 CLOUDINARY_API_KEY="your-api-key"
 CLOUDINARY_API_SECRET="your-cloud-secret"
+GEMINI_API_KEY="your-gemini-api-key"
 
 # Logging
 LOG_LEVEL="debug"          # trace | debug | info | warn | error | silent
@@ -257,9 +282,9 @@ API_URL=http://localhost:3000/api
 ## Production Deployment
 
 ### Backend
-1. Switch to PostgreSQL (update DATABASE_URL)
-2. Deploy to Railway/Heroku/Render
-3. Set environment variables
+1. Set `DATABASE_URL`, `GEMINI_API_KEY`, and the remaining production environment variables
+2. Run `npm run prisma:generate` and `npx prisma migrate deploy` from `api/` before serving traffic
+3. Deploy to Railway/Heroku/Render using `npm run build` (the build regenerates Prisma Client before TypeScript compilation)
 
 ### Mobile
 1. Configure EAS Build
