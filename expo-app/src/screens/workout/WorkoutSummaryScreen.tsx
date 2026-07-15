@@ -8,7 +8,7 @@ import { Typography, Card, Button, Icon, Input, WorkoutSummaryScreenSkeleton } f
 import { BarChart } from "../../components/charts";
 import { useTheme } from "../../theme/themeStore";
 import { space, radius } from "../../theme/spacing";
-import { createCheckIn, getCheckIn, updateCheckIn } from "../../api/checkins";
+import { createCheckIn, getCheckIn } from "../../api/checkins";
 import { useQueryClient } from "@tanstack/react-query";
 
 type Props = NativeStackScreenProps<HomeStackParamList, "WorkoutSummary">;
@@ -41,7 +41,6 @@ export default function WorkoutSummaryScreen({ route, navigation }: Props) {
   const { activeSession, completeSession, updateSessionNotes } = useWorkoutStore();
   const [saving, setSaving] = useState(false);
   const [checkInText, setCheckInText] = useState("");
-  const [existingCheckInId, setExistingCheckInId] = useState<string | null>(null);
 
   // For viewing past/completed summary
   const [loadingPastSession, setLoadingPastSession] = useState(false);
@@ -63,7 +62,6 @@ export default function WorkoutSummaryScreen({ route, navigation }: Props) {
               .then((ciRes) => {
                 if (ciRes?.checkIn) {
                   setCheckInText(ciRes.checkIn.rawText);
-                  setExistingCheckInId(ciRes.checkIn.id);
                 }
               })
               .catch(() => {});
@@ -79,16 +77,8 @@ export default function WorkoutSummaryScreen({ route, navigation }: Props) {
       } else {
         navigation.getParent()?.getParent()?.navigate("Home", { screen: "HomeMain" });
       }
-    } else {
-      getCheckIn(activeSession.sessionId)
-        .then((res) => {
-          if (res?.checkIn) {
-            setCheckInText(res.checkIn.rawText);
-            setExistingCheckInId(res.checkIn.id);
-          }
-        })
-        .catch(() => {});
     }
+    // Note: Don't try to load check-in for activeSession here - it hasn't been saved to DB yet
   }, [activeSession, sessionId]);
 
   const isPast = !activeSession;
@@ -187,19 +177,16 @@ export default function WorkoutSummaryScreen({ route, navigation }: Props) {
   const handleSave = async () => {
     setSaving(true);
     try {
-      if (activeSession && checkInText.trim()) {
+      const res = await completeSession();
+      
+      // Create check-in AFTER session is saved (using the real server-generated session ID)
+      if (res && !res.isOffline && res.session?.id && checkInText.trim()) {
         try {
-          if (existingCheckInId) {
-            await updateCheckIn(activeSession.sessionId, checkInText.trim());
-          } else {
-            await createCheckIn(activeSession.sessionId, checkInText.trim());
-          }
+          await createCheckIn(res.session.id, checkInText.trim());
         } catch (err) {
           console.error("Failed to save check-in:", err);
         }
       }
-
-      const res = await completeSession();
       
       // Invalidate the cache to refresh charts/metrics immediately
       try {
