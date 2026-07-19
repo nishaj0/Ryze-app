@@ -422,6 +422,7 @@ User profile (already collected — use this as ground truth, do NOT ask the use
 - Days available: ${ctx.daysAvailable ?? "Not specified"} per week
 - Equipment: ${EQUIPMENT_LABELS[ctx.equipmentAccess] ?? ctx.equipmentAccess ?? "Not specified"}
 - Gender: ${GENDER_LABELS[ctx.gender] ?? ctx.gender ?? "Not specified"}
+- Training limitations (HARD CONSTRAINTS): ${ctx.trainingLimitations?.length ? ctx.trainingLimitations.join("; ") : "None recorded"}
 `;
   }
 
@@ -513,8 +514,16 @@ export const generateAISplit = async (req: AuthRequest, res: Response) => {
     LIMITED: ["body only", "bands"],
   };
 
+  const profile = await prisma.user.findUnique({
+    where: { id: req.userId },
+    select: { trainingLimitations: true },
+  });
+  const context: Record<string, any> = {
+    ...(onboardingContext as Record<string, any> | undefined),
+    trainingLimitations: profile?.trainingLimitations ?? [],
+  };
   const exerciseWhere: any = {};
-  const equipmentAccess = onboardingContext?.equipmentAccess as string | undefined;
+  const equipmentAccess = context.equipmentAccess as string | undefined;
   if (equipmentAccess && EQUIPMENT_MAP[equipmentAccess]) {
     exerciseWhere.equipment = { in: EQUIPMENT_MAP[equipmentAccess] };
   }
@@ -535,7 +544,7 @@ export const generateAISplit = async (req: AuthRequest, res: Response) => {
   }
 
   // Shape the candidate list based on experience level and size
-  const experienceLevel = (onboardingContext as Record<string, any> | undefined)?.experienceLevel as string | undefined;
+  const experienceLevel = context.experienceLevel as string | undefined;
   const exercises = shapeCandidateList(rawExercises as CandidateExercise[], experienceLevel);
 
   log.debug(
@@ -549,7 +558,7 @@ export const generateAISplit = async (req: AuthRequest, res: Response) => {
   // Build prompts
   const { systemPrompt, userPrompt } = buildSplitGenerationPrompt(
     description,
-    onboardingContext as Record<string, any> | undefined,
+    context,
     exercises
   );
 

@@ -226,6 +226,22 @@ export const getCheckIn = async (req: AuthRequest, res: Response) => {
   return res.json({ checkIn });
 };
 
+export const listCheckInHistory = async (req: AuthRequest, res: Response) => {
+  const days = Math.min(Math.max(Number(req.query.days) || 30, 1), 365);
+  const since = new Date();
+  since.setDate(since.getDate() - days);
+  const checkIns = await prisma.checkIn.findMany({
+    where: { userId: req.userId!, createdAt: { gte: since } },
+    orderBy: { createdAt: "desc" },
+    select: { id: true, rawText: true, extractedIssues: true, sentiment: true, aiProcessed: true, createdAt: true, sessionId: true },
+  });
+  const summary = checkIns.reduce<Record<string, number>>((counts, checkIn) => {
+    counts[checkIn.sentiment] = (counts[checkIn.sentiment] || 0) + 1;
+    return counts;
+  }, { GOOD: 0, NEUTRAL: 0, STRUGGLED: 0 });
+  res.json({ checkIns, summary, days });
+};
+
 export const retryUnprocessed = async (req: AuthRequest, res: Response) => {
   const adminKey = req.headers["x-admin-key"];
   if (adminKey !== (process.env.ADMIN_KEY || "ryze-admin-2024")) {

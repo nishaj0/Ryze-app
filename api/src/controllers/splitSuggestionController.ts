@@ -38,6 +38,17 @@ const SUGGESTION_SCHEMA = {
   additionalProperties: false,
 };
 
+const conflictsWithLimitation = (exerciseName: string, limitations: string[]) => {
+  const name = exerciseName.toLowerCase();
+  return limitations.some((limitation) => {
+    const text = limitation.toLowerCase();
+    if (text.includes("overhead") && (name.includes("overhead") || name.includes("shoulder press") || name.includes("military press"))) return true;
+    if (text.includes("knee") && (name.includes("squat") || name.includes("lunge") || name.includes("leg press"))) return true;
+    const keywords = text.match(/[a-z]{5,}/g) ?? [];
+    return keywords.some((keyword) => name.includes(keyword));
+  });
+};
+
 async function sendPushNotification(
   expoPushToken: string,
   title: string,
@@ -74,6 +85,11 @@ export async function evaluateForUser(userId: string): Promise<{
   const settings = await prisma.appSettings.findUnique({
     where: { id: "default" },
   });
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { trainingLimitations: true },
+  });
+  const limitations = user?.trainingLimitations ?? [];
 
   if (settings && !settings.aiSuggestionsEnabled) {
     log.debug({ userId, reason: "AI suggestions disabled" }, "evaluateForUser:skip");
@@ -137,7 +153,7 @@ export async function evaluateForUser(userId: string): Promise<{
     const session = await prisma.workoutSession.findUnique({
       where: { id: checkIn.sessionId },
     });
-    if (!session) continue;
+    if (!session || !session.splitDayId) continue;
 
     if (checkIn.affectedExerciseId) {
       const existing = exerciseGroups.get(checkIn.affectedExerciseId);
@@ -207,8 +223,9 @@ export async function evaluateForUser(userId: string): Promise<{
       },
     });
 
-    const canSwap = alternatives.length > 0;
-    const alternativeNames = alternatives.map((a) => a.alternative.name);
+    const safeAlternatives = alternatives.filter((alternative) => !conflictsWithLimitation(alternative.alternative.name, limitations));
+    const canSwap = safeAlternatives.length > 0;
+    const alternativeNames = safeAlternatives.map((a) => a.alternative.name);
 
     const allIssues = group.checkIns.flatMap((c) => c.extractedIssues);
 
@@ -219,7 +236,8 @@ export async function evaluateForUser(userId: string): Promise<{
       splitDayExercise?.targetSets || 3,
       splitDayExercise?.targetRepsMin || 8,
       splitDayExercise?.targetRepsMax || 12,
-      canSwap
+      canSwap,
+      limitations
     );
 
     const userPrompt = `The user has reported the following issues across ${group.checkIns.length} workouts: ${group.checkIns
@@ -244,7 +262,7 @@ export async function evaluateForUser(userId: string): Promise<{
 
     let suggestedAlternativeExerciseId: string | null = null;
     if (result.suggestionType === "SWAP_EXERCISE" && result.alternativeExerciseName) {
-      const matched = alternatives.find(
+      const matched = safeAlternatives.find(
         (a) => a.alternative.name.toLowerCase() === result.alternativeExerciseName!.toLowerCase()
       );
       if (!matched) {
@@ -303,7 +321,8 @@ export async function evaluateForUser(userId: string): Promise<{
     const systemPrompt = buildGeneralSuggestionPrompt(
       keyword,
       splitDayExercise?.targetSets || 3,
-      false
+      false,
+      limitations
     );
 
     const userPrompt = `The user has reported general issues related to "${keyword}" across ${group.checkIns.length} workouts: ${group.checkIns
@@ -378,7 +397,8 @@ function buildSuggestionPrompt(
   targetSets: number,
   targetRepsMin: number,
   targetRepsMax: number,
-  canSwap: boolean
+  canSwap: boolean,
+  limitations: string[]
 ): string {
   const allowedTypes = canSwap
     ? "SWAP_EXERCISE, REDUCE_VOLUME, ADD_DELOAD, or ADJUST_REST"
@@ -391,6 +411,7 @@ Issues reported: ${issues.join(", ")}
 Current exercise parameters:
 - Target sets: ${targetSets}
 - Target reps: ${targetRepsMin}-${targetRepsMax}
+- Training limitations (HARD CONSTRAINTS): ${limitations.length ? limitations.join("; ") : "None recorded"}
 
 ${canSwap ? `Available alternative exercises: ${alternativeNames.join(", ")}` : "No alternative exercises are available for this exercise."}
 
@@ -405,12 +426,14 @@ Provide your reasoning in plain, encouraging language (not clinical or alarming)
 function buildGeneralSuggestionPrompt(
   keyword: string,
   targetSets: number,
-  canSwap: boolean
+  canSwap: boolean,
+  limitations: string[]
 ): string {
   return `You are a fitness coach analyzing a user's workout data. The user has reported general discomfort related to "${keyword}" across multiple workouts, not tied to a specific exercise.
 
 Current training parameters:
 - Target sets: ${targetSets}
+- Training limitations (HARD CONSTRAINTS): ${limitations.length ? limitations.join("; ") : "None recorded"}
 
 You must choose ONE response:
 - REDUCE_VOLUME, ADD_DELOAD, or ADJUST_REST

@@ -94,6 +94,8 @@ export default function ExerciseProgressScreen({ route }: Props) {
   const totalVolume = sorted.reduce((sum, p) => sum + p.totalVolume, 0);
   const totalReps = sorted.reduce((sum, p) => sum + p.totalReps, 0);
   const sessions = sorted.length;
+  const rpeValues = sorted.map((p) => p.averageRpe).filter((rpe): rpe is number => rpe !== null && rpe !== undefined);
+  const averageRpe = rpeValues.length ? rpeValues.reduce((sum, rpe) => sum + rpe, 0) / rpeValues.length : null;
 
   // First vs last for trend
   const firstWeight = sorted[0]?.maxWeight || 0;
@@ -148,6 +150,13 @@ export default function ExerciseProgressScreen({ route }: Props) {
               </Typography>
             </View>
           </View>
+          {averageRpe !== null && <View style={{ marginTop: space.md, backgroundColor: theme.surface, borderRadius: 16, padding: space.md, borderWidth: 1, borderColor: theme.border, flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+            <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
+              <Icon name="Activity" size={16} color={theme.warning} />
+              <Typography variant="bodySmall" color={theme.textMuted}>AVG RPE</Typography>
+            </View>
+            <Typography variant="heading3" color={theme.textPrimary}>{averageRpe.toFixed(1)}<Typography variant="bodySmall" color={theme.textMuted}> / 10</Typography></Typography>
+          </View>}
         </View>
 
         {/* Weight Progression Chart */}

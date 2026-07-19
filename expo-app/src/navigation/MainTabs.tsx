@@ -66,6 +66,7 @@ function ProgressStack() {
       <ProgressStackNav.Screen name="Dashboard" getComponent={() => require("../screens/progress/DashboardScreen").default} options={{ title: "Progress" }} />
       <ProgressStackNav.Screen name="ExerciseProgress" getComponent={() => require("../screens/progress/ExerciseProgressScreen").default} options={{ title: "Exercise" }} />
       <ProgressStackNav.Screen name="Records" getComponent={() => require("../screens/progress/RecordsScreen").default} options={{ title: "Personal Records" }} />
+      <ProgressStackNav.Screen name="CheckInHistory" getComponent={() => require("../screens/progress/CheckInHistoryScreen").default} options={{ title: "Training Feel" }} />
     </ProgressStackNav.Navigator>
   );
 }

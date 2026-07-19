@@ -13,6 +13,8 @@ You can choose a prebuilt split or make a custom split. The built-in options inc
 1. Open the Home screen and select the scheduled workout.
 2. Review the exercise list, target sets, rep range, rest guidance, and notes.
 3. Record each completed set with its weight and repetitions.
+   - Mark preparatory sets as **Warm-up**. They remain in workout history but do not affect volume, records, or overload guidance.
+   - Add an optional whole-number **RPE** from 1–10 when you want to record how hard a working set felt.
 4. Use the exercise screen to review technique notes, equipment, and alternatives when available.
 5. Finish the session to save it to your workout history and review the workout summary.
 
@@ -33,6 +35,8 @@ For each exercise, Ryze shows:
 
 The recommendation is based on your real, logged sets. It is guidance, not a command: adjust or skip it when form, recovery, pain, or your coach’s instructions call for a different choice.
 
+If you are intentionally training lighter, mark the workout as a **Deload** before starting. Deload sessions remain visible in history and charts but are skipped when Ryze selects the historical working set for the next overload recommendation.
+
 ## 4. Track your progress
 
 Use Progress to review your training over time:
@@ -46,6 +50,7 @@ Use Progress to review your training over time:
 | Training heatmap | Completed-workout activity by date |
 | Muscle volume | Volume grouped by muscle group |
 | Photos | Capture, upload, timeline, comparison, and deletion of progress photos |
+| Training Feel | Check-in timeline with Good, Neutral, and Struggled counts from the last 30 days |
 
 Progress calculations only use completed, logged data. Missing or incomplete sets do not become training records.
 
@@ -56,6 +61,8 @@ Use Photos to take or choose a progress photo, upload it, and add it to your pri
 ## 5. Ryze Coach and check-ins
 
 Ryze Coach can answer questions about your active plan and recent training. It can read relevant workout, split, check-in, and progress information to provide context-aware help.
+
+Add standing training limitations in **Edit Profile** (for example, “avoid overhead pressing” or “left knee sensitivity”). Ryze treats them as hard constraints when its AI features build plans, suggest adaptations, or offer coaching guidance.
 
 After a workout or when prompted, submit a check-in. Describe how the session felt and any exercise that was difficult. Ryze can summarize the sentiment and identify recurring trouble areas.
 

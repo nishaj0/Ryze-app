@@ -116,9 +116,11 @@ export const getExerciseProgress = async (req: AuthRequest, res: Response) => {
   });
 
   const progression = logs.map((log: any) => {
-    const totalVolume = log.setLogs.reduce((sum: number, s: any) => sum + s.weightKg * s.reps, 0);
-    const maxWeight = Math.max(...log.setLogs.map((s: any) => s.weightKg), 0);
-    const totalReps = log.setLogs.reduce((sum: number, s: any) => sum + s.reps, 0);
+    const workingSets = log.setLogs.filter((s: any) => !s.isWarmup);
+    const rpeSets = workingSets.filter((s: any) => s.rpe !== null);
+    const totalVolume = workingSets.reduce((sum: number, s: any) => sum + s.weightKg * s.reps, 0);
+    const maxWeight = Math.max(...workingSets.map((s: any) => s.weightKg), 0);
+    const totalReps = workingSets.reduce((sum: number, s: any) => sum + s.reps, 0);
 
     return {
       date: log.session.date,
@@ -126,17 +128,20 @@ export const getExerciseProgress = async (req: AuthRequest, res: Response) => {
       totalVolume: Math.round(totalVolume),
       maxWeight,
       totalReps,
-      sets: log.setLogs.length,
+      sets: workingSets.length,
+      averageRpe: rpeSets.length
+        ? Math.round((rpeSets.reduce((sum: number, s: any) => sum + s.rpe, 0) / rpeSets.length) * 10) / 10
+        : null,
     };
   });
 
   res.json({ progression });
 };
 
-type OverloadSet = { weightKg: number; reps: number };
+type OverloadSet = { weightKg: number; reps: number; isWarmup?: boolean };
 
 const getTopSet = (sets: OverloadSet[]) =>
-  sets.reduce<OverloadSet | null>((top, set) => {
+  sets.filter((set) => !set.isWarmup).reduce<OverloadSet | null>((top, set) => {
     if (!top || set.weightKg > top.weightKg || (set.weightKg === top.weightKg && set.reps > top.reps)) {
       return set;
     }
@@ -150,7 +155,7 @@ export const getOverloadFilters = async (req: AuthRequest, res: Response) => {
   const logs = await prisma.exerciseLog.findMany({
     where: {
       session: { userId, status: "COMPLETED" },
-      setLogs: { some: {} },
+      setLogs: { some: { isWarmup: false } },
     },
     select: {
       exercise: {
@@ -177,9 +182,10 @@ export const getOverloadFilters = async (req: AuthRequest, res: Response) => {
       exercises.set(exercise.id, exercise);
       byMuscle.set(muscle.muscle.name, exercises);
     }
-    const splitDayKey = `${log.session.splitDayId}:${log.session.splitDayName}`;
+    const splitDayId = log.session.splitDayId ?? "freestyle";
+    const splitDayKey = `${splitDayId}:${log.session.splitDayName}`;
     const splitDay = bySplitDay.get(splitDayKey) ?? {
-      id: log.session.splitDayId,
+      id: splitDayId,
       name: log.session.splitDayName,
       exercises: new Map(),
     };
@@ -226,10 +232,10 @@ export const getOverloadHistory = async (req: AuthRequest, res: Response) => {
 
   const [logs, records] = await Promise.all([
     prisma.exerciseLog.findMany({
-      where: { exerciseId, session: sessionWhere, setLogs: { some: {} } },
+      where: { exerciseId, session: sessionWhere, setLogs: { some: { isWarmup: false } } },
       include: {
         setLogs: { orderBy: { setNumber: "asc" } },
-        session: { select: { id: true, date: true } },
+        session: { select: { id: true, date: true, isDeload: true } },
       },
       orderBy: { session: { date: "asc" } },
     }),
@@ -253,7 +259,7 @@ export const getOverloadHistory = async (req: AuthRequest, res: Response) => {
 
   const points = logs.map((log: any) => {
     const topSet = getTopSet(log.setLogs);
-    const totalVolume = log.setLogs.reduce((sum: number, set: OverloadSet) => sum + set.weightKg * set.reps, 0);
+    const totalVolume = log.setLogs.reduce((sum: number, set: OverloadSet) => sum + (set.isWarmup ? 0 : set.weightKg * set.reps), 0);
     const isPR = relevantRecords.some((record: any) => recordMatchesSession(record, log));
 
     return {
@@ -263,6 +269,7 @@ export const getOverloadHistory = async (req: AuthRequest, res: Response) => {
       totalVolume: Math.round(totalVolume),
       estimated1rm: topSet ? estimate1RM(topSet.weightKg, topSet.reps) : 0,
       isPR,
+      isDeload: log.session.isDeload,
     };
   });
 
@@ -309,7 +316,7 @@ export const getMuscleVolume = async (req: AuthRequest, res: Response) => {
 
   for (const session of sessions) {
     for (const log of session.exerciseLogs) {
-      const volume = log.setLogs.reduce((sum, s) => sum + s.weightKg * s.reps, 0);
+      const volume = log.setLogs.reduce((sum, s) => sum + (s.isWarmup ? 0 : s.weightKg * s.reps), 0);
       const primaryMuscle = log.exercise.muscles.find((m) => m.isPrimary);
       const muscle = primaryMuscle?.muscle.name || "unknown";
       muscleVolumes[muscle] = (muscleVolumes[muscle] || 0) + volume;
@@ -386,7 +393,7 @@ export const getVolumeHistory = async (req: AuthRequest, res: Response) => {
     });
     const volume = weekSessions.reduce((sum, s) => {
       const sessVol = s.exerciseLogs.reduce((logSum, log) => {
-        return logSum + log.setLogs.reduce((setSum, set) => setSum + set.weightKg * set.reps, 0);
+        return logSum + log.setLogs.reduce((setSum, set) => setSum + (set.isWarmup ? 0 : set.weightKg * set.reps), 0);
       }, 0);
       return sum + sessVol;
     }, 0);

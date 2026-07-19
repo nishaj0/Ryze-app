@@ -55,6 +55,31 @@ export const getDashboardStats = async (_req: Request, res: Response, next: Next
   } catch (err) { next(err); }
 };
 
+export const getSuggestionAcceptanceAnalytics = async (_req: Request, res: Response, next: NextFunction) => {
+  try {
+    const grouped = await prisma.splitSuggestion.groupBy({
+      by: ["suggestionType", "status"],
+      where: { status: { in: ["ACCEPTED", "DISMISSED"] } },
+      _count: { _all: true },
+    });
+    const byType = new Map<string, { acceptedCount: number; dismissedCount: number }>();
+    for (const item of grouped) {
+      const counts = byType.get(item.suggestionType) ?? { acceptedCount: 0, dismissedCount: 0 };
+      if (item.status === "ACCEPTED") counts.acceptedCount = item._count._all;
+      if (item.status === "DISMISSED") counts.dismissedCount = item._count._all;
+      byType.set(item.suggestionType, counts);
+    }
+    const breakdown = [...byType.entries()].map(([suggestionType, counts]) => {
+      const resolvedCount = counts.acceptedCount + counts.dismissedCount;
+      return { suggestionType, ...counts, resolvedCount, acceptanceRate: resolvedCount ? counts.acceptedCount / resolvedCount : null };
+    });
+    const acceptedCount = breakdown.reduce((sum, item) => sum + item.acceptedCount, 0);
+    const dismissedCount = breakdown.reduce((sum, item) => sum + item.dismissedCount, 0);
+    const resolvedCount = acceptedCount + dismissedCount;
+    res.json({ acceptedCount, dismissedCount, resolvedCount, acceptanceRate: resolvedCount ? acceptedCount / resolvedCount : null, breakdown });
+  } catch (err) { next(err); }
+};
+
 // ─── Users ────────────────────────────────────────────────────────────────────
 export const listUsers = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -517,4 +542,3 @@ export const createExercise = async (req: Request, res: Response, next: NextFunc
     res.status(201).json({ exercise: fullExercise });
   } catch (err) { next(err); }
 };
-

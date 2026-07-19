@@ -64,6 +64,9 @@ Before changing commands or dependency versions, read the relevant package scrip
 - Progress endpoints calculate volume, estimated one-rep maximum, records, streaks, and overload data server-side.
 - The app also presents date-based activity and muscle-volume data; changing a calculation should account for all consumer screens, not only the dashboard.
 - The app’s progression helper derives a next-set recommendation from recent valid sets. Do not present that recommendation as a guaranteed prescription.
+- Warm-up sets are preserved for history but must be excluded from top-set, PR, 1RM, volume, and overload calculations. A session with no working sets has no top-set result.
+- RPE is an optional integer from 1–10. It is displayed as context only and does not currently alter the overload rule.
+- Deload sessions display normally but are skipped by the progression helper.
 - Current tab/filter changes are intentionally handled from already fetched history where possible; avoid unnecessary new network requests.
 
 ### Onboarding and split recommendations
@@ -75,6 +78,10 @@ The deterministic split recommendation has a clear baseline rule:
 - Otherwise, five or more days: Bro Split.
 
 Recommendations are ranked and shown to the user; do not silently overwrite an active split.
+
+### Training limitations
+
+`User.trainingLimitations` is an authenticated, validated profile field. Treat it as a hard constraint in every AI-facing context: split generation, adaptive suggestions, and Coach prompts. It is user input, so validate it at the profile boundary; model responses remain separately untrusted and require their existing validation.
 
 ### Check-ins and split suggestions
 

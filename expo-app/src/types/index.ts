@@ -14,6 +14,7 @@ export interface User {
   onboardingDone: boolean;
   reminderTime: string | null;
   weeklyCheckin: boolean;
+  trainingLimitations?: string[];
   createdAt: string;
 }
 
@@ -39,7 +40,7 @@ export interface SplitDay {
 
 export interface SplitDayExercise {
   id: string;
-  splitDayId: string;
+  splitDayId: string | null;
   exerciseId: string;
   order: number;
   targetSets: number;
@@ -112,6 +113,7 @@ export interface WorkoutSession {
   restReason: string | null;
   notes: string | null;
   durationMinutes: number | null;
+  isDeload?: boolean;
   splitDay?: SplitDay;
   exerciseLogs?: ExerciseLog[];
 }
@@ -136,6 +138,7 @@ export interface SetLog {
   wasAlternative?: boolean;
   alternativeExerciseId?: string | null;
   rpe: number | null;
+  isWarmup?: boolean;
   notes: string | null;
   completedAt: string;
 }
@@ -204,6 +207,7 @@ export interface ExerciseProgress {
   maxWeight: number;
   totalReps: number;
   sets: number;
+  averageRpe?: number | null;
 }
 
 export interface OverloadFilterOption {
@@ -226,6 +230,7 @@ export interface OverloadHistoryPoint {
   totalVolume: number;
   estimated1rm: number;
   isPR: boolean;
+  isDeload?: boolean;
 }
 
 export interface OverloadPR {
@@ -275,6 +280,7 @@ export interface ActiveSession {
   restStartedAt: number | null;
   notes: string;
   hasStarted: boolean;
+  isDeload?: boolean;
 }
 
 export interface CalendarSession {
@@ -288,6 +294,7 @@ export interface CalendarSession {
   exerciseCount: number;
   totalVolume: number;
   notes: string | null;
+  isDeload?: boolean;
   exerciseLogs?: {
     id: string;
     exerciseName: string;
@@ -296,6 +303,8 @@ export interface CalendarSession {
       setNumber: number;
       weightKg: number | null;
       reps: number | null;
+      rpe?: number | null;
+      isWarmup?: boolean;
     }[];
   }[];
 }

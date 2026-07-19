@@ -8,6 +8,15 @@ const calculate1RM = (weight: number, reps: number): number => {
   return Math.round(weight * (1 + reps / 30) * 100) / 100;
 };
 
+const validRpe = (value: unknown): number | null => {
+  if (value === null || value === undefined || value === "") return null;
+  const rpe = Number(value);
+  if (!Number.isInteger(rpe) || rpe < 1 || rpe > 10) {
+    throw new AppError("RPE must be an integer from 1 to 10", 400);
+  }
+  return rpe;
+};
+
 export const createSession = async (req: AuthRequest, res: Response) => {
   const { splitDayId, date } = req.body;
   const userId = req.userId!;
@@ -121,6 +130,7 @@ const getLastSessionLogs = async (
     result[log.exerciseId] = log.setLogs.map((s) => ({
       weightKg: s.weightKg,
       reps: s.reps,
+      isWarmup: s.isWarmup,
     }));
   }
   return result;
@@ -206,7 +216,7 @@ export const getSession = async (req: AuthRequest, res: Response) => {
 };
 
 export const completeSession = async (req: AuthRequest, res: Response) => {
-  const { notes, durationMinutes } = req.body;
+  const { notes, durationMinutes, isDeload } = req.body;
 
   const session: any = await prisma.workoutSession.findUnique({
     where: { id: req.params.id as string },
@@ -220,11 +230,15 @@ export const completeSession = async (req: AuthRequest, res: Response) => {
   if (!session) {
     throw new AppError("Session not found", 404);
   }
+  if (session.userId !== req.userId) {
+    throw new AppError("Unauthorized", 403);
+  }
 
   const newPRs: any[] = [];
 
   for (const log of session.exerciseLogs) {
     for (const set of log.setLogs) {
+      if (set.isWarmup) continue;
       const estimated1rm = calculate1RM(set.weightKg, set.reps);
 
       const previousPR = await prisma.personalRecord.findFirst({
@@ -265,6 +279,7 @@ export const completeSession = async (req: AuthRequest, res: Response) => {
       status: "COMPLETED",
       notes,
       durationMinutes,
+      ...(isDeload !== undefined && { isDeload: Boolean(isDeload) }),
     },
     include: {
       exerciseLogs: {
@@ -286,6 +301,7 @@ export const completeSession = async (req: AuthRequest, res: Response) => {
   let totalSets = 0;
   for (const log of updated.exerciseLogs) {
     for (const set of log.setLogs) {
+      if (set.isWarmup) continue;
       totalVolume += set.weightKg * set.reps;
       totalSets++;
     }
@@ -404,7 +420,7 @@ export const swapExercise = async (req: AuthRequest, res: Response) => {
 };
 
 export const logSet = async (req: AuthRequest, res: Response) => {
-  const { weightKg, reps, rpe, notes } = req.body;
+  const { weightKg, reps, rpe, notes, isWarmup = false } = req.body;
   const exerciseLogId = req.params.exerciseLogId as string;
 
   const exerciseLog: any = await prisma.exerciseLog.findUnique({
@@ -414,6 +430,14 @@ export const logSet = async (req: AuthRequest, res: Response) => {
 
   if (!exerciseLog) {
     throw new AppError("Exercise log not found", 404);
+  }
+
+  const owningSession = await prisma.workoutSession.findUnique({
+    where: { id: exerciseLog.sessionId },
+    select: { userId: true },
+  });
+  if (!owningSession || owningSession.userId !== req.userId) {
+    throw new AppError("Unauthorized", 403);
   }
 
   const setNumber = exerciseLog.setLogs.length > 0
@@ -426,7 +450,8 @@ export const logSet = async (req: AuthRequest, res: Response) => {
       setNumber,
       weightKg,
       reps,
-      rpe,
+      rpe: validRpe(rpe),
+      isWarmup: Boolean(isWarmup),
       notes,
     },
   });
@@ -467,7 +492,7 @@ export const logSet = async (req: AuthRequest, res: Response) => {
   }
 
   let progression: "up" | "down" | "same" | null = null;
-  if (previousSetData) {
+  if (previousSetData && !isWarmup) {
     const currentVolume = weightKg * reps;
     const prevVolume = previousSetData.weightKg * previousSetData.reps;
     if (currentVolume > prevVolume * 1.05) progression = "up";
@@ -486,17 +511,17 @@ export const deleteSet = async (req: AuthRequest, res: Response) => {
 };
 
 export const syncSession = async (req: AuthRequest, res: Response) => {
-  const { splitDayId, date, durationMinutes, notes, exercises } = req.body;
+  const { splitDayId, date, durationMinutes, notes, exercises, isDeload = false } = req.body;
   const userId = req.userId!;
 
   const sessionDate = new Date(date || new Date());
 
-  const splitDay = await prisma.splitDay.findUnique({
+  const splitDay = splitDayId ? await prisma.splitDay.findUnique({
     where: { id: splitDayId },
-    select: { name: true },
-  });
+    select: { id: true, name: true },
+  }) : null;
 
-  if (!splitDay) {
+  if (splitDayId && !splitDay) {
     throw new AppError("Split day not found", 404);
   }
 
@@ -504,12 +529,13 @@ export const syncSession = async (req: AuthRequest, res: Response) => {
     const session = await tx.workoutSession.create({
       data: {
         userId,
-        splitDayId,
-        splitDayName: splitDay.name,
+        splitDayId: splitDay?.id ?? null,
+        splitDayName: splitDay?.name ?? "Freestyle",
         date: sessionDate,
         status: "COMPLETED",
         durationMinutes: durationMinutes ? Number(durationMinutes) : null,
         notes: notes || null,
+        isDeload: Boolean(isDeload),
       },
     });
 
@@ -535,20 +561,27 @@ export const syncSession = async (req: AuthRequest, res: Response) => {
             const weightKg = Number(setData.weightKg);
             const reps = Number(setData.reps);
 
+            const isWarmup = Boolean(setData.isWarmup);
+            const rpe = validRpe(setData.rpe);
             await tx.setLog.create({
               data: {
                 exerciseLogId: exerciseLog.id,
                 setNumber: j + 1,
                 weightKg,
                 reps,
+                rpe,
+                isWarmup,
                 notes: setData.notes || null,
                 completedAt: setData.completedAt ? new Date(setData.completedAt) : new Date(),
               },
             });
 
-            totalVolume += weightKg * reps;
-            totalSets++;
+            if (!isWarmup) {
+              totalVolume += weightKg * reps;
+              totalSets++;
+            }
 
+            if (isWarmup) continue;
             const estimated1rm = calculate1RM(weightKg, reps);
             const previousPR = await tx.personalRecord.findFirst({
               where: {
@@ -665,16 +698,17 @@ export const getCalendarSessions = async (req: AuthRequest, res: Response) => {
 
   const calendar = sessions.map((s: any) => {
     const totalVolume = s.exerciseLogs.reduce((sum: number, log: any) => {
-      return sum + log.setLogs.reduce((setSum: number, set: any) => setSum + set.weightKg * set.reps, 0);
+      return sum + log.setLogs.reduce((setSum: number, set: any) => setSum + (set.isWarmup ? 0 : set.weightKg * set.reps), 0);
     }, 0);
 
     return {
       id: s.id,
       date: s.date,
       status: s.status,
-      splitDayName: s.splitDay.name,
-      muscleGroups: s.splitDay.muscleGroups,
+      splitDayName: s.splitDay?.name ?? s.splitDayName,
+      muscleGroups: s.splitDay?.muscleGroups ?? "Freestyle",
       restReason: s.restReason,
+      isDeload: s.isDeload,
       durationMinutes: s.durationMinutes,
       exerciseCount: s.exerciseLogs.length,
       totalVolume: Math.round(totalVolume),
@@ -687,6 +721,8 @@ export const getCalendarSessions = async (req: AuthRequest, res: Response) => {
           setNumber: set.setNumber,
           weightKg: set.weightKg,
           reps: set.reps,
+          rpe: set.rpe,
+          isWarmup: set.isWarmup,
         })),
       })),
     };
@@ -696,7 +732,7 @@ export const getCalendarSessions = async (req: AuthRequest, res: Response) => {
 };
 
 export const updateSession = async (req: AuthRequest, res: Response) => {
-  const { restReason, notes } = req.body;
+  const { restReason, notes, isDeload } = req.body;
   const sessionId = req.params.id as string;
 
   const session = await prisma.workoutSession.findUnique({
@@ -714,6 +750,7 @@ export const updateSession = async (req: AuthRequest, res: Response) => {
   const data: any = {};
   if (restReason !== undefined) data.restReason = restReason;
   if (notes !== undefined) data.notes = notes;
+  if (isDeload !== undefined) data.isDeload = Boolean(isDeload);
 
   const updated = await prisma.workoutSession.update({
     where: { id: sessionId },

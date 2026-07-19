@@ -172,6 +172,30 @@ describe("getSetRecommendation", () => {
     });
   });
 
+  describe("working-set selection", () => {
+    it("ignores a heavier warm-up when recommending the next set", () => {
+      const exercise = makeExercise();
+      const history = [{
+        id: "log-1",
+        session: { date: "2024-01-15" },
+        setLogs: [
+          { weightKg: 60, reps: 3, isWarmup: true, completedAt: "2024-01-15" },
+          { weightKg: 50, reps: 10, completedAt: "2024-01-15" },
+        ],
+      }];
+      expect(getSetRecommendation(exercise, 8, 12, history)).toMatchObject({ lastWeight: 50, lastReps: 10, recommendedWeight: 50, recommendedReps: 12 });
+    });
+
+    it("skips deload sessions instead of treating their lighter sets as regression", () => {
+      const exercise = makeExercise();
+      const history = [
+        { id: "deload", session: { date: "2024-01-20", isDeload: true }, setLogs: [{ weightKg: 40, reps: 8, completedAt: "2024-01-20" }] },
+        { id: "working", session: { date: "2024-01-13" }, setLogs: [{ weightKg: 50, reps: 10, completedAt: "2024-01-13" }] },
+      ];
+      expect(getSetRecommendation(exercise, 8, 12, history)).toMatchObject({ lastWeight: 50, recommendedWeight: 50, recommendedReps: 12 });
+    });
+  });
+
   describe("weight increment detection", () => {
     it("should detect equipment from name if equipment field is empty", () => {
       const exercise = makeExercise({ equipment: "", name: "Barbell Squat" });

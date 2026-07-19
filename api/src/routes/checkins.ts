@@ -20,6 +20,12 @@ router.post(
 );
 
 router.get(
+  "/history",
+  authMiddleware,
+  wrap(checkinController.listCheckInHistory)
+);
+
+router.get(
   "/:sessionId",
   authMiddleware,
   wrap(checkinController.getCheckIn)

@@ -106,7 +106,7 @@ async function runRead(userId: string, tool: ReadToolName, args: Record<string, 
   }
   const since = new Date(Date.now() - 30 * 86400000);
   const sessions = await prisma.workoutSession.findMany({ where: { userId, status: "COMPLETED", date: { gte: since } }, include: { exerciseLogs: { include: { setLogs: true } } } });
-  return { period: "last 30 days", sessions: sessions.length, volume: sessions.flatMap((session) => session.exerciseLogs).flatMap((log) => log.setLogs).reduce((sum, set) => sum + set.weightKg * set.reps, 0), streak: sessions.length };
+  return { period: "last 30 days", sessions: sessions.length, volume: sessions.flatMap((session) => session.exerciseLogs).flatMap((log) => log.setLogs).filter((set) => !set.isWarmup).reduce((sum, set) => sum + set.weightKg * set.reps, 0), streak: sessions.length };
 }
 
 async function createProposal(userId: string, tool: WriteToolName, args: Record<string, unknown>): Promise<Proposal> {
@@ -221,9 +221,9 @@ export async function sendMessage(req: AuthRequest, res: Response) {
 
   const [history, profile] = await Promise.all([
     prisma.chatMessage.findMany({ where: { userId, conversationId }, orderBy: { createdAt: "desc" }, take: 10 }),
-    prisma.user.findUnique({ where: { id: userId }, select: { goal: true, experienceLevel: true, daysAvailable: true, equipmentAccess: true } }),
+    prisma.user.findUnique({ where: { id: userId }, select: { goal: true, experienceLevel: true, daysAvailable: true, equipmentAccess: true, trainingLimitations: true } }),
   ]);
-  const systemPrompt = `You are Ryze Coach: encouraging, concise, and not clinical. You have real tools. When the user asks about workouts, split, progress, check-ins, exercises, or history, you MUST call the relevant read tool before responding. Never say you could show data or ask permission to show read-only information: retrieve it immediately. For fitness advice, first call getCurrentSplit or getExerciseHistory and reference the returned exercises. Use the supplied profile context to match the user's experience level. Only use proposal tools for writes, and explain that those changes require confirmation. When the user asks how to reach a dedicated app feature, call one fixed open* navigation tool and keep the text brief. Never invent data, tool results, raw routes, or navigation names. IMPORTANT: If the user asks what an exercise IS, how to perform it, what muscles it works, or wants to see an image of it, call getExerciseDetail. If the user asks about THEIR performance, history, or logged sets for an exercise, call getExerciseHistory. These serve different intents — do not treat 'I haven't logged this exercise' as a blocker for showing exercise information, since the two are unrelated.`;
+  const systemPrompt = `You are Ryze Coach: encouraging, concise, and not clinical. You have real tools. When the user asks about workouts, split, progress, check-ins, exercises, or history, you MUST call the relevant read tool before responding. Never say you could show data or ask permission to show read-only information: retrieve it immediately. For fitness advice, first call getCurrentSplit or getExerciseHistory and reference the returned exercises. Use the supplied profile context to match the user's experience level and treat recorded training limitations as hard constraints. Only use proposal tools for writes, and explain that those changes require confirmation. When the user asks how to reach a dedicated app feature, call one fixed open* navigation tool and keep the text brief. Never invent data, tool results, raw routes, or navigation names. IMPORTANT: If the user asks what an exercise IS, how to perform it, what muscles it works, or wants to see an image of it, call getExerciseDetail. If the user asks about THEIR performance, history, or logged sets for an exercise, call getExerciseHistory. These serve different intents — do not treat 'I haven't logged this exercise' as a blocker for showing exercise information, since the two are unrelated.`;
   let proposal: Proposal | undefined;
   const navigationBlocks: ChatResponseBlock[] = [];
   const toolResultBlocks: ChatResponseBlock[] = [];

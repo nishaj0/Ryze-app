@@ -19,6 +19,7 @@ router.use(adminAuth);
 
 // Dashboard
 router.get("/dashboard", wrap(admin.getDashboardStats));
+router.get("/suggestions/analytics", wrap(admin.getSuggestionAcceptanceAnalytics));
 
 // Users
 router.get("/users", wrap(admin.listUsers));

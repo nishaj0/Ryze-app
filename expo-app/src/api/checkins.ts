@@ -22,6 +22,11 @@ export const getCheckIn = async (sessionId: string) => {
   return data as { checkIn: CheckIn };
 };
 
+export const getCheckInHistory = async (days = 30) => {
+  const { data } = await client.get("/checkins/history", { params: { days } });
+  return data as { checkIns: Array<{ id: string; sessionId: string; rawText: string; extractedIssues: string[]; sentiment: "GOOD" | "NEUTRAL" | "STRUGGLED"; aiProcessed: boolean; createdAt: string }>; summary: Record<"GOOD" | "NEUTRAL" | "STRUGGLED", number>; days: number };
+};
+
 export const updateCheckIn = async (sessionId: string, rawText: string) => {
   const { data } = await client.put(`/checkins/${sessionId}`, {
     sessionId,

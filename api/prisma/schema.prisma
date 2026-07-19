@@ -27,6 +27,7 @@ model User {
   pushToken        String?
   reminderTime     String?  @default("08:00")
   weeklyCheckin    Boolean  @default(true)
+  trainingLimitations String[] @default([])
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 
@@ -165,17 +166,18 @@ model UserSplit {
 model WorkoutSession {
   id              String   @id @default(cuid())
   userId          String
-  splitDayId      String
-  splitDayName    String
+  splitDayId      String?
+  splitDayName    String   @default("Freestyle")
   date            DateTime @default(now())
   status          String   @default("IN_PROGRESS")
   restReason      String?
   notes           String?
   durationMinutes Int?
+  isDeload        Boolean  @default(false)
   createdAt       DateTime @default(now())
 
   user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  splitDay       SplitDay      @relation(fields: [splitDayId], references: [id])
+  splitDay       SplitDay?     @relation(fields: [splitDayId], references: [id])
   exerciseLogs   ExerciseLog[]
   checkIn        CheckIn?
 
@@ -200,7 +202,8 @@ model SetLog {
   setNumber     Int
   weightKg      Float
   reps          Int
-  rpe           Float?
+  rpe           Int?
+  isWarmup      Boolean  @default(false)
   notes         String?
   completedAt   DateTime @default(now())
 

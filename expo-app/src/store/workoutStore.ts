@@ -17,7 +17,9 @@ interface WorkoutState {
     wasSkipped?: boolean,
     wasAlternative?: boolean,
     alternativeId?: string | null,
-    isPR?: boolean
+    isPR?: boolean,
+    rpe?: number | null,
+    isWarmup?: boolean
   ) => void;
   deleteSet: (queueItemId: string, setId: string) => void;
   replaceExercise: (queueItemId: string, newExercise: Exercise, isPermanent: boolean) => Promise<void>;
@@ -25,6 +27,7 @@ interface WorkoutState {
   updateExerciseNotes: (queueItemId: string, notes: string) => void;
   updateSessionNotes: (notes: string) => void;
   setRestTimer: (isActive: boolean, startedAt: number | null) => void;
+  setSessionDeload: (isDeload: boolean) => void;
   clearSession: () => void;
   completeSession: () => Promise<any>;
   resumeSession: (sessionData: ActiveSession) => void;
@@ -69,6 +72,7 @@ export const useWorkoutStore = create<WorkoutState>((set, get) => ({
       restStartedAt: null,
       notes: "",
       hasStarted: false,
+      isDeload: false,
     };
 
     set({ activeSession: session });
@@ -105,7 +109,7 @@ export const useWorkoutStore = create<WorkoutState>((set, get) => ({
     });
   },
 
-  logSet: (queueItemId, weightKg, reps, durationSeconds = null, wasSkipped = false, wasAlternative = false, alternativeId = null, isPR = false) => {
+  logSet: (queueItemId, weightKg, reps, durationSeconds = null, wasSkipped = false, wasAlternative = false, alternativeId = null, isPR = false, rpe = null, isWarmup = false) => {
     set((state) => {
       if (!state.activeSession) return {};
       
@@ -122,7 +126,8 @@ export const useWorkoutStore = create<WorkoutState>((set, get) => ({
             wasSkipped,
             wasAlternative,
             alternativeExerciseId: alternativeId,
-            rpe: isPR ? 1 : null, // we can use rpe or map it to notes or add it to types, wait: we can just add isPR field or use rpe as a indicator, let's keep isPR: isPR as we modified SetLog to allow extra fields!
+            rpe,
+            isWarmup,
             notes: isPR ? "PR" : null,
             completedAt: new Date().toISOString(),
           };
@@ -325,6 +330,15 @@ export const useWorkoutStore = create<WorkoutState>((set, get) => ({
     });
   },
 
+  setSessionDeload: (isDeload) => {
+    set((state) => {
+      if (!state.activeSession) return {};
+      const activeSession = { ...state.activeSession, isDeload };
+      mmkv.set("active_session", JSON.stringify(activeSession));
+      return { activeSession };
+    });
+  },
+
   clearSession: () => {
     set({ activeSession: null });
     mmkv.delete("active_session");
@@ -404,6 +418,8 @@ export const useWorkoutStore = create<WorkoutState>((set, get) => ({
           weightKg: set.weightKg ?? 0,
           reps: set.durationSeconds !== null && set.durationSeconds !== undefined ? set.durationSeconds : (set.reps ?? 0),
           notes: set.notes || null,
+          rpe: set.rpe,
+          isWarmup: Boolean(set.isWarmup),
           completedAt: set.completedAt || new Date().toISOString(),
         })),
     }));
@@ -413,6 +429,7 @@ export const useWorkoutStore = create<WorkoutState>((set, get) => ({
       date: new Date(activeSession.startedAt).toISOString(),
       durationMinutes,
       notes: activeSession.notes || null,
+      isDeload: Boolean(activeSession.isDeload),
       exercises: exercisesPayload,
     };
 

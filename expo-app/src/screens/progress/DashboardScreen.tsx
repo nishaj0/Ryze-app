@@ -363,6 +363,21 @@ export default function DashboardScreen({ navigation }: Props) {
           </View>
         )}
 
+        <View style={{ paddingHorizontal: space.lg, marginTop: space.lg }}>
+          <TouchableOpacity onPress={() => navigation.navigate("CheckInHistory")} activeOpacity={0.8}>
+            <Card shadow="sm" style={{ padding: space.md, flexDirection: "row", alignItems: "center", gap: space.md }}>
+              <View style={{ width: 40, height: 40, borderRadius: radius.md, backgroundColor: theme.primaryLight, alignItems: "center", justifyContent: "center" }}>
+                <Icon name="MessageSquare" size={20} color={theme.primary} />
+              </View>
+              <View style={{ flex: 1 }}>
+                <Typography variant="body" color={theme.textPrimary} weight="700">Training Feel</Typography>
+                <Typography variant="caption" color={theme.textMuted}>Review your check-in trend and reported issues</Typography>
+              </View>
+              <Icon name="ChevronRight" size={18} color={theme.textMuted} />
+            </Card>
+          </TouchableOpacity>
+        </View>
+
         {/* Empty state */}
         {(!overview || overview.totalWorkouts === 0) && (
           <View style={{ paddingHorizontal: space.lg, marginTop: space.lg }}>

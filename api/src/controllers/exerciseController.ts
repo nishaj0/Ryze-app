@@ -93,7 +93,7 @@ export const getExerciseHistory = async (req: AuthRequest, res: Response) => {
     include: {
       setLogs: { orderBy: { setNumber: "asc" } },
       session: {
-        select: { date: true, id: true },
+        select: { date: true, id: true, isDeload: true },
       },
     },
     orderBy: { session: { date: "desc" } },

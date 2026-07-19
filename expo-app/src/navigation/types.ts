@@ -37,6 +37,7 @@ export type ProgressStackParamList = {
   Dashboard: undefined;
   ExerciseProgress: { exerciseId: string; exerciseName: string };
   Records: undefined;
+  CheckInHistory: undefined;
 };
 
 export type PhotosStackParamList = {

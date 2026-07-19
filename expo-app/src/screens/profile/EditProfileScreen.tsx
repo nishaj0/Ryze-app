@@ -44,6 +44,7 @@ export default function EditProfileScreen({ navigation }: Props) {
   const [weight, setWeight] = useState(String(user?.currentWeight || ""));
   const [height, setHeight] = useState(String(user?.height || ""));
   const [sleep, setSleep] = useState(String(user?.sleepHours || ""));
+  const [limitationsText, setLimitationsText] = useState((user?.trainingLimitations || []).join("\n"));
   const [gender, setGender] = useState(user?.gender || "OTHER");
   const [experienceLevel, setExperienceLevel] = useState(user?.experienceLevel || "BEGINNER");
   const [daysAvailable, setDaysAvailable] = useState(user?.daysAvailable || 3);
@@ -60,6 +61,7 @@ export default function EditProfileScreen({ navigation }: Props) {
         experienceLevel,
         daysAvailable,
         equipmentAccess,
+        trainingLimitations: limitationsText.split(/\n|,/).map((item) => item.trim()).filter(Boolean),
       };
       if (weight) updates.currentWeight = parseFloat(weight);
       if (height) updates.height = parseFloat(height);
@@ -182,6 +184,19 @@ export default function EditProfileScreen({ navigation }: Props) {
             keyboardType="decimal-pad"
             icon={<Icon name="Moon" size={20} color={theme.textMuted} />}
           />
+
+          <Input
+            label="Training limitations (optional)"
+            value={limitationsText}
+            onChangeText={setLimitationsText}
+            placeholder="e.g. avoid overhead pressing\nleft knee sensitivity"
+            multiline
+            numberOfLines={3}
+            containerStyle={{ marginBottom: 0 }}
+          />
+          <Typography variant="caption" color={theme.textMuted} style={{ marginTop: -space.sm }}>
+            One per line. Ryze treats these as hard constraints in AI guidance.
+          </Typography>
 
           <View>
             <Typography variant="label" color={theme.textSecondary} style={{ marginBottom: space.sm }}>

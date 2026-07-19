@@ -56,7 +56,7 @@ export default function ProgressiveOverloadCard() {
   const chartData = useMemo(() => history.map((point) => ({
     label: dateLabel(point.date),
     value: metric === "weight" ? point.topSet?.weightKg ?? 0 : metric === "volume" ? point.totalVolume : point.estimated1rm,
-    annotation: metric === "weight" && point.topSet ? `×${point.topSet.reps}` : undefined,
+    annotation: point.isDeload ? "Deload" : metric === "weight" && point.topSet ? `×${point.topSet.reps}` : undefined,
     highlighted: metric === "weight" && point.isPR,
   })), [history, metric]);
 

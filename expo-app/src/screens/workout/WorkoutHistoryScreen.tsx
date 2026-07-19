@@ -373,7 +373,7 @@ export default function WorkoutHistoryScreen() {
                                   }}
                                 >
                                   <Typography variant="caption" color={theme.textSecondary}>
-                                    S{set.setNumber}: {set.reps} × {set.weightKg} kg
+                                    {set.isWarmup ? "Warm-up · " : ""}S{set.setNumber}: {set.reps} × {set.weightKg} kg
                                   </Typography>
                                 </View>
                               ))}

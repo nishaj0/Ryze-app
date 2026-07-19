@@ -81,6 +81,7 @@ export const me = async (req: AuthRequest, res: Response) => {
       onboardingDone: true,
       reminderTime: true,
       weeklyCheckin: true,
+      trainingLimitations: true,
       createdAt: true,
     },
   });
@@ -93,8 +94,12 @@ export const me = async (req: AuthRequest, res: Response) => {
 };
 
 export const updateProfile = async (req: AuthRequest, res: Response) => {
-  const { name, goal, currentWeight, height, sleepHours, units, reminderTime, weeklyCheckin } =
+  const { name, goal, currentWeight, height, sleepHours, units, reminderTime, weeklyCheckin, trainingLimitations } =
     req.body;
+
+  if (trainingLimitations !== undefined && (!Array.isArray(trainingLimitations) || trainingLimitations.some((item) => typeof item !== "string" || item.trim().length > 160))) {
+    throw new AppError("Training limitations must be short text entries", 400);
+  }
 
   const user = await prisma.user.update({
     where: { id: req.userId },
@@ -107,6 +112,7 @@ export const updateProfile = async (req: AuthRequest, res: Response) => {
       ...(units !== undefined && { units }),
       ...(reminderTime !== undefined && { reminderTime }),
       ...(weeklyCheckin !== undefined && { weeklyCheckin }),
+      ...(trainingLimitations !== undefined && { trainingLimitations: trainingLimitations.map((item: string) => item.trim()).filter(Boolean).slice(0, 12) }),
     },
   });
 

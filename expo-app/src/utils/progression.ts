@@ -40,6 +40,7 @@ export function getSetRecommendation(
             flatSets.push({
               ...set,
               exerciseLogId: log.id,
+              isDeload: Boolean(log.session?.isDeload),
               completedAt: set.completedAt || log.session?.date || new Date().toISOString(),
             });
           });
@@ -56,7 +57,7 @@ export function getSetRecommendation(
 
   // Filter out skipped/invalid sets
   const validHistory = flatSets.filter(
-    (h) => !h.was_skipped && !h.wasSkipped && h.weightKg !== null && h.reps !== null
+    (h) => !h.was_skipped && !h.wasSkipped && !h.isWarmup && !h.isDeload && h.weightKg !== null && h.reps !== null
   );
 
   if (validHistory.length === 0) {

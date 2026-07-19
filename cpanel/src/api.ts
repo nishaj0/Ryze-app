@@ -20,6 +20,7 @@ export function getAdminKey() {
 
 // Dashboard
 export const getDashboard = () => api.get('/dashboard').then(r => r.data)
+export const getSuggestionAcceptanceAnalytics = () => api.get('/suggestions/analytics').then(r => r.data)
 
 // Users
 export const getUsers = (params: Record<string, any>) => api.get('/users', { params }).then(r => r.data)

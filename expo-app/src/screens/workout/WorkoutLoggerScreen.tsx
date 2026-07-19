@@ -150,6 +150,7 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
     updateExerciseNotes,
     updateSessionNotes,
     setRestTimer,
+    setSessionDeload,
     clearSession,
     setCurrentExerciseIndex,
     addExtraSet,
@@ -162,6 +163,8 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
   const [weightStr, setWeightStr] = useState("");
   const [repsStr, setRepsStr] = useState("");
   const [durationStr, setDurationStr] = useState("");
+  const [rpeStr, setRpeStr] = useState("");
+  const [isWarmup, setIsWarmup] = useState(false);
 
   // Modals & Sheets
   const [showQueueModal, setShowQueueModal] = useState(false);
@@ -229,7 +232,7 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
     historyLogs.forEach((log) => {
       if (log.setLogs) {
         log.setLogs.forEach((set: any) => {
-          if (!set.wasSkipped && set.weightKg && set.reps) {
+          if (!set.wasSkipped && !set.isWarmup && !log.session?.isDeload && set.weightKg && set.reps) {
             const oneRM = calc1RM(set.weightKg, set.reps);
             if (oneRM > max) max = oneRM;
           }
@@ -298,6 +301,8 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
       }
     }
     setDurationStr("");
+    setRpeStr("");
+    setIsWarmup(false);
   }, [activeSession?.currentExerciseIndex, activeSession?.currentSetNumber, recommendation.recommendedWeight, recommendation.recommendedReps]);
 
   // Timers
@@ -352,6 +357,7 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
     let weight: number | null = null;
     let reps: number | null = null;
     let duration: number | null = null;
+    let rpe: number | null = null;
 
     if (!wasSkipped) {
       if (!isBodyweight(currentItem.exercise)) {
@@ -378,9 +384,17 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
       }
     }
 
+    if (rpeStr.trim()) {
+      rpe = parseInt(rpeStr, 10);
+      if (!Number.isInteger(rpe) || rpe < 1 || rpe > 10) {
+        Alert.alert("Error", "RPE must be a whole number from 1 to 10.");
+        return;
+      }
+    }
+
     // PR Check
     let isPR = false;
-    if (!wasSkipped && weight !== null && reps !== null && !isBodyweight(currentItem.exercise) && !isTimed(currentItem.exercise)) {
+    if (!wasSkipped && !isWarmup && weight !== null && reps !== null && !isBodyweight(currentItem.exercise) && !isTimed(currentItem.exercise)) {
       const current1RM = calc1RM(weight, reps);
       const prevMax = getMaxPrevious1RM(history);
       if (prevMax > 0 && current1RM > prevMax) {
@@ -397,7 +411,9 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
       wasSkipped,
       false,
       null,
-      isPR
+      isPR,
+      rpe,
+      isWarmup
     );
 
     // currentItem.loggedSets.length is the count BEFORE this set was added.
@@ -614,6 +630,16 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
         </ScrollView>
 
         <View style={{ padding: space.lg, borderTopWidth: 1, borderTopColor: theme.border }}>
+          <TouchableOpacity
+            onPress={() => setSessionDeload(!activeSession.isDeload)}
+            style={{ minHeight: 44, marginBottom: space.sm, borderRadius: radius.md, borderWidth: 1, borderColor: activeSession.isDeload ? theme.warning : theme.border, backgroundColor: activeSession.isDeload ? theme.warningBg : theme.surfaceSecondary, alignItems: "center", justifyContent: "center", flexDirection: "row", gap: space.xs }}
+            accessibilityRole="switch"
+            accessibilityState={{ checked: Boolean(activeSession.isDeload) }}
+            accessibilityLabel="Mark this workout as a deload"
+          >
+            <Icon name="Target" size={16} color={activeSession.isDeload ? theme.warning : theme.textSecondary} />
+            <Typography variant="bodySmall" color={activeSession.isDeload ? theme.warningText : theme.textSecondary} weight="700">{activeSession.isDeload ? "DELOAD WORKOUT" : "Mark as deload"}</Typography>
+          </TouchableOpacity>
           <Button title="Begin Session" onPress={beginSession} variant="primary" size="lg" icon={<Icon name="Play" color={theme.primaryText} size={20} />} />
         </View>
         <ExerciseDetailSheet exercise={selectedExerciseDetail} visible={exerciseDetailVisible} onClose={() => setExerciseDetailVisible(false)} />
@@ -930,6 +956,30 @@ export default function WorkoutLoggerScreen({ navigation }: Props) {
                     )}
                   </View>
                 )}
+
+                <View style={{ flexDirection: "row", gap: space.sm, marginBottom: space.md, alignItems: "flex-end" }}>
+                  <View style={{ width: 100 }}>
+                    <Input
+                      label="RPE (optional)"
+                      value={rpeStr}
+                      onChangeText={setRpeStr}
+                      placeholder="1–10"
+                      keyboardType="number-pad"
+                      containerStyle={{ marginBottom: 0 }}
+                    />
+                  </View>
+                  <TouchableOpacity
+                    onPress={() => setIsWarmup((value) => !value)}
+                    style={{ flex: 1, minHeight: 44, borderRadius: radius.md, borderWidth: 1, borderColor: isWarmup ? theme.warning : theme.border, backgroundColor: isWarmup ? theme.warningBg : theme.surfaceSecondary, alignItems: "center", justifyContent: "center", flexDirection: "row", gap: space.xs }}
+                    accessibilityRole="switch"
+                    accessibilityState={{ checked: isWarmup }}
+                    accessibilityLabel="Mark this set as a warm-up"
+                  >
+                    <Icon name="Flame" size={16} color={isWarmup ? theme.warning : theme.textSecondary} />
+                    <Typography variant="bodySmall" color={isWarmup ? theme.warningText : theme.textSecondary} weight="700">{isWarmup ? "WARM-UP" : "Mark warm-up"}</Typography>
+                  </TouchableOpacity>
+                </View>
+                {isWarmup && <Typography variant="caption" color={theme.warningText} style={{ marginTop: -space.sm, marginBottom: space.md }}>Warm-up sets stay in history but are excluded from volume, PRs, and progression.</Typography>}
 
                 {/* Progressive recommendation */}
                 {(!isCardBodyweight || recommendation.lastReps !== null) && (

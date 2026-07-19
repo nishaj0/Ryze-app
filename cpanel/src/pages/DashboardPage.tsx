@@ -4,7 +4,7 @@ import {
   Users, Layers, Dumbbell, Activity, TrendingUp,
   UserCheck, ChevronRight, Calendar
 } from 'lucide-react'
-import { getDashboard } from '../api'
+import { getDashboard, getSuggestionAcceptanceAnalytics } from '../api'
 import { PageLoader, Avatar } from '../components/UI'
 import {
   AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid
@@ -24,6 +24,14 @@ interface DashData {
   dailySessions: { date: string; count: number }[]
 }
 
+interface SuggestionAnalytics {
+  acceptedCount: number
+  dismissedCount: number
+  resolvedCount: number
+  acceptanceRate: number | null
+  breakdown: { suggestionType: string; acceptedCount: number; dismissedCount: number; resolvedCount: number; acceptanceRate: number | null }[]
+}
+
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     return (
@@ -38,10 +46,12 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 
 export default function DashboardPage() {
   const [data, setData] = useState<DashData | null>(null)
+  const [suggestionAnalytics, setSuggestionAnalytics] = useState<SuggestionAnalytics | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     getDashboard().then(setData).catch(console.error).finally(() => setLoading(false))
+    getSuggestionAcceptanceAnalytics().then(setSuggestionAnalytics).catch(console.error)
   }, [])
 
   if (loading) return <PageLoader />
@@ -80,6 +90,21 @@ export default function DashboardPage() {
             <div className="stat-label">{s.label}</div>
           </div>
         ))}
+      </div>
+
+      <div className="card" style={{ marginBottom: 24 }}>
+        <div className="row-between" style={{ marginBottom: 16 }}>
+          <div>
+            <div style={{ fontSize: 15, fontWeight: 700 }}>AI Suggestion Acceptance</div>
+            <div style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 2 }}>Resolved suggestions only; read-only product signal</div>
+          </div>
+          <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--primary)' }}>{suggestionAnalytics?.acceptanceRate == null ? '—' : `${Math.round(suggestionAnalytics.acceptanceRate * 100)}%`}</div>
+        </div>
+        <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', fontSize: 13 }}>
+          <span><strong>{suggestionAnalytics?.acceptedCount ?? 0}</strong> accepted</span>
+          <span><strong>{suggestionAnalytics?.dismissedCount ?? 0}</strong> dismissed</span>
+          {suggestionAnalytics?.breakdown.map((item) => <span key={item.suggestionType}><strong>{item.suggestionType.replace('_', ' ')}</strong>: {item.acceptanceRate == null ? '—' : `${Math.round(item.acceptanceRate * 100)}%`}</span>)}
+        </div>
       </div>
 
       {/* Chart + Recent Users */}
