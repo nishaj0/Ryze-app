@@ -3,7 +3,7 @@ import { View, ScrollView, TouchableOpacity, Switch, Modal, Alert, ActivityIndic
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ProfileStackParamList } from "../../navigation/types";
-import { createSplit, setActiveSplit, getSplit, updateSplit } from "../../api/splits";
+import { createSplit, getSplit, updateSplit } from "../../api/splits";
 import { listExercises, getDistinctMuscles, getExercise } from "../../api/exercises";
 import { Exercise } from "../../types";
 import { Typography, Card, Icon, Button, Input, InlineListSkeleton, ExerciseDetailSheet } from "../../components";
@@ -379,9 +379,8 @@ export default function CustomSplitScreen({ route, navigation }: Props) {
           name: name.endsWith(" (Edited)") ? name : `${name} (Edited)`,
           type: "CUSTOM",
         });
-        await setActiveSplit(res.split.id);
-        Alert.alert("Success", "Your edited split has been created and activated!", [
-          { text: "OK", onPress: () => navigation.getParent()?.getParent()?.navigate("Home", { screen: "HomeMain" }) },
+        Alert.alert("Success", "Your edited split was added to your library.", [
+          { text: "OK", onPress: () => navigation.navigate("SplitSwitcher") },
         ]);
       } else if (isEditMode) {
         await updateSplit(splitId!, {
@@ -402,9 +401,8 @@ export default function CustomSplitScreen({ route, navigation }: Props) {
         ]);
       } else {
         const res = await createSplit({ ...payload, type: "CUSTOM" });
-        await setActiveSplit(res.split.id);
-        Alert.alert("Success", "Custom split created and activated!", [
-          { text: "OK", onPress: () => navigation.getParent()?.getParent()?.navigate("Home", { screen: "HomeMain" }) },
+        Alert.alert("Success", "Custom split was added to your library.", [
+          { text: "OK", onPress: () => navigation.navigate("SplitSwitcher") },
         ]);
       }
     } catch (err) {

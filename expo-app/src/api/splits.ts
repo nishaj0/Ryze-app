@@ -3,7 +3,7 @@ import { Split, UserSplit } from "../types";
 
 export const listSplits = async () => {
   const { data } = await client.get("/splits");
-  return data as { splits: Split[] };
+  return data as { userSplits: UserSplit[] };
 };
 
 export const getSplit = async (id: string) => {
@@ -34,6 +34,47 @@ export const updateSplit = async (id: string, splitData: any) => {
 export const updateSplitExercise = async (id: string, exerciseId: string) => {
   const { data } = await client.patch(`/splits/exercises/${id}`, { exerciseId });
   return data;
+};
+
+export const removeFromLibrary = async (splitId: string) => {
+  await client.delete(`/splits/${splitId}/library`);
+};
+
+export const publishSplit = async (splitId: string) => {
+  const { data } = await client.post(`/splits/${splitId}/publish`);
+  return data as { split: Split };
+};
+
+export const unpublishSplit = async (splitId: string) => {
+  await client.post(`/splits/${splitId}/unpublish`);
+};
+
+export type CommunitySplitSort = "recent" | "liked" | "saved";
+
+export const listCommunitySplits = async (params: {
+  page?: number;
+  limit?: number;
+  daysPerWeek?: number;
+  splitTypeTag?: string;
+  sort?: CommunitySplitSort;
+} = {}) => {
+  const { data } = await client.get("/splits/community", { params });
+  return data as { splits: Split[]; page: number; limit: number; total: number; hasMore: boolean };
+};
+
+export const getCommunitySplit = async (splitId: string) => {
+  const { data } = await client.get(`/splits/community/${splitId}`);
+  return data as { split: Split };
+};
+
+export const toggleSplitLike = async (splitId: string) => {
+  const { data } = await client.post(`/splits/community/${splitId}/like`);
+  return data as { liked: boolean; likeCount: number };
+};
+
+export const forkCommunitySplit = async (splitId: string, activateForOnboarding = false) => {
+  const { data } = await client.post(`/splits/community/${splitId}/fork`, { activateForOnboarding });
+  return data as { split: Split };
 };
 
 export const generateAISplit = async (

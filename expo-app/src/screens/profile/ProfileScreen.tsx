@@ -87,6 +87,7 @@ export default function ProfileScreen({ navigation }: Props) {
     { label: "Browse Exercises", icon: "Dumbbell", onPress: () => navigation.navigate("AllExercises") },
     { label: "Workout History", icon: "Calendar", onPress: () => (navigation as any).navigate("Home", { screen: "WorkoutHistory" }) },
     { label: "Switch Split", icon: "Repeat", onPress: () => navigation.navigate("SplitSwitcher") },
+    { label: "Community Splits", icon: "Users", onPress: () => navigation.navigate("CommunitySplits") },
     { label: "Body Metrics", icon: "Ruler", onPress: () => navigation.navigate("Metrics") },
   ];
 

@@ -37,18 +37,17 @@ export const completeOnboarding = async (req: AuthRequest, res: Response) => {
   });
 
   if (splitId) {
-    await prisma.userSplit.updateMany({
-      where: { userId },
-      data: { isActive: false },
-    });
+    await prisma.$transaction(async (tx) => {
+      await tx.userSplit.updateMany({
+        where: { userId },
+        data: { isActive: false },
+      });
 
-    await prisma.userSplit.create({
-      data: {
-        userId,
-        splitId,
-        isActive: true,
-        startDate: new Date(),
-      },
+      await tx.userSplit.upsert({
+        where: { userId_splitId: { userId, splitId } },
+        create: { userId, splitId, isActive: true, startDate: new Date() },
+        update: { isActive: true, startDate: new Date() },
+      });
     });
   }
 

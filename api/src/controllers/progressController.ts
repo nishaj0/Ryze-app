@@ -331,6 +331,53 @@ export const getMuscleVolume = async (req: AuthRequest, res: Response) => {
   res.json({ muscleVolumes: result });
 };
 
+export const getWeeklyMuscleVolume = async (req: AuthRequest, res: Response) => {
+  const userId = req.userId!;
+  const startDate = new Date();
+  startDate.setHours(0, 0, 0, 0);
+  startDate.setDate(startDate.getDate() - 6);
+
+  const sessions = await prisma.workoutSession.findMany({
+    where: {
+      userId,
+      status: "COMPLETED",
+      date: { gte: startDate },
+    },
+    include: {
+      exerciseLogs: {
+        include: {
+          exercise: { select: { muscles: { include: { muscle: true } } } },
+          setLogs: true,
+        },
+      },
+    },
+  });
+
+  const muscleVolumes: Record<string, number> = {};
+
+  for (const session of sessions) {
+    for (const log of session.exerciseLogs) {
+      const primaryMuscles = log.exercise.muscles.filter((muscle) => muscle.isPrimary);
+      if (primaryMuscles.length === 0) continue;
+
+      const volume = log.setLogs.reduce((sum, set) => sum + (set.isWarmup ? 0 : set.weightKg * set.reps), 0);
+      const volumePerMuscle = volume / primaryMuscles.length;
+
+      for (const primaryMuscle of primaryMuscles) {
+        const muscleName = primaryMuscle.muscle.name;
+        muscleVolumes[muscleName] = (muscleVolumes[muscleName] || 0) + volumePerMuscle;
+      }
+    }
+  }
+
+  res.json({
+    muscleVolumes: Object.entries(muscleVolumes).map(([muscleGroup, volume]) => ({
+      muscleGroup,
+      volume: Math.round(volume),
+    })),
+  });
+};
+
 export const getHeatmap = async (req: AuthRequest, res: Response) => {
   const userId = req.userId!;
 

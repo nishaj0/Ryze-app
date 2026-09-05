@@ -38,6 +38,7 @@ model User {
   personalRecords  PersonalRecord[]
   notifications    Notification[]
   createdSplits    Split[]
+  splitLikes       SplitLike[]
   nutritionLogs    DailyNutrition[]
   exerciseRequests ExerciseRequest[]
   supportTickets   SupportTicket[]
@@ -48,18 +49,32 @@ model User {
 }
 
 model Split {
-  id           String   @id @default(cuid())
-  name         String
-  description  String?
-  type         String
-  daysPerWeek  Int
-  isPrebuilt   Boolean  @default(false)
-  createdById  String?
-  createdAt    DateTime @default(now())
+  id                String   @id @default(cuid())
+  name              String
+  description       String?
+  type              String
+  daysPerWeek       Int
+  isPrebuilt        Boolean  @default(false)
+  createdById       String?
+  visibility        String   @default("PRIVATE")
+  publishedAt       DateTime?
+  forkedFromSplitId String?
+  creatorDisplayName String?
+  splitTypeTag      String   @default("CUSTOM")
+  likeCount         Int      @default(0)
+  saveCount         Int      @default(0)
+  createdAt         DateTime @default(now())
 
-  createdBy    User?          @relation(fields: [createdById], references: [id])
+  createdBy    User?          @relation(fields: [createdById], references: [id], onDelete: SetNull)
+  forkedFrom   Split?         @relation("SplitForkSource", fields: [forkedFromSplitId], references: [id], onDelete: SetNull)
+  forks        Split[]        @relation("SplitForkSource")
   days         SplitDay[]
   userSplits   UserSplit[]
+  likes        SplitLike[]
+
+  @@index([visibility, publishedAt])
+  @@index([visibility, likeCount])
+  @@index([visibility, saveCount])
 }
 
 model SplitDay {
@@ -155,12 +170,29 @@ model UserSplit {
   id        String   @id @default(cuid())
   userId    String
   splitId   String
+  savedAt   DateTime @default(now())
   startDate DateTime @default(now())
-  isActive  Boolean  @default(true)
+  isActive  Boolean  @default(false)
   phase     String?
 
   user      User  @relation(fields: [userId], references: [id], onDelete: Cascade)
   split     Split @relation(fields: [splitId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, splitId])
+  @@index([userId, isActive])
+}
+
+model SplitLike {
+  id        String   @id @default(cuid())
+  userId    String
+  splitId   String
+  createdAt DateTime @default(now())
+
+  user      User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  split     Split @relation(fields: [splitId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, splitId])
+  @@index([splitId])
 }
 
 model WorkoutSession {

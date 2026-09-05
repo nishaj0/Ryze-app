@@ -30,26 +30,21 @@ describe("splitController", () => {
   });
 
   describe("listSplits", () => {
-    it("should return all prebuilt and user-created splits", async () => {
-      const splits = [
-        { id: "split-1", name: "PPL", isPrebuilt: true, days: [] },
-        { id: "split-2", name: "My Split", isPrebuilt: false, createdById: TEST_USER.id, days: [] },
+    it("should return the user's saved split library", async () => {
+      const userSplits = [
+        { id: "saved-1", userId: TEST_USER.id, isActive: true, split: { id: "split-1", name: "PPL", days: [] } },
+        { id: "saved-2", userId: TEST_USER.id, isActive: false, split: { id: "split-2", name: "My Split", days: [] } },
       ];
-      mockPrismaClient.split.findMany.mockResolvedValue(splits);
+      mockPrismaClient.userSplit.findMany.mockResolvedValue(userSplits);
 
       await splitController.listSplits(req as AuthRequest, res as Response);
 
-      expect(mockPrismaClient.split.findMany).toHaveBeenCalledWith({
-        where: {
-          OR: [
-            { isPrebuilt: true },
-            { createdById: TEST_USER.id },
-          ],
-        },
-        include: { days: { orderBy: { dayNumber: "asc" } } },
-        orderBy: { name: "asc" },
+      expect(mockPrismaClient.userSplit.findMany).toHaveBeenCalledWith({
+        where: { userId: TEST_USER.id },
+        include: { split: { include: { days: { orderBy: { dayNumber: "asc" } } } } },
+        orderBy: [{ isActive: "desc" }, { savedAt: "desc" }],
       });
-      expect(res.json).toHaveBeenCalledWith({ splits });
+      expect(res.json).toHaveBeenCalledWith({ userSplits });
     });
   });
 
@@ -67,6 +62,7 @@ describe("splitController", () => {
       const split = {
         id: "split-1",
         name: "PPL",
+        isPrebuilt: true,
         days: [{ id: "day-1", dayNumber: 1, exercises: [] }],
       };
       mockPrismaClient.split.findUnique.mockResolvedValue(split);
@@ -124,20 +120,20 @@ describe("splitController", () => {
   describe("setActiveSplit", () => {
     it("should return 404 if split not found", async () => {
       req.body = { splitId: "nonexistent" };
-      mockPrismaClient.split.findUnique.mockResolvedValue(null);
+      mockPrismaClient.userSplit.findUnique.mockResolvedValue(null);
 
       await expect(splitController.setActiveSplit(req as AuthRequest, res as Response))
-        .rejects.toThrow("Split not found");
+        .rejects.toThrow("Save this split to your library before activating it");
     });
 
     it("should deactivate other splits and set new active split", async () => {
       req.body = { splitId: "split-1", phase: "hypertrophy" };
       const split = { id: "split-1", name: "PPL" };
-      mockPrismaClient.split.findUnique.mockResolvedValue(split);
+      mockPrismaClient.userSplit.findUnique.mockResolvedValue({ id: "saved-1", userId: TEST_USER.id, splitId: split.id });
       mockPrismaClient.userSplit.updateMany.mockResolvedValue({ count: 1 });
       
       const userSplit = { id: "us-1", userId: TEST_USER.id, splitId: "split-1", isActive: true };
-      mockPrismaClient.userSplit.create.mockResolvedValue({
+      mockPrismaClient.userSplit.update.mockResolvedValue({
         ...userSplit,
         split: { ...split, days: [] },
       });
@@ -148,17 +144,53 @@ describe("splitController", () => {
         where: { userId: TEST_USER.id },
         data: { isActive: false },
       });
-      expect(mockPrismaClient.userSplit.create).toHaveBeenCalledWith(
+      expect(mockPrismaClient.userSplit.update).toHaveBeenCalledWith(
         expect.objectContaining({
+          where: { userId_splitId: { userId: TEST_USER.id, splitId: "split-1" } },
           data: expect.objectContaining({
-            userId: TEST_USER.id,
-            splitId: "split-1",
             isActive: true,
             phase: "hypertrophy",
           }),
         })
       );
       expect(res.json).toHaveBeenCalled();
+    });
+  });
+
+  describe("publishSplit", () => {
+    it("rejects publishing a training day with no exercises", async () => {
+      req.params = { id: "split-1" };
+      mockPrismaClient.split.findFirst.mockResolvedValue({
+        id: "split-1",
+        type: "PPL",
+        creatorDisplayName: null,
+        createdBy: { name: "Test User" },
+        days: [{ isRest: false, exercises: [] }],
+      });
+
+      await expect(splitController.publishSplit(req as AuthRequest, res as Response))
+        .rejects.toThrow("Add an exercise to every training day before publishing");
+    });
+
+    it("publishes an original split with community metadata", async () => {
+      req.params = { id: "split-1" };
+      const split = {
+        id: "split-1",
+        type: "PPL",
+        creatorDisplayName: null,
+        createdBy: { name: "Test User" },
+        days: [{ isRest: false, exercises: [{ id: "exercise-1" }] }],
+      };
+      mockPrismaClient.split.findFirst.mockResolvedValue(split);
+      mockPrismaClient.split.update.mockResolvedValue({ ...split, visibility: "COMMUNITY" });
+
+      await splitController.publishSplit(req as AuthRequest, res as Response);
+
+      expect(mockPrismaClient.split.update).toHaveBeenCalledWith(expect.objectContaining({
+        where: { id: "split-1" },
+        data: expect.objectContaining({ visibility: "COMMUNITY", splitTypeTag: "PPL" }),
+      }));
+      expect(res.json).toHaveBeenCalledWith(expect.objectContaining({ split: expect.anything() }));
     });
   });
 
@@ -732,4 +764,3 @@ describe("splitController", () => {
     });
   });
 });
-

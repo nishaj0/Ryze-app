@@ -1,9 +1,11 @@
 import React from "react";
 import { View, Modal, TouchableOpacity, ScrollView } from "react-native";
+import Body from "react-native-body-highlighter";
 import { Exercise } from "../types";
 import { Typography, Icon, ExerciseImageCarousel, InstructionStepper, ExerciseMetaBadges } from "./index";
 import { useTheme } from "../theme/themeStore";
 import { space, radius } from "../theme/spacing";
+import { getMuscleHighlightData, isSlugVisibleOnSide } from "../constants/muscleHighlighterMapping";
 
 interface ExerciseDetailSheetProps {
   exercise: Exercise | null;
@@ -18,6 +20,12 @@ export default function ExerciseDetailSheet({ exercise, visible, onClose }: Exer
 
   const primaryMuscles = exercise.muscles?.filter((m) => m.isPrimary).map((m) => m.muscle.name) || [];
   const secondaryMuscles = exercise.muscles?.filter((m) => !m.isPrimary).map((m) => m.muscle.name) || [];
+  const muscleHighlights = [
+    ...getMuscleHighlightData(secondaryMuscles, 1),
+    ...getMuscleHighlightData(primaryMuscles, 2),
+  ];
+  const frontHighlights = muscleHighlights.filter((highlight) => isSlugVisibleOnSide(highlight.slug, "front"));
+  const backHighlights = muscleHighlights.filter((highlight) => isSlugVisibleOnSide(highlight.slug, "back"));
 
   return (
     <Modal visible={visible} transparent animationType="slide" onRequestClose={onClose}>
@@ -72,6 +80,45 @@ export default function ExerciseDetailSheet({ exercise, visible, onClose }: Exer
             {/* Muscles */}
             {(primaryMuscles.length > 0 || secondaryMuscles.length > 0) && (
               <View style={{ marginBottom: space.lg }}>
+                {(frontHighlights.length > 0 || backHighlights.length > 0) && (
+                  <View style={{ marginBottom: space.md }}>
+                    <Typography variant="label" color={theme.textSecondary} style={{ marginBottom: space.sm }}>
+                      MUSCLE MAP
+                    </Typography>
+                    <View style={{ flexDirection: "row", justifyContent: "space-around", gap: space.md }}>
+                      {frontHighlights.length > 0 && (
+                        <View style={{ flex: 1, alignItems: "center" }}>
+                          <Body
+                            data={frontHighlights}
+                            side="front"
+                            scale={0.58}
+                            colors={[theme.primaryLight, theme.primary]}
+                            border={theme.border}
+                            defaultFill={theme.surfaceTertiary}
+                          />
+                          <Typography variant="caption" color={theme.textMuted} weight="600" style={{ marginTop: space.xs }}>
+                            FRONT
+                          </Typography>
+                        </View>
+                      )}
+                      {backHighlights.length > 0 && (
+                        <View style={{ flex: 1, alignItems: "center" }}>
+                          <Body
+                            data={backHighlights}
+                            side="back"
+                            scale={0.58}
+                            colors={[theme.primaryLight, theme.primary]}
+                            border={theme.border}
+                            defaultFill={theme.surfaceTertiary}
+                          />
+                          <Typography variant="caption" color={theme.textMuted} weight="600" style={{ marginTop: space.xs }}>
+                            BACK
+                          </Typography>
+                        </View>
+                      )}
+                    </View>
+                  </View>
+                )}
                 <Typography variant="label" color={theme.textSecondary} style={{ marginBottom: space.sm }}>
                   MUSCLES WORKED
                 </Typography>

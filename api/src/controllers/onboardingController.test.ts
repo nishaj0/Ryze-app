@@ -36,7 +36,7 @@ describe("onboardingController", () => {
       const updatedUser = { ...TEST_USER, onboardingDone: true };
       mockPrismaClient.user.update.mockResolvedValue(updatedUser);
       mockPrismaClient.userSplit.updateMany.mockResolvedValue({ count: 0 });
-      mockPrismaClient.userSplit.create.mockResolvedValue({});
+      mockPrismaClient.userSplit.upsert.mockResolvedValue({});
 
       await onboardingController.completeOnboarding(req as AuthRequest, res as Response);
 
@@ -68,7 +68,7 @@ describe("onboardingController", () => {
 
       mockPrismaClient.user.update.mockResolvedValue(TEST_USER);
       mockPrismaClient.userSplit.updateMany.mockResolvedValue({ count: 1 });
-      mockPrismaClient.userSplit.create.mockResolvedValue({});
+      mockPrismaClient.userSplit.upsert.mockResolvedValue({});
 
       await onboardingController.completeOnboarding(req as AuthRequest, res as Response);
 
@@ -76,9 +76,9 @@ describe("onboardingController", () => {
         where: { userId: TEST_USER.id },
         data: { isActive: false },
       });
-      expect(mockPrismaClient.userSplit.create).toHaveBeenCalledWith(
+      expect(mockPrismaClient.userSplit.upsert).toHaveBeenCalledWith(
         expect.objectContaining({
-          data: expect.objectContaining({
+          create: expect.objectContaining({
             userId: TEST_USER.id,
             splitId: "split-1",
             isActive: true,
@@ -104,7 +104,7 @@ describe("onboardingController", () => {
       await onboardingController.completeOnboarding(req as AuthRequest, res as Response);
 
       expect(mockPrismaClient.userSplit.updateMany).not.toHaveBeenCalled();
-      expect(mockPrismaClient.userSplit.create).not.toHaveBeenCalled();
+      expect(mockPrismaClient.userSplit.upsert).not.toHaveBeenCalled();
     });
   });
 

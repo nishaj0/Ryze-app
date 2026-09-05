@@ -25,6 +25,11 @@ export const getMuscleVolume = async () => {
   return data as { muscleVolumes: MuscleVolume[] };
 };
 
+export const getWeeklyMuscleVolume = async () => {
+  const { data } = await client.get("/progress/weekly-muscle-volume");
+  return data as { muscleVolumes: MuscleVolume[] };
+};
+
 export const getHeatmap = async () => {
   const { data } = await client.get("/progress/heatmap");
   return data as { heatmap: HeatmapEntry[] };

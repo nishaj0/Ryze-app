@@ -161,7 +161,7 @@ describe("authController", () => {
   });
 
   describe("deleteAccount", () => {
-    it("should delete user-created splits then delete the user account", async () => {
+    it("should delete private user-created splits and preserve community originals", async () => {
       req.userId = TEST_USER.id;
       mockPrismaClient.split.deleteMany.mockResolvedValue({ count: 2 });
       mockPrismaClient.user.delete.mockResolvedValue(TEST_USER);
@@ -169,7 +169,7 @@ describe("authController", () => {
       await authController.deleteAccount(req as AuthRequest, res as Response);
 
       expect(mockPrismaClient.split.deleteMany).toHaveBeenCalledWith({
-        where: { createdById: TEST_USER.id },
+        where: { createdById: TEST_USER.id, visibility: "PRIVATE" },
       });
       expect(mockPrismaClient.user.delete).toHaveBeenCalledWith({
         where: { id: TEST_USER.id },

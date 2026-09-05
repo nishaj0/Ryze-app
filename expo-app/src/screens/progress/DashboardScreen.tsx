@@ -1,5 +1,6 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { View, TouchableOpacity, ScrollView, Dimensions } from "react-native";
+import Body from "react-native-body-highlighter";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ProgressStackParamList } from "../../navigation/types";
@@ -8,6 +9,7 @@ import {
   getOverview,
   getHeatmap,
   getMuscleVolume,
+  getWeeklyMuscleVolume,
   getVolumeHistory,
 } from "../../api/progress";
 import { getRecords } from "../../api/records";
@@ -22,6 +24,8 @@ import { LineChart, BarChart, Heatmap, RingChart } from "../../components/charts
 import ProgressiveOverloadCard from "./ProgressiveOverloadCard";
 import { useTheme } from "../../theme/themeStore";
 import { space, radius } from "../../theme/spacing";
+import { useAuthStore } from "../../store/authStore";
+import { getWeeklyVolumeHighlightData, isSlugVisibleOnSide, MuscleHighlightData } from "../../constants/muscleHighlighterMapping";
 
 type Props = NativeStackScreenProps<ProgressStackParamList, "Dashboard">;
 
@@ -32,23 +36,28 @@ export default function DashboardScreen({ navigation }: Props) {
   const [overview, setOverview] = useState<ProgressOverview | null>(null);
   const [heatmap, setHeatmap] = useState<HeatmapEntry[]>([]);
   const [muscleVolumes, setMuscleVolumes] = useState<MuscleVolume[]>([]);
+  const [weeklyMuscleVolumes, setWeeklyMuscleVolumes] = useState<MuscleVolume[]>([]);
   const [records, setRecords] = useState<PersonalRecord[]>([]);
   const [volumeHistory, setVolumeHistory] = useState<{ week: string; volume: number; workouts: number }[]>([]);
   const [dailyActivity, setDailyActivity] = useState<{ day: string; count: number }[]>([]);
   const [loading, setLoading] = useState(true);
+  const [bodySide, setBodySide] = useState<"front" | "back">("front");
+  const { user } = useAuthStore();
 
   const loadData = useCallback(async () => {
     try {
-      const [overRes, heatRes, muscRes, recRes, volRes] = await Promise.all([
+      const [overRes, heatRes, muscRes, weeklyMuscRes, recRes, volRes] = await Promise.all([
         getOverview(),
         getHeatmap(),
         getMuscleVolume(),
+        getWeeklyMuscleVolume(),
         getRecords(),
         getVolumeHistory(8),
       ]);
       setOverview(overRes.overview);
       setHeatmap(heatRes.heatmap);
       setMuscleVolumes(muscRes.muscleVolumes);
+      setWeeklyMuscleVolumes(weeklyMuscRes.muscleVolumes);
       setRecords(recRes.records);
       setVolumeHistory(volRes.weekly);
       setDailyActivity(volRes.daily);
@@ -89,6 +98,9 @@ export default function DashboardScreen({ navigation }: Props) {
 
   // Heatmap data
   const heatmapData = heatmap.map((h) => ({ date: h.date, count: h.count }));
+  const weeklyHighlightData = useMemo(() => getWeeklyVolumeHighlightData(weeklyMuscleVolumes), [weeklyMuscleVolumes]);
+  const visibleWeeklyHighlights = weeklyHighlightData.filter((highlight) => isSlugVisibleOnSide(highlight.slug, bodySide));
+  const bodyGender = user?.gender?.toUpperCase() === "FEMALE" ? "female" : "male";
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: theme.bg }} edges={["top"]}>
@@ -223,6 +235,17 @@ export default function DashboardScreen({ navigation }: Props) {
               />
             )}
           </Card>
+        </View>
+
+        {/* Weekly Muscle Volume */}
+        <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
+          <WeeklyMuscleVolumeCard
+            hasData={weeklyMuscleVolumes.length > 0}
+            side={bodySide}
+            onSideChange={setBodySide}
+            highlights={visibleWeeklyHighlights}
+            gender={bodyGender}
+          />
         </View>
 
         {/* Heatmap */}
@@ -454,6 +477,96 @@ function StatCard({ icon, color, bg, value, label }: StatCardProps) {
       <Typography variant="caption" color={theme.textMuted}>
         {label}
       </Typography>
+    </View>
+  );
+}
+
+function WeeklyMuscleVolumeCard({
+  hasData,
+  side,
+  onSideChange,
+  highlights,
+  gender,
+}: {
+  hasData: boolean;
+  side: "front" | "back";
+  onSideChange: (side: "front" | "back") => void;
+  highlights: MuscleHighlightData[];
+  gender: "male" | "female";
+}) {
+  const theme = useTheme();
+
+  if (!hasData) {
+    return (
+      <Card padding="lg" shadow="sm" style={{ alignItems: "center" }}>
+        <View style={{ width: 64, height: 64, borderRadius: 32, backgroundColor: theme.primaryLight, alignItems: "center", justifyContent: "center", marginBottom: space.md }}>
+          <Icon name="Dumbbell" size={30} color={theme.primary} />
+        </View>
+        <Typography variant="heading3" color={theme.textPrimary} align="center">No data yet</Typography>
+        <Typography variant="bodySmall" color={theme.textSecondary} align="center" style={{ marginTop: space.xs }}>
+          Complete a workout to see your weekly muscle volume.
+        </Typography>
+      </Card>
+    );
+  }
+
+  return (
+    <Card shadow="sm" style={{ padding: space.lg }}>
+      <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.md }}>
+        <Icon name="Dumbbell" size={16} color={theme.textMuted} />
+        <Typography variant="caption" color={theme.textMuted} weight="600">WEEKLY MUSCLE VOLUME</Typography>
+      </View>
+      <BodySideToggle side={side} onChange={onSideChange} />
+      <View style={{ alignItems: "center", marginVertical: space.md }}>
+        <Body
+          data={highlights}
+          side={side}
+          gender={gender}
+          scale={1.05}
+          colors={[theme.primaryLight, theme.primary]}
+          border={theme.border}
+          defaultFill={theme.surfaceTertiary}
+        />
+      </View>
+      <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", gap: space.md }}>
+        <Legend color={theme.primaryLight} label="Less trained" />
+        <Legend color={theme.primary} label="More trained" />
+      </View>
+    </Card>
+  );
+}
+
+function BodySideToggle({ side, onChange }: { side: "front" | "back"; onChange: (side: "front" | "back") => void }) {
+  const theme = useTheme();
+  return (
+    <View style={{ flexDirection: "row", backgroundColor: theme.surfaceTertiary, borderRadius: radius.md, padding: 3 }}>
+      {(["front", "back"] as const).map((option) => {
+        const selected = side === option;
+        return (
+          <TouchableOpacity
+            key={option}
+            accessibilityRole="button"
+            accessibilityLabel={`${option} body view`}
+            accessibilityState={{ selected }}
+            onPress={() => onChange(option)}
+            style={{ flex: 1, minHeight: 44, alignItems: "center", justifyContent: "center", borderRadius: radius.sm, backgroundColor: selected ? theme.surface : "transparent" }}
+          >
+            <Typography variant="bodySmall" color={selected ? theme.textPrimary : theme.textMuted} weight="600">
+              {option === "front" ? "Front" : "Back"}
+            </Typography>
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
+}
+
+function Legend({ color, label }: { color: string; label: string }) {
+  const theme = useTheme();
+  return (
+    <View style={{ flexDirection: "row", alignItems: "center", gap: space.xs }}>
+      <View style={{ width: 10, height: 10, borderRadius: 5, backgroundColor: color }} />
+      <Typography variant="caption" color={theme.textMuted}>{label}</Typography>
     </View>
   );
 }

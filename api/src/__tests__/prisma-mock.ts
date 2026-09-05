@@ -77,6 +77,12 @@ export const mockPrismaClient = {
     updateMany: vi.fn(),
     delete: vi.fn(),
     count: vi.fn(),
+    upsert: vi.fn(),
+  },
+  splitLike: {
+    findUnique: vi.fn(),
+    create: vi.fn(),
+    delete: vi.fn(),
   },
   workoutSession: {
     findUnique: vi.fn(),
@@ -185,7 +191,7 @@ export const mockPrismaClient = {
     update: vi.fn(),
     updateMany: vi.fn(),
   },
-  $transaction: vi.fn((fn: any) => fn(mockPrismaClient)),
+  $transaction: vi.fn((value: any) => Array.isArray(value) ? Promise.all(value) : value(mockPrismaClient)),
   $connect: vi.fn(),
   $disconnect: vi.fn(),
 };

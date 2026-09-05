@@ -10,24 +10,22 @@ const log = createLogger("split");
 
 export const listSplits = async (req: AuthRequest, res: Response) => {
   const userId = req.userId!;
-  const splits = await prisma.split.findMany({
-    where: {
-      OR: [
-        { isPrebuilt: true },
-        { createdById: userId }
-      ]
-    },
+  const userSplits = await prisma.userSplit.findMany({
+    where: { userId },
     include: {
-      days: {
-        orderBy: { dayNumber: "asc" },
+      split: {
+        include: {
+          days: { orderBy: { dayNumber: "asc" } },
+        },
       },
     },
-    orderBy: { name: "asc" },
+    orderBy: [{ isActive: "desc" }, { savedAt: "desc" }],
   });
-  res.json({ splits });
+  res.json({ userSplits });
 };
 
 export const getSplit = async (req: AuthRequest, res: Response) => {
+  const userId = req.userId!;
   const split = await prisma.split.findUnique({
     where: { id: req.params.id as string },
     include: {
@@ -57,6 +55,14 @@ export const getSplit = async (req: AuthRequest, res: Response) => {
     throw new AppError("Split not found", 404);
   }
 
+  const isSaved = await prisma.userSplit.findUnique({
+    where: { userId_splitId: { userId, splitId: split.id } },
+    select: { id: true },
+  });
+  if (!split.isPrebuilt && split.visibility !== "COMMUNITY" && split.createdById !== userId && !isSaved) {
+    throw new AppError("You do not have access to this split", 403);
+  }
+
   res.json({ split });
 };
 
@@ -71,6 +77,9 @@ export const createSplit = async (req: AuthRequest, res: Response) => {
       daysPerWeek,
       isPrebuilt: false,
       createdById: req.userId,
+      visibility: "PRIVATE",
+      splitTypeTag: ["PPL", "BRO_SPLIT", "FULL_BODY", "UPPER_LOWER", "CUSTOM"].includes(type) ? type : "CUSTOM",
+      userSplits: { create: { userId: req.userId!, isActive: false } },
       days: {
         create: days.map(
           (day: {
@@ -116,28 +125,201 @@ export const setActiveSplit = async (req: AuthRequest, res: Response) => {
   const { splitId, phase } = req.body;
   const userId = req.userId!;
 
-  const split = await prisma.split.findUnique({ where: { id: splitId } });
-  if (!split) {
-    throw new AppError("Split not found", 404);
+  const savedSplit = await prisma.userSplit.findUnique({
+    where: { userId_splitId: { userId, splitId } },
+  });
+  if (!savedSplit) {
+    throw new AppError("Save this split to your library before activating it", 404);
   }
 
-  await prisma.userSplit.updateMany({
-    where: { userId },
-    data: { isActive: false },
-  });
-
-  const userSplit = await prisma.userSplit.create({
-    data: {
-      userId,
-      splitId,
-      isActive: true,
-      phase: phase || null,
-      startDate: new Date(),
-    },
-    include: { split: { include: { days: true } } },
+  const userSplit = await prisma.$transaction(async (tx) => {
+    await tx.userSplit.updateMany({
+      where: { userId },
+      data: { isActive: false },
+    });
+    return tx.userSplit.update({
+      where: { userId_splitId: { userId, splitId } },
+      data: { isActive: true, phase: phase || null, startDate: new Date() },
+      include: { split: { include: { days: true } } },
+    });
   });
 
   res.json({ userSplit });
+};
+
+export const removeFromLibrary = async (req: AuthRequest, res: Response) => {
+  const userId = req.userId!;
+  const splitId = req.params.id as string;
+  const savedSplit = await prisma.userSplit.findUnique({
+    where: { userId_splitId: { userId, splitId } },
+    include: { split: true },
+  });
+
+  if (!savedSplit) throw new AppError("Split is not in your library", 404);
+  if (savedSplit.isActive) throw new AppError("Activate another split before removing this one", 409);
+
+  await prisma.$transaction(async (tx) => {
+    if (savedSplit.split.createdById === userId && !savedSplit.split.isPrebuilt) {
+      await tx.split.delete({ where: { id: splitId } });
+    } else {
+      await tx.userSplit.delete({ where: { id: savedSplit.id } });
+    }
+  });
+  res.status(204).send();
+};
+
+const communitySplitInclude = (userId: string) => ({
+  days: {
+    orderBy: { dayNumber: "asc" as const },
+    include: { exercises: { orderBy: { order: "asc" as const } } },
+  },
+  likes: { where: { userId }, select: { id: true } },
+  createdBy: { select: { name: true } },
+  forkedFrom: { select: { id: true, name: true, creatorDisplayName: true } },
+});
+
+export const listCommunitySplits = async (req: AuthRequest, res: Response) => {
+  const userId = req.userId!;
+  const page = Math.max(1, Number(req.query.page) || 1);
+  const limit = Math.min(50, Math.max(1, Number(req.query.limit) || 20));
+  const daysPerWeek = req.query.daysPerWeek ? Number(req.query.daysPerWeek) : undefined;
+  const splitTypeTag = typeof req.query.splitTypeTag === "string" ? req.query.splitTypeTag : undefined;
+  const sort = req.query.sort === "liked" ? "liked" : req.query.sort === "saved" ? "saved" : "recent";
+  const where = {
+    visibility: "COMMUNITY",
+    ...(Number.isFinite(daysPerWeek) ? { daysPerWeek } : {}),
+    ...(splitTypeTag ? { splitTypeTag } : {}),
+  };
+  const orderBy = sort === "liked"
+    ? [{ likeCount: "desc" as const }, { publishedAt: "desc" as const }]
+    : sort === "saved"
+      ? [{ saveCount: "desc" as const }, { publishedAt: "desc" as const }]
+      : [{ publishedAt: "desc" as const }];
+  const [splits, total] = await prisma.$transaction([
+    prisma.split.findMany({ where, include: communitySplitInclude(userId), orderBy, skip: (page - 1) * limit, take: limit }),
+    prisma.split.count({ where }),
+  ]);
+  res.json({
+    splits: splits.map(({ likes, createdBy, ...split }) => ({
+      ...split,
+      liked: likes.length > 0,
+      creatorDisplayName: split.creatorDisplayName || createdBy?.name || "Ryze member",
+    })),
+    page,
+    limit,
+    total,
+    hasMore: page * limit < total,
+  });
+};
+
+export const getCommunitySplit = async (req: AuthRequest, res: Response) => {
+  const split = await prisma.split.findFirst({
+    where: { id: req.params.id as string, visibility: "COMMUNITY" },
+    include: communitySplitInclude(req.userId!),
+  });
+  if (!split) throw new AppError("Community split not found", 404);
+  const { likes, createdBy, ...value } = split;
+  res.json({ split: { ...value, liked: likes.length > 0, creatorDisplayName: value.creatorDisplayName || createdBy?.name || "Ryze member" } });
+};
+
+export const publishSplit = async (req: AuthRequest, res: Response) => {
+  const userId = req.userId!;
+  const split = await prisma.split.findFirst({
+    where: { id: req.params.id as string, createdById: userId, isPrebuilt: false, forkedFromSplitId: null },
+    include: { days: { include: { exercises: true } }, createdBy: { select: { name: true } } },
+  });
+  if (!split) throw new AppError("Only original splits you created can be published", 403);
+  if (split.days.some((day) => !day.isRest && day.exercises.length === 0)) {
+    throw new AppError("Add an exercise to every training day before publishing", 400);
+  }
+  const published = await prisma.split.update({
+    where: { id: split.id },
+    data: {
+      visibility: "COMMUNITY",
+      publishedAt: new Date(),
+      creatorDisplayName: split.creatorDisplayName || split.createdBy?.name || "Ryze member",
+      splitTypeTag: ["PPL", "BRO_SPLIT", "FULL_BODY", "UPPER_LOWER", "CUSTOM"].includes(split.type) ? split.type : "CUSTOM",
+    },
+  });
+  res.json({ split: published });
+};
+
+export const unpublishSplit = async (req: AuthRequest, res: Response) => {
+  const split = await prisma.split.updateMany({
+    where: { id: req.params.id as string, createdById: req.userId!, isPrebuilt: false, forkedFromSplitId: null },
+    data: { visibility: "PRIVATE", publishedAt: null },
+  });
+  if (!split.count) throw new AppError("Only original splits you created can be unpublished", 403);
+  res.status(204).send();
+};
+
+export const toggleSplitLike = async (req: AuthRequest, res: Response) => {
+  const userId = req.userId!;
+  const splitId = req.params.id as string;
+  const result = await prisma.$transaction(async (tx) => {
+    const split = await tx.split.findFirst({ where: { id: splitId, visibility: "COMMUNITY" } });
+    if (!split) throw new AppError("Community split not found", 404);
+    const existing = await tx.splitLike.findUnique({ where: { userId_splitId: { userId, splitId } } });
+    if (existing) {
+      await tx.splitLike.delete({ where: { id: existing.id } });
+      const updated = await tx.split.update({ where: { id: splitId }, data: { likeCount: Math.max(0, split.likeCount - 1) } });
+      return { liked: false, likeCount: updated.likeCount };
+    }
+    await tx.splitLike.create({ data: { userId, splitId } });
+    const updated = await tx.split.update({ where: { id: splitId }, data: { likeCount: split.likeCount + 1 } });
+    return { liked: true, likeCount: updated.likeCount };
+  });
+  res.json(result);
+};
+
+export const forkCommunitySplit = async (req: AuthRequest, res: Response) => {
+  const userId = req.userId!;
+  const splitId = req.params.id as string;
+  const activateForOnboarding = req.body?.activateForOnboarding === true;
+  const fork = await prisma.$transaction(async (tx) => {
+    const [source, user] = await Promise.all([
+      tx.split.findFirst({
+        where: { id: splitId, visibility: "COMMUNITY" },
+        include: { days: { orderBy: { dayNumber: "asc" }, include: { exercises: { orderBy: { order: "asc" } } } } },
+      }),
+      tx.user.findUnique({ where: { id: userId }, select: { onboardingDone: true } }),
+    ]);
+    if (!source) throw new AppError("Community split not found", 404);
+    const shouldActivate = activateForOnboarding && !user?.onboardingDone;
+    if (shouldActivate) await tx.userSplit.updateMany({ where: { userId }, data: { isActive: false } });
+    const created = await tx.split.create({
+      data: {
+        name: source.name,
+        description: source.description,
+        type: source.type,
+        daysPerWeek: source.daysPerWeek,
+        isPrebuilt: false,
+        createdById: userId,
+        visibility: "PRIVATE",
+        forkedFromSplitId: source.id,
+        splitTypeTag: source.splitTypeTag,
+        userSplits: { create: { userId, isActive: shouldActivate, startDate: shouldActivate ? new Date() : undefined } },
+        days: { create: source.days.map((day) => ({
+          dayNumber: day.dayNumber,
+          name: day.name,
+          muscleGroups: day.muscleGroups,
+          isRest: day.isRest,
+          exercises: { create: day.exercises.map((exercise) => ({
+            exerciseId: exercise.exerciseId,
+            order: exercise.order,
+            targetSets: exercise.targetSets,
+            targetRepsMin: exercise.targetRepsMin,
+            targetRepsMax: exercise.targetRepsMax,
+            notes: exercise.notes,
+          })) },
+        })) },
+      },
+      include: { days: { orderBy: { dayNumber: "asc" } } },
+    });
+    await tx.split.update({ where: { id: source.id }, data: { saveCount: source.saveCount + 1 } });
+    return created;
+  });
+  res.status(201).json({ split: fork });
 };
 
 export const getActiveSplit = async (req: AuthRequest, res: Response) => {

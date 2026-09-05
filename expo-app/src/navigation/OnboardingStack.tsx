@@ -11,6 +11,7 @@ import SleepScreen from "../screens/onboarding/SleepScreen";
 import SplitSelectionScreen from "../screens/onboarding/SplitSelectionScreen";
 import OnboardingCustomSplitScreen from "../screens/onboarding/OnboardingCustomSplitScreen";
 import AISplitBuilderScreen from "../screens/onboarding/AISplitBuilderScreen";
+import CommunitySplitsScreen from "../screens/profile/CommunitySplitsScreen";
 
 import {
   OnboardingProvider,
@@ -124,6 +125,11 @@ export default function OnboardingStack() {
           name="AISplitBuilder"
           component={AISplitBuilderScreen}
           options={{ title: "Build with AI" }}
+        />
+        <Stack.Screen
+          name="CommunitySplits"
+          component={CommunitySplitsScreen}
+          options={{ title: "Community Splits" }}
         />
       </Stack.Navigator>
     </OnboardingProvider>

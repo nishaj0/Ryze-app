@@ -18,6 +18,7 @@ export type OnboardingStackParamList = {
   SplitSelection: undefined;
   OnboardingCustomSplit: undefined;
   AISplitBuilder: undefined;
+  CommunitySplits: { onboarding: true; daysAvailable: number };
 };
 
 export type HomeStackParamList = {
@@ -50,7 +51,8 @@ export type ProfileStackParamList = {
   ProfileMain: undefined;
   EditProfile: undefined;
   SplitSwitcher: undefined;
-  SplitDetails: { splitId: string; splitName: string };
+  SplitDetails: { splitId: string; splitName: string; community?: boolean };
+  CommunitySplits: undefined;
   CustomSplit: { splitId?: string; fromPrebuilt?: boolean; afterSaveGoHome?: boolean } | undefined;
   AISplitBuilder: undefined;
   Settings: undefined;

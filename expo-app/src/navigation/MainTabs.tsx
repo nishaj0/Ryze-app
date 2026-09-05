@@ -99,6 +99,7 @@ function ProfileStack() {
       <ProfileStackNav.Screen name="ProfileMain" getComponent={() => require("../screens/profile/ProfileScreen").default} options={{ title: "Profile" }} />
       <ProfileStackNav.Screen name="EditProfile" getComponent={() => require("../screens/profile/EditProfileScreen").default} options={{ title: "Edit Profile" }} />
       <ProfileStackNav.Screen name="SplitSwitcher" getComponent={() => require("../screens/profile/SplitSwitcherScreen").default} options={{ title: "Switch Split" }} />
+      <ProfileStackNav.Screen name="CommunitySplits" getComponent={() => require("../screens/profile/CommunitySplitsScreen").default} options={{ title: "Community Splits" }} />
       <ProfileStackNav.Screen name="SplitDetails" getComponent={() => require("../screens/profile/SplitDetailsScreen").default} options={{ title: "Split Details" }} />
       <ProfileStackNav.Screen name="CustomSplit" getComponent={() => require("../screens/profile/CustomSplitScreen").default} options={{ title: "Create Custom Split" }} />
       <ProfileStackNav.Screen name="AISplitBuilder" getComponent={() => require("../screens/onboarding/AISplitBuilderScreen").default} options={{ title: "Build with AI" }} />

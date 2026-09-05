@@ -385,8 +385,8 @@
     "semantic_hash": ""
   },
   "expo-app/src/screens/progress/DashboardScreen.tsx": {
-    "mtime": 1788615484.4444852,
-    "ast_hash": "63b4f9833cc09ebd840323b7fbb86a8b",
+    "mtime": 1788615111.7179658,
+    "ast_hash": "93e82180e39db455d7d4afdd1b31e003",
     "semantic_hash": ""
   },
   "expo-app/src/screens/progress/ExerciseProgressScreen.tsx": {
@@ -14680,13 +14680,13 @@
     "semantic_hash": ""
   },
   "expo-app/src/constants/muscleHighlighterMapping.test.ts": {
-    "mtime": 1788615476.168677,
-    "ast_hash": "3b38cd265fff30b04a5e6ad003f2d3f9",
+    "mtime": 1788615236.216816,
+    "ast_hash": "84877126f4b29e7def5491e464b64153",
     "semantic_hash": ""
   },
   "expo-app/src/constants/muscleHighlighterMapping.ts": {
-    "mtime": 1788615475.1343477,
-    "ast_hash": "f80d8297643027d1a3371b645f9e34b8",
+    "mtime": 1788615235.136532,
+    "ast_hash": "6318e2a2397e8c0bb863cd609be229dc",
     "semantic_hash": ""
   },
   "expo-app/src/screens/profile/CommunitySplitsScreen.tsx": {

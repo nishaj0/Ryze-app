@@ -201,6 +201,53 @@ describe("progressController", () => {
     });
   });
 
+  describe("getWeeklyMuscleVolume", () => {
+    it("uses completed working sets from the rolling seven-day window and shares multiple primary muscles", async () => {
+      mockPrismaClient.workoutSession.findMany.mockResolvedValue([
+        {
+          exerciseLogs: [
+            {
+              exercise: {
+                muscles: [
+                  { isPrimary: true, muscle: { name: "chest" } },
+                  { isPrimary: true, muscle: { name: "triceps" } },
+                  { isPrimary: false, muscle: { name: "shoulders" } },
+                ],
+              },
+              setLogs: [
+                { weightKg: 100, reps: 10, isWarmup: false },
+                { weightKg: 50, reps: 10, isWarmup: true },
+              ],
+            },
+          ],
+        },
+      ]);
+
+      await progressController.getWeeklyMuscleVolume(req as AuthRequest, res as Response);
+
+      expect(mockPrismaClient.workoutSession.findMany).toHaveBeenCalledWith(expect.objectContaining({
+        where: expect.objectContaining({ userId: TEST_USER.id, status: "COMPLETED", date: { gte: expect.any(Date) } }),
+      }));
+      expect(res.json).toHaveBeenCalledWith({
+        muscleVolumes: expect.arrayContaining([
+          { muscleGroup: "chest", volume: 500 },
+          { muscleGroup: "triceps", volume: 500 },
+        ]),
+      });
+      expect(res.json).not.toHaveBeenCalledWith(expect.objectContaining({
+        muscleVolumes: expect.arrayContaining([expect.objectContaining({ muscleGroup: "shoulders" })]),
+      }));
+    });
+
+    it("returns no volume when the rolling window has no working sets", async () => {
+      mockPrismaClient.workoutSession.findMany.mockResolvedValue([]);
+
+      await progressController.getWeeklyMuscleVolume(req as AuthRequest, res as Response);
+
+      expect(res.json).toHaveBeenCalledWith({ muscleVolumes: [] });
+    });
+  });
+
   describe("getHeatmap", () => {
     it("should return workout heatmap data", async () => {
       const sessions = [

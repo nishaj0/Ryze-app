@@ -3,7 +3,7 @@ import { View, ScrollView, Alert, TouchableOpacity, Modal } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ProfileStackParamList } from "../../navigation/types";
-import { getSplit, setActiveSplit } from "../../api/splits";
+import { forkCommunitySplit, getCommunitySplit, getSplit, setActiveSplit, toggleSplitLike } from "../../api/splits";
 import { getExercise } from "../../api/exercises";
 import { Split, Exercise } from "../../types";
 import { Typography, Card, Icon, Button, Input, SplitDetailsScreenSkeleton, ExerciseDetailSheet } from "../../components";
@@ -13,11 +13,12 @@ import { space, radius } from "../../theme/spacing";
 type Props = NativeStackScreenProps<ProfileStackParamList, "SplitDetails">;
 
 export default function SplitDetailsScreen({ route, navigation }: Props) {
-  const { splitId, splitName } = route.params;
+  const { splitId, splitName, community = false } = route.params;
   const theme = useTheme();
   const [split, setSplit] = useState<Split | null>(null);
   const [loading, setLoading] = useState(true);
   const [switching, setSwitching] = useState(false);
+  const [savingCopy, setSavingCopy] = useState(false);
   const [phaseModalVisible, setPhaseModalVisible] = useState(false);
   const [phase, setPhase] = useState("");
   const [exerciseDetailVisible, setExerciseDetailVisible] = useState(false);
@@ -45,7 +46,7 @@ export default function SplitDetailsScreen({ route, navigation }: Props) {
 
   const loadSplitDetails = async () => {
     try {
-      const res = await getSplit(splitId);
+      const res = community ? await getCommunitySplit(splitId) : await getSplit(splitId);
       setSplit(res.split);
     } catch (err) {
       Alert.alert("Error", "Failed to load split details");
@@ -67,6 +68,30 @@ export default function SplitDetailsScreen({ route, navigation }: Props) {
       Alert.alert("Error", "Failed to switch split");
     } finally {
       setSwitching(false);
+    }
+  };
+
+  const handleSaveCommunityCopy = async () => {
+    setSavingCopy(true);
+    try {
+      await forkCommunitySplit(splitId);
+      Alert.alert("Saved to your library", "You now have a private copy. Activate it whenever you're ready.", [
+        { text: "View library", onPress: () => navigation.navigate("SplitSwitcher") },
+        { text: "Stay here" },
+      ]);
+    } catch (err: any) {
+      Alert.alert("Could not save split", err.response?.data?.error || "Please try again.");
+    } finally {
+      setSavingCopy(false);
+    }
+  };
+
+  const handleCommunityLike = async () => {
+    try {
+      const result = await toggleSplitLike(splitId);
+      setSplit((current) => current ? { ...current, liked: result.liked, likeCount: result.likeCount } : current);
+    } catch {
+      Alert.alert("Could not update like", "Please try again.");
     }
   };
 
@@ -106,7 +131,18 @@ export default function SplitDetailsScreen({ route, navigation }: Props) {
                 {split.type.replace("_", " ")}
               </Typography>
             </View>
+            {community && (
+              <TouchableOpacity onPress={handleCommunityLike} style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
+                <Icon name="Heart" size={14} color={split.liked ? theme.primary : theme.textMuted} />
+                <Typography variant="bodySmall" color={theme.textMuted}>{split.likeCount ?? 0}</Typography>
+              </TouchableOpacity>
+            )}
           </View>
+          {community && (
+            <Typography variant="bodySmall" color={theme.textMuted} style={{ marginTop: space.sm }}>
+              Shared by {split.creatorDisplayName || "Ryze member"}. Saving creates an independent private copy.
+            </Typography>
+          )}
         </View>
 
         {/* Days List */}
@@ -187,7 +223,17 @@ export default function SplitDetailsScreen({ route, navigation }: Props) {
 
       {/* Switch Split Button + Edit */}
       <View style={{ position: "absolute", bottom: 0, left: 0, right: 0, backgroundColor: theme.surface, borderTopWidth: 1, borderTopColor: theme.border, padding: space.lg }}>
-        {split.isPrebuilt && (
+        {community && (
+          <Button
+            title="Save private copy"
+            onPress={handleSaveCommunityCopy}
+            loading={savingCopy}
+            variant="primary"
+            size="lg"
+            icon={<Icon name="Save" size={20} color={theme.primaryText} />}
+          />
+        )}
+        {!community && split.isPrebuilt && (
           <View style={{ flexDirection: "row", gap: space.md }}>
             <Button
               title="Switch"
@@ -210,7 +256,7 @@ export default function SplitDetailsScreen({ route, navigation }: Props) {
             />
           </View>
         )}
-        {!split.isPrebuilt && (
+        {!community && !split.isPrebuilt && (
           <View style={{ flexDirection: "row", gap: space.md }}>
             <Button
               title="Switch"

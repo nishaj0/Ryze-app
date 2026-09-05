@@ -175,6 +175,33 @@ function SplitSelectionContent({ navigation }: Props) {
           </Card>
         </TouchableOpacity>
 
+        <TouchableOpacity
+          onPress={() => navigation.navigate("CommunitySplits", { onboarding: true, daysAvailable: data.daysAvailable })}
+          disabled={submitting}
+          style={{ marginBottom: space.md }}
+          activeOpacity={0.8}
+        >
+          <Card
+            padding="lg"
+            border={true}
+            style={{
+              borderStyle: "dashed",
+              borderColor: theme.primary,
+              borderWidth: 2,
+              backgroundColor: theme.bg,
+              alignItems: "center",
+            }}
+          >
+            <Icon name="Users" size={32} color={theme.primary} />
+            <Typography variant="heading3" color={theme.primary} style={{ marginTop: space.sm }}>
+              Browse Community Plans
+            </Typography>
+            <Typography variant="bodySmall" color={theme.textSecondary} style={{ marginTop: space.xs, textAlign: "center" }}>
+              Find a {data.daysAvailable}-day plan and save it as your starting point
+            </Typography>
+          </Card>
+        </TouchableOpacity>
+
         {/* Build with AI Option */}
         <TouchableOpacity
           onPress={() => navigation.navigate("AISplitBuilder")}

@@ -125,7 +125,10 @@ export const deleteAccount = async (req: AuthRequest, res: Response) => {
   // Delete user-created splits first — the Split.createdBy relation does not
   // cascade-delete (it only nullifies createdById), so we must do this manually.
   // Deleting the Split cascades to SplitDay → SplitDayExercise automatically.
-  await prisma.split.deleteMany({ where: { createdById: userId } });
+  // Private splits are deleted with their owner. Published community originals
+  // remain available; their owner relation becomes null while the published
+  // display-name snapshot preserves attribution for community members/forks.
+  await prisma.split.deleteMany({ where: { createdById: userId, visibility: "PRIVATE" } });
 
   // Deleting the user cascades to all other owned data:
   // UserSplit, WorkoutSession (→ ExerciseLog → SetLog, CheckIn),

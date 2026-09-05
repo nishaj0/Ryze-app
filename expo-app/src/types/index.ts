@@ -25,6 +25,15 @@ export interface Split {
   type: string;
   daysPerWeek: number;
   isPrebuilt: boolean;
+  createdById?: string | null;
+  visibility?: "PRIVATE" | "COMMUNITY";
+  publishedAt?: string | null;
+  forkedFromSplitId?: string | null;
+  creatorDisplayName?: string | null;
+  splitTypeTag?: "PPL" | "BRO_SPLIT" | "FULL_BODY" | "UPPER_LOWER" | "CUSTOM";
+  likeCount?: number;
+  saveCount?: number;
+  liked?: boolean;
   days: SplitDay[];
 }
 
@@ -98,6 +107,7 @@ export interface UserSplit {
   userId: string;
   splitId: string;
   startDate: string;
+  savedAt?: string;
   isActive: boolean;
   phase: string | null;
   split: Split;

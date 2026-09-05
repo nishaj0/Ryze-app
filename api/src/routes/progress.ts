@@ -10,6 +10,7 @@ router.get("/overload/filters", authMiddleware, wrap(progressController.getOverl
 router.get("/overload/:id", authMiddleware, wrap(progressController.getOverloadHistory));
 router.get("/exercise/:id", authMiddleware, wrap(progressController.getExerciseProgress));
 router.get("/muscle-volume", authMiddleware, wrap(progressController.getMuscleVolume));
+router.get("/weekly-muscle-volume", authMiddleware, wrap(progressController.getWeeklyMuscleVolume));
 router.get("/heatmap", authMiddleware, wrap(progressController.getHeatmap));
 router.get("/volume-history", authMiddleware, wrap(progressController.getVolumeHistory));
 

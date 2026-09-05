@@ -12,7 +12,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { OnboardingStackParamList } from "../../navigation/types";
 import { generateAISplit } from "../../api/splits";
-import { createSplit, setActiveSplit } from "../../api/splits";
+import { createSplit } from "../../api/splits";
 import { completeOnboarding } from "../../api/onboarding";
 import { getApiErrorMessage } from "../../utils/apiErrors";
 import { useOnboarding } from "./OnboardingContext";
@@ -277,9 +277,6 @@ export default function AISplitBuilderScreen({ navigation }: Props) {
         })),
       });
 
-      // Set as active split
-      await setActiveSplit(splitRes.split.id);
-
       // Complete onboarding
       const onboardingRes = await completeOnboarding({
         ...onboardingData,
@@ -329,9 +326,6 @@ export default function AISplitBuilderScreen({ navigation }: Props) {
           })),
         })),
       });
-
-      // Set as active split
-      await setActiveSplit(splitRes.split.id);
 
       if (user?.onboardingDone) {
         // Already onboarded (Profile stack) — navigate directly to editor

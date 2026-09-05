@@ -3,8 +3,8 @@ import { View, ScrollView, TouchableOpacity, Alert, ActivityIndicator } from "re
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ProfileStackParamList } from "../../navigation/types";
-import { listSplits, setActiveSplit } from "../../api/splits";
-import { Split } from "../../types";
+import { listSplits, removeFromLibrary, publishSplit, unpublishSplit } from "../../api/splits";
+import { UserSplit } from "../../types";
 import { Typography, Card, Icon, SplitSwitcherScreenSkeleton } from "../../components";
 import { useTheme } from "../../theme/themeStore";
 import { space, radius } from "../../theme/spacing";
@@ -12,10 +12,10 @@ import { space, radius } from "../../theme/spacing";
 type Props = NativeStackScreenProps<ProfileStackParamList, "SplitSwitcher">;
 
 export default function SplitSwitcherScreen({ navigation }: Props) {
-  const [splits, setSplits] = useState<Split[]>([]);
+  const [userSplits, setUserSplits] = useState<UserSplit[]>([]);
   const theme = useTheme();
   const [loading, setLoading] = useState(true);
-  const [switching, setSwitching] = useState<string | null>(null);
+  const [updatingId, setUpdatingId] = useState<string | null>(null);
 
   useEffect(() => {
     loadSplits();
@@ -24,7 +24,7 @@ export default function SplitSwitcherScreen({ navigation }: Props) {
   const loadSplits = async () => {
     try {
       const res = await listSplits();
-      setSplits(res.splits);
+      setUserSplits(res.userSplits);
     } catch (err) {
       console.error("[SplitSwitcher] load error:", err);
     } finally {
@@ -32,28 +32,49 @@ export default function SplitSwitcherScreen({ navigation }: Props) {
     }
   };
 
-  const handleSwitch = (splitId: string, splitName: string) => {
+  const handleRemove = (userSplit: UserSplit) => {
+    if (userSplit.isActive) {
+      Alert.alert("Choose another active split", "Activate another saved split before removing this one.");
+      return;
+    }
     Alert.alert(
-      "Switch Split",
-      `Switch to "${splitName}"? Your workout tracking will reset for the new split.`,
+      "Remove split",
+      `Remove "${userSplit.split.name}" from your library?${userSplit.split.createdById ? " Your private copy will be deleted." : ""}`,
       [
         { text: "Cancel", style: "cancel" },
         {
-          text: "Switch",
+          text: "Remove",
+          style: "destructive",
           onPress: async () => {
-            setSwitching(splitId);
+            setUpdatingId(userSplit.splitId);
             try {
-              await setActiveSplit(splitId);
-              Alert.alert("Success", "Split switched!", [{ text: "OK", onPress: () => navigation.goBack() }]);
+              await removeFromLibrary(userSplit.splitId);
+              setUserSplits((current) => current.filter((item) => item.id !== userSplit.id));
             } catch (err) {
-              Alert.alert("Error", "Failed to switch split");
+              Alert.alert("Error", "Failed to remove split");
             } finally {
-              setSwitching(null);
+              setUpdatingId(null);
             }
           },
         },
       ]
     );
+  };
+
+  const handlePublication = async (split: UserSplit["split"]) => {
+    setUpdatingId(split.id);
+    try {
+      if (split.visibility === "COMMUNITY") {
+        await unpublishSplit(split.id);
+      } else {
+        await publishSplit(split.id);
+      }
+      await loadSplits();
+    } catch (err: any) {
+      Alert.alert("Could not update community sharing", err.response?.data?.error || "Please check that every training day has an exercise.");
+    } finally {
+      setUpdatingId(null);
+    }
   };
 
   if (loading) {
@@ -75,15 +96,30 @@ export default function SplitSwitcherScreen({ navigation }: Props) {
         <View style={{ marginBottom: space.xl, flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
           <View style={{ flex: 1 }}>
             <Typography variant="caption" color={theme.textMuted} weight="600">
-              AVAILABLE SPLITS
+              YOUR LIBRARY
             </Typography>
             <Typography variant="heading1" color={theme.textPrimary} style={{ marginTop: space.xs }}>
               Switch Split
             </Typography>
             <Typography variant="body" color={theme.textSecondary} style={{ marginTop: space.xs }}>
-              Choose or create a program
+              Saved programs stay here until you choose to activate one.
             </Typography>
           </View>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("CommunitySplits")}
+            style={{
+              backgroundColor: theme.surfaceTertiary,
+              paddingHorizontal: space.md,
+              paddingVertical: space.sm,
+              borderRadius: radius.md,
+              flexDirection: "row",
+              alignItems: "center",
+              gap: space.xs,
+            }}
+          >
+            <Icon name="Users" size={14} color={theme.primary} />
+            <Typography variant="bodySmall" color={theme.primary} weight="700">COMMUNITY</Typography>
+          </TouchableOpacity>
           <View style={{ flexDirection: "row", gap: space.sm }}>
             <TouchableOpacity
               onPress={() => navigation.navigate("AISplitBuilder")}
@@ -122,7 +158,7 @@ export default function SplitSwitcherScreen({ navigation }: Props) {
           </View>
         </View>
 
-        {splits.length === 0 ? (
+        {userSplits.length === 0 ? (
           <Card padding="lg" shadow="sm" style={{ alignItems: "center" }}>
             <View
               style={{
@@ -138,14 +174,20 @@ export default function SplitSwitcherScreen({ navigation }: Props) {
               <Icon name="Layers" size={36} color={theme.primary} />
             </View>
             <Typography variant="heading3" color={theme.textPrimary} align="center">
-              No splits available
+              Your library is empty
+            </Typography>
+            <Typography variant="bodySmall" color={theme.textSecondary} align="center" style={{ marginTop: space.xs }}>
+              Browse community programs or create one to get started.
             </Typography>
           </Card>
         ) : (
           <View style={{ gap: space.md }}>
-            {splits.map((split) => (
+            {userSplits.map((userSplit) => {
+              const split = userSplit.split;
+              const canPublish = !split.isPrebuilt && split.createdById && !split.forkedFromSplitId;
+              return (
               <TouchableOpacity
-                key={split.id}
+                key={userSplit.id}
                 onPress={() => navigation.navigate("SplitDetails", { splitId: split.id, splitName: split.name })}
                 activeOpacity={0.8}
               >
@@ -193,11 +235,24 @@ export default function SplitSwitcherScreen({ navigation }: Props) {
                         </View>
                       </View>
                     </View>
-                    {switching === split.id ? (
+                    {updatingId === split.id ? (
                       <ActivityIndicator color={theme.primary} />
                     ) : (
                       <View style={{ flexDirection: "row", alignItems: "center", gap: space.xs }}>
-                        {!split.isPrebuilt && (
+                        {userSplit.isActive && (
+                          <View style={{ backgroundColor: theme.successBg, paddingHorizontal: 6, paddingVertical: 3, borderRadius: radius.sm }}>
+                            <Typography variant="caption" color={theme.success} weight="700">ACTIVE</Typography>
+                          </View>
+                        )}
+                        {canPublish && (
+                          <TouchableOpacity
+                            onPress={() => handlePublication(split)}
+                            style={{ padding: 6, borderRadius: radius.sm, backgroundColor: theme.surfaceTertiary }}
+                          >
+                            <Icon name={split.visibility === "COMMUNITY" ? "Download" : "Upload"} size={16} color={theme.primary} />
+                          </TouchableOpacity>
+                        )}
+                        {!split.isPrebuilt && split.createdById === userSplit.userId && (
                           <TouchableOpacity
                             onPress={() => navigation.navigate("CustomSplit", { splitId: split.id })}
                             style={{ padding: 6, borderRadius: radius.sm, backgroundColor: theme.surfaceTertiary }}
@@ -213,13 +268,20 @@ export default function SplitSwitcherScreen({ navigation }: Props) {
                             <Icon name="Pencil" size={16} color={theme.primary} />
                           </TouchableOpacity>
                         )}
+                        <TouchableOpacity
+                          onPress={() => handleRemove(userSplit)}
+                          style={{ padding: 6, borderRadius: radius.sm, backgroundColor: theme.surfaceTertiary }}
+                        >
+                          <Icon name="Trash2" size={16} color={theme.danger} />
+                        </TouchableOpacity>
                         <Icon name="ChevronRight" size={20} color={theme.textMuted} />
                       </View>
                     )}
                   </View>
                 </Card>
               </TouchableOpacity>
-            ))}
+              );
+            })}
           </View>
         )}
       </ScrollView>
