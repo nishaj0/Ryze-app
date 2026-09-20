@@ -5,9 +5,8 @@
  * higher-level screen-specific skeleton layouts.
  */
 
-import React from "react";
-import { View, Dimensions } from "react-native";
-import { MotiView } from "moti";
+import React, { useEffect, useRef } from "react";
+import { View, Animated, Dimensions } from "react-native";
 import { useTheme } from "../theme/themeStore";
 import { space, radius } from "../theme/spacing";
 
@@ -28,17 +27,29 @@ interface SkeletonProps {
 }
 
 export function Skeleton({ width = "100%", height = 16, borderRadius = 8, style }: SkeletonProps) {
-  const theme = useTheme();
+  const opacity = useRef(new Animated.Value(0.4)).current;
+
+  useEffect(() => {
+    const pulse = Animated.loop(
+      Animated.sequence([
+        Animated.timing(opacity, {
+          toValue: 1,
+          duration: 800,
+          useNativeDriver: false,
+        }),
+        Animated.timing(opacity, {
+          toValue: 0.4,
+          duration: 800,
+          useNativeDriver: false,
+        }),
+      ])
+    );
+    pulse.start();
+    return () => pulse.stop();
+  }, [opacity]);
+
   return (
-    <MotiView
-      from={{ opacity: 0.4 }}
-      animate={{ opacity: 1 }}
-      transition={{
-        type: "timing",
-        duration: 800,
-        loop: true,
-        repeatReverse: true,
-      }}
+    <Animated.View
       style={[
         {
           width: width as any,
@@ -46,6 +57,7 @@ export function Skeleton({ width = "100%", height = 16, borderRadius = 8, style 
           borderRadius,
           backgroundColor: BASE_COLOR,
           overflow: "hidden",
+          opacity,
         },
         style,
       ]}

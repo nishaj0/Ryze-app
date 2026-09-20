@@ -54,13 +54,13 @@ export default function DashboardScreen({ navigation }: Props) {
         getRecords(),
         getVolumeHistory(8),
       ]);
-      setOverview(overRes.overview);
-      setHeatmap(heatRes.heatmap);
-      setMuscleVolumes(muscRes.muscleVolumes);
-      setWeeklyMuscleVolumes(weeklyMuscRes.muscleVolumes);
-      setRecords(recRes.records);
-      setVolumeHistory(volRes.weekly);
-      setDailyActivity(volRes.daily);
+      setOverview(overRes?.overview ?? null);
+      setHeatmap(heatRes?.heatmap ?? []);
+      setMuscleVolumes(muscRes?.muscleVolumes ?? []);
+      setWeeklyMuscleVolumes(weeklyMuscRes?.muscleVolumes ?? []);
+      setRecords(recRes?.records ?? []);
+      setVolumeHistory(volRes?.weekly ?? []);
+      setDailyActivity(volRes?.daily ?? []);
     } catch (err) {
       console.error("[Dashboard] load error:", err);
     } finally {
@@ -74,6 +74,24 @@ export default function DashboardScreen({ navigation }: Props) {
     }, [loadData])
   );
 
+  // Compute deltas
+  const currentWeekVol = volumeHistory?.[volumeHistory.length - 1]?.volume || 0;
+  const prevWeekVol = volumeHistory?.[volumeHistory.length - 2]?.volume || 0;
+  const volDelta = prevWeekVol > 0 ? Math.round(((currentWeekVol - prevWeekVol) / prevWeekVol) * 100) : 0;
+
+  // Total volume
+  const totalVolume = (volumeHistory || []).reduce((sum, w) => sum + (w?.volume || 0), 0);
+
+  // Top muscle group
+  const topMuscle = (muscleVolumes || []).length > 0
+    ? (muscleVolumes || []).reduce((max, m) => (m.volume > max.volume ? m : max), muscleVolumes[0])
+    : null;
+
+  // Heatmap data
+  const heatmapData = (heatmap || []).map((h) => ({ date: h.date, count: h.count }));
+  const weeklyHighlightData = useMemo(() => getWeeklyVolumeHighlightData(weeklyMuscleVolumes || []), [weeklyMuscleVolumes]);
+  const visibleWeeklyHighlights = weeklyHighlightData.filter((highlight) => isSlugVisibleOnSide(highlight.slug, bodySide));
+  const bodyGender = user?.gender?.toUpperCase() === "FEMALE" ? "female" : "male";
 
   if (loading) {
     return (
@@ -82,25 +100,6 @@ export default function DashboardScreen({ navigation }: Props) {
       </SafeAreaView>
     );
   }
-
-  // Compute deltas
-  const currentWeekVol = volumeHistory[volumeHistory.length - 1]?.volume || 0;
-  const prevWeekVol = volumeHistory[volumeHistory.length - 2]?.volume || 0;
-  const volDelta = prevWeekVol > 0 ? Math.round(((currentWeekVol - prevWeekVol) / prevWeekVol) * 100) : 0;
-
-  // Total volume
-  const totalVolume = volumeHistory.reduce((sum, w) => sum + w.volume, 0);
-
-  // Top muscle group
-  const topMuscle = muscleVolumes.length > 0
-    ? muscleVolumes.reduce((max, m) => (m.volume > max.volume ? m : max), muscleVolumes[0])
-    : null;
-
-  // Heatmap data
-  const heatmapData = heatmap.map((h) => ({ date: h.date, count: h.count }));
-  const weeklyHighlightData = useMemo(() => getWeeklyVolumeHighlightData(weeklyMuscleVolumes), [weeklyMuscleVolumes]);
-  const visibleWeeklyHighlights = weeklyHighlightData.filter((highlight) => isSlugVisibleOnSide(highlight.slug, bodySide));
-  const bodyGender = user?.gender?.toUpperCase() === "FEMALE" ? "female" : "male";
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: theme.bg }} edges={["top"]}>
