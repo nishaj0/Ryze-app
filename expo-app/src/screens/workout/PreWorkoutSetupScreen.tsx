@@ -17,6 +17,7 @@ import { useWorkoutStore } from "../../store/workoutStore";
 import { getActiveSplit } from "../../api/splits";
 import { ExerciseQueueItem, SplitDay } from "../../types";
 import { getThumbnailUrl } from "../../utils/cloudinary";
+import { WORKOUT_CONSTANTS, COLORS, FONTS } from "../../constants";
 
 type Props = NativeStackScreenProps<HomeStackParamList, "PreWorkoutSetup">;
 
@@ -151,7 +152,7 @@ export default function PreWorkoutSetupScreen({ route, navigation }: Props) {
                 <Text style={styles.deloadTitle}>Deload Mode</Text>
                 {isDeload && (
                   <View style={styles.deloadBadge}>
-                    <Text style={styles.deloadBadgeText}>-30% LOAD</Text>
+                    <Text style={styles.deloadBadgeText}>{WORKOUT_CONSTANTS.DELOAD_PERCENT_LABEL}</Text>
                   </View>
                 )}
               </View>

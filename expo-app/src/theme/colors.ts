@@ -4,6 +4,8 @@
  * Dark: "Iron" — near-black warm, ember accents
  */
 
+export { COLORS } from "../constants/colors";
+
 // Chalk Athletic Modernism raw tokens
 export const chalkTokens = {
   chalkBg: "#fcf9f3",

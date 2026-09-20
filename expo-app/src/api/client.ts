@@ -1,10 +1,10 @@
 import axios from "axios";
-import { API_URL } from "../constants/config";
+import { API_URL, API_TIMEOUTS } from "../constants";
 import { getToken, clearAuth } from "../utils/storage";
 
 const client = axios.create({
   baseURL: API_URL,
-  timeout: 15000,
+  timeout: API_TIMEOUTS.STANDARD,
   headers: { "Content-Type": "application/json" },
 });
 

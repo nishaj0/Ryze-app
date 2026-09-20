@@ -1,4 +1,5 @@
 import client from "./client";
+import { API_TIMEOUTS } from "../constants";
 
 export interface SwapExercisePayload {
   splitDayExerciseId?: string;
@@ -87,7 +88,7 @@ export const sendChatMessage = async (content: string, conversationId?: string) 
     await client.post(
       "/chat/messages",
       { content, conversationId },
-      { timeout: 60000 }
+      { timeout: API_TIMEOUTS.AI }
     )
   ).data as {
     message: ChatMessage;

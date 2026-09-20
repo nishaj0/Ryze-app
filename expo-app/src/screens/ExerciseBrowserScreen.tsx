@@ -25,26 +25,7 @@ import { listExercises, getDistinctMuscles } from "../api/exercises";
 import { Exercise } from "../types";
 import { getThumbnailUrl } from "../utils/cloudinary";
 import ExerciseFormSheet from "../components/exercises/ExerciseFormSheet";
-
-const ALL_MUSCLES = [
-  "All",
-  "Chest",
-  "Lats",
-  "Shoulders",
-  "Quads",
-  "Hamstrings",
-  "Glutes",
-  "Biceps",
-  "Triceps",
-  "Abdominals",
-  "Calves",
-  "Traps",
-  "Forearms",
-  "Lower Back",
-  "Upper Back",
-  "Adductors",
-  "Abductors",
-];
+import { MUSCLE_GROUPS, WORKOUT_CONSTANTS, COLORS, FONTS } from "../constants";
 
 export default function ExerciseBrowserScreen() {
   const insets = useSafeAreaInsets();
@@ -56,7 +37,7 @@ export default function ExerciseBrowserScreen() {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-  const [availableMuscles, setAvailableMuscles] = useState<string[]>(ALL_MUSCLES);
+  const [availableMuscles, setAvailableMuscles] = useState<string[]>([...MUSCLE_GROUPS]);
 
   // Form sheet state
   const [formSheetVisible, setFormSheetVisible] = useState(false);
@@ -108,7 +89,7 @@ export default function ExerciseBrowserScreen() {
     if (searchTimerRef.current) clearTimeout(searchTimerRef.current);
     searchTimerRef.current = setTimeout(() => {
       fetchExercises(1, true);
-    }, 200); // 200ms debounce
+    }, WORKOUT_CONSTANTS.SEARCH_DEBOUNCE_MS);
   }, [searchQuery, selectedMuscle]);
 
   useEffect(() => {

@@ -1,4 +1,5 @@
 import client from "./client";
+import { API_TIMEOUTS } from "../constants";
 import { Split, UserSplit } from "../types";
 
 export const listSplits = async () => {
@@ -90,7 +91,7 @@ export const generateAISplit = async (
   const { data } = await client.post(
     "/splits/ai-generate",
     { description, onboardingContext },
-    { timeout: 60_000 }
+    { timeout: API_TIMEOUTS.AI }
   );
   return data as {
     split: {

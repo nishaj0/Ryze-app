@@ -1,8 +1,12 @@
 import { createLogger, getLogContext } from "./logger";
+import { GEMINI_CONFIG } from "../constants";
 
 const log = createLogger("gemini");
 
-const TIMEOUT_MS = 100_000; // 100s — AI split generation can take 30s+ for large exercise lists
+const TIMEOUT_MS = GEMINI_CONFIG.TIMEOUT_MS;
+const RETRY_MAX = GEMINI_CONFIG.RETRY_MAX;
+const RETRY_BASE_DELAY_MS = GEMINI_CONFIG.RETRY_BASE_DELAY_MS;
+const DEFAULT_MODEL = GEMINI_CONFIG.DEFAULT_MODEL;
 
 let client: any = null;
 
@@ -51,8 +55,6 @@ type CallGeminiWithToolsOptions = {
   execute: (name: string, args: Record<string, unknown>) => Promise<unknown>;
 };
 
-const DEFAULT_MODEL = process.env.GEMINI_MODEL || "gemini-3.6-flash";
-
 function buildCallMeta(options: CallGeminiOptions) {
   const context = getLogContext();
   return {
@@ -64,9 +66,6 @@ function buildCallMeta(options: CallGeminiOptions) {
     runId: context?.runId,
   };
 }
-
-const RETRY_MAX = 3;
-const RETRY_BASE_DELAY_MS = 2_000; // 2s, 4s, 8s
 
 /** Returns true if the error is a transient Gemini 503 / UNAVAILABLE */
 function isRetryable(error: unknown): boolean {

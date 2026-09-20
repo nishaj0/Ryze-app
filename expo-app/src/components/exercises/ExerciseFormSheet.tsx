@@ -26,9 +26,12 @@ import {
 import { Exercise } from "../../types";
 import { getHighResUrl } from "../../utils/cloudinary";
 import {
+  COLORS,
+  FONTS,
+  WORKOUT_CONSTANTS,
   getMuscleHighlightData,
   isSlugVisibleOnSide,
-} from "../../constants/muscleHighlighterMapping";
+} from "../../constants";
 
 interface ExerciseFormSheetProps {
   exercise: Exercise | null;
@@ -61,7 +64,7 @@ export default function ExerciseFormSheet({
     if (!visible || images.length <= 1) return;
     const interval = setInterval(() => {
       setActiveImageIndex((prev) => (prev + 1) % images.length);
-    }, 1200);
+    }, WORKOUT_CONSTANTS.POSTURE_ANIMATION_INTERVAL_MS);
     return () => clearInterval(interval);
   }, [images.length, visible]);
 

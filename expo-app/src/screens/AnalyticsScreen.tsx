@@ -40,6 +40,7 @@ import {
 import { useAuthStore } from "../store/authStore";
 import AnatomyMap from "../components/analytics/AnatomyMap";
 import { Heatmap } from "../components/charts";
+import { ANALYTICS_CONSTANTS, COLORS, FONTS } from "../constants";
 
 type Props = NativeStackScreenProps<ProgressStackParamList, "Dashboard">;
 
@@ -85,7 +86,7 @@ export default function AnalyticsScreen({ navigation }: Props) {
   // 8-week volume history normalization
   const chartWeeks = useMemo(() => {
     if (volumeHistory && volumeHistory.length > 0) {
-      return volumeHistory.slice(-8);
+      return volumeHistory.slice(-ANALYTICS_CONSTANTS.VOLUME_HISTORY_WEEKS);
     }
     // Fallback sample progression curve
     return [
@@ -106,7 +107,7 @@ export default function AnalyticsScreen({ navigation }: Props) {
     if (weeklyMuscleVolumes && weeklyMuscleVolumes.length > 0) {
       return weeklyMuscleVolumes.reduce((sum, m) => sum + (m.volume || 0), 0);
     }
-    return 14850;
+    return ANALYTICS_CONSTANTS.DEFAULT_WEEKLY_VOLUME_KG;
   }, [weeklyMuscleVolumes]);
 
   if (loading) {

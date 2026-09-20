@@ -1,4 +1,5 @@
 import client from "./client";
+import { API_TIMEOUTS } from "../constants";
 
 export interface CheckIn {
   id: string;
@@ -13,7 +14,7 @@ export interface CheckIn {
 }
 
 export const createCheckIn = async (sessionId: string, rawText: string) => {
-  const { data } = await client.post("/checkins", { sessionId, rawText }, { timeout: 60000 });
+  const { data } = await client.post("/checkins", { sessionId, rawText }, { timeout: API_TIMEOUTS.AI });
   return data as { checkIn: CheckIn };
 };
 
@@ -31,6 +32,6 @@ export const updateCheckIn = async (sessionId: string, rawText: string) => {
   const { data } = await client.put(`/checkins/${sessionId}`, {
     sessionId,
     rawText,
-  }, { timeout: 60000 });
+  }, { timeout: API_TIMEOUTS.AI });
   return data as { checkIn: CheckIn };
 };
