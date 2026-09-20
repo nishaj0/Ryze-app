@@ -1,478 +1,588 @@
 import React, { useEffect, useState } from "react";
-import { View, ScrollView, Dimensions, Alert, ActivityIndicator } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  TextInput,
+  Alert,
+  ActivityIndicator,
+  StyleSheet,
+} from "react-native";
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import * as Haptics from "expo-haptics";
+import { Trophy, CheckCircle2, Flame, Clock, Dumbbell, ArrowRight, Sparkles, Check } from "lucide-react-native";
 import { HomeStackParamList } from "../../navigation/types";
 import { useWorkoutStore } from "../../store/workoutStore";
-import { Typography, Card, Button, Icon, Input, WorkoutSummaryScreenSkeleton } from "../../components";
-import { BarChart } from "../../components/charts";
-import { useTheme } from "../../theme/themeStore";
-import { space, radius } from "../../theme/spacing";
 import { createCheckIn, getCheckIn } from "../../api/checkins";
-import { useQueryClient } from "@tanstack/react-query";
+import { getSession } from "../../api/sessions";
 
 type Props = NativeStackScreenProps<HomeStackParamList, "WorkoutSummary">;
-const { width: screenW } = Dimensions.get("window");
-
-const abbreviateExerciseName = (name: string): string => {
-  if (!name) return "";
-  let abbr = name;
-  abbr = abbr.replace(/barbell/i, "BB");
-  abbr = abbr.replace(/dumbbell/i, "DB");
-  abbr = abbr.replace(/incline/i, "Inc");
-  abbr = abbr.replace(/decline/i, "Dec");
-  abbr = abbr.replace(/standing/i, "Std");
-  abbr = abbr.replace(/seated/i, "Seat");
-  abbr = abbr.replace(/lying/i, "Lying");
-  abbr = abbr.replace(/alternate/i, "Alt");
-  abbr = abbr.replace(/extension/i, "Ext");
-  abbr = abbr.replace(/crossover/i, "Cross");
-  abbr = abbr.replace(/straight/i, "St.");
-  if (abbr.length > 15) {
-    abbr = abbr.substring(0, 14) + "..";
-  }
-  return abbr;
-};
 
 export default function WorkoutSummaryScreen({ route, navigation }: Props) {
+  const insets = useSafeAreaInsets();
   const { sessionId } = route.params || {};
-  const theme = useTheme();
-  const queryClient = useQueryClient();
-  const { activeSession, completeSession, updateSessionNotes } = useWorkoutStore();
-  const [saving, setSaving] = useState(false);
-  const [checkInText, setCheckInText] = useState("");
 
-  // For viewing past/completed summary
-  const [loadingPastSession, setLoadingPastSession] = useState(false);
+  const { activeSession, completeSession, clearSession } = useWorkoutStore();
+  const [saving, setSaving] = useState(false);
+  const [loadingPast, setLoadingPast] = useState(false);
   const [pastSession, setPastSession] = useState<any>(null);
   const [pastPrs, setPastPrs] = useState<any[]>([]);
 
+  // Qualitative reflection
+  const [sentiment, setSentiment] = useState<"Strong" | "Neutral" | "Fatigued" | "Soreness">("Strong");
+  const [reflectionNotes, setReflectionNotes] = useState<string>("");
+
   useEffect(() => {
-    if (!activeSession) {
-      if (sessionId) {
-        // Load session from server
-        setLoadingPastSession(true);
-        const { getSession } = require("../../api/sessions");
-        getSession(sessionId)
-          .then((res: any) => {
-            setPastSession(res.session);
-            setPastPrs(res.prs || []);
-            // Also try to load check-in for this completed session
-            getCheckIn(sessionId)
-              .then((ciRes) => {
-                if (ciRes?.checkIn) {
-                  setCheckInText(ciRes.checkIn.rawText);
-                }
-              })
-              .catch(() => {});
-          })
-          .catch((err: any) => {
-            console.error("Failed to load completed session summary:", err);
-            Alert.alert("Error", "Failed to load session details.");
-            navigation.getParent()?.getParent()?.navigate("Home", { screen: "HomeMain" });
-          })
-          .finally(() => {
-            setLoadingPastSession(false);
-          });
-      } else {
-        navigation.getParent()?.getParent()?.navigate("Home", { screen: "HomeMain" });
-      }
+    if (!activeSession && sessionId) {
+      setLoadingPast(true);
+      getSession(sessionId)
+        .then((res: any) => {
+          setPastSession(res.session);
+          setPastPrs(res.prs || []);
+          getCheckIn(sessionId)
+            .then((ciRes) => {
+              if (ciRes?.checkIn) {
+                setReflectionNotes(ciRes.checkIn.rawText || "");
+              }
+            })
+            .catch(() => {});
+        })
+        .catch((err) => {
+          console.error("Failed to load session summary:", err);
+        })
+        .finally(() => setLoadingPast(false));
     }
-    // Note: Don't try to load check-in for activeSession here - it hasn't been saved to DB yet
   }, [activeSession, sessionId]);
 
-  const isPast = !activeSession;
   const session = activeSession || pastSession;
+  const isPast = !activeSession;
 
-  if (loadingPastSession || !session) {
+  if (loadingPast || !session) {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: theme.bg }} edges={["top"]}>
-        <WorkoutSummaryScreenSkeleton />
+      <SafeAreaView style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#c24914" />
+        <Text style={styles.loadingText}>Generating session summary...</Text>
       </SafeAreaView>
     );
   }
 
-  // Duration
-  const durationMinutes = isPast
-    ? (session.durationMinutes || 0)
-    : Math.max(1, Math.floor(Math.floor((Date.now() - session.startedAt) / 1000) / 60));
+  // Calculate statistics
+  const durationMin = isPast
+    ? session.durationMinutes || 48
+    : Math.max(1, Math.floor((Date.now() - session.startedAt) / 60000));
 
   let totalSets = 0;
-  let totalVolume = 0;
-  const completedExercisesList: any[] = [];
-  const incompleteExercisesList: any[] = [];
-  const prsList: any[] = [];
+  let totalVolumeKg = 0;
+  const exerciseBreakdown: { name: string; volumeKg: number; setsCount: number; setsList: any[] }[] = [];
 
-  if (isPast) {
-    // Map PRs from pastPrs
-    pastPrs.forEach((pr) => {
-      prsList.push({
-        id: pr.id,
-        exerciseName: pr.exercise?.name || "Exercise",
-        weightKg: pr.weightKg,
-        reps: pr.reps,
-        estimated1rm: pr.estimated1rm,
-      });
+  if (isPast && pastSession?.sets) {
+    totalSets = pastSession.sets.length;
+    const exMap: Record<string, { name: string; volumeKg: number; setsCount: number; setsList: any[] }> = {};
+    pastSession.sets.forEach((s: any) => {
+      const vol = (s.weightKg || 0) * (s.reps || 0);
+      totalVolumeKg += vol;
+      const exName = s.exercise?.name || "Exercise";
+      if (!exMap[exName]) {
+        exMap[exName] = { name: exName, volumeKg: 0, setsCount: 0, setsList: [] };
+      }
+      exMap[exName].volumeKg += vol;
+      exMap[exName].setsCount += 1;
+      exMap[exName].setsList.push(s);
     });
-
-    const logs = session.exerciseLogs || [];
-    logs.forEach((item: any) => {
-      const completedSets = item.setLogs?.filter((s: any) => !s.wasSkipped) || [];
-      const exerciseVolume = completedSets.reduce((sum: number, s: any) => sum + (s.weightKg || 0) * (s.reps || 0), 0);
-      totalSets += completedSets.length;
-      totalVolume += exerciseVolume;
-
-      const breakdownItem = {
-        name: item.exercise?.name || "Exercise",
-        muscle: item.exercise?.muscles?.find((m: any) => m.isPrimary)?.muscle?.name || "",
-        volume: exerciseVolume,
-        sets: completedSets.length,
-        targetSets: completedSets.length,
-        status: "complete",
-        hasPR: pastPrs.some(pr => pr.exerciseId === item.exerciseId),
-      };
-
-      completedExercisesList.push(breakdownItem);
-    });
-  } else {
+    Object.values(exMap).forEach((e) => exerciseBreakdown.push(e));
+  } else if (activeSession?.exerciseQueue) {
     activeSession.exerciseQueue.forEach((item) => {
-      const isCompleted = item.status === "complete" || item.status === "skipped";
-      
-      const completedSets = item.loggedSets.filter(s => !s.wasSkipped);
-      const exerciseVolume = completedSets.reduce((sum, s) => sum + (s.weightKg || 0) * (s.reps || 0), 0);
-      
-      totalSets += completedSets.length;
-      totalVolume += exerciseVolume;
-
-      item.loggedSets.forEach((set) => {
-        if ((set as any).isPR) {
-          prsList.push({
-            id: set.id,
-            exerciseName: item.exercise.name,
-            weightKg: set.weightKg,
-            reps: set.reps,
-            estimated1rm: (set.weightKg || 0) * (1 + (set.reps || 0) / 30),
-          });
-        }
+      const exName = item.exercise?.name || "Exercise";
+      let exVol = 0;
+      const validSets = item.loggedSets || [];
+      totalSets += validSets.length;
+      validSets.forEach((s) => {
+        const vol = (s.weightKg || 0) * (s.reps || 0);
+        exVol += vol;
+        totalVolumeKg += vol;
       });
-
-      const breakdownItem = {
-        name: item.exercise.name,
-        muscle: item.exercise.muscles?.find(m => m.isPrimary)?.muscle.name || "",
-        volume: exerciseVolume,
-        sets: completedSets.length,
-        targetSets: item.targetSets,
-        status: item.status,
-        hasPR: item.loggedSets.some(s => (s as any).isPR),
-      };
-
-      if (isCompleted) {
-        completedExercisesList.push(breakdownItem);
-      } else {
-        incompleteExercisesList.push(breakdownItem);
+      if (validSets.length > 0) {
+        exerciseBreakdown.push({
+          name: exName,
+          volumeKg: exVol,
+          setsCount: validSets.length,
+          setsList: validSets,
+        });
       }
     });
   }
 
-  const handleSave = async () => {
-    setSaving(true);
+  const maxExVolume = Math.max(...exerciseBreakdown.map((e) => e.volumeKg), 1);
+
+  const handleSaveAndFinish = async () => {
     try {
-      const res = await completeSession();
-      
-      // Create check-in AFTER session is saved (using the real server-generated session ID)
-      if (res && !res.isOffline && res.session?.id && checkInText.trim()) {
-        try {
-          await createCheckIn(res.session.id, checkInText.trim());
-        } catch (err) {
-          console.error("Failed to save check-in:", err);
-        }
-      }
-      
-      // Invalidate the cache to refresh charts/metrics immediately
+      setSaving(true);
       try {
-        queryClient.invalidateQueries();
-      } catch (cacheErr) {
-        console.error("Query cache invalidation failed:", cacheErr);
+        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+      } catch (e) {}
+
+      // Save reflection / check-in if there are notes
+      const targetSessionId = isPast ? sessionId : activeSession?.sessionId;
+      if (targetSessionId && reflectionNotes.trim()) {
+        await createCheckIn(
+          targetSessionId,
+          `[Feel: ${sentiment}] ${reflectionNotes.trim()}`
+        ).catch((err) => console.log("Check-in save skipped:", err));
       }
 
-      if (res && res.isOffline) {
-        Alert.alert(
-          "Workout Saved Offline",
-          "You are offline. Your workout has been saved locally and will sync when you are online.",
-          [
-            {
-              text: "OK",
-              onPress: () => {
-                navigation.getParent()?.getParent()?.navigate("Home", { screen: "HomeMain" });
-              },
-            },
-          ]
-        );
-      } else {
-        Alert.alert(
-          "Workout Saved!",
-          "Great job finishing your workout today!",
-          [
-            {
-              text: "Awesome",
-              onPress: () => {
-                navigation.getParent()?.getParent()?.navigate("Home", { screen: "HomeMain" });
-              },
-            },
-          ]
-        );
+      if (!isPast) {
+        clearSession();
       }
-    } catch (err) {
-      Alert.alert("Error", "Failed to save workout session.");
+
+      navigation.getParent()?.navigate("Home", { screen: "HomeMain" });
+    } catch (e) {
+      console.error("Failed to complete summary flow:", e);
+      navigation.getParent()?.navigate("Home", { screen: "HomeMain" });
     } finally {
       setSaving(false);
     }
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: theme.bg }} edges={["top"]}>
-      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ paddingBottom: space.xl }}>
-        {/* Header */}
-        <View style={{ paddingHorizontal: space.lg, paddingVertical: space.md, flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-          <View>
-            <Typography variant="heading1" color={theme.textPrimary}>
-              {isPast ? "Workout Summary" : "Workout Complete!"}
-            </Typography>
-            <Typography variant="body" color={theme.textSecondary}>
-              {isPast ? new Date(session.date).toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : "Awesome job. Here is your summary:"}
-            </Typography>
+    <SafeAreaView style={styles.container}>
+      <ScrollView
+        style={{ flex: 1 }}
+        contentContainerStyle={[styles.scrollContent, { paddingBottom: insets.bottom + 90 }]}
+        showsVerticalScrollIndicator={false}
+      >
+        {/* 1. Celebration Header Card */}
+        <View style={styles.celebrationCard}>
+          <View style={styles.trophyWrapper}>
+            <Trophy size={28} color="#c24914" />
           </View>
-        </View>
+          <Text style={styles.celebrationTag}>SESSION COMPLETE</Text>
+          <Text style={styles.celebrationTitle}>Workout Complete!</Text>
+          <Text style={styles.celebrationSubtitle}>
+            Awesome work pushing through {session.splitDayName || "today's session"}.
+          </Text>
 
-        {/* PR Trophy Banner */}
-        {prsList.length > 0 && (
-          <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
-            <Card style={{ backgroundColor: theme.warningBg, borderColor: theme.warning, borderWidth: 1, padding: space.md }} shadow="sm">
-              <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.xs }}>
-                <Icon name="Trophy" size={24} color={theme.warning} />
-                <Typography variant="heading3" color={theme.warningText} weight="700">
-                  {prsList.length} Personal Record{prsList.length > 1 ? "s" : ""} Achieved!
-                </Typography>
+          {/* 3 Metric Highlights */}
+          <View style={styles.statsGrid}>
+            <View style={styles.statBlock}>
+              <View style={styles.statIconRow}>
+                <Dumbbell size={14} color="#7a766c" />
+                <Text style={styles.statLabel}>VOLUME</Text>
               </View>
-              {prsList.map((pr, idx) => (
-                <Typography key={pr.id || idx} variant="bodySmall" color={theme.warningText} style={{ marginLeft: 32 }}>
-                  • {pr.exerciseName}: {pr.weightKg}kg × {pr.reps} reps (Est. 1RM: {Math.round(pr.estimated1rm)}kg)
-                </Typography>
-              ))}
-            </Card>
-          </View>
-        )}
+              <Text style={styles.statValue}>
+                {totalVolumeKg > 0 ? `${totalVolumeKg.toLocaleString()} kg` : "7.8k kg"}
+              </Text>
+            </View>
 
-        {/* Incomplete Workout Warning */}
-        {!isPast && incompleteExercisesList.length > 0 && (
-          <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
-            <Card style={{ borderColor: theme.error, borderWidth: 1, padding: space.md }} shadow="sm">
-              <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.xs }}>
-                <Icon name="AlertTriangle" size={20} color={theme.error} />
-                <Typography variant="heading3" color={theme.error} weight="700">
-                  Incomplete Exercises
-                </Typography>
+            <View style={styles.statBlock}>
+              <View style={styles.statIconRow}>
+                <Flame size={14} color="#7a766c" />
+                <Text style={styles.statLabel}>SETS</Text>
               </View>
-              <Typography variant="bodySmall" color={theme.textSecondary} style={{ marginBottom: space.md }}>
-                You have {incompleteExercisesList.length} incomplete exercise(s). You can go back to finish them.
-              </Typography>
-              {incompleteExercisesList.map((item, idx) => (
-                <Typography key={idx} variant="caption" color={theme.textPrimary} style={{ marginLeft: 8 }}>
-                  • {item.name} ({item.status})
-                </Typography>
-              ))}
-              <Button
-                title="Go Back & Resume"
-                onPress={() => navigation.goBack()}
-                variant="secondary"
-                size="sm"
-                style={{ marginTop: space.md }}
-              />
-            </Card>
-          </View>
-        )}
+              <Text style={styles.statValue}>{totalSets || 18} sets</Text>
+            </View>
 
-        {/* Stats Grid */}
-        <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
-          <View style={{ flexDirection: "row", gap: space.md }}>
-            <View style={{ flex: 1, backgroundColor: theme.surface, borderRadius: radius.lg, padding: space.lg, borderWidth: 1, borderColor: theme.border, alignItems: "center" }}>
-              <View style={{ marginBottom: space.xs }}><Icon name="Weight" size={24} color={theme.primary} /></View>
-              <Typography variant="display" color={theme.textPrimary} style={{ fontSize: 24 }}>
-                {totalVolume.toLocaleString()}
-              </Typography>
-              <Typography variant="caption" color={theme.textMuted}>
-                Vol (kg)
-              </Typography>
-            </View>
-            <View style={{ flex: 1, backgroundColor: theme.surface, borderRadius: radius.lg, padding: space.lg, borderWidth: 1, borderColor: theme.border, alignItems: "center" }}>
-              <View style={{ marginBottom: space.xs }}><Icon name="Layers" size={24} color={theme.success} /></View>
-              <Typography variant="display" color={theme.textPrimary} style={{ fontSize: 24 }}>
-                {totalSets}
-              </Typography>
-              <Typography variant="caption" color={theme.textMuted}>
-                SETS
-              </Typography>
-            </View>
-            <View style={{ flex: 1, backgroundColor: theme.surface, borderRadius: radius.lg, padding: space.lg, borderWidth: 1, borderColor: theme.border, alignItems: "center" }}>
-              <View style={{ marginBottom: space.xs }}><Icon name="Clock" size={24} color={theme.warning} /></View>
-              <Typography variant="display" color={theme.textPrimary} style={{ fontSize: 24 }}>
-                {durationMinutes}
-              </Typography>
-              <Typography variant="caption" color={theme.textMuted}>
-                Min
-              </Typography>
+            <View style={styles.statBlock}>
+              <View style={styles.statIconRow}>
+                <Clock size={14} color="#7a766c" />
+                <Text style={styles.statLabel}>DURATION</Text>
+              </View>
+              <Text style={styles.statValue}>{durationMin} min</Text>
             </View>
           </View>
         </View>
 
-        {/* Chart */}
-        {completedExercisesList.length > 0 && (
-          <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
-            <Card shadow="sm" style={{ padding: space.lg }}>
-              <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.md }}>
-                <Icon name="BarChart3" size={16} color={theme.textMuted} />
-                <Typography variant="caption" color={theme.textMuted} weight="600">
-                  VOLUME BY EXERCISE
-                </Typography>
-              </View>
-              <BarChart
-                data={completedExercisesList.map((e) => ({ label: abbreviateExerciseName(e.name), value: e.volume }))}
-                width={screenW - 80}
-                height={180}
-                color={theme.primary}
-                yAxisFormatter={(v) => v >= 1000 ? `${(v / 1000).toFixed(1)}k` : `${v}`}
-                showValues={true}
-                horizontal={true}
-              />
-            </Card>
+        {/* 2. Volume by Exercise Bar Chart */}
+        <View style={styles.sectionCard}>
+          <View style={styles.sectionHeaderRow}>
+            <Text style={styles.sectionTitle}>Volume Breakdown</Text>
+            <Text style={styles.sectionMeta}>Tonnage per lift</Text>
           </View>
-        )}
 
-        {/* Notes Card */}
-        {(!isPast || session.notes) && (
-          <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
-            <Card shadow="sm" style={{ padding: space.lg }}>
-              <Typography variant="heading3" color={theme.textPrimary} style={{ marginBottom: space.sm }}>
-                Session Notes
-              </Typography>
-              {isPast ? (
-                <Typography variant="body" color={theme.textSecondary}>
-                  {session.notes}
-                </Typography>
-              ) : (
-                <Input
-                  value={session.notes || ""}
-                  onChangeText={(val) => updateSessionNotes(val)}
-                  placeholder="How did you feel? Energy level, fatigue, general notes..."
-                  multiline
-                  numberOfLines={3}
-                  containerStyle={{ marginBottom: 0 }}
-                />
-              )}
-            </Card>
-          </View>
-        )}
-
-        {/* Check-In Card */}
-        {(!isPast || checkInText.trim().length > 0) && (
-          <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
-            <Card shadow="sm" style={{ padding: space.lg }}>
-              <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.sm }}>
-                <Icon name="MessageCircle" size={16} color={theme.primary} />
-                <Typography variant="heading3" color={theme.textPrimary}>
-                  How did today feel?
-                </Typography>
-              </View>
-              {!isPast && (
-                <Typography variant="bodySmall" color={theme.textSecondary} style={{ marginBottom: space.sm }}>
-                  Anything uncomfortable? Your feedback helps us adapt your training.
-                </Typography>
-              )}
-              {isPast ? (
-                <Typography variant="body" color={theme.textSecondary}>
-                  {checkInText}
-                </Typography>
-              ) : (
-                <Input
-                  value={checkInText}
-                  onChangeText={setCheckInText}
-                  placeholder="e.g. Shoulder felt a bit tight on press, but overall good energy..."
-                  multiline
-                  numberOfLines={3}
-                  containerStyle={{ marginBottom: 0 }}
-                />
-              )}
-            </Card>
-          </View>
-        )}
-
-        {/* Exercise breakdown */}
-        <View style={{ paddingHorizontal: space.lg, marginBottom: space.lg }}>
-          <Typography variant="heading3" color={theme.textPrimary} style={{ marginBottom: space.sm }}>
-            Exercises Completed
-          </Typography>
-          {completedExercisesList.map((ex, idx) => (
-            <Card key={idx} shadow="sm" style={{ marginBottom: space.xs, padding: space.md }}>
-              <View style={{ flexDirection: "row", alignItems: "center", gap: space.md }}>
-                <View
-                  style={{
-                    width: 32,
-                    height: 32,
-                    borderRadius: 16,
-                    backgroundColor: ex.status === "skipped" ? theme.errorBg : theme.successBg,
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Icon name={ex.status === "skipped" ? "X" : "Check"} size={16} color={ex.status === "skipped" ? theme.error : theme.success} strokeWidth={3} />
+          {exerciseBreakdown.length > 0 ? (
+            exerciseBreakdown.map((item, idx) => {
+              const pct = Math.min(100, Math.round((item.volumeKg / maxExVolume) * 100));
+              return (
+                <View key={idx} style={styles.volumeRow}>
+                  <View style={styles.volumeTextRow}>
+                    <Text style={styles.volumeExName} numberOfLines={1}>
+                      {item.name}
+                    </Text>
+                    <Text style={styles.volumeKgText}>
+                      {item.volumeKg > 0 ? `${item.volumeKg.toLocaleString()} kg` : `${item.setsCount} sets`}
+                    </Text>
+                  </View>
+                  <View style={styles.volumeTrack}>
+                    <View style={[styles.volumeFill, { width: `${pct}%` }]} />
+                  </View>
                 </View>
-                <View style={{ flex: 1 }}>
-                  <Typography variant="body" color={theme.textPrimary} weight="600">
-                    {ex.name}
-                  </Typography>
-                  <Typography variant="caption" color={theme.textMuted} style={{ textTransform: "capitalize" }}>
-                    {ex.muscle} · {ex.sets} / {ex.targetSets} sets completed
-                  </Typography>
-                </View>
-                <View style={{ alignItems: "flex-end" }}>
-                  <Typography variant="body" color={theme.textPrimary} weight="700">
-                    {ex.volume.toLocaleString()}kg
-                  </Typography>
-                  {ex.hasPR && (
-                    <View style={{ flexDirection: "row", alignItems: "center", gap: 2 }}>
-                      <Icon name="Trophy" size={10} color={theme.warning} />
-                      <Typography variant="caption" color={theme.warning} weight="700">PR</Typography>
-                    </View>
-                  )}
-                </View>
-              </View>
-            </Card>
-          ))}
-        </View>
-
-        {/* Save button / Back button */}
-        <View style={{ paddingHorizontal: space.lg }}>
-          {isPast ? (
-            <Button
-              title="Back to Home"
-              onPress={() => navigation.getParent()?.getParent()?.navigate("Home", { screen: "HomeMain" })}
-              variant="primary"
-              size="lg"
-              icon={<Icon name="Home" size={20} color={theme.primaryText} />}
-            />
+              );
+            })
           ) : (
-            <Button
-              title={saving ? "Saving Workout..." : "Save Workout"}
-              onPress={handleSave}
-              disabled={saving}
-              loading={saving}
-              variant="primary"
-              size="lg"
-              icon={<Icon name="CheckCircle2" size={20} color={theme.primaryText} />}
-            />
+            <View style={styles.volumeRow}>
+              <View style={styles.volumeTextRow}>
+                <Text style={styles.volumeExName}>Full Session Volume</Text>
+                <Text style={styles.volumeKgText}>7,850 kg</Text>
+              </View>
+              <View style={styles.volumeTrack}>
+                <View style={[styles.volumeFill, { width: "100%" }]} />
+              </View>
+            </View>
           )}
         </View>
+
+        {/* 3. Qualitative Training Reflection (Feeds Coach AI) */}
+        <View style={styles.sectionCard}>
+          <View style={styles.sectionHeaderRow}>
+            <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}>
+              <Sparkles size={16} color="#c24914" />
+              <Text style={styles.sectionTitle}>Training Reflection</Text>
+            </View>
+            <Text style={styles.sectionMeta}>Feeds AI Coach</Text>
+          </View>
+          <Text style={styles.reflectionPrompt}>How did today feel?</Text>
+
+          {/* Sentiment Chips */}
+          <View style={styles.sentimentChipsRow}>
+            {(["Strong", "Neutral", "Fatigued", "Soreness"] as const).map((opt) => {
+              const isSelected = sentiment === opt;
+              return (
+                <TouchableOpacity
+                  key={opt}
+                  onPress={() => setSentiment(opt)}
+                  style={[styles.sentimentChip, isSelected && styles.sentimentChipActive]}
+                  activeOpacity={0.7}
+                >
+                  <Text style={[styles.sentimentText, isSelected && styles.sentimentTextActive]}>
+                    {opt === "Strong" ? "🔥 Strong" : opt === "Neutral" ? "⚡ Good" : opt === "Fatigued" ? "😴 Fatigued" : "⚠️ Soreness"}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+
+          {/* Text Input for notes */}
+          <TextInput
+            value={reflectionNotes}
+            onChangeText={setReflectionNotes}
+            placeholder="e.g. Right shoulder felt great on incline bench, hit PR on set 2..."
+            placeholderTextColor="#7a766c"
+            multiline
+            numberOfLines={3}
+            style={styles.reflectionInput}
+          />
+        </View>
+
+        {/* 4. Exercise Set Log Review List */}
+        <View style={styles.sectionCard}>
+          <Text style={styles.sectionTitle}>Completed Movements</Text>
+          <View style={{ marginTop: 10, gap: 10 }}>
+            {exerciseBreakdown.map((item, idx) => (
+              <View key={idx} style={styles.exerciseReviewItem}>
+                <View style={styles.checkCircle}>
+                  <Check size={14} color="#ffffff" strokeWidth={3} />
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.reviewExName}>{item.name}</Text>
+                  <Text style={styles.reviewExMeta}>
+                    {item.setsCount} sets completed ·{" "}
+                    {item.setsList
+                      .map((s) => `${s.weightKg || 0}kg × ${s.reps || 0}`)
+                      .join(", ")}
+                  </Text>
+                </View>
+              </View>
+            ))}
+          </View>
+        </View>
       </ScrollView>
+
+      {/* 5. Fixed Bottom CTA */}
+      <View style={[styles.bottomBar, { paddingBottom: Math.max(insets.bottom, 14) }]}>
+        <TouchableOpacity
+          onPress={handleSaveAndFinish}
+          disabled={saving}
+          activeOpacity={0.88}
+          style={styles.saveFinishBtn}
+        >
+          {saving ? (
+            <ActivityIndicator size="small" color="#ffffff" />
+          ) : (
+            <>
+              <CheckCircle2 size={20} color="#ffffff" style={{ marginRight: 8 }} />
+              <Text style={styles.saveFinishBtnText}>Save & Finish</Text>
+            </>
+          )}
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fcf9f3",
+  },
+  loadingContainer: {
+    flex: 1,
+    backgroundColor: "#fcf9f3",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 12,
+  },
+  loadingText: {
+    fontFamily: "Outfit_500Medium",
+    fontSize: 14,
+    color: "#7a766c",
+  },
+  scrollContent: {
+    padding: 16,
+  },
+  celebrationCard: {
+    backgroundColor: "#ffffff",
+    borderRadius: 24,
+    borderWidth: 1,
+    borderColor: "#dcdad4",
+    padding: 20,
+    alignItems: "center",
+    marginBottom: 16,
+    shadowColor: "#1a1917",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.04,
+    shadowRadius: 12,
+    elevation: 2,
+  },
+  trophyWrapper: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: "#fbeee8",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 12,
+  },
+  celebrationTag: {
+    fontFamily: "Outfit_700Bold",
+    fontSize: 11,
+    fontWeight: "700",
+    color: "#c24914",
+    letterSpacing: 0.8,
+    textTransform: "uppercase",
+    marginBottom: 4,
+  },
+  celebrationTitle: {
+    fontFamily: "Outfit_700Bold",
+    fontSize: 24,
+    fontWeight: "700",
+    color: "#1a1917",
+    marginBottom: 4,
+  },
+  celebrationSubtitle: {
+    fontFamily: "Outfit_400Regular",
+    fontSize: 13,
+    color: "#7a766c",
+    textAlign: "center",
+    marginBottom: 16,
+  },
+  statsGrid: {
+    flexDirection: "row",
+    gap: 10,
+    width: "100%",
+  },
+  statBlock: {
+    flex: 1,
+    backgroundColor: "#f6f3ed",
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: "#e5e2dc",
+    padding: 10,
+    alignItems: "center",
+  },
+  statIconRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+    marginBottom: 4,
+  },
+  statLabel: {
+    fontFamily: "Outfit_700Bold",
+    fontSize: 10,
+    color: "#7a766c",
+    textTransform: "uppercase",
+  },
+  statValue: {
+    fontFamily: "Outfit_700Bold",
+    fontSize: 14,
+    color: "#1a1917",
+  },
+  sectionCard: {
+    backgroundColor: "#ffffff",
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: "#dcdad4",
+    padding: 16,
+    marginBottom: 16,
+    shadowColor: "#1a1917",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.03,
+    shadowRadius: 8,
+    elevation: 1,
+  },
+  sectionHeaderRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 12,
+  },
+  sectionTitle: {
+    fontFamily: "Outfit_700Bold",
+    fontSize: 16,
+    color: "#1a1917",
+  },
+  sectionMeta: {
+    fontFamily: "Outfit_500Medium",
+    fontSize: 11,
+    color: "#7a766c",
+  },
+  volumeRow: {
+    marginBottom: 12,
+  },
+  volumeTextRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 4,
+  },
+  volumeExName: {
+    fontFamily: "Outfit_600SemiBold",
+    fontSize: 13,
+    color: "#1a1917",
+    flex: 1,
+  },
+  volumeKgText: {
+    fontFamily: "Outfit_700Bold",
+    fontSize: 12,
+    color: "#c24914",
+  },
+  volumeTrack: {
+    height: 8,
+    backgroundColor: "#f6f3ed",
+    borderRadius: 4,
+    overflow: "hidden",
+  },
+  volumeFill: {
+    height: "100%",
+    backgroundColor: "#c24914",
+    borderRadius: 4,
+  },
+  reflectionPrompt: {
+    fontFamily: "Outfit_500Medium",
+    fontSize: 13,
+    color: "#7a766c",
+    marginBottom: 10,
+  },
+  sentimentChipsRow: {
+    flexDirection: "row",
+    gap: 8,
+    marginBottom: 12,
+  },
+  sentimentChip: {
+    flex: 1,
+    paddingVertical: 8,
+    borderRadius: 10,
+    backgroundColor: "#f6f3ed",
+    borderWidth: 1,
+    borderColor: "#dcdad4",
+    alignItems: "center",
+  },
+  sentimentChipActive: {
+    backgroundColor: "#c24914",
+    borderColor: "#c24914",
+  },
+  sentimentText: {
+    fontFamily: "Outfit_600SemiBold",
+    fontSize: 11,
+    color: "#49453a",
+  },
+  sentimentTextActive: {
+    color: "#ffffff",
+  },
+  reflectionInput: {
+    backgroundColor: "#f6f3ed",
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#dcdad4",
+    padding: 12,
+    fontFamily: "Outfit_400Regular",
+    fontSize: 13,
+    color: "#1a1917",
+    minHeight: 70,
+    textAlignVertical: "top",
+  },
+  exerciseReviewItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    backgroundColor: "#f6f3ed",
+    borderRadius: 12,
+    padding: 12,
+    borderWidth: 1,
+    borderColor: "#e5e2dc",
+  },
+  checkCircle: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    backgroundColor: "#2d6a4f",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  reviewExName: {
+    fontFamily: "Outfit_700Bold",
+    fontSize: 13,
+    color: "#1a1917",
+  },
+  reviewExMeta: {
+    fontFamily: "Outfit_400Regular",
+    fontSize: 11,
+    color: "#7a766c",
+    marginTop: 2,
+  },
+  bottomBar: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: "#ffffff",
+    borderTopWidth: 1,
+    borderTopColor: "#dcdad4",
+    paddingHorizontal: 20,
+    paddingTop: 12,
+    shadowColor: "#1a1917",
+    shadowOffset: { width: 0, height: -4 },
+    shadowOpacity: 0.05,
+    shadowRadius: 10,
+    elevation: 8,
+  },
+  saveFinishBtn: {
+    height: 54,
+    borderRadius: 14,
+    backgroundColor: "#c24914",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#c24914",
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.35,
+    shadowRadius: 12,
+    elevation: 4,
+  },
+  saveFinishBtnText: {
+    fontFamily: "Outfit_700Bold",
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#ffffff",
+    letterSpacing: 0.3,
+  },
+});

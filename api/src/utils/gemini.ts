@@ -51,10 +51,12 @@ type CallGeminiWithToolsOptions = {
   execute: (name: string, args: Record<string, unknown>) => Promise<unknown>;
 };
 
+const DEFAULT_MODEL = process.env.GEMINI_MODEL || "gemini-3.6-flash";
+
 function buildCallMeta(options: CallGeminiOptions) {
   const context = getLogContext();
   return {
-    model: "gemini-2.5-flash",
+    model: DEFAULT_MODEL,
     systemPromptLen: options.systemPrompt.length,
     userPromptLen: options.userPrompt.length,
     schemaKeys: Object.keys(options.responseSchema),
@@ -97,7 +99,7 @@ export async function callGemini<T>(
     try {
       const ai = await getClient();
       const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
+        model: DEFAULT_MODEL,
         contents: options.userPrompt,
         config: {
           systemInstruction: options.systemPrompt,
@@ -200,7 +202,7 @@ export async function callGeminiWithTools(options: CallGeminiWithToolsOptions): 
 
   for (let turn = 0; turn < 3; turn++) {
     const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
+      model: DEFAULT_MODEL,
       contents,
       config: {
         systemInstruction: options.systemPrompt,

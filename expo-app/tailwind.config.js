@@ -6,6 +6,33 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        "chalk-bg": "#fcf9f3",
+        "chalk-card": "#ffffff",
+        "chalk-subtle": "#f6f3ed",
+        "chalk-dim": "#dcdad4",
+        chalk: {
+          bg: "#fcf9f3",
+          card: "#ffffff",
+          subtle: "#f6f3ed",
+          dim: "#dcdad4",
+        },
+        terracotta: {
+          DEFAULT: "#c24914",
+          hover: "#a83e0f",
+          soft: "#fbeee8",
+        },
+        forest: {
+          DEFAULT: "#2d6a4f",
+          soft: "#e8f5e9",
+        },
+        "ink-headline": "#1a1917",
+        "ink-body": "#49453a",
+        "ink-muted": "#7a766c",
+        ink: {
+          headline: "#1a1917",
+          body: "#49453a",
+          muted: "#7a766c",
+        },
         primary: {
           50: "#EEF2FF",
           100: "#E0E7FF",
@@ -34,6 +61,12 @@ module.exports = {
         success: "#10B981",
         warning: "#F59E0B",
         danger: "#EF4444",
+      },
+      fontFamily: {
+        outfit: ["Outfit_400Regular", "sans-serif"],
+        "outfit-medium": ["Outfit_500Medium", "sans-serif"],
+        "outfit-semibold": ["Outfit_600SemiBold", "sans-serif"],
+        "outfit-bold": ["Outfit_700Bold", "sans-serif"],
       },
     },
   },

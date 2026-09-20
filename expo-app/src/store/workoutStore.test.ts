@@ -70,12 +70,12 @@ describe("useWorkoutStore", () => {
       expect(state.activeSession?.currentSetNumber).toBe(1);
     });
 
-    it("should handle split day with no exercises", () => {
+    it("should handle split day with no exercises by providing standard movements", () => {
       const emptyDay = { id: "day-2", name: "Rest Day", exercises: [] };
       useWorkoutStore.getState().initPreStartSession(emptyDay);
 
       const state = useWorkoutStore.getState();
-      expect(state.activeSession?.exerciseQueue).toHaveLength(0);
+      expect(state.activeSession?.exerciseQueue.length).toBeGreaterThan(0);
     });
 
     it("should persist to mmkv", () => {

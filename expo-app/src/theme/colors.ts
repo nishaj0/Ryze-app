@@ -1,27 +1,54 @@
 /**
  * Ryze Design System — Color Tokens
- * Light: "Chalk" — warm concrete, rust orange accents
+ * Light: "Chalk" — Chalk Athletic Modernism (warm bone substrate, terracotta & forest accents)
  * Dark: "Iron" — near-black warm, ember accents
  */
 
+// Chalk Athletic Modernism raw tokens
+export const chalkTokens = {
+  chalkBg: "#fcf9f3",
+  chalkCard: "#ffffff",
+  chalkSubtle: "#f6f3ed",
+  chalkDim: "#dcdad4",
+  terracotta: "#c24914",
+  terracottaHover: "#a83e0f",
+  terracottaSoft: "#fbeee8",
+  forest: "#2d6a4f",
+  forestSoft: "#e8f5e9",
+  inkHeadline: "#1a1917",
+  inkBody: "#49453a",
+  inkMuted: "#7a766c",
+} as const;
+
 // Raw color values
 export const chalk = {
-  bg: "#F2EFE9",
-  surface: "#FFFFFF",
-  ink: "#1C1B19",
-  muted: "#6B665E",
-  accent: "#C24914",
-  accentSoft: "#E8D9C7",
-  line: "#DDD7CC",
-  success: "#3D6B47",
-  danger: "#A23B2E",
-  warning: "#B45309",
-  warningBg: "#FEF3C7",
-  successBg: "#D1FAE5",
-  successText: "#047857",
-  dangerBg: "#FEE2E2",
-  dangerText: "#991B1B",
-  overlay: "rgba(28, 27, 25, 0.4)",
+  bg: "#fcf9f3",
+  surface: "#ffffff",
+  card: "#ffffff",
+  subtle: "#f6f3ed",
+  dim: "#dcdad4",
+  ink: "#1a1917",
+  inkHeadline: "#1a1917",
+  inkBody: "#49453a",
+  inkMuted: "#7a766c",
+  muted: "#7a766c",
+  terracotta: "#c24914",
+  terracottaHover: "#a83e0f",
+  terracottaSoft: "#fbeee8",
+  forest: "#2d6a4f",
+  forestSoft: "#e8f5e9",
+  accent: "#c24914",
+  accentSoft: "#fbeee8",
+  line: "#dcdad4",
+  success: "#2d6a4f",
+  danger: "#a23b2e",
+  warning: "#b45309",
+  warningBg: "#fef3c7",
+  successBg: "#e8f5e9",
+  successText: "#2d6a4f",
+  dangerBg: "#fee2e2",
+  dangerText: "#991b1b",
+  overlay: "rgba(26, 25, 23, 0.4)",
   shadowSm: "rgba(0, 0, 0, 0.04)",
   shadowMd: "rgba(0, 0, 0, 0.08)",
   shadowLg: "rgba(0, 0, 0, 0.12)",

@@ -13,7 +13,7 @@ export interface CheckIn {
 }
 
 export const createCheckIn = async (sessionId: string, rawText: string) => {
-  const { data } = await client.post("/checkins", { sessionId, rawText });
+  const { data } = await client.post("/checkins", { sessionId, rawText }, { timeout: 60000 });
   return data as { checkIn: CheckIn };
 };
 
@@ -31,6 +31,6 @@ export const updateCheckIn = async (sessionId: string, rawText: string) => {
   const { data } = await client.put(`/checkins/${sessionId}`, {
     sessionId,
     rawText,
-  });
+  }, { timeout: 60000 });
   return data as { checkIn: CheckIn };
 };

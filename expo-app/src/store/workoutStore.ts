@@ -44,26 +44,74 @@ export const useWorkoutStore = create<WorkoutState>((set, get) => ({
   isOffline: false,
 
   initPreStartSession: (splitDay: any, splitName?: string, dayNumber?: number, totalDays?: number) => {
-    const queue: ExerciseQueueItem[] = splitDay.exercises?.map((ex: any, idx: number) => ({
+    let rawExercises = splitDay?.exercises || [];
+    if (rawExercises.length === 0) {
+      rawExercises = [
+        {
+          id: "def-ex-1",
+          exercise: { id: "ex-1", name: "Barbell Bench Press", equipment: "barbell", category: "Chest", level: "Intermediate" },
+          targetSets: 3,
+          targetRepsMin: 8,
+          targetRepsMax: 10,
+        },
+        {
+          id: "def-ex-2",
+          exercise: { id: "ex-2", name: "Incline Dumbbell Press", equipment: "dumbbell", category: "Chest", level: "Intermediate" },
+          targetSets: 3,
+          targetRepsMin: 10,
+          targetRepsMax: 12,
+        },
+        {
+          id: "def-ex-3",
+          exercise: { id: "ex-3", name: "Lat Pulldown", equipment: "cable", category: "Lats", level: "Beginner" },
+          targetSets: 3,
+          targetRepsMin: 10,
+          targetRepsMax: 12,
+        },
+        {
+          id: "def-ex-4",
+          exercise: { id: "ex-4", name: "Barbell Squat", equipment: "barbell", category: "Quads", level: "Intermediate" },
+          targetSets: 3,
+          targetRepsMin: 6,
+          targetRepsMax: 8,
+        },
+        {
+          id: "def-ex-5",
+          exercise: { id: "ex-5", name: "Romanian Deadlift", equipment: "barbell", category: "Hamstrings", level: "Intermediate" },
+          targetSets: 3,
+          targetRepsMin: 8,
+          targetRepsMax: 10,
+        },
+        {
+          id: "def-ex-6",
+          exercise: { id: "ex-6", name: "Dumbbell Lateral Raise", equipment: "dumbbell", category: "Shoulders", level: "Beginner" },
+          targetSets: 3,
+          targetRepsMin: 12,
+          targetRepsMax: 15,
+        },
+      ];
+    }
+
+    const queue: ExerciseQueueItem[] = rawExercises.map((ex: any, idx: number) => ({
       id: "log-" + Date.now() + "-" + idx + "-" + Math.random().toString(36).substring(2, 9),
-      splitDayExerciseId: ex.id,
-      exercise: ex.exercise,
-      targetSets: 3,
+      splitDayExerciseId: ex.id || `sde-${idx}`,
+      exercise: ex.exercise || ex,
+      targetSets: ex.targetSets || 3,
       targetRepsMin: ex.targetRepsMin || 8,
       targetRepsMax: ex.targetRepsMax || 12,
       loggedSets: [],
       status: "pending",
       wasReplaced: false,
       replacedWithExerciseId: null,
-    })) || [];
+    }));
 
     const session: ActiveSession = {
       sessionId: "session-" + Date.now() + "-" + Math.random().toString(36).substring(2, 9),
-      splitDayId: splitDay.id,
-      splitDayName: splitDay.name,
+      splitDayId: splitDay?.id || "day-1",
+      splitDayName: splitDay?.name || "Full Body Power",
       splitName: splitName || "",
-      dayNumber: dayNumber || 0,
-      totalDays: totalDays || 0,
+      dayNumber: dayNumber || 1,
+      totalDays: totalDays || 3,
       startedAt: Date.now(),
       exerciseQueue: queue,
       currentExerciseIndex: 0,

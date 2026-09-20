@@ -5,11 +5,16 @@
  */
 
 export const fontFamily = {
-  primary: "Inter_400Regular",
-  medium: "Inter_500Medium",
-  semibold: "Inter_600SemiBold",
-  bold: "Inter_700Bold",
-  extrabold: "Inter_800ExtraBold",
+  primary: "Outfit_400Regular",
+  medium: "Outfit_500Medium",
+  semibold: "Outfit_600SemiBold",
+  bold: "Outfit_700Bold",
+  extrabold: "Outfit_700Bold",
+  outfit: "Outfit_400Regular",
+  outfitMedium: "Outfit_500Medium",
+  outfitSemibold: "Outfit_600SemiBold",
+  outfitBold: "Outfit_700Bold",
+  inter: "Inter_400Regular",
   mono: "Courier",
 } as const;
 

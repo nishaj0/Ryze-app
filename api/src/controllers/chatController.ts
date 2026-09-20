@@ -120,7 +120,19 @@ async function createProposal(userId: string, tool: WriteToolName, args: Record<
     if (!entry) throw new AppError("That exercise is no longer in this split day.", 409);
     const alternative = await prisma.exerciseAlternative.findFirst({ where: { exerciseId: entry.exerciseId }, include: { alternative: true } });
     if (!alternative) throw new AppError("There is no approved alternative for that exercise.", 400);
-    return { type: "SWAP_EXERCISE", payload: { splitDayExerciseId: entry.id, alternativeId: alternative.alternativeId }, summary: `Swap ${entry.exercise.name} for ${alternative.alternative.name} in ${entry.splitDay.name}?` };
+    const reason = typeof args.reason === "string" ? args.reason : "Target muscle fatigue & joint safety";
+    return {
+      type: "SWAP_EXERCISE",
+      payload: {
+        splitDayExerciseId: entry.id,
+        alternativeId: alternative.alternativeId,
+        currentExerciseName: entry.exercise.name,
+        proposedExerciseName: alternative.alternative.name,
+        splitDayName: entry.splitDay.name,
+        reason,
+      },
+      summary: `Swap ${entry.exercise.name} for ${alternative.alternative.name} in ${entry.splitDay.name}?`,
+    };
   }
   return { type: "SPLIT_REGENERATION", payload: { description: typeof args.description === "string" ? args.description : "" }, summary: "Create a new split preview from these requirements?" };
 }
@@ -227,33 +239,45 @@ export async function sendMessage(req: AuthRequest, res: Response) {
   let proposal: Proposal | undefined;
   const navigationBlocks: ChatResponseBlock[] = [];
   const toolResultBlocks: ChatResponseBlock[] = [];
-  const model = await callGeminiWithTools({
-    systemPrompt,
-    userPrompt: JSON.stringify({ profile, history: history.reverse().map((message) => ({ role: message.role, content: message.content })), message: content }),
-    tools: TOOLS,
-    execute: async (name, args) => {
-      if (!isToolName(name)) {
-        log.warn({ name, args }, "coach:invalid-tool-call");
-        return { error: "This action is not available." };
-      }
-      if (READ_TOOLS.has(name as ReadToolName)) {
-        const result = await runRead(userId, name as ReadToolName, args);
-        toolResultBlocks.push(...readBlocks(name as ReadToolName, result));
-        return result;
-      }
-      if (name.startsWith("propose")) {
-        proposal = await createProposal(userId, name as WriteToolName, args);
-        return { proposal: proposal.summary };
-      }
-      const action = await navigationAction(userId, name as NavigationToolName, args);
-      if (!action) {
-        log.warn({ name, args }, "coach:invalid-navigation-call");
-        return { error: "That destination is unavailable." };
-      }
-      navigationBlocks.push(action);
-      return { label: targetLabel(action) };
-    },
-  });
+  let model: { reply: string; calls: any[] } = { reply: "", calls: [] };
+
+  try {
+    model = await callGeminiWithTools({
+      systemPrompt,
+      userPrompt: JSON.stringify({ profile, history: history.reverse().map((message) => ({ role: message.role, content: message.content })), message: content }),
+      tools: TOOLS,
+      execute: async (name, args) => {
+        if (!isToolName(name)) {
+          log.warn({ name, args }, "coach:invalid-tool-call");
+          return { error: "This action is not available." };
+        }
+        if (READ_TOOLS.has(name as ReadToolName)) {
+          const result = await runRead(userId, name as ReadToolName, args);
+          toolResultBlocks.push(...readBlocks(name as ReadToolName, result));
+          return result;
+        }
+        if (name.startsWith("propose")) {
+          proposal = await createProposal(userId, name as WriteToolName, args);
+          return { proposal: proposal.summary };
+        }
+        const action = await navigationAction(userId, name as NavigationToolName, args);
+        if (!action) {
+          log.warn({ name, args }, "coach:invalid-navigation-call");
+          return { error: "That destination is unavailable." };
+        }
+        navigationBlocks.push(action);
+        return { label: targetLabel(action) };
+      },
+    });
+  } catch (error: any) {
+    log.error({ err: error }, "coach:gemini-call-failed");
+    const errorMsg = error?.message || "";
+    if (errorMsg.includes("403") || errorMsg.includes("PERMISSION_DENIED") || errorMsg.includes("denied access")) {
+      model.reply = "Ryze AI Coach is temporarily unable to connect to the Gemini service because the configured GEMINI_API_KEY was denied access (403 Permission Denied). Please update your GEMINI_API_KEY in api/.env with a valid key from Google AI Studio.";
+    } else {
+      model.reply = "I'm having trouble connecting to the AI service right now. Please try again in a moment.";
+    }
+  }
 
   if (toolResultBlocks.length === 0 && !proposal && navigationBlocks.length === 0) {
     const required = requiredReadFor(content);
@@ -319,7 +343,8 @@ export async function resolveProposal(req: AuthRequest, res: Response) {
   const messageId = String(req.params.id);
   const message = await prisma.chatMessage.findFirst({ where: { id: messageId, userId } });
   if (!message?.action || message.outcome) throw new AppError("This proposal is no longer available.", 409);
-  if (req.body.confirm !== true) {
+  const isConfirmed = req.body.confirm === true || req.body.action === "confirm";
+  if (!isConfirmed) {
     const cancelled = await prisma.chatMessage.update({ where: { id: message.id }, data: { outcome: "CANCELLED" } });
     return res.json({ message: cancelled });
   }

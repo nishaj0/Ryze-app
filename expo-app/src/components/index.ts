@@ -11,6 +11,9 @@ export { default as ExerciseMetaBadges } from "./ExerciseMetaBadges";
 export { default as SetTrackerStrip } from "./SetTrackerStrip";
 export { default as ExerciseDetailSheet } from "./ExerciseDetailSheet";
 export { default as CoachResponseBlocks } from "./CoachResponseBlocks";
+export { default as WorkoutHeroCard } from "./dashboard/WorkoutHeroCard";
+export { default as WeeklyRhythmStrip } from "./dashboard/WeeklyRhythmStrip";
+export { default as BiometricsWidget } from "./dashboard/BiometricsWidget";
 export {
   Skeleton,
   SkeletonCard,
@@ -28,3 +31,4 @@ export {
   InlineListSkeleton,
   WorkoutSummaryScreenSkeleton,
 } from "./Skeleton";
+

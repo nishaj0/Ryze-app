@@ -44,11 +44,11 @@ export default function Heatmap({ data, width = 320, cellSize = 14, gap = 3, wee
   const finalH = gridH;
 
   const colorFor = (count: number): string => {
-    if (count === 0) return theme.surfaceTertiary;
-    if (count === 1) return theme.primary[100];
-    if (count === 2) return theme.primary[300];
-    if (count >= 3) return theme.primary[600];
-    return theme.primary[100];
+    if (count === 0) return theme.surfaceTertiary || "#f6f3ed";
+    if (count === 1) return theme.primaryLight || "#fbeee8";
+    if (count === 2) return "#f4a261";
+    if (count >= 3) return theme.primary || "#c24914";
+    return theme.primaryLight || "#fbeee8";
   };
 
   const days = ["S", "M", "T", "W", "T", "F", "S"];

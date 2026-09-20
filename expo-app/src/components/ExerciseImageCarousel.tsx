@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, Image, StyleSheet, ActivityIndicator } from "react-native";
 import { useTheme } from "../theme/themeStore";
 import { radius } from "../theme/spacing";
+import { getHighResUrl } from "../utils/cloudinary";
 
 interface ExerciseImageCarouselProps {
   images: { url: string }[];
@@ -10,7 +11,7 @@ interface ExerciseImageCarouselProps {
 
 export default function ExerciseImageCarousel({
   images,
-  intervalMs = 2000,
+  intervalMs = 1200,
 }: ExerciseImageCarouselProps) {
   const theme = useTheme();
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -36,8 +37,8 @@ export default function ExerciseImageCarousel({
     <View style={[styles.container, { backgroundColor: theme.surfaceSecondary }]}>
       {images.map((img, index) => (
         <Image
-          key={img.url}
-          source={{ uri: img.url }}
+          key={img.url + index}
+          source={{ uri: getHighResUrl(img.url) }}
           style={[
             styles.image,
             { opacity: index === currentIndex ? 1 : 0 },

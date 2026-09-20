@@ -110,4 +110,25 @@ describe("chatController", () => {
     expect(mockPrismaClient.workoutSession.create).not.toHaveBeenCalled();
     expect(mockPrismaClient.chatMessage.update).toHaveBeenCalledWith(expect.objectContaining({ data: { outcome: "CANCELLED" } }));
   });
+
+  it("executes an exercise swap proposal when confirmed with action confirm", async () => {
+    mockPrismaClient.chatMessage.findFirst.mockResolvedValue({
+      id: "proposal-2",
+      action: {
+        type: "SWAP_EXERCISE",
+        payload: { splitDayExerciseId: "sde-1", alternativeId: "ex-alt-1" },
+      },
+      outcome: null,
+    });
+    mockPrismaClient.chatMessage.update.mockResolvedValue({ id: "proposal-2", outcome: "CONFIRMED" });
+    mockPrismaClient.splitDayExercise.update.mockResolvedValue({ id: "sde-1", exerciseId: "ex-alt-1" });
+    const response = res();
+    await chat.resolveProposal({ ...req({ action: "confirm" }), params: { id: "proposal-2" } } as AuthRequest, response);
+    expect(mockPrismaClient.splitDayExercise.update).toHaveBeenCalledWith({
+      where: { id: "sde-1" },
+      data: { exerciseId: "ex-alt-1" },
+    });
+    expect(mockPrismaClient.chatMessage.update).toHaveBeenCalledWith(expect.objectContaining({ data: { outcome: "CONFIRMED" } }));
+  });
 });
+
